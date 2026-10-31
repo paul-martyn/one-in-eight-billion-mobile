@@ -1,0 +1,49 @@
+{
+  "study": [
+    "learn",
+    "mind",
+    "career"
+  ],
+  "learn": [
+    "study",
+    "mind",
+    "career"
+  ],
+  "mind": [
+    "learn",
+    "study"
+  ],
+  "career": [
+    "learn",
+    "study"
+  ],
+  "play": [
+    "family"
+  ],
+  "family": [
+    "play"
+  ],
+  "sport": [
+    "health"
+  ],
+  "health": [
+    "sport"
+  ],
+  "hobby": [
+    "hobby"
+  ],
+  "faith": [
+    "family"
+  ],
+  "rest": [
+    "health"
+  ],
+  "work": [
+    "parttime",
+    "balance"
+  ],
+  "parttime": [
+    "work",
+    "balance"
+  ]
+}

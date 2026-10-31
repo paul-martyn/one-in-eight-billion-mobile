@@ -1,0 +1,17 @@
+{
+  "en": "USA,GBR,CAN,AUS,NZL,IRL,JAM,SGP,TTO,GUY,MLT",
+  "es": "ESP,MEX,COL,ARG,PER,VEN,CHL,ECU,GTM,CUB,BOL,DOM,HND,PRY,SLV,NIC,CRI,PAN,URY,GNQ,PRI",
+  "pt": "PRT,BRA,AGO,MOZ,GNB,CPV",
+  "it": "ITA,SMR",
+  "fr": "FRA,BEL,CHE,CAN,HTI,LUX",
+  "de": "DEU,AUT,CHE,LUX",
+  "ru": "RUS,BLR,KAZ,KGZ,UKR",
+  "zh": "CHN,TWN,SGP,HKG,MAC",
+  "ar": "SAU,ARE,EGY,JOR,IRQ,SYR,LBN,MAR,DZA,TUN,LBY,KWT,QAT,OMN,YEM,SDN,PSE,MRT,BHR",
+  "ko": "KOR,PRK",
+  "el": "GRC,CYP",
+  "ro": "ROU,MDA",
+  "sq": "ALB,XKX",
+  "sh": "SRB,HRV,BIH,MNE",
+  "nl": "NLD,SUR"
+}

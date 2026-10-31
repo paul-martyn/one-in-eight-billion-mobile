@@ -1,0 +1,112 @@
+{
+  "hi": {
+    "sc": [
+      "Kumar",
+      "Das",
+      "Ram",
+      "Bharti",
+      "Gautam",
+      "Kamble",
+      "Gaikwad",
+      "Jatav",
+      "Paswan",
+      "Valmiki",
+      "Meghwal",
+      "Ahirwar",
+      "Rao"
+    ],
+    "obc": [
+      "Kumar",
+      "Singh",
+      "Yadav",
+      "Patel",
+      "Verma",
+      "Das",
+      "Rao",
+      "Pillai",
+      "Chauhan",
+      "Chaudhary",
+      "Thakur",
+      "Maurya",
+      "Kushwaha",
+      "Prajapati",
+      "Sahu"
+    ],
+    "gen": [
+      "Sharma",
+      "Kumar",
+      "Singh",
+      "Gupta",
+      "Verma",
+      "Reddy",
+      "Nair",
+      "Mishra",
+      "Iyer",
+      "Chauhan",
+      "Pandey",
+      "Jha",
+      "Tiwari",
+      "Srivastava",
+      "Joshi",
+      "Mehta",
+      "Shah",
+      "Rao",
+      "Menon",
+      "Desai",
+      "Saxena",
+      "Agarwal",
+      "Bhatt",
+      "Thakur",
+      "Rathore",
+      "Patel"
+    ]
+  },
+  "ne": {
+    "dalit": [
+      "Bishwakarma",
+      "Nepali",
+      "Pariyar",
+      "Sunar",
+      "Sarki",
+      "Mijar",
+      "Ram",
+      "Paswan"
+    ],
+    "khas": [
+      "Adhikari",
+      "Karki",
+      "Poudel",
+      "Bhandari",
+      "Khadka",
+      "Basnet",
+      "Pandey",
+      "Sharma",
+      "Acharya",
+      "Bhattarai",
+      "Dahal",
+      "Rana",
+      "Thapa"
+    ],
+    "jana": [
+      "Shrestha",
+      "Gurung",
+      "Tamang",
+      "Rai",
+      "Magar",
+      "Lama",
+      "Sherpa",
+      "Maharjan",
+      "Thapa",
+      "Limbu",
+      "Chaudhary"
+    ],
+    "madh": [
+      "Yadav",
+      "Mahato",
+      "Sah",
+      "Mandal",
+      "Jha",
+      "Chaudhary"
+    ]
+  }
+}

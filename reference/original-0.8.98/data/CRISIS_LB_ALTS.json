@@ -1,0 +1,6 @@
+[
+  "(?<!ไม่)(?<!ไม่ได้)อยากตาย",
+  "(?<!ไม่)(?<!ไม่ได้)อยาก(?:จะ)?ฆ่าตัวตาย",
+  "(?<!\\bno\\s+(?:me\\s+)?)(?<!\\bnunca\\s+(?:me\\s+)?)\\b(?:me\\s+)?(?:quiero|quisiera|deseo|tengo\\s+ganas\\s+de|ganas\\s+de|solo\\s+quiero)\\s+morir(?:me)?(?![a-zà-öø-ÿ])(?!\\s*(?:de\\s+(?!verdad|veras)|del\\s|en\\s|a\\s|al\\s|con\\s|como\\s|feliz|tranquil|viej|ancian|alg[uú]n|un\\s+d[ií]a|dormid|junt|cerca|aqu[ií]|all[ií]|rodead|sin\\s|joven|antes|despu[eé]s|cuando|si\\s|por\\s|para\\s|lejos))",
+  "(?<!\\bnunca\\s+)\\bno\\s+quiero\\s+(?:vivir|seguir\\s+viviendo|estar\\s+viv[oa]|existir)(?![a-zà-öø-ÿ])(?!\\s*(?:en\\s|con\\s|cerca|lejos|aqu[ií]|all[ií]|ah[ií]|sol[oa](?![a-zà-öø-ÿ])|de\\s|del\\s|junt|a\\s|al\\s|por\\s|para\\s|bajo\\s|sin\\s|otra\\s|otro\\s|lo\\s+mismo))"
+]

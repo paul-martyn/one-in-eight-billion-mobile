@@ -1,0 +1,57 @@
+{
+  "version": "0.8.98 베타",
+  "siteUrl": "https://1in8b.life",
+  "feedbackForm": "https://docs.google.com/forms/d/e/1FAIpQLSepSGrQUzhfI2pYBa7GYLg0a-OQUAXWBBwUq5PBP0NKhZAAUA/viewform?usp=pp_url&entry.519934536=TYPE&entry.868892289=TEXT&entry.1441967796=CTX&entry.305146402=NICK",
+  "keep": {
+    "on": true,
+    "price": "4,000원",
+    "priceEn": "$3",
+    "priceJa": "¥480",
+    "priceZh": "NT$90",
+    "priceVi": "59.000₫",
+    "priceFr": "3 €",
+    "priceTh": "฿79",
+    "priceEs": "US$3",
+    "priceDe": "3 €",
+    "priceZhs": "US$3",
+    "pricePt": "R$ 9,90",
+    "priceRu": "3 $",
+    "priceTr": "129 TL",
+    "priceId": "Rp39.000",
+    "priceIt": "3 €",
+    "priceAr": "US$3",
+    "priceFa": "US$3",
+    "priceUk": "US$3",
+    "pricePl": "US$3",
+    "noSale": [
+      "ko"
+    ],
+    "mem": 3
+  },
+  "packs": {
+    "on": true,
+    "price": "2,700원",
+    "priceEn": "$2",
+    "priceJa": "¥320",
+    "priceZh": "NT$60",
+    "priceZhs": "US$2",
+    "priceVi": "39.000₫",
+    "priceFr": "2 €",
+    "priceTh": "฿49",
+    "priceEs": "US$2",
+    "priceDe": "2 €",
+    "pricePt": "R$ 6,90",
+    "priceRu": "2 $",
+    "priceTr": "89 TL",
+    "priceId": "Rp25.000",
+    "priceIt": "2 €",
+    "priceAr": "US$2",
+    "priceFa": "US$2",
+    "priceUk": "US$2",
+    "pricePl": "US$2"
+  },
+  "home": {
+    "on": true
+  },
+  "umamiId": ""
+}

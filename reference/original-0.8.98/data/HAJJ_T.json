@@ -1,0 +1,158 @@
+{
+  "M": {
+    "NGA": [
+      "알하지",
+      "Alhaji"
+    ],
+    "GHA": [
+      "알하지",
+      "Alhaji"
+    ],
+    "SLE": [
+      "알하지",
+      "Alhaji"
+    ],
+    "GMB": [
+      "알하지",
+      "Alhaji"
+    ],
+    "LBR": [
+      "알하지",
+      "Alhaji"
+    ],
+    "SEN": [
+      "엘하지",
+      "El Hadji"
+    ],
+    "MLI": [
+      "엘하지",
+      "El Hadj"
+    ],
+    "GIN": [
+      "엘하지",
+      "El Hadj"
+    ],
+    "BFA": [
+      "엘하지",
+      "El Hadj"
+    ],
+    "CIV": [
+      "엘하지",
+      "El Hadj"
+    ],
+    "NER": [
+      "알하지",
+      "Alhaji"
+    ],
+    "TCD": [
+      "엘하지",
+      "El Hadj"
+    ],
+    "CMR": [
+      "알하지",
+      "Alhaji"
+    ],
+    "IDN": [
+      "하지",
+      "Haji"
+    ],
+    "MYS": [
+      "하지",
+      "Haji"
+    ],
+    "SGP": [
+      "하지",
+      "Haji"
+    ],
+    "BRN": [
+      "하지",
+      "Haji"
+    ],
+    "_": [
+      "하지",
+      "Hajji"
+    ]
+  },
+  "F": {
+    "NGA": [
+      "하지야",
+      "Hajiya"
+    ],
+    "NER": [
+      "하지야",
+      "Hajiya"
+    ],
+    "CMR": [
+      "하지야",
+      "Hajiya"
+    ],
+    "GHA": [
+      "하지아",
+      "Hajia"
+    ],
+    "SLE": [
+      "하지아",
+      "Hajia"
+    ],
+    "GMB": [
+      "하지아",
+      "Hajia"
+    ],
+    "LBR": [
+      "하지아",
+      "Hajia"
+    ],
+    "SEN": [
+      "아자",
+      "Adja"
+    ],
+    "MLI": [
+      "하자",
+      "Hadja"
+    ],
+    "GIN": [
+      "하자",
+      "Hadja"
+    ],
+    "BFA": [
+      "하자",
+      "Hadja"
+    ],
+    "CIV": [
+      "하자",
+      "Hadja"
+    ],
+    "TCD": [
+      "하자",
+      "Hadja"
+    ],
+    "IDN": [
+      "하자",
+      "Hajah"
+    ],
+    "MYS": [
+      "하자",
+      "Hajah"
+    ],
+    "SGP": [
+      "하자",
+      "Hajah"
+    ],
+    "BRN": [
+      "하자",
+      "Hajah"
+    ],
+    "IND": [
+      "하잔",
+      "Hajjan"
+    ],
+    "PAK": [
+      "하잔",
+      "Hajjan"
+    ],
+    "_": [
+      "하자",
+      "Hajja"
+    ]
+  }
+}

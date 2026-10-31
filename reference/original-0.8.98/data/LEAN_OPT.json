@@ -1,0 +1,126 @@
+{
+  "rankup": {
+    "up": "w",
+    "no": "p"
+  },
+  "jobchange": {
+    "o0": "wv",
+    "o1": "wv",
+    "o2": "wv",
+    "stay": "c"
+  },
+  "ownup": {
+    "own": "wv",
+    "no": "c"
+  },
+  "pbiz": {
+    "go": "v",
+    "no": "c"
+  },
+  "farmback": {
+    "go": "v",
+    "stay": "c"
+  },
+  "movenear": {
+    "move": "wf",
+    "stay": "r"
+  },
+  "city": {
+    "go": "fv",
+    "stay": "r"
+  },
+  "abroad": {
+    "go": "f",
+    "gop": "f",
+    "stay": "r"
+  },
+  "prq": {
+    "go": "f"
+  },
+  "histgo": {
+    "go": "f",
+    "stay": "r"
+  },
+  "oldhome": {
+    "kid": "p",
+    "kidab": "pf",
+    "own": "r"
+  },
+  "sm_holiday": {
+    "trip": "ft",
+    "go": "ft",
+    "home": "r",
+    "stay": "c"
+  },
+  "sm_reunion": {
+    "go": "pr"
+  },
+  "sm_volunteer": {
+    "join": "p"
+  },
+  "sm_friend": {
+    "close": "p"
+  },
+  "newneighbor": {
+    "share": "p"
+  },
+  "mentor": {
+    "help": "p",
+    "busy": "w"
+  },
+  "thanks": {
+    "call": "p"
+  },
+  "kids": {
+    "yes": "p"
+  },
+  "partner": {
+    "date": "p",
+    "yes": "p"
+  },
+  "babycare": {
+    "me": "p",
+    "leave": "p",
+    "pt": "p",
+    "pay": "w"
+  },
+  "care": {
+    "home": "p",
+    "near": "p",
+    "pay": "w"
+  },
+  "retire": {
+    "retire": "t",
+    "less": "pt",
+    "work": "w",
+    "keepbiz": "w"
+  },
+  "mandret": {
+    "retire": "t",
+    "rehire": "w",
+    "other": "wv"
+  },
+  "adultedu": {
+    "go": "mv",
+    "no": "t"
+  },
+  "afterUni": {
+    "keep": "w",
+    "job": "w",
+    "grad": "m",
+    "gradabroad": "mf",
+    "stayjob": "f"
+  },
+  "college": {
+    "uni": "m",
+    "abroad": "mf"
+  },
+  "retake": {
+    "retake": "m"
+  },
+  "invest": {
+    "stock": "m",
+    "mix": "m",
+    "property": "m"
+  }
+}

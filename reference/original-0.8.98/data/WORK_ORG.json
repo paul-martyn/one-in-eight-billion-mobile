@@ -1,0 +1,436 @@
+{
+  "ko": {
+    "war": [
+      [
+        "국제적십자위원회",
+        "https://kr.icrc.org/activities/main/"
+      ]
+    ],
+    "refugee": [
+      [
+        "유엔난민기구",
+        "https://www.unhcr.org/kr/what-we-do"
+      ]
+    ],
+    "defector": [
+      [
+        "남북하나재단",
+        "https://koreahana.or.kr/home/kor/main.do"
+      ]
+    ],
+    "girls": [
+      [
+        "플랜코리아",
+        "https://www.plankorea.or.kr/what-we-do/key-issues/protection-from-violence/"
+      ],
+      [
+        "세이브더칠드런",
+        "https://www.sc.or.kr/program/international_program.do?PROGRAMCHOICE=protect"
+      ]
+    ],
+    "care": [
+      [
+        "국가아동권리보장원",
+        "https://www.ncrc.or.kr/ncrc/cm/cntnts/cntntsView.do?mi=1031&cntntsId=1057"
+      ],
+      [
+        "세이브더칠드런",
+        "https://www.sc.or.kr/program/domestic_program.do?PROGRAMCHOICE=protect"
+      ]
+    ],
+    "child": [
+      [
+        "유니세프 한국위원회",
+        "https://www.unicef.or.kr/what-we-do/no-discrimination/saving-lives"
+      ],
+      [
+        "New Incentives (영문)",
+        "https://www.newincentives.org/how"
+      ]
+    ],
+    "mother": [
+      [
+        "세이브더칠드런",
+        "https://www.sc.or.kr/program/international_program.do?PROGRAMCHOICE=health"
+      ],
+      [
+        "유니세프 한국위원회",
+        "https://www.unicef.or.kr/what-we-do/no-discrimination/saving-lives"
+      ]
+    ],
+    "disability": [
+      [
+        "유니세프 한국위원회",
+        "https://www.unicef.or.kr/what-we-do/building-future/disability"
+      ],
+      [
+        "한국장애인고용공단",
+        "https://www.kead.or.kr/prpsmjrf/cntntsPage.do?menuId=MENU0826"
+      ]
+    ],
+    "hunger": [
+      [
+        "유엔세계식량계획(WFP)",
+        "https://ko.wfp.org/ending-hunger"
+      ],
+      [
+        "Helen Keller Intl (영문)",
+        "https://helenkellerintl.org/combatting-vitamin-a-deficiencies/"
+      ]
+    ],
+    "malaria": [
+      [
+        "플랜코리아",
+        "https://www.plankorea.or.kr/what-we-do/key-issues/health-nutrition-wash/"
+      ],
+      [
+        "Malaria Consortium (영문)",
+        "https://www.malariaconsortium.org/resources/seasonal-malaria-chemoprevention"
+      ]
+    ],
+    "tb": [
+      [
+        "대한결핵협회",
+        "https://www.knta.or.kr/"
+      ]
+    ],
+    "hiv": [
+      [
+        "한국에이즈퇴치연맹",
+        "https://kaids.or.kr/page/about_01"
+      ]
+    ],
+    "dementia": [
+      [
+        "중앙치매센터",
+        "https://www.nmc.or.kr/nmc/contents/nid_activities"
+      ]
+    ],
+    "disaster": [
+      [
+        "대한적십자사",
+        "https://www.redcross.or.kr/main/cm/conts/contsView.do?mi=1126&contsId=1012"
+      ],
+      [
+        "세이브더칠드런",
+        "https://www.sc.or.kr/program/international_program.do?PROGRAMCHOICE=support"
+      ]
+    ],
+    "water": [
+      [
+        "유니세프 한국위원회",
+        "https://www.unicef.or.kr/what-we-do/no-discrimination/wash"
+      ]
+    ],
+    "school": [
+      [
+        "유니세프 한국위원회",
+        "https://www.unicef.or.kr/what-we-do/no-discrimination/education"
+      ],
+      [
+        "세이브더칠드런",
+        "https://www.sc.or.kr/program/international_program.do?PROGRAMCHOICE=education"
+      ]
+    ]
+  },
+  "en": {
+    "war": [
+      [
+        "ICRC",
+        "https://www.icrc.org/en/what-we-do/protection"
+      ],
+      [
+        "Doctors Without Borders",
+        "https://msf.org.uk/issues/conflict-and-war"
+      ]
+    ],
+    "refugee": [
+      [
+        "UNHCR",
+        "https://www.unhcr.org/what-we-do"
+      ],
+      [
+        "Norwegian Refugee Council",
+        "https://www.nrc.no/who-we-are/about-us"
+      ]
+    ],
+    "girls": [
+      [
+        "Girls Not Brides",
+        "https://www.girlsnotbrides.org/en/about-us/"
+      ],
+      [
+        "UNFPA",
+        "https://www.unfpa.org/child-marriage"
+      ]
+    ],
+    "care": [
+      [
+        "SOS Children's Villages",
+        "https://www.sos-childrensvillages.org/our-work"
+      ],
+      [
+        "Hope and Homes for Children",
+        "https://www.hopeandhomes.org/what-we-do/"
+      ]
+    ],
+    "child": [
+      [
+        "UNICEF",
+        "https://www.unicef.org/health/maternal-newborn-and-child-survival"
+      ],
+      [
+        "New Incentives",
+        "https://www.newincentives.org/how"
+      ]
+    ],
+    "mother": [
+      [
+        "UNFPA",
+        "https://www.unfpa.org/maternal-health"
+      ],
+      [
+        "Doctors Without Borders",
+        "https://www.doctorswithoutborders.org/what-we-do/medical-issues/maternal-health"
+      ]
+    ],
+    "disability": [
+      [
+        "Humanity & Inclusion",
+        "https://www.hi-us.org/en/action/inclusion"
+      ],
+      [
+        "Sightsavers",
+        "https://www.sightsavers.org/disability-and-inclusion/"
+      ]
+    ],
+    "hunger": [
+      [
+        "World Food Programme",
+        "https://www.wfp.org/emergency-relief"
+      ],
+      [
+        "Helen Keller Intl",
+        "https://helenkellerintl.org/combatting-vitamin-a-deficiencies/"
+      ]
+    ],
+    "malaria": [
+      [
+        "Against Malaria Foundation",
+        "https://www.againstmalaria.com/Nets.aspx"
+      ],
+      [
+        "Malaria Consortium",
+        "https://www.malariaconsortium.org/resources/seasonal-malaria-chemoprevention"
+      ]
+    ],
+    "tb": [
+      [
+        "The Global Fund",
+        "https://www.theglobalfund.org/en/tuberculosis/"
+      ],
+      [
+        "Partners In Health",
+        "https://www.pih.org/programs/tuberculosis"
+      ]
+    ],
+    "hiv": [
+      [
+        "UNAIDS",
+        "https://www.unaids.org/en/whoweare/about"
+      ],
+      [
+        "The Global Fund",
+        "https://www.theglobalfund.org/en/hivaids/"
+      ]
+    ],
+    "dementia": [
+      [
+        "Alzheimer's Disease International",
+        "https://www.alzint.org/what-we-do/"
+      ]
+    ],
+    "disaster": [
+      [
+        "IFRC",
+        "https://www.ifrc.org/our-work/disasters-climate-and-crises"
+      ],
+      [
+        "ShelterBox",
+        "https://shelterbox.org/what-we-do/"
+      ]
+    ],
+    "water": [
+      [
+        "WaterAid",
+        "https://www.wateraid.org/us/what-does-wateraid-do"
+      ],
+      [
+        "charity: water",
+        "https://www.charitywater.org/our-work"
+      ]
+    ],
+    "school": [
+      [
+        "Global Partnership for Education",
+        "https://www.globalpartnership.org/what-we-do/access-education"
+      ],
+      [
+        "UNICEF",
+        "https://www.unicef.org/education"
+      ]
+    ]
+  },
+  "ja": {
+    "war": [
+      [
+        "赤十字国際委員会（ICRC）",
+        "https://jp.icrc.org/plan/region/"
+      ],
+      [
+        "国境なき医師団",
+        "https://www.msf.or.jp/news/conflict.html"
+      ]
+    ],
+    "refugee": [
+      [
+        "UNHCR駐日事務所",
+        "https://www.unhcr.org/jp/what-we-do"
+      ],
+      [
+        "難民を助ける会（AAR Japan）",
+        "https://aarjapan.gr.jp/activity/refugees/"
+      ]
+    ],
+    "girls": [
+      [
+        "プラン・インターナショナル・ジャパン",
+        "https://www.plan-international.jp/social_issues/risk_childmarriage/"
+      ],
+      [
+        "日本ユニセフ協会",
+        "https://www.unicef.or.jp/about_unicef/about_act04_04.html"
+      ]
+    ],
+    "care": [
+      [
+        "SOS子どもの村JAPAN",
+        "https://www.sosjapan.org/our-action"
+      ],
+      [
+        "日本ユニセフ協会",
+        "https://www.unicef.or.jp/about_unicef/about_act04_07.html"
+      ]
+    ],
+    "child": [
+      [
+        "日本ユニセフ協会",
+        "https://www.unicef.or.jp/about_unicef/about_act01.html"
+      ],
+      [
+        "New Incentives（英語）",
+        "https://www.newincentives.org/how"
+      ]
+    ],
+    "mother": [
+      [
+        "国連人口基金（UNFPA）駐日事務所",
+        "https://tokyo.unfpa.org/ja/%E5%9B%BD%E9%80%A3%E4%BA%BA%E5%8F%A3%E5%9F%BA%E9%87%91%E3%81%AE%E6%B4%BB%E5%8B%95-0"
+      ],
+      [
+        "国境なき医師団",
+        "https://www.msf.or.jp/news/maternal.html"
+      ]
+    ],
+    "disability": [
+      [
+        "難民を助ける会（AAR Japan）",
+        "https://aarjapan.gr.jp/activity/disabilities/"
+      ],
+      [
+        "日本障害者リハビリテーション協会",
+        "https://www.jsrpd.jp/overview/international/"
+      ]
+    ],
+    "hunger": [
+      [
+        "国連WFP",
+        "https://ja.wfp.org/our-work"
+      ],
+      [
+        "Helen Keller Intl（英語）",
+        "https://helenkellerintl.org/combatting-vitamin-a-deficiencies/"
+      ]
+    ],
+    "malaria": [
+      [
+        "国境なき医師団",
+        "https://www.msf.or.jp/news/malaria.html"
+      ],
+      [
+        "Malaria Consortium（英語）",
+        "https://www.malariaconsortium.org/resources/seasonal-malaria-chemoprevention"
+      ]
+    ],
+    "tb": [
+      [
+        "結核予防会",
+        "https://www.jatahq.org/headquarters/international/"
+      ],
+      [
+        "ストップ結核パートナーシップ日本",
+        "https://www.stoptb.jp/aboutus/"
+      ]
+    ],
+    "hiv": [
+      [
+        "日本ユニセフ協会",
+        "https://www.unicef.or.jp/about_unicef/about_act03.html"
+      ],
+      [
+        "国境なき医師団",
+        "https://www.msf.or.jp/news/hiv.html"
+      ]
+    ],
+    "dementia": [
+      [
+        "認知症の人と家族の会",
+        "https://www.alzheimer.or.jp/?page_id=73"
+      ],
+      [
+        "日本認知症本人ワーキンググループ",
+        "https://www.jdwg.org/group-information/"
+      ]
+    ],
+    "disaster": [
+      [
+        "日本赤十字社",
+        "https://www.jrc.or.jp/international/about/saigai/"
+      ],
+      [
+        "ジャパン・プラットフォーム",
+        "https://www.japanplatform.org/emergency/index.html"
+      ]
+    ],
+    "water": [
+      [
+        "日本ユニセフ協会",
+        "https://www.unicef.or.jp/about_unicef/about_act01_03.html"
+      ],
+      [
+        "ウォーターエイドジャパン",
+        "https://www.wateraid.org/jp/what-we-do/for-beginners"
+      ]
+    ],
+    "school": [
+      [
+        "日本ユニセフ協会",
+        "https://www.unicef.or.jp/about_unicef/about_act02.html"
+      ],
+      [
+        "ACE",
+        "https://acejapan.org/activity"
+      ]
+    ]
+  }
+}

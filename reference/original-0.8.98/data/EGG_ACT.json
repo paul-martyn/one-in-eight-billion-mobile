@@ -1,0 +1,14 @@
+{
+  "nobel": "award:prize",
+  "fields": "award:prize",
+  "turing": "award:prize",
+  "named": "award:prize",
+  "oscar": "award:stage",
+  "grammy": "award:stage",
+  "comet": "stars",
+  "meteor": "stars",
+  "dino": "trip:nature::solo",
+  "species": "trip:nature::solo",
+  "relic": "trip:nature::solo",
+  "rescue": "help"
+}

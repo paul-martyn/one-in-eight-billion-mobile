@@ -1,0 +1,72 @@
+{
+  "c": {
+    "DE": "in Deutschland die TelefonSeelsorge unter 0800 111 0 111, 0800 111 0 222 oder 116 123 (rund um die Uhr, kostenlos)",
+    "AT": "in Österreich die Telefonseelsorge unter 142 (rund um die Uhr, kostenlos)",
+    "CH": "in der Schweiz die Dargebotene Hand unter 143 (rund um die Uhr)",
+    "LI": "in Liechtenstein die Dargebotene Hand unter 143 (rund um die Uhr)",
+    "LU": "in Luxemburg SOS Détresse unter 45 45 45 (täglich 11 bis 23 Uhr, freitags und samstags bis 3 Uhr, kostenlos); im Notfall die 112"
+  },
+  "y": {
+    "DE": "in Deutschland die Nummer gegen Kummer unter 116 111 (montags bis samstags 14 bis 20 Uhr, kostenlos) oder die TelefonSeelsorge unter 0800 111 0 111 (rund um die Uhr, kostenlos)",
+    "AT": "in Österreich Rat auf Draht unter 147 (rund um die Uhr, kostenlos)",
+    "CH": "in der Schweiz Pro Juventute unter 147 (rund um die Uhr, kostenlos)",
+    "LI": "in Liechtenstein Pro Juventute unter 147 (rund um die Uhr, kostenlos)",
+    "LU": "in Luxemburg das Kanner-Jugendtelefon unter 116 111 (montags und mittwochs 17 bis 22 Uhr, dienstags, donnerstags und freitags 14 bis 22 Uhr, samstags 14 bis 20 Uhr, kostenlos)"
+  },
+  "k": {
+    "DE": "in Deutschland die Nummer gegen Kummer unter 116 111 (montags bis samstags 14 bis 20 Uhr, kostenlos)",
+    "AT": "in Österreich Rat auf Draht unter 147 (rund um die Uhr, kostenlos)",
+    "CH": "in der Schweiz Pro Juventute unter 147 (rund um die Uhr, kostenlos)",
+    "LI": "in Liechtenstein Pro Juventute unter 147 (rund um die Uhr, kostenlos)",
+    "LU": "in Luxemburg das Kanner-Jugendtelefon unter 116 111 (montags und mittwochs 17 bis 22 Uhr, dienstags, donnerstags und freitags 14 bis 22 Uhr, samstags 14 bis 20 Uhr, kostenlos)"
+  },
+  "d": {
+    "DE": "in Deutschland das Hilfetelefon Gewalt gegen Frauen unter 116 016 (rund um die Uhr, kostenlos)",
+    "AT": "in Österreich die Frauenhelpline gegen Gewalt unter 0800 222 555 (rund um die Uhr, kostenlos)",
+    "CH": "in der Schweiz die Opferhilfe-Nummer 142 (rund um die Uhr, kostenlos)",
+    "LI": "in Liechtenstein das Frauenhaus unter +423 380 02 03 (Tag und Nacht, Beratung kostenlos)",
+    "LU": "in Luxemburg die Helpline Gewalt unter 2060 1060 (rund um die Uhr)"
+  },
+  "dm": {
+    "DE": "in Deutschland das Hilfetelefon Gewalt an Männern unter 0800 123 99 00 (montags bis donnerstags 8 bis 20 Uhr, freitags 8 bis 15 Uhr, kostenlos) oder das Opfer-Telefon des Weissen Rings unter 116 006 (täglich 7 bis 22 Uhr, kostenlos)",
+    "AT": "in Österreich die Männerinfo unter 0800 400 777 (rund um die Uhr, kostenlos)",
+    "CH": "in der Schweiz die Opferhilfe-Nummer 142 (rund um die Uhr, kostenlos)",
+    "LI": "in Liechtenstein die Opferhilfestelle unter +423 236 76 96 (zu Bürozeiten)",
+    "LU": "in Luxemburg die Helpline Gewalt unter 2060 1060 (rund um die Uhr)"
+  },
+  "a": {
+    "DE": "in Deutschland das BIÖG-Infotelefon zur Suchtvorbeugung unter 0221 892031 (montags bis donnerstags 10 bis 22 Uhr, freitags bis sonntags 10 bis 18 Uhr)",
+    "AT": "in Österreich die Telefonseelsorge unter 142 (rund um die Uhr, kostenlos)",
+    "CH": "in der Schweiz die Online-Suchtberatung SafeZone.ch (kostenlos, anonym) oder die Dargebotene Hand unter 143 (rund um die Uhr)",
+    "LI": "in Liechtenstein die Dargebotene Hand unter 143 (rund um die Uhr)",
+    "LU": "in Luxemburg die Hotline „Fro No“ des CNAPA unter 49 77 77 55 (montags bis freitags 9 bis 13 Uhr)"
+  },
+  "g": {
+    "DE": "in Deutschland die Telefonberatung zur Glücksspielsucht des BIÖG unter 0800 1 37 27 00 (montags bis donnerstags 10 bis 22 Uhr, freitags bis sonntags 10 bis 18 Uhr, kostenlos)",
+    "AT": "in Österreich die Spielsuchthilfe in Wien unter 01 544 13 57 (Beratung kostenlos) oder die Telefonseelsorge unter 142 (rund um die Uhr, kostenlos)",
+    "CH": "in der Schweiz SOS Spielsucht unter 0800 040 080 (rund um die Uhr, kostenlos)",
+    "LI": "in Liechtenstein die Dargebotene Hand unter 143 (rund um die Uhr)",
+    "LU": "in Luxemburg das ZEV, Zentrum für exzessives Verhalten und Verhaltenssucht, unter 26 48 00 38 (montags bis freitags 10 bis 16 Uhr)"
+  },
+  "u": {
+    "DE": "in Deutschland die Sucht & Drogen Hotline unter 01806 313031 (täglich 8 bis 24 Uhr, 20 Cent pro Anruf)",
+    "AT": "in Österreich die Telefonseelsorge unter 142 (rund um die Uhr, kostenlos)",
+    "CH": "in der Schweiz die Online-Suchtberatung SafeZone.ch (kostenlos, anonym) oder die Dargebotene Hand unter 143 (rund um die Uhr)",
+    "LI": "in Liechtenstein die Dargebotene Hand unter 143 (rund um die Uhr)",
+    "LU": "in Luxemburg die Hotline „Fro No“ des CNAPA unter 49 77 77 55 (montags bis freitags 9 bis 13 Uhr)"
+  },
+  "s": {
+    "DE": "in Deutschland das Hilfe-Telefon Sexueller Missbrauch unter 0800 22 55 530 (montags, mittwochs und freitags 9 bis 14 Uhr, dienstags und donnerstags 15 bis 20 Uhr, kostenlos) oder, für Frauen, das Hilfetelefon Gewalt gegen Frauen unter 116 016 (rund um die Uhr, kostenlos)",
+    "AT": "in Österreich die Frauenhelpline gegen Gewalt unter 0800 222 555 (rund um die Uhr, kostenlos) oder der Opfer-Notruf unter 0800 112 112 (werktags 8 bis 20 Uhr, kostenlos)",
+    "CH": "in der Schweiz die Opferhilfe-Nummer 142 (rund um die Uhr, kostenlos)",
+    "LI": "in Liechtenstein das Frauenhaus unter +423 380 02 03 (Tag und Nacht, Beratung kostenlos) oder die Opferhilfestelle unter +423 236 76 96 (zu Bürozeiten)",
+    "LU": "in Luxemburg die Helpline Gewalt unter 2060 1060 (rund um die Uhr)"
+  },
+  "t": {
+    "DE": "in Deutschland die Beratung des BIÖG zu sexueller und geschlechtlicher Vielfalt unter 0221 8992876 (montags bis donnerstags 12 bis 16 Uhr) oder die TelefonSeelsorge unter 0800 111 0 111 (rund um die Uhr, kostenlos)",
+    "AT": "in Österreich die Telefonseelsorge unter 142 (rund um die Uhr, kostenlos)",
+    "CH": "in der Schweiz die LGBTIQ-Helpline unter 0800 133 133 (montags bis freitags 19 bis 21 Uhr) oder die Dargebotene Hand unter 143 (rund um die Uhr)",
+    "LI": "in Liechtenstein die Dargebotene Hand unter 143 (rund um die Uhr)",
+    "LU": "in Luxemburg das LGBTIQ+-Zentrum CIGALE unter 26 19 00 18 oder SOS Détresse unter 45 45 45 (täglich 11 bis 23 Uhr, kostenlos)"
+  }
+}

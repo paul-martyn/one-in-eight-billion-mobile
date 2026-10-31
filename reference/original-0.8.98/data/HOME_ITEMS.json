@@ -1,0 +1,547 @@
+{
+  "wp_cream": [
+    "wp",
+    ""
+  ],
+  "wp_sky": [
+    "wp",
+    ""
+  ],
+  "wp_stripe": [
+    "wp",
+    ""
+  ],
+  "wp_dots": [
+    "wp",
+    ""
+  ],
+  "wp_check": [
+    "wp",
+    ""
+  ],
+  "wp_tile": [
+    "wp",
+    ""
+  ],
+  "wp_flower": [
+    "wp",
+    ""
+  ],
+  "wp_wood": [
+    "wp",
+    ""
+  ],
+  "wp_brick": [
+    "wp",
+    ""
+  ],
+  "wp_hanji": [
+    "wp",
+    ""
+  ],
+  "wp_star": [
+    "wp",
+    ""
+  ],
+  "fl_wood": [
+    "fl",
+    ""
+  ],
+  "fl_jangpan": [
+    "fl",
+    ""
+  ],
+  "fl_tatami": [
+    "fl",
+    ""
+  ],
+  "fl_tile": [
+    "fl",
+    ""
+  ],
+  "fl_carpet": [
+    "fl",
+    ""
+  ],
+  "fl_marble": [
+    "fl",
+    ""
+  ],
+  "wv_home": [
+    "wv",
+    ""
+  ],
+  "wv_city": [
+    "wv",
+    ""
+  ],
+  "wv_hills": [
+    "wv",
+    ""
+  ],
+  "wv_rain": [
+    "wv",
+    ""
+  ],
+  "wv_night": [
+    "wv",
+    ""
+  ],
+  "wv_sea": [
+    "wv",
+    ""
+  ],
+  "wv_snow": [
+    "wv",
+    ""
+  ],
+  "wv_bloom": [
+    "wv",
+    ""
+  ],
+  "wv_stars": [
+    "wv",
+    ""
+  ],
+  "wv_summer": [
+    "wv",
+    ""
+  ],
+  "wv_maple": [
+    "wv",
+    ""
+  ],
+  "wv_dusk": [
+    "wv",
+    ""
+  ],
+  "wv_moon": [
+    "wv",
+    ""
+  ],
+  "wv_firefly": [
+    "wv",
+    ""
+  ],
+  "wv_snownight": [
+    "wv",
+    ""
+  ],
+  "ot_me": [
+    "ot",
+    ""
+  ],
+  "ot_navy": [
+    "ot",
+    ""
+  ],
+  "ot_red": [
+    "ot",
+    ""
+  ],
+  "ot_yellow": [
+    "ot",
+    ""
+  ],
+  "ot_white": [
+    "ot",
+    ""
+  ],
+  "ot_pink": [
+    "ot",
+    ""
+  ],
+  "ot_green": [
+    "ot",
+    ""
+  ],
+  "ot_black": [
+    "ot",
+    ""
+  ],
+  "bgm_base": [
+    "bgm",
+    ""
+  ],
+  "bgm_box": [
+    "bgm",
+    ""
+  ],
+  "bgm_waltz": [
+    "bgm",
+    ""
+  ],
+  "bgm_rain": [
+    "bgm",
+    ""
+  ],
+  "bgm_night": [
+    "bgm",
+    ""
+  ],
+  "bgm_spring": [
+    "bgm",
+    ""
+  ],
+  "table": [
+    "it",
+    "big"
+  ],
+  "chair": [
+    "it",
+    "small"
+  ],
+  "plant": [
+    "it",
+    "small"
+  ],
+  "clock": [
+    "it",
+    "wall"
+  ],
+  "bed": [
+    "it",
+    "big"
+  ],
+  "sofa": [
+    "it",
+    "big"
+  ],
+  "desk": [
+    "it",
+    "big"
+  ],
+  "piano": [
+    "it",
+    "big"
+  ],
+  "tv": [
+    "it",
+    "big"
+  ],
+  "bike": [
+    "it",
+    "big"
+  ],
+  "shelf": [
+    "it",
+    "tall"
+  ],
+  "wardrobe": [
+    "it",
+    "tall"
+  ],
+  "gclock": [
+    "it",
+    "tall"
+  ],
+  "lamp": [
+    "it",
+    "tall"
+  ],
+  "xmas": [
+    "it",
+    "tall"
+  ],
+  "radio": [
+    "it",
+    "small"
+  ],
+  "tank": [
+    "it",
+    "small"
+  ],
+  "bear": [
+    "it",
+    "small"
+  ],
+  "globe": [
+    "it",
+    "small"
+  ],
+  "record": [
+    "it",
+    "small"
+  ],
+  "cake": [
+    "it",
+    "small"
+  ],
+  "bigplant": [
+    "it",
+    "small"
+  ],
+  "wshelf": [
+    "it",
+    "wall"
+  ],
+  "poster": [
+    "it",
+    "wall"
+  ],
+  "mirror": [
+    "it",
+    "wall"
+  ],
+  "paint": [
+    "it",
+    "wall"
+  ],
+  "lights": [
+    "it",
+    "wall"
+  ],
+  "calendar": [
+    "it",
+    "wall"
+  ],
+  "rug_round": [
+    "it",
+    "rug"
+  ],
+  "rug_stripe": [
+    "it",
+    "rug"
+  ],
+  "rug_persian": [
+    "it",
+    "rug"
+  ],
+  "rocking": [
+    "it",
+    "big"
+  ],
+  "fire": [
+    "it",
+    "big"
+  ],
+  "scope": [
+    "it",
+    "tall"
+  ],
+  "birdcage": [
+    "it",
+    "tall"
+  ],
+  "violin": [
+    "it",
+    "small"
+  ],
+  "drum": [
+    "it",
+    "small"
+  ],
+  "tea": [
+    "it",
+    "small"
+  ],
+  "chess": [
+    "it",
+    "small"
+  ],
+  "bonsai": [
+    "it",
+    "small"
+  ],
+  "cactus": [
+    "it",
+    "small"
+  ],
+  "suitcase": [
+    "it",
+    "small"
+  ],
+  "fruit": [
+    "it",
+    "small"
+  ],
+  "lantern": [
+    "it",
+    "small"
+  ],
+  "kite": [
+    "it",
+    "wall"
+  ],
+  "chime": [
+    "it",
+    "wall"
+  ],
+  "quilt": [
+    "it",
+    "wall"
+  ],
+  "rug_mat": [
+    "it",
+    "rug"
+  ],
+  "rug_kilim": [
+    "it",
+    "rug"
+  ],
+  "photos": [
+    "it",
+    "wall"
+  ],
+  "e_lamp": [
+    "it",
+    "small"
+  ],
+  "e_gramo": [
+    "it",
+    "small"
+  ],
+  "e_sew": [
+    "it",
+    "small"
+  ],
+  "e_type": [
+    "it",
+    "small"
+  ],
+  "e_dial": [
+    "it",
+    "small"
+  ],
+  "e_najeon": [
+    "it",
+    "tall"
+  ],
+  "e_yeontan": [
+    "it",
+    "small"
+  ],
+  "e_fan": [
+    "it",
+    "small"
+  ],
+  "e_cassette": [
+    "it",
+    "small"
+  ],
+  "e_crt": [
+    "it",
+    "small"
+  ],
+  "e_pc": [
+    "it",
+    "big"
+  ],
+  "e_aircon": [
+    "it",
+    "tall"
+  ],
+  "e_flatv": [
+    "it",
+    "wall"
+  ],
+  "e_purifier": [
+    "it",
+    "small"
+  ],
+  "l_dog": [
+    "it",
+    "small",
+    1
+  ],
+  "l_cat": [
+    "it",
+    "small",
+    1
+  ],
+  "l_guitar": [
+    "it",
+    "small",
+    1
+  ],
+  "l_easel": [
+    "it",
+    "tall",
+    1
+  ],
+  "l_medal": [
+    "it",
+    "wall",
+    1
+  ],
+  "l_diploma": [
+    "it",
+    "wall",
+    1
+  ],
+  "l_wed": [
+    "it",
+    "wall",
+    1
+  ],
+  "l_fam": [
+    "it",
+    "wall",
+    1
+  ],
+  "l_map": [
+    "it",
+    "wall",
+    1
+  ],
+  "l_rocket": [
+    "it",
+    "small",
+    1
+  ],
+  "l_flag": [
+    "it",
+    "small",
+    1
+  ],
+  "l_books": [
+    "it",
+    "small",
+    1
+  ],
+  "l_basket": [
+    "it",
+    "small",
+    1
+  ],
+  "l_rod": [
+    "it",
+    "tall",
+    1
+  ],
+  "l_tools": [
+    "it",
+    "small",
+    1
+  ],
+  "l_kit": [
+    "it",
+    "small",
+    1
+  ],
+  "l_pot": [
+    "it",
+    "small",
+    1
+  ],
+  "l_laptop": [
+    "it",
+    "small",
+    1
+  ],
+  "l_camera": [
+    "it",
+    "small",
+    1
+  ],
+  "l_ball": [
+    "it",
+    "small",
+    1
+  ],
+  "l_yarn": [
+    "it",
+    "small",
+    1
+  ]
+}

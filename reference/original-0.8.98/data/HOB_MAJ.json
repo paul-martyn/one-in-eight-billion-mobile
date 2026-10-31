@@ -1,0 +1,19 @@
+{
+  "art": "art",
+  "crafts": "art",
+  "photo": "art",
+  "music": "mus",
+  "dance": "dnc",
+  "karaoke": "art",
+  "drama": "art",
+  "reading": "hum",
+  "writing": "hum",
+  "faith": "hum",
+  "games": "cs",
+  "garden": "agr",
+  "gym": "pe",
+  "sport": "pe",
+  "cooking": "hosp",
+  "travel": "hosp",
+  "sns": "media"
+}

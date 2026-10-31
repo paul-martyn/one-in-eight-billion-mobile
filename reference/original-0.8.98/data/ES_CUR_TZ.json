@@ -1,0 +1,22 @@
+{
+  "Europe/Madrid": "EUR",
+  "Africa/Ceuta": "EUR",
+  "Atlantic/Canary": "EUR",
+  "America/Mexico_City": "MXN",
+  "America/Cancun": "MXN",
+  "America/Merida": "MXN",
+  "America/Monterrey": "MXN",
+  "America/Matamoros": "MXN",
+  "America/Chihuahua": "MXN",
+  "America/Ciudad_Juarez": "MXN",
+  "America/Ojinaga": "MXN",
+  "America/Mazatlan": "MXN",
+  "America/Bahia_Banderas": "MXN",
+  "America/Hermosillo": "MXN",
+  "America/Tijuana": "MXN",
+  "America/Bogota": "COP",
+  "America/Santiago": "CLP",
+  "America/Punta_Arenas": "CLP",
+  "Pacific/Easter": "CLP",
+  "America/Lima": "PEN"
+}

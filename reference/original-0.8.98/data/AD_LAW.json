@@ -1,0 +1,67 @@
+{
+  "NLD": {
+    "from": 2002,
+    "yr": 2025,
+    "s": 0.06,
+    "src": "RTE 2025"
+  },
+  "BEL": {
+    "from": 2002,
+    "yr": 2025,
+    "s": 0.04,
+    "src": "FCEE 2025"
+  },
+  "CAN": {
+    "from": 2016,
+    "yr": 2024,
+    "s": 0.051,
+    "src": "Health Canada 2025"
+  },
+  "CHE": {
+    "from": 1999,
+    "fy": 1942,
+    "yr": 2023,
+    "s": 0.024,
+    "src": "FSO 2024"
+  },
+  "LUX": {
+    "from": 2009,
+    "yr": 2024,
+    "s": 0.008,
+    "src": "Commission nationale de contrôle 2025"
+  },
+  "NZL": {
+    "from": 2022,
+    "fy": 2021,
+    "yr": 2025,
+    "s": 0.013,
+    "src": "NZ Ministry of Health 2026"
+  },
+  "AUS": {
+    "from": 2019,
+    "yr": 2025,
+    "s": 0.018,
+    "st": 1,
+    "src": "state VAD review boards 2024-25"
+  },
+  "ESP": {
+    "from": 2021,
+    "yr": 2024,
+    "s": 0.001,
+    "src": "Ministerio de Sanidad 2025"
+  },
+  "AUT": {
+    "from": 2022,
+    "yr": 2024,
+    "s": 0.0013,
+    "src": "Statistik Austria 2025"
+  },
+  "USA": {
+    "from": 1998,
+    "fy": 1997,
+    "yr": 2025,
+    "s": 0.0009,
+    "st": 1,
+    "src": "state reports 2024-25"
+  }
+}

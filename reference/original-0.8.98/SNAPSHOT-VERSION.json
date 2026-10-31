@@ -1,0 +1,14 @@
+{
+  "version": "0.8.98 베타",
+  "capturedDate": "2026-10-31",
+  "baselineVersion": "0.8.63 beta",
+  "baselineCaptureDate": "2026-10-27",
+  "publicOrigin": "https://1in8b.life",
+  "captureFirst": "2026-10-31T18:05:33.260Z",
+  "captureLast": "2026-10-31T18:11:41.655Z",
+  "nodeTested": "v24.16.0",
+  "publicClientOnly": true,
+  "gameplayRewritten": false,
+  "originalPrivateRepository": false,
+  "backendRecovered": false
+}

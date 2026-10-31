@@ -1,0 +1,13 @@
+{
+  "id": "./",
+  "name": "One in Eight Billion",
+  "short_name": "1in8b",
+  "lang": "ru",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F4F2EB",
+  "theme_color": "#F4F2EB",
+  "icons": [{ "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

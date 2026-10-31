@@ -1,0 +1,44 @@
+[
+  {
+    "bg": "#1F2A44",
+    "ink": "#F6F1E7",
+    "ink2": "#C3BDB0",
+    "acc": "#E8B04B",
+    "rule": "#3A4664"
+  },
+  {
+    "bg": "#23402F",
+    "ink": "#F4F1E6",
+    "ink2": "#BDC7B8",
+    "acc": "#E9C46A",
+    "rule": "#3B5A47"
+  },
+  {
+    "bg": "#5A2232",
+    "ink": "#FBEFEA",
+    "ink2": "#D9B9B6",
+    "acc": "#F2C14E",
+    "rule": "#76394A"
+  },
+  {
+    "bg": "#38304F",
+    "ink": "#F3EFF8",
+    "ink2": "#C4BCD6",
+    "acc": "#F0A86A",
+    "rule": "#504769"
+  },
+  {
+    "bg": "#6B4220",
+    "ink": "#FBF3E6",
+    "ink2": "#E0CDB4",
+    "acc": "#FFD27A",
+    "rule": "#85593A"
+  },
+  {
+    "bg": "#13212A",
+    "ink": "#EEF3F0",
+    "ink2": "#9FB0B4",
+    "acc": "#5FC4B4",
+    "rule": "#2C3E48"
+  }
+]

@@ -1,0 +1,2154 @@
+{
+  "S": {
+    "v": 3,
+    "phase": "life",
+    "mode": "birth",
+    "paceMin": 60,
+    "yearSec": 42.37687164516433,
+    "t": 0,
+    "age": 25,
+    "speed": 1,
+    "paused": false,
+    "born": "CAN",
+    "cur": "CAN",
+    "sex": "F",
+    "q": 3,
+    "urban": true,
+    "city": "Calgary",
+    "bornUrban": true,
+    "bornCity": "Calgary",
+    "rel": "N",
+    "cl": "en",
+    "name": {
+      "g": "Natalie",
+      "base": "Robinson",
+      "full": "Natalie Robinson",
+      "cl": "en"
+    },
+    "eth": null,
+    "caste": null,
+    "st": {
+      "hl": 89.66459182053244,
+      "h": 61.19789859731357,
+      "sm": 46.61493163975204,
+      "so": 69.31867058150397
+    },
+    "tal": {
+      "st": -0.22,
+      "bd": 0.91,
+      "ar": 1.25,
+      "mu": -0.78,
+      "hd": -0.72,
+      "wd": 0.96
+    },
+    "kE": 0.11304735156423353,
+    "money": 1542.5384816116646,
+    "house": 0,
+    "debt": 0,
+    "income": 0,
+    "pct": 0.252969300460875,
+    "job": "seeking",
+    "jobY": 4,
+    "formal": true,
+    "formalY": 4,
+    "exp": {
+      "childcare": [
+        4,
+        0.252969300460875
+      ]
+    },
+    "edu": 3,
+    "school": null,
+    "schoolY": 0,
+    "focus": "family",
+    "fT": {},
+    "fam": {
+      "mom": {
+        "age": 59,
+        "alive": true,
+        "job": "teacher",
+        "name": {
+          "g": "Rebecca",
+          "base": "Robinson",
+          "full": "Rebecca Robinson",
+          "cl": "en"
+        },
+        "bt": [
+          3,
+          20
+        ]
+      },
+      "dad": {
+        "age": 60,
+        "alive": true,
+        "absent": false,
+        "job": "engineer",
+        "name": {
+          "g": "Michael",
+          "base": "Robinson",
+          "full": "Michael Robinson",
+          "cl": "en"
+        },
+        "bt": [
+          3,
+          20
+        ]
+      },
+      "older": 1,
+      "younger": 1,
+      "sibBorn": 1,
+      "sibAt": [
+        [
+          5,
+          "F"
+        ]
+      ],
+      "mAt": 34,
+      "partner": null,
+      "married": false,
+      "kids": [],
+      "father": "Andrew",
+      "fb": 20,
+      "gp": [
+        {
+          "side": "m",
+          "sex": "F",
+          "age": 78,
+          "alive": false
+        },
+        {
+          "side": "m",
+          "sex": "M",
+          "age": 70,
+          "alive": false
+        },
+        {
+          "side": "f",
+          "sex": "F",
+          "age": 94,
+          "alive": true
+        },
+        {
+          "side": "f",
+          "sex": "M",
+          "age": 82,
+          "alive": false
+        }
+      ],
+      "pPct": 0.7284655285347252,
+      "pHome": "own",
+      "sibDA": [
+        89,
+        74
+      ],
+      "grand": [],
+      "ppD": 0,
+      "sibLT": [
+        0
+      ],
+      "lastSib": 5
+    },
+    "trait": "act",
+    "smoker": true,
+    "quitTried": 0,
+    "conds": {},
+    "hobbies": [
+      {
+        "id": "hiking",
+        "lv": 8.30655,
+        "since": 7,
+        "m3": 1
+      }
+    ],
+    "owns": {
+      "phone": 12
+    },
+    "mig": null,
+    "migY": 0,
+    "refugee": false,
+    "served": false,
+    "serveLeft": 0,
+    "pension": 0,
+    "retired": false,
+    "log": [
+      {
+        "a": 0,
+        "text": "You got your basic vaccinations (DTP and measles).",
+        "kind": "ev",
+        "fact": "In 2023, 84% of infants worldwide received all three doses of the DTP vaccine (WHO·UNICEF)",
+        "fx": {
+          "hl": 3
+        }
+      },
+      {
+        "a": 1,
+        "text": "Age 1. Of the girls born in Canada the same year as you, nearly all are still alive.",
+        "kind": "ms"
+      },
+      {
+        "a": 1,
+        "text": "You took your first steps. The whole family clapped.",
+        "kind": "ev",
+        "fx": {
+          "h": 2
+        }
+      },
+      {
+        "a": 1,
+        "text": "You spent Thanksgiving with your family.",
+        "kind": "ev",
+        "fx": {
+          "h": 2,
+          "so": 1
+        }
+      },
+      {
+        "a": 2,
+        "text": "You played with the neighborhood kids until the sun went down.",
+        "kind": "ev",
+        "fx": {
+          "h": 3,
+          "so": 2
+        }
+      },
+      {
+        "a": 2,
+        "text": "Decision: Run off as fast as you can",
+        "kind": "dec",
+        "q": "Two years old, and a world outside"
+      },
+      {
+        "a": 2,
+        "text": "You were the first at the door, shoes in hand, waiting to go out.",
+        "kind": "big",
+        "d": "temper"
+      },
+      {
+        "a": 2,
+        "text": "You said your first word: ‘Mama’.",
+        "kind": "ev"
+      },
+      {
+        "a": 3,
+        "text": "You started preschool.",
+        "kind": "ev",
+        "fx": {
+          "sm": 1,
+          "so": 2
+        }
+      },
+      {
+        "a": 3,
+        "text": "Sitting next to your parents, you watched a video on the internet for the first time.",
+        "kind": "ev",
+        "fact": "Internet use in Canada: 94% of people (ITU, World Bank)",
+        "fa": "Mother, 37 · Father, 38",
+        "fx": {
+          "h": 2,
+          "sm": 1
+        }
+      },
+      {
+        "a": 4,
+        "text": "Your paternal grandmother told you stories from long ago.",
+        "kind": "ev",
+        "fx": {
+          "h": 3,
+          "so": 2
+        }
+      },
+      {
+        "a": 4,
+        "text": "Your paternal grandmother slipped you some pocket money on the quiet. (+$176)",
+        "kind": "ev",
+        "fx": {
+          "h": 3,
+          "so": 2
+        }
+      },
+      {
+        "a": 4,
+        "text": "You waved and smiled even at grown-ups you had never met.",
+        "kind": "warm",
+        "act": "play"
+      },
+      {
+        "a": 4,
+        "text": "By about five, the grown-ups were calling Natalie a lively child.",
+        "kind": "warm",
+        "fact": "Childhood temperament often carries into adulthood. Persistence and self-control around age five were linked, modestly but clearly, to schooling, health and finances decades later (Moffitt et al. 2011, the Dunedin study, New Zealand)",
+        "act": "play"
+      },
+      {
+        "a": 4,
+        "text": "Crayon or stick, once you had something to draw with you lost all track of time. Grown-ups would stop to look at your drawings.",
+        "kind": "warm",
+        "fact": "Taken together, twin studies find that most human traits are roughly half inborn and half shaped by growing up (Polderman et al. 2015)"
+      },
+      {
+        "a": 5,
+        "text": "You turned five.",
+        "kind": "ms"
+      },
+      {
+        "a": 5,
+        "text": "On the day of the first heavy snow you had a snowball fight with the neighbourhood children and built a snowman.",
+        "kind": "ev",
+        "fx": {
+          "h": 3,
+          "so": 1
+        }
+      },
+      {
+        "a": 5,
+        "text": "You went on a trip with your family.",
+        "kind": "ev",
+        "fx": {
+          "h": 3,
+          "so": 1
+        }
+      },
+      {
+        "a": 5,
+        "text": "A younger sister was born.",
+        "kind": "ev"
+      },
+      {
+        "a": 5,
+        "text": "On Halloween night you went trick-or-treating, knocking on the neighbours' doors in a costume you had made yourself.",
+        "kind": "warm"
+      },
+      {
+        "a": 6,
+        "text": "You started primary school.",
+        "kind": "big",
+        "act": "school"
+      },
+      {
+        "a": 6,
+        "text": "Whenever grown-ups asked what you wanted to be, you said a singer.",
+        "kind": "warm"
+      },
+      {
+        "a": 6,
+        "text": "Every night before bed, your parents read you picture books.",
+        "kind": "ev",
+        "fa": "Mother, 40 · Father, 41",
+        "fx": {
+          "so": 1
+        }
+      },
+      {
+        "a": 6,
+        "text": "You played at being a basketball champion.",
+        "kind": "ev",
+        "fx": {
+          "h": 3,
+          "so": 2
+        }
+      },
+      {
+        "a": 7,
+        "text": "You played with the neighborhood kids until the sun went down.",
+        "kind": "ev",
+        "fx": {
+          "h": 3,
+          "so": 2
+        }
+      },
+      {
+        "a": 7,
+        "text": "Decision: Hiking & walking",
+        "kind": "dec",
+        "q": "Finding something you love"
+      },
+      {
+        "a": 7,
+        "text": "You fell in love with hiking & walking.",
+        "kind": "big",
+        "act": "hobby:hiking",
+        "d": "hobby",
+        "fx": {
+          "h": 3
+        }
+      },
+      {
+        "a": 7,
+        "text": "A good teacher got you interested in history.",
+        "kind": "ev",
+        "fx": {
+          "sm": 1
+        }
+      },
+      {
+        "a": 7,
+        "text": "You and Charlotte became best friends.",
+        "kind": "ev",
+        "fx": {
+          "h": 3,
+          "so": 5
+        }
+      },
+      {
+        "a": 7,
+        "text": "At 78, your maternal grandmother passed away. Cause: ischemic heart disease (heart attack).",
+        "kind": "loss",
+        "act": "loss:gp"
+      },
+      {
+        "a": 7,
+        "text": "Family and friends gathered for the funeral.",
+        "kind": "note",
+        "act": "loss:gp"
+      },
+      {
+        "a": 8,
+        "text": "You played in the mud and got your clothes filthy.",
+        "kind": "ev",
+        "fx": {
+          "h": 3,
+          "so": 2
+        }
+      },
+      {
+        "a": 8,
+        "text": "For the first time, you had a room of your own.",
+        "kind": "ev",
+        "fx": {
+          "h": 2
+        }
+      },
+      {
+        "a": 8,
+        "text": "You finished the school year with good grades.",
+        "kind": "ev",
+        "fx": {
+          "h": 1
+        }
+      },
+      {
+        "a": 8,
+        "text": "You still remember the stories your maternal grandmother used to tell. Sometimes you go over them again on your own.",
+        "kind": "warm",
+        "fact": "Most people who lose someone close stay steady through their grief, or find their footing again within a year or two (Bonanno 2004)",
+        "act": "mem:gp"
+      },
+      {
+        "a": 9,
+        "text": "During the holidays, you shared food with your neighbors.",
+        "kind": "warm",
+        "act": "fest",
+        "fx": {
+          "h": 2,
+          "so": 3
+        }
+      },
+      {
+        "a": 9,
+        "text": "Decision: Run around with friends until sunset",
+        "kind": "dec",
+        "q": "After school"
+      },
+      {
+        "a": 9,
+        "text": "You played with your friends until the sun went down.",
+        "kind": "big",
+        "act": "hobby:reading",
+        "d": "sm_after",
+        "fx": {
+          "hl": 1,
+          "h": 2,
+          "so": 3
+        }
+      },
+      {
+        "a": 9,
+        "text": "You finished the school year with average grades.",
+        "kind": "ev"
+      },
+      {
+        "a": 9,
+        "text": "You spent Thanksgiving with your family.",
+        "kind": "ev",
+        "fx": {
+          "h": 2,
+          "so": 1
+        }
+      },
+      {
+        "a": 10,
+        "text": "You learned to ride a bicycle in the lot in front of your building. After a few falls you rode off on your own.",
+        "kind": "ev",
+        "fx": {
+          "h": 3
+        }
+      },
+      {
+        "a": 10,
+        "text": "You'll never forget the taste of your father's home cooking.",
+        "kind": "warm",
+        "fa": "Father, 45",
+        "act": "meal",
+        "fx": {
+          "h": 2,
+          "so": 1
+        }
+      },
+      {
+        "a": 10,
+        "text": "Your paternal grandfather slipped you some pocket money on the quiet. (+$176)",
+        "kind": "ev",
+        "fx": {
+          "h": 3,
+          "so": 2
+        }
+      },
+      {
+        "a": 11,
+        "text": "You went on a trip with your family during the school holidays.",
+        "kind": "ev",
+        "fx": {
+          "h": 3,
+          "so": 1
+        }
+      },
+      {
+        "a": 11,
+        "text": "At a neighborhood party, you sang and danced until late.",
+        "kind": "warm",
+        "act": "fest",
+        "fx": {
+          "h": 2,
+          "so": 2
+        }
+      },
+      {
+        "a": 12,
+        "text": "You finished primary school.",
+        "kind": "big",
+        "act": "grad:1"
+      },
+      {
+        "a": 12,
+        "text": "You had your first period. Your changing body felt strange, but you took it as part of growing up.",
+        "kind": "ev"
+      },
+      {
+        "a": 12,
+        "text": "You went on to middle school.",
+        "kind": "big"
+      },
+      {
+        "a": 12,
+        "text": "Fooling around with your older brother, the two of you laughed until your sides hurt.",
+        "kind": "warm",
+        "act": "meal",
+        "fx": {
+          "so": 3
+        }
+      },
+      {
+        "a": 12,
+        "text": "You walked the neighborhood until the neighbors' runaway puppy was found.",
+        "kind": "ev",
+        "fx": {
+          "so": 3
+        }
+      },
+      {
+        "a": 12,
+        "text": "You got your first smartphone.",
+        "kind": "ev"
+      },
+      {
+        "a": 13,
+        "text": "A good teacher got you interested in writing.",
+        "kind": "ev",
+        "fx": {
+          "sm": 1
+        }
+      },
+      {
+        "a": 13,
+        "text": "You and Samuel became best friends.",
+        "kind": "ev",
+        "fx": {
+          "h": 3,
+          "so": 5
+        }
+      },
+      {
+        "a": 13,
+        "text": "You had a crush on a classmate.",
+        "kind": "ev",
+        "fx": {
+          "h": 2
+        }
+      },
+      {
+        "a": 13,
+        "text": "The family fell into debt, and for a while things were hard.",
+        "kind": "bad",
+        "fact": "In OECD countries about 60% of people in the bottom fifth of incomes were still there four years later, and about 70% of those in the top fifth (OECD 2018)"
+      },
+      {
+        "a": 14,
+        "text": "You spent the school holidays at your paternal grandfather's home.",
+        "kind": "ev",
+        "fx": {
+          "h": 3,
+          "so": 2
+        }
+      },
+      {
+        "a": 14,
+        "text": "You finished the school year with good grades.",
+        "kind": "ev",
+        "fx": {
+          "h": 1
+        }
+      },
+      {
+        "a": 14,
+        "text": "You made friends to go hiking with every weekend.",
+        "kind": "ev",
+        "fx": {
+          "h": 3
+        }
+      },
+      {
+        "a": 15,
+        "text": "You finished middle school.",
+        "kind": "big",
+        "act": "grad:2"
+      },
+      {
+        "a": 15,
+        "text": "Age 15. Of the girls born in Canada the same year as you, about 99% are still alive.",
+        "kind": "ms"
+      },
+      {
+        "a": 15,
+        "text": "You had a crush on a friend from the neighborhood.",
+        "kind": "ev",
+        "fx": {
+          "h": 2
+        }
+      },
+      {
+        "a": 15,
+        "text": "You were short of the bus fare, and as you turned to get off, the driver said it was all right and waved you on.",
+        "kind": "warm",
+        "act": "help",
+        "fx": {
+          "h": 3
+        }
+      },
+      {
+        "a": 15,
+        "text": "Decision: Go on to high school",
+        "kind": "dec",
+        "q": "Go on to high school?"
+      },
+      {
+        "a": 15,
+        "text": "You went on to high school.",
+        "kind": "big",
+        "act": "school",
+        "d": "school3"
+      },
+      {
+        "a": 15,
+        "text": "The whole family gathered for your paternal grandmother's birthday.",
+        "kind": "ev",
+        "fx": {
+          "h": 1,
+          "so": 2
+        }
+      },
+      {
+        "a": 15,
+        "text": "At 82, your paternal grandfather passed away. Cause: ischemic heart disease (heart attack).",
+        "kind": "loss",
+        "act": "loss:gp"
+      },
+      {
+        "a": 15,
+        "text": "You sorted through your paternal grandfather's well-worn belongings.",
+        "kind": "note",
+        "act": "loss:gp"
+      },
+      {
+        "a": 16,
+        "text": "A good teacher got you interested in writing.",
+        "kind": "ev",
+        "fx": {
+          "sm": 1
+        }
+      },
+      {
+        "a": 16,
+        "text": "You spent Thanksgiving with your family.",
+        "kind": "ev",
+        "fx": {
+          "h": 2,
+          "so": 1
+        }
+      },
+      {
+        "a": 16,
+        "text": "You did well on an important exam.",
+        "kind": "ev",
+        "fx": {
+          "h": 3,
+          "sm": 1
+        }
+      },
+      {
+        "a": 16,
+        "text": "In social studies, your class talked about this country's abortion law. The class ended without settling on an answer.",
+        "kind": "note",
+        "fact": "In Canada, the law allows abortion on request (Center for Reproductive Rights, 2026). How far into a pregnancy it is allowed differs from country to country.",
+        "d": "abl"
+      },
+      {
+        "a": 17,
+        "text": "You did well on an important exam.",
+        "kind": "ev",
+        "fx": {
+          "h": 3,
+          "sm": 1
+        }
+      },
+      {
+        "a": 17,
+        "text": "You finished the school year with average grades.",
+        "kind": "ev"
+      },
+      {
+        "a": 17,
+        "text": "You gave up your seat on the bus, and as that person got off, they pressed a sweet into your hand.",
+        "kind": "warm",
+        "fx": {
+          "h": 2
+        }
+      },
+      {
+        "a": 18,
+        "text": "You graduated from high school.",
+        "kind": "big",
+        "act": "grad:3"
+      },
+      {
+        "a": 18,
+        "text": "Heavy rain flooded the neighborhood. You could not leave the house for a few days. (−$974)",
+        "kind": "bad",
+        "fact": "In 2023 alone, about 93 million people were affected by natural disasters such as floods, storms, droughts and earthquakes (EM-DAT)"
+      },
+      {
+        "a": 18,
+        "text": "A bad cold kept you in bed for several days.",
+        "kind": "ev",
+        "fx": {
+          "hl": -3
+        }
+      },
+      {
+        "a": 18,
+        "text": "Decision: Get a job right away",
+        "kind": "dec",
+        "q": "A crossroads"
+      },
+      {
+        "a": 18,
+        "text": "You chose work instead of university.",
+        "kind": "big",
+        "d": "college"
+      },
+      {
+        "a": 18,
+        "text": "You helped a neighbour's child with homework. A few days later the child came running to tell you how well the test went.",
+        "kind": "warm",
+        "act": "study",
+        "fx": {
+          "h": 2,
+          "so": 3
+        }
+      },
+      {
+        "a": 18,
+        "text": "Decision: Childcare worker",
+        "kind": "dec",
+        "q": "You found work"
+      },
+      {
+        "a": 18,
+        "text": "You started working as a childcare worker.",
+        "kind": "big",
+        "act": "work:childcare",
+        "d": "job"
+      },
+      {
+        "a": 18,
+        "text": "You had a big fight with a sibling and made up a few months later.",
+        "kind": "ev",
+        "fx": {
+          "h": 2,
+          "so": 3
+        }
+      },
+      {
+        "a": 19,
+        "text": "You had said no then, but a year or two later, among the friends you went around with, you started smoking after all.",
+        "kind": "ev",
+        "fact": "Even among teenagers who said they would not smoke if a friend offered, about 13% try a cigarette within two years. About 60% of those who try one become daily smokers (Aleyan et al., BMJ Open 2018; Birge et al., Nicotine Tob Res 2018)"
+      },
+      {
+        "a": 19,
+        "text": "You looked after the neighbors' children for a few days.",
+        "kind": "ev",
+        "fx": {
+          "so": 3
+        }
+      },
+      {
+        "a": 19,
+        "text": "Decision: Get them to a hospital",
+        "kind": "dec",
+        "q": "Someone collapsed in the street"
+      },
+      {
+        "a": 19,
+        "text": "You went with them all the way to the hospital. A few days later, their family came to thank you.",
+        "kind": "warm",
+        "act": "help",
+        "d": "stranger",
+        "fx": {
+          "h": 4,
+          "so": 3
+        }
+      },
+      {
+        "a": 19,
+        "text": "You and Samuel became best friends.",
+        "kind": "ev",
+        "fx": {
+          "h": 3,
+          "so": 5
+        }
+      },
+      {
+        "a": 20,
+        "text": "Work is not far: the commute takes just 30 minutes a day.",
+        "kind": "ev"
+      },
+      {
+        "a": 20,
+        "text": "Decision: Pay for all of it",
+        "kind": "dec",
+        "q": "The fridge at your parents' home broke down"
+      },
+      {
+        "a": 20,
+        "text": "You bought a new fridge for your parents' home with your own money. (−$1,323)",
+        "kind": "warm",
+        "fa": "Mother, 54 · Father, 55",
+        "d": "applpar",
+        "fx": {
+          "h": 1,
+          "so": 2
+        }
+      },
+      {
+        "a": 20,
+        "text": "Your paternal grandmother sent you home with a big batch of home-cooked food.",
+        "kind": "ev",
+        "fx": {
+          "h": 1,
+          "so": 2
+        }
+      },
+      {
+        "a": 21,
+        "text": "Your friend Jackson remembered your birthday and sent a small gift.",
+        "kind": "warm",
+        "act": "phone:gift",
+        "fx": {
+          "h": 2,
+          "so": 2
+        }
+      },
+      {
+        "a": 21,
+        "text": "You contributed toward a relative's funeral. (−$228)",
+        "kind": "ev"
+      },
+      {
+        "a": 21,
+        "text": "The world economy fell into recession. Factory orders dried up and jobs disappeared.",
+        "kind": "bad",
+        "fact": "Over the past 60 years, rich economies fell into recession about once a decade, and financial crises hit each country in about 2% of years (IMF; Laeven and Valencia 2018)"
+      },
+      {
+        "a": 22,
+        "text": "With fewer children, the daycare you worked at closed.",
+        "kind": "bad",
+        "fx": {
+          "h": -10
+        }
+      },
+      {
+        "a": 22,
+        "text": "Decision: Wait for a better job",
+        "kind": "dec",
+        "q": "Choose a new job"
+      },
+      {
+        "a": 22,
+        "text": "You decided to wait a little longer.",
+        "kind": "big",
+        "d": "job",
+        "fx": {
+          "h": -3
+        }
+      },
+      {
+        "a": 22,
+        "text": "Decision: Take in a dog",
+        "kind": "dec",
+        "q": "Take in a pet?"
+      },
+      {
+        "a": 22,
+        "text": "A puppy, Coco, joined the family.",
+        "kind": "big",
+        "act": "pet:d",
+        "d": "petq",
+        "fx": {
+          "h": 5,
+          "so": 2
+        }
+      },
+      {
+        "a": 22,
+        "text": "Coco whimpered all through the first night and only near dawn curled up asleep at the foot of your bed.",
+        "kind": "warm",
+        "act": "pet:d"
+      },
+      {
+        "a": 23,
+        "text": "You have been looking for work for more than a year.",
+        "kind": "bad",
+        "fact": "In Canada, about 7% of people who want to work are looking for a job (ILO estimate, 2024)"
+      },
+      {
+        "a": 23,
+        "text": "You spent the New Year holiday with your family.",
+        "kind": "ev",
+        "fx": {
+          "h": 2,
+          "so": 1
+        }
+      },
+      {
+        "a": 23,
+        "text": "Decision: Borrow to rebuild",
+        "kind": "dec",
+        "q": "A flood has struck"
+      },
+      {
+        "a": 23,
+        "text": "You borrowed to rebuild your damaged home and your livelihood. (−$18K)",
+        "kind": "bad",
+        "d": "disaster",
+        "fx": {
+          "h": -4
+        }
+      },
+      {
+        "a": 23,
+        "text": "You went looking for work, but it wasn't easy.",
+        "kind": "bad",
+        "fx": {
+          "h": -3
+        }
+      },
+      {
+        "a": 23,
+        "text": "Your older brother left home to live on their own.",
+        "kind": "ev"
+      },
+      {
+        "a": 23,
+        "text": "You moved out of your parents' home and ran a household of your own for the first time.",
+        "kind": "ev",
+        "fa": "Mother, 58 · Father, 59"
+      },
+      {
+        "a": 24,
+        "text": "For the first time in a long while you went somewhere far and gazed at a wide-open view.",
+        "kind": "warm",
+        "act": "walk",
+        "fx": {
+          "hl": 1,
+          "h": 3
+        }
+      },
+      {
+        "a": 24,
+        "text": "Decision: Wait for a better job",
+        "kind": "dec",
+        "q": "Choose a new job"
+      },
+      {
+        "a": 24,
+        "text": "You decided to wait a little longer.",
+        "kind": "big",
+        "d": "job",
+        "fx": {
+          "h": -3
+        }
+      },
+      {
+        "a": 24,
+        "text": "Your rent went up, and money got tight. (−$2,422)",
+        "kind": "ev"
+      },
+      {
+        "a": 24,
+        "text": "Your unemployment benefits ran out. Now you have to get by on your savings.",
+        "kind": "bad"
+      }
+    ],
+    "years": [
+      {
+        "a": 0,
+        "h": 60,
+        "hl": 80,
+        "so": 56,
+        "sm": 47,
+        "nw": 0,
+        "inc": 0,
+        "mk": null,
+        "cur": "CAN",
+        "fl": null,
+        "sc": "1|flat|toys|0|0|0|parM36s1,parF35s1,meF0s1,sibM4s1|"
+      },
+      {
+        "a": 1,
+        "h": 65,
+        "hl": 80,
+        "so": 56,
+        "sm": 47,
+        "nw": 0,
+        "inc": 0,
+        "mk": null,
+        "cur": "CAN",
+        "fl": null
+      },
+      {
+        "a": 2,
+        "h": 69,
+        "hl": 81,
+        "so": 57,
+        "sm": 47,
+        "nw": 0,
+        "inc": 0,
+        "mk": null,
+        "cur": "CAN",
+        "fl": null
+      },
+      {
+        "a": 3,
+        "h": 71,
+        "hl": 81,
+        "so": 57,
+        "sm": 49,
+        "nw": 0,
+        "inc": 0,
+        "mk": null,
+        "cur": "CAN",
+        "fl": null
+      },
+      {
+        "a": 4,
+        "h": 75,
+        "hl": 90,
+        "so": 63,
+        "sm": 48,
+        "nw": 176,
+        "inc": 0,
+        "mk": null,
+        "cur": "CAN",
+        "fl": null
+      },
+      {
+        "a": 5,
+        "h": 79,
+        "hl": 90,
+        "so": 65,
+        "sm": 48,
+        "nw": 176,
+        "inc": 0,
+        "mk": null,
+        "cur": "CAN",
+        "fl": null,
+        "sc": "1|flat|toys|0|0|0|parM36s1,parF35s1,meF0s1,sibM4s1,sibF-5s1|"
+      },
+      {
+        "a": 6,
+        "h": 80,
+        "hl": 91,
+        "so": 67,
+        "sm": 47,
+        "nw": 176,
+        "inc": 0,
+        "mk": "edu",
+        "cur": "CAN",
+        "fl": null,
+        "sc": "1|flat|school|0|0|0|parM36s1,parF35s1,meF0s1,sibM4s1,sibF-5s1|"
+      },
+      {
+        "a": 7,
+        "h": 81,
+        "hl": 92,
+        "so": 72,
+        "sm": 49,
+        "nw": 176,
+        "inc": 0,
+        "mk": "loss",
+        "cur": "CAN",
+        "fl": null
+      },
+      {
+        "a": 8,
+        "h": 87,
+        "hl": 93,
+        "so": 74,
+        "sm": 48,
+        "nw": 176,
+        "inc": 0,
+        "mk": null,
+        "cur": "CAN",
+        "fl": null
+      },
+      {
+        "a": 9,
+        "h": 91,
+        "hl": 94,
+        "so": 80,
+        "sm": 46,
+        "nw": 176,
+        "inc": 0,
+        "mk": null,
+        "cur": "CAN",
+        "fl": null
+      },
+      {
+        "a": 10,
+        "h": 95,
+        "hl": 95,
+        "so": 81,
+        "sm": 45,
+        "nw": 353,
+        "inc": 0,
+        "mk": null,
+        "cur": "CAN",
+        "fl": null
+      },
+      {
+        "a": 11,
+        "h": 95,
+        "hl": 95,
+        "so": 82,
+        "sm": 44,
+        "nw": 353,
+        "inc": 0,
+        "mk": null,
+        "cur": "CAN",
+        "fl": null
+      },
+      {
+        "a": 12,
+        "h": 92,
+        "hl": 95,
+        "so": 86,
+        "sm": 42,
+        "nw": 353,
+        "inc": 0,
+        "mk": "edu",
+        "cur": "CAN",
+        "fl": null
+      },
+      {
+        "a": 13,
+        "h": 91,
+        "hl": 95,
+        "so": 88,
+        "sm": 44,
+        "nw": 353,
+        "inc": 0,
+        "mk": null,
+        "cur": "CAN",
+        "fl": null
+      },
+      {
+        "a": 14,
+        "h": 94,
+        "hl": 95,
+        "so": 88,
+        "sm": 43,
+        "nw": 353,
+        "inc": 0,
+        "mk": null,
+        "cur": "CAN",
+        "fl": null
+      },
+      {
+        "a": 15,
+        "h": 88,
+        "hl": 95,
+        "so": 83,
+        "sm": 44,
+        "nw": 353,
+        "inc": 0,
+        "mk": "edu",
+        "cur": "CAN",
+        "fl": {
+          "d": 0,
+          "it": []
+        },
+        "w": "student",
+        "v": "cash"
+      },
+      {
+        "a": 16,
+        "h": 87,
+        "hl": 95,
+        "so": 78,
+        "sm": 51,
+        "nw": 303,
+        "inc": 0,
+        "mk": null,
+        "cur": "CAN",
+        "fl": {
+          "d": -49.31766968652386,
+          "it": [
+            [
+              "Student living costs",
+              -3969
+            ],
+            [
+              "Living money from your parents",
+              3969
+            ]
+          ]
+        }
+      },
+      {
+        "a": 17,
+        "h": 84,
+        "hl": 95,
+        "so": 72,
+        "sm": 54,
+        "nw": 255,
+        "inc": 0,
+        "mk": null,
+        "cur": "CAN",
+        "fl": {
+          "d": -48.05513734254879,
+          "it": [
+            [
+              "Student living costs",
+              -3969
+            ],
+            [
+              "Living money from your parents",
+              3969
+            ]
+          ]
+        }
+      },
+      {
+        "a": 18,
+        "h": 80,
+        "hl": 92,
+        "so": 76,
+        "sm": 53,
+        "nw": 1347,
+        "inc": 25987,
+        "mk": "job",
+        "cur": "CAN",
+        "fl": {
+          "d": 1091.5599246796419,
+          "it": [
+            [
+              "Saved from your earnings",
+              1405
+            ],
+            [
+              "Disaster damage",
+              -974
+            ],
+            [
+              "Debt paid down by cutting back",
+              719
+            ]
+          ]
+        },
+        "w": "childcare worker"
+      },
+      {
+        "a": 19,
+        "h": 81,
+        "hl": 91,
+        "so": 81,
+        "sm": 51,
+        "nw": 924,
+        "inc": 25987,
+        "mk": null,
+        "cur": "CAN",
+        "fl": {
+          "d": -423.286654694297,
+          "it": [
+            [
+              "Saved from your earnings",
+              1405
+            ],
+            [
+              "Someone collapsed in the street",
+              -882
+            ],
+            [
+              "Cigarettes",
+              -882
+            ]
+          ]
+        }
+      },
+      {
+        "a": 20,
+        "h": 76,
+        "hl": 90,
+        "so": 79,
+        "sm": 50,
+        "nw": 452,
+        "inc": 25987,
+        "mk": null,
+        "cur": "CAN",
+        "fl": {
+          "d": -471.95495724921847,
+          "it": [
+            [
+              "Saved from your earnings",
+              1405
+            ],
+            [
+              "Parents' appliance",
+              -1323
+            ],
+            [
+              "Cigarettes",
+              -882
+            ],
+            [
+              "Debt paid down by cutting back",
+              399
+            ]
+          ]
+        }
+      },
+      {
+        "a": 21,
+        "h": 73,
+        "hl": 90,
+        "so": 76,
+        "sm": 49,
+        "nw": 662,
+        "inc": 25894,
+        "mk": null,
+        "cur": "CAN",
+        "fl": {
+          "d": 210.33186024020705,
+          "it": [
+            [
+              "Saved from your earnings",
+              1388
+            ],
+            [
+              "Cigarettes",
+              -882
+            ],
+            [
+              "Weddings & funerals",
+              -228
+            ]
+          ]
+        }
+      },
+      {
+        "a": 22,
+        "h": 66,
+        "hl": 89,
+        "so": 74,
+        "sm": 48,
+        "nw": 14761,
+        "inc": 0,
+        "mk": "fam",
+        "cur": "CAN",
+        "fl": {
+          "d": 14098.497190026961,
+          "it": [
+            [
+              "Unemployment benefits",
+              17640
+            ],
+            [
+              "Living costs (no income)",
+              -3969
+            ],
+            [
+              "Living money from your parents",
+              1786
+            ],
+            [
+              "Cigarettes",
+              -794
+            ],
+            [
+              "Pet",
+              -728
+            ]
+          ]
+        },
+        "w": "looking for work",
+        "sc": "1|flat|sign|0|0|0|parM36s1,parF35s1,meF0s1,sibM4s1,sibF-5s1|d"
+      },
+      {
+        "a": 23,
+        "h": 63,
+        "hl": 89,
+        "so": 72,
+        "sm": 48,
+        "nw": 11193,
+        "inc": 0,
+        "mk": "move",
+        "cur": "CAN",
+        "fl": {
+          "d": -3567.9770641443884,
+          "it": [
+            [
+              "Disaster damage",
+              -17640
+            ],
+            [
+              "Unemployment benefits",
+              17640
+            ],
+            [
+              "Living costs (no income)",
+              -3969
+            ],
+            [
+              "Living money from your parents",
+              1786
+            ],
+            [
+              "Cigarettes",
+              -794
+            ],
+            [
+              "Other",
+              -591
+            ]
+          ]
+        },
+        "sc": "1|flat|sign|0|0|0|meF0s1|d"
+      },
+      {
+        "a": 24,
+        "h": 61,
+        "hl": 90,
+        "so": 69,
+        "sm": 47,
+        "nw": 1543,
+        "inc": 0,
+        "mk": null,
+        "cur": "CAN",
+        "fl": {
+          "d": -9650.063586353544,
+          "it": [
+            [
+              "Living costs (no income)",
+              -11965
+            ],
+            [
+              "Income support",
+              6615
+            ],
+            [
+              "Rent increase",
+              -2422
+            ],
+            [
+              "Cigarettes",
+              -794
+            ],
+            [
+              "Pet",
+              -728
+            ],
+            [
+              "Other",
+              -357
+            ]
+          ]
+        }
+      }
+    ],
+    "queue": [
+      {
+        "at": 0.2830117098564903,
+        "type": "ev",
+        "id": "hobbylv",
+        "p": {}
+      },
+      {
+        "at": 0.41185752432793377,
+        "type": "dec",
+        "id": "job",
+        "p": {}
+      },
+      {
+        "at": 0.4809533440619707,
+        "type": "ev",
+        "id": "reunion",
+        "p": {}
+      },
+      {
+        "at": 0.7419660546001978,
+        "type": "dec",
+        "id": "partner",
+        "p": {}
+      },
+      {
+        "at": 0.8362303311924139,
+        "type": "ev",
+        "id": "seeking",
+        "p": {}
+      }
+    ],
+    "pending": null,
+    "recent": [
+      "sibling",
+      "neighbor",
+      "bff",
+      "commute",
+      "expense",
+      "gpcall",
+      "fr_call",
+      "expense",
+      "layoff",
+      "fest",
+      "seeking",
+      "w_view",
+      "seeking",
+      "expense"
+    ],
+    "flags": {
+      "schChk": 6,
+      "tl": {},
+      "denV": 1,
+      "famTrip": 0,
+      "preT": 0,
+      "between": false,
+      "justGrad": null,
+      "nlk": 0,
+      "roll_kidsick": [
+        4,
+        false
+      ],
+      "vax": 1,
+      "ev_vax": 0,
+      "kSt": 3,
+      "seekY": 3,
+      "lessonFk": null,
+      "noReg": 0,
+      "usInsW": 0,
+      "debtUp": 0,
+      "lastSc": "1|flat|sign|0|0|0|meF0s1|d",
+      "eduL": 3,
+      "ev_steps": 1,
+      "festC": 1,
+      "ev_fest": 23,
+      "vt_play": 1,
+      "ev_play": 8,
+      "last_temper": 2,
+      "tmp": null,
+      "word": 1,
+      "ev_word": 2,
+      "roll_ks": [
+        5,
+        true
+      ],
+      "kinder": 1,
+      "ev_kinder": 3,
+      "net": 1,
+      "ev_net": 3,
+      "talShown": [
+        "ar"
+      ],
+      "phit": 0,
+      "pfight": 0,
+      "gmStory": 4,
+      "vt_gpvn": 1,
+      "kidAmt": 1,
+      "ev_gpvisit": 14,
+      "warmY": 24,
+      "roll_kb": [
+        10,
+        true
+      ],
+      "roll_flu": [
+        18,
+        true
+      ],
+      "kidSnow": 1,
+      "ev_kid_snow": 5,
+      "refQ": "How different are the futures Natalie can dream of from the one you dreamed of at fifteen?",
+      "last_reflect": 15,
+      "ev_fam_trip": 11,
+      "roll_amh": [
+        5,
+        true
+      ],
+      "amHw": 5,
+      "ownPriv": 0,
+      "roll_kid_dream": [
+        6,
+        true
+      ],
+      "roll_kli": [
+        11,
+        false
+      ],
+      "shit": 0,
+      "envL": 0,
+      "kidDream": "musician",
+      "kidDreamAt": 6,
+      "kidDreamC": "CAN",
+      "ev_kid_dream": 6,
+      "petBegK": "d",
+      "petDef": null,
+      "last_petq": 22,
+      "petAsk": 22,
+      "petNo": 1,
+      "famBooks": 1,
+      "ev_fam_books": 6,
+      "hob7": 1,
+      "boardG": "chess",
+      "hobOpts": [
+        "hiking",
+        "art",
+        "music"
+      ],
+      "last_hobby": 7,
+      "goodT": 16,
+      "ev_teacher": 16,
+      "ev_bff": 19,
+      "lossY": 15,
+      "grief": [],
+      "funG": 1,
+      "roll_bully": [
+        14,
+        false
+      ],
+      "ownRoom": 1,
+      "ev_fam_room": 8,
+      "cr": 0.9170901358593255,
+      "grB": {
+        "b": "mid",
+        "a": 17
+      },
+      "ev_grades": 17,
+      "griefR": {
+        "gp": 1
+      },
+      "griefN": 1,
+      "wmY": 24,
+      "griefFact": 1,
+      "lastSm": 24,
+      "wm_w_share": 1,
+      "ev_w_share": 9,
+      "last_sm_after": 9,
+      "pubA": 12,
+      "roll_acc": [
+        25,
+        false
+      ],
+      "roll_tmpl": [
+        25,
+        false
+      ],
+      "kidBike": 1,
+      "ev_kid_bike": 10,
+      "wm_w_dish": 1,
+      "ev_w_dish": 10,
+      "vt_gpv": 3,
+      "wm_w_song": 1,
+      "ev_w_song": 11,
+      "gradDue": 0,
+      "eduA": 18,
+      "roll_hobl": [
+        25,
+        false
+      ],
+      "roll_wallet": [
+        25,
+        false
+      ],
+      "pubDone": 12,
+      "ev_puberty": 12,
+      "wm_w_sib": 1,
+      "ev_w_sib": 12,
+      "ev_neighbor": 19,
+      "tg0": 1,
+      "ss": 0,
+      "bi": 0,
+      "oHid": 0,
+      "ace": 0,
+      "roll_shOld": [
+        14,
+        false
+      ],
+      "roll_teenbad": [
+        18,
+        false
+      ],
+      "ev_crush": 15,
+      "famMoveSaid": 1,
+      "ev_hobbylv": 14,
+      "hob15": 1,
+      "roll_frf": [
+        25,
+        false
+      ],
+      "mv": 0,
+      "la": 23,
+      "wm_w_stranger": 1,
+      "ev_w_stranger": 15,
+      "last_school3": 15,
+      "vt_gpc": 2,
+      "ev_gpcall": 20,
+      "kSm": 43.131642132602785,
+      "vt_fun": 2,
+      "prA": 43,
+      "fgmS": 0,
+      "lastW": "looking for work",
+      "lastV": "cash",
+      "roll_tj": [
+        17,
+        false
+      ],
+      "roll_theft": [
+        25,
+        false
+      ],
+      "roll_vol": [
+        25,
+        false
+      ],
+      "ev_exam": 17,
+      "rentNet": null,
+      "invG": 0,
+      "invM": 2270.1979198908766,
+      "tightY": 0,
+      "hMkC": "CAN",
+      "hMk": -0.0029987592748764794,
+      "abl": 1,
+      "roll_fight": [
+        25,
+        false
+      ],
+      "wm_w_seat": 1,
+      "wjA": 24,
+      "ev_w_seat": 17,
+      "solo": 0,
+      "lastHaz": 23,
+      "roll_frc": [
+        25,
+        false
+      ],
+      "roll_fchg": [
+        25,
+        false
+      ],
+      "lastFlu": 18,
+      "ev_flu": 18,
+      "last_college": 18,
+      "wm_w_teach": 1,
+      "ev_w_teach": 18,
+      "offers": [
+        {
+          "id": "childcare",
+          "formal": true,
+          "pct": 0.22282136136932668,
+          "xp": 4,
+          "xf": false,
+          "late": false,
+          "via": null
+        },
+        {
+          "id": "domestic",
+          "formal": true,
+          "pct": 0.18016186600671402,
+          "xp": 0,
+          "xf": false,
+          "late": false,
+          "via": null
+        },
+        {
+          "id": "cleaner",
+          "formal": true,
+          "pct": 0.18016186600671402,
+          "xp": 0,
+          "xf": false,
+          "late": false,
+          "via": {
+            "k": "kin"
+          }
+        }
+      ],
+      "offY": {
+        "childcare": 24,
+        "cleaner": 24,
+        "vendor": 18,
+        "factory": 22,
+        "shop": 22,
+        "hotel": 22,
+        "domestic": 24
+      },
+      "last_job": 24,
+      "hmAt": null,
+      "reSeek": null,
+      "rehireAt": null,
+      "rehireEnd": null,
+      "rehireJob": null,
+      "bizInh": 0,
+      "bizFund": null,
+      "uiC": "CAN",
+      "uiF": true,
+      "vt_sibk": 1,
+      "ev_sibling": 18,
+      "last_smoke": 18,
+      "smokeLate": null,
+      "pSupNoted": 0,
+      "inDebt": 0,
+      "illit": 0,
+      "lastJob": "childcare",
+      "lastJobY": 4,
+      "longJob": {
+        "j": "childcare",
+        "y": 4,
+        "c": "CAN"
+      },
+      "lastHum": 25,
+      "drk": 1,
+      "last_stranger": 19,
+      "roll_layoff": [
+        22,
+        true
+      ],
+      "roll_sibl": [
+        25,
+        false
+      ],
+      "roll_rift": [
+        25,
+        false
+      ],
+      "roll_noise": [
+        25,
+        false
+      ],
+      "comm": {
+        "k": "childcare|Calgary|1",
+        "m": 32.102303511887435
+      },
+      "ev_commute": 20,
+      "exp_appl": 20,
+      "expK": "rent",
+      "ev_expense": 24,
+      "ap": 1323.0171605076582,
+      "last_applpar": 20,
+      "way": {
+        "applpar": "all"
+      },
+      "frNames": [
+        "Jackson"
+      ],
+      "vt_frc": 2,
+      "ev_fr_call": 21,
+      "exp_funeral": 21,
+      "roll_promo": [
+        22,
+        false
+      ],
+      "roll_bonus": [
+        22,
+        false
+      ],
+      "roll_frm": [
+        25,
+        false
+      ],
+      "roll_pgap": [
+        22,
+        false
+      ],
+      "ev_layoff": 22,
+      "petSm": "h",
+      "petNames": [
+        "Coco"
+      ],
+      "petL": [
+        {
+          "n": "Coco",
+          "k": "d"
+        }
+      ],
+      "unLine": 1,
+      "roll_scam": [
+        23,
+        false
+      ],
+      "dis": "flood",
+      "disK": "F",
+      "last_disaster": 23,
+      "tl_seeking": 23,
+      "ev_seeking": 24,
+      "left": 23,
+      "roll_gnt": [
+        25,
+        false
+      ],
+      "wm_w_view": 1,
+      "ev_w_view": 24,
+      "exp_rent": 24,
+      "ncdG": {
+        "htn": 0.8,
+        "dm": 1,
+        "heart": 1.6
+      },
+      "roll_back": [
+        25,
+        false
+      ]
+    },
+    "done": {
+      "temper": 1,
+      "reflect": 2,
+      "petq": 2,
+      "hobby": 1,
+      "sm_after": 1,
+      "school3": 1,
+      "college": 1,
+      "job": 3,
+      "smoke": 1,
+      "stranger": 1,
+      "applpar": 1,
+      "disaster": 1
+    },
+    "deathAt": null,
+    "stats": {
+      "maxIncome": 25987.216931743005,
+      "maxPct": 0.1822917522657179,
+      "kidsBorn": 0,
+      "kidsLost": 0,
+      "moves": 0,
+      "decisions": 14,
+      "jobs": 1,
+      "fY": {
+        "family": 7
+      },
+      "fYa": 18
+    },
+    "fc": null,
+    "q0": 4,
+    "fl": {
+      "nw0": 1542.5384816116646,
+      "m0": 1542.5384816116646,
+      "it": {}
+    },
+    "eraF": {
+      "v": 0,
+      "w": {},
+      "wy": {},
+      "e": {
+        "CAN2026": {
+          "k": "wrec",
+          "lay": 1.8,
+          "inc": -0.02,
+          "stk": -0.25,
+          "hse": -0.04,
+          "sav": 1,
+          "n": 0,
+          "y0": 2026
+        },
+        "CAN2027": 0,
+        "CAN2028": 0,
+        "CAN2029": {
+          "k": "bank",
+          "lay": 2.5,
+          "inc": -0.06,
+          "stk": -0.4,
+          "hse": -0.12,
+          "sav": 1,
+          "n": 1,
+          "y0": 2029
+        },
+        "CAN2030": {
+          "k": "bank",
+          "lay": 2.5,
+          "inc": -0.06,
+          "stk": null,
+          "hse": -0.12,
+          "sav": 1,
+          "n": 0,
+          "y0": 2029
+        },
+        "CAN2031": 0,
+        "CAN2032": 0,
+        "CAN2033": {
+          "k": "rec",
+          "lay": 1.8,
+          "inc": -0.02,
+          "stk": -0.25,
+          "hse": -0.04,
+          "sav": 1,
+          "n": 0,
+          "y0": 2033
+        },
+        "CAN2034": 0,
+        "CAN2035": 0,
+        "CAN2036": 0,
+        "CAN2037": {
+          "k": "wrec",
+          "lay": 1.8,
+          "inc": -0.02,
+          "stk": -0.25,
+          "hse": -0.04,
+          "sav": 1,
+          "n": 0,
+          "y0": 2037
+        },
+        "CAN2038": 0,
+        "CAN2039": 0,
+        "CAN2040": 0,
+        "CAN2041": 0,
+        "CAN2042": 0,
+        "CAN2043": 0,
+        "CAN2044": 0,
+        "CAN2045": 0,
+        "CAN2046": 0,
+        "CAN2047": {
+          "k": "wrec",
+          "lay": 1.8,
+          "inc": -0.02,
+          "stk": -0.25,
+          "hse": -0.04,
+          "sav": 1,
+          "n": 0,
+          "y0": 2047
+        },
+        "CAN2048": 0,
+        "CAN2049": 0,
+        "CAN2050": 0,
+        "CAN2051": 0
+      },
+      "wr": {
+        "2026": 1,
+        "2027": 0,
+        "2028": 0,
+        "2029": 0,
+        "2030": 0,
+        "2031": 0,
+        "2032": 0,
+        "2033": 0,
+        "2034": 0,
+        "2035": 0,
+        "2036": 0,
+        "2037": 1,
+        "2038": 0,
+        "2039": 0,
+        "2040": 0,
+        "2041": 0,
+        "2042": 0,
+        "2043": 0,
+        "2044": 0,
+        "2045": 0,
+        "2046": 0,
+        "2047": 1,
+        "2048": 0,
+        "2049": 0,
+        "2050": 0,
+        "2051": 0
+      },
+      "pan": null,
+      "pr": null,
+      "h": {
+        "FE|CAN|wrec|2047": 1
+      },
+      "lastE": 2047
+    },
+    "eraY": null,
+    "focusW": {
+      "family": 1
+    },
+    "skn": 1,
+    "yearMark": null,
+    "lastFl": {
+      "d": -9650.063586353544,
+      "it": [
+        [
+          "Living costs (no income)",
+          -11965
+        ],
+        [
+          "Income support",
+          6615
+        ],
+        [
+          "Rent increase",
+          -2422
+        ],
+        [
+          "Cigarettes",
+          -794
+        ],
+        [
+          "Pet",
+          -728
+        ],
+        [
+          "Other",
+          -357
+        ]
+      ]
+    },
+    "lastSave": 0,
+    "lastInc": 25894.329797491882,
+    "pet": {
+      "k": "d",
+      "n": "Coco",
+      "at": 22,
+      "life": 10,
+      "par": 0,
+      "bd": [
+        "night"
+      ],
+      "bl": 22
+    }
+  },
+  "at": 1793102400000
+}

@@ -1,0 +1,90 @@
+{
+  "fr": {
+    "FRA": 45,
+    "MAR": 12,
+    "CAN": 12,
+    "BEL": 7,
+    "DEU": 5,
+    "USA": 5,
+    "CHN": 5,
+    "TUN": 3,
+    "RUS": 3,
+    "TUR": 3
+  },
+  "ssa": {
+    "GBR": 25,
+    "USA": 20,
+    "ZAF": 12,
+    "CAN": 10,
+    "CHN": 8,
+    "IND": 8,
+    "AUS": 5,
+    "MYS": 5,
+    "DEU": 4,
+    "KEN": 3
+  },
+  "lac": {
+    "USA": 35,
+    "ESP": 22,
+    "MEX": 8,
+    "ARG": 8,
+    "CHL": 5,
+    "DEU": 5,
+    "FRA": 5,
+    "CAN": 5,
+    "BRA": 3
+  },
+  "mena": {
+    "GBR": 15,
+    "TUR": 12,
+    "USA": 12,
+    "MYS": 10,
+    "EGY": 8,
+    "JOR": 8,
+    "DEU": 8,
+    "FRA": 8,
+    "SAU": 6,
+    "CAN": 5
+  },
+  "sa": {
+    "USA": 25,
+    "GBR": 20,
+    "AUS": 15,
+    "CAN": 12,
+    "IND": 8,
+    "MYS": 6,
+    "DEU": 5
+  },
+  "eap": {
+    "AUS": 25,
+    "USA": 20,
+    "JPN": 12,
+    "KOR": 10,
+    "GBR": 10,
+    "CHN": 8,
+    "MYS": 5,
+    "THA": 5
+  },
+  "eca": {
+    "RUS": 30,
+    "DEU": 20,
+    "TUR": 10,
+    "CZE": 6,
+    "POL": 6,
+    "GBR": 6,
+    "USA": 6,
+    "KAZ": 4,
+    "CHN": 4
+  },
+  "hi": {
+    "USA": 30,
+    "GBR": 25,
+    "DEU": 10,
+    "CAN": 8,
+    "FRA": 6,
+    "AUS": 6,
+    "NLD": 5,
+    "CHE": 4,
+    "AUT": 3
+  }
+}

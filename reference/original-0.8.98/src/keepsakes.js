@@ -1,0 +1,6499 @@
+const KEEP_SURE_MS = 18e5;
+async function keepSure() {
+  const e = keepTok();
+  if (!e || KP.sureBusy) return !1;
+  if (KP.sure && KP.sure.tok === e && Date.now() - KP.sure.at < 18e5) return !0;
+  KP.sureBusy = !0;
+  const t = await keepPost("/api/keep/me", { tok: e });
+  if (((KP.sureBusy = !1), t.ok))
+    return (
+      (KP.sure = { tok: e, at: Date.now() }),
+      (KP.refAt = Date.now()),
+      !0
+    );
+  (t.why === "tok" || t.why === "none") &&
+    (keepPut({ tok: null }), $("#keepPanel") && keepMount());
+  const n = keepWhy(
+    t.why === "none"
+      ? "refunded"
+      : ["tok", "off", "busy", "rate"].includes(t.why)
+        ? t.why
+        : "net",
+  );
+  return ($("#kmMsg") || $("#keepMsg") ? keepMsg(n, !0) : toast(n), !1);
+}
+function keepUse() {
+  const e = keepTok();
+  !e ||
+    keepGet().usedTok === e ||
+    keepPost("/api/keep/use", { tok: e }).then((t) => {
+      t.ok
+        ? keepPut({ usedTok: e })
+        : (t.why === "tok" || t.why === "none") &&
+          (keepPut({ tok: null }), $("#keepPanel") && keepMount());
+    });
+}
+function giftKeep(e) {
+  const t = S,
+    n = giftOf(t);
+  return n.some((a) => a.k === e.k)
+    ? !1
+    : ((t.gwGiven = n
+        .concat([
+          { k: e.k, t: e.title, l: e.lack, s: e.say, f: e.fact || "", m: e.m },
+        ])
+        .slice(-GW_MAX)),
+      !0);
+}
+async function giftSync(e) {
+  return e.memId
+    ? (await keepPost(
+        "/api\
+/memgift",
+        {
+          tok: keepTok(),
+          v: CONFIG.version,
+          id: e.memId,
+          dk: e.memKey,
+          gw: giftOf(e),
+        },
+      )) || { ok: !1 }
+    : { ok: !1 };
+}
+function keepMade(e, t) {
+  t &&
+    ((t.made = Object.assign({}, t.made, { [e]: Date.now() })),
+    keepSaveLife(t),
+    t === S && $("#keepPanel") && keepMount());
+}
+const KT = { run: 0 };
+function keepTrailer(e) {
+  const t = custApply(withFaith(S.endD, S));
+  if (!e || !t || !t.frames) return;
+  const n = pxPalette("light"),
+    a = (r, M, H) => {
+      try {
+        const E = r.getContext("2d").getImageData(M, H, 1, 1).data;
+        return [E[0], E[1], E[2]];
+      } catch {
+        return [34, 34, 51];
+      }
+    },
+    o = (r, M) => `rgb(${r.map((H) => Math.round(H * M)).join(",")})`,
+    s = (r, M) => {
+      const H = pxCanvas(
+        M ? pxFuneral(t.fm, pxPalette("dark"), t.mourners) : pxScene(r, n),
+      );
+      let E = PX.W / 2;
+      if (!M)
+        try {
+          const N = pxSceneLayers(r, n);
+          N.people && (E = (N.people[0] + N.people[1]) / 2);
+        } catch {}
+      return { c: H, pc: E, top: a(H, 0, 0), bot: a(H, 2, PX.H - 1) };
+    },
+    d = filmFrames(t).filter((r) => r.m);
+  if (!d.length) return;
+  const c = [];
+  try {
+    c.push(Object.assign(s(d[0].m), { kind: "title", dur: 2800 }));
+  } catch {
+    return;
+  }
+  d.forEach((r, M) => {
+    try {
+      c.push(
+        Object.assign(s(r.m), {
+          kind: "moment",
+          a: r.a,
+          t: capS(r.t || ""),
+          note: !!r.note,
+          dur: Math.max(
+            2600 + Math.min(1200, (r.t || "").length * 14),
+            Math.min(6e3, 1200 + filmRead(r.t)),
+          ),
+          dir: M % 2 ? -1 : 1,
+        }),
+      );
+    } catch {}
+  });
+  try {
+    c.push(Object.assign(s(null, !0), { kind: "end", dur: 3400 }));
+  } catch {}
+  const m = c.reduce((r, M) => r + M.dur, 0),
+    i = 450,
+    p = Math.min(2, window.devicePixelRatio || 1),
+    u = Math.round((e.clientWidth || 200) * p),
+    f = Math.round((u * 16) / 9);
+  ((e.width = u), (e.height = f));
+  const b = e.getContext("2d"),
+    W =
+      window.matchMedia &&
+      matchMedia("(prefers-reduced-motion: reduce)").matches,
+    _ = Math.max(2, Math.round((f * 0.5) / PX.H)),
+    B = Math.round(f * 0.5 - PX.H * _ * 0.5),
+    g = (r) => Math.max(0, Math.min(PX.W * _ - u, r.pc * _ - u / 2));
+  loadCardFonts(
+    [
+      t.name,
+      ...c.map((r) => r.t || ""),
+      L`80억 명 가운데, 단 한 번뿐인 삶이었습니다.`,
+    ].join(""),
+  ).catch(() => {});
+  const w = (r, M, H) => {
+      ((b.globalAlpha = H), (b.imageSmoothingEnabled = !1));
+      let E = b.createLinearGradient(0, 0, 0, B + 2);
+      (E.addColorStop(0, o(r.top, 0.8)),
+        E.addColorStop(1, o(r.top, 1)),
+        (b.fillStyle = E),
+        b.fillRect(0, 0, u, B + 2));
+      const N = B + PX.H * _ - 2;
+      ((E = b.createLinearGradient(0, N, 0, f)),
+        E.addColorStop(0, o(r.bot, 1)),
+        E.addColorStop(1, o(r.bot, 0.55)),
+        (b.fillStyle = E),
+        b.fillRect(0, N, u, f - N));
+      const R = g(r),
+        I = Math.min(PX.W * _ - u, u * 0.6),
+        j = W
+          ? R
+          : r.kind === "moment"
+            ? r.dir > 0
+              ? Math.max(0, R - I * 0.5)
+              : Math.min(PX.W * _ - u, R + I * 0.5)
+            : R,
+        U = W ? 1 : -(Math.cos(Math.PI * M) - 1) / 2,
+        z = Math.round(j + (R - j) * U);
+      if (r.kind === "title" && !W) {
+        const O = 1 + 0.08 * M,
+          J = PX.W * _ * O,
+          V = PX.H * _ * O;
+        b.drawImage(
+          r.c,
+          -g(r) * O - ((O - 1) * u) / 2,
+          B - (V - PX.H * _) / 2,
+          J,
+          V,
+        );
+      } else b.drawImage(r.c, -z, B, PX.W * _, PX.H * _);
+      const X = r.kind === "end" ? 0 : filmArch(t, r.a || 0);
+      (X > 0.05 &&
+        ((b.globalCompositeOperation = "multiply"),
+        (b.fillStyle = `rgba(255,222,176,${(X * 0.38 * H).toFixed(3)})`),
+        b.fillRect(0, 0, u, f),
+        (b.globalCompositeOperation = "source-over")),
+        (b.globalAlpha = 1));
+    },
+    P = (r, M, H) => {
+      if (H <= 0.02) return;
+      ((b.globalAlpha = H),
+        (b.textAlign = "left"),
+        (b.textBaseline = "alphabetic"));
+      const E = Math.round(u * 0.07),
+        N = (R) => {
+          ((b.shadowColor = "rgba(0,0,0,.55)"), (b.shadowBlur = R * p));
+        };
+      if (r.kind === "title") {
+        const R = b.createLinearGradient(0, 0, 0, f * 0.42);
+        (R.addColorStop(0, "rgba(10,12,16,.62)"),
+          R.addColorStop(1, "rgba(10,12,16,0)"),
+          (b.fillStyle = R),
+          b.fillRect(0, 0, u, f * 0.42),
+          N(6),
+          (b.fillStyle = "#fff7e6"),
+          fitText(
+            b,
+            t.name,
+            700,
+            CF.d,
+            Math.round(u * 0.115),
+            u - E * 2,
+            Math.round(u * 0.07),
+          ),
+          b.fillText(t.name, E, f * 0.17),
+          cfont(b, 400, Math.round(u * 0.052), CF.m),
+          (b.fillStyle = "rgba(255,247,230,.85)"),
+          b.fillText(`${t.by} – ${t.by + t.age}`, E, f * 0.17 + u * 0.09));
+      } else if (r.kind === "moment") {
+        (N(4),
+          cfont(b, 600, Math.round(u * 0.06), CF.b),
+          (b.fillStyle = "#fff7e6"),
+          b.fillText(L`${r.a}세${LBL}` + ` · ${t.by + r.a}`, E, E + u * 0.06));
+        const R = b.createLinearGradient(0, f * 0.66, 0, f);
+        (R.addColorStop(0, "rgba(10,12,16,0)"),
+          R.addColorStop(0.35, "rgba(10,12,16,.62)"),
+          R.addColorStop(1, "rgba(10,12,16,.8)"),
+          (b.shadowBlur = 0),
+          (b.fillStyle = R),
+          b.fillRect(0, f * 0.66, u, f * 0.34),
+          N(3),
+          cfont(
+            b,
+            r.note ? 700 : 400,
+            Math.round(u * 0.056),
+            r.note ? CF.d : CF.b,
+          ),
+          (b.fillStyle = r.note ? "#f6e3b4" : "#f4efe4"));
+        const I = wrapLines(b, r.t, u - E * 2),
+          j = I.slice(0, 3),
+          U = u * 0.078;
+        (I.length > 3 && (j[2] = j[2].replace(/.?$/, "…")),
+          j.forEach((z, X) =>
+            b.fillText(z, E, f - E - (j.length - 1 - X) * U),
+          ));
+      } else {
+        const R = b.createLinearGradient(0, f * 0.62, 0, f);
+        (R.addColorStop(0, "rgba(10,12,16,0)"),
+          R.addColorStop(0.4, "rgba(10,12,16,.7)"),
+          R.addColorStop(1, "rgba(10,12,16,.86)"),
+          (b.shadowBlur = 0),
+          (b.fillStyle = R),
+          b.fillRect(0, f * 0.62, u, f * 0.38),
+          N(3),
+          (b.textAlign = "center"),
+          (b.fillStyle = "#f4ecd8"),
+          cfont(b, 700, Math.round(u * 0.06), CF.d),
+          wrapLines(
+            b,
+            L`80억 명 가운데, 단 한 번뿐인 삶이었습니다.`,
+            u - E * 2,
+          ).forEach((I, j, U) =>
+            b.fillText(I, u / 2, f - E * 1.6 - (U.length - 1 - j) * u * 0.085),
+          ));
+      }
+      ((b.shadowBlur = 0), (b.globalAlpha = 1));
+    },
+    x = (r) => {
+      r %= m;
+      let M = 0,
+        H = 0;
+      for (; r > H + c[M].dur; ) ((H += c[M].dur), M++);
+      const E = c[M],
+        N = c[(M + 1) % c.length],
+        R = (r - H) / E.dur,
+        I = H + E.dur - r;
+      (w(E, R, 1),
+        P(E, R, Math.min(1, (r - H) / 500, I / 380)),
+        I < i && !W && (w(N, 0, 1 - I / i), P(N, 0, 0)));
+      const j = b.createRadialGradient(
+        u / 2,
+        f / 2,
+        f * 0.3,
+        u / 2,
+        f / 2,
+        f * 0.75,
+      );
+      (j.addColorStop(0, "rgba(0,0,0,0)"),
+        j.addColorStop(1, "rgba(0,0,0,.35)"),
+        (b.fillStyle = j),
+        b.fillRect(0, 0, u, f));
+    };
+  KT.frame = x;
+  const F = ++KT.run;
+  let T = !1,
+    A = 0,
+    v = 0,
+    k = 0,
+    l = 0;
+  const K = (r) => {
+    if (!(F !== KT.run || !e.isConnected)) {
+      if (((l = 0), !T || document.hidden)) {
+        k = 0;
+        return;
+      }
+      (k && (v += Math.min(100, r - k)),
+        (k = r),
+        r - A >= (W ? 400 : 48) && !KT.hold && ((A = r), x(v)),
+        (l = requestAnimationFrame(K)));
+    }
+  };
+  x(0);
+  const y =
+    "IntersectionObserver" in window
+      ? new IntersectionObserver(
+          (r) => {
+            ((T = r.some((M) => M.isIntersecting)),
+              T && !l && (l = requestAnimationFrame(K)));
+          },
+          { threshold: 0.25 },
+        )
+      : null;
+  (y ? y.observe(e) : ((T = !0), (l = requestAnimationFrame(K))),
+    (KT.wake = () => {
+      F === KT.run &&
+        !document.hidden &&
+        T &&
+        !l &&
+        (l = requestAnimationFrame(K));
+    }),
+    KT.vis ||
+      ((KT.vis = !0),
+      document.addEventListener("visibilitychange", () => {
+        KT.wake && KT.wake();
+      })));
+}
+const keepLink = () =>
+    S && S.memId
+      ? memUrl(S.memId)
+      : typeof shareUrl == "function"
+        ? shareUrl("death")
+        : location.origin,
+  KEEP_THEMES = () => ({
+    warm: L`따뜻하게`,
+    calm: L`차분하게`,
+    mono: L`흑백`,
+    clear: L`맑게`,
+  });
+function custMoments(e) {
+  const t = new Set((S.journal || []).map((o) => o.a + "|“" + o.t + "”")),
+    n = new Set(),
+    a = [];
+  for (const o of S.log || []) {
+    if (
+      !(o.a > 0) ||
+      o.a > e ||
+      !CUST_KINDS.includes(o.kind) ||
+      o.nf ||
+      o.d === "suic" ||
+      (typeof END_SKIP_D < "u" && END_SKIP_D.has(o.d))
+    )
+      continue;
+    const s = endClean(o.text);
+    !s ||
+      n.has(o.a + "|" + s) ||
+      (n.add(o.a + "|" + s),
+      a.push({
+        a: o.a,
+        t: s,
+        big: CUST_BIG.includes(o.kind),
+        n: t.has(o.a + "|" + o.text) ? 1 : void 0,
+        k: CUST_BIG.includes(o.kind) ? custAct(o.act) : void 0,
+      }));
+  }
+  return a;
+}
+function custSheet(e, t) {
+  const n = e === "mem" ? KP.ed : null,
+    a = !!(n && n.kind === "mem");
+  if (e === "mem" && !n) return;
+  const o = a ? n.D : withFaith(S && S.endD, S);
+  if (!o || !Array.isArray(o.frames) || !o.frames.length) return;
+  let s;
+  if (a) {
+    const c = msClean(n.st),
+      m = new Set(c.hide),
+      i = n.cv >= 0 && o.frames[n.cv] ? o.frames[n.cv].a : null,
+      p = o.frames.map((f, b) => ({
+        a: f.a,
+        t: f.t,
+        big: !0,
+        n: f.note ? 1 : void 0,
+        i: b,
+        own0: !!f.own,
+      })),
+      u = p
+        .filter((f) => !m.has(f.i))
+        .map((f) => ({ a: f.a, t: f.t, n: f.n, i: f.i, own0: f.own0 }));
+    s = {
+      sel: u,
+      mo: p,
+      dflt: u.map((f) => Object.assign({}, f)),
+      had: !0,
+      cover: i,
+      title: c.tt,
+      words: c.ln,
+      end: c.ew,
+      ms: { th: c.th, fr: c.fr, fl: c.fl },
+    };
+  } else {
+    const c = custGet(),
+      m = S,
+      i = msClean(m.memSt),
+      p =
+        e === "mem"
+          ? o.frames.filter(
+              (b, W) =>
+                !i.hide.includes(W) && !(m.memId && m.memPlain && b.note),
+            )
+          : spreadOf(o.frames, FILM_MAX),
+      u = custNorm(
+        p.map((b) => ({ a: b.a, t: b.t, n: b.note ? 1 : void 0 })),
+        o.frames,
+      ),
+      f =
+        c.cover != null
+          ? c.cover
+          : e === "mem" && m.memCv != null && o.frames[m.memCv]
+            ? o.frames[m.memCv].a
+            : null;
+    s = {
+      sel: (c.sel || u).map((b) => Object.assign({}, b)),
+      mo: custMoments(o.age),
+      dflt: u,
+      had: !!c.sel,
+      cover: f,
+      title: c.title,
+      words: c.words || (e === "mem" ? i.ln.slice(0, CUST_WORDS) : ""),
+      end: c.end,
+      theme: c.theme,
+      music: c.music,
+      bx: c.bx,
+      bn: c.bn,
+      cloth: c.cloth,
+      prints: c.prints,
+      ms: { th: i.th, fr: i.fr, fl: i.fl },
+    };
+  }
+  if (
+    ((KP.cust = Object.assign(
+      {
+        kind: e,
+        preview: t,
+        srv: a,
+        D: o,
+        stages: albumStages(o.age),
+        st: 0,
+        all: !1,
+        ed: null,
+        tab: "sc",
+        px: new Map(),
+      },
+      s,
+    )),
+    typeof HM < "u" && ((HM.ed = null), e === "mem" && homeOn()))
+  )
+    try {
+      HM.ed = roomEdFor(n, o);
+    } catch (c) {
+      reportCaught(c);
+    }
+  e === "mem" && n.tab === "rm" && HM.ed && (KP.cust.tab = "rm");
+  const d = KP.cust.sel.find((c) => c.a > 0);
+  (d &&
+    (KP.cust.st = Math.max(
+      0,
+      KP.cust.stages.findIndex(([c, m]) => d.a >= c && d.a <= m),
+    )),
+    custOpen());
+}
+function custOpen() {
+  const e = KP.cust;
+  if (!e) return;
+  const t = e.kind,
+    n = t === "film",
+    a = t === "mem",
+    o = e.D,
+    s = a ? KP.ed : null,
+    d = !!(s && s.kind === "trial"),
+    c = a && (e.srv || !!(s && s.life && s.life.memId)),
+    m = a && typeof HM < "u" && !!HM.ed,
+    i = (T, A) =>
+      `<button type="button" role="tab" class="cu-tab" id="cuTab-${T}" data-cu="tab" data-v="${T}" aria-controls="cuPane-${T}" aria-selected="${T === e.tab}">${A}</button>`,
+    p = (T, A, v, k) =>
+      `<div class="cu-chips">${Object.keys(A)
+        .map(
+          (l) => `<button type="button" class="cu-th${k ? ` ${k}-${l}` : ""}"\
+ data-cu="${T}" data-v="${l}" aria-pressed="${v === l}">${k ? '<i aria-hidden="true"></i>' : ""}${A[l]}</button>`,
+        )
+        .join("")}</div>`,
+    u = (T, A, v, k, l) =>
+      l > 1
+        ? `<textarea id="${T}" class="cu-in" maxlength="${A}" rows="${l}" placeholder="${esc(k)}">${esc(v)}</textarea>`
+        : `<input type="text" id="${T}" class="cu-in" maxlength="${A}" placeholder="${esc(k)}" value="${esc(v)}" autocomplete="off">`,
+    f = (T) =>
+      `class="cu-pane" id="cuPane-${T}" role="tabpanel" aria-labelledby="cuTab-${T}"${e.tab === T ? "" : " hidden"}`;
+  let b;
+  if (n) {
+    const A = bonusPick(custApply(o), null, 0)
+      ? `<h4 class="cu-h">${L`쿠키 영상`}</h4><p class="cu-note">${L`엔딩 크레딧 뒤에 나오는, 아무도 몰랐던 하루예요. 어떤 하루인지는 필름 끝에서 만나요.`}</p>
+      ${p("bx", { auto: L`넣기`, none: L`넣지 않기` }, e.bx)}<p class="cu-more"><button type="button" class="ghost sm" data-cu="bn" id="cuBn"${e.bx === "none" ? " disabled" : ""}>${L`다른 하루로 바꾸기`}</button>${e.preview ? "" : `<button type="button" class="ghost sm" data-cu="cookie" id="cuCookie">${L`이 하루만 따로 만들기`}</button>`}</p>`
+      : `<h4 class="cu-h">${L`쿠키 영상`}</h4><p class="cu-note">${bxNoWhy(o)}</p>`;
+    b = `<h4 class="cu-h">${L`첫 장면`}</h4><p class="cu-note">${L`제목이 이 그림 위로 떠올라요.`}</p><div class="cu-covers" id="cuCovers"></div>
+      <h4 class="cu-h">${L`분위기`}</h4><p class="cu-note">${L`색과 옛 필름 느낌, 음악의 빠르기가 달라져요.`}</p>${p("theme", KEEP_THEMES(), e.theme, "cu-th")}
+      <h4 class="cu-h">${L`음악`}</h4>${p("music", CUST_MUSIC(), e.music)}<p class="cu-more"><button type="button" class="ghost sm" data-cu="listen" id="cuListen">${L`♪ 들어 보기`}</button></p>${A}`;
+  } else if (a) {
+    const T = (v) => {
+        const k = EX_TH[v];
+        return `<i class="ms-sw" aria-hidden="true">${(k.s
+          ? k.s
+          : [
+              [58, 70, 92],
+              [74, 92, 80],
+              [140, 104, 62],
+            ]
+        )
+          .map((K) => `<b style="background:rgb(${K.join(",")})"></b>`)
+          .join("")}<b style="background:${k.floor[1]}"></b></i>`;
+      },
+      A = (v, k, l, K, y) =>
+        `<div class="cu-chips">${k.map((r) => `<button type="button" class="cu-th cu-ms" data-cu="m${v}" data-v="${r}" aria-pressed="${e.ms[v] === r}">${K ? K(r) : ""}<span>${l(r)}${y ? `<small>${y(r)}</small>` : ""}</span></button>`).join("")}</div>`;
+    b = `<h4 class="cu-h">${L`추모관 표지 그림`}</h4><p class="cu-note">${L`링크를 나눌 때와 추모관 목록에 보이는 그림이에요.`}</p><div class="cu-covers" id="cuCovers"></div>
+      <h4 class="cu-h">${L`집의 분위기`}</h4><p class="cu-note">${L`추모관 전체의 색이 달라져요.`}</p>${A("th", MS_TH, msThName, T, msThSub)}
+      <h4 class="cu-h">${L`사진 액자`}</h4>${A("fr", MS_FR, msFrName, (v) => `<i class="ms-fr ex-fr-${v}" aria-hidden="true"></i>`)}
+      <h4 class="cu-h">${L`꽃`}</h4><p class="cu-note">${L`촛불 곁에 놓여요.`}</p>${A("fl", MS_FL, msFlName, (v) => (v ? `<canvas class="ms-fl" width="20" height="24" data-fl="${v}" aria-hidden="true"></canvas>` : ""))}`;
+  } else
+    b = `<h4 class="cu-h">${L`표지 사진`}</h4><div class="cu-covers" id="cuCovers"></div>
+      <h4 class="cu-h">${L`표지 천`}</h4>${p("cloth", CUST_CLOTH(), e.cloth, "cu-cl")}
+      <h4 class="cu-h">${L`사진 모양`}</h4><p class="cu-note">${L`풍경 사진은 모서리를 끼운 가로 사진, 즉석 사진은 테이프로 붙인 네모난 사진이에요.`}</p>${p("prints", CUST_PRINTS(), e.prints)}
+      <h4 class="cu-h">${L`분위기`}</h4><p class="cu-note">${L`종이와 사진의 색이 달라져요.`}</p>${p("theme", KEEP_THEMES(), e.theme, "cu-th")}`;
+  const W = a
+      ? d
+        ? L`이대로 미리 보기`
+        : c
+          ? L`추모관에 적용하기`
+          : L`저장하기`
+      : e.preview
+        ? L`이대로 미리 보기`
+        : n
+          ? L`이대로 필름 만들기`
+          : L`이대로 앨범 만들기`,
+    _ = n ? L`주마등 필름 꾸미기` : a ? L`추모관 꾸미기` : L`인생 앨범 꾸미기`,
+    B = n
+      ? L`삶 전체에서 담을 장면을 고르고, 자막과 제목, 남길 말, 화면과 음악을 정할 수 있어요. 고르지 않으면 알아서 만들어요.`
+      : a
+        ? m
+          ? e.srv
+            ? L`추모관에 담긴 장면을 고르고, 자막과 제목, 남길 말, 집의 분위기와 사진 액자, 꽃, 그 삶의 방까지 한곳에서 꾸며요.`
+            : L`삶 전체에서 담을 장면을 고르고, 자막과 제목, 남길 말, 집의 분위기와 사진 액자, 꽃, 그 삶의 방까지 한곳에서 꾸며요. 고르지 않으면 알아서 꾸며요.`
+          : e.srv
+            ? L`추모관에 담긴 장면을 고르고, 자막과 제목, 남길 말, 집의 분위기와 사진 액자, 꽃을 정할 수 있어요.`
+            : L`삶 전체에서 담을 장면을 고르고, 자막과 제목, 남길 말, 집의 분위기와 사진 액자, 꽃을 정할 수 있어요. 고르지 않으면 알아서 꾸며요.`
+        : L`삶 전체에서 먼저 붙일 사진을 고르고, 사진 글과 제목, 남길 말, 표지와 사진 모양을 정할 수 있어요. 고르지 않으면 알아서 만들어요.`,
+    g = n
+      ? [
+          L`첫 화면에 이름 위로 크게 나와요. 비워 두면 이름이 제목이 돼요.`,
+          L`제목 다음에 한 장면으로 나와요.`,
+          L`묘비 다음, 엔딩 크레딧 전에 한 장면으로 나와요.`,
+        ]
+      : a
+        ? [
+            L`그 삶을 소개하는 칸에서 이름 위에 걸려요. 비워 두면 이름만 보여요.`,
+            L`이름 아래, 그 삶을 소개하는 칸에 보여요.`,
+            L`'마지막 순간'의 끝에 보여요.`,
+          ]
+        : [
+            L`표지 맨 위에 금박 글씨로 들어가요. 비워 두면 '인생 앨범'이라고 들어가요.`,
+            L`표지를 넘긴 첫 장에 손글씨로 들어가요.`,
+            L`앨범의 마지막 장에 손글씨로 들어가요.`,
+          ],
+    w = a
+      ? d
+        ? L`꾸며 보기예요. 고른 것은 필름과 앨범에도 함께 쓰이고, 이용권이 있으면 이대로 추모관에 모실 수 있어요.`
+        : e.srv
+          ? L`추모관은 누구나 볼 수 있어요. 이름, 연락처, 학교, 사는 곳처럼 실제의 나를 알아볼 수 있는 말은 올라가지 않아요.`
+          : L`고른 것은 필름, 앨범, 추모관에 함께 쓰여요. 추모관은 누구나 볼 수 있어서, 이름, 연락처, 학교, 사는 곳처럼 실제의 나를 알아볼 수 있는 말은 올라가지 않아요.`
+      : L`고른 것은 필름과 앨범에 함께 쓰여요. 필름과 앨범은 이 기기에서만 만들어지고, 어디에도 보내지 않아요.`,
+    P = e.srv
+      ? `<h4 class="cu-h">${L`담아 둔 장면`}</h4><p class="cu-note">${L`이 추모관에 담아 둔 장면이에요. 삶 전체의 기록은 그 삶을 산 기기의 전생 기록에서 고를 수 있어요.`}</p>`
+      : `<h4 class="cu-h">${L`삶 전체에서 고르기`}</h4>`,
+    x = a
+      ? d
+        ? `<button type="button" class="cta" \
+id="cuGo">${W}</button>`
+        : `<button type="button" class="ghost" data-cu="mpv" id="cuMemPv">${L`미리 보기`}</button><button type="button" class="cta" id="cuGo">${W}</button>`
+      : `<button type="button" class="ghost" data-cu="reset" id="cuReset">${L`처음 상태로`}</button>${n && !e.preview ? `<button type="button" class="ghost" data-cu="teaser" id="cuTeaser">${L`20초 예고편 만들기`}</button>` : ""}<button type="button" class="cta" id="cuGo">${W}</button>`;
+  (openSheet(
+    _,
+    `<div class="cu${e.tab === "rm" ? " cu-rm" : ""}" id="cuRoot"><p class="cm-sub">${B}</p>
+    <div class="cu-tabs" role="tablist">${i("sc", L`장면`)}${i("tx", L`글`)}${i("lk", n ? L`화면·음악` : a ? L`분위기` : L`표지·사진`)}${m ? i("rm", L`방`) : ""}</div>
+    <div ${f("sc")}>
+      <h4 class="cu-h">${n ? L`필름에 담길 장면` : a ? L`추모관에 걸 장면` : L`앨범에 먼저 붙일 장면`} <small id="cuCount"></small></h4>
+      <ol class="cu-list" id="cuList"></ol>
+      <p class="cu-note">${L`처음 장면은 늘 들어가요. 한 해에 한 장면씩, ${CUST_MAX}개까지 담을 수 있어요. ✎를 누르면 자막을 내 말로 고쳐 쓸 수 있어요.`}</p><p class="kp-msg" id="cuMsg" role="status"></p>
+      ${P}
+      <div class="cu-stages" id="cuStages" role="group" aria-label="${esc(L`시절`)}"></div>
+      ${e.srv ? "" : `<label class="cu-all"><input type="checkbox" id="cuAll"${e.all ? " checked" : ""}> ${L`작은 일까지 모두 보기`}</label>`}
+      <div class="cu-browse" id="cuBrowse"></div>
+    </div>
+    <div ${f("tx")}>
+      <h4 class="cu-h">${L`제목`} <small id="cuLen-cuTitle"></small></h4>${u("cuTitle", CUST_TITLE, e.title, L`예: ${o.name}의 ${o.age}년`, 1)}
+      <p class="cu-note">${g[0]}</p>
+      <h4 class="cu-h">${L`처음 한마디`} <small id="cuLen-cuWords"></small></h4>${u("cuWords", CUST_WORDS, e.words, L`예: 늘 웃던 당신을 기억하며`, 2)}
+      <p class="cu-note">${g[1]}</p>
+      <h4 class="cu-h">${L`마지막 한마디`} <small id="cuLen-cuEnd"></small></h4>${u("cuEnd", CUST_WORDS, e.end, L`예: 잘 살았어요. 고마웠어요.`, 2)}
+      <p class="cu-note">${g[2]}</p>
+      <p class="cu-note">${L`자막을 고쳐 쓰려면 '장면'에서 ✎를 눌러 주세요.`}</p>
+    </div>
+    <div ${f("lk")}>${b}</div>
+    ${m ? `<div ${f("rm")}>${roomEdHTML()}</div>` : ""}
+    <p class="cu-note cu-priv">${w}</p><p class="kp-msg" id="cuMsg2" role="status"></p>
+    <div class="cu-acts">${x}</div></div>`,
+  ),
+    a && s && s.back && (UI.sheetBack = s.back));
+  for (const [T, A, v] of [
+    ["cuTitle", "title", CUST_TITLE],
+    ["cuWords", "words", CUST_WORDS],
+    ["cuEnd", "end", CUST_WORDS],
+  ]) {
+    const k = $("#" + T);
+    (k &&
+      k.addEventListener("input", () => {
+        KP.cust && ((KP.cust[A] = k.value.slice(0, v)), custLen(T, v));
+      }),
+      custLen(T, v));
+  }
+  const F = $("#cuAll");
+  (F &&
+    F.addEventListener("change", () => {
+      KP.cust && ((KP.cust.all = F.checked), custBrowse());
+    }),
+    document
+      .querySelectorAll("#cuRoot canvas[data-fl]")
+      .forEach((T, A) => pxBouquet(T, T.dataset.fl, A)),
+    custList(),
+    custStages(),
+    custBrowse(),
+    custCovers(),
+    m &&
+      (e.tab === "rm"
+        ? roomEdShow(e.cover, e.D.frames)
+        : (roomEdDraw(), roomEdPane())));
+}
+const easeS = (e) => -(Math.cos(Math.PI * Math.max(0, Math.min(1, e))) - 1) / 2,
+  filmUp = (e, t) => {
+    const n = document.createElement("canvas");
+    ((n.width = e.width * t), (n.height = e.height * t));
+    const a = n.getContext("2d");
+    return (
+      (a.imageSmoothingEnabled = !1),
+      a.drawImage(e, 0, 0, n.width, n.height),
+      n
+    );
+  };
+function filmCast() {
+  if (!S || !S.fam) return [];
+  const e = S.fam,
+    t = [],
+    n = (e.older || 0) + (e.sibBorn != null ? e.sibBorn : e.younger || 0);
+  return (
+    t.push(
+      e.mom && e.mom.ss ? L`아버지` : L`어머니`,
+      e.dad && e.dad.ss ? L`어머니` : L`아버지`,
+    ),
+    n && t.push(L`형제자매 ${n}명`),
+    e.partner && e.partner.name && t.push(L`배우자 ${e.partner.name.full}`),
+    (e.kids || [])
+      .filter((a) => !a.cut)
+      .forEach((a) => t.push(L`자녀 ${a.name.full}`)),
+    (S.flags.grand || 0) > 0 && t.push(L`손주 ${S.flags.grand}명`),
+    (S.flags.ggrand || 0) > 0 && t.push(L`증손주 ${S.flags.ggrand}명`),
+    (S.flags.gggrand || 0) > 0 && t.push(L`고손주 ${S.flags.gggrand}명`),
+    t
+  );
+}
+const alSuic = (e) =>
+  e.d === "suic" ||
+  (e.kind === "death" && !!S.deathAt && S.deathAt.cause === "suic");
+function filmSources() {
+  const e = new Set();
+  for (const t of (S && S.log) || []) {
+    const n = t.fact && /\(([^()]*)\)\s*$/.exec(t.fact);
+    n &&
+      n[1]
+        .split(/[·,\/]| and | 및 /)
+        .map((a) =>
+          a
+            .replace(/\b\d{4}\b/g, "")
+            .replace(/[0-9–-]+$/, "")
+            .trim(),
+        )
+        .filter((a) => a && a.length <= 40)
+        .forEach((a) => e.add(a));
+  }
+  return [...e].slice(0, 12);
+}
+function filmPlan(e) {
+  const t = [];
+  let n = 0;
+  const a = (v, k, l) => {
+      (t.push(Object.assign({ kind: v, t0: n, t1: n + k }, l)), (n += k));
+    },
+    o = filmFrames(e),
+    s = albumStages(e.age),
+    d = (v) => s.findIndex(([k, l]) => v >= k && v <= l),
+    c = e.cust || {},
+    m = c.coverF && c.coverF !== o[0] ? c.coverF : null;
+  (a("map", 6600),
+    a("title", 5200, { f: m ? null : o[0], cover: !!m }),
+    c.words &&
+      a("words", 3600 + Math.min(1600, c.words.length * 40), { w: c.words }));
+  let i = -1,
+    p = 0;
+  const u = Math.max(0.78, Math.min(1, 7 / (o.length - (m ? 0 : 1)))),
+    f = filmCast(),
+    b = filmSources(),
+    W = c.bx === "none" ? null : bonusPick(e, null, c.bn || 0),
+    _ = (v) => 3600 + Math.min(1600, v.length * 40),
+    B = new Set(o.filter((v, k) => k > 0 || m).map((v) => d(v.a))).size,
+    g =
+      11800 +
+      (c.words ? _(c.words) : 0) +
+      B * 1300 +
+      4800 +
+      6e3 +
+      6400 +
+      (e.quote ? 1200 : 0) +
+      (c.end ? _(c.end) : 0) +
+      Math.min(9500, 5e3 + (f.length + b.length) * 260) +
+      3200 +
+      (W ? 2800 + W.len + 900 : 0),
+    w = o.map((v, k) => {
+      if (k === 0 && !m) return null;
+      const l = Math.round((4600 + Math.min(1e3, v.t.length * 9)) * u);
+      return [l, Math.max(l, Math.min(FILM_RD_MAX, 1850 + filmRead(v.t)))];
+    }),
+    P = w.reduce((v, k) => v + (k ? k[0] : 0), 0),
+    x = w.reduce((v, k) => v + (k ? k[1] : 0), 0),
+    F = FILM_LEN_MAX - g,
+    T = x > F && x > P ? Math.max(0, (F - P) / (x - P)) : 1;
+  (o.forEach((v, k) => {
+    if (k === 0 && !m) return;
+    const l = d(v.a),
+      K = l !== i;
+    (K && (p++, (i = l)),
+      a(
+        "moment",
+        Math.round(w[k][0] + (w[k][1] - w[k][0]) * T) + (K ? 1300 : 0),
+        {
+          f: v,
+          i: k,
+          cam: FILM_CAMS[
+            (k + (m ? 0 : FILM_CAMS.length - 1)) % FILM_CAMS.length
+          ],
+          dir: k % 2 ? 1 : -1,
+          ch: K ? { n: p, st: s[l] } : null,
+        },
+      ));
+  }),
+    a("death", 4800),
+    a("funeral", 6e3),
+    a("epi", 6400 + (e.quote ? 1200 : 0)),
+    c.end && a("words", 3600 + Math.min(1600, c.end.length * 40), { w: c.end }),
+    a("credits", Math.min(9500, 5e3 + (f.length + b.length) * 260), {
+      cast: f,
+      src: b,
+    }),
+    a("end", 3200));
+  const A = n;
+  return (
+    W && (a("cookie", 2800), a("bonus", W.len, { b: W }), a("fin", 900)),
+    {
+      seg: t,
+      dur: n,
+      main: A,
+      bonus: W,
+      moms: o,
+      theme: c.theme || "warm",
+      music: c.music || "pno",
+    }
+  );
+}
+function cookieCaption(e, t, n) {
+  return [
+    L`80억분의1에서 살아 본 삶의 쿠키 영상, ${e.name}의 ${t.a}세`,
+    capS(t.punch),
+    L`사는 동안 아무도 몰랐던 하루예요.`,
+    L`#80억분의1`,
+    n,
+  ].filter(Boolean).join(`
+`);
+}
+const filmCol = (e) => (e ? `rgb(${fgrade(e).join(",")})` : "#000");
+function filmLayered(e, t) {
+  if (!e) return null;
+  t = t || pxPalette("light");
+  const n = pxSceneLayers(e, t),
+    a = PX.W / 2,
+    o = (PX.H - 1) * PX.W + a;
+  return {
+    layers: [
+      [filmLayer(n.sky), 0.22],
+      [filmLayer(n.back), 0.55],
+      [filmLayer(n.mid), 1],
+      [filmLayer(n.front), 1],
+    ],
+    pc: (n.people[0] + n.people[1]) / 2,
+    top: filmCol(n.sky.d[a]),
+    hor: filmCol(
+      n.sky.d[(PX.G - 1) * PX.W + a] || n.back.d[(PX.G - 1) * PX.W + a],
+    ),
+    bot: filmCol(n.mid.d[o] || n.front.d[o]),
+  };
+}
+const filmGrain = () =>
+    [0, 1, 2].map(() => {
+      const e = document.createElement("canvas");
+      ((e.width = 180), (e.height = 320));
+      const t = e.getContext("2d"),
+        n = t.createImageData(180, 320);
+      for (let a = 0; a < n.data.length; a += 4) {
+        const o = Math.random() * 255;
+        ((n.data[a] = n.data[a + 1] = n.data[a + 2] = o),
+          (n.data[a + 3] = 255));
+      }
+      return (t.putImageData(n, 0, 0), e);
+    }),
+  bxAssets = (e) => ({ L0: filmLayered(e.m), imgs: { grain: filmGrain() } });
+function filmAssets(e) {
+  const t = pxPalette("light"),
+    n = pxPalette("dark"),
+    a = new Map(),
+    o = filmFrames(e),
+    s = e.frames[e.frames.length - 1],
+    d = custScene(null, e.age) || (s && s.m),
+    c = filmCol,
+    m = PX.W / 2,
+    i = (PX.H - 1) * PX.W + m,
+    p = (g) => filmLayered(g, t),
+    u = (g) => ({
+      layers: [[filmLayer(g), 1]],
+      pc: m,
+      top: c(g.d[m]),
+      hor: c(g.d[30 * PX.W + m]),
+      bot: c(g.d[i]),
+    }),
+    f = (g, w) => (
+      a.has(g) ||
+        (a.set(g, w()), a.size > 4 && a.delete(a.keys().next().value)),
+      a.get(g)
+    ),
+    b = typeof tgLand == "function" ? tgLand() : [],
+    W = Object.keys(WORLD.at).filter((g) => CBY[g] && CBY[g].b),
+    _ = [];
+  let B = 0;
+  for (const g of W) ((B += CBY[g].b), _.push(B));
+  return {
+    moment: (g) => f("m" + g, () => p(o[g] && o[g].m)),
+    cover: () => f("cov", () => p(e.cust && e.cust.coverF && e.cust.coverF.m)),
+    last: () => f("last", () => p(d)),
+    funeral: () => f("fun", () => u(pxFuneral(e.fm, n, e.mourners))),
+    bonus: (g) => f("bx", () => p(g)),
+    world: {
+      land: b,
+      pick: (g) => {
+        const w = g * B;
+        let P = _.findIndex((x) => x >= w);
+        return WORLD.at[W[P < 0 ? 0 : P]];
+      },
+      home: WORLD.at[e.iso] || [WORLD.w / 2, WORLD.h / 2],
+    },
+    grain: f("grain", filmGrain),
+  };
+}
+const fgrade = (e) => {
+  const t = 0.299 * e[0] + 0.587 * e[1] + 0.114 * e[2];
+  return e.map((n) =>
+    Math.round(
+      Math.max(0, Math.min(255, (t + (n - t) * 1.12 - 128) * 1.14 + 124)),
+    ),
+  );
+};
+function filmLayer(e) {
+  const t = document.createElement("canvas");
+  ((t.width = PX.W), (t.height = PX.H));
+  const n = t.getContext("2d"),
+    a = n.createImageData(PX.W, PX.H),
+    o = a.data;
+  for (let s = 0; s < e.d.length; s++) {
+    const d = e.d[s];
+    if (!d) continue;
+    const c = fgrade(d);
+    ((o[s * 4] = c[0]),
+      (o[s * 4 + 1] = c[1]),
+      (o[s * 4 + 2] = c[2]),
+      (o[s * 4 + 3] = 255));
+  }
+  return (n.putImageData(a, 0, 0), filmUp(t, FILM_K));
+}
+function filmShot(e, t, n, a) {
+  if (!t || a <= 0) return;
+  const o = FS0 * n[2],
+    s = FW / 2 / o,
+    d = Math.max(s, Math.min(PX.W - s, n[0])),
+    c = n[1],
+    m = (u) => [
+      FW / 2 - (PX.W / 2 + (d - PX.W / 2) * u) * o,
+      FY - (38 + (c - 38) * u) * o,
+    ];
+  (e.save(),
+    (e.globalAlpha = a),
+    (e.imageSmoothingEnabled = !0),
+    (e.imageSmoothingQuality = "high"));
+  const i = m(t.layers[0][1])[1],
+    p = m(1)[1] + PX.G * o;
+  ((e.fillStyle = t.hor),
+    e.fillRect(0, 0, FW, FH),
+    (e.fillStyle = t.top),
+    e.fillRect(0, 0, FW, Math.max(0, i + 2)),
+    (e.fillStyle = t.bot),
+    e.fillRect(0, p, FW, FH));
+  for (const [u, f] of t.layers) {
+    const [b, W] = m(f);
+    e.drawImage(u, b, W, PX.W * o, PX.H * o);
+  }
+  e.restore();
+}
+function filmCam(e, t, n, a) {
+  const o = easeS(n),
+    s = (d, c) => d + (c - d) * o;
+  switch (e) {
+    case "track":
+      return [s(t + 48 * a, t + 4 * a), 37, s(1, 1.06)];
+    case "push":
+      return [s(t - 6, t), s(35, 39), s(0.96, 1.34)];
+    case "tilt":
+      return [s(t - 10, t - 2), s(-8, 37), s(1.08, 1.02)];
+    case "pull":
+      return [t, s(40, 37), s(1.62, 1.02)];
+    case "rise":
+      return [s(t + 6, t), s(-12, 36), s(1.1, 1)];
+    default:
+      return [s(t - 8, t + 8), 37, s(1, 1.2)];
+  }
+}
+const FILM_TH = {
+    warm: { tintA: 0.38, archK: 1, mono: 0, cool: 0, grainK: 1 },
+    calm: {
+      tintA: 0.3,
+      archK: 0.45,
+      mono: 0,
+      cool: 0.6,
+      grainK: 0.8,
+      desat: 0.2,
+      wash: [86, 116, 156, 0.26],
+    },
+    mono: { tintA: 0, archK: 0.7, mono: 1, cool: 0, grainK: 1.5 },
+    clear: {
+      tintA: 0.2,
+      archK: 0,
+      mono: 0,
+      cool: 0,
+      grainK: 0.6,
+      wash: [255, 252, 244, 0.12],
+    },
+  },
+  filmTh = (e) =>
+    FILM_TH[(e && e.cust && e.cust.theme) || "warm"] || FILM_TH.warm,
+  filmArch = (e, t) =>
+    e.age > 0
+      ? filmTh(e).archK *
+        Math.max(0, Math.min(1, ((e.age - t) / e.age) * 1.35 - 0.3))
+      : 0;
+function filmWeave(e, t, n) {
+  if (t < 0.05) return;
+  const a = lvRand("w" + Math.floor(n / 70));
+  (a(), e.translate((a() - 0.5) * 3.2 * t, (a() - 0.5) * 3.2 * t));
+}
+function filmLook(e, t, n, a, o, s) {
+  const d = filmTh(s);
+  (e.save(),
+    n &&
+      d.cool &&
+      (n = n.map((p, u) => Math.round(p + ([92, 118, 150][u] - p) * d.cool))),
+    n &&
+      d.tintA &&
+      ((e.globalCompositeOperation = "soft-light"),
+      (e.fillStyle = `rgba(${n.join(",")},${d.tintA})`),
+      e.fillRect(0, 0, FW, FH)),
+    d.desat &&
+      ((e.globalCompositeOperation = "saturation"),
+      (e.fillStyle = `rgba(128,128,128,${d.desat})`),
+      e.fillRect(0, 0, FW, FH)),
+    d.wash &&
+      ((e.globalCompositeOperation = "soft-light"),
+      (e.fillStyle = `rgba(${d.wash.join(",")})`),
+      e.fillRect(0, 0, FW, FH)),
+    a > 0.02 &&
+      ((e.globalCompositeOperation = "saturation"),
+      (e.fillStyle = `rgba(128,128,128,${(0.34 * a).toFixed(3)})`),
+      e.fillRect(0, 0, FW, FH),
+      (e.globalCompositeOperation = "soft-light"),
+      (e.fillStyle = d.mono
+        ? `rgba(196,196,196,${(0.4 * a).toFixed(3)})`
+        : `rgba(206,140,60,${(0.5 * a).toFixed(3)})`),
+      e.fillRect(0, 0, FW, FH)),
+    d.mono &&
+      ((e.globalCompositeOperation = "saturation"),
+      (e.fillStyle = "rgb(128,128,128)"),
+      e.fillRect(0, 0, FW, FH),
+      (e.globalCompositeOperation = "soft-light"),
+      (e.fillStyle = "rgba(150,150,150,0.25)"),
+      e.fillRect(0, 0, FW, FH)),
+    (e.globalCompositeOperation = "source-over"));
+  const c = e.createRadialGradient(
+    FW / 2,
+    FH * 0.5,
+    FW * 0.42,
+    FW / 2,
+    FH * 0.5,
+    FH * 0.72,
+  );
+  (c.addColorStop(0, "rgba(0,0,0,0)"),
+    c.addColorStop(1, `rgba(0,0,0,${(0.55 + 0.25 * a).toFixed(2)})`),
+    (e.fillStyle = c),
+    e.fillRect(0, 0, FW, FH));
+  const m = e.createLinearGradient(0, 0, 0, 360);
+  (m.addColorStop(0, "rgba(0,0,0,0.5)"),
+    m.addColorStop(1, "rgba(0,0,0,0)"),
+    (e.fillStyle = m),
+    e.fillRect(0, 0, FW, 360));
+  const i = e.createLinearGradient(0, FH - 470, 0, FH);
+  if (
+    (i.addColorStop(0, "rgba(0,0,0,0)"),
+    i.addColorStop(1, "rgba(0,0,0,0.78)"),
+    (e.fillStyle = i),
+    e.fillRect(0, FH - 470, FW, 470),
+    (e.fillStyle = `rgba(0,0,0,${(0.015 + (0.02 + 0.05 * a) * Math.abs(Math.sin(o * 0.0137) * Math.sin(o * 0.031))).toFixed(3)})`),
+    e.fillRect(0, 0, FW, FH),
+    a > 0.3)
+  ) {
+    const p = lvRand("d" + Math.floor(o / 83));
+    p();
+    for (let u = Math.floor(p() * 4 * a); u > 0; u--)
+      ((e.fillStyle =
+        p() < 0.5 ? "rgba(255,248,230,0.5)" : "rgba(20,14,8,0.45)"),
+        e.beginPath(),
+        e.ellipse(p() * FW, p() * FH, 1 + p() * 3, 1 + p() * 2, p() * 3, 0, 7),
+        e.fill());
+    p() < 0.12 * a &&
+      ((e.fillStyle = "rgba(255,248,230,0.22)"),
+      e.fillRect(p() * FW, 0, 1.5, FH));
+  }
+  (e.restore(),
+    e.save(),
+    (e.globalCompositeOperation = "overlay"),
+    (e.globalAlpha = Math.min(0.2, (0.045 + 0.06 * a) * d.grainK)),
+    (e.imageSmoothingEnabled = !1),
+    e.drawImage(t.grain[Math.floor(o / 42) % 3], 0, 0, FW, FH),
+    e.restore());
+}
+function filmMap(e, t, n, a, o) {
+  const s = 1 - fa(a, o - 650, o),
+    d = easeS(fa(a, 2700, o - 300)),
+    c = Math.pow(7, d),
+    m = ((FW * 0.94) / WORLD.w) * c,
+    i = n.home,
+    p = (1 - 1 / c) / (1 - 1 / 7),
+    u = WORLD.w / 2 + (i[0] + 0.5 - WORLD.w / 2) * p,
+    f = WORLD.h / 2 + (i[1] + 0.5 - WORLD.h / 2) * p,
+    b = FW / 2,
+    W = 560,
+    _ = (w) => b + (w - u) * m,
+    B = (w) => W + (w - f) * m,
+    g = Math.max(1.4, m * 0.56);
+  (e.save(), (e.globalAlpha = s * fa(a, 0, 900)), (e.fillStyle = "#34404d"));
+  for (const [w, P] of n.land) {
+    const x = _(w + 0.5),
+      F = B(P + 0.5);
+    x > -g &&
+      x < FW + g &&
+      F > -g &&
+      F < FH + g &&
+      e.fillRect(x - g / 2, F - g / 2, g, g);
+  }
+  for (let w = Math.floor((a - 700) / 70); w <= a / 70; w++) {
+    if (w < 3) continue;
+    const P = lvRand("b" + w);
+    P();
+    for (let x = 0; x < 4; x++) {
+      const F = n.pick(P()),
+        T = (P() - 0.5) * 3.4,
+        A = (P() - 0.5) * 2.4,
+        v = a - (w * 70 + P() * 70);
+      if (!F || v < 0 || v > 700) continue;
+      const k = Math.sin((Math.PI * v) / 700),
+        l = _(F[0] + 0.5 + T),
+        K = B(F[1] + 0.5 + A);
+      ((e.globalAlpha = s * k * 0.28),
+        (e.fillStyle = "#ffcf7a"),
+        e.beginPath(),
+        e.arc(l, K, g * 1.5, 0, 7),
+        e.fill(),
+        (e.globalAlpha = s * k * 0.95),
+        e.fillRect(l - g / 2, K - g / 2, g, g));
+    }
+  }
+  if (a > 1900) {
+    const w = _(i[0] + 0.5),
+      P = B(i[1] + 0.5),
+      x = fa(a, 1900, 2600) * s,
+      F = ((a - 1900) % 1700) / 1700;
+    ((e.globalAlpha = x),
+      (e.fillStyle = "#fff1c8"),
+      (e.shadowColor = "#ffd27a"),
+      (e.shadowBlur = 18),
+      e.fillRect(w - g * 0.7, P - g * 0.7, g * 1.4, g * 1.4),
+      (e.shadowBlur = 0),
+      (e.globalAlpha = x * (1 - F) * 0.8),
+      (e.strokeStyle = "#ffe2a6"),
+      (e.lineWidth = 2),
+      e.beginPath(),
+      e.arc(w, P, g * (1.2 + F * 5) + 6, 0, 7),
+      e.stroke());
+  }
+  e.restore();
+}
+function ftext(e, t, n, a, o, s, d, c, m, i, p, u, f) {
+  if (!t || m <= 0) return 0;
+  (e.save(),
+    (e.globalAlpha = m),
+    (e.fillStyle = c),
+    cfont(e, s, o, d),
+    (e.textAlign = u || "center"),
+    f &&
+      ((e.shadowColor = "rgba(0,0,0,0.8)"),
+      (e.shadowBlur = 12),
+      (e.shadowOffsetY = 1)));
+  const b = i ? wrapLines(e, t, i) : [t];
+  return (
+    b.forEach((W, _) => e.fillText(W, n, a + _ * (p || o * 1.45))),
+    e.restore(),
+    b.length
+  );
+}
+const flines = (e, t, n, a, o, s) => (
+    cfont(e, a, n, o),
+    wrapLines(e, t, s).length
+  ),
+  placeAt = (e, t) => {
+    const n = ((S && S.years) || []).find((o) => o.a === e),
+      a = CBY[(n && n.cur) || t.iso];
+    return e === 0 && S && S.bornUrban && S.bornCity && a
+      ? cityIn(a.ko, S.bornCity)
+      : a
+        ? placeTag(a)
+        : "";
+  };
+function filmSub(e, t, n) {
+  const a = "#f4efe6",
+    o = "#f2e0b4",
+    s = "#b5ada0",
+    d = t.note,
+    c = d ? `${Q1}${capS(t.t).replace(/^[“«]|[”»]$/g, "")}${Q2}` : capS(t.t),
+    m = d ? 34 : 31,
+    i = 46,
+    p = flines(e, c, m, d ? 600 : 500, d ? CF.d : CF.b, 620),
+    u = (d ? 1112 : 1150) - (p - 1) * i;
+  (ftext(
+    e,
+    c,
+    FW / 2,
+    u,
+    m,
+    d ? 600 : 500,
+    d ? CF.d : CF.b,
+    d ? o : a,
+    n,
+    620,
+    i,
+    "center",
+    !0,
+  ),
+    d &&
+      ftext(
+        e,
+        L`그해 당신이 남긴 기록`,
+        FW / 2,
+        u + p * i + 6,
+        21,
+        400,
+        CF.b,
+        s,
+        n,
+        0,
+        0,
+        "center",
+        !0,
+      ));
+}
+function filmCap(e, t, n, a) {
+  (ftext(
+    e,
+    String(t.by + n),
+    52,
+    132,
+    46,
+    600,
+    CF.m,
+    "#f4efe6",
+    a,
+    0,
+    0,
+    "left",
+    !0,
+  ),
+    ftext(
+      e,
+      [L`${n}세${LBL}`, placeAt(n, t)].filter(Boolean).join(" · "),
+      54,
+      176,
+      24,
+      500,
+      CF.b,
+      "#e2dbcf",
+      a,
+      600,
+      0,
+      "left",
+      !0,
+    ));
+}
+function filmFrame(e, t, n, a, o) {
+  const s = "#f2ede4",
+    d = "#d6d0c4",
+    c = "#a49d92",
+    m = "#f0dfb5",
+    i = CF.b,
+    p = CF.d;
+  ((e.fillStyle = "#000"), e.fillRect(0, 0, FW, FH));
+  const u = n.seg.findIndex((F) => o < F.t1),
+    f = n.seg[u < 0 ? n.seg.length - 1 : u],
+    b = o - f.t0,
+    W = f.t1 - f.t0,
+    _ = b / W,
+    B = (F) => fa(b, F, F + 700),
+    g = 1 - fa(b, W - 700, W),
+    w = (F) => B(F) * g,
+    P = n.seg[u + 1],
+    x = P && (P.kind === "moment" || P.kind === "death") ? 1 : g;
+  if (f.kind === "map")
+    (filmMap(e, t, a.world, b, W),
+      ftext(
+        e,
+        L`그해 지구에서는 약 1억 3천만 명의 아기가 태어났습니다.`,
+        FW / 2,
+        930,
+        30,
+        400,
+        i,
+        s,
+        w(400),
+        600,
+        46,
+      ),
+      ftext(
+        e,
+        L`이것은 그중 한 사람의 이야기입니다.`,
+        FW / 2,
+        1040,
+        30,
+        400,
+        i,
+        s,
+        w(2700),
+        600,
+        46,
+      ),
+      ftext(
+        e,
+        placeTag(CBY[t.iso] || C()),
+        FW / 2,
+        640,
+        26,
+        600,
+        i,
+        m,
+        w(4600),
+        600,
+        0,
+        "center",
+        !0,
+      ));
+  else if (f.kind === "title") {
+    const F = f.cover ? t.cust.coverF.a : 0,
+      T = f.cover ? a.cover() : a.moment(0),
+      A = filmArch(t, F);
+    (e.save(),
+      filmWeave(e, A, o),
+      filmShot(e, T, filmCam("rise", T ? T.pc : 108, _), B(0)),
+      e.restore(),
+      filmLook(e, a, filmTint(t.strip[F]), A, o, t));
+    const v = 1 - fa(b, W - 600, W),
+      k = t.cust && t.cust.title;
+    if (k) {
+      const l = flines(e, k, 62, 700, p, 640);
+      (ftext(
+        e,
+        k,
+        FW / 2,
+        270,
+        62,
+        700,
+        p,
+        s,
+        B(900) * v,
+        640,
+        74,
+        "center",
+        !0,
+      ),
+        ftext(
+          e,
+          t.name,
+          FW / 2,
+          340 + (l - 1) * 74,
+          34,
+          600,
+          p,
+          s,
+          B(1300) * v,
+          640,
+          0,
+          "center",
+          !0,
+        ),
+        ftext(
+          e,
+          `${t.by} – ${t.by + t.age}`,
+          FW / 2,
+          388 + (l - 1) * 74,
+          24,
+          600,
+          CF.m,
+          s,
+          B(1600) * v,
+          0,
+          0,
+          "center",
+          !0,
+        ));
+    } else
+      (ftext(
+        e,
+        t.name,
+        FW / 2,
+        290,
+        72,
+        700,
+        p,
+        s,
+        B(900) * v,
+        660,
+        84,
+        "center",
+        !0,
+      ),
+        ftext(
+          e,
+          `${t.by} – ${t.by + t.age}`,
+          FW / 2,
+          356 + (flines(e, t.name, 72, 700, p, 660) - 1) * 84,
+          26,
+          600,
+          CF.m,
+          s,
+          B(1500) * v,
+          0,
+          0,
+          "center",
+          !0,
+        ));
+    f.f && filmSub(e, f.f, B(2600) * v);
+  } else if (f.kind === "words") {
+    const F = f.w || t.cust.words,
+      T = flines(e, `${Q1}${F}${Q2}`, 38, 600, p, 600),
+      A = Math.round(FH / 2 - (T - 1) * 27),
+      v = filmTh(t).mono ? "#e9e6df" : m;
+    (ftext(e, `${Q1}${F}${Q2}`, FW / 2, A, 38, 600, p, v, w(300), 600, 54),
+      e.save(),
+      (e.globalAlpha = w(900) * 0.6),
+      (e.fillStyle = v),
+      e.fillRect(FW / 2 - 24, A + T * 54 + 10, 48, 2),
+      e.restore());
+  } else if (f.kind === "moment") {
+    const F = f.f,
+      T = a.moment(f.i),
+      A = n.seg[u - 1],
+      v = filmArch(t, F.a),
+      k =
+        A && (A.kind === "moment" || A.kind === "title") ? fa(b, 0, 900) : B(0);
+    if ((e.save(), filmWeave(e, v, o), k < 1 && A)) {
+      const y =
+          A.kind === "title"
+            ? A.cover
+              ? a.cover()
+              : a.moment(0)
+            : a.moment(A.i),
+        r = 1 + b / (A.t1 - A.t0);
+      filmShot(
+        e,
+        y,
+        A.kind === "title"
+          ? filmCam("rise", y ? y.pc : 108, 1)
+          : filmCam(A.cam, y ? y.pc : 108, r, A.dir),
+        1,
+      );
+    }
+    (filmShot(e, T, filmCam(f.cam, T ? T.pc : 108, _, f.dir), k),
+      e.restore(),
+      filmLook(e, a, filmTint(t.strip[F.a]), v, o, t));
+    const l = f.ch ? 2300 : 500,
+      K = x === 1 ? 1 - fa(b, W - 500, W) : g;
+    if (f.ch) {
+      const [y, r, M] = f.ch.st,
+        H = B(150) * (1 - fa(b, 1700, 2400));
+      (e.save(),
+        (e.fillStyle = `rgba(0,0,0,${(0.42 * (1 - fa(b, 1600, 2500))).toFixed(3)})`),
+        e.fillRect(0, 0, FW, FH));
+      const E = Math.sin(Math.PI * fa(b, 0, 1700)),
+        N = -120 + 960 * fa(b, 0, 1700),
+        R = e.createRadialGradient(N, 420, 20, N, 420, 420);
+      (R.addColorStop(0, `rgba(255,170,90,${(0.32 * E).toFixed(3)})`),
+        R.addColorStop(1, "rgba(255,178,96,0)"),
+        (e.globalCompositeOperation = "screen"),
+        (e.fillStyle = R),
+        e.fillRect(0, 0, FW, FH),
+        e.restore(),
+        ftext(
+          e,
+          L`제${f.ch.n}장`,
+          FW / 2,
+          560,
+          24,
+          500,
+          i,
+          d,
+          H,
+          0,
+          0,
+          "center",
+          !0,
+        ),
+        ftext(e, M, FW / 2, 646, 70, 700, p, s, H, 660, 0, "center", !0),
+        ftext(
+          e,
+          `${t.by + y} – ${t.by + Math.min(r, t.age)}`,
+          FW / 2,
+          704,
+          24,
+          400,
+          CF.m,
+          d,
+          H,
+          0,
+          0,
+          "center",
+          !0,
+        ));
+    }
+    (filmCap(e, t, F.a, B(l) * K), filmSub(e, F, B(l + 400) * K));
+  } else if (f.kind === "death") {
+    const F = a.last(),
+      T = n.seg[u - 1],
+      A = T && T.kind === "moment" ? fa(b, 0, 900) : B(0);
+    if (A < 1 && T && T.kind === "moment") {
+      const k = a.moment(T.i);
+      filmShot(
+        e,
+        k,
+        filmCam(T.cam, k ? k.pc : 108, 1 + b / (T.t1 - T.t0), T.dir),
+        g,
+      );
+    }
+    (filmShot(e, F, filmCam("drift", F ? F.pc : 108, _), A * g),
+      filmLook(e, a, [80, 84, 110], 0, o, t),
+      e.save(),
+      (e.globalCompositeOperation = "multiply"),
+      (e.fillStyle = `rgba(92,78,140,${(0.6 * fa(b, 500, 3800)).toFixed(3)})`),
+      e.fillRect(0, 0, FW, FH),
+      (e.globalCompositeOperation = "source-over"),
+      (e.fillStyle = `rgba(0,0,0,${(0.4 * fa(b, 1500, 4600)).toFixed(3)})`),
+      e.fillRect(0, 0, FW, FH),
+      e.restore());
+    const v = flines(e, capS(t.died), 28, 400, i, 620);
+    (ftext(
+      e,
+      t.head,
+      FW / 2,
+      1100 - v * 42,
+      40,
+      700,
+      p,
+      s,
+      w(700),
+      0,
+      0,
+      "center",
+      !0,
+    ),
+      ftext(
+        e,
+        capS(t.died),
+        FW / 2,
+        1160 - (v - 1) * 42,
+        28,
+        400,
+        i,
+        d,
+        w(1500),
+        620,
+        42,
+        "center",
+        !0,
+      ));
+  } else if (f.kind === "funeral") {
+    const F = a.funeral();
+    (filmShot(
+      e,
+      F,
+      [PX.W / 2, 38 - 2 * easeS(_), 1.5 - 0.5 * easeS(_)],
+      B(0) * g,
+    ),
+      filmLook(e, a, [58, 72, 104], 0, o, t));
+    const T = flines(e, capS(t.funeral), 29, 500, i, 620),
+      A = t.attend ? flines(e, capS(t.attend), 24, 400, i, 620) : 0,
+      v = 1160 - (T - 1) * 44 - (A ? A * 38 + 18 : 0);
+    (ftext(
+      e,
+      capS(t.funeral),
+      FW / 2,
+      v,
+      29,
+      500,
+      i,
+      s,
+      w(900),
+      620,
+      44,
+      "center",
+      !0,
+    ),
+      t.attend &&
+        ftext(
+          e,
+          capS(t.attend),
+          FW / 2,
+          v + T * 44 + 18,
+          24,
+          400,
+          i,
+          d,
+          w(2600),
+          620,
+          38,
+          "center",
+          !0,
+        ));
+  } else if (f.kind === "epi") {
+    const F =
+      154 +
+      t.epi.reduce(
+        (A, v) => A + flines(e, capS(v), 28, 400, i, 600) * 42 + 16,
+        0,
+      ) +
+      (t.quote
+        ? 30 + flines(e, `${Q1}${t.quote.t}${Q2}`, 30, 600, p, 580) * 46 + 46
+        : 0);
+    let T = Math.max(220, Math.round((FH - F) / 2));
+    if (
+      (ftext(e, t.name, FW / 2, T, 50, 700, p, s, w(0), 640),
+      (T += 58),
+      ftext(e, `${t.by} – ${t.by + t.age}`, FW / 2, T, 24, 400, i, c, w(300)),
+      (T += 44),
+      e.save(),
+      (e.globalAlpha = w(500)),
+      (e.fillStyle = m),
+      e.fillRect(FW / 2 - 30, T, 60, 2),
+      e.restore(),
+      (T += 46),
+      t.epi.forEach((A, v) => {
+        const k = ftext(
+          e,
+          capS(A),
+          FW / 2,
+          T,
+          28,
+          400,
+          i,
+          s,
+          w(900 + v * 700),
+          600,
+          42,
+        );
+        T += k * 42 + 16;
+      }),
+      t.quote)
+    ) {
+      T += 30;
+      const A = 900 + t.epi.length * 700,
+        v = ftext(
+          e,
+          `${Q1}${t.quote.t}${Q2}`,
+          FW / 2,
+          T,
+          30,
+          600,
+          p,
+          m,
+          w(A),
+          580,
+          46,
+        );
+      ((T += v * 46 + 6),
+        ftext(
+          e,
+          L`${t.quote.a}세의 당신이 남긴 생각`,
+          FW / 2,
+          T,
+          20,
+          400,
+          i,
+          c,
+          w(A + 300),
+        ));
+    }
+  } else if (f.kind === "cookie") {
+    const F = n.bonus;
+    (ftext(
+      e,
+      L`쿠키 영상`,
+      FW / 2,
+      560,
+      24,
+      600,
+      CF.m,
+      m,
+      w(200),
+      0,
+      0,
+      "center",
+    ),
+      ftext(
+        e,
+        L`아무도 몰랐던 하루`,
+        FW / 2,
+        650,
+        54,
+        700,
+        p,
+        s,
+        w(500),
+        640,
+        64,
+        "center",
+      ),
+      ftext(
+        e,
+        L`${t.name}, ${F.a}세의 어느 날`,
+        FW / 2,
+        716,
+        24,
+        400,
+        i,
+        c,
+        w(1e3),
+        640,
+        0,
+        "center",
+      ));
+  } else if (f.kind === "bonus")
+    bonusFrame(e, t, f.b, a.bonus(f.b.m), a, b, W, o);
+  else if (f.kind !== "fin")
+    if (f.kind === "credits") {
+      const F = [
+        [t.name, 44, 700, p, s, 70],
+        [`${t.by} – ${t.by + t.age}`, 22, 400, i, c, 110],
+      ];
+      (f.cast.length &&
+        (F.push([L`함께한 사람들`, 22, 500, i, c, 52]),
+        f.cast.forEach((k) => F.push([k, 28, 400, i, s, 44])),
+        (F[F.length - 1][5] = 100)),
+        f.src.length &&
+          (F.push([L`이 이야기에 쓰인 자료`, 22, 500, i, c, 52]),
+          f.src.forEach((k) => F.push([k, 26, 400, i, d, 40])),
+          (F[F.length - 1][5] = 100)),
+        F.push([L`이 삶은 실제 통계로 만든 이야기입니다.`, 22, 400, i, c, 40]));
+      const T = F.reduce((k, l) => k + l[5], 0);
+      let v = FH + 40 - (FH + 40 + T - 200) * (b / W);
+      for (const [k, l, K, y, r, M] of F)
+        (v > -60 &&
+          v < FH + 60 &&
+          ftext(e, k, FW / 2, v, l, K, y, r, B(0), 640),
+          (v += M));
+    } else if (f.kind === "invite") {
+      const F = L`80억 명 가운데, 단 한 번뿐인 삶이었습니다.`,
+        T = L`당신은 어디에서 태어날까요?`,
+        A = L`실제 통계로 한 사람의 일생을 살아 보는 인생 시뮬레이션`,
+        v = (flines(e, F, 32, 600, p, 620) - 1) * 46,
+        k = `${t.name} · ${t.by} – ${t.by + t.age}`,
+        l = v + (flines(e, k, 24, 400, i, 620) - 1) * 34,
+        K = l + (flines(e, T, 44, 700, p, 640) - 1) * 58,
+        y = K + (flines(e, A, 24, 400, i, 620) - 1) * 36;
+      (ftext(e, F, FW / 2, 470, 32, 600, p, s, w(0), 620, 46),
+        ftext(e, k, FW / 2, 560 + v, 24, 400, i, c, w(400), 620, 34),
+        e.save(),
+        (e.globalAlpha = w(900)),
+        (e.fillStyle = m),
+        e.fillRect(FW / 2 - 30, 620 + l, 60, 2),
+        e.restore(),
+        ftext(e, T, FW / 2, 720 + l, 44, 700, p, m, w(1300), 640, 58),
+        ftext(e, A, FW / 2, 790 + K, 24, 400, i, d, w(1800), 620, 36),
+        ftext(e, LC.brand, FW / 2, 900 + y, 34, 700, p, s, w(2200)),
+        ftext(
+          e,
+          "1in8b.life",
+          FW / 2,
+          950 + y,
+          28,
+          600,
+          i,
+          "#E2678A",
+          w(2400),
+        ));
+    } else
+      (ftext(
+        e,
+        L`80억 명 가운데, 단 한 번뿐인 삶이었습니다.`,
+        FW / 2,
+        600,
+        32,
+        600,
+        p,
+        s,
+        w(0),
+        620,
+        46,
+      ),
+        ftext(e, LC.brand, FW / 2, 700, 30, 700, p, d, w(900)),
+        ftext(e, "1in8b.life", FW / 2, 742, 22, 400, i, c, w(1100)));
+  ["end", "credits", "cookie", "fin", "invite"].includes(f.kind) ||
+    (e.save(),
+    (e.globalAlpha = 0.4),
+    (e.fillStyle = c),
+    cfont(e, 400, 18, i),
+    (e.textAlign = "center"),
+    e.fillText("1in8b.life", FW / 2, 1236),
+    e.restore());
+}
+function bxNoWhy(e) {
+  if (!e || e.age < 18) return L`18세 전에 끝난 삶에는 쿠키 영상이 없어요.`;
+  const t = S && S.deathAt && S.deathAt.cause;
+  return t && t !== "suic" && BX_NO_CAUSE.includes(t)
+    ? L`전쟁이나 학살, 재난, 돌림병, 굶주림처럼 많은 사람이 함께 겪은 비극으로 끝난 삶에는 쿠키 영상을 넣지 않아요.`
+    : L`이 삶에는 쿠키 영상이 없어요.`;
+}
+const BX_LIVE = new Set([
+  "me",
+  "pt",
+  "par",
+  "col",
+  "gkid",
+  "baby",
+  "kid",
+  "f0",
+  "f1",
+  "f2",
+  "f3",
+  "dog",
+  "cat",
+  "chicken",
+  "goat",
+  "pigeon",
+  "pigeonf",
+]);
+function bxSprites(e, t) {
+  if (e.spr) return e.spr;
+  const n = (r) => {
+      const M = document.createElement("canvas");
+      ((M.width = r.w), (M.height = r.h));
+      const H = M.getContext("2d"),
+        E = H.createImageData(r.w, r.h);
+      for (let N = 0; N < r.d.length; N++) {
+        const R = r.d[N];
+        if (!R) continue;
+        const I = fgrade(R);
+        ((E.data[N * 4] = I[0]),
+          (E.data[N * 4 + 1] = I[1]),
+          (E.data[N * 4 + 2] = I[2]),
+          (E.data[N * 4 + 3] = 255));
+      }
+      return (H.putImageData(E, 0, 0), M);
+    },
+    a = (r, M = t.ol) => {
+      const H = new PxR(r.w + 2, r.h + 2);
+      return (H.blit(r, 1, 1, M), n(H));
+    },
+    o = (r, M) => pxSprite(r, M),
+    s = {},
+    d = {},
+    c = (r, M) => {
+      const H = pxPerson(M, t);
+      ((s[r] = a(H)), (d[r] = H.h));
+    },
+    m = lvRand(e.a + e.id),
+    i = e.sk,
+    p = (r) => (r && r.sk != null ? r.sk : i),
+    u =
+      e.cur && typeof skinW == "function"
+        ? skinPick(skinW(e.cur, null), e.a + e.id + "col")
+        : i;
+  (c("me", {
+    role: "me",
+    sex: e.sex,
+    age: e.a,
+    sk: i,
+    ...(e.ad ? { aid: e.ad } : {}),
+  }),
+    e.ad && c("me0", { role: "me", sex: e.sex, age: e.a, sk: i }),
+    e.pt && c("pt", { role: "pt", sex: e.pt.sex, age: e.pt.age, sk: p(e.pt) }),
+    c(
+      "par",
+      e.par
+        ? { role: "par", sex: e.par.sex, age: e.par.age, sk: p(e.par) }
+        : { role: "par", sex: "F", age: e.a + 28, sk: i },
+    ),
+    c("col", {
+      role: "pt",
+      sex: e.sex === "F" ? "M" : "F",
+      age: Math.max(25, e.a + 4),
+      sk: u,
+    }),
+    c("gkid", { role: "kid", sex: m() < 0.5 ? "M" : "F", age: 8, sk: i }),
+    c("baby", { role: "kid", sex: "F", age: 1, sk: i }),
+    (e.fam || [])
+      .slice(0, 4)
+      .forEach((r, M) =>
+        c("f" + M, { role: r.role, sex: r.sex, age: r.age, sk: p(r) }),
+      ));
+  const f = (e.fam || [])
+    .filter((r) => r.role === "kid")
+    .sort((r, M) => r.age - M.age)[0];
+  (c(
+    "kid",
+    f
+      ? { role: "kid", sex: f.sex, age: f.age, sk: p(f) }
+      : { role: "kid", sex: m() < 0.5 ? "M" : "F", age: 4, sk: i },
+  ),
+    (s.dog = a(pxPet("d", t))),
+    (s.cat = a(pxPet("c", t))));
+  const b = t.cloud,
+    W = t.ol,
+    _ = t.trunk,
+    B = t.shade(t.trunk, 0.25),
+    g = pxMix(t.sand2, t.trunk, 0.25);
+  ((s.shoe = a(o([".SSSS", "SSSSS"], { S: t.trunk }))),
+    (s.ball = a(o([".WW.", "WKWW", "WWKW", ".WW."], { W: b, K: W }))),
+    (s.glasses = a(
+      o(["KKK.KKK", "KwKKKwK", "KKK.KKK"], { K: W, w: t.water2 }),
+      null,
+    )),
+    (s.chicken = a(
+      o(
+        [
+          "..R....",
+          ".RWW...",
+          "YWKW...",
+          ".WWWWW.",
+          "..WWWWW",
+          "..WWWW.",
+          "...Y.Y.",
+        ],
+        { R: t.accent, W: b, Y: t.gold, K: W },
+      ),
+    )),
+    (s.pot = a(
+      o([".HHHHHH.", "MMMMMMMM", "MmmmmmmM", ".MMMMMM."], {
+        H: t.shade(t.metal, 0.3),
+        M: t.metal,
+        m: t.light(t.metal, 0.25),
+      }),
+    )),
+    (s.table = a(
+      o(
+        [
+          "TTTTTTTTTTTT",
+          "tttttttttttt",
+          ".t........t.",
+          ".t........t.",
+          ".t........t.",
+        ],
+        { T: _, t: B },
+      ),
+    )),
+    (s.desk = a(
+      o(
+        [
+          "TTTTTTTTTTTTTTTT",
+          "tttttttttttttttt",
+          "tTTTTTTTTTTTTTTt",
+          "tTTTTTTTTTTTTTTt",
+          "tTTTTTTTTTTTTTTt",
+          "tTTTTTTTTTTTTTTt",
+        ],
+        { T: t.wall2, t: t.shade(t.wall2, 0.3) },
+      ),
+    )),
+    (s.paper = a(o(["WWWWW", "WKKKW"], { W: b, K: t.wall3 }))));
+  const w = (r) =>
+    a(
+      o(
+        [
+          "KKKKKKKKKKKK",
+          "KBBBBBBBBBBK",
+          "KBbBBBBBBBBK",
+          "KBBBBBBBBBBK",
+          "KBBBBBBBBbBK",
+          "KBBBBBBBBBBK",
+          "KKKKKKKKKKKK",
+          ".....KK.....",
+          "...KKKKKK...",
+        ],
+        { K: W, B: r ? t.light(t.win, 0.3) : t.win, b },
+      ),
+    );
+  ((s.tv0 = w(0)), (s.tv1 = w(1)));
+  const P = t.shade(t.accent, 0.15);
+  ((s.sofa = a(
+    o(
+      [
+        ".AAAAAAAAAAAAAAAAAAAAAA.",
+        "AAAAAAAAAAAAAAAAAAAAAAAA",
+        "AaaaaaaaaaaaaaaaaaaaaaaA",
+        "AaaaaaaaaaaaaaaaaaaaaaaA",
+        "AAAAAAAAAAAAAAAAAAAAAAAA",
+        "AAAAAAAAAAAAAAAAAAAAAAAA",
+        "K.K..................K.K",
+      ],
+      { A: P, a: t.light(P, 0.2), K: W },
+    ),
+  )),
+    (s.remote = a(o(["KK", "KR", "KK", "KK"], { K: t.wall3, R: t.accent }))),
+    (s.board0 = a(o(["KWKWKWKW", "WKWKWKWK"], { K: W, W: t.gold }))),
+    (s.board1 = a(o(["WKWKWKWK", "KWKWKWKW"], { K: W, W: t.gold }))),
+    (s.scissors = a(
+      o(["K...K", ".K.K.", "..K..", ".R.R.", "R...R"], {
+        K: t.metal,
+        R: t.accent,
+      }),
+    )),
+    (s.crib = a(
+      o(
+        [
+          "WWWWWWWWWWWWWW",
+          "W.W..W..W..W.W",
+          "W.W..W..W..W.W",
+          "WmmmmmmmmmmmmW",
+          "W............W",
+          "W............W",
+        ],
+        { W: t.light(_, 0.35), m: t.light(t.kid, 0.35) },
+      ),
+    )),
+    (s.tcam = a(
+      o(
+        [
+          ".KKKKK.",
+          "KKKwwKK",
+          "KKKwwKK",
+          ".KKKKK.",
+          "...T...",
+          "..T.T..",
+          "..T.T..",
+          ".T...T.",
+          ".T...T.",
+          "T.....T",
+        ],
+        { K: t.shade(t.metal, 0.45), w: t.water2, T: t.metal },
+      ),
+    )),
+    (s.cake = a(
+      o(
+        [
+          ".c..c..c.",
+          ".c..c..c.",
+          ".WRWRWRW.",
+          "WWWWWWWWW",
+          "PPPPPPPPP",
+          "PPPPPPPPP",
+          "WWWWWWWWW",
+        ],
+        {
+          c: t.light(t.sib, 0.3),
+          W: b,
+          R: t.accent,
+          P: pxMix(t.light(t.accent, 0.55), t.sand, 0.4),
+        },
+      ),
+    )));
+  const x = (r) =>
+    a(
+      o(
+        r
+          ? [
+              "A.....A.....A",
+              ".A....A....A.",
+              ".AA...A...AA.",
+              "..AAa.A.aAA..",
+              "...AAAKAAA...",
+              "......K......",
+              "......K......",
+              "......K......",
+              "......K......",
+              "......K......",
+              ".....KK......",
+            ]
+          : [
+              "....AAAAA....",
+              "..AAAAAAAAA..",
+              ".AAAAAAAAAAA.",
+              "AaAaAaAaAaAaA",
+              "......K......",
+              "......K......",
+              "......K......",
+              "......K......",
+              "......K......",
+              "......K......",
+              ".....KK......",
+            ],
+        { A: t.stamp, a: t.shade(t.stamp, 0.3), K: t.ol },
+      ),
+    );
+  ((s.umb = x(0)), (s.umbx = x(1)));
+  const F = t.light(t.hairold, 0.25);
+  ((s.goat = a(
+    o(
+      [
+        ".H..........",
+        "HHB.........",
+        "BBBB.......T",
+        "kBBB......T.",
+        "NBBBBBBBBBB.",
+        ".bBBBBBBBBB.",
+        ".b.BBBBBBBB.",
+        "...B.B..B.B.",
+        "...B.B..B.B.",
+        "...h.h..h.h.",
+      ],
+      {
+        H: t.stone,
+        B: F,
+        T: F,
+        k: W,
+        N: t.shade(F, 0.5),
+        b: t.shade(F, 0.2),
+        h: t.shade(t.stone, 0.3),
+      },
+    ),
+  )),
+    (s.phone = a(
+      o(["KKK", "KwK", "KwK", "KKK"], {
+        K: t.shade(t.metal, 0.5),
+        w: t.water2,
+      }),
+    )));
+  const T = t.cloudlow,
+    A = { G: T, g: t.stamp, k: W, Y: t.gold, y: t.accent, W: t.light(T, 0.3) };
+  ((s.pigeon = a(
+    o([".GG....", "GkGG...", "YGGGG..", ".gGGGGG", "..GGGGG", "...y.y."], A),
+  )),
+    (s.pigeonf = a(
+      o(
+        [
+          "...WW..",
+          ".GGWWW.",
+          "G\
+kGGWW.",
+          "YGGGGGG",
+          "..GGGG.",
+        ],
+        A,
+      ),
+    )),
+    (s.sandwich = a(o(["TTTT", "GGGG", "TTTT"], { T: t.sand, G: t.grass }))),
+    (s.crust = a(o(["TT", "T."], { T: t.sand2 }))));
+  const v = t.light(_, 0.2);
+  ((s.benchb = a(
+    o(
+      [
+        "TTTTTTTTTTTTTTTTTT",
+        ".K..............K.",
+        ".K..............K.",
+        ".K..............K.",
+      ],
+      { T: v, K: t.metal },
+    ),
+  )),
+    (s.bench = a(
+      o(["TTTTTTTTTTTTTTTTTT", ".K..............K.", ".K..............K."], {
+        T: v,
+        K: t.metal,
+      }),
+    )));
+  const k = (r) => {
+    const M = new PxR(15, 9),
+      H = t.accent,
+      E = t.ol,
+      N = t.light(t.metal, 0.3);
+    for (const R of [3, 11]) {
+      for (let I = -3; I <= 3; I++)
+        for (let j = -3; j <= 3; j++) {
+          const U = Math.hypot(j, I);
+          U > 2.4 && U < 3.5 && M.px(R + j, 5 + I, E);
+        }
+      (r
+        ? (M.px(R - 1, 4, N),
+          M.px(R + 1, 6, N),
+          M.px(R + 1, 4, N),
+          M.px(R - 1, 6, N))
+        : (M.px(R, 3, N), M.px(R, 7, N), M.px(R - 2, 5, N), M.px(R + 2, 5, N)),
+        M.px(R, 5, t.metal));
+    }
+    return (
+      M.line(3, 5, 6, 2, H),
+      M.line(6, 2, 10, 2, H),
+      M.line(6, 2, 7, 5, H),
+      M.line(7, 5, 3, 5, H),
+      M.line(10, 2, 11, 5, H),
+      M.line(7, 5, 10, 2, H),
+      M.rect(5, 1, 3, 1, t.ol),
+      M.line(10, 2, 10, 0, t.metal),
+      M.rect(9, 0, 3, 1, t.ol),
+      a(M)
+    );
+  };
+  ((s.bike0 = k(0)), (s.bike1 = k(1)));
+  const l = { C: g, c: t.shade(g, 0.22), t: t.light(t.sand, 0.2), K: W };
+  ((s.box = a(
+    o(
+      [
+        "CCCCCCCtCCCCCCCC",
+        "c\
+cccccctcccccccc",
+        "CCCCCCCtCCCCCCCC",
+        "CCCCCCCCCCCCCCCC",
+        "CCCCCCCCCCCCCCCC",
+        "CCCCCCCCCCCCCCCC",
+        "CCCCCCKKKCCCCCCC",
+        "CCCCCCKCKCCCCCCC",
+        "CCCCCCCCCCCCCCCC",
+        "CCCCCCCCCCCCCCCC",
+        "CCCCCCCCCCCCCCCC",
+        "cccccccccccccccc",
+      ],
+      l,
+    ),
+  )),
+    (s.boxo = a(
+      o(
+        [
+          "c..............c",
+          "Cc............cC",
+          ".Cc..........cC.",
+          "cccccccccccccccc",
+          "C..............C",
+          "CCCCCCCCCCCCCCCC",
+          "CCCCCCKKKCCCCCCC",
+          "CCCCCCKCKCCCCCCC",
+          "CCCCCCCCCCCCCCCC",
+          "CCCCCCCCCCCCCCCC",
+          "CCCCCCCCCCCCCCCC",
+          "cccccccccccccccc",
+        ],
+        l,
+      ),
+    )),
+    (s.boxf = a(
+      o(
+        [
+          "CCCCCCCCCCCCCCCC",
+          "CCCCCCKKKCCCCCCC",
+          "CCCCCCKCKCCCCCCC",
+          "CCCCCCCCCCCCCCCC",
+          "CCCCCCCCCCCCCCCC",
+          "CCCCCCCCCCCCCCCC",
+          "cccccccccccccccc",
+        ],
+        l,
+      ),
+    )),
+    (s.tiny = a(o(["RR", "Rr"], { R: t.accent, r: t.shade(t.accent, 0.3) }))),
+    (s.sprout = a(o(["G.G", ".G.", ".G."], { G: t.grass2 }))));
+  const K = pxMix(t.gold, t.accent, 0.35);
+  ((s.pumpkin = a(
+    o(
+      [
+        "....tt....",
+        "..OOOOOO..",
+        ".OoOOOOoO.",
+        "OOoOOOOoOO",
+        "OOoOOOOoOO",
+        ".OoOOOOoO.",
+        "..OOOOOO..",
+      ],
+      { O: K, o: t.shade(K, 0.22), t: t.grass2 },
+    ),
+  )),
+    (s.can = a(
+      o(
+        [
+          "..MMM.....r",
+          ".M...M...r.",
+          "MMMMMMM.M..",
+          "MmmmmmMM...",
+          "MmmmmmM....",
+          "MMMMMMM....",
+        ],
+        { M: t.metal, m: t.light(t.metal, 0.3), r: t.shade(t.metal, 0.35) },
+      ),
+    )),
+    (s.pan = a(
+      o([".KKKKK....", "KKKKKKKMMM"], { K: t.shade(t.metal, 0.55), M: _ }),
+    )),
+    (s.mat = a(
+      o(["bbbbbbbbbbbbbbbbbbbb", "BBBBBBBBBBBBBBBBBBBB"], {
+        b: t.light(t.kid, 0.4),
+        B: t.shade(t.light(t.kid, 0.4), 0.2),
+      }),
+    )),
+    (s.sign = a(
+      o(
+        [
+          "BBBBBBBBB",
+          "BWWWWWWBB",
+          "BBBBBBBBB",
+          "BWWWWBBBB",
+          "BBBBBBBBB",
+          "....T....",
+          "....T....",
+          "....T....",
+          "....T....",
+          "....T....",
+          "....T....",
+        ],
+        { B: t.stamp, W: t.cloud, T: t.metal },
+      ),
+    )));
+  const y = {
+    "!": ["..K..", "..K..", "..K..", ".....", "..K.."],
+    "?": [".KKK.", "...K.", "..K..", ".....", "..K.."],
+    "♪": ["..KK.", "..K.K", "..K..", "KKK..", "KKK.."],
+    Z: ["KKKKK", "...K.", "..K..", ".K...", "KKKKK"],
+    "♥": [".K.K.", "KKKKK", "KKKKK", ".KKK.", "..K.."],
+    "…": [".....", ".....", ".....", ".....", "K.K.K"],
+  };
+  s.ic = {};
+  for (const [r, M] of Object.entries(y)) {
+    const H = new PxR(9, 9);
+    (H.rect(1, 0, 7, 8, b),
+      H.rect(0, 1, 9, 6, b),
+      H.px(2, 8, b),
+      H.blit(
+        o(M, { K: r === "♥" ? t.accent : r === "♪" ? t.stamp : W }),
+        2,
+        1,
+        null,
+      ),
+      (s.ic[r] = a(H)));
+  }
+  return (
+    (s.sweat = a(o([".B.", "BBB", "BBB", ".B."], { B: t.water }))),
+    (e.spr = s),
+    (e.h = d),
+    s
+  );
+}
+function bxFrame(e, t) {
+  let n = 0,
+    a = 0,
+    o = 0;
+  for (let p = 0; p <= 5; p++) {
+    const u = e.e.act(Math.max(0, t - p * 120), e),
+      f = 1 - p * 0.13;
+    let b = 1e9,
+      W = -1e9;
+    for (const _ of u) {
+      const B = _.k || _.fx === "cloth" ? _.x : null;
+      if (B == null || (_.fx && _.fx !== "cloth")) continue;
+      const g = _.k === "me" || BX_LIVE.has(_.k);
+      if (_.k !== "me" && (g ? B < 52 || B > 158 : B < 70 || B > 150)) continue;
+      const w = g ? 7 : 4;
+      ((b = Math.min(b, B - w)), (W = Math.max(W, B + w)));
+    }
+    (b > W && ((b = 96), (W = 124)), (n += b * f), (a += W * f), (o += f));
+  }
+  ((n /= o), (a /= o));
+  const s = Math.max(40, a - n + 16),
+    d = Math.max(0.8, Math.min(1.08, FW / (s * FS0))),
+    c = FW / 2 / (FS0 * d) - 13,
+    m = e.e.act(t, e).find((p) => p.k === "me"),
+    i = (n + a) / 2;
+  return { cx: m ? Math.max(m.x - c, Math.min(m.x + c, i)) : i, z: d };
+}
+function bxPunch(e, t) {
+  let n = 0,
+    a = 0;
+  for (const [o, s] of e.hits) {
+    if (s === "shutter") continue;
+    const d = t - o;
+    d < 0 ||
+      d > 2200 ||
+      ((n = Math.max(n, d < 140 ? d / 140 : Math.exp(-(d - 140) / 420))),
+      d < 320 && (a = Math.max(a, 1 - d / 320)));
+  }
+  return { z: n, sh: a };
+}
+const BX_FRZ = 2200,
+  bxFrz = (e) => BX_LEN - BX_FRZ;
+function bxScene(e, t, n, a, o, s, d) {
+  const c = pxPalette("light"),
+    m = bxSprites(n, c),
+    i = n.len,
+    p = Math.min(1, o / bxFrz(n)),
+    u = d ? bxPunch(n, o) : { z: 0, sh: 0 },
+    f = n.e.act(o, n),
+    b = f.find((l) => l.k === "me"),
+    W = bxFrame(n, o);
+  let _ = W.cx;
+  b && u.z && (_ += (b.x - _) * 0.5 * u.z);
+  const B = [_, 37 - 2 * u.z, W.z * (1 + 0.04 * easeS(p)) + 0.16 * u.z],
+    g = FS0 * B[2],
+    w = FW / 2 / g,
+    P = Math.max(w, Math.min(PX.W - w, B[0])),
+    x = (l) => FW / 2 + (l - P) * g,
+    F = (l) => FY + (l - B[1]) * g;
+  if ((e.save(), u.sh)) {
+    const l = lvRand("sh" + Math.floor(o / 33));
+    e.translate((l() - 0.5) * 16 * u.sh, (l() - 0.5) * 12 * u.sh);
+  }
+  (filmShot(e, a, B, s), (e.globalAlpha = s), (e.imageSmoothingEnabled = !1));
+  const T = (l, K, y, r, M, H) => {
+      if (!l) return;
+      const E = g * (M || 1),
+        N = l.width,
+        R = l.height;
+      if (H) {
+        (e.save(),
+          e.translate(x(K), F(y + 1) - (N * E) / 2),
+          e.rotate((H * Math.PI) / 2),
+          e.drawImage(l, (-N * E) / 2, (-R * E) / 2, N * E, R * E),
+          e.restore());
+        return;
+      }
+      const I = x(K) - (N * E) / 2,
+        j = F(y + 1) - R * E;
+      r
+        ? (e.save(),
+          e.translate(I + N * E, j),
+          e.scale(-1, 1),
+          e.drawImage(l, 0, 0, N * E, R * E),
+          e.restore())
+        : e.drawImage(l, I, j, N * E, R * E);
+    },
+    A = (l, K, y, r = 1) => {
+      ((e.fillStyle = y), e.fillRect(x(l), F(K), g * r, g * r));
+    },
+    v = (l) => `rgb(${fgrade(l).join(",")})`,
+    k = n.e.act(Math.max(0, o - 70), n);
+  for (const l of f) {
+    if (!l.k || !BX_LIVE.has(l.k)) continue;
+    const K = k.find((N) => N.k === l.k);
+    if (!K) continue;
+    const y = (l.x - K.x) / 70;
+    if (Math.abs(y) < 0.03) continue;
+    const r = y > 0 ? -1 : 1,
+      M = (m[l.k] ? m[l.k].height : 10) - 2,
+      H = (l.y != null ? l.y : G0) + (l.dy || 0);
+    (e.save(),
+      (e.globalAlpha = s * Math.min(0.75, (Math.abs(y) - 0.03) * 18 + 0.35)),
+      (e.fillStyle = "#ffffff"));
+    for (let N = 0; N < 3; N++) {
+      const R = 5 + ((N * 3 + Math.floor(o / 60)) % 4),
+        I = H - M * (0.25 + N * 0.25),
+        j = l.x + r * (5 + (N % 2) * 2);
+      e.fillRect(
+        Math.min(x(j), x(j + r * R)),
+        F(I),
+        R * g,
+        Math.max(2, g * 0.4),
+      );
+    }
+    ((e.globalAlpha = s * 0.5), (e.fillStyle = v(c.sand)));
+    const E = (o % 240) / 240;
+    (e.beginPath(),
+      e.arc(x(l.x + r * (4 + E * 4)), F(G0 - E * 2), g * (0.8 + E * 1.4), 0, 7),
+      e.fill(),
+      e.restore());
+  }
+  for (const l of f) {
+    if (l.fx) {
+      const y = l.fx;
+      if (y === "snip")
+        for (const [r, M] of [
+          [0, 0],
+          [-1, 0],
+          [1, 0],
+          [0, -1],
+          [0, 1],
+        ])
+          A(l.x + r, l.y + M, "#fff8e0");
+      else if (y === "bits") {
+        const r = lvRand("h" + l.n);
+        for (let M = 0; M < 4; M++)
+          A(l.x + (r() - 0.5) * 6, l.y + r() * 2, v(c[l.c] || c.hair));
+      } else if (y === "steam") {
+        for (let r = 0; r < 3; r++) {
+          const M = ((o + r * 400) % 1200) / 1200;
+          ((e.globalAlpha = s * 0.7 * (1 - M)),
+            A(
+              l.x - 2 + r * 2 + Math.sin(o / 300 + r) * 0.8,
+              l.y - M * 8,
+              "#ffffff",
+            ));
+        }
+        e.globalAlpha = s;
+      } else if (y === "pour")
+        for (let r = 0; r < 4; r++)
+          A(l.x + (r % 2), l.y + ((l.t / 60 + r * 2) % 7), v(c[l.c]));
+      else if (y === "line")
+        ((e.fillStyle = v(c.trunk)),
+          e.fillRect(x(l.x0), F(l.y), g, (G0 - l.y) * g),
+          e.fillRect(x(l.x1), F(l.y), g, (G0 - l.y) * g),
+          (e.fillStyle = v(c.ol)),
+          e.fillRect(
+            x(l.x0),
+            F(l.y),
+            (l.x1 - l.x0 + 1) * g,
+            Math.max(2, g * 0.35),
+          ));
+      else if (y === "cloth") {
+        const r = 5 - Math.round(2.4 * (l.cut || 0));
+        ((e.fillStyle = v([c.stamp, c.gold, c.accent][l.i % 3])),
+          e.fillRect(x(l.x + 2.5 - r), F(l.y), r * g, (6 + (l.i % 2) * 2) * g));
+      } else if (y === "rain") {
+        (e.save(),
+          (e.fillStyle = "rgba(40,58,86,0.38)"),
+          e.fillRect(-20, -20, FW + 40, FH + 40),
+          (e.strokeStyle = "rgba(200,225,255,0.75)"),
+          (e.lineWidth = 3),
+          e.beginPath());
+        const r = lvRand("rain");
+        for (let M = 0; M < 70; M++) {
+          const H = r() * (FW + 200) - 100,
+            E = ((r() * FH + o * 1.6) % (FH + 80)) - 40;
+          (e.moveTo(H, E), e.lineTo(H - 10, E + 34));
+        }
+        (e.stroke(), e.restore(), (e.globalAlpha = s));
+      } else if (y === "wind") {
+        (e.save(),
+          (e.globalAlpha = s * 0.6),
+          (e.strokeStyle = "#ffffff"),
+          (e.lineWidth = 3),
+          e.beginPath());
+        const r = lvRand("wind");
+        for (let M = 0; M < 9; M++) {
+          const H = 380 + r() * 520,
+            E = ((r() * FW + l.t * 1.9) % (FW + 300)) - 150,
+            N = 60 + r() * 90;
+          (e.moveTo(E, H), e.quadraticCurveTo(E + N / 2, H - 10, E + N, H));
+        }
+        (e.stroke(), (e.fillStyle = v(c.tree)));
+        for (let M = 0; M < 6; M++) {
+          const H = 420 + r() * 420 + Math.sin(l.t / 120 + M) * 16,
+            E = ((r() * FW + l.t * 2.3) % (FW + 100)) - 50;
+          e.fillRect(E, H, g * 0.9, g * 0.6);
+        }
+        (e.restore(), (e.globalAlpha = s));
+      } else if (y === "flame")
+        if (l.on) {
+          const r = Math.floor(o / 90) % 2;
+          (e.save(),
+            (e.globalAlpha = s * (0.32 + 0.08 * r)),
+            (e.fillStyle = "#ffc860"),
+            e.beginPath(),
+            e.arc(x(l.x), F(l.y - 0.5), g * 2.1, 0, 7),
+            e.fill(),
+            e.restore(),
+            A(l.x - 0.5, l.y, "#ffe27a"),
+            A(l.x - 0.5 + (r ? 0.25 : -0.25), l.y - 1, "#ff9a3c"));
+        } else {
+          const r = (o % 700) / 700;
+          ((e.globalAlpha = s * 0.6 * (1 - r)),
+            A(l.x - 0.5, l.y - r * 5, "#d8d8d8"),
+            (e.globalAlpha = s));
+        }
+      else if (y === "blow") {
+        const r = l.t / 500;
+        for (let M = 0; M < 3; M++)
+          ((e.globalAlpha = s * 0.8 * (1 - r)),
+            A(l.x + r * 7 + M, l.y + (M - 1) * 1.2, "#ffffff"));
+        e.globalAlpha = s;
+      } else if (y === "blink")
+        l.on &&
+          (A(l.x, l.y, "#ff4a3a"),
+          e.save(),
+          (e.globalAlpha = s * 0.35),
+          (e.fillStyle = "#ff6a4a"),
+          e.beginPath(),
+          e.arc(x(l.x + 0.5), F(l.y + 0.5), g * 1.6, 0, 7),
+          e.fill(),
+          e.restore());
+      else if (y === "flash")
+        (e.save(),
+          (e.globalAlpha = Math.max(0, Math.min(1, l.a)) * 0.9),
+          (e.fillStyle = "#ffffff"),
+          e.fillRect(-20, -20, FW + 40, FH + 40),
+          e.restore());
+      else if (y === "smoke") {
+        e.save();
+        for (let r = 0; r < 9; r++) {
+          const M = ((o + r * 260) % 2300) / 2300;
+          ((e.globalAlpha = s * 0.85 * l.k * (1 - M * 0.8)),
+            (e.fillStyle =
+              r % 3 === 0 ? "#5d6467" : r % 2 ? "#8a9194" : "#727a7d"),
+            e.beginPath(),
+            e.arc(
+              x(l.x + Math.sin(o / 400 + r) * 2 + (r - 4) * M * 2.5),
+              F(l.y - M * 26),
+              g * (1.2 + M * 5 * l.k),
+              0,
+              7,
+            ),
+            e.fill());
+        }
+        ((e.globalAlpha = s * 0.3 * l.k),
+          (e.fillStyle = "#7d8487"),
+          e.fillRect(-20, -20, FW + 40, F(l.y - 2) + 20),
+          e.restore(),
+          (e.globalAlpha = s));
+      } else if (y === "dark")
+        l.on &&
+          (e.save(),
+          (e.globalAlpha = s * 0.72),
+          (e.fillStyle = "#0b1124"),
+          e.fillRect(-20, -20, FW + 40, FH + 40),
+          e.restore(),
+          (e.globalAlpha = s));
+      else if (y === "bug")
+        (A(l.x - 0.2, l.y, l.dk ? "#ece6da" : "#2a2a2a", 1.4),
+          Math.floor(o / 45) % 2 &&
+            ((e.globalAlpha = s * 0.75),
+            A(l.x - 1.3, l.y - 1.1, "#ffffff", 1.1),
+            A(l.x + 1.1, l.y - 1.1, "#ffffff", 1.1),
+            (e.globalAlpha = s)));
+      else if (y === "call") {
+        const r = Math.min(1, l.t / 260),
+          M = 0.85 + 0.15 * bxEase(r),
+          H = 290 * M,
+          E = 400 * M,
+          N = 410,
+          R = 230;
+        (e.save(),
+          (e.globalAlpha = s * r),
+          (e.fillStyle = "#1b2024"),
+          e.beginPath(),
+          e.roundRect ? e.roundRect(N, R, H, E, 34) : e.rect(N, R, H, E),
+          e.fill());
+        const I = N + 14,
+          j = R + 40,
+          U = H - 28,
+          z = E - 70;
+        ((e.fillStyle = v(c.light(c.wall2, 0.25))),
+          e.fillRect(I, j, U, z),
+          e.beginPath(),
+          e.rect(I, j, U, z),
+          e.clip());
+        const X = m.me0 || m.me,
+          O = (U / X.width) * 1.25,
+          J = (b && b.dy ? -b.dy : 0) + Math.sin(l.t / 700) * 0.5,
+          V = 5.2 + J;
+        ((e.imageSmoothingEnabled = !1),
+          e.drawImage(
+            X,
+            I + U / 2 - (X.width * O) / 2,
+            j + z - V * O,
+            X.width * O,
+            X.height * O,
+          ));
+        const D = n.grand ? m.gkid : m.f0 || m.col,
+          oe = I + U - 86,
+          h = j + 12,
+          q = l.laugh ? Math.abs(Math.sin(l.t / 120)) * 8 : 0;
+        if (
+          ((e.fillStyle = v(c.light(c.sky ? c.water2 : c.win, 0.2))),
+          e.fillRect(oe, h, 74, 96),
+          (e.strokeStyle = "#ffffff"),
+          (e.lineWidth = 3),
+          e.strokeRect(oe, h, 74, 96),
+          e.save(),
+          e.beginPath(),
+          e.rect(oe, h, 74, 96),
+          e.clip(),
+          e.drawImage(
+            D,
+            oe + 37 - D.width * 3,
+            h + 96 - D.height * 6 * 0.62 - q,
+            D.width * 6,
+            D.height * 6,
+          ),
+          e.restore(),
+          l.laugh && Math.floor(l.t / 300) % 2)
+        ) {
+          const Z = m.ic["♪"];
+          e.drawImage(Z, oe - 10, h - 18, Z.width * 4, Z.height * 4);
+        }
+        (e.restore(), (e.globalAlpha = s));
+      }
+      continue;
+    }
+    const K =
+      (l.y != null ? l.y : G0) +
+      (l.k === "me" && n.ad === "w" ? Math.min(0, l.dy || 0) : l.dy || 0) +
+      (l.k === "me" ? 1 : 0);
+    if (
+      (l.k &&
+        T(
+          m[l.k === "me" && l.rot && m.me0 ? "me0" : l.k],
+          l.x,
+          K,
+          l.flip,
+          l.sc,
+          l.rot,
+        ),
+      (l.ic || l.sw) && !l.rot)
+    ) {
+      const y = l.k ? (m[l.k] ? m[l.k].height - 2 : 10) : 0,
+        r = K - y,
+        M = l.k === "dog" || l.k === "cat" || l.k === "goat",
+        H =
+          l.k && l.x > P + 12
+            ? M
+              ? -5
+              : -4
+            : l.k && l.x < P - 12
+              ? M
+                ? 5
+                : 4
+              : M
+                ? l.flip
+                  ? 5
+                  : -5
+                : 4;
+      (l.ic &&
+        T(m.ic[l.ic], l.x + H, r - 1 + (Math.floor(o / 260) % 2 ? 0 : -1), !1),
+        l.sw && T(m.sweat, l.x - 5, r + 4 + ((o / 120) % 3), !1));
+    } else l.rot && (l.ic || l.sw) && T(m.ic[l.ic || "!"], l.x + 9, K - 6, !1);
+  }
+  return (e.restore(), { X: x, Y: F, s: g });
+}
+function bxCap(e, t, n) {
+  (ftext(
+    e,
+    String(t.y),
+    52,
+    132,
+    46,
+    600,
+    CF.m,
+    "#f4efe6",
+    n,
+    0,
+    0,
+    "left",
+    !0,
+  ),
+    ftext(
+      e,
+      [L`${t.a}세${LBL}`, t.place].filter(Boolean).join(" · "),
+      54,
+      176,
+      24,
+      500,
+      CF.b,
+      "#e2dbcf",
+      n,
+      600,
+      0,
+      "left",
+      !0,
+    ));
+}
+const BX_PH = { w: 600, h: 500 };
+function bxPhoto(e, t, n) {
+  if (t._ph) return t._ph;
+  const a = document.createElement("canvas");
+  ((a.width = FW), (a.height = FH));
+  const o = a.getContext("2d");
+  ((o.fillStyle = "#000"),
+    o.fillRect(0, 0, FW, FH),
+    bxScene(o, e, t, n, t.e.snap || bxFrz(t), 1, !1));
+  const s = document.createElement("canvas");
+  ((s.width = BX_PH.w), (s.height = BX_PH.h));
+  const d = s.getContext("2d");
+  (d.drawImage(
+    a,
+    (FW - BX_PH.w) / 2,
+    FY - 250,
+    BX_PH.w,
+    BX_PH.h,
+    0,
+    0,
+    BX_PH.w,
+    BX_PH.h,
+  ),
+    (d.globalCompositeOperation = "soft-light"),
+    (d.fillStyle = "rgba(255,214,150,0.35)"),
+    d.fillRect(0, 0, BX_PH.w, BX_PH.h),
+    (d.globalCompositeOperation = "source-over"));
+  const c = lvRand(t.rec ? t.rec.a + t.id : t.id),
+    m = 1 + Math.floor(c() * 12),
+    i = 1 + Math.floor(c() * 28),
+    p = `'${String(t.y % 100).padStart(2, "0")} ${m} ${i}`;
+  return (
+    (d.font = `600 30\
+px ${CF.m}`),
+    (d.textAlign = "right"),
+    (d.shadowColor = "rgba(255,120,40,0.9)"),
+    (d.shadowBlur = 8),
+    (d.fillStyle = "#ff9a3c"),
+    d.fillText(p, BX_PH.w - 24, BX_PH.h - 22),
+    (t._bg = a),
+    (t._ph = s),
+    s
+  );
+}
+const BX_SZ = {
+    sub: [40, 38, 36, 34, 32, 31],
+    gold: [42, 40, 38, 36, 34, 33],
+    soft: [38, 36, 34, 32],
+  },
+  BX_TOP = 968;
+function bxFit(e, t, n) {
+  const a = n === "sub" ? CF.b : CF.d,
+    o = n === "gold" ? 600 : 500;
+  let s = null;
+  for (const d of BX_SZ[n]) {
+    const c = Math.round(d * 1.36),
+      m = flines(e, t, d, o, a, 640);
+    if (
+      ((s = { size: d, lh: c, n: m, fam: a, w: o }),
+      1150 - (m - 1) * c >= BX_TOP)
+    )
+      break;
+  }
+  return s;
+}
+function bonusFrame(e, t, n, a, o, s, d, c) {
+  const m = Math.min(1, s / 600),
+    i = 1 - fa(s, d - 700, d),
+    p = bxFrz(n);
+  if (s < p) bxScene(e, t, n, a, s, m * i, !0);
+  else {
+    const W = bxPhoto(t, n, a),
+      _ = s - p;
+    (e.save(),
+      (e.globalAlpha = i),
+      e.drawImage(n._bg, 0, 0),
+      (e.fillStyle = "rgba(12,10,8,0.62)"),
+      e.fillRect(0, 0, FW, FH));
+    const B = bxEase(Math.min(1, _ / 380)),
+      g = 1.1 - 0.1 * B,
+      w = -0.06 * B,
+      P = 22,
+      x = 64,
+      F = BX_PH.w * 0.94,
+      T = BX_PH.h * 0.94;
+    (e.translate(FW / 2, 610),
+      e.rotate(w),
+      e.scale(g, g),
+      (e.shadowColor = "rgba(0,0,0,0.55)"),
+      (e.shadowBlur = 30),
+      (e.shadowOffsetY = 10),
+      (e.fillStyle = "#f7f3ea"),
+      e.fillRect(-F / 2 - P, -T / 2 - P, F + P * 2, T + P + x),
+      (e.shadowColor = "transparent"),
+      e.drawImage(W, -F / 2, -T / 2, F, T),
+      (e.fillStyle = "rgba(255,255,255,0.07)"),
+      e.fillRect(-F / 2, -T / 2, F, T * 0.42),
+      e.restore(),
+      _ < 300 &&
+        (e.save(),
+        (e.globalAlpha = 1 - _ / 300),
+        (e.fillStyle = "#ffffff"),
+        e.fillRect(0, 0, FW, FH),
+        e.restore()));
+  }
+  filmLook(e, o, filmTint(t.strip ? t.strip[n.a] : null), 0, c, t);
+  const u = "#f4efe6",
+    f = "#f2e0b4";
+  bxCap(e, n, fa(s, 300, 900) * i);
+  const b = (W, _, B, g, w) => {
+    const P = fa(s, _, _ + (w ? 700 : 400)) * (1 - fa(s, B - 400, B));
+    if (P <= 0) return;
+    const x = g ? "gold" : w ? "soft" : "sub",
+      F =
+        (n._fit || (n._fit = {}))[x + W] ||
+        (n._fit[x + W] = bxFit(e, capS(W), x));
+    ftext(
+      e,
+      capS(W),
+      FW / 2,
+      1150 - (F.n - 1) * F.lh,
+      F.size,
+      F.w,
+      F.fam,
+      g ? f : w ? "#f6f0e4" : u,
+      P,
+      640,
+      F.lh,
+      "center",
+      !0,
+    );
+  };
+  (b(n.subs[0], 500, 4e3),
+    b(n.subs[1], 4200, 7700),
+    b(n.punch, 8e3, n.cbText ? BX_LEN - 700 : d - 300, !0),
+    n.cbText && b(n.cbText, BX_LEN - 500, d - 300, !1, !0));
+}
+function bonusAudio(e, t, n, a, o, s, d) {
+  const c = lvRand(o + "cookie"),
+    m = e.createGain(),
+    i = d != null ? d / 1e3 : a - 2.2,
+    p = 1.4;
+  (m.gain.setValueAtTime(0, n),
+    m.gain.linearRampToValueAtTime(p, n + 0.4),
+    m.gain.setValueAtTime(p, n + Math.max(0.5, a - 1.4)),
+    m.gain.linearRampToValueAtTime(0, n + a),
+    m.connect(t));
+  const u = (() => {
+      const v = Math.floor(e.sampleRate * 0.6),
+        k = e.createBuffer(1, v, e.sampleRate),
+        l = k.getChannelData(0),
+        K = lvRand(o + "nz");
+      for (let y = 0; y < v; y++) l[y] = K() * 2 - 1;
+      return k;
+    })(),
+    f = (v, k, l, K) => {
+      const y = e.createGain();
+      return (
+        y.gain.setValueAtTime(0, v),
+        y.gain.linearRampToValueAtTime(k, v + l),
+        y.gain.exponentialRampToValueAtTime(1e-4, v + K),
+        y.connect(m),
+        y
+      );
+    },
+    b = (v, k, l, K, y) => {
+      const r = e.createOscillator();
+      return (
+        (r.type = v),
+        r.frequency.setValueAtTime(k, l),
+        r.connect(y),
+        r.start(l),
+        r.stop(l + K + 0.05),
+        r
+      );
+    },
+    W = (v, k, l, K) => {
+      const y = f(k, l, 0.006, K);
+      b("triangle", v, k, K, y);
+      const r = e.createGain();
+      ((r.gain.value = 0.22), r.connect(y), b("sine", v * 4, k, K, r));
+    },
+    _ = (v, k, l) => {
+      const K = e.createBiquadFilter();
+      ((K.type = "lowpass"), (K.frequency.value = 900), (K.Q.value = 0.8));
+      const y = f(k, l, 0.025, 0.32);
+      (K.connect(y), b("sawtooth", v, k, 0.32, K), b("sine", v, k, 0.32, y));
+    },
+    B = (v, k) => {
+      const l = e.createBufferSource();
+      l.buffer = u;
+      const K = e.createBiquadFilter();
+      ((K.type = "bandpass"), (K.frequency.value = 1900), (K.Q.value = 9));
+      const y = f(v, k, 0.002, 0.06);
+      (l.connect(K), K.connect(y), l.start(v, c() * 0.4, 0.08));
+    },
+    g = (v, k, l) => {
+      const K = f(k, l, 0.003, 0.32);
+      b("sine", v, k, 0.32, K);
+      const y = e.createGain();
+      ((y.gain.value = 0.3), y.connect(K), b("sine", v * 3.9, k, 0.12, y));
+    },
+    w = 60 / 120,
+    P = [0, 2, 4, 7, 9, 12, 14, 16, 19],
+    x = [
+      [0, 4, 7],
+      [5, 9, 12],
+      [7, 11, 14],
+      [0, 4, 7],
+    ];
+  let F = 4;
+  for (let v = 0, k = n + 0.25; k < n + i - 0.12; v++, k += w / 2) {
+    const l = Math.floor(v / 8) % 4,
+      K = x[l],
+      y = 43 + K[0];
+    (v % 4 === 0
+      ? _(mhz(y), k, 0.16)
+      : v % 4 === 2 && _(mhz(y + 7 - (K[0] === 7 ? 12 : 0)), k, 0.13),
+      v % 2 === 1 &&
+        K.forEach((r, M) => W(mhz(60 + r), k + M * 0.008, 0.05, 0.16)),
+      (v % 8 === 7 || (v % 8 === 3 && c() < 0.5)) && B(k, 0.14),
+      c() < 0.62 &&
+        ((F = Math.max(
+          0,
+          Math.min(P.length - 1, F + [-2, -1, 1, 2, 0][Math.floor(c() * 5)]),
+        )),
+        g(mhz(72 + P[F]), k + 0.01, 0.095)));
+  }
+  const T = n + i;
+  ([0, 4, 7, 12].forEach((v, k) => {
+    W(mhz(60 + v), T + 0.12 + k * 0.03, 0.06, 2.2);
+  }),
+    _(mhz(43), T + 0.12, 0.15));
+  const A = (v, k) => {
+    if (v === "boing") {
+      const l = f(k, 0.1, 0.01, 0.5),
+        K = b("sine", 300, k, 0.5, l);
+      (K.frequency.exponentialRampToValueAtTime(900, k + 0.12),
+        K.frequency.exponentialRampToValueAtTime(560, k + 0.45));
+      const y = e.createOscillator(),
+        r = e.createGain();
+      ((y.frequency.value = 14),
+        (r.gain.value = 40),
+        y.connect(r),
+        r.connect(K.frequency),
+        y.start(k),
+        y.stop(k + 0.55));
+    } else if (v === "pop") {
+      const l = f(k, 0.12, 0.002, 0.12);
+      b("sine", 500, k, 0.12, l).frequency.exponentialRampToValueAtTime(
+        1500,
+        k + 0.05,
+      );
+    } else if (v === "slide") {
+      const l = f(k, 0.07, 0.03, 0.75);
+      b("sine", 1500, k, 0.75, l).frequency.exponentialRampToValueAtTime(
+        340,
+        k + 0.7,
+      );
+    } else if (v === "thud") {
+      const l = f(k, 0.22, 0.004, 0.3);
+      b("sine", 150, k, 0.3, l).frequency.exponentialRampToValueAtTime(
+        48,
+        k + 0.25,
+      );
+      const y = e.createBufferSource();
+      y.buffer = u;
+      const r = e.createBiquadFilter();
+      ((r.type = "lowpass"), (r.frequency.value = 400));
+      const M = f(k, 0.18, 0.002, 0.15);
+      (y.connect(r), r.connect(M), y.start(k, 0, 0.2));
+    } else if (v === "ding")
+      for (const [l, K, y] of [
+        [1, 0.07, 1.3],
+        [2.76, 0.03, 0.7],
+        [5.4, 0.015, 0.35],
+      ]) {
+        const r = f(k, K, 0.003, y);
+        b("sine", 1320 * l, k, y, r);
+      }
+    else if (v === "whoosh") {
+      const l = e.createBufferSource();
+      l.buffer = u;
+      const K = e.createBiquadFilter();
+      ((K.type = "bandpass"),
+        (K.Q.value = 1.4),
+        K.frequency.setValueAtTime(400, k),
+        K.frequency.exponentialRampToValueAtTime(3200, k + 0.35));
+      const y = f(k, 0.3, 0.12, 0.45);
+      (l.connect(K), K.connect(y), l.start(k, 0, 0.5));
+    } else if (v === "shutter")
+      for (const l of [0, 0.085]) {
+        const K = e.createBufferSource();
+        K.buffer = u;
+        const y = e.createBiquadFilter();
+        ((y.type = "highpass"), (y.frequency.value = 2400));
+        const r = f(k + l, 0.22, 0.001, 0.035);
+        (K.connect(y), y.connect(r), K.start(k + l, c() * 0.4, 0.05));
+      }
+  };
+  for (const v of s || []) {
+    const [k, l] = Array.isArray(v) ? v : [v, "boing"];
+    k / 1e3 < i && A(l, n + k / 1e3);
+  }
+  if ((A("shutter", T), a * 1e3 > BX_LEN + 500)) {
+    const v = n + (BX_LEN - 400) / 1e3;
+    [76, 79, 84, 83, 79].forEach((k, l) => {
+      const K = v + l * 0.34,
+        y = f(K, 0.05, 0.003, 1.4);
+      b("sine", mhz(k), K, 1.4, y);
+      const r = e.createGain();
+      ((r.gain.value = 0.25), r.connect(y), b("sine", mhz(k) * 3, K, 0.4, r));
+    });
+  }
+}
+function cookieIntro(e, t, n) {
+  const a = e.createGain();
+  ((a.gain.value = 1.4),
+    a.connect(t),
+    [72, 76, 79, 84, 83].forEach((o, s) => {
+      const d = n + 0.12 + s * 0.27,
+        c = e.createGain();
+      (c.gain.setValueAtTime(0, d),
+        c.gain.linearRampToValueAtTime(0.055, d + 0.004),
+        c.gain.exponentialRampToValueAtTime(1e-4, d + 1.5),
+        c.connect(a));
+      const m = e.createOscillator();
+      ((m.type = "sine"),
+        (m.frequency.value = mhz(o)),
+        m.connect(c),
+        m.start(d),
+        m.stop(d + 1.55));
+      const i = e.createGain();
+      ((i.gain.value = 0.25), i.connect(c));
+      const p = e.createOscillator();
+      ((p.type = "sine"),
+        (p.frequency.value = mhz(o) * 3),
+        p.connect(i),
+        p.start(d),
+        p.stop(d + 0.45));
+    }));
+}
+const filmText = (e, t) =>
+    [
+      e.name,
+      e.head,
+      e.died,
+      e.funeral,
+      e.attend,
+      e.quote ? e.quote.t : "",
+      e.cust && e.cust.words ? e.cust.words : "",
+      e.cust && e.cust.title ? e.cust.title : "",
+      e.cust && e.cust.end ? e.cust.end : "",
+      ...e.epi,
+      ...e.frames.map((n) => n.t),
+      (CBY[e.iso] || C()).ko,
+      placeTag(CBY[e.iso] || C()),
+      ...t.seg.flatMap((n) => n.cast || []),
+      ...t.seg.flatMap((n) => n.src || []),
+      ...t.seg.filter((n) => n.ch).map((n) => n.ch.st[2]),
+      ...(t.moms || []).map((n) => placeAt(n.a, e)),
+      L`그해 지구에서는 약 1억 3천만 명의 아기가 태어났습니다.`,
+      L`이것은 그중 한 사람의 이야기입니다.`,
+      L`함께한 사람들`,
+      L`이 이야기에 쓰인 자료`,
+      L`이 삶은 실제 통계로 만든 이야기입니다.`,
+      L`그해 당신이 남긴 기록`,
+      L`80억 명 가운데, 단 한 번뿐인 삶이었습니다.`,
+      L`제${1}장`,
+      L`미리 보기`,
+      "0123456789–·“”",
+      ...(t.teaser || t.invite
+        ? [
+            L`당신은 어디에서 태어날까요?`,
+            L`실제 통계로 한 사람의 일생을 살아 보는 인생 시뮬레이션`,
+            LC.brand + " 1in8b.life",
+          ]
+        : []),
+      ...(t.bonus
+        ? [
+            L`쿠키 영상`,
+            L`아무도 몰랐던 하루`,
+            L`${e.name}, ${t.bonus.a}세의 어느 날`,
+            ...t.bonus.subs,
+            t.bonus.punch,
+            t.bonus.cbText || "",
+            t.bonus.place,
+            "'0123456789 ",
+          ]
+        : []),
+    ].join(""),
+  BV = { busy: !1, url: "" },
+  BV_DUR = 10400,
+  BV_W = 720,
+  BV_H = 1280,
+  BV_C = {
+    bg: "#0E1A22",
+    land: "#25394A",
+    ink: "#EEF3F0",
+    ink2: "#9FB0B4",
+    rip: "#5FC4B4",
+    gold: "#F2C14E",
+  };
+function bvSetup() {
+  const e = BB(),
+    t = share(e),
+    n = (
+      (u) => () =>
+        (u = (u * 1664525 + 1013904223) >>> 0) / 4294967296
+    )(hashStr(S.name.full + S.born + S.by)),
+    a = COUNTRIES.filter((u) => WORLD.at[u.id] && u.b > 0),
+    o = a.reduce((u, f) => u + f.b, 0),
+    s = TOTAL_BIRTHS / SEC_YEAR,
+    d = () => {
+      let u = n() * o;
+      for (const f of a) if (((u -= f.b), u <= 0)) return f.id;
+      return a[0].id;
+    },
+    c = [];
+  for (let u = 150; u < 5200; u += (-Math.log(1 - n() * 0.999) * 1e3) / s)
+    c.push([u, d()]);
+  const m = document.createElement("canvas");
+  ((m.width = 300), (m.height = 375));
+  const i = m.getContext("2d");
+  ((i.fillStyle = "#F7FAF8"), i.fillRect(0, 0, 300, 375));
+  let p = !1;
+  try {
+    p = cardPortraitPx(i, 0, 0, 300, 375, 0);
+  } catch {
+    p = !1;
+  }
+  return {
+    land: tgLand(),
+    at: WORLD.at[S.born] || [78, 33],
+    rips: c,
+    pic: p ? m : null,
+    country: e.ko,
+    name: S.name.full,
+    rate: s.toLocaleString(LC.loc, {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    }),
+    born: L`${S.bornCity ? S.bornCity : L`농촌 마을`} · ${QSHORT[bornQ()]}에서 ${S.sex === "F" ? L`여자아이` : L`남자아이`}로 태어났습니다`,
+    odds: L`지금 태어나는 아기 ${Math.round(1 / t).toLocaleString("ko-KR")}명 중 1명꼴로 ${e.ko}에서 태어납니다.`,
+    dom: CONFIG.siteUrl
+      ? CONFIG.siteUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")
+      : "1in8b.life",
+  };
+}
+const bvEase = (e) =>
+    e <= 0
+      ? 0
+      : e >= 1
+        ? 1
+        : e < 0.5
+          ? 4 * e * e * e
+          : 1 - Math.pow(-2 * e + 2, 3) / 2,
+  bvIn = (e, t, n) => Math.max(0, Math.min(1, (e - t) / (n - t)));
+function bvText(e, t, n, a, o, s, d, c, m, i) {
+  if (c <= 0 || !t) return n;
+  (e.save(), (e.globalAlpha = c), (e.fillStyle = d), cfont(e, o, a, s));
+  const p = wrapLines(e, t, m || BV_W - 96).slice(0, 4);
+  for (const u of p) (e.fillText(u, BV_W / 2, n), (n += i || a * 1.32));
+  return (e.restore(), n);
+}
+function bvFrame(e, t, n) {
+  (e.setTransform(1, 0, 0, 1, 0, 0),
+    (e.globalAlpha = 1),
+    (e.fillStyle = BV_C.bg),
+    e.fillRect(0, 0, BV_W, BV_H),
+    (e.textAlign = "center"),
+    (e.textBaseline = "alphabetic"));
+  try {
+    e.direction = L_RTL ? "rtl" : "ltr";
+  } catch {}
+  const a = bvEase(bvIn(t, 3300, 5500)),
+    o = (BV_W - 40) / WORLD.w,
+    s = o + (17 - o) * a,
+    d = WORLD.w / 2 + (n.at[0] - WORLD.w / 2) * a,
+    c = WORLD.h / 2 + (n.at[1] - WORLD.h / 2) * a,
+    m = 600 - 80 * a,
+    i = (w) => BV_W / 2 + (w - d) * s,
+    p = (w) => m + (w - c) * s,
+    u = 1 - 0.7 * bvEase(bvIn(t, 5600, 6400));
+  ((e.globalAlpha = u), (e.fillStyle = BV_C.land));
+  const f = Math.max(1.2, s * 0.3);
+  for (const [w, P] of n.land) {
+    const x = i(w + 0.5),
+      F = p(P + 0.5);
+    x < -f ||
+      x > BV_W + f ||
+      F < -f ||
+      F > BV_H + f ||
+      (e.beginPath(), e.arc(x, F, f, 0, 7), e.fill());
+  }
+  ((e.strokeStyle = BV_C.rip), (e.lineWidth = 3));
+  for (const [w, P] of n.rips) {
+    const x = (t - w) / 1800;
+    if (x < 0 || x >= 1) continue;
+    const F = WORLD.at[P];
+    ((e.globalAlpha = 0.85 * (1 - x) * (1 - a) * u),
+      e.beginPath(),
+      e.arc(i(F[0]), p(F[1]), o * (0.6 + x * 4), 0, 7),
+      e.stroke());
+  }
+  const b = bvIn(t, 3500, 4300);
+  if (b > 0) {
+    const w = i(n.at[0]),
+      P = p(n.at[1]);
+    ((e.globalAlpha = Math.max(0.35, u)),
+      (e.fillStyle = BV_C.gold),
+      e.beginPath(),
+      e.arc(w, P, Math.max(5, s * 0.55) * b, 0, 7),
+      e.fill());
+    const x = ((t - 3500) % 1400) / 1400;
+    ((e.strokeStyle = BV_C.gold),
+      (e.lineWidth = 3),
+      (e.globalAlpha = 0.8 * (1 - x) * b * Math.max(0.35, u)),
+      e.beginPath(),
+      e.arc(w, P, Math.max(5, s * 0.55) * (1 + x * 3), 0, 7),
+      e.stroke());
+  }
+  e.globalAlpha = 1;
+  const W = bvIn(t, 250, 750) * (1 - bvIn(t, 3100, 3500)),
+    _ = bvIn(t, 3800, 4300) * (1 - bvIn(t, 5300, 5700));
+  (bvText(e, L`지금 이 순간에도`, 210, 40, 400, CF.b, BV_C.ink2, W),
+    bvText(
+      e,
+      L`1초에 ${n.rate}명이 태어나요`,
+      290,
+      64,
+      700,
+      CF.d,
+      BV_C.ink,
+      bvIn(t, 600, 1100) * (1 - bvIn(t, 3100, 3500)),
+    ),
+    bvText(e, L`그중 한 명`, 270, 76, 700, CF.d, BV_C.gold, _));
+  const B = bvIn(t, 5700, 6200);
+  if (B > 0) {
+    let w = bvText(
+      e,
+      n.country,
+      190,
+      80,
+      700,
+      CF.d,
+      BV_C.ink,
+      B,
+      BV_W - 80,
+      92,
+    );
+    w = bvText(e, n.born, w + 4, 32, 400, CF.b, BV_C.ink2, B, BV_W - 120, 44);
+    const P = bvIn(t, 6e3, 6600),
+      x = Math.max(w + 18, 300) + (1 - bvEase(P)) * 40;
+    P > 0 &&
+      (e.save(),
+      (e.globalAlpha = P),
+      n.pic && e.drawImage(n.pic, 230, x, 260, 325),
+      (e.strokeStyle = BV_C.gold),
+      (e.lineWidth = 4),
+      e.strokeRect(228, x - 2, 264, 329),
+      e.restore());
+    const F = bvIn(t, 6500, 7e3);
+    ((w = bvText(
+      e,
+      n.name,
+      x + 325 + 66,
+      50,
+      700,
+      CF.d,
+      BV_C.ink,
+      F,
+      BV_W - 80,
+      58,
+    )),
+      (n.endY = Math.max(
+        bvText(
+          e,
+          n.odds,
+          w + 8,
+          32,
+          600,
+          CF.b,
+          BV_C.gold,
+          bvIn(t, 7e3, 7500),
+          BV_W - 110,
+          44,
+        ),
+        n.endY || 0,
+      )));
+  }
+  const g = bvIn(t, 8300, 8800);
+  if (g > 0) {
+    const w = Math.max(n.endY || 0, 900) + 20;
+    (e.save(),
+      (e.globalAlpha = g),
+      (e.strokeStyle = "rgba(238,243,240,.25)"),
+      (e.lineWidth = 2),
+      e.beginPath(),
+      e.moveTo(120, w),
+      e.lineTo(BV_W - 120, w),
+      e.stroke(),
+      e.restore(),
+      bvText(e, L`80억 분의 1`, w + 62, 50, 700, CF.d, BV_C.ink, g),
+      bvText(
+        e,
+        L`너는 80억 명 중 누구로 태어날까?`,
+        w + 112,
+        30,
+        400,
+        CF.b,
+        BV_C.ink2,
+        g,
+      ),
+      bvText(e, n.dom, w + 160, 30, 600, CF.m, BV_C.rip, g));
+  }
+}
+async function birthVideo() {
+  if (BV.busy || !S || (S.era && S.era !== "now")) return;
+  const e = window.MediaRecorder,
+    t = document.createElement("canvas");
+  if (!e || !t.captureStream) {
+    toast(
+      L`이 브라우저는 영상 만들기를 지원하지 않아요. 최신 크롬이나 사파리에서 열어 주세요.`,
+    );
+    return;
+  }
+  ((BV.busy = !0), track("card_share", { kind: "bvid_make" }));
+  const n = document.createElement("div");
+  ((n.className = "ending film on"),
+    (n.id = "bvid"),
+    n.setAttribute("role", "dialog"),
+    n.setAttribute("aria-modal", "true"),
+    n.setAttribute("aria-label", L`출생 영상`),
+    (n.innerHTML = `<button type="button" class="end-skip" data-bv="close">${L`닫기`}</button><div class="film-in"><canvas width="${BV_W}" height="${BV_H}"></canvas\
+>
+    <p class="film-msg">${L`10초 영상을 만드는 중이에요. 다 될 때까지 이 화면을 켜 두세요.`}</p><div class="film-bar"><i></i></div><div class="film-acts"></div></div>`),
+    document.body.appendChild(n));
+  const a = (y) => n.querySelector(y),
+    o = a("canvas"),
+    s = a(".film-msg"),
+    d = a(".film-bar i"),
+    c = a(".film-acts"),
+    m = o.getContext("2d");
+  let i = !1,
+    p = 0,
+    u = null,
+    f = null,
+    b = !1,
+    W = 0;
+  const _ = () => {
+      f &&
+        f.getTracks().forEach((y) => {
+          try {
+            y.stop();
+          } catch {}
+        });
+    },
+    B = () => {
+      ((i = !0), cancelAnimationFrame(p), clearTimeout(W));
+      try {
+        u && u.state !== "inactive" && u.stop();
+      } catch {}
+      (_(),
+        (BV.busy = !1),
+        document.removeEventListener("visibilitychange", x));
+    },
+    g = () => {
+      (B(), n.remove());
+    },
+    w = () => {
+      c.innerHTML = `<button class="cta" data-bv="again">${L`다시 만들기`}</button>`;
+    },
+    P = (y) => {
+      (i && y !== "hidden") ||
+        (B(),
+        (o.style.opacity = "0.3"),
+        (d.parentNode.hidden = !0),
+        (s.textContent =
+          y === "hidden"
+            ? L`화면이 꺼지거나 다른 앱으로 넘어가서 영상이 끊겼어요. 화면을 켜 둔 채로 다시 만들어 주세요.`
+            : L`영상을 마무리하지 못했어요. 이 브라우저에서 녹화가 끝나지 않았어요. 다시 만들어 주세요.`),
+        w(),
+        track("card_share", { kind: "bvid_fail" }));
+    },
+    x = () => {
+      document.hidden &&
+        !i &&
+        u &&
+        !b &&
+        u.state === "recording" &&
+        P("hidden");
+    };
+  (n.addEventListener("click", (y) => {
+    const r = y.target.closest("[data-bv]");
+    if (!r) return;
+    const M = r.dataset.bv;
+    if (M === "close") g();
+    else if (M === "again") (g(), birthVideo());
+    else if (M === "share") {
+      const H = BV.o;
+      if (!H) return;
+      (kpCopy(H.text),
+        navigator
+          .share({ files: [H.file], text: H.text })
+          .then(() => track("card_share", { kind: "bvid_img" }))
+          .catch(() => {}));
+    } else if (M === "cap") {
+      const H = BV.o;
+      H &&
+        kpCopy(H.text).then((E) => {
+          r.textContent = E
+            ? L`복사했어요`
+            : L`아래 글을 길게 눌러 복사해 주세요`;
+        });
+    }
+  }),
+    document.addEventListener("visibilitychange", x));
+  let F = null;
+  try {
+    ((F = bvSetup()),
+      await loadCardFonts(
+        [
+          F.country,
+          F.name,
+          F.born,
+          F.odds,
+          L`지금 이 순간에도`,
+          L`1초에 ${F.rate}명이 태어나요`,
+          L`그중 한 명`,
+          L`80억 분의 1`,
+          L`너는 80억 명 중 누구로 태어날까?`,
+        ].join(""),
+      ));
+  } catch (y) {
+    (reportCaught(y), P());
+    return;
+  }
+  if (i) return;
+  (bvFrame(m, 0, F), (f = o.captureStream(30)));
+  const A =
+    [
+      "video/mp4;codecs=avc1\
+.42E01E",
+      "video/mp4",
+      "video/webm;codecs=vp9",
+      "video/webm;codecs=vp8",
+      "video/webm",
+    ].find((y) => e.isTypeSupported && e.isTypeSupported(y)) || "";
+  try {
+    u = new e(f, A ? { mimeType: A, videoBitsPerSecond: 3e6 } : {});
+  } catch {
+    (B(),
+      (s.textContent = L`이 브라우저는 영상 만들기를 지원하지 않아요. 최신 크롬이나 사파리에서 열어 주세요.`));
+    return;
+  }
+  const v = [];
+  u.ondataavailable = (y) => {
+    y.data && y.data.size && v.push(y.data);
+  };
+  const k = async () => {
+    if (b || i) return;
+    if (
+      ((b = !0),
+      clearTimeout(W),
+      _(),
+      document.removeEventListener("visibilitychange", x),
+      !v.length)
+    ) {
+      P();
+      return;
+    }
+    const y = u.mimeType || A || "video/webm",
+      r = /mp4/.test(y) ? "mp4" : "webm";
+    let M = new Blob(v, { type: y.split(";")[0] });
+    if (r === "mp4")
+      try {
+        const U = mp4Flat(new Uint8Array(await M.arrayBuffer()));
+        if (U) {
+          const z = new Blob(
+            [...U.head, ...U.ranges.map(([X, O]) => M.slice(X, O))],
+            { type: M.type },
+          );
+          z.size === U.len && (M = z);
+        }
+      } catch {}
+    if (!n.isConnected) {
+      BV.busy = !1;
+      return;
+    }
+    if (BV.url)
+      try {
+        URL.revokeObjectURL(BV.url);
+      } catch {}
+    const H = (BV.url = URL.createObjectURL(M)),
+      E = `${LC.file}-${L`출생`}-${S.born}.${r}`;
+    let N = null;
+    try {
+      N = new File([M], E, { type: M.type });
+    } catch {}
+    const R =
+      !IN_APP &&
+      !!N &&
+      navigator.canShare &&
+      navigator.canShare({ files: [N] });
+    BV.o = { file: N, text: birthShareText() };
+    const I = Object.assign(document.createElement("video"), {
+      src: H,
+      controls: !0,
+      playsInline: !0,
+      muted: !0,
+      loop: !0,
+      autoplay: !0,
+    });
+    (o.replaceWith(I),
+      (d.parentNode.hidden = !0),
+      (BV.busy = !1),
+      (s.textContent = R
+        ? L`다 만들었어요. 바로 올릴 수 있어요. 올릴 글과 링크는 복사해 둘게요.`
+        : L`다 만들었어요. 저장한 뒤 올려 주세요. 올릴 글과 링크도 복사할 수 있어요.`),
+      (c.innerHTML =
+        (R
+          ? `<button class="cta" data-bv="share">${L`SNS에 바로 올리기`}</button><a class="ghost" href="${H}" download="${esc(E)}" data-bvsave="1">${L`기기에 저장`}</a>`
+          : `<a class="cta" href="${H}" download="${esc(E)}" data-bvsave="1">${L`저장하기`}</a><button class="ghost" data-bv="cap">${L`올릴 글 복사`}</button>`) +
+        `<p class="film-cap">${esc(BV.o.text).replace(/\n/g, "<br>")}</p>` +
+        (r === "webm"
+          ? `<p class="film\
+-msg">${L`이 브라우저는 webm 파일로 만들어요. 릴스나 스레드에 올리려면 사파리나 크롬에서 만들어 주세요.`}</p>`
+          : "")));
+    const j = c.querySelector("[data-bvsave]");
+    j &&
+      j.addEventListener("click", () =>
+        track("card_share", { kind: "bvid_save" }),
+      );
+    try {
+      c.querySelector(".cta").focus({ preventScroll: !0 });
+    } catch {}
+    track("card_share", { kind: "bvid_done" });
+  };
+  u.onstop = () => {
+    k();
+  };
+  try {
+    u.start(1e3);
+  } catch {
+    (B(), P());
+    return;
+  }
+  const l = performance.now(),
+    K = () => {
+      if (i) return;
+      const y = performance.now() - l;
+      try {
+        bvFrame(m, Math.min(y, BV_DUR), F);
+      } catch (r) {
+        (reportCaught(r), P());
+        return;
+      }
+      if (
+        ((d.style.transform = `scaleX(${Math.min(1, y / BV_DUR).toFixed(3)})`),
+        y < BV_DUR)
+      ) {
+        p = requestAnimationFrame(K);
+        return;
+      }
+      s.textContent = L`거의 다 됐어요. 영상을 정리하는 중이에요.`;
+      try {
+        u.stop();
+      } catch {}
+      W = setTimeout(() => {
+        b || k();
+      }, 5e3);
+    };
+  p = requestAnimationFrame(K);
+}
+function mp4Flat(e) {
+  const t = new DataView(e.buffer, e.byteOffset, e.byteLength),
+    n = e.byteLength,
+    a = (R) => t.getUint32(R),
+    o = (R) => t.getUint32(R) * 4294967296 + t.getUint32(R + 4),
+    s = (R) => String.fromCharCode(e[R], e[R + 1], e[R + 2], e[R + 3]),
+    d = (R, I) => {
+      const j = [];
+      let U = R;
+      for (; U + 8 <= I; ) {
+        let z = a(U),
+          X = 8;
+        if (
+          (z === 1 ? ((z = o(U + 8)), (X = 16)) : z === 0 && (z = I - U),
+          z < X || U + z > I)
+        )
+          return null;
+        (j.push({ t: s(U + 4), s: U, h: X, e: U + z }), (U += z));
+      }
+      return j;
+    },
+    c = d(0, n);
+  if (!c) return null;
+  const m = c.find((R) => R.t === "ftyp"),
+    i = c.find((R) => R.t === "moov");
+  if (!m || !i || !c.some((R) => R.t === "moof")) return null;
+  const p = (R, I) => (d(R.s + R.h, R.e) || []).find((j) => j.t === I),
+    u = (R, I) => (d(R.s + R.h, R.e) || []).filter((j) => j.t === I),
+    f = {},
+    b = p(i, "mvex");
+  if (b)
+    for (const R of u(b, "trex"))
+      f[a(R.s + 12)] = { d: a(R.s + 20), z: a(R.s + 24), f: a(R.s + 28) };
+  const W = {},
+    _ = [];
+  for (const R of u(i, "trak")) {
+    const I = p(R, "tkhd"),
+      j = p(R, "mdia");
+    if (!I || !j) return null;
+    const U = a(I.s + (e[I.s + 8] === 1 ? 28 : 20)),
+      z = p(j, "mdhd"),
+      X = p(j, "minf"),
+      O = X && p(X, "stbl"),
+      J = O && p(O, "stsd");
+    if (!z || !X || !O || !J) return null;
+    ((W[U] = {
+      tk: R,
+      tkhd: I,
+      mdia: j,
+      mdhd: z,
+      minf: X,
+      stbl: O,
+      stsd: J,
+      ts: a(z.s + (e[z.s + 8] === 1 ? 28 : 20)),
+      smp: [],
+      chunks: [],
+      dt: 0,
+    }),
+      _.push(U));
+  }
+  const B = [];
+  let g = 0;
+  for (const R of c.filter((I) => I.t === "moof"))
+    for (const I of u(R, "traf")) {
+      const j = p(I, "tfhd");
+      if (!j) return null;
+      const U = a(j.s + 8) & 16777215,
+        z = a(j.s + 12),
+        X = W[z],
+        O = f[z] || { d: 0, z: 0, f: 0 };
+      if (!X) return null;
+      let J = j.s + 16,
+        V = R.s;
+      if (U & 1) ((V = o(J)), (J += 8));
+      else if (!(U & 131072)) return null;
+      U & 2 && (J += 4);
+      const D = U & 8 ? a(J) : O.d;
+      U & 8 && (J += 4);
+      const oe = U & 16 ? a(J) : O.z;
+      U & 16 && (J += 4);
+      const h = U & 32 ? a(J) : O.f,
+        q = p(I, "tfdt");
+      if (q) {
+        const te = e[q.s + 8] === 1 ? o(q.s + 12) : a(q.s + 12);
+        if (X.smp.length && te !== X.dt) {
+          const G = X.smp[X.smp.length - 1];
+          G.d = Math.max(1, G.d + te - X.dt);
+        }
+        X.dt = te;
+      }
+      let Z = null;
+      for (const te of u(I, "trun")) {
+        const G = a(te.s + 8) & 16777215,
+          ae = a(te.s + 12);
+        let Q = te.s + 16;
+        G & 1 ? ((Z = V + t.getInt32(Q)), (Q += 4)) : Z == null && (Z = V);
+        let ne = null;
+        G & 4 && ((ne = a(Q)), (Q += 4));
+        const Y = Z;
+        for (let ee = 0; ee < ae; ee++) {
+          const le = G & 256 ? a(Q) : D;
+          G & 256 && (Q += 4);
+          const ce = G & 512 ? a(Q) : oe;
+          G & 512 && (Q += 4);
+          let ie = G & 1024 ? a(Q) : h;
+          (G & 1024 && (Q += 4), ee === 0 && ne != null && (ie = ne));
+          const re = G & 2048 ? t.getInt32(Q) : 0;
+          (G & 2048 && (Q += 4),
+            X.smp.push({ d: le, z: ce, sync: !((ie >>> 16) & 1), c: re }),
+            (Z += ce),
+            (X.dt += le));
+        }
+        if (Z > n || Y < 0) return null;
+        ae && (X.chunks.push({ off: g, n: ae }), B.push([Y, Z]), (g += Z - Y));
+      }
+    }
+  if (!_.some((R) => W[R].smp.length)) return null;
+  const w = [];
+  let P = 0;
+  const x = (R, ...I) => {
+      const j = I.flat(),
+        U = 8 + j.reduce((X, O) => X + O.length, 0),
+        z = new Uint8Array(8);
+      new DataView(z.buffer).setUint32(0, U);
+      for (let X = 0; X < 4; X++) z[4 + X] = R.charCodeAt(X);
+      return [z, ...j];
+    },
+    F = (R) => R.flat().reduce((I, j) => I + j.length, 0),
+    T = (R, I = 4) => {
+      const j = new Uint8Array(R.length * I),
+        U = new DataView(j.buffer);
+      return (
+        R.forEach((z, X) =>
+          I === 8
+            ? (U.setUint32(X * 8, Math.floor(z / 4294967296)),
+              U.setUint32(X * 8 + 4, z >>> 0))
+            : U.setUint32(X * 4, z >>> 0),
+        ),
+        j
+      );
+    },
+    A = (R) => e.slice(R.s, R.e),
+    v = (R, I, j, U) => {
+      const z = A(R),
+        X = new DataView(z.buffer);
+      return (
+        z[8] === 1
+          ? (X.setUint32(I, Math.floor(U / 4294967296)),
+            X.setUint32(I + 4, U >>> 0))
+          : X.setUint32(j, Math.min(U, 4294967295) >>> 0),
+        z
+      );
+    },
+    k = p(i, "mvhd");
+  if (!k) return null;
+  const l = a(k.s + (e[k.s + 8] === 1 ? 28 : 20)),
+    K = m.e - m.s,
+    y = (R) => {
+      let I = 0;
+      const j = [];
+      for (const U of _) {
+        const z = W[U];
+        if (!z.smp.length) continue;
+        const X = z.smp,
+          O = X.reduce((Y, ee) => Y + ee.d, 0),
+          J = Math.round((O / z.ts) * l);
+        I = Math.max(I, J);
+        const V = [];
+        for (const Y of X) {
+          const ee = V[V.length - 1];
+          ee && ee[1] === Y.d ? ee[0]++ : V.push([1, Y.d]);
+        }
+        const D = X.some((Y) => Y.c)
+            ? (() => {
+                const Y = [];
+                for (const ee of X) {
+                  const le = Y[Y.length - 1];
+                  le && le[1] === ee.c ? le[0]++ : Y.push([1, ee.c]);
+                }
+                return Y;
+              })()
+            : null,
+          oe = D && D.some((Y) => Y[1] < 0),
+          h = X.every((Y) => Y.sync)
+            ? null
+            : X.map((Y, ee) => (Y.sync ? ee + 1 : 0)).filter(Boolean),
+          q = [];
+        z.chunks.forEach((Y, ee) => {
+          const le = q[q.length - 1];
+          (!le || le[1] !== Y.n) && q.push([ee + 1, Y.n, 1]);
+        });
+        const Z = x(
+            "stbl",
+            A(z.stsd),
+            x("stts", T([0, V.length]), T(V.flat())),
+            D ? x("ctts", T([oe ? 16777216 : 0, D.length]), T(D.flat())) : [],
+            h ? x("stss", T([0, h.length]), T(h)) : [],
+            x("stsc", T([0, q.length]), T(q.flat())),
+            x("stsz", T([0, 0, X.length]), T(X.map((Y) => Y.z))),
+            x(
+              "stco",
+              T([0, z.chunks.length]),
+              T(z.chunks.map((Y) => R + Y.off)),
+            ),
+          ),
+          te = x(
+            "minf",
+            ...(d(z.minf.s + z.minf.h, z.minf.e) || [])
+              .filter((Y) => Y.t !== "stbl")
+              .map(A),
+            Z,
+          ),
+          G = x(
+            "mdia",
+            v(z.mdhd, 32, 24, O),
+            ...(d(z.mdia.s + z.mdia.h, z.mdia.e) || [])
+              .filter((Y) => Y.t !== "mdhd" && Y.t !== "minf")
+              .map(A),
+            te,
+          ),
+          ae = p(z.tk, "edts"),
+          Q = ae && p(ae, "elst");
+        let ne = [];
+        if (Q) {
+          const Y = A(Q),
+            ee = new DataView(Y.buffer),
+            le = Y[8] === 1,
+            ce = ee.getUint32(12),
+            ie = le ? 20 : 12;
+          for (let re = 0; re < ce; re++) {
+            const se = 16 + re * ie;
+            (le
+              ? !ee.getUint32(se) && !ee.getUint32(se + 4)
+              : !ee.getUint32(se)) &&
+              (le
+                ? (ee.setUint32(se, Math.floor(J / 4294967296)),
+                  ee.setUint32(se + 4, J >>> 0))
+                : ee.setUint32(se, J >>> 0));
+          }
+          ne = x("edts", Y);
+        }
+        j.push(x("trak", v(z.tkhd, 36, 28, J), ne, G));
+      }
+      return x("moov", v(k, 32, 24, I), ...j);
+    };
+  if (g > 4e9) return null;
+  let r = y(0);
+  const M = F(r),
+    H = g + 8 > 4294967295,
+    E = new Uint8Array(H ? 16 : 8),
+    N = new DataView(E.buffer);
+  return (
+    H
+      ? (N.setUint32(0, 1),
+        N.setUint32(8, Math.floor((g + 16) / 4294967296)),
+        N.setUint32(12, (g + 16) >>> 0))
+      : N.setUint32(0, g + 8),
+    E.set([109, 100, 97, 116], 4),
+    (r = y(K + M + E.length)),
+    { head: [A(m), ...r.flat(), E], ranges: B, len: K + M + E.length + g }
+  );
+}
+const filmPlays = (e) =>
+  new Promise((t) => {
+    const n = document.createElement("video");
+    let a = 0;
+    const o = (s) => {
+      (clearTimeout(a),
+        (n.onloadedmetadata = n.onerror = null),
+        n.removeAttribute("src"));
+      try {
+        n.load();
+      } catch {}
+      t(s);
+    };
+    ((a = setTimeout(() => o(!0), 3e3)),
+      (n.muted = !0),
+      (n.preload = "metadata"),
+      (n.onloadedmetadata = () => o(!0)),
+      (n.onerror = () => o(!1)),
+      (n.src = e));
+  });
+async function makeFilm(e, t) {
+  const n = e === !0 ? "teaser" : e || "film",
+    a = n === "teaser",
+    o = n === "cookie",
+    s = !!(t && t.quiet),
+    d = S,
+    c = custApply(withFaith(S && S.endD, S));
+  if (!c || KP.film) return;
+  const m = o ? cookiePlan(c) : a ? teaserPlan(c) : filmPlan(c);
+  if (!m) {
+    keepMsg(
+      L`이 삶에는 쿠키 영상이 없어요. 어릴 때 끝난 삶이나 전쟁·재난으로 끝난 삶에는 넣지 않아요.`,
+      !0,
+    );
+    return;
+  }
+  const i = window.MediaRecorder,
+    p = document.createElement("canvas");
+  if (!i || !p.captureStream) {
+    keepMsg(
+      L`이 브라우저는 영상 만들기를 지원하지 않아요. 최신 크롬이나 사파리에서 열어 주세요.`,
+      !0,
+    );
+    return;
+  }
+  KP.film = !0;
+  let u = null;
+  if (!s)
+    try {
+      soundAsk();
+      const G = window.AudioContext || window.webkitAudioContext;
+      G && ((u = new G()), u.resume && u.resume().catch(() => {}));
+    } catch {
+      u = null;
+    }
+  const f = document.createElement("div");
+  ((f.className = "ending film on"),
+    (f.id = "film"),
+    f.setAttribute("role", "dialog"),
+    f.setAttribute("aria-modal", "true"),
+    f.setAttribute(
+      "aria-label",
+      o ? L`쿠키 영상` : a ? L`주마등 필름 예고편` : L`주마등 필름`,
+    ),
+    (f.innerHTML = `<button type="button" class="end-skip" data-f="close">${L`닫기`}</button><div class="film-in"><canvas width\
+="${FW}" height="${FH}"></canvas>
+    <p class="film-msg">${o ? L`쿠키 영상을 준비하는 중이에요.` : a ? L`예고편을 준비하는 중이에요.` : L`필름을 준비하는 중이에요.`}</p><div class="film-bar"><i></i></div><div class="film-acts"></div></div>`),
+    document.body.appendChild(f));
+  const b = (G) => f.querySelector(G),
+    W = b("canvas"),
+    _ = b(".film-msg"),
+    B = b(".film-bar i"),
+    g = b(".film-acts");
+  let w = !1,
+    P = 0,
+    x = null,
+    F = null,
+    T = !1,
+    A = !1,
+    v = 0,
+    k = !1,
+    l = null,
+    K = !1;
+  const y = () => {
+      const G = u;
+      ((u = null), G && G.close().catch(() => {}));
+    },
+    r = () => {
+      l &&
+        l.getTracks().forEach((G) => {
+          try {
+            G.stop();
+          } catch {}
+        });
+    },
+    M = () => {
+      ((KP.film = !1),
+        clearTimeout(v),
+        document.removeEventListener("visibilitychange", N),
+        F && (F.release().catch(() => {}), (F = null)));
+    },
+    H = () => {
+      ((w = !0), cancelAnimationFrame(P));
+      try {
+        x && x.state !== "inactive" && x.stop();
+      } catch {}
+      (r(), y(), M());
+    },
+    E = () => {
+      (H(), f.remove());
+    },
+    N = () => {
+      !document.hidden ||
+        w ||
+        !x ||
+        T ||
+        (H(),
+        (W.style.opacity = "0.3"),
+        (B.parentNode.hidden = !0),
+        (_.textContent = L`화면이 꺼지거나 다른 앱으로 넘어가서 필름이 끊겼어요. 화면을 켜 둔 채로 다시 만들어 주세요.`),
+        (g.innerHTML = `<button class="cta" data-f="again">${L`다시 만들기`}</button>`));
+    };
+  (f.addEventListener("click", (G) => {
+    const ae = G.target.closest("[data-f]");
+    if (!ae) return;
+    const Q = ae.dataset.f;
+    Q === "close"
+      ? E()
+      : Q === "again"
+        ? (E(), makeFilm(n, { quiet: s }))
+        : Q === "quiet"
+          ? (E(), makeFilm(n, { quiet: !0 }))
+          : (Q === "teaser" || Q === "cookie") && (E(), makeFilm(Q));
+  }),
+    document.addEventListener("visibilitychange", N));
+  const R = keepSure();
+  await loadCardFonts(filmText(c, m));
+  const I = await R;
+  if (w) return;
+  if (!I) {
+    E();
+    return;
+  }
+  try {
+    navigator.wakeLock && (F = await navigator.wakeLock.request("screen"));
+  } catch {
+    F = null;
+  }
+  if (w) {
+    M();
+    return;
+  }
+  _.textContent = o
+    ? L`쿠키 영상을 만드는 중이에요. 20초쯤 걸려요. 다 될 때까지 이 화면을 켜 두세요.`
+    : a
+      ? L`예고편을 만드는 중이에요. 20초쯤 걸려요. 다 될 때까지 이 화면을 켜 두세요.`
+      : L`필름을 만드는 중이에요. 다 될 때까지 이 화면을 켜 두세요.`;
+  const j = W.getContext("2d"),
+    U = filmAssets(c);
+  let z = W,
+    X = "";
+  const O = () => {
+    try {
+      const G = document.createElement("canvas");
+      ((G.width = FW), (G.height = FH));
+      const ae = m.seg.find((ne) => ne.kind === "bonus"),
+        Q = m.seg.find((ne) => ne.kind === "title");
+      return (
+        filmFrame(
+          G.getContext("2d"),
+          c,
+          m,
+          U,
+          o && ae ? ae.t0 + bxFrz(m.bonus) + 900 : Q ? Q.t0 + 2200 : 0,
+        ),
+        G.toDataURL("image/jpeg", 0.86)
+      );
+    } catch {
+      return "";
+    }
+  };
+  l = W.captureStream(30);
+  try {
+    if (u) {
+      const G = u.createMediaStreamDestination(),
+        ae = soundOut(u),
+        Q = u.createGain();
+      (Q.connect(G),
+        Q.connect(ae),
+        o
+          ? cookieIntro(u, Q, u.currentTime + 0.05)
+          : filmAudio(
+              u,
+              Q,
+              (m.bonus ? m.main : m.dur) / 1e3 + 0.5,
+              c.name + c.iso,
+              m,
+            ));
+      const ne = m.bonus && m.seg.find((ee) => ee.kind === "bonus");
+      ne &&
+        bonusAudio(
+          u,
+          Q,
+          u.currentTime + 0.05 + ne.t0 / 1e3,
+          (ne.t1 - ne.t0) / 1e3,
+          c.name + c.iso,
+          m.bonus.hits,
+          bxFrz(m.bonus),
+        );
+      {
+        const ee = u.sampleRate,
+          le = u.createBuffer(1, ee, u.sampleRate),
+          ce = le.getChannelData(0);
+        for (let de = 0; de < ee; de++) ce[de] = Math.random() * 2 - 1;
+        const ie = u.createBufferSource(),
+          re = u.createBiquadFilter(),
+          se = u.createGain();
+        ((ie.buffer = le),
+          (ie.loop = !0),
+          (re.type = "lowpass"),
+          (re.frequency.value = 900),
+          (se.gain.value = 0.002),
+          ie.connect(re),
+          re.connect(se),
+          se.connect(G),
+          ie.start());
+      }
+      const Y = G.stream.getAudioTracks()[0];
+      Y && (l.addTrack(Y), (k = !0));
+    }
+  } catch {
+    y();
+  }
+  const V =
+    [
+      "video/mp4;codecs=avc1.42E01E,mp4a.40.2",
+      "video/mp4",
+      "video/webm;codecs=vp9,opus",
+      "video/webm;codecs=vp8,opus",
+      "video/webm",
+    ].find((G) => i.isTypeSupported && i.isTypeSupported(G)) || "";
+  try {
+    x = new i(l, V ? { mimeType: V, videoBitsPerSecond: 4e6 } : {});
+  } catch {
+    (H(),
+      (_.textContent = L`이 브라우저는 영상 만들기를 지원하지 않아요. 최신 크롬이나 사파리에서 열어 주세요.`));
+    return;
+  }
+  const D = [];
+  x.ondataavailable = (G) => {
+    G.data && G.data.size && D.push(G.data);
+  };
+  const oe = () => {
+      if (!(w || !f.isConnected)) {
+        (M(),
+          (B.parentNode.hidden = !0),
+          (z.style.opacity = "0.3"),
+          (_.textContent = k
+            ? L`영상을 마무리하지 못했어요. 이 브라우저에서 녹화가 끝나지 않았어요. 다시 만들거나, 소리 없이 만들어 보세요.`
+            : L`영상을 마무리하지 못했어요. 이 브라우저에서 녹화가 끝나지 않았어요. 다시 만들어 주세요.`),
+          (g.innerHTML =
+            `<button class="cta" data-f="again">${L`다시 만들기`}</button>` +
+            (k
+              ? `<button\
+ class="ghost" data-f="quiet">${L`소리 없이 만들기`}</button>`
+              : `<button class="ghost" data-help="1">${L`문제 알리기`}</button>`)),
+          probAdd(
+            "film",
+            (e === !0 ? "teaser" : String(e || "film")) + (k ? "" : ":quiet"),
+          ));
+        try {
+          g.querySelector(".cta").focus({ preventScroll: !0 });
+        } catch {}
+        track("keep", { kind: "filmfail" });
+      }
+    },
+    h = async (G) => {
+      if (A || ((A = !0), clearTimeout(v), r(), y(), w)) return;
+      if (!D.length) {
+        oe();
+        return;
+      }
+      M();
+      const ae = x.mimeType || V || "video/webm",
+        Q = /mp4/.test(ae) ? "mp4" : "webm";
+      let ne = new Blob(D, { type: ae.split(";")[0] });
+      if (Q === "mp4") {
+        _.textContent = L`거의 다 됐어요. 영상을 정리하는 중이에요.`;
+        try {
+          const se = mp4Flat(new Uint8Array(await ne.arrayBuffer()));
+          if (se) {
+            const de = new Blob(
+              [...se.head, ...se.ranges.map(([fe, ue]) => ne.slice(fe, ue))],
+              { type: ne.type },
+            );
+            de.size === se.len && (ne = de);
+          }
+        } catch {}
+        if (w || !f.isConnected) return;
+      }
+      const Y = URL.createObjectURL(ne),
+        ee = `${LC.file}-${(c.name || "life").replace(/[\\/:*?"<>|\s]+/g, "_")}${
+          o
+            ? {
+                en: "-bonus-scene",
+                ja: "-おまけ映像",
+                zh: "-片尾彩蛋",
+                vi: "-cảnh-sau-phần-kết",
+                fr: "-apres-le-generique",
+                th: "-ฉากหลังเครดิต",
+                es: "-escena-poscreditos",
+                de: "-nach-dem-abspann",
+                ar: "-مشهد-بعد-النهاية",
+                fa: "-صحنه-پس-از-تیتراژ",
+                uk: "-сцена-після-титрів",
+                pl: "-scena-po-napisach",
+              }[LANG] || "-쿠키영상"
+            : a
+              ? {
+                  en: "-teaser",
+                  ja: "-予告編",
+                  zh: "-預告片",
+                  vi: "-đoạn-giới-thiệu",
+                  fr: "-bande-annonce",
+                  es: "-avance",
+                  ar: "-إعلان",
+                  fa: "-پیش‌پرده",
+                  uk: "-тизер",
+                }[LANG] || "-예고편"
+              : ""
+        }.${Q}`;
+      if (G && !(await filmPlays(Y))) {
+        try {
+          URL.revokeObjectURL(Y);
+        } catch {}
+        oe();
+        return;
+      }
+      if (w || !f.isConnected) return;
+      const le = Object.assign(document.createElement("video"), {
+        src: Y,
+        controls: !0,
+        playsInline: !0,
+      });
+      (X && (le.poster = X),
+        z.replaceWith(le),
+        (z = le),
+        (B.parentNode.hidden = !0));
+      const ce = new File([ne], ee, { type: ne.type }),
+        ie =
+          !IN_APP && navigator.canShare && navigator.canShare({ files: [ce] });
+      if (IN_APP)
+        ((_.textContent = L`다 만들었어요. 다만 이 앱 안에서는 영상을 저장할 수 없어요. 닫은 뒤 '사파리·크롬으로 옮기기'로 이 삶을 옮겨서 다시 만들면 저장할 수 있어요.`),
+          (g.innerHTML = `<button class="cta" data-f="close">${L`닫기`}</button>`));
+      else {
+        keepUse();
+        const se = o ? "mc" : a ? "mt" : "mf";
+        if (KP[se] && KP[se].url !== Y)
+          try {
+            URL.revokeObjectURL(KP[se].url);
+          } catch {}
+        const de = (KP[se] = {
+          at: d.lifeAt,
+          t: Date.now(),
+          url: Y,
+          fname: ee,
+          file: ce,
+          canShare: !!ie,
+          cap: o
+            ? cookieCaption(c, m.bonus, keepLink())
+            : keepCaption(c, keepLink()),
+          ext: Q,
+          teaser: !!a,
+          kind: n,
+        });
+        if (
+          ((_.textContent = o
+            ? ie
+              ? L`쿠키 영상이 다 됐어요. 스레드·릴스·스토리에 바로 올려 보세요. 올릴 글과 링크는 복사해 둘게요.`
+              : L`쿠키 영상이 다 됐어요. 저장한 뒤 스레드·릴스·스토리에 올려 보세요. 올릴 글과 링크도 복사할 수 있어요.`
+            : a
+              ? ie
+                ? L`예고편이 다 됐어요. 스레드·릴스·스토리에 바로 올려 보세요. 올릴 글과 링크는 복사해 둘게요.`
+                : L`예고편이 다 됐어요. 저장한 뒤 스레드·릴스·스토리에 올려 보세요. 올릴 글과 링크도 복사할 수 있어요.`
+              : ie
+                ? L`다 만들었어요. 바로 올릴 수 있어요. 올릴 글과 링크는 복사해 둘게요.`
+                : L`다 만들었어요. 저장한 뒤 올려 주세요. 올릴 글과 링크도 복사할 수 있어요.`),
+          filmActs(g, de),
+          s &&
+            g.insertAdjacentHTML(
+              "beforeend",
+              `<p class="film-msg">${L`이번 영상은 소리 없이 만들었어요.`}</p>`,
+            ),
+          !a && !o)
+        ) {
+          const fe = g.querySelector(".film-cap");
+          fe &&
+            fe.insertAdjacentHTML(
+              "beforebegin",
+              `<button class="ghost film-tz" data-f="teaser">${L`20초 예고편도 만들기`}<small>${L`피드에 올리기 좋은 길이예요`}</small></button>` +
+                (m.bonus
+                  ? `<button class="ghost film-tz" data-f="cookie">${L`쿠키 영상만 따로 만들기`}<small>${L`아무도 몰랐던 그 하루만 20초 안팎으로`}</small></button>`
+                  : ""),
+            );
+        }
+        keepMade(n, d);
+      }
+      const re = g.querySelector(".cta");
+      if (re) {
+        try {
+          re.focus({ preventScroll: !0 });
+        } catch {}
+        const se =
+          window.matchMedia &&
+          matchMedia("(prefers-reduced-motion: reduce)").matches;
+        re.scrollIntoView({
+          block: "center",
+          behavior: se ? "auto" : "smooth",
+        });
+      }
+      (track("keep", { kind: n }), G && track("keep", { kind: "filmlate" }));
+    };
+  ((x.onstop = () => h(K)),
+    (x.onerror = () => {
+      w || setTimeout(() => h(!0), 300);
+    }));
+  const q = () => {
+    if (!T) {
+      ((T = !0),
+        (_.textContent = L`거의 다 됐어요. 영상을 정리하는 중이에요.`),
+        B.parentNode.classList.add("wait"));
+      try {
+        if (x.state === "inactive") {
+          h(!0);
+          return;
+        }
+        x.stop();
+      } catch {
+        h(!0);
+        return;
+      }
+      if (((X = O()), X)) {
+        const G = new Image();
+        ((G.className = "film-pic"),
+          (G.alt = ""),
+          (G.src = X),
+          z.replaceWith(G),
+          (z = G));
+      }
+      v = setTimeout(() => {
+        if (!(A || w)) {
+          K = !0;
+          try {
+            x.state !== "inactive" && x.requestData();
+          } catch {}
+          try {
+            x.state !== "inactive" && x.stop();
+          } catch {}
+          (setTimeout(r, 600),
+            (v = setTimeout(() => {
+              !A && !w && h(!0);
+            }, 2500)));
+        }
+      }, 4e3);
+    }
+  };
+  x.start(1e3);
+  const Z = performance.now(),
+    te = () => {
+      if (w) return;
+      const G = performance.now() - Z;
+      if (
+        (filmFrame(j, c, m, U, Math.min(G, m.dur - 1)),
+        setBar(B, G / m.dur),
+        G >= m.dur + 300)
+      ) {
+        q();
+        return;
+      }
+      P = requestAnimationFrame(te);
+    };
+  P = requestAnimationFrame(te);
+}
+const PV_MS = 15e3;
+async function filmPreview(e) {
+  const t = e === "teaser" || e === "cookie" ? e : "film",
+    n = t !== "film",
+    a = custApply(withFaith(S && S.endD, S));
+  if (!a || KP.film) return;
+  const o =
+    t === "cookie"
+      ? cookiePlan(a)
+      : t === "teaser"
+        ? teaserPlan(a)
+        : filmPlan(a);
+  if (!o) return;
+  ((KP.film = !0), track("keep", { kind: t === "film" ? "pvfilm" : "pv" + t }));
+  let s = null;
+  try {
+    soundAsk();
+    const T = window.AudioContext || window.webkitAudioContext;
+    T && ((s = new T()), s.resume && s.resume().catch(() => {}));
+  } catch {
+    s = null;
+  }
+  const d = document.createElement("div");
+  ((d.className = "ending film on"),
+    (d.id = "film"),
+    d.setAttribute("role", "dialog"),
+    d.setAttribute("aria-modal", "true"),
+    d.setAttribute(
+      "aria-label",
+      t === "cookie"
+        ? L`쿠키 영상 미리 보기`
+        : t === "teaser"
+          ? L`예고편 미리 보기`
+          : L`주마등 필름 미리 보기`,
+    ),
+    (d.innerHTML = `<button type="button" class="end-skip" data-f="close">${L`닫기`}</button><div class="film-in"><canvas width="${FW}" height="${FH}"></canvas>
+    <p class="film-msg">${t === "cookie" ? L`이 삶으로 만든 쿠키 영상이에요. 미리 보기라 저장되지 않아요.` : t === "teaser" ? L`이 삶으로 만든 20초 예고편이에요. 미리 보기라 저장되지 않아요.` : L`이 삶으로 만든 필름의 처음 15초예요. 미리 보기라 저장되지 않아요.`}</p><div class="film-bar"><i></i></div><div class="film-acts"></div></div>`),
+    document.body.appendChild(d));
+  const c = (T) => d.querySelector(T),
+    m = c("canvas"),
+    i = c(".film-msg"),
+    p = c(".film-bar i"),
+    u = c(".film-acts");
+  let f = !1,
+    b = 0;
+  const W = () => {
+    ((f = !0), cancelAnimationFrame(b));
+    const T = s;
+    ((s = null), T && T.close().catch(() => {}), (KP.film = !1));
+  };
+  if (
+    (d.addEventListener("click", (T) => {
+      const A = T.target.closest("[data-f]");
+      A &&
+        (A.dataset.f === "close" || A.dataset.f === "buy") &&
+        (W(), d.remove(), A.dataset.f === "buy" && keepBuyShow());
+    }),
+    await loadCardFonts(filmText(a, o)),
+    f)
+  )
+    return;
+  const _ = n ? o.dur : PV_MS,
+    B = m.getContext("2d"),
+    g = filmAssets(a),
+    w = 0;
+  try {
+    if (s) {
+      const T = soundOut(s);
+      t === "cookie"
+        ? cookieIntro(s, T, s.currentTime + 0.05)
+        : filmAudio(
+            s,
+            T,
+            (n ? (o.bonus ? o.main : o.dur) : PV_MS) / 1e3 + 0.6,
+            a.name + a.iso,
+            o,
+          );
+      const A = n && o.bonus && o.seg.find((v) => v.kind === "bonus");
+      A &&
+        bonusAudio(
+          s,
+          T,
+          s.currentTime + 0.05 + A.t0 / 1e3,
+          (A.t1 - A.t0) / 1e3,
+          a.name + a.iso,
+          o.bonus.hits,
+          bxFrz(o.bonus),
+        );
+    }
+  } catch {}
+  const P = () => {
+      ((B.globalAlpha = 0.85),
+        (B.fillStyle = "#f0dfb5"),
+        cfont(B, 600, 22, CF.m),
+        (B.textAlign = "center"),
+        B.fillText(L`미리 보기`, FW / 2, 120),
+        (B.globalAlpha = 1));
+    },
+    x = performance.now(),
+    F = () => {
+      if (f) return;
+      const T = performance.now() - x;
+      if (
+        (filmFrame(B, a, o, g, Math.min(T, _ - 1) + w),
+        P(),
+        setBar(p, T / _),
+        T < _)
+      ) {
+        b = requestAnimationFrame(F);
+        return;
+      }
+      const A = s;
+      ((s = null),
+        A && setTimeout(() => A.close().catch(() => {}), 800),
+        (KP.film = !1),
+        (m.style.opacity = "0.45"),
+        (p.parentNode.hidden = !0),
+        (i.textContent = n
+          ? L`미리 보기는 여기까지예요. 이용권이 있으면 이 영상을 휴대폰에 저장하고 SNS에 바로 올릴 수 있어요.`
+          : o.bonus
+            ? L`미리 보기는 여기까지예요. 전체 필름은 ${Math.round(o.dur / 1e3)}초이고, 엔딩 크레딧 뒤에는 쿠키 영상도 있어요. 이용권이 있으면 음악과 함께 휴대폰에 저장할 수 있어요.`
+            : L`미리 보기는 여기까지예요. 전체 필름은 ${Math.round(o.dur / 1e3)}초이고, 이용권이 있으면 음악과 함께 휴대폰에 저장할 수 있어요.`),
+        (u.innerHTML =
+          `<button class="cta" data-f="close">${L`닫기`}</button>` +
+          (keepPitch() && $("#keepPanel .kp-buy")
+            ? `<button class="ghost" data-f="buy">${L`이용권 보기`}</button>`
+            : "")));
+    };
+  b = requestAnimationFrame(F);
+}
+const phHand = () => `'Nanum Pen Script', ${CF.b}`;
+function phPaper(e, t, n, a) {
+  ((e.fillStyle = a ? "#1e2124" : "#efe7d6"), e.fillRect(0, 0, PH_W, PH_H));
+  const o = lvRand("paper" + t);
+  e.save();
+  for (let c = 0; c < 900; c++)
+    ((e.globalAlpha = 0.05 + o() * 0.05),
+      (e.fillStyle = o() < 0.5 ? (a ? "#000" : "#7d6a4c") : "#fff"),
+      e.fillRect(o() * PH_W, o() * PH_H, 2, 2));
+  const s = e.createRadialGradient(
+    PH_W / 2,
+    PH_H / 2,
+    PH_W * 0.45,
+    PH_W / 2,
+    PH_H / 2,
+    PH_H * 0.78,
+  );
+  (s.addColorStop(0, "rgba(0,0,0,0)"),
+    s.addColorStop(1, a ? "rgba(0,0,0,0.5)" : "rgba(92,70,40,0.18)"),
+    (e.globalAlpha = 1),
+    (e.fillStyle = s),
+    e.fillRect(0, 0, PH_W, PH_H),
+    e.restore());
+  const d = a ? "#d8d2c6" : "#5b5143";
+  (ftext(e, LC.brand, 64, 92, 30, 700, CF.d, d, 0.9, 0, 0, "left"),
+    n &&
+      ftext(
+        e,
+        `${t + 1} / ${n}`,
+        PH_W - 64,
+        92,
+        26,
+        400,
+        CF.m,
+        d,
+        0.75,
+        0,
+        0,
+        "right",
+      ));
+}
+function phPrint(e, t, n, a, o, s, d, c, m) {
+  const i = pxPalette("light");
+  let p = PX.W / 2;
+  try {
+    const B = pxSceneLayers(t, i);
+    B.people && (p = (B.people[0] + B.people[1]) / 2);
+  } catch {}
+  const u = pxCanvas(pxScene(t, i)),
+    f = 80,
+    b = Math.round(Math.max(0, Math.min(PX.W - f, p - f / 2))),
+    W = (o * PX.H) / f,
+    _ = Math.round(o * 0.035);
+  return (
+    e.save(),
+    e.translate(n, a),
+    e.rotate(s),
+    (e.shadowColor = "rgba(40,30,20,0.35)"),
+    (e.shadowBlur = 26),
+    (e.shadowOffsetY = 10),
+    (e.fillStyle = "#fbf8f1"),
+    e.fillRect(-o / 2 - _, -W / 2 - _, o + 2 * _, W + 2 * _),
+    (e.shadowColor = "transparent"),
+    (e.imageSmoothingEnabled = !1),
+    e.drawImage(u, b, 0, f, PX.H, -o / 2, -W / 2, o, W),
+    c > 0.02 &&
+      ((e.globalCompositeOperation = "soft-light"),
+      (e.fillStyle = `rgba(214,160,92,${(0.55 * c).toFixed(2)})`),
+      e.fillRect(-o / 2, -W / 2, o, W),
+      (e.globalCompositeOperation = "source-over"),
+      (e.fillStyle = `rgba(255,246,230,${(0.18 * c).toFixed(2)})`),
+      e.fillRect(-o / 2, -W / 2, o, W)),
+    d &&
+      ((e.font = `600 ${Math.round(o * 0.04)}px ${CF.m}`),
+      (e.textAlign = "right"),
+      (e.shadowColor = "rgba(255,120,40,0.9)"),
+      (e.shadowBlur = 8),
+      (e.fillStyle = "#ff9a3c"),
+      e.fillText(d, o / 2 - o * 0.03, W / 2 - o * 0.03),
+      (e.shadowColor = "transparent")),
+    m &&
+      ((e.fillStyle = "rgba(236,226,196,0.82)"),
+      e.save(),
+      e.translate(0, -W / 2 - _),
+      e.rotate(-0.05),
+      e.fillRect(-90, -22, 180, 44),
+      e.restore()),
+    e.restore(),
+    W + 2 * _
+  );
+}
+const phCap = (e) =>
+    e.note ? `${Q1}${capS(e.t).replace(/^[“«]|[”»]$/g, "")}${Q2}` : capS(e.t),
+  phHandText = (e, t) =>
+    t.k === "cover"
+      ? e.road
+        ? capS(e.road)
+        : ""
+      : t.k === "cookie"
+        ? capS(t.b.punch || "")
+        : t.f
+          ? phCap(t.f)
+          : "";
+function photoPage(e, t, n, a, o, s) {
+  const d = "#2c2620",
+    c = "#6b5f4f";
+  if (n.k === "end") {
+    phPaper(e, a, o, !0);
+    let g = 360;
+    (ftext(e, t.name, PH_W / 2, g, 64, 700, CF.d, "#f2ede4", 1, 900),
+      (g += 64),
+      ftext(
+        e,
+        `${t.by} – ${t.by + t.age}`,
+        PH_W / 2,
+        g,
+        30,
+        400,
+        CF.m,
+        "#a49d92",
+        1,
+      ),
+      (g += 70),
+      t.epi.slice(0, 3).forEach((w) => {
+        const P = ftext(
+          e,
+          capS(w),
+          PH_W / 2,
+          g,
+          36,
+          400,
+          CF.b,
+          "#e6e0d4",
+          1,
+          860,
+          52,
+        );
+        g += P * 52 + 14;
+      }),
+      (g = Math.max(g + 40, 900)),
+      (e.fillStyle = "#f0dfb5"),
+      e.fillRect(PH_W / 2 - 40, g - 50, 80, 3),
+      ftext(
+        e,
+        L`80억 명 가운데, 단 한 번뿐인 삶이었습니다.`,
+        PH_W / 2,
+        g + 20,
+        38,
+        600,
+        CF.d,
+        "#f0dfb5",
+        1,
+        900,
+        54,
+      ),
+      ftext(
+        e,
+        L`당신은 어디에서 태어날까요?`,
+        PH_W / 2,
+        PH_H - 190,
+        44,
+        700,
+        CF.d,
+        "#f2ede4",
+        1,
+        900,
+      ),
+      ftext(
+        e,
+        "1in8b.life",
+        PH_W / 2,
+        PH_H - 122,
+        34,
+        600,
+        CF.b,
+        "#E2678A",
+        1,
+      ));
+    return;
+  }
+  if ((phPaper(e, a, o, !1), n.k === "cover")) {
+    const g = n.f;
+    let P =
+      470 +
+      (g && g.m
+        ? phPrint(
+            e,
+            g.m,
+            PH_W / 2,
+            470,
+            860,
+            -0.025,
+            phStamp(t.by + g.a, g.a),
+            filmArch(t, g.a),
+            !0,
+          )
+        : 0) /
+        2 +
+      120;
+    (t.cust &&
+      t.cust.title &&
+      (ftext(e, t.cust.title, PH_W / 2, P, 34, 600, CF.d, "#9a7a3a", 1, 900),
+      (P += 64)),
+      ftext(e, t.name, PH_W / 2, P, 76, 700, CF.d, d, 1, 940),
+      (P += 66),
+      ftext(
+        e,
+        `${t.by} – ${t.by + t.age} · ${placeTag(CBY[t.iso] || C())}`,
+        PH_W / 2,
+        P,
+        32,
+        400,
+        CF.b,
+        c,
+        1,
+        940,
+      ),
+      (P += 74),
+      t.road &&
+        ftext(e, capS(t.road), PH_W / 2, P, 50, 400, phHand(), d, 1, 900, 60));
+    return;
+  }
+  if (n.k === "cookie") {
+    const g = n.b,
+      w = s && s.ph;
+    if (
+      (ftext(e, L`쿠키 사진`, PH_W / 2, 170, 30, 600, CF.m, "#9a7a3a", 1),
+      ftext(e, L`아무도 몰랐던 하루`, PH_W / 2, 238, 54, 700, CF.d, d, 1, 940),
+      w)
+    ) {
+      const x = (700 * w.height) / w.width,
+        F = 24,
+        T = 300;
+      (e.save(),
+        e.translate(PH_W / 2, T + x / 2),
+        e.rotate(0.018),
+        (e.shadowColor = "rgba(40,30,20,0.35)"),
+        (e.shadowBlur = 26),
+        (e.shadowOffsetY = 10),
+        (e.fillStyle = "#fbf8f1"),
+        e.fillRect(-700 / 2 - F, -x / 2 - F, 700 + 2 * F, x + F + 60),
+        (e.shadowColor =
+          "trans\
+parent"),
+        e.drawImage(w, -700 / 2, -x / 2, 700, x),
+        e.restore());
+      let A = T + x + 60 + 76;
+      (ftext(e, L`${g.a}세 · ${g.y}`, PH_W / 2, A, 28, 400, CF.b, c, 1),
+        (A += 64));
+      const v = ftext(
+        e,
+        capS(g.punch),
+        PH_W / 2,
+        A,
+        44,
+        400,
+        phHand(),
+        d,
+        1,
+        920,
+        54,
+      );
+      ((A += v * 54 + 18),
+        g.cbText &&
+          ftext(
+            e,
+            capS(g.cbText),
+            PH_W / 2,
+            A,
+            30,
+            400,
+            CF.d,
+            "#7a5a24",
+            1,
+            900,
+            42,
+          ));
+    }
+    return;
+  }
+  const m = n.f,
+    i = a % 2 ? 0.02 : -0.018,
+    p = phCap(m),
+    u = 900,
+    f = (u * PX.H) / 80 + 2 * Math.round(u * 0.035),
+    b = Math.min(4, flines(e, p, 54, 400, phHand(), 900)),
+    W = f + 96 + 74 + b * 66,
+    _ = Math.max(150, (PH_H - W) / 2 + 30);
+  phPrint(
+    e,
+    m.m,
+    PH_W / 2,
+    _ + f / 2,
+    u,
+    i,
+    phStamp(t.by + m.a, m.a),
+    filmArch(t, m.a),
+    a % 3 === 1,
+  );
+  let B = _ + f + 96;
+  (ftext(
+    e,
+    [L`${m.a}세${LBL}`, String(t.by + m.a)].join(" · "),
+    PH_W / 2,
+    B,
+    30,
+    500,
+    CF.b,
+    c,
+    1,
+  ),
+    (B += 74),
+    ftext(
+      e,
+      p,
+      PH_W / 2,
+      B,
+      54,
+      400,
+      phHand(),
+      m.note ? "#7a5a24" : d,
+      1,
+      900,
+      66,
+    ),
+    m.note &&
+      ftext(
+        e,
+        L`그해 당신이 남긴 기록`,
+        PH_W / 2,
+        PH_H - 90,
+        26,
+        400,
+        CF.b,
+        c,
+        1,
+      ));
+}
+function giftPage(e, t, n) {
+  const a = "#2c2620",
+    o = "#6b5f4f";
+  (phPaper(e, 0, 0, !1),
+    ftext(e, L`못다 한 소원`, PH_W / 2, 150, 28, 600, CF.b, "#9a7a3a", 1));
+  const s = Math.min(2, flines(e, n.title, 52, 700, CF.d, 940)),
+    d = Math.min(2, flines(e, n.lack, 28, 400, CF.b, 940)),
+    c = Math.min(2, flines(e, n.say, 50, 400, phHand(), 900));
+  ftext(e, n.title, PH_W / 2, 218, 52, 700, CF.d, a, 1, 940, 60);
+  const m = 218 + (s - 1) * 60 + 52;
+  ftext(e, n.lack, PH_W / 2, m, 28, 400, CF.b, o, 1, 940, 38);
+  const i = m + (d - 1) * 38 + 48,
+    p = Math.min(780, Math.floor((PH_H - 156 - (160 + c * 60) - i) / 0.82)),
+    u = (p * PX.H) / 80 + 2 * Math.round(p * 0.035);
+  phPrint(e, n.m, PH_W / 2, i + u / 2, p, -0.016, "", 0, !0);
+  let f = i + u + 84;
+  (ftext(e, n.say, PH_W / 2, f, 50, 400, phHand(), a, 1, 900, 60),
+    (f += c * 60 + 30),
+    ftext(e, t.name, PH_W / 2, f, 36, 700, CF.d, a, 1, 900),
+    (f += 46),
+    ftext(
+      e,
+      `${t.by} – ${t.by + t.age} · ${placeTag(CBY[t.iso] || C())}`,
+      PH_W / 2,
+      f,
+      26,
+      400,
+      CF.b,
+      o,
+      1,
+      900,
+    ),
+    ftext(
+      e,
+      L`이 삶에는 없던 하루예요.`,
+      PH_W / 2,
+      PH_H - 96,
+      25,
+      400,
+      CF.b,
+      o,
+      1,
+      900,
+    ),
+    ftext(e, "1in8b.life", PH_W / 2, PH_H - 52, 28, 600, CF.b, "#E2678A", 1));
+}
+async function giftPic(e, t, n) {
+  (await loadCardFonts(
+    [
+      L`못다 한 소원`,
+      t.title,
+      t.lack,
+      e.name,
+      placeTag(CBY[e.iso] || C()),
+      L`이 삶에는 없던 하루예요.`,
+      L`미리 보기`,
+    ].join(""),
+  ),
+    await albumFont(),
+    await handReady(t.say, 6e3));
+  const a = document.createElement("canvas");
+  ((a.width = PH_W), (a.height = PH_H));
+  const o = a.getContext("2d");
+  if ((giftPage(o, e, t), n)) {
+    (o.save(), (o.globalAlpha = 0.9), (o.fillStyle = "#9a7a3a"));
+    const i = 300;
+    (o.fillRect((PH_W - i) / 2, 760, i, 74),
+      (o.globalAlpha = 1),
+      ftext(o, L`미리 보기`, PH_W / 2, 810, 38, 700, CF.d, "#fff8ea", 1),
+      o.restore());
+  }
+  const s = await new Promise((i) => a.toBlob(i, "image/jpeg", 0.9));
+  if (!s) throw new Error("gift blob");
+  const d = `${LC.file}-${(e.name || "life").replace(/[\\/:*?"<>|\s]+/g, "_")}-${t.k}.jpg`;
+  let c = null;
+  try {
+    c = new File([s], d, { type: "image/jpeg" });
+  } catch {}
+  const m = await new Promise((i) => {
+    const p = new FileReader();
+    ((p.onload = () => i(p.result)),
+      (p.onerror = () => i(null)),
+      p.readAsDataURL(s));
+  });
+  return { file: c, name: d, url: URL.createObjectURL(s), dataUrl: m };
+}
+async function giftMake(e, t) {
+  const n = giftWishes(),
+    a = n[e];
+  if (!(!a || KP.gwBusy || !S || !S.endD)) {
+    KP.gwBusy = !0;
+    try {
+      const o = KP.gw.key + "|" + a.k + (t ? "|pv" : "");
+      let s = KP.gwPic && KP.gwPic.key === o ? KP.gwPic.pic : null;
+      if (!s) {
+        if (
+          (openSheet(
+            esc(a.title),
+            `<p class="gw-wait">${L`그 하루를 그리는 중이에요.`}</p>`,
+          ),
+          !t && !(await keepSure()))
+        ) {
+          closeSheet();
+          return;
+        }
+        if (
+          ((s = await giftPic(custApply(withFaith(S.endD, S)), a, t)),
+          KP.gwPic && KP.gwPic.pic && KP.gwPic.pic.url)
+        )
+          try {
+            URL.revokeObjectURL(KP.gwPic.pic.url);
+          } catch {}
+        ((KP.gwPic = { key: o, pic: s }),
+          track("keep", { kind: t ? "pvgift" : "gift" }));
+      }
+      const d = S.made || {},
+        c =
+          n.length > 1
+            ? (n.findIndex((m, i) => i !== e && !d["gw_" + m.k]) + 1 ||
+                ((e + 1) % n.length) + 1) - 1
+            : -1;
+      if (
+        (openSheet(
+          esc(a.title),
+          `<img class="cardimg gw-img" src="${IN_APP && s.dataUrl ? s.dataUrl : s.url}" alt="${esc(a.title + " · " + a.say)}">
+      ${a.fact ? `<p class="gw-fact">${esc(capS(a.fact))}</p>` : ""}
+      <div class="gw-acts">${t ? `<button class="cta" id="gwBuy">${L`이용권 보기`}</button>` : `<button class="cta" id="gwShare" data-i="${e}">${L`공유하기`}</button>`}${c >= 0 ? `<button class="ghost" data-gw="${c}"${t ? ' data-gwpv="1"' : ""}>${L`다른 소원 보기`}</button>` : ""}</div>
+      ${t ? `<p class="gw-note">${[L`미리 보기예요.`, L`이용권이 있으면 이 그림을 저장하고 SNS에 바로 올릴 수 있어요.`].join(L_CJK ? "" : " ")}</p>` : `<p class="gw-note" id="gwMem" role="status">${S.memId ? L`추모관의 '건넨 하루'에도 걸려 있어요.` : L`추모관에 모시면 이 그림도 함께 걸려요.`}</p>`}`,
+        ),
+        !t)
+      ) {
+        const m = S;
+        (giftKeep(a) || !d["gw_" + a.k]) && keepMade("gw_" + a.k, m);
+        const i = giftOf(m)
+          .map((p) => p.k)
+          .join(",");
+        if (m.memId && m.gwSync !== i) {
+          const p = $("#gwMem");
+          (p && (p.textContent = L`추모관에 거는 중이에요.`),
+            giftSync(m).then((u) => {
+              const f = !!u.ok;
+              f && ((m.gwSync = i), keepSaveLife(m));
+              const b = $("#gwMem");
+              b &&
+                S === m &&
+                (b.textContent = f
+                  ? L`추모관의 '건넨 하루'에도 걸었어요.`
+                  : u.why === "mail"
+                    ? keepWhy("mail")
+                    : [
+                        L`추모관에는 아직 걸지 못했어요.`,
+                        L`이 그림을 다시 열면 다시 걸어 볼게요.`,
+                      ].join(L_CJK ? "" : " "));
+            }));
+        }
+      }
+    } catch (o) {
+      (reportCaught(o),
+        closeSheet(),
+        toast(L`지금은 사진을 만들 수 없어요. 잠시 후 다시 해 주세요.`));
+    } finally {
+      KP.gwBusy = !1;
+    }
+  }
+}
+async function makePhotos(e) {
+  const t = S,
+    n = custApply(withFaith(S && S.endD, S));
+  if (!n || KP.photos || $("#photos")) return;
+  KP.photos = !0;
+  const a = albumFont(),
+    o = photoPages(n),
+    s = o.findIndex((B) => B.k === "cookie"),
+    d = e
+      ? [0, 1, s >= 0 ? s : 2].filter(
+          (B, g, w) => B < o.length && w.indexOf(B) === g,
+        )
+      : o.map((B, g) => g),
+    c = d.map((B) => o[B]),
+    m = c.find((B) => B.k === "cookie"),
+    i = document.createElement("div");
+  ((i.className = "ending film photos on"),
+    (i.id = "photos"),
+    i.setAttribute("role", "dialog"),
+    i.setAttribute("aria-modal", "true"),
+    i.setAttribute("aria-label", L`사진 ${c.length}장`),
+    (i.innerHTML = `<button type="button" class="end-skip" data-p="close">${L`닫기`}</button><div class="ph-in"><p class="film-msg">${e ? L`미리 볼 사진을 그리는 중이에요.` : L`사진을 만드는 중이에요.`}</p><div class="ph-row" tabindex="0"></div><div class="film-acts"></div></div>`),
+    document.body.appendChild(i));
+  const p = (B) => i.querySelector(B),
+    u = p(".film-msg"),
+    f = p(".ph-row"),
+    b = p(".film-acts"),
+    W = [],
+    _ = () => {
+      ((KP.photos = !1),
+        i.remove(),
+        W.forEach((B) => {
+          try {
+            URL.revokeObjectURL(B);
+          } catch {}
+        }));
+    };
+  if (
+    (i.addEventListener("click", (B) => {
+      const g = B.target.closest("[data-p]");
+      g &&
+        (g.dataset.p === "close"
+          ? _()
+          : g.dataset.p === "buy" && (_(), keepBuyShow()));
+    }),
+    !e && !(await keepSure()))
+  ) {
+    _();
+    return;
+  }
+  try {
+    (await loadCardFonts(
+      [
+        n.name,
+        ...n.epi,
+        ...c.map((A) =>
+          A.f ? A.f.t : A.b ? A.b.punch + (A.b.cbText || "") : "",
+        ),
+        L`80억 명 가운데, 단 한 번뿐인 삶이었습니다.`,
+        L`당신은 어디에서 태어날까요?`,
+        L`아무도 몰랐던 하루`,
+        L`쿠키 사진`,
+        L`그해 당신이 남긴 기록`,
+        n.road || "",
+        (CBY[n.iso] || C()).ko,
+        "0123456789'·–",
+      ].join(""),
+    ),
+      await a,
+      await handReady(c.map((A) => phHandText(n, A)).join(""), 9e3));
+    let B = null;
+    if (m) {
+      const A = bxAssets(m.b);
+      (bxPhoto(n, m.b, A.L0), (B = { ph: m.b._ph }));
+    }
+    const g = document.createElement("canvas");
+    ((g.width = PH_W), (g.height = PH_H));
+    const w = g.getContext("2d"),
+      P = [],
+      x = `${LC.file}-${(n.name || "life").replace(/[\\/:*?"<>|\s]+/g, "_")}`;
+    for (let A = 0; A < c.length; A++) {
+      if (!i.isConnected) return;
+      if (
+        (await handReady(phHandText(n, c[A]), 4e3),
+        photoPage(w, n, c[A], d[A], o.length, B),
+        e)
+      ) {
+        (w.save(), (w.globalAlpha = 0.9), (w.fillStyle = "#9a7a3a"));
+        const l = 300;
+        (w.fillRect((PH_W - l) / 2, PH_H - 170, l, 74),
+          (w.globalAlpha = 1),
+          ftext(
+            w,
+            L`미리 보기`,
+            PH_W / 2,
+            PH_H - 120,
+            34,
+            700,
+            CF.b,
+            "#fff8ea",
+            1,
+          ),
+          w.restore());
+      }
+      const v = await new Promise((l) => g.toBlob(l, "image/jpeg", 0.9));
+      if (!v) continue;
+      const k = URL.createObjectURL(v);
+      (W.push(k),
+        P.push(
+          new File([v], `${x}-${String(A + 1).padStart(2, "0")}.jpg`, {
+            type: "image/jpeg",
+          }),
+        ),
+        f.insertAdjacentHTML(
+          "beforeend",
+          `<img src="${k}" alt="${esc(L`사진 ${A + 1}`)}" width="${PH_W}" height="${PH_H}">`,
+        ));
+    }
+    if (e) {
+      ((u.textContent = L`사진 ${o.length}장 가운데 ${c.length}장을 미리 보여 드려요. 이용권이 있으면 ${o.length}장을 모두 저장하고 한 번에 올릴 수 있어요.`),
+        (b.innerHTML =
+          `<button class="cta" data-p="close">${L`닫기`}</button>` +
+          ($("#keepPanel .kp-buy")
+            ? `<button class="ghost" data-p="buy">${L`이용권 보기`}</button>`
+            : "")),
+        track("keep", { kind: "pvphotos" }));
+      return;
+    }
+    const F = keepCaption(n, keepLink()),
+      T = !IN_APP && navigator.canShare && navigator.canShare({ files: P });
+    ((u.textContent = IN_APP
+      ? L`사진 ${P.length}장을 만들었어요. 이 앱 안에서는 한 번에 저장할 수 없어서, 사진을 하나씩 길게 눌러 저장해 주세요.`
+      : T
+        ? L`사진 ${P.length}장을 만들었어요. 옆으로 넘겨 보고, 스레드나 인스타그램에 한 번에 올려 보세요. 올릴 글과 링크는 복사해 둘게요.`
+        : L`사진 ${P.length}장을 만들었어요. 저장한 뒤 스레드나 인스타그램에 여러 장으로 올려 보세요.`),
+      (b.innerHTML =
+        (T
+          ? `<button class="cta" data-p="share">${L`SNS에 바로 올리기`}</button>`
+          : "") +
+        (IN_APP
+          ? ""
+          : `<button class="${T ? "ghost" : "cta"}" data-p="save">${L`모두 저장`}</button>`) +
+        `<button class="ghost" data-p="cap">${L`올릴 글 복사`}</button><p class="film-cap">${esc(F).replace(/\n/g, "<br>")}</p>`),
+      b.addEventListener("click", async (A) => {
+        const v = A.target.closest("[data-p]");
+        if (v)
+          if (v.dataset.p === "share") {
+            try {
+              navigator.clipboard.writeText(F).catch(() => {});
+            } catch {}
+            (navigator.share({ files: P, text: F }).catch(() => {}),
+              track(
+                "ke\
+ep",
+                { kind: "photoshare" },
+              ));
+          } else if (v.dataset.p === "save") {
+            track("keep", { kind: "photosave" });
+            for (let k = 0; k < P.length; k++) {
+              const l = document.createElement("a");
+              ((l.href = W[k]),
+                (l.download = P[k].name),
+                document.body.appendChild(l),
+                l.click(),
+                l.remove(),
+                await new Promise((K) => setTimeout(K, 350)));
+            }
+          } else
+            v.dataset.p === "cap" &&
+              (v.textContent = (await kpCopy(F))
+                ? L`복사했어요`
+                : L`아래 글을 길게 눌러 복사해 주세요`);
+      }),
+      keepUse(),
+      keepMade("photos", t),
+      track("keep", { kind: "photos" }));
+  } catch (B) {
+    (reportCaught(B),
+      (u.textContent = L`사진을 만들지 못했어요. 다시 해 주세요.`));
+  } finally {
+    KP.photos = !1;
+  }
+}
+function scenePhoto(e, t, n) {
+  let a = null;
+  try {
+    const o = pxSceneLayers(e, t);
+    o.people && (a = (o.people[0] + o.people[1]) / 2);
+  } catch {}
+  return photoPng(pxScene(e, t), n, a);
+}
+async function handReady(e, t) {
+  const n = "400 50px 'Nanum Pen Script'";
+  if (!(!e || !document.fonts || !document.fonts.load)) {
+    try {
+      if (document.fonts.check(n, e)) return;
+    } catch {}
+    try {
+      await Promise.race([
+        document.fonts.load(n, e),
+        new Promise((a) => setTimeout(a, t)),
+      ]);
+    } catch {}
+  }
+}
+function albumWith(e) {
+  const t = ((e && e.people) || []).filter((d) => d.role !== "me"),
+    n = t.filter((d) => d.role === "par"),
+    a = t.filter((d) => d.role === "kid"),
+    o = t.filter((d) => d.role === "sib").length,
+    s = [
+      n.length > 1
+        ? n.every((d) => d.sex === "F")
+          ? L`두 어머니`
+          : n.every((d) => d.sex === "M")
+            ? L`두 아버지`
+            : L`어머니, 아버지`
+        : n.length
+          ? n[0].sex === "F"
+            ? L`어머니`
+            : L`아버지`
+          : "",
+      o ? (o === 1 ? L`형제자매 한 명` : L`형제자매 ${o}명`) : "",
+      ...ptParts(
+        t,
+        (((e && e.people) || []).find((d) => d.role === "me") || {}).sex,
+      ),
+      a.length ? L`아이 ${a.length}명` : "",
+    ].filter(Boolean);
+  return LANG === "ko" ? s.join(", ") : listAnd(s);
+}
+const alPhoto = (e, t, n, a) =>
+    `<div class="ph ${t}">${t === "sq" ? '<i class="tape"></i>' : ""}<img alt="" src="${e}"${a > 0.02 ? ` style="filter:sepia(${a.toFixed(2)}) saturate(${(1 - a * 0.5).toFixed(2)}) contrast(${(1 - a * 0.12).toFixed(2)})"` : ""}>${n ? `<span class="ds">${n}</span>` : ""}</div>`,
+  BK_MK = () => ({
+    edu: L`배움의 고비`,
+    job: L`새 일`,
+    ret: L`일을 내려놓음`,
+    love: L`사랑`,
+    fam: L`가족${LBL}`,
+    baby: L`아이`,
+    grand: L`손주`,
+    ggrand: L`증손주`,
+    gggrand: L`고손주`,
+    loss: L`떠나보냄`,
+    move: L`옮겨 감`,
+    svc: L`군 복무`,
+    buy: L`장만`,
+    trip: L`여행`,
+    star: L`잊지 못할 일`,
+    death: L`마지막 해`,
+  }),
+  bkMk = (e) => {
+    const t = BK_MK()[e],
+      n = typeof MK < "u" && MK[e] && !/\p{L}/u.test(MK[e]) ? MK[e] + " " : "";
+    return t ? n + t : "";
+  },
+  bkSign = (e) => (e < 0 ? "−" : "+") + wonStr(Math.abs(e)),
+  bkFlow = (e) =>
+    e && e.it ? e.it.map(([t, n]) => `${t} ${bkSign(n)}`).join(" · ") : "";
+function bookYears() {
+  let e = "",
+    t = "";
+  return (S.years || []).map((n) => {
+    (n.w !== void 0 && (e = n.w), n.v !== void 0 && (t = n.v));
+    const a = CBY[n.cur] || C(),
+      o = n.inc > 0 ? n.inc : 0;
+    return {
+      a: n.a,
+      yr: S.by + n.a,
+      land: a.ko,
+      wk: n.a >= 15 ? e : "",
+      iv: n.a >= 15 ? t : "",
+      inc: o,
+      nw: n.a >= 15 ? n.nw : null,
+      n: o > 0 ? pctOfIncome(a, o) : null,
+      w: o > 0 ? worldPct(o) : null,
+      h: n.h,
+      hl: n.hl,
+      so: n.so,
+      sm: n.sm,
+      mk: n.mk,
+      fl: n.fl,
+    };
+  });
+}
+function bookDecs() {
+  const e = S.log || [],
+    t = capS(L`결정: ${""}`).split("")[0],
+    n = [];
+  return (
+    e.forEach((a, o) => {
+      if (a.kind !== "dec") return;
+      const s = e[o + 1];
+      n.push({
+        a: a.a,
+        q: a.q || "",
+        c: t && a.text.startsWith(t) ? a.text.slice(t.length) : a.text,
+        r: s && s.a === a.a && s.d ? endClean(s.text) : "",
+        au: !!a.au,
+      });
+    }),
+    n
+  );
+}
+const bookPhoto = (e, t) => {
+  if (!e) return "";
+  try {
+    const n = pxPalette("light"),
+      a = pxScene(e, n);
+    let o = null;
+    try {
+      const s = pxSceneLayers(e, n);
+      s.people && (o = (s.people[0] + s.people[1]) / 2);
+    } catch {}
+    return photoPng(a, "land", o, t || 4);
+  } catch {
+    return "";
+  }
+};
+function bookMeasureSVG(e) {
+  if (e.length < 2) return "";
+  const t = Math.max(1, e[e.length - 1].a),
+    n = (s) => LF.x0 + ((LF.x1 - LF.x0) * s) / t,
+    a = (s) => LF.y1 - ((LF.y1 - LF.y0) * s) / 100;
+  let o = "";
+  for (const s of [0, 25, 50, 75, 100])
+    o += `<line x1="${LF.x0}" x2="${LF.x1}" y1="${a(s)}" y2="${a(s)}" class="lf-grid"/><text x="${LF.x0 + 2}" y="${a(s) - 4}" class="lf-tick">${s}</text>`;
+  o += lfAxisX(0, t, n);
+  for (const [s, d] of [
+    ["sm", "bk-sm"],
+    ["so", "bk-so"],
+    ["hl", "bk-hl"],
+    ["h", "bk-h"],
+  ])
+    e.some((c) => c[s] != null) &&
+      (o += `<path d="${lfPath(e, n, a, s)}" class="lf-line ${d}"/>`);
+  return `<svg viewBox="0 0 ${LF.W} ${LF.H}" role="img" aria-label="${esc(L`나이별 행복과 건강`)}">${o}</svg>`;
+}
+function bookBody(e, t) {
+  const n = e.age,
+    a = (CBY[e.iso] || C()).ko,
+    o = placeTag(CBY[e.where] || C()),
+    s = bookYears(),
+    d = bookDecs(),
+    c = S.journal || [],
+    m = [
+      ...new Set((S.years || []).map((h) => h.cur).filter((h) => CBY[h])),
+    ].map((h) => placeTag(h)),
+    i = LANG === "ko" ? m.join(", ") : listAnd(m),
+    p = `${e.by} – ${e.by + n}`,
+    u = [],
+    f = [];
+  let b = 0;
+  const W = (h, q, Z) => (
+    b++,
+    f.push(`<a href="#${h}">${esc(q)}</a>`),
+    `<h2><span class="no">${String(b).padStart(2, "0")}</span>${esc(q)}${Z ? `<small>${esc(Z)}</small>` : ""}</h2>`
+  );
+  let _ = "";
+  try {
+    _ = storyOf(summaryOf(S));
+  } catch {
+    _ = "";
+  }
+  const B = (e.frames || []).filter((h) => h.m),
+    g =
+      (e.cust && e.cust.coverF) ||
+      B.slice().sort(
+        (h, q) =>
+          (q.m.people || []).length - (h.m.people || []).length || q.a - h.a,
+      )[0],
+    w = g ? bookPhoto(g.m, 6) : "",
+    P = keepRoad(S),
+    x =
+      S.bornUrban && S.bornCity
+        ? cityIn(a, S.bornCity)
+        : placeTag(CBY[e.iso] || C()),
+    F = [
+      [L`태어남`, L`${e.by}년, ${x}`],
+      [L`잠듦`, L`${e.by + n}년, ${o} · ${n}세`],
+      [L`떠난 까닭`, e.cause],
+      [
+        L`살아온 날`,
+        L`약 ${Math.round((n + 0.5) * 365.25).toLocaleString(LC.loc)}일`,
+      ],
+      [L`살아 본 곳`, i],
+    ].filter((h) => h[1]),
+    T = `<header class="lb-cover"><p class="lb-kick">${esc(LC.brand)} · ${esc(L`인생 기록집`)}</p>${e.cust && e.cust.title ? `<p class="lb-own">${esc(e.cust.title)}</p>` : ""}
+    ${w ? `<img class="lb-pic" alt="" src="${w}">` : ""}<h1>${esc(e.name)}</h1><p class="lb-yrs">${p}</p>${P ? `<p class="lb-road">${esc(capS(P.s))}</p>` : ""}
+    <dl class="lb-facts">${F.map(([h, q]) => `<div><dt>${esc(h)}</dt><dd>${esc(capS(q))}</dd></div>`).join("")}</dl></header>`;
+  u.push(`<section id="bk-story">${W("bk-story", L`이야기`)}${e.cust && e.cust.words ? `<p class="lb-q">${Q1}${esc(e.cust.words)}${Q2}</p>` : ""}${_ ? `<p class="lb-story">${esc(_)}</p>` : ""}
+    <div class="lb-epi">${(e.epi || []).map((h) => `<p>${esc(capS(h))}</p>`).join("")}</div>${S.farewell ? `<p class="lb-q">${Q1}${esc(S.farewell)}${Q2}<small>${esc(L`이 삶을 살아 본 당신이 남긴 말`)}</small></p>` : ""}${e.cust && e.cust.end ? `<p class="lb-q">${Q1}${esc(e.cust.end)}${Q2}</p>` : ""}</section>`);
+  const A = (h, q, Z) =>
+    `<div><small>${esc(h)}</small><b>${esc(q)}</b>${Z ? `<small>${esc(Z)}</small>` : ""}</div>`;
+  let v = "";
+  try {
+    const h = document.querySelector("#dead .dcert p.ctx:not(#tgDead)");
+    v = h ? h.textContent.trim() : "";
+  } catch {}
+  let k = "";
+  try {
+    k =
+      A(L`최종 학력`, eduLbl() + (S.major && S.edu >= 4 ? majorLbl() : "")) +
+      A(L`마지막 일`, lastWorkLabel()) +
+      A(L`함께한 사람${LBL}`, ...partnerCell(n)) +
+      A(
+        L`자녀`,
+        S.fam.kids.some((h) => !h.cut)
+          ? L`${S.fam.kids.filter((h) => !h.cut).length}명`
+          : L`없음`,
+        S.stats.kidsLost
+          ? L`${S.stats.kidsLost}명을 먼저 보냄`
+          : S.flags.grand
+            ? S.flags.grand === 1
+              ? L`손주 한 명`
+              : L`손주 ${S.flags.grand}명`
+            : "",
+      ) +
+      A(L`마지막 길을 배웅한 사람`, ...seeOffCell(n)) +
+      A(L`가장 행복했던 해`, ...happiestCell()) +
+      A(L`살았던 곳`, countryPath().join(ARW)) +
+      A(
+        L`취미`,
+        S.hobbies.length
+          ? S.hobbies.map((h) => hobbyName(h.id)).join(", ")
+          : "—",
+      ) +
+      leftCellHTML() +
+      A(
+        L`내린 결정`,
+        L`${S.stats.decisions}번`,
+        S.stats.auto ? L`그중 ${S.stats.auto}번은 자동으로` : "",
+      ) +
+      timeSpentHTML();
+  } catch (h) {
+    reportCaught(h);
+  }
+  if (
+    (u.push(
+      `<section id="bk-sum">${W("bk-sum", L`한눈에`)}<div class="lb-sum">${k}</div>${v ? `<p class="lb-ctx">${esc(v)}</p>` : ""}</section>`,
+    ),
+    !t)
+  ) {
+    let h = [];
+    try {
+      h = idRows()
+        .filter(([q]) => q !== L`직업`)
+        .concat(famRows());
+    } catch (q) {
+      reportCaught(q);
+    }
+    h.length &&
+      u.push(
+        `<section id="bk-fam">${W("bk-fam", L`가족과 삶`, L`마지막 해의 모습`)}<div class="lb-rows">${h.map(([q, Z]) => `<div><span>${q}</span><span>${Z}</span></div>`).join("")}</div></section>`,
+      );
+  }
+  const l = flowData();
+  let K = "";
+  const y = bookMeasureSVG(s);
+  if (
+    (y &&
+      (K += `<figure class="lb-ch"><figcaption>${esc(L`행복과 건강`)}</figcaption>${y}<p class="lb-leg"><span><i class="bk-h"></i>${esc(L`행복`)}</span><span><i class="bk-hl"></i\
+>${esc(L`건강`)}</span>${s.some((h) => h.so != null) ? `<span><i class="bk-so"></i>${esc(L`관계`)}</span><span><i class="bk-sm"></i>${esc(L`지식`)}</span>` : ""}</p></figure>`),
+    l.length >= 3)
+  ) {
+    const h = l[0].a,
+      q = l[l.length - 1].a,
+      Z = LF_IV();
+    ((K += `<figure class="lb-ch"><figcaption>${esc(L`소득 순위`)}</figcaption>${rankSVG(l, h, q)}${laneSVG(
+      l,
+      h,
+      q,
+      "wk",
+      (te) => te,
+      (te, G) => (G % 2 ? "lf-sa" : "lf-sb"),
+    )}<p class="lb-leg"><span><i class="bk-nat"></i>${esc(L`살던 나라 안`)}</span><span><i class="bk-world"></i>${esc(L`세계`)}</span>${l.some((te) => te.wk) ? `<span>${esc(L`아래 띠는 그해 하던 일`)}</span>` : ""}</p></figure>`),
+      (K += `<figure class="lb-ch"><figcaption>${esc(L`순자산${LBL}`)}</figcaption>${worthSVG(l, h, q)}${laneSVG(
+        l,
+        h,
+        q,
+        "iv",
+        (te) => Z[te] || "",
+        (te) => "lf-iv-" + te,
+      )}<p class="lb-leg"><span>${esc(L`0 아래는 빚이 재산보다 많았던 해`)}</span>${l.some((te) => te.iv) ? `<span>${esc(L`아래 띠는 모아 둔 돈을 어디에 두었는지`)}</span>` : ""}</p></figure>`));
+  }
+  K &&
+    u.push(
+      `<section id="bk-ch">${W(
+        "bk\
+-ch",
+        L`그래프`,
+        L`한국 체감 금액`,
+      )}<div class="lb-chs">${K}</div></section>`,
+    );
+  const r = s.some((h) => h.so != null),
+    M = m.length > 1,
+    H = LF_IV(),
+    E = t ? s.slice(0, 12) : s,
+    N = [
+      L`나이`,
+      L`연도`,
+      ...(M ? [L`사는 곳`] : []),
+      L`하던 일`,
+      L`연 소득`,
+      L`나라 안 소득${LBL}`,
+      L`순자산${LBL}`,
+      L`모아 둔 돈`,
+      L`행복`,
+      L`건강`,
+      ...(r ? [L`관계`, L`지식`] : []),
+      L`그해`,
+    ],
+    R = (h) => [
+      L`${h.a}세${LBL}`,
+      h.yr,
+      ...(M ? [h.land] : []),
+      h.wk ? capS(h.wk) : "—",
+      h.inc > 0 ? wonStr(h.inc) : "—",
+      h.n != null ? rankStr(h.n) : "—",
+      h.nw != null ? wonStr(h.nw) : "—",
+      H[h.iv] ? capS(H[h.iv]) : "—",
+      h.h,
+      h.hl,
+      ...(r ? [h.so != null ? h.so : "—", h.sm != null ? h.sm : "—"] : []),
+      bkMk(h.mk),
+    ],
+    I = N.map((h) =>
+      [L`사는 곳`, L`하던 일`, L`모아 둔 돈`, L`그해`].includes(h),
+    );
+  if (
+    (u.push(
+      `<section id="bk-yr">${W("bk-yr", L`해마다${LBL}`, L`${s.length}해의 기록 · 한국 체감 금액`)}<div class="lb-wrap"><table class="lb-tab"><thead><tr>${N.map((h) => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${E.map(
+        (h) =>
+          `<tr${h.mk ? ' class="mk"' : ""}>${R(h)
+            .map((q, Z) => `<td${I[Z] ? ' class="tx"' : ""}>${esc(q)}</td>`)
+            .join("")}</tr>`,
+      ).join(
+        "",
+      )}</tbody></table></div>${t ? `<p class="lb-more">${esc(L`… ${s.length}해 가운데 처음 ${E.length}해`)}</p>` : ""}</section>`,
+    ),
+    !t)
+  ) {
+    const h = s.filter((q) => q.fl && q.fl.it && q.fl.it.length);
+    h.length &&
+      u.push(
+        `<section id="bk-mo">${W("bk-mo", L`해마다 돈의 흐름`, L`순자산이 바뀐 까닭 · 한국 체감 금액`)}<ul class="lb-mo">${h.map((q) => `<li><span class="a">${esc(L`${q.a}세${LBL}`)}</span><b class="${q.fl.d < 0 ? "neg" : "pos"}">${esc(bkSign(q.fl.d))}</b><span class="it">${esc(bkFlow(q.fl))}</span></li>`).join("")}</ul></section>`,
+      );
+  }
+  if (d.length) {
+    const h = t ? d.slice(0, 3) : d;
+    u.push(
+      `<section id="bk-dec">${W("bk-dec", L`내린 결정`, L`${d.length}번`)}<ol class="lb-dec">${h.map((q) => `<li><span class="a">${esc(L`${q.a}세${LBL}`)}</span><div>${q.q ? `<p class="q">${esc(q.q)}</p>` : ""}<p class="c">${esc(q.c)}${q.au ? ` <small>${esc(L`자동으로`)}</small>` : ""}</p>${q.r ? `<p class="r">${esc(q.r)}</p>` : ""}</div></li>`).join("")}</ol>${
+        t && d.length > h.length
+          ? `<p class="lb-more">${esc(L`… ${d.length}번 가운데 처음 ${h.length}번`)}</p>`
+          : ""
+      }</section>`,
+    );
+  }
+  if (!t && S.deathAt && S.deathAt.age >= 18) {
+    let h = null;
+    try {
+      h = estateKept();
+    } catch {}
+    h &&
+      (h.rows.length || h.how) &&
+      u.push(
+        `<section id="bk-est">${W("bk-est", L`남긴 재산은 이렇게 나뉘었습니다`, L`한국 체감 · 세금 전`)}${h.how ? `<p>${esc(h.how)}</p>` : ""}${h.rows.length ? `<ul class="lb-est">${h.rows.map(([q, Z]) => `<li><b>${esc(wonStr(Z))}</b><span>${esc(capS(q))}</span></li>`).join("")}</ul>` : ""}</section>`,
+      );
+  }
+  const j = (S.log || []).filter((h) => h.kind !== "ledger"),
+    U = [],
+    z = new Set();
+  for (const h of j) {
+    const q = Math.floor(h.a / 10) * 10;
+    let Z = U[U.length - 1];
+    ((!Z || Z.k !== q) && U.push((Z = { k: q, L: [] })), Z.L.push(h));
+  }
+  const X = (h) =>
+      h === 0 ? L`어린 시절${LBL}` : h === 10 ? L`10대` : L`${h}대`,
+    O = /^[a-z]{1,12}$/,
+    V = (t ? U.slice(0, 1) : U)
+      .map((h) => {
+        const q = Math.min(h.k + 9, n),
+          Z = Math.min(q, h.k + 5),
+          te = bookPhoto(sceneAt(Z) || sceneAt(h.k));
+        let G = -1;
+        const ae = h.L.map((Q) => {
+          const ne = Q.fx && typeof fxText == "function" ? fxText(Q.fx) : "",
+            Y = Q.fact && !z.has(Q.fact) ? Q.fact : "";
+          Y && z.add(Y);
+          const ee = Q.a !== G ? L`${Q.a}세${LBL}` : "";
+          return (
+            (G = Q.a),
+            `<li class="${O.test(Q.kind) ? Q.kind : "ev"}${Q.star ? " star" : ""}"><span class="a">${esc(ee)}</span><span class="t">${Q.star ? '<b class="st">★</b> ' : ""}${esc(capS(endClean(Q.text)))}${ne ? `<small class="fx">${esc(ne)}</small>` : ""}${Y ? `<small class="src">${esc(Y)}</small>` : ""}</span></li>`
+          );
+        }).join("");
+        return `<div class="lb-dk"><h3>${esc(X(h.k))}<small>${e.by + h.k} – ${e.by + q}</small></h3>${te ? `<img class="lb-dpic" alt="" src="${te}">` : ""}<ul class="lb-rec">${ae}</ul></div>`;
+      })
+      .join("");
+  if (
+    (u.push(
+      `<section id="bk-rec">${W("bk-rec", L`인생 기록 전체`, L`${j.length}줄 · 태어난 날부터 순서대로`)}${j.length && j[0].a > 0 ? `<p class="lb-ctx">${esc(L`이 기록은 앞부분이 남아 있지 않아요.`)}</p>` : ""}${V}</section>`,
+    ),
+    !t &&
+      c.length &&
+      u.push(
+        `<section id="bk-note">${W("bk-note", L`남긴 생각`, L`${c.length}개`)}<ul class="lb-notes">${c
+          .map(
+            (h) =>
+              `<li><small>${esc(L`${h.a}세${LBL}`)}${
+                h.q ? " · " + esc(h.q) : ""
+              }</small><p>${Q1}${esc(h.t)}${Q2}</p></li>`,
+          )
+          .join("")}</ul></section>`,
+      ),
+    t)
+  ) {
+    const h = [
+      L`가족과 삶`,
+      L`해마다 ${s.length}해의 표 전체`,
+      L`해마다 돈의 흐름`,
+      d.length > 3 ? L`내린 결정 ${d.length}번 모두` : "",
+      L`남긴 재산을 나눈 방법`,
+      L`인생 기록 ${j.length}줄 전체`,
+      c.length ? L`남긴 생각 ${c.length}개` : "",
+      L`해마다 표를 엑셀에서 여는 CSV 파일`,
+    ].filter(Boolean);
+    u.push(
+      `<section class="lb-lock"><h2>${esc(L`미리 보기는 여기까지예요`)}</h2><p>${esc(L`이 기록집에는 이 뒤로 이런 것이 더 있어요.`)}</p><ul>${h.map((q) => `<li>${esc(q)}</li>`).join("")}</ul><p>${esc(L`이용권이 있으면 이 기록집을 파일로 저장해 인터넷 없이 열어 보고 인쇄할 수 있어요.`)}</p></section>`,
+    );
+  }
+  const D =
+      LANG === "vi"
+        ? ((h) =>
+            `ngày ${h.getDate()} tháng ${h.getMonth() + 1} năm ${h.getFullYear()}`)(
+            new Date(),
+          )
+        : LANG === "fr"
+          ? ((h) =>
+              `${h.getDate() === 1 ? "1er" : h.getDate()} ${monthFr(h.getMonth() + 1)} ${h.getFullYear()}`)(
+              new Date(),
+            )
+          : LANG === "th"
+            ? ((h) =>
+                `${h.getDate()} ${monthTh(h.getMonth() + 1)} ${h.getFullYear()}`)(
+                new Date(),
+              )
+            : LANG === "es"
+              ? ((h) =>
+                  `${h.getDate()} de ${monthEs(h.getMonth() + 1)} de ${h.getFullYear()}`)(
+                  new Date(),
+                )
+              : LANG === "pt"
+                ? ((h) =>
+                    `${h.getDate()} de ${monthPt(h.getMonth() + 1)} de ${h.getFullYear()}`)(
+                    new Date(),
+                  )
+                : LANG === "ru"
+                  ? ((h) =>
+                      `${h.getDate()} ${monthRuG(h.getMonth() + 1)} ${h.getFullYear()} г.`)(
+                      new Date(),
+                    )
+                  : LANG === "uk"
+                    ? ((h) =>
+                        `${h.getDate()} ${monthRuG(h.getMonth() + 1)} ${h.getFullYear()} р.`)(
+                        new Date(),
+                      )
+                    : L_PL
+                      ? ((h) =>
+                          `${h.getDate()} ${monthRuG(h.getMonth() + 1)} ${h.getFullYear()} r.`)(
+                          new Date(),
+                        )
+                      : LANG === "tr"
+                        ? ((h) =>
+                            `${h.getDate()} ${monthTr(h.getMonth() + 1)} ${h.getFullYear()}`)(
+                            new Date(),
+                          )
+                        : LANG === "id"
+                          ? ((h) =>
+                              `${h.getDate()} ${monthId(h.getMonth() + 1)} ${h.getFullYear()}`)(
+                              new Date(),
+                            )
+                          : LANG === "it"
+                            ? ((h) =>
+                                `${h.getDate() === 1 ? "1º" : h.getDate()} ${monthIt(h.getMonth() + 1)} ${h.getFullYear()}`)(
+                                new Date(),
+                              )
+                            : LANG === "de"
+                              ? new Date().toLocaleDateString("de-DE", {
+                                  day: "numeric",
+                                  month: "long",
+                                  year: "numeric",
+                                })
+                              : LANG === "ar"
+                                ? ((h) =>
+                                    `${h.getDate()} ${monthAr(
+                                      h.getMonth() + 1,
+                                    )} ${h.getFullYear()}`)(new Date())
+                                : LANG === "fa"
+                                  ? ((h) =>
+                                      `${h.getDate()} ${monthFa(h.getMonth() + 1)} ${h.getFullYear()}`)(
+                                      new Date(),
+                                    )
+                                  : new Date().toLocaleDateString(LC.loc),
+    oe = `<footer class="lb-foot"><p class="lb-close">${esc(L`80억 명 가운데, 단 한 번뿐인 삶이었습니다.`)}</p><p>${esc(L`이 기록은 인생 시뮬레이션 80억 분의 1에서 살아 본 한 사람의 삶이에요. 실제 인물이 아니에요.`)}</p><p>${esc(LC.brand)} · <a href="https://1in8b.life${LP}/">1in8b.life</a> · ${esc(L`${D}에 만듦`)}</p></footer>`;
+  return (
+    T +
+    (t
+      ? ""
+      : `<nav class="lb-toc" aria-label="${esc(L`차례`)}">${f.join("")}</nav>`) +
+    u.join("") +
+    oe
+  );
+}
+const BOOK_CSS = `.lb{--pa:#FBF8F2;--cd:#FFFFFF;--ink:#1E1B16;--ink2:#5B544A;--ink3:#7D7466;--rule:#DED6C8;--rule2:#ECE6DA;--stamp:#0F6E68;--accent:#8C1D3C;--gold:#9C7020;--good:#2B7A4E;--bad:#B0362B;--card:#FBF8F2;--zb:#F4EEE3;
+--fs:'Hahmlet','Noto Serif KR','Nanum Myeongjo','AppleMyungjo','Batang','Hiragino Mincho ProN','Yu Mincho',Georgia,serif;--fb:'IBM Plex Sans KR',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Hiragino Sans','Yu Gothic','Noto Sans JP','Segoe UI',Roboto,sans-serif;
+display:block;box-sizing:border-box;max-width:920px;margin:0 auto;padding:44px 22px 64px;background:var(--pa);color:var(--ink);font:15px/1.7 var(--fb);word-break:keep-all;overflow-wrap:anywhere;-webkit-text-size-adjust:100%;text-align:left}
+.lb.ja{word-break:normal;line-break:strict}.lb.ru,.lb.uk{--fs:Georgia,'PT Serif','Noto Serif',serif}.lb.vi,.lb.fr,.lb.es,.lb.de,.lb.pt,.lb.ru,.lb.uk,.lb.pl{--fb:system-ui,-apple-system,'Segoe UI',Roboto,'Noto Sans','Helvetica Neue',Arial,sans-serif;word-break:normal}.lb.ar{--fb:'IBM Plex Sans Arabic',system-ui,-apple-system,'Segoe UI',Tahoma,'Noto Sans Arabic',sans-serif;--fs:'IBM Plex Sans Arabic','Noto Naskh Arabic','Geeza Pro',serif;word-break:normal;line-height:1.85;text-align:right}.lb.ar *{word-break:normal!important;letter-spacing:0!important}.lb.ar .lb-facts,.lb.ar .lb-tab th{text-align:right}.lb.ar .lb-rows>div>span:last-child{text-align:left}.lb.ar .lb-q{padding-left:0;padding-right:14px;border-left:0;border-right:3px solid var(--gold)}.lb.ar .lb-leg i{margin-right:0;margin-left:5px}.lb.ar .lb-lock ul{padding-left:0;padding-right:20px}.lb.ar .lb-tab td:first-child,.lb.ar .lb-tab th:first-child{left:auto;right:0}.lb.ar .lb-tab td:first-child{box-shadow:-1px 0 0 var(--rule2)}.l\
+b.ar svg{direction:ltr}.lb.th{--fb:'Noto Sans Thai',Thonburi,'Leelawadee UI',Tahoma,system-ui,sans-serif;--fs:'Noto Serif Thai','Noto Sans Thai',Thonburi,'Leelawadee UI',serif;word-break:normal;line-height:1.75}.lb.th *{word-break:normal!important}.lb *{box-sizing:border-box}.lb a{color:var(--stamp)}
+@media screen and (prefers-color-scheme:dark){.lb{--pa:#17150F;--cd:#1F1C16;--ink:#ECE6DA;--ink2:#BDB4A4;--ink3:#978E7F;--rule:#3B352C;--rule2:#2A251F;--stamp:#4CC0AF;--accent:#E2678A;--gold:#D9AF59;--good:#5CC38B;--bad:#F07B6B;--card:#17150F;--zb:#1E1B15}}
+.lb-cover{text-align:center;padding-bottom:28px;border-bottom:1px solid var(--rule)}
+.lb-kick{margin:0 0 14px;font-size:12px;letter-spacing:.14em;color:var(--ink3)}
+.lb-own{margin:0 0 10px;font:600 17px/1.4 var(--fs);color:var(--gold)}
+.lb-pic{display:block;width:100%;max-width:560px;margin:6px auto 22px;image-rendering:pixelated;border-radius:4px;box-shadow:0 0 0 6px var(--cd),0 0 0 7px var(--rule),0 14px 30px -14px rgba(0,0,0,.4)}
+.lb h1{margin:0;font:700 clamp(28px,6vw,40px)/1.2 var(--fs)}
+.lb-yrs{margin:6px 0 0;font-size:15px;letter-spacing:.06em;color:var(--ink2);font-variant-numeric:tabular-nums}
+.lb-road{margin:12px auto 0;max-width:560px;font:500 16px/1.6 var(--fs);color:var(--ink2)}
+.lb-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px 18px;max-width:640px;margin:22px auto 0;text-align:left}
+.lb-facts div{padding-top:8px;border-top:1px solid var(--rule2)}.lb-facts dt{font-size:12px;color:var(--ink3)}.lb-facts dd{margin:2px 0 0}
+.lb-toc{display:flex;flex-wrap:wrap;gap:6px 8px;margin:22px 0 0}
+.lb-toc a{padding:4px 11px;border:1px solid var(--rule);border-radius:999px;font-size:13px;text-decoration:none;color:var(--ink2)}
+.lb section{margin-top:46px}
+.lb h2{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:0 0 16px;padding-top:12px;border-top:2px solid var(--ink);font:700 22px/1.3 var(--fs)}
+.lb h2 .no{font:600 12px var(--fb);letter-spacing:.1em;color:var(--accent)}.lb h2 small{font:400 12.5px var(--fb);color:var(--ink3)}
+.lb h3{display:flex;align-items:baseline;gap:10px;margin:30px 0 10px;font:700 18px/1.3 var(--fs)}.lb h3 small{font:400 12.5px var(--fb);color:var(--ink3);font-variant-numeric:tabular-nums}
+.lb-story{margin:0;font:400 17px/1.9 var(--fs)}
+.lb-epi{margin:22px 0 0;padding:16px 18px;text-align:center;background:var(--cd);border:1px solid var(--rule2);border-radius:4px}.lb-epi p{margin:4px 0;font-family:var(--fs)}
+.lb-q{margin:18px 0 0;padding-left:14px;border-left:3px solid var(--gold);font:500 16px/1.7 var(--fs)}.lb-q small{display:block;font:400 12px var(--fb);color:var(--ink3)}
+.lb-sum{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1px;background:var(--rule2);border:1px solid var(--rule2)}
+.lb-sum>div{display:flex;flex-direction:column;gap:2px;padding:10px 12px;background:var(--cd)}.lb-sum>div.wide{grid-column:1/-1}
+.lb-sum small{font-size:12px;color:var(--ink3)}.lb-sum b{font-weight:600}
+.lb-ctx{margin:12px 0 0;font-size:13.5px;color:var(--ink2)}
+.lb-rows>div{display:flex;justify-content:space-between;gap:16px;padding:7px 0;border-bottom:1px dotted var(--rule)}.lb-rows>div>span:first-child{flex:0 0 auto;color:var(--ink3);font-size:13.5px}.lb-rows>div>span:last-child{text-align:right}
+.lb-rows small{display:block;font-size:12.5px;color:var(--ink2)}.lb-rows small.bond{display:inline}.lb-rows .gone{color:var(--ink3)}
+.lb .qdots{display:inline-flex;gap:3px;vertical-align:middle}.lb .qdots i{width:9px;height:9px;border-radius:50%;border:1px solid var(--ink3)}.lb .qdots i.on{background:var(--ink2)}
+.lb-chs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.lb-ch{margin:0}.lb-ch figcaption{margin:0 0 4px;font-weight:600}.lb-ch svg{display:block;width:100%;height:auto;overflow:visible}
+.lb-leg{display:flex;flex-wrap:wrap;gap:4px 14px;margin:6px 0 0;font-size:12px;color:var(--ink2)}.lb-leg i{display:inline-block;width:14px;height:3px;margin-right:5px;vertical-align:middle;border-radius:2px}
+.lb .lf-tick{font:10px var(--fb);fill:var(--ink3)}.lb .lf-grid{stroke:var(--rule2);stroke-width:1}.lb .lf-zero{stroke:var(--ink2);stroke-width:1;opacity:.6}
+.lb .lf-line{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}.lb .lf-nat{stroke:var(--stamp)}.lb .lf-world{stroke:var(--ink3);stroke-width:1.6;stroke-dasharray:4 3}
+.lb .lf-area{fill:var(--stamp);opacity:.1}.lb .lf-dot{fill:var(--stamp);stroke:var(--pa);stroke-width:2}.lb .lf-cross{display:none}
+.lb .lf-seg{stroke:var(--pa);stroke-width:1}.lb .lf-sa{fill:var(--stamp);opacity:.16}.lb .lf-sb{fill:var(--stamp);opacity:.3}.lb .lf-segt{font:10px var(--fb);fill:var(--ink)}
+.lb .lf-iv-cash{fill:var(--ink3);opacity:.22}.lb .lf-iv-stock{fill:var(--stamp);opacity:.3}.lb .lf-iv-property{fill:var(--gold);opacity:.38}.lb .lf-iv-bond{fill:var(--ink3);opacity:.34}.lb .lf-iv-mix{fill:var(--stamp);opacity:.18}.lb .lf-iv-trade{fill:var(--bad);opacity:.16}.lb .lf-iv-debt{fill:var(--bad);opacity:.24}.lb .lf-iv-loan{fill:var(--accent);opacity:.22}
+.lb .bk-h{stroke:var(--gold)}.lb .bk-hl{stroke:var(--good)}.lb .bk-so{stroke:var(--accent);stroke-width:1.5;opacity:.75}.lb .bk-sm{stroke:var(--stamp);stroke-width:1.5;opacity:.75;stroke-dasharray:4 3}
+.lb-leg i.bk-h{background:var(--gold)}.lb-leg i.bk-hl{background:var(--good)}.lb-leg i.bk-so{background:var(--accent)}.lb-leg i.bk-sm{background:repeating-linear-gradient(90deg,var(--stamp) 0 4px,transparent 4px 7px)}.lb-leg i.bk-nat{background:var(--stamp)}.lb-leg i.bk-world{background:var(--ink3)}
+.lb-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule2)}
+.lb-tab{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.lb-tab th{position:sticky;top:0;padding:7px 8px;text-align:left;font-weight:600;color:var(--ink2);background:var(--cd);border-bottom:1px solid var(--rule)}
+.lb-tab td{padding:5px 8px;border-bottom:1px solid var(--rule2);background:var(--pa)}.lb-tab tbody tr:nth-child(even) td{background:var(--zb)}
+.lb-tab td:first-child,.lb-tab th:first-child{position:sticky;left:0;z-index:1}.lb-tab th:first-child{z-index:2}.lb-tab td:first-child{box-shadow:1px 0 0 var(--rule2)}.lb-tab tr.mk td:last-child{color:var(--accent)}
+.lb-mo{list-style:none;margin:0;padding:0}.lb-mo li{display:grid;grid-template-columns:58px 120px 1fr;gap:10px;padding:7px 0;border-bottom:1px solid var(--rule2);font-size:13.5px}
+.lb-mo .a{color:var(--ink3);font-variant-numeric:tabular-nums}.lb-mo b{font-weight:600;font-variant-numeric:tabular-nums}.lb-mo .neg{color:var(--bad)}.lb-mo .pos{color:var(--good)}.lb-mo .it{color:var(--ink2)}
+.lb-more{margin:8px 0 0;font-size:13px;color:var(--ink3)}
+.lb-dec{list-style:none;margin:0;padding:0}.lb-dec li{display:grid;grid-template-columns:58px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid var(--rule2)}
+.lb-dec .a,.lb-rec .a{color:var(--ink3);font-size:13px;font-variant-numeric:tabular-nums}.lb-dec p{margin:0}.lb-dec .q{font-size:13px;color:var(--ink2)}.lb-dec .c{font-weight:600}.lb-dec .c small{font-weight:400;font-size:12px;color:var(--ink3)}.lb-dec .r{margin-top:2px;font-size:14px;color:var(--ink2)}
+.lb-est{list-style:none;margin:10px 0 0;padding:0}.lb-est li{display:flex;gap:14px;padding:6px 0;border-bottom:1px dotted var(--rule)}.lb-est b{flex:0 0 auto;min-width:110px;font-variant-numeric:tabular-nums}
+.lb-dpic{display:block;width:100%;max-width:420px;margin:0 0 10px;image-rendering:pixelated;border-radius:3px;box-shadow:0 0 0 4px var(--cd),0 0 0 5px var(--rule)}
+.lb-rec{list-style:none;margin:0;padding:0}.lb-rec li{display:grid;grid-template-columns:58px 1fr;gap:10px;padding:4px 0;font-size:14.5px;line-height:1.65}
+.lb-rec .t small{display:block;font-size:12px;color:var(--ink3)}.lb-rec .t small.src{font-style:italic}
+.lb-rec .big .t{font-weight:600}.lb-rec .loss .t,.lb-rec .death .t{font-weight:600;color:var(--ink)}.lb-rec .warm .t{color:var(--gold)}.lb-rec .note .t{font-family:var(--fs);font-style:italic}.lb-rec .dec .t,.lb-rec .comp .t,.lb-rec .ms .t{font-size:13.5px;color:var(--ink2)}.lb-rec .hist .t::before{content:'◆ ';color:var(--accent)}.lb-rec .st{color:var(--gold)}.lb-rec .star{background:rgba(156,112,32,.08)}
+.lb-notes{list-style:none;margin:0;padding:0}.lb-notes li{padding:10px 0;border-bottom:1px solid var(--rule2)}.lb-notes small{color:var(--ink3);font-size:12.5px}.lb-notes p{margin:4px 0 0;font:500 16px/1.7 var(--fs)}
+.lb-lock{padding:20px 22px;border:1px dashed var(--accent);border-radius:6px}.lb-lock h2{border:0;padding:0}.lb-lock ul{margin:8px 0 12px;padding-left:20px}
+.lb-foot{margin-top:56px;padding-top:18px;border-top:1px solid var(--rule);text-align:center;font-size:12.5px;color:var(--ink3)}.lb-foot p{margin:4px 0}.lb-close{font:500 16px var(--fs);color:var(--ink)!important}
+@media (max-width:560px){.lb{padding:28px 16px 48px}.lb-dec li,.lb-rec li{grid-template-columns:46px 1fr;gap:8px}.lb-chs{grid-template-columns:1fr}.lb-mo li{grid-template-columns:46px 1fr;gap:2px 8px}.lb-mo .it{grid-column:2}}
+@media print{.lb{--pa:#fff;--cd:#fff;--zb:#f6f4f0;max-width:none;padding:0;font-size:10.5pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}.lb-toc{display:none}.lb-wrap{overflow:visible;border:0}.lb-tab{font-size:7.5pt}.lb-tab th,.lb-tab td.tx{white-space:normal}.lb-tab td.tx{min-width:6em;overflow-wrap:anywhere}.lb-tab th,.lb-tab td{padding:3px 5px}.lb-tab th,.lb-tab td:first-child{position:static}
+.lb h2,.lb h3{break-after:avoid}.lb-rec li,.lb-dec li,.lb-mo li,.lb-tab tr,.lb-ch,.lb-sum>div{break-inside:avoid}.lb-pic,.lb-dpic{box-shadow:none;border:1px solid #ccc}.lb section{margin-top:28px}}`;
+function bookFile(e) {
+  return `<!doctype html><html lang="${esc(LANG)}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><title>${esc(e.name)} · ${esc(L`인생 기록집`)}</title>
+<style>html,body{margin:0;background:#FBF8F2}@media screen and (prefers-color-scheme:dark){html,body{background:#17150F}}@page{margin:14mm}${BOOK_CSS}</style></head><body><main class="lb${L_CJK ? " ja" : LANG === "vi" || LANG === "fr" || LANG === "th" || LANG === "es" || LANG === "de" || LANG === "pt" || L_SLAV || LANG === "ar" || LANG === "fa" ? " " + LANG : ""}"${L_RTL ? ' dir="rtl"' : ""}>${bookBody(e, !1)}</main></body></html>
+`;
+}
+function bookCSV(e) {
+  const t = bookYears(),
+    n = LF_IV(),
+    a = CUR_K,
+    o = L`원, 한국 체감`,
+    s = (i) => {
+      const p = i == null ? "" : String(i),
+        u = '"';
+      return /[,\r\n\u0022]/.test(p) ? u + p.split(u).join(u + u) + u : p;
+    },
+    d = new Map();
+  for (const i of S.log || [])
+    if (i.kind !== "ledger") {
+      const p = capS(endClean(i.text));
+      p && (d.get(i.a) || d.set(i.a, []).get(i.a)).push(p);
+    }
+  const c = [
+      L`나이`,
+      L`연도`,
+      L`사는 곳`,
+      L`하던 일`,
+      L`연 소득 (${o})`,
+      L`나라 안 소득${LBL}`,
+      L`세계 소득${LBL}`,
+      L`순자산 (${o})`,
+      L`모아 둔 돈`,
+      L`행복`,
+      L`건강`,
+      L`관계`,
+      L`지식`,
+      L`그해`,
+      L`순자산 변화 (${o})`,
+      L`들고 난 곳`,
+      L`그해 있었던 일`,
+    ],
+    m = t.map((i) => [
+      i.a,
+      i.yr,
+      i.land,
+      i.wk,
+      i.inc > 0 ? Math.round(i.inc * a) : "",
+      i.n != null ? rankStr(i.n) : "",
+      i.w != null ? rankStr(i.w) : "",
+      i.nw != null ? Math.round(i.nw * a) : "",
+      n[i.iv] ? capS(n[i.iv]) : "",
+      i.h,
+      i.hl,
+      i.so != null ? i.so : "",
+      i.sm != null ? i.sm : "",
+      bkMk(i.mk),
+      i.fl ? Math.round(i.fl.d * a) : "",
+      bkFlow(i.fl),
+      (d.get(i.a) || []).join(" / "),
+    ]);
+  return (
+    "\uFEFF" +
+    [c, ...m].map((i) => i.map(s).join(",")).join(`\r
+`) +
+    `\r
+`
+  );
+}
+const bookName = (e) =>
+  String(e.name)
+    .replace(/[\\/:*?"<>|]/g, "")
+    .trim() || "life";
+function bookSave(e) {
+  const t = custApply(withFaith(S && S.endD, S));
+  if (t)
+    try {
+      const n = e === "csv",
+        a = new Blob([n ? bookCSV(t) : bookFile(t)], {
+          type: n ? "text/csv;charset=utf-8" : "text/html;charset=utf-8",
+        }),
+        o = URL.createObjectURL(a),
+        s = document.createElement("a");
+      ((s.href = o),
+        (s.download = `${bookName(t)}-${n ? L`해마다 표` : L`인생 기록집`}.${n ? "csv" : "html"}`),
+        document.body.appendChild(s),
+        s.click(),
+        s.remove(),
+        setTimeout(() => URL.revokeObjectURL(o), 6e4),
+        track("keep", { kind: n ? "bookcsv" : "bookfile" }),
+        keepUse());
+      const d = $("#bkMsg");
+      d &&
+        (d.textContent = n
+          ? L`표 파일을 저장했어요. 엑셀이나 구글 시트에서 열 수 있어요.`
+          : L`기록집을 저장했어요. 다운로드 폴더의 파일을 누르면 인터넷 없이 열려요.`);
+    } catch (n) {
+      reportCaught(n);
+    }
+}
+async function openBook(e) {
+  const t = custApply(withFaith(S && S.endD, S));
+  if (!t || $("#book") || (!e && (!(await keepSure()) || $("#book")))) return;
+  (track("keep", { kind: e ? "pvbook" : "book" }), e || keepMade("book", S));
+  const n = document.createElement("div");
+  ((n.id = "book"),
+    (n.className = "bookov" + (e ? " pv" : "")),
+    n.setAttribute("role", "dialog"),
+    n.setAttribute("aria-modal", "true"),
+    n.setAttribute("aria-label", L`인생 기록집`));
+  const a =
+      e || IN_APP
+        ? ""
+        : `<button class="cta" id="bkSave">${L`기록집 저장`}</button><button class="ghost" id="bkCsv">${L`표로 저장 (CSV)`}</button><button class="ghost" id="bkPrint">${L`PDF로 저장 · 인쇄`}</button>`,
+    o = e
+      ? L`이 삶으로 만든 기록집의 앞부분이에요. 미리 보기는 저장할 수 없어요.`
+      : IN_APP
+        ? L`이 앱 안에서는 파일을 저장할 수 없어요. 기록집은 여기서 볼 수 있고, 저장하려면 닫은 뒤 '사파리·크롬으로 옮기기'로 이 삶을 옮겨 주세요.`
+        : L`'기록집 저장'은 이 모든 쪽을 파일 하나로 저장해요. 인터넷 없이 열리고 인쇄할 수 있어요. 표는 엑셀이나 구글 시트에서 열려요.`;
+  ((n.innerHTML = `<div class="bk-bar"><span>${e ? L`인생 기록집 미리 보기` : L`인생 기록집`}\
+ · ${esc(t.name)}</span><button class="ghost" id="bkClose">${L`닫기`}</button></div>${a ? `<div class="bk-btns">${a}</div>` : ""}<p class="bk-note">${o}</p><p class="bk-msg" id="bkMsg" role="status"></p><div class="bk-host"></div>`),
+    document.body.appendChild(n),
+    document.documentElement.classList.add("book-open"));
+  const s = n.querySelector(".bk-host"),
+    d = s.attachShadow ? s.attachShadow({ mode: "open" }) : s;
+  let c = "";
+  try {
+    c = bookBody(t, e);
+  } catch (p) {
+    (reportCaught(p),
+      (c = `<p>${esc(L`기록집을 만드는 중 문제가 생겼어요.`)}</p>`));
+  }
+  ((d.innerHTML = `<style>${BOOK_CSS}</style><main class="lb${L_CJK ? " ja" : LANG === "vi" || LANG === "fr" || LANG === "th" || LANG === "es" || LANG === "de" || LANG === "pt" || L_SLAV || LANG === "tr" || LANG === "id" || LANG === "it" || LANG === "ar" || LANG === "fa" ? " " + LANG : ""}"${L_RTL ? ' dir="rtl"' : ""}>${c}</main>`),
+    d.addEventListener("click", (p) => {
+      const u = p.target.closest && p.target.closest('a[href^="#"]');
+      if (!u) return;
+      p.preventDefault();
+      const f = d.querySelector(u.getAttribute("href"));
+      f && f.scrollIntoView({ behavior: "smooth", block: "start" });
+    }));
+  const m = () => {
+      (n.remove(),
+        document.documentElement.classList.remove("book-open"),
+        document.removeEventListener("keydown", i));
+    },
+    i = (p) => {
+      p.key === "Escape" && m();
+    };
+  (document.addEventListener("keydown", i),
+    $("#bkClose").addEventListener("click", m),
+    $("#bkClose").focus({ preventScroll: !0 }));
+  {
+    const p = $("#bkSave");
+    p && p.addEventListener("click", () => bookSave("html"));
+  }
+  {
+    const p = $("#bkCsv");
+    p && p.addEventListener("click", () => bookSave("csv"));
+  }
+  {
+    const p = $("#bkPrint");
+    p &&
+      p.addEventListener("click", () => {
+        track("keep", { kind: "bookprint" });
+        try {
+          window.print();
+        } catch {}
+      });
+  }
+  !e && !IN_APP && keepUse();
+}
+async function makeAlbum(e) {
+  const t = custApply(withFaith(S && S.endD, S));
+  if (!t || (!e && (!(await keepSure()) || $("#album")))) return;
+  (e ? track("keep", { kind: "pvalbum" }) : IN_APP || keepUse(),
+    e || keepMade("album", S),
+    albumFont());
+  const n = pxPalette("light"),
+    a = t.age,
+    o = ["big", "loss", "warm", "death"],
+    s = [],
+    d = [],
+    c = (l) => (a > 0 ? (0.32 * Math.max(0, (a - l) / a - 0.25)) / 0.75 : 0);
+  let m = 0;
+  const i = e ? ` data-pv="${esc(L`미리 보기`)}"` : "",
+    p = (l, K, y) => {
+      (m++,
+        s.push(`<section cl\
+ass="al-page ${l}"><div class="al-in"${i}>${K}${l.includes("al-cover") ? "" : `<span class="al-pn">${m}</span>`}</div></section>`),
+        d.push(y));
+    },
+    u = S.journal || [],
+    f = (l) =>
+      l.kind === "note" &&
+      u.some((K) => K.a === l.a && l.text === "“" + K.t + "”"),
+    b = (l) =>
+      `<li${o.includes(l.kind) ? ' class="key"' : ""}><span class="al-a">${L`${l.a}세${LBL}`}</span><span>${esc(capS(endClean(l.text)))}</span></li>`,
+    W = LC.brand,
+    _ = (CBY[t.iso] || C()).ko,
+    B = (CBY[t.where] || C()).ko,
+    g = t.frames.filter((l) => l.m),
+    w =
+      t.cust.coverF ||
+      g
+        .slice()
+        .sort(
+          (l, K) =>
+            (K.m.people || []).length - (l.m.people || []).length || K.a - l.a,
+        )[0];
+  (p(
+    "al-cover",
+    `<p class="al-ctitle${t.cust.title ? " own" : ""}">${t.cust.title ? esc(t.cust.title) : L`인생 앨범`}</p>${w ? `<div class="al-window"><img alt="" src="${scenePhoto(w.m, n, "land")}"></div>` : '<div class="al-window empty"></div>'}
+    <h1>${esc(t.name)}</h1><p class="al-cyrs">${t.by} – ${t.by + a}</p><p class="al-cfoot">${W}</p>`,
+    "",
+  ),
+    t.cust.words &&
+      p(
+        "al-ded",
+        `<p class="hw al-dedw">${Q1}${esc(t.cust.words)}${Q2}</p>`,
+        "",
+      ));
+  const P =
+      (typeof sceneFor == "function" ? sceneFor(0, "born") : sceneAt(0)) ||
+      (t.frames[0] && t.frames[0].m),
+    x = S.bornUrban && S.bornCity ? cityIn(_, S.bornCity) : L`${_}의 시골 마을`,
+    F = [
+      [L`이름`, t.name],
+      [
+        L`태어난 해`,
+        LANG === "en" ||
+        LANG === "vi" ||
+        LANG === "fr" ||
+        LANG === "th" ||
+        LANG === "es" ||
+        LANG === "de" ||
+        LANG === "pt" ||
+        L_SLAV ||
+        LANG === "tr" ||
+        LANG === "id" ||
+        LANG === "it" ||
+        LANG === "ar" ||
+        LANG === "fa"
+          ? String(t.by)
+          : L`${t.by}년`,
+      ],
+      [L`태어난 곳`, x],
+      [L`함께한 사람`, albumWith(P)],
+    ].filter((l) => l[1]);
+  p(
+    "al-baby",
+    `<h2 class="hw">${L`세상에 온 날`}</h2>${P ? `<figure class="pf b1">${alPhoto(scenePhoto(P, n, "land"), "land", t.by, c(0))}</figure>` : ""}
+    <dl class="al-fill">${F.map(([l, K]) => `<div><dt>${esc(l)}</dt><dd class="hw">${esc(K)}</dd></div>`).join("")}</dl><p class="hw al-one">${L`80억 명 가운데 한 사람으로.`}</p>`,
+    L`세상에 온 날`,
+  );
+  let T = 0;
+  const A = [],
+    v = {
+      land: [["land"], ["land", "land"], ["land", "land", "land"]],
+      sq: [["sq"], ["sq", "sq"], ["sq", "sq", "sq"]],
+    }[t.cust.prints] || [["land"], ["land", "sq"], ["land", "sq", "land"]];
+  for (const [l, K, y] of albumStages(a)) {
+    const r = Math.min(K, a),
+      M = S.log.filter(
+        (O) =>
+          O.a >= l &&
+          O.a <= r &&
+          O.kind !== "ms" &&
+          O.kind !== "dec" &&
+          O.kind !== "ledger" &&
+          O.kind !== "comp" &&
+          !f(O) &&
+          !alSuic(O),
+      ),
+      H = M.filter(
+        (O) =>
+          o.includes(O.kind) &&
+          !O.nf &&
+          !(typeof END_SKIP_D < "u" && END_SKIP_D.has(O.d)),
+      ).sort(
+        (O, J) =>
+          (typeof endScore == "function" ? endScore(J) - endScore(O) : 0) ||
+          O.a - J.a,
+      ),
+      E = u.filter((O) => O.a >= l && O.a <= r);
+    if (!M.length && !E.length) continue;
+    if (e && T >= 1) {
+      A.push(y);
+      continue;
+    }
+    T++;
+    const N = l === 0 && P ? Math.min(r, 2) : l,
+      R = t.cust.picked
+        ? t.frames.filter((O) => O.a >= Math.max(1, l) && O.a <= r && O.m)
+        : [],
+      I = R.map((O) => O.a);
+    let j;
+    if (I.length > 3)
+      j = Array.from({ length: Math.ceil(I.length / 3) }, (O, J) =>
+        I.slice(J * 3, J * 3 + 3),
+      );
+    else {
+      const O = [
+          ...I,
+          ...H.map((V) => V.a),
+          ...E.map((V) => V.a),
+          Math.round((N + r) / 2),
+          N,
+          r,
+        ],
+        J = [];
+      for (const V of O)
+        if (
+          (V <= r &&
+            (I.includes(V) ||
+              (V >= N && J.every((D) => Math.abs(D - V) >= 3))) &&
+            !J.includes(V) &&
+            sceneAt(V) &&
+            J.push(V),
+          J.length === 3)
+        )
+          break;
+      j = [J.sort((V, D) => V - D)];
+    }
+    const U = (O) => {
+        const J = String(O).match(/.+?(?:[.!?。](?=\s|$)|$)\s*/g) || [O];
+        let V = "";
+        for (const D of J) if (((V += D), V.trim().length >= 16)) break;
+        return V.trim();
+      },
+      z = (O) => {
+        const J = R.find((D) => D.a === O);
+        if (J) return J.m;
+        const V = H.find((D) => D.a === O);
+        return (
+          (V && V.act && typeof sceneFor == "function"
+            ? sceneFor(O, V.act)
+            : null) ||
+          sceneAt(O) ||
+          custScene(t.frames, O)
+        );
+      },
+      X = (O) => {
+        const J = R.find((oe) => oe.a === O);
+        if (J) return J.own ? capS(J.t) : U(capS(J.t));
+        const V = H.find((oe) => oe.a === O) || M.find((oe) => oe.a === O),
+          D = E.find((oe) => oe.a === O);
+        return V ? U(capS(endClean(V.text))) : D ? `“${D.t}”` : "";
+      };
+    j.forEach((O, J) => {
+      const V = v[O.length - 1] || [],
+        D = J === j.length - 1,
+        oe = O.map(
+          (
+            G,
+            ae,
+          ) => `<figure class="pf f${ae + 1} ${V[ae]}">${alPhoto(scenePhoto(z(G), n, V[ae]), V[ae], t.by + G, c(G))}<figcaptio\
+n class="hw">${L`${G}세${LBL}`} · ${esc(X(G))}</figcaption></figure>`,
+        ),
+        h = D ? E.slice(-(O.length >= 3 ? 1 : 2)) : [],
+        q = h.length
+          ? `<div class="al-card"><i class="tape"></i>${h.map((G) => `<p class="hw">${Q1}${esc(G.t)}${Q2}</p><small>${L`${G.a}세의 기록`}</small>`).join("")}</div>`
+          : "",
+        Z = O.length
+          ? `<div class="al-col"><div class="c1">${oe[0]}${O.length === 3 ? q : ""}</div>${O.length > 1 ? `<div class="c2">${oe.slice(1).join("")}</div>` : ""}</div>${O.length < 3 ? q : ""}`
+          : q,
+        te = O.length
+          ? ""
+          : `<ul class="al-hwlist">${H.concat(
+              M.filter((G) => !o.includes(G.kind)),
+            )
+              .slice(0, 6)
+              .sort((G, ae) => G.a - ae.a)
+              .map(
+                (G) =>
+                  `<li class="hw">${L`${G.a}세${LBL}`} · ${esc(capS(endClean(G.text)))}</li>`,
+              )
+              .join("")}</ul>`;
+      p(
+        `al-ch t${O.length}${q ? " wc" : ""}`,
+        `<header class="al-h"><h2 class="hw">${esc(y)}</h2><span>${t.by + l} – ${t.by + r}</span></header>${Z}${te}`,
+        J ? "" : y,
+      );
+    });
+  }
+  if (e) {
+    const l = A.concat([L`마지막 길`, L`묘비`, L`돌아보며`, L`인생 기록 전체`]);
+    p(
+      "al-lock",
+      `<h2 class="hw">${L`미리 보기는 여기까지예요`}</h2><p>${L`이 앨범에는 이 뒤로 이런 쪽들이 더 있어요.`}\
+</p><ul class="al-hwlist">${l.map((K) => `<li class="hw">${esc(K)}</li>`).join("")}</ul><p>${L`이용권이 있으면 이 앨범 전체를 PDF로 저장하거나 종이에 인쇄할 수 있어요.`}</p>`,
+      "",
+    );
+  } else {
+    (p(
+      "al-fun",
+      `<h2 class="hw">${L`마지막 길`}</h2><figure class="pf">${alPhoto(photoPng(pxFuneral(t.fm, pxPalette("dark"), t.mourners), "pano"), "pano", "", 0)}<figcaption class="hw">${esc(capS(t.funeral))}</figcaption></figure>${t.attend ? `<p class="hw al-att">${esc(capS(t.attend))}</p>` : ""}${t.said ? `<p class="hw al-att">${esc(capS(t.said))}</p>` : ""}`,
+      "",
+    ),
+      p(
+        "al-epi",
+        `<p class="al-orn">✦</p><h1>${esc(t.name)}</h1><p class="al-yrs">${t.by} – ${t.by + a}</p>${t.epi.map((H) => `<p>${esc(capS(H))}</p>`).join("")}
+      ${t.quote ? `<blockquote class="hw">${Q1}${esc(t.quote.t)}${Q2}<small>${L`${t.quote.a}세의 당신이 남긴 생각`}</small></blockquote>` : ""}
+      ${S.farewell ? `<blockquote class="hw al-fw">${Q1}${esc(S.farewell)}${Q2}<small>${L`이 삶을 살아 본 당신이 남긴 말`}</small></blockquote>` : ""}<p class="al-close">${L`80억 명 가운데, 단 한 번뿐인 삶이었습니다.`}</p>`,
+        "",
+      ),
+      t.cust.end &&
+        p(
+          "al-ded al-endp",
+          `<p class="hw al-dedw">${Q1}${esc(t.cust.end)}${Q2}</p>`,
+          "",
+        ));
+    const l = [
+        ...new Set((S.years || []).map((H) => H.cur).filter((H) => CBY[H])),
+      ].map((H) => placeTag(H)),
+      K = Math.round((a + 0.5) * 365.25).toLocaleString(LC.loc),
+      y = [
+        [L`태어남`, L`${t.by}년, ${placeTag(CBY[t.iso] || C())}`],
+        [L`잠듦`, L`${t.by + a}년, ${placeTag(CBY[t.where] || C())} · ${a}세`],
+        [L`떠난 까닭`, t.cause],
+        [L`살아온 날`, L`약 ${K}일`],
+        [L`살아 본 곳`, LANG === "ko" ? l.join(", ") : listAnd(l)],
+      ].filter((H) => H[1]);
+    let r = "";
+    try {
+      r = storyOf(summaryOf(S));
+    } catch {
+      r = "";
+    }
+    p(
+      "al-glance",
+      `<h2 class="hw">${L`돌아보며`}</h2>${r ? `<div class="al-letter"><i class="tape"></i><p>${esc(r)}</p></div>` : ""}
+      <dl class="al-facts">${y.map(([H, E]) => `<dt>${esc(H)}</dt><dd>${esc(E)}</dd>`).join("")}</dl>
+      <div class="al-band" role="img" aria-label="${esc(L`해마다의 행복`)}">${t.strip.map((H) => `<i style="background:rgb(${filmTint(H).join(",")});height:${24 + Math.round(H * 0.76)}%"></i>`).join("")}</div>
+      <p class="al-cap">${L`해마다의 행복이에요. 밝고 높을수록 행복했던 해예요.`}</p>`,
+      L`돌아보며`,
+    );
+    const M = [
+      ...new Set(S.log.filter((H) => H.fact && !alSuic(H)).map((H) => H.fact)),
+    ];
+    p(
+      "al-rec",
+      `<h2>${L`인생 기록 전체`}</h2><p class="al-sub">${L`${t.by}년부터 ${t.by + a}년까지`}</p><ul class="al-all">${S.log
+        .filter((H) => H.kind !== "ledger" && !alSuic(H))
+        .map(b)
+        .join(
+          "",
+        )}</ul>${M.length ? `<h3>${L`이 삶에 쓰인 자료`}</h3><ul class="al-src">${M.map((H) => `<li>${esc(H)}</li>`).join("")}</ul>` : ""}`,
+      "",
+    );
+  }
+  const k = document.createElement("div");
+  ((k.id = "album"),
+    (k.className =
+      "album" +
+      (e ? " pv" : "") +
+      " t-" +
+      t.cust.theme +
+      (t.cust.cloth && t.cust.cloth !== "auto" ? " cl-" + t.cust.cloth : "")),
+    k.setAttribute("role", "dialog"),
+    k.setAttribute("aria-modal", "true"),
+    k.setAttribute("aria-label", L`인생 앨범`),
+    (k.innerHTML = `<div class="al-bar"><span>${e ? L`인생 앨범 미리 보기` : L`인생 앨범`} · ${esc(t.name)}</span><span class="al-btns">${
+      IN_APP || e
+        ? ""
+        : `<button class="cta" id="albumPrint">${L`PDF로 저장 · 인쇄`}\
+</button>`
+    }<button class="ghost" id="albumClose">${L`닫기`}</button></span></div>
+    ${e ? `<p class="al-note">${L`이 삶으로 만든 앨범의 앞부분이에요. 미리 보기는 저장하거나 인쇄할 수 없어요.`}</p>` : IN_APP ? `<p class="al-note">${L`이 앱 안에서는 PDF로 저장하거나 인쇄할 수 없어요. 앨범은 여기서 볼 수 있고, 저장하려면 닫은 뒤 '사파리·크롬으로 옮기기'로 이 삶을 옮겨 주세요.`}</p>` : `<p class="al-note">${L`인쇄 창에서 대상을 'PDF로 저장'으로 고르면 파일로 남길 수 있어요.`}</p>`}<div class="al-pages">${s.join("")}</div>`),
+    document.body.appendChild(k),
+    document.documentElement.classList.add("album-open"),
+    $("#albumClose").addEventListener("click", () => {
+      (k.remove(), document.documentElement.classList.remove("album-open"));
+    }));
+  {
+    const l = $("#albumPrint");
+    l &&
+      l.addEventListener("click", async () => {
+        try {
+          document.fonts &&
+            document.fonts.status !== "loaded" &&
+            (await Promise.race([
+              document.fonts.ready,
+              new Promise((K) => setTimeout(K, 2500)),
+            ]));
+        } catch {}
+        try {
+          window.print();
+        } catch {}
+      });
+  }
+  e ||
+    track("keep", {
+      kind: "album",
+    });
+}
+const msThSub = (e) =>
+  ({
+    auto: L`그 삶이 얼마나 행복했는지에 따라 색이 정해져요`,
+    warm: L`햇살이 드는 황토빛 집`,
+    night: L`깊은 남색의 조용한 집`,
+    garden: L`풀빛이 감도는 집`,
+    sea: L`물빛이 비치는 집`,
+  })[e];
+function memoBxMount(e, t) {
+  const n = e.querySelector(".hp-bx:not(.hp-fm)");
+  if (!n) return;
+  const a = bonusOf(t.bx, t),
+    o = n.querySelector("canvas"),
+    s = o.getContext("2d"),
+    d = bxAssets(a),
+    c =
+      window.matchMedia &&
+      matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let m = 0,
+    i = null,
+    p = !1;
+  const u = (W) => {
+      ((s.fillStyle = "#000"),
+        s.fillRect(0, 0, FW, FH),
+        bonusFrame(s, t, a, d.L0, d.imgs, W, a.len, W));
+    },
+    f = () => {
+      const W = i;
+      ((i = null), W && setTimeout(() => W.close().catch(() => {}), 600));
+    },
+    b = (W) => {
+      if ((cancelAnimationFrame(m), f(), n.classList.add("on"), W)) {
+        soundAsk();
+        try {
+          const g = window.AudioContext || window.webkitAudioContext;
+          g &&
+            ((i = new g()),
+            i.resume && i.resume().catch(() => {}),
+            bonusAudio(
+              i,
+              soundOut(i),
+              i.currentTime + 0.05,
+              a.len / 1e3,
+              t.name + t.iso,
+              a.hits,
+              bxFrz(a),
+            ));
+        } catch {
+          i = null;
+        }
+        track("keep", { kind: "memobx" });
+      }
+      const _ = performance.now(),
+        B = () => {
+          if (!n.isConnected) {
+            f();
+            return;
+          }
+          const g = performance.now() - _ + 50;
+          if (g >= a.len - 800) {
+            (u(a.len - 800), n.classList.remove("on"), f());
+            return;
+          }
+          (u(g), (m = requestAnimationFrame(B)));
+        };
+      m = requestAnimationFrame(B);
+    };
+  (loadCardFonts(
+    [t.name, ...a.subs, a.punch, a.cbText || "", a.place, "0123456789'·"].join(
+      "",
+    ),
+  ).then(() => {
+    if (!n.isConnected || (u(1600), c || !window.IntersectionObserver)) return;
+    const W = new IntersectionObserver(
+      (_) => {
+        _.some((B) => B.isIntersecting) &&
+          !p &&
+          !n.closest("[hidden]") &&
+          ((p = !0), W.disconnect(), b(!1));
+      },
+      { threshold: 0.6 },
+    );
+    W.observe(o);
+  }),
+    n.addEventListener("click", (W) => {
+      W.target.closest("#memoBxPlay, #memoBxSound") && ((p = !0), b(!0));
+    }));
+}
+async function memoStory(e, t) {
+  if (((e = e || memShareCtx()), !e)) return;
+  const n = e.id,
+    a = e.D;
+  (openSheet(L`스토리용 그림`, `<p>${L`그림을 만드는 중이에요…`}</p>`),
+    t && (UI.sheetBack = t));
+  const o = (e.st && e.st.ln) || "",
+    s = L`80억 분의 1 · 시뮬레이션 속 삶의 추모관`;
+  await loadCardFonts(
+    [
+      a.name,
+      a.road || "",
+      ...(a.epi || []),
+      a.farewell || "",
+      o,
+      s,
+      CBY[a.iso] ? placeTag(CBY[a.iso]) : "",
+    ].join(""),
+  );
+  const d = 1080,
+    c = 1920,
+    m = document.createElement("canvas");
+  ((m.width = d), (m.height = c));
+  const i = m.getContext("2d"),
+    p = memoCover(a, e.cv),
+    u = CBY[a.iso];
+  ((i.fillStyle = "#0e1113"),
+    i.fillRect(0, 0, d, c),
+    (i.textAlign = "center"),
+    (i.textBaseline = "alphabetic"),
+    (i.fillStyle = "#4CC0AF"),
+    fitText(i, s, 600, CF.b, 34, 960, 24),
+    i.fillText(s, d / 2, 250));
+  const f = document.createElement("canvas");
+  ((f.width = PX.W),
+    (f.height = PX.H),
+    pxDraw(
+      p >= 0
+        ? pxScene(a.frames[p].m, pxPalette("light"))
+        : pxFuneral(a.fm, pxPalette("dark"), a.mourners),
+      f,
+    ));
+  const b = 5,
+    W = PX.W * b,
+    _ = PX.H * b,
+    B = (d - W) / 2,
+    g = 290;
+  ((i.imageSmoothingEnabled = !1),
+    i.drawImage(f, B, g, W, _),
+    (i.strokeStyle = "rgba(255,255,255,0.18)"),
+    (i.lineWidth = 2),
+    i.strokeRect(B - 1, g - 1, W + 2, _ + 2),
+    (i.fillStyle = "#f4ecd8"),
+    fitText(i, a.name, 700, CF.d, 84, 960, 44),
+    i.fillText(a.name, d / 2, 720),
+    (i.fillStyle = "#a59f95"),
+    cfont(i, 400, 36, CF.b),
+    i.fillText(
+      `${a.by} – ${a.by + a.age}${u ? " · " + placeTag(u) : ""}`,
+      d / 2,
+      790,
+    ));
+  let w = 890;
+  if (a.road) {
+    const y = capS(a.road);
+    ((i.fillStyle = "#f4ecd8"),
+      fitText(i, y, 700, CF.b, 42, 940, 28),
+      i.fillText(y, d / 2, 862),
+      (w = 950));
+  }
+  (o &&
+    ((i.fillStyle =
+      "#f0dfb\
+5"),
+    cfont(i, 700, 40, CF.d),
+    (w = drawWrapped(i, `${Q1}${o}${Q2}`, d / 2, w, 880, 58, 2) + 40)),
+    (i.fillStyle = "#e2dccf"),
+    cfont(i, 400, 38, CF.b));
+  for (const y of (a.epi || []).slice(0, o ? 2 : 3))
+    w = drawWrapped(i, y, d / 2, w, 900, 56, 2) + 14;
+  a.farewell &&
+    ((w += 30),
+    (i.fillStyle = "#f0dfb5"),
+    cfont(i, 700, 40, CF.d),
+    (w = drawWrapped(
+      i,
+      `${Q1}${a.farewell}${Q2}`,
+      d / 2,
+      w,
+      880,
+      60,
+      o ? 2 : 3,
+    )),
+    (i.fillStyle = "#8f8a80"),
+    cfont(i, 400, 28, CF.b),
+    i.fillText(L`이 삶을 살아 본 사람이 남긴 말`, d / 2, w + 6));
+  const P = Math.min(Math.max(w + 210, 1290), 1460),
+    x = i.createRadialGradient(d / 2, P - 40, 10, d / 2, P - 40, 520);
+  (x.addColorStop(0, "rgba(242,199,110,0.20)"),
+    x.addColorStop(1, "rgba(242,199,110,0)"),
+    (i.fillStyle = x),
+    i.fillRect(0, P - 560, d, 1040));
+  const F = Math.max(1, Math.min(7, e.candles || 1)),
+    T = 70,
+    A = d / 2 - ((F - 1) * T) / 2;
+  for (let y = 0; y < F; y++) {
+    const r = A + y * T,
+      M = i.createRadialGradient(r, P - 70, 2, r, P - 70, 46);
+    (M.addColorStop(0, "rgba(242,199,110,0.45)"),
+      M.addColorStop(1, "rgba(242,199,110,0)"),
+      (i.fillStyle = M),
+      i.fillRect(r - 50, P - 120, 100, 100),
+      (i.fillStyle = "#e9e2d2"),
+      i.fillRect(r - 8, P - 46, 16, 56),
+      (i.fillStyle = "#f2b544"),
+      i.beginPath(),
+      i.moveTo(r, P - 96),
+      i.bezierCurveTo(r + 13, P - 76, r + 11, P - 58, r, P - 52),
+      i.bezierCurveTo(r - 11, P - 58, r - 13, P - 76, r, P - 96),
+      i.fill(),
+      (i.fillStyle = "#fff3c4"),
+      i.beginPath(),
+      i.moveTo(r, P - 82),
+      i.bezierCurveTo(r + 5, P - 72, r + 5, P - 62, r, P - 58),
+      i.bezierCurveTo(r - 5, P - 62, r - 5, P - 72, r, P - 82),
+      i.fill());
+  }
+  ((i.fillStyle = "#a59f95"),
+    cfont(i, 400, 30, CF.b),
+    i.fillText(
+      L`누구나 들러 촛불을 켜고 한마디를 남길 수 있어요.`,
+      d / 2,
+      P + 76,
+    ),
+    (i.fillStyle = "#f4ecd8"),
+    fitText(
+      i,
+      L`80억 명 가운데, 단 한 번뿐인 삶이었습니다.`,
+      400,
+      CF.d,
+      36,
+      960,
+      26,
+    ),
+    i.fillText(L`80억 명 가운데, 단 한 번뿐인 삶이었습니다.`, d / 2, P + 160),
+    (i.fillStyle = "#E2678A"),
+    cfont(i, 400, 36, CF.m),
+    i.fillText(`1in8b.life${LANG === "ko" ? "" : LP}/m/${n}`, d / 2, P + 236));
+  const v = await new Promise((y) => m.toBlob(y, "image/png"));
+  if (!v || $("#sheet").hidden) return;
+  const k = L`80억분의1-추모관-${n}.png`;
+  let l = null;
+  try {
+    l = new File([v], k, { type: "image/png" });
+  } catch {}
+  const K = await new Promise((y) => {
+    try {
+      const r = new FileReader();
+      ((r.onload = () => y(r.result)),
+        (r.onerror = () => y(null)),
+        r.readAsDataURL(v));
+    } catch {
+      y(null);
+    }
+  });
+  (MEMO.story && MEMO.story.url && URL.revokeObjectURL(MEMO.story.url),
+    (MEMO.story = {
+      file: l,
+      name: k,
+      url: URL.createObjectURL(v),
+      id: n,
+      D: a,
+      other: !!e.other,
+    }),
+    ($("#sheet .bd").innerHTML =
+      `<img class="cardimg story" src="${IN_APP && K ? K : MEMO.story.url}" alt="${esc(L`${a.name}의 추모관 스토리 그림`)}">
+    <div class="sheetact">${IN_APP ? `<p>${L`<b>그림을 길게 눌러</b> '이미지 저장'이나 '공유'를 골라 주세요.`}</p><small>${L`앱 안에서 열린 화면에서는 저장 버튼이 막혀 있어요. 길게 눌러도 안 되면 화면을 캡처해 주세요.`}</small>` : `<button class="cta" id="storyShare">${L`그림 공유하기`}</button><button class="ghost" id="storySave">${L`그림 저장`}</button>`}
+      <small>${L`인스타그램이나 스레드 스토리에 올리고, 링크 스티커로 추모관 주소를 붙여 보세요.`}</small><button class="ghost" id="memoCopy2">${L`추모관 링크 복사`}</button></div>`),
+    track("keep", { kind: "story" }));
+}

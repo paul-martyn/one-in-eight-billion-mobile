@@ -1,0 +1,56 @@
+{
+  "USD": {
+    "k": 1,
+    "place": "Estados Unidos",
+    "name": "dólares",
+    "short": "EE. UU.",
+    "loc": "es-US",
+    "pre": "US$",
+    "sym": "$"
+  },
+  "MXN": {
+    "k": 10.3,
+    "place": "México",
+    "name": "pesos mexicanos",
+    "short": "México",
+    "loc": "es-MX",
+    "pre": "$",
+    "sym": "$"
+  },
+  "EUR": {
+    "k": 0.6,
+    "place": "España",
+    "name": "euros",
+    "short": "España",
+    "loc": "es-ES",
+    "post": " €",
+    "sym": "€"
+  },
+  "COP": {
+    "k": 1550,
+    "place": "Colombia",
+    "name": "pesos colombianos",
+    "short": "Colombia",
+    "loc": "es-CO",
+    "pre": "$",
+    "sym": "$"
+  },
+  "CLP": {
+    "k": 473,
+    "place": "Chile",
+    "name": "pesos chilenos",
+    "short": "Chile",
+    "loc": "es-CL",
+    "pre": "$",
+    "sym": "$"
+  },
+  "PEN": {
+    "k": 1.83,
+    "place": "Perú",
+    "name": "soles",
+    "short": "Perú",
+    "loc": "es-PE",
+    "pre": "S/ ",
+    "sym": "S/"
+  }
+}

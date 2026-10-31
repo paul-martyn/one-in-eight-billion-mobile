@@ -1,0 +1,30 @@
+{
+  "synthetic": true,
+  "source": "src/game.en.js",
+  "seed": "1in8b-porting-synthetic-v1",
+  "simulatedClock": "2026-10-27T12:00:00.000Z",
+  "storageStartedEmpty": true,
+  "networkRequests": [],
+  "storageEnvelope": "{S,at}",
+  "storageKey": "one8b.en.save.v3",
+  "birth": {
+    "phase": "birth",
+    "age": 0,
+    "born": "CAN"
+  },
+  "progress": {
+    "phase": "life",
+    "age": 25,
+    "born": "CAN",
+    "decisions": 14,
+    "logEntries": 113
+  },
+  "completed": {
+    "phase": "dead",
+    "age": 82,
+    "decisions": 59,
+    "logEntries": 413
+  },
+  "originalSaveEnvelopeVerified": true,
+  "notes": "All characters and events here are synthetic output of the captured client. No browser/user storage or server records were read. DOM/time/network stubs belong to this validation harness only."
+}

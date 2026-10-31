@@ -1,0 +1,115 @@
+{
+  "ko": {
+    "loc": "ko-KR",
+    "name": "한국어",
+    "brand": "80억 분의 1",
+    "file": "80억분의1"
+  },
+  "en": {
+    "loc": "en-US",
+    "name": "English",
+    "brand": "1 in 8 Billion",
+    "file": "1in8b",
+    "west": 1
+  },
+  "ja": {
+    "loc": "ja-JP",
+    "name": "日本語",
+    "brand": "80億分の1",
+    "file": "80億分の1",
+    "cjk": 1
+  },
+  "zh": {
+    "loc": "zh-TW",
+    "name": "繁體中文",
+    "brand": "80億分之1",
+    "file": "80億分之1",
+    "cjk": 1
+  },
+  "vi": {
+    "loc": "vi-VN",
+    "name": "Tiếng Việt",
+    "brand": "1 trong 8 tỷ",
+    "file": "1trong8ty"
+  },
+  "fr": {
+    "loc": "fr-FR",
+    "name": "Français",
+    "brand": "1 sur 8 milliards",
+    "file": "1sur8milliards"
+  },
+  "th": {
+    "loc": "th-TH",
+    "name": "ไทย",
+    "brand": "1 ใน 8 พันล้าน",
+    "file": "1in8b-th"
+  },
+  "es": {
+    "loc": "es",
+    "name": "Español",
+    "brand": "1 entre 8 mil millones",
+    "file": "1entre8milmillones"
+  },
+  "de": {
+    "loc": "de-DE",
+    "name": "Deutsch",
+    "brand": "1 von 8 Milliarden",
+    "file": "1von8milliarden"
+  },
+  "pt": {
+    "loc": "pt-BR",
+    "name": "Português",
+    "brand": "1 em 8 bilhões",
+    "file": "1em8bilhoes"
+  },
+  "ru": {
+    "loc": "ru-RU",
+    "name": "Русский",
+    "brand": "1 из 8 миллиардов",
+    "file": "1iz8mlrd"
+  },
+  "tr": {
+    "loc": "tr-TR",
+    "name": "Türkçe",
+    "brand": "8 Milyarda 1",
+    "file": "8milyarda1"
+  },
+  "id": {
+    "loc": "id-ID",
+    "name": "Bahasa Indonesia",
+    "brand": "1 dari 8 Miliar",
+    "file": "1dari8miliar"
+  },
+  "it": {
+    "loc": "it-IT",
+    "name": "Italiano",
+    "brand": "1 su 8 miliardi",
+    "file": "1su8miliardi"
+  },
+  "ar": {
+    "loc": "ar-u-nu-latn",
+    "name": "العربية",
+    "brand": "1 من 8 مليارات",
+    "file": "1min8milyarat",
+    "rtl": 1
+  },
+  "fa": {
+    "loc": "fa-u-nu-latn",
+    "name": "فارسی",
+    "brand": "یک در هشت میلیارد",
+    "file": "1dar8miliard",
+    "rtl": 1
+  },
+  "uk": {
+    "loc": "uk-UA",
+    "name": "Українська",
+    "brand": "1 з 8 мільярдів",
+    "file": "1z8mlrd"
+  },
+  "pl": {
+    "loc": "pl-PL",
+    "name": "Polski",
+    "brand": "1 na 8 miliardów",
+    "file": "1na8mld"
+  }
+}
