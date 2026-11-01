@@ -2,6 +2,7 @@
 // адаптер получает CoreHost и больше никто.
 import { createCoreGlobals, CoreTimers, namespacedStorage, memoryStorage, type CoreClock, type NetworkAttempt, type StorageLike } from './env.ts';
 import { CoreEntropy } from './entropy.ts';
+import { installRussianTextOverrides } from './localization/ru.ts';
 
 /** Пространство ключей веб-версии: не пересекается с сохранениями прежней копии игры. */
 export const STORAGE_PREFIX = '1in8b-mobile/v1:';
@@ -115,6 +116,7 @@ export function createHost(mod: CoreModule, opts: HostOptions): CoreHost {
   randomSource = entropy.next;
   const discardedBootTimers = timers.discardAll();
   const top = core.top;
+  installRussianTextOverrides(top);
   // Верхнеуровневые let ядра (у них есть сеттер в таблице доступа): кэши,
   // счётчики, состояние последнего действия. Песочница восстанавливает их все.
   const letNames = Object.keys(top).filter(k => Object.getOwnPropertyDescriptor(top, k)?.set);

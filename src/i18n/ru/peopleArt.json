@@ -1,7 +1,7 @@
 {
   "peopleArt.home": "Дома: {people}",
   "peopleArt.entry": "{role}, {age}",
-  "peopleArt.role.me": "ты",
+  "peopleArt.role.me": "вы",
   "peopleArt.role.par": "родитель",
   "peopleArt.role.sib": "брат или сестра",
   "peopleArt.role.pt": "партнёр",

@@ -10,7 +10,8 @@ import { peopleVM, type MemoryVM, type PeopleVM, type PersonVM, type BondTone } 
 import { ChevronIcon } from '../../../ui/icons';
 import { Eyebrow } from '../../../ui/components';
 import { TabHeader, TabNavSpace, TabScroll, pausedText } from './peopleParts/TabFrame';
-import { Avatar, BondChip, findMentions } from './peopleParts/personParts';
+import { Avatar, BondChip } from './peopleParts/personParts';
+import { findMentions } from '../../../ui/people/mentions';
 import type { TabProps } from './types';
 import './people.css';
 
@@ -43,7 +44,7 @@ function fromPerson(p: PersonVM): Entry {
   if (p.pet && p.away) tags.push(t('people.petAway'));
   return {
     id: p.id, title: p.name || role, role, hasName: !!p.name, age: p.age, bond: p.bond, tone: p.tone, tags,
-    names: p.search, phrases: [...p.phrases, ...(p.kin && role ? [t('people.yourRole', { role: role.toLocaleLowerCase() })] : [])],
+    names: p.search, phrases: [...p.phrases, ...(p.kin && role && !p.phrases.length ? [t('people.yourRole', { role: role.toLocaleLowerCase() })] : [])],
     memory: false, away: p.away, pet: p.pet, friend: p.group === 'friends',
   };
 }
@@ -53,7 +54,7 @@ function fromMemory(m: MemoryVM): Entry {
   return {
     id: `mem:${m.id}`, title: m.name || m.role, role: m.role, hasName: !!m.name, age: null, bond: '', tone: 'none',
     tags: [died, m.job].filter(Boolean),
-    names: m.search, phrases: [...m.phrases, ...(m.kin && m.role ? [t('people.yourRole', { role: m.role.toLocaleLowerCase() })] : [])],
+    names: m.search, phrases: [...m.phrases, ...(m.kin && m.role && !m.phrases.length ? [t('people.yourRole', { role: m.role.toLocaleLowerCase() })] : [])],
     memory: true, away: false, pet: false, friend: false,
   };
 }

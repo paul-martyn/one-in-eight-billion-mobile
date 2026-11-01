@@ -93,6 +93,25 @@ const nameOf = (m: Any | null | undefined): string => (m && m.name && typeof m.n
 const givenOf = (m: Any | null | undefined): string => (m && m.name && typeof m.name === 'object' ? String(m.name.g ?? '') : '');
 const searchOf = (...names: string[]) => [...new Set(names.map(n => n.trim()).filter(n => n.length >= 2))];
 
+/** Поисковые фразы должны совпадать с грамматикой дневника, а не с подписью UI. */
+export function kinMentionPhrases(T: Top, role: string): string[] {
+  if (T.LANG !== 'ru' || !role) return [];
+  const noun = role.toLocaleLowerCase('ru');
+  if (!T.ruGender(noun)) return [];
+  return [...new Set([
+    '{{0:ваш|ваша|ваше|ваши}} {0}',
+    '{{0:вашего|вашей|вашего|ваших}} {0}#р',
+    '{{0:вашему|вашей|вашему|вашим}} {0}#д',
+    '{{0:вашего|вашу|ваше|ваших}} {0}#в',
+    '{{0:вашим|вашей|вашим|вашими}} {0}#т',
+    '{{0:вашем|вашей|вашем|ваших}} {0}#п',
+  ].map(template => plain(T.ruFill(template, [noun]))))];
+}
+
+function withKinPhrases<P extends { role: string; kin: boolean; phrases: string[] }>(T: Top, p: P): P {
+  return p.kin ? { ...p, phrases: [...new Set([...p.phrases, ...kinMentionPhrases(T, p.role)])] } : p;
+}
+
 export function peopleVM(T: Top): PeopleVM {
   const S = T.S as Any;
   const fam = S.fam as Any;
@@ -334,10 +353,10 @@ export function peopleVM(T: Top): PeopleVM {
 
   return {
     age: S.age, year,
-    family: byKin(family).map(clean), friends, pets,
+    family: byKin(family).map(clean).map(p => withKinPhrases(T, p)), friends, pets,
     friendsBond: safe(friendsBond), friendsTone: toneOf(L, friendsBond), friendsNote: safe(friendsNote), friendsShown,
     familyNotes: familyNotes.filter(n => n.value && !HANGUL.test(n.label + n.value)),
-    memory: byKin(memory).map(m => ({ ...m, role: safe(m.role), line: safe(m.line), job: safe(m.job) })),
+    memory: byKin(memory).map(m => withKinPhrases(T, { ...m, role: safe(m.role), line: safe(m.line), job: safe(m.job) })),
   };
 }
 

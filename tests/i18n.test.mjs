@@ -68,3 +68,13 @@ test('счётчики сумм сохраняют десятичные и ра�
   }
   assert.equal(scaleNumbers('Нет денег', 0.5, 'ru'), 'Нет денег');
 });
+
+test('итоги наград выбирают русскую форму по числу кристаллов, включая форматированные суммы', () => {
+  const ru = catalog('ru');
+  for (const [count, word] of [[0, 'кристаллов'], [1, 'кристалл'], [2, 'кристалла'], [5, 'кристаллов'], [11, 'кристаллов'], [21, 'кристалл'], [22, 'кристалла'], [1002, 'кристалла']]) {
+    const gems = new Intl.NumberFormat('ru').format(count);
+    const params = { dollars: '60', gems, count };
+    assert.equal(translate(ru, english, 'ru', 'rewards.totalValue', params), `+60 $ · +${gems} ${word}`);
+    assert.equal(translate(ru, english, 'ru', 'rewards.claimed', params), `Получено: +60 $ и +${gems} ${word}. Жизнь сохранена в «Жизнях».`);
+  }
+});

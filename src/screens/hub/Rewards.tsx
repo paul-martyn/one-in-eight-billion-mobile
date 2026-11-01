@@ -160,7 +160,7 @@ export function useLifeReward({ active, leaving, reduced, rootRef, livesRef }: {
       return;
     }
     focusLives.current = true;
-    setSaid(t('rewards.claimed', { dollars: fmtMeta(r.dollars), gems: fmtMeta(r.gems) }));
+    setSaid(t('rewards.claimed', { dollars: fmtMeta(r.dollars), gems: fmtMeta(r.gems), count: r.gems }));
     // Reduced motion: окно закрывается (награды в снимке больше нет), числа — сразу новые.
     if (!flights) return;
     timers.current.push(
@@ -263,7 +263,7 @@ export function RewardsPopup({ reward, closing, ready, onClaim, sources }: {
                             <>
                               <BanknotesBig size={20} className="hub-reward__icon" />
                               <span aria-hidden="true">+{fmtMeta(it.dollars)}</span>
-                              <span className="sr-only">{t('rewards.amountDollars', { n: fmtMeta(it.dollars) })}</span>
+                              <span className="sr-only">{t('rewards.amountDollars', { n: fmtMeta(it.dollars), count: it.dollars })}</span>
                             </>
                           )}
                           {it.gems > 0 && (
@@ -283,7 +283,7 @@ export function RewardsPopup({ reward, closing, ready, onClaim, sources }: {
                 <div className="hub-reward__total">
                   <span className="hub-reward__total-label">{t('rewards.total')}</span>
                   <span className="hub-reward__sums">
-                    <span className="sr-only">{t('rewards.totalValue', { dollars: fmtMeta(reward.dollars), gems: fmtMeta(reward.gems) })}</span>
+                    <span className="sr-only">{t('rewards.totalValue', { dollars: fmtMeta(reward.dollars), gems: fmtMeta(reward.gems), count: reward.gems })}</span>
                     {showDollars && (
                       <span className="hub-reward__sum" aria-hidden="true" ref={el => { sources.current.dollars = el; }}>
                         <SumContent kind="dollars" n={reward.dollars} />

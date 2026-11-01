@@ -3,7 +3,7 @@
   "spend.income": "Годовой доход: {amount}",
   "spend.closed": "Раздел «{title}» откроется, когда появится выбор фокуса года. До этого решает семья.",
   "spend.empty": "Сейчас здесь нечего купить или продать.",
-  "spend.confirm.title": "Ты уверен?",
+  "spend.confirm.title": "Подтвердить действие?",
   "spend.confirm.cancel": "Отмена",
   "spend.confirm.yes": "Подтвердить",
   "spend.result.title": "Готово!",

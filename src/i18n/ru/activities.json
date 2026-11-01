@@ -3,10 +3,10 @@
   "activities.pausedAge": "Пауза · {age}",
   "activities.unavailable": "Занятия появятся здесь после начала жизни.",
   "activities.now": "Сейчас",
-  "activities.now.label": "Чем ты сейчас занимаешься",
+  "activities.now.label": "Чем вы сейчас занимаетесь",
   "activities.focus.title": "Фокус этого года",
-  "activities.focus.none": "Пока не выбран. Если не выбирать, игра выберет за тебя.",
-  "activities.focus.note": "В конце года каждый фокус учитывается за то время, которое ты ему уделял.",
+  "activities.focus.none": "Пока не выбран. Если не выбирать, игра выберет за вас.",
+  "activities.focus.note": "В конце года каждый фокус учитывается за то время, которое вы ему уделяли.",
   "activities.year.title": "Этот год",
   "activities.year.meta": "Прожито {pct}% года",
   "activities.year.share": "{name} — {pct}%"
