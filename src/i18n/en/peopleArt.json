@@ -1,0 +1,11 @@
+{
+  "peopleArt.home": "At home: {people}",
+  "peopleArt.entry": "{role}, {age}",
+  "peopleArt.role.me": "you",
+  "peopleArt.role.par": "parent",
+  "peopleArt.role.sib": "sibling",
+  "peopleArt.role.pt": "partner",
+  "peopleArt.role.kid": "child",
+  "peopleArt.role.grandkid": "grandchild",
+  "peopleArt.role.inlaw": "in-law"
+}

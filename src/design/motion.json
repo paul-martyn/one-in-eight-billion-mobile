@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "notes": "Motion specification shared by the web UI and the future Unity port. Coordinates are in the 393x852 portrait frame; normalized anchors are 0..1 of that frame. Every transition is presentation-only: game commands are applied before any animation starts, and skip/interrupt/reduced-motion leave the same game state.",
+  "easing": {
+    "pop": [0.3, 1.45, 0.5, 1],
+    "glide": [0.2, 0.8, 0.2, 1],
+    "screen": [0.22, 1, 0.36, 1],
+    "arrive": [0.25, 1, 0.5, 1],
+    "away": [0.5, 0, 0.75, 0],
+    "spring": [0.3, 1.6, 0.5, 1],
+    "sparkle": [0.2, 0.8, 0.3, 1],
+    "ease": [0.25, 0.1, 0.25, 1],
+    "easeOut": [0, 0, 0.58, 1],
+    "easeOutCubic": "1-(1-t)^3",
+    "easeOutQuart": "1-(1-t)^4"
+  },
+  "screenTransitions": [
+    { "id": "screen.fade", "trigger": "navigate (default)", "from": "*", "to": "*", "durationMs": 380, "delayMs": 0, "easing": "ease", "enter": { "opacity": [0, 1] }, "exit": null, "interrupt": "jump-to-end; new transition starts from the current screen", "input": "only the arriving screen receives input" },
+    { "id": "screen.tab", "trigger": "sticker tab", "from": "life tab", "to": "life tab", "durationMs": 220, "delayMs": 0, "easing": "ease", "enter": { "opacity": [0, 1] }, "exit": null, "interrupt": "jump-to-end", "input": "immediate" },
+    { "id": "screen.rise", "trigger": "Who am I?", "from": "roll", "to": "certificate", "durationMs": 520, "delayMs": 0, "easing": "screen", "enter": { "translateY": ["100%", "0%"] }, "exit": null, "interrupt": "jump-to-end", "input": "after 0 ms" },
+    { "id": "screen.push", "trigger": "Your odds; Settings", "from": "certificate|hub", "to": "odds|language", "durationMs": 440, "delayMs": 0, "easing": "screen", "enter": { "translateX": ["100%", "0%"] }, "exit": { "translateX": ["0%", "-30%"], "brightness": [1, 0.8] }, "interrupt": "jump-to-end", "input": "arriving" },
+    { "id": "screen.pop", "trigger": "Back", "from": "odds|language", "to": "certificate|hub", "durationMs": 440, "delayMs": 0, "easing": "screen", "enter": { "translateX": ["-30%", "0%"], "brightness": [0.8, 1] }, "exit": { "translateX": ["0%", "100%"] }, "zOrder": "leaving on top", "interrupt": "jump-to-end", "input": "arriving" },
+    { "id": "screen.zoom", "trigger": "Start life", "from": "certificate|odds", "to": "life", "durationMs": 480, "delayMs": 0, "easing": "easeOut", "enter": { "opacity": [0, 1], "scale": [1.08, 1] }, "exit": null, "interrupt": "jump-to-end", "input": "arriving" }
+  ],
+  "sequences": {
+    "roll": { "startDelayMs": 400, "spinMs": 4600, "turns": 3, "spinEasing": "easeOutQuart", "zoom": 2.4, "revealDelayMs": 1300, "nameFlips": 30, "flipEasing": "1-(1-p)^2", "reveal": { "durationMs": 600, "translateY": [10, 0], "ctaDelayMs": 150 }, "label": { "durationMs": 400, "easing": "pop", "scale": [0.94, 1] } },
+    "certificate": {
+      "phasesMs": { "parents": 300, "dad": 800, "tree": 1500, "baby": 2700, "name": 3300, "toCertificate": 5800, "typing": 7100 },
+      "typing": { "intervalMs": 40, "charsPerTick": 5, "caretBlinkMs": 900 },
+      "babyFlight": { "durationMs": 900, "delayMs": 100, "easing": "glide", "to": { "x": 127, "y": -317, "rotate": -4, "scale": 0.516 } },
+      "certificateSlide": { "durationMs": 800, "delayMs": 150, "easing": "glide", "translateY": [900, 0] },
+      "stamp": { "opacity": [0, 0.9], "scale": [1.7, 1], "durationMs": 350, "delayMs": 250, "easing": "pop" },
+      "skip": "tap Skip or reduced motion: jump to the filled certificate; the record content is identical"
+    },
+    "countUp": { "durationMs": 900, "easing": "easeOutCubic", "reducedMotion": "final values immediately" },
+    "hubArrive": { "top": { "translateY": [-150, 0], "durationMs": 400, "easing": "arrive" }, "counters": { "translateY": [24, 0], "durationMs": 350, "delayMs": 100 }, "cta": { "scale": [0.8, 1], "durationMs": 300, "delayMs": 250 }, "nav": { "translateY": [140, 0], "durationMs": 400, "delayMs": 100, "easing": "arrive" } },
+    "hubLeave": { "cta": { "delayMs": 100 }, "nav": { "delayMs": 150, "easing": "away" }, "counters": { "delayMs": 200 }, "top": { "delayMs": 250, "easing": "away" }, "navigateAfterMs": 800 },
+    "sticker": { "activate": { "scale": [1, 1.1], "durationMs": 250, "easing": "spring" }, "wobbleMs": 400, "fillMs": 200, "ringMs": 400, "sparkleMs": 500, "sparkleDelayMs": 40, "sparkleOffsets": [[-44, -30], [-6, -50], [38, -38], [50, 4], [-50, 6], [24, 30]], "press": { "scale": 0.92, "durationMs": 80 } },
+    "badgePulse": { "durationMs": 2000, "scale": [1, 1.1, 1], "loop": true },
+    "popup": { "enter": { "opacity": [0, 1], "scale": [0.94, 1], "durationMs": 220, "easing": "pop" }, "exit": { "opacity": [1, 0], "durationMs": 140 }, "backdrop": { "opacity": [0, 1], "durationMs": 180 }, "note": "Design draws pop-ups instantly; a short enter/exit was added so the decision does not flash. Game state does not wait for it." },
+    "journalEntry": { "enter": { "opacity": [0, 1], "translateY": [-8, 0], "durationMs": 260, "easing": "glide" }, "note": "added for live entries; history renders without animation" },
+    "statDelta": { "durationMs": 1600, "note": "delta label fades after a change" }
+  },
+  "globe": { "idleSpinDegPerSec": 8, "latRest": 12, "latRelax": 0.6, "inertiaKeepPerSec": 0.04, "dragLatClamp": 60, "flash": { "everySec": [0.16, 0.36], "lifeSec": 1.8, "maxAlive": 40, "randomness": "decorative (separate from the game RNG)" }, "marker": { "loopMs": 1600 }, "zoomRate": 1.8, "markerRate": 4 },
+  "inputPolicy": {
+    "commands": "Every game command carries an id and is applied exactly once; repeated taps on a resolved decision are ignored.",
+    "transitions": "Navigation during a running transition finishes the current one instantly and starts the next.",
+    "reducedMotion": "Transitions become 0 ms fades, count-ups show final values, sequences jump to their end state."
+  }
+}

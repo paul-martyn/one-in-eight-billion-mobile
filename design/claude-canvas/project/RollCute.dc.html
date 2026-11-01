@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Birth roll — cute</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+main a:focus-visible,main button:focus-visible{outline:3px solid #2593a3;outline-offset:3px}
+.k-o{color:#ffffff;text-shadow:1.5px 0 0 #5a3418,-1.5px 0 0 #5a3418,0 1.5px 0 #5a3418,0 -1.5px 0 #5a3418,1.1px 1.1px 0 #5a3418,-1.1px 1.1px 0 #5a3418,1.1px -1.1px 0 #5a3418,-1.1px -1.1px 0 #5a3418,0 2px 0 #5a3418}
+.k-big{color:#ffffff;text-shadow:2.5px 0 0 #5a3418,-2.5px 0 0 #5a3418,0 2.5px 0 #5a3418,0 -2.5px 0 #5a3418,1.8px 1.8px 0 #5a3418,-1.8px 1.8px 0 #5a3418,1.8px -1.8px 0 #5a3418,-1.8px -1.8px 0 #5a3418,0 4px 0 #5a3418}
+</style>
+</helmet>
+<main style="position: relative; width: 393px; height: 852px; box-sizing: border-box; padding: 58px 24px 100px; overflow: hidden; background: #f2e3c6; color: #5a3418; font-family: Fredoka, 'Baloo 2', system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; text-align: center">
+<div aria-hidden="true" style="position: absolute; left: -24px; top: 120px; width: 440px; height: 440px; border-radius: 50%; background: radial-gradient(closest-side, rgba(127,208,240,0.55) 0%, rgba(127,208,240,0.25) 60%, rgba(127,208,240,0) 100%)"></div>
+<button type="button" onClick="{{ replay }}" aria-label="Replay the spin" style="position: absolute; right: 12px; top: 50px; width: 42px; height: 42px; box-sizing: border-box; padding: 0; border: 2px solid #7b4b2a; border-radius: 21px; background: #fff3d6; box-shadow: inset 0 -3px 0 rgba(90,52,24,0.22); color: #7b4b2a; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: {{ revealOp }}; visibility: {{ revealVis }}; transition: opacity 0.6s ease"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"></path><path d="M20 4v4.5h-4.5"></path></svg></button>
+<p style="position: relative; margin: 0; font-size: {{ labelSize }}; font-weight: 700; line-height: 30px; color: {{ labelInk }}; transform: scale({{ labelScale }}); transition: transform 0.4s cubic-bezier(.3,1.45,.5,1), color 0.3s ease">{{ label }}</p>
+<p aria-hidden="true" class="k-big" style="position: relative; margin: 10px 0 0; font-size: 52px; font-weight: 700; line-height: 60px; white-space: nowrap; opacity: {{ nameOp }}; transform: scale({{ nameScale }}); transition: opacity 0.35s ease, transform 0.35s ease">{{ country }}</p>
+<p role="status" style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap">{{ status }}</p>
+<div style="position: relative; width: 290px; height: 290px; margin-top: 4px; flex: none">
+<dc-import name="Globe" size="290" variant="halftone" land="#5bb54a" ocean="#9fdcf5" shade="#5cb3e0" night="rgba(90,52,24,0.14)" rim="#7b4b2a" grid="" flash="#ff6f8a" marker="#ff6f8a" marker-ring="#fff3d6" dot="1.15" spin="8" start-lon="-40" focus="{{ spinning }}" turns="3" duration="4600" zoom="2.4" hint-size="290px,290px"></dc-import>
+</div>
+<div style="position: relative; width: 100%; height: 130px; margin-top: 14px">
+<p style="position: absolute; left: 0px; right: 0px; top: 10px; margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #8a5a35; opacity: {{ hintOp }}; transition: opacity 0.4s ease">Every birth is a roll of the dice…</p>
+<div style="position: absolute; left: 0px; right: 0px; top: 0px; display: flex; flex-direction: column; align-items: center; opacity: {{ revealOp }}; visibility: {{ revealVis }}; transform: translateY({{ revealY }}px); transition: opacity 0.6s ease, transform 0.6s ease">
+<span style="position: relative; display: inline-flex; align-items: center; gap: 6px; height: 32px; box-sizing: border-box; padding: 0 14px 0 28px; border: 2px solid #7b4b2a; border-radius: 8px; background: #fffaf0; font-size: 15px; font-weight: 600"><svg width="26" height="30" viewBox="0 0 24 28" aria-hidden="true" style="position: absolute; left: -9px; top: -3px"><path d="M12 26s-8.5-7.6-8.5-14.4a8.5 8.5 0 0 1 17 0C20.5 18.4 12 26 12 26Z" fill="#ff6f8a" stroke="#7b4b2a" stroke-width="2" stroke-linejoin="round"></path><circle cx="12" cy="11.5" r="3.2" fill="#ffffff" stroke="#7b4b2a" stroke-width="1.8"></circle></svg>Lucknow, Uttar Pradesh</span>
+<p style="margin: 14px 0 0; padding: 9px 18px 10px; border: 2px solid #7b4b2a; border-radius: 16px; background: #fff3d6; box-shadow: 0 4px 12px rgba(90,52,24,0.2), 0 1px 3px rgba(90,52,24,0.14); font-size: 19px; font-weight: 600; line-height: 1.3; color: #4a2c17">1 in 6 babies starts here.<br><span style="color: #c85a14; font-weight: 700">Today, that’s you!</span></p>
+</div>
+</div>
+<a href="{{ to.cert.href }}" onClick="{{ to.cert.go }}" style="position: relative; margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 10px; width: 230px; height: 64px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 18px; background: #ffd75a; box-shadow: inset 0 -4px 0 rgba(90,52,24,0.22), inset 0 4px 0 rgba(255,255,255,0.5); text-decoration: none; cursor: pointer; opacity: {{ revealOp }}; visibility: {{ revealVis }}; transform: translateY({{ revealY }}px); transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s"><span class="k-o" style="font-size: 24px; font-weight: 700">Who am I?</span><svg width="34" height="30" viewBox="0 0 30 26" aria-hidden="true" style="flex: none"><path d="M5 13 H22.5 M15.5 6 L22.5 13 L15.5 20" fill="none" stroke="#7b4b2a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 13 H22.5 M15.5 6 L22.5 13 L15.5 20" fill="none" stroke="#ffffff" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"nav":{"editor":null},"$preview":{"width":393,"height":852}}'>
+// The birth roll in the cute idle-game style: the candy globe spins like a roulette wheel while
+// country names flip under the heading, lands on the birthplace, zooms in, then shows the city.
+// Must match the Globe's duration; the reveal waits for the zoom to settle.
+var SPIN_MS = 4600, START_DELAY = 400, REVEAL_DELAY = 1300;
+var NAMES = ['Brazil', 'Nigeria', 'China', 'Germany', 'Pakistan', 'Ethiopia', 'Mexico', 'Indonesia', 'Egypt', 'Japan', 'Kenya', 'USA', 'Vietnam', 'DR Congo', 'Iran', 'Tanzania', 'Turkey', 'Uganda', 'Colombia', 'Sudan', 'Russia', 'Ghana', 'Peru', 'Nepal', 'Morocco', 'Angola', 'Nigeria', 'China', 'Pakistan', 'India'];
+
+// Inside the prototype the host passes `nav` and moves between screens itself; on its own an
+// artboard follows plain links.
+function linkTo(self, stem) {
+  return typeof self.props.nav === 'function'
+    ? { href: null, go: () => self.props.nav(stem) }
+    : { href: stem + '.dc.html', go: null };
+}
+var STICKER_STEMS = { people: 'PeopleCute', activities: 'ActivitiesCute', life: 'LiveCute', money: 'MoneyCute', odds: 'OddsLife' };
+function stickerLinks(self) {
+  const out = {};
+  Object.keys(STICKER_STEMS).forEach((k) => { out[k] = linkTo(self, STICKER_STEMS[k]); });
+  return out;
+}
+
+class Component extends DCLogic {
+  componentDidMount() {
+    this.roll();
+  }
+  componentWillUnmount() {
+    clearTimeout(this.kick);
+    clearInterval(this.tick);
+  }
+  roll() {
+    clearTimeout(this.kick);
+    clearInterval(this.tick);
+    this.t0 = 0;
+    this.setState({ spinning: false, landedAt: 0 });
+    this.kick = setTimeout(() => {
+      this.t0 = Date.now();
+      this.setState({ spinning: true });
+      this.tick = setInterval(() => {
+        const now = Date.now();
+        const landedAt = (this.state && this.state.landedAt) || 0;
+        if (!landedAt && now - this.t0 >= SPIN_MS) this.setState({ landedAt: now });
+        else if (landedAt && now - landedAt > REVEAL_DELAY + 800) clearInterval(this.tick);
+        this.forceUpdate();
+      }, 50);
+    }, START_DELAY);
+  }
+  renderVals() {
+    const st = this.state || {};
+    const now = Date.now();
+    const landed = !!st.landedAt;
+    const revealed = landed && now - st.landedAt >= REVEAL_DELAY;
+    // Names flip fast, then slower, settling just before the globe stops.
+    let idx = 0;
+    if (st.spinning && this.t0) {
+      const p = Math.min(1, (now - this.t0) / SPIN_MS);
+      idx = Math.min(NAMES.length - 1, Math.floor((1 - Math.pow(1 - p, 2)) * NAMES.length));
+    }
+    if (landed) idx = NAMES.length - 1;
+    return {
+      spinning: !!st.spinning,
+      label: landed ? 'You are born in' : 'Where will you be born?',
+      labelSize: landed ? '20px' : '17px',
+      labelInk: landed ? '#c85a14' : '#8a5a35',
+      labelScale: landed ? 1 : 0.94,
+      country: NAMES[idx],
+      status: landed ? 'You are born in Lucknow, India.' : '',
+      nameOp: landed ? 1 : 0.6,
+      nameScale: landed ? 1 : 0.9,
+      hintOp: landed ? 0 : 1,
+      revealOp: revealed ? 1 : 0,
+      revealVis: revealed ? 'visible' : 'hidden',
+      revealY: revealed ? 0 : 10,
+      replay: () => this.roll(),
+      to: { cert: linkTo(this, 'CertCute') }
+    };
+  }
+}
+</script>
+</body>
+</html>

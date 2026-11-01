@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Start — cute</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+main a:focus-visible,main button:focus-visible{outline:3px solid #2593a3;outline-offset:3px}
+.k-o{color:#ffffff;text-shadow:1.5px 0 0 #5a3418,-1.5px 0 0 #5a3418,0 1.5px 0 #5a3418,0 -1.5px 0 #5a3418,1.1px 1.1px 0 #5a3418,-1.1px 1.1px 0 #5a3418,1.1px -1.1px 0 #5a3418,-1.1px -1.1px 0 #5a3418,0 2px 0 #5a3418}
+.k-big{color:#ffffff;text-shadow:3px 0 0 #5a3418,-3px 0 0 #5a3418,0 3px 0 #5a3418,0 -3px 0 #5a3418,2.2px 2.2px 0 #5a3418,-2.2px 2.2px 0 #5a3418,2.2px -2.2px 0 #5a3418,-2.2px -2.2px 0 #5a3418,0 5px 0 #5a3418}
+</style>
+</helmet>
+<main style="position: relative; width: 393px; height: 852px; box-sizing: border-box; padding: 58px 24px 100px; overflow: hidden; background: #f2e3c6; color: #5a3418; font-family: Fredoka, 'Baloo 2', system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; text-align: center">
+<div aria-hidden="true" style="position: absolute; left: -24px; top: 92px; width: 440px; height: 440px; border-radius: 50%; background: radial-gradient(closest-side, rgba(127,208,240,0.55) 0%, rgba(127,208,240,0.25) 60%, rgba(127,208,240,0) 100%)"></div>
+<h1 class="k-big" style="position: relative; margin: 0; font-size: 64px; font-weight: 700; line-height: 70px; letter-spacing: -1px; white-space: nowrap">1 in <span style="color: #ffd75a">8</span> B</h1>
+<div style="position: relative; width: 280px; height: 280px; margin-top: 10px; flex: none">
+<dc-import name="Globe" size="280" variant="halftone" land="#5bb54a" ocean="#9fdcf5" shade="#5cb3e0" night="rgba(90,52,24,0.14)" rim="#7b4b2a" grid="" flash="#ff6f8a" marker="#ff6f8a" marker-ring="#fff3d6" dot="1.15" spin="8" start-lon="-40" hint-size="280px,280px"></dc-import>
+</div>
+<p style="position: relative; margin: 16px 0 0; padding: 10px 18px 11px; border: 2px solid #7b4b2a; border-radius: 16px; background: #fff3d6; box-shadow: 0 4px 12px rgba(90,52,24,0.2), 0 1px 3px rgba(90,52,24,0.14); font-size: 19px; font-weight: 600; line-height: 1.3; color: #4a2c17">Someone is born right now.<br><span style="color: #c85a14; font-weight: 700">This time, it’s you!</span></p>
+<div role="group" aria-label="{{ countersLabel }}" style="position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 2px minmax(0, 1fr); align-items: center; width: 300px; height: 84px; box-sizing: border-box; margin-top: 26px; border: 2px solid #7b4b2a; border-radius: 14px; background: #fffaf0">
+<span style="position: absolute; left: 50%; top: -11px; transform: translateX(-50%); padding: 0 10px; background: #f2e3c6; font-size: 12px; font-weight: 700; line-height: 18px; letter-spacing: 0.06em; text-transform: uppercase; color: #8a5a35; white-space: nowrap">Since you opened</span>
+<div>
+<p style="margin: 0; font-size: 30px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; color: #4a2c17">{{ bornCount }}</p>
+<p style="display: flex; align-items: center; justify-content: center; gap: 6px; margin: 7px 0 0; font-size: 13px; font-weight: 600; line-height: 1.2; color: #8a5a35"><span aria-hidden="true" style="width: 10px; height: 10px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 5px; background: #ff6f8a"></span>born</p>
+</div>
+<span aria-hidden="true" style="width: 2px; height: 46px; border-radius: 1px; background: #e2c595"></span>
+<div>
+<p style="margin: 0; font-size: 30px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; color: #4a2c17">{{ diedCount }}</p>
+<p style="display: flex; align-items: center; justify-content: center; gap: 6px; margin: 7px 0 0; font-size: 13px; font-weight: 600; line-height: 1.2; color: #8a5a35"><span aria-hidden="true" style="width: 10px; height: 10px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 5px; background: #c9b6ff"></span>passed away</p>
+</div>
+</div>
+<a href="{{ to.roll.href }}" onClick="{{ to.roll.go }}" style="position: relative; margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 10px; width: 230px; height: 64px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 18px; background: #ffd75a; box-shadow: inset 0 -4px 0 rgba(90,52,24,0.22), inset 0 4px 0 rgba(255,255,255,0.5); text-decoration: none; cursor: pointer"><span class="k-o" style="font-size: 24px; font-weight: 700">Be Born!</span><svg width="34" height="30" viewBox="0 0 30 26" aria-hidden="true" style="flex: none"><path d="M5 13 H22.5 M15.5 6 L22.5 13 L15.5 20" fill="none" stroke="#7b4b2a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 13 H22.5 M15.5 6 L22.5 13 L15.5 20" fill="none" stroke="#ffffff" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"nav":{"editor":null},"$preview":{"width":393,"height":852}}'>
+// The start screen in the cute idle-game style: outlined title, a candy-coloured globe, a speech
+// bubble and two counters of the births and deaths since the game was opened.
+
+// Inside the prototype the host passes `nav` and moves between screens itself; on its own an
+// artboard follows plain links.
+function linkTo(self, stem) {
+  return typeof self.props.nav === 'function'
+    ? { href: null, go: () => self.props.nav(stem) }
+    : { href: stem + '.dc.html', go: null };
+}
+var STICKER_STEMS = { people: 'PeopleCute', activities: 'ActivitiesCute', life: 'LiveCute', money: 'MoneyCute', odds: 'OddsLife' };
+function stickerLinks(self) {
+  const out = {};
+  Object.keys(STICKER_STEMS).forEach((k) => { out[k] = linkTo(self, STICKER_STEMS[k]); });
+  return out;
+}
+
+class Component extends DCLogic {
+  componentDidMount() {
+    this.openedAt = Date.now();
+    this.timer = setInterval(() => this.forceUpdate(), 250);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+  renderVals() {
+    const secs = this.openedAt ? (Date.now() - this.openedAt) / 1000 : 0;
+    // About 4.2 births and 2 deaths every second worldwide.
+    const born = Math.floor(secs * 4.2).toLocaleString('en-US');
+    const died = Math.floor(secs * 2).toLocaleString('en-US');
+    return {
+      bornCount: born,
+      diedCount: died,
+      countersLabel: 'Since you opened the game: ' + born + ' born, ' + died + ' passed away',
+      to: { roll: linkTo(this, 'RollCute') }
+    };
+  }
+}
+</script>
+</body>
+</html>

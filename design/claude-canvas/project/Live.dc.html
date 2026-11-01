@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Life</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&amp;family=Figtree:wght@400;500;600;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+main[data-theme=light] a:focus-visible,main[data-theme=light] button:focus-visible{outline:3px solid #e5533c;outline-offset:3px}
+main[data-theme=dark] a:focus-visible,main[data-theme=dark] button:focus-visible{outline:3px solid #f6cfe0;outline-offset:3px}
+.lv-scroll::-webkit-scrollbar{display:none}
+.lv-o{color:#ffffff;text-shadow:1.5px 0 0 #17352e,-1.5px 0 0 #17352e,0 1.5px 0 #17352e,0 -1.5px 0 #17352e,1px 1px 0 #17352e,-1px 1px 0 #17352e,1px -1px 0 #17352e,-1px -1px 0 #17352e}
+</style>
+</helmet>
+<main data-theme="{{ theme }}" style="position: relative; width: 393px; height: 852px; overflow: hidden; background: {{ c.bg }}; color: {{ c.ink }}; font-family: Figtree, system-ui, sans-serif">
+<div style="position: absolute; left: 0px; top: 0px; width: 393px; height: 300px; overflow: hidden">
+<svg width="393" height="300" viewBox="0 0 393 300" role="img" aria-label="{{ s.label }}" style="display: block">
+<defs><linearGradient id="{{ ids.sky }}" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="220"><stop offset="0" stop-color="{{ s.sky0 }}"></stop><stop offset="1" stop-color="{{ s.sky1 }}"></stop></linearGradient></defs>
+<rect width="393" height="300" fill="{{ urls.sky }}"></rect>
+<g opacity="{{ s.day }}">
+<circle cx="322" cy="124" r="22" fill="#f2b33d"></circle>
+<g fill="#ffffff"><ellipse cx="64" cy="124" rx="30" ry="11"></ellipse><ellipse cx="88" cy="115" rx="19" ry="11"></ellipse><ellipse cx="224" cy="110" rx="26" ry="9"></ellipse><ellipse cx="244" cy="104" rx="15" ry="8"></ellipse></g>
+</g>
+<g opacity="{{ s.night }}">
+<circle cx="322" cy="124" r="36" fill="#8a78f0" opacity="0.22"></circle>
+<path d="M321 103 A21 21 0 1 0 341 133 A17.6 17.6 0 1 1 321 103 Z" fill="#f6f1ea"></path>
+<g fill="#ffffff"><circle cx="24" cy="104" r="1.2"></circle><circle cx="96" cy="96" r="1"></circle><circle cx="170" cy="112" r="1.4"></circle><circle cx="262" cy="98" r="1"></circle><circle cx="376" cy="160" r="1.2"></circle><circle cx="140" cy="134" r="0.9"></circle></g>
+</g>
+<g stroke="{{ s.string }}" stroke-width="0.8" opacity="{{ s.stringOp }}" fill="none"><path d="M150 166 C156 196 142 216 136 240"></path><path d="M360 182 C346 206 368 224 352 240"></path></g>
+<path d="M150 136 L160 150 L150 166 L140 150 Z" fill="{{ s.kite1 }}"></path>
+<path d="M360 166 L368 174 L360 182 L352 174 Z" fill="{{ s.kite3 }}"></path>
+<path d="M0 214 V160 H62 V214 Z" fill="{{ s.b1 }}"></path>
+<path d="M62 214 V146 H132 V214 Z" fill="{{ s.b2 }}"></path>
+<path d="M141 214 V158 L146 149 L151 158 V214 Z M235 214 V158 L240 149 L245 158 V214 Z" fill="{{ s.dome }}"></path>
+<path d="M151 214 V186 C151 167 170 154 190 154 C210 154 229 167 229 186 V214 Z" fill="{{ s.dome }}"></path>
+<path d="M190 154 V142" stroke="{{ s.finial }}" stroke-width="3" stroke-linecap="round"></path>
+<path d="M250 214 V168 H318 V214 Z" fill="{{ s.b4 }}"></path>
+<path d="M318 214 V156 H393 V214 Z" fill="{{ s.b1 }}"></path>
+<g fill="{{ s.win }}" opacity="{{ s.winOp }}"><rect x="14" y="176" width="9" height="13" rx="4.5"></rect><rect x="38" y="176" width="9" height="13" rx="4.5"></rect><rect x="84" y="162" width="9" height="13" rx="4.5"></rect><rect x="108" y="162" width="9" height="13" rx="4.5"></rect><rect x="182" y="192" width="16" height="22" rx="8"></rect><rect x="266" y="182" width="9" height="13" rx="4.5"></rect><rect x="292" y="182" width="9" height="13" rx="4.5"></rect><rect x="340" y="170" width="9" height="13" rx="4.5"></rect></g>
+<rect x="0" y="210" width="393" height="16" fill="{{ s.parapet }}"></rect>
+<rect x="0" y="226" width="393" height="74" fill="{{ s.floor }}"></rect>
+<rect x="0" y="226" width="393" height="4" fill="{{ s.floorEdge }}"></rect>
+<path d="M336 174 C336 165 378 165 378 174 L378 220 C378 228 336 228 336 220 Z" fill="{{ s.tank }}"></path>
+<ellipse cx="357" cy="173" rx="21" ry="5.5" fill="{{ s.tankLid }}"></ellipse>
+<path d="M8 226 V168 M104 226 V164" stroke="{{ s.pole }}" stroke-width="3" stroke-linecap="round"></path>
+<path d="M8 174 Q56 188 104 170" stroke="{{ s.line }}" stroke-width="1.5" fill="none"></path>
+<path d="M20 178 L36 181 L34 202 L22 200 Z" fill="{{ s.cl1 }}"></path>
+<path d="M46 182 L62 183 L61 199 L47 199 Z" fill="{{ s.cl2 }}"></path>
+<path d="M72 181 L84 180 L86 210 L74 210 Z" fill="{{ s.cl3 }}"></path>
+<g fill="{{ s.shadow }}"><ellipse cx="58" cy="289" rx="26" ry="4"></ellipse><ellipse cx="118" cy="289" rx="26" ry="4"></ellipse><ellipse cx="186" cy="289" rx="23" ry="4"></ellipse><ellipse cx="242" cy="289" rx="25" ry="4"></ellipse></g>
+</svg>
+<img src="/_blob/06309a7b119165e18071ca59d8f05442" alt="" style="position: absolute; left: 18px; top: 110px; width: 80px; height: 180px; filter: {{ c.figFilter }}">
+<img src="/_blob/eb500ed323792a3dc80fed8b200f7f56" alt="" style="position: absolute; left: 78px; top: 110px; width: 80px; height: 180px; filter: {{ c.figFilter }}">
+<img src="/_blob/c2128b913ac0de53f21a0f1ef59e6e8c" alt="" style="position: absolute; left: 202px; top: 110px; width: 80px; height: 180px; filter: {{ c.figFilter }}">
+<img src="/_blob/a4686a07ba0291fccb319c9cc5c8501c" alt="" style="position: absolute; left: 146px; top: 110px; width: 80px; height: 180px; filter: {{ c.figFilter }}">
+<span aria-hidden="true" style="position: absolute; left: 169px; top: 102px; display: flex; align-items: center; height: 20px; box-sizing: border-box; padding: 0 6px; border: 2px solid {{ c.outline }}; border-radius: 4px; background: {{ c.accent }}; color: {{ c.youInk }}; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 0.06em">YOU</span>
+</div>
+<button type="button" aria-label="Menu" style="position: absolute; left: 14px; top: 46px; width: 44px; height: 44px; box-sizing: border-box; padding: 0; border: 2px solid {{ c.outline }}; border-radius: 10px; background: {{ c.face }}; box-shadow: 0 3px 0 {{ c.outline }}; color: {{ c.ink }}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+<div style="position: absolute; left: 50%; top: 44px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; min-width: 148px; box-sizing: border-box; padding: 4px 14px 5px; border: 2px solid {{ c.outline }}; border-radius: 10px; background: {{ c.face }}; box-shadow: 0 3px 0 {{ c.outline }}; text-align: center">
+<span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 19px; font-weight: 800; line-height: 22px; letter-spacing: -0.2px">October 2041</span>
+<span style="display: flex; align-items: center; gap: 3px; font-size: 11px; font-weight: 700; line-height: 14px; color: {{ c.muted }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.8-6.5-11a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11-6.5 11Z"></path><circle cx="12" cy="10" r="2.3"></circle></svg>Lucknow · Home</span>
+</div>
+<button type="button" onClick="{{ togglePause }}" aria-label="{{ pauseLabel }}" style="position: absolute; right: 14px; top: 46px; width: 44px; height: 44px; box-sizing: border-box; padding: 0; border: 2px solid {{ c.outline }}; border-radius: 10px; background: {{ c.face }}; box-shadow: 0 3px 0 {{ c.outline }}; color: {{ c.ink }}; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<sc-if value="{{ running }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M9 6v12M15 6v12"></path></svg></sc-if>
+<sc-if value="{{ stopped }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5Z" fill="currentColor"></path></svg></sc-if>
+</button>
+<div style="position: absolute; right: 14px; top: 248px; display: flex; gap: 8px">
+<button type="button" aria-label="Statistics" style="width: 40px; height: 40px; box-sizing: border-box; padding: 0; border: 2px solid {{ c.outline }}; border-radius: 10px; background: {{ c.face }}; box-shadow: 0 3px 0 {{ c.outline }}; color: {{ c.ink }}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V12M12 20V5M19 20v-9"></path></svg></button>
+<button type="button" onClick="{{ cycleSpeed }}" aria-label="{{ speedLabel }}" style="min-width: 58px; height: 40px; box-sizing: border-box; padding: 0 10px; border: 2px solid {{ c.outline }}; border-radius: 10px; background: {{ c.accent }}; box-shadow: 0 3px 0 {{ c.outline }}; color: {{ c.youInk }}; display: flex; align-items: center; justify-content: center; gap: 3px; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 17px; font-weight: 800; cursor: pointer"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5v13l9-6.5ZM12 5.5v13l9-6.5Z" fill="currentColor"></path></svg>×{{ speed }}</button>
+</div>
+<section aria-label="Aarav’s stats" style="position: absolute; left: 0px; right: 0px; top: 300px; height: 92px; box-sizing: border-box; padding: 8px 12px 0; border-top: 2px solid {{ c.outline }}; border-bottom: 2px solid {{ c.outline }}; background: {{ c.panel }}">
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px">
+<sc-for list="{{ stats }}" as="st" hint-placeholder-count="4">
+<div role="meter" aria-label="{{ st.name }}" aria-valuenow="{{ st.v }}" aria-valuemin="0" aria-valuemax="100" style="position: relative; min-width: 0">
+<div style="display: flex; align-items: center; gap: 3px; height: 14px; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{ st.color }}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="{{ st.icon }}"></path></svg><span style="font-size: 10px; font-weight: 700; line-height: 14px">{{ st.name }}</span></div>
+<div aria-hidden="true" style="position: relative; height: 17px; margin-top: 3px; box-sizing: border-box; border: 2px solid {{ c.outline }}; border-radius: 4px; background: {{ c.track }}; overflow: hidden">
+<div style="width: {{ st.w }}; height: 100%; background: {{ st.color }}; box-shadow: inset 0 3px 0 rgba(255,255,255,0.3)"></div>
+<sc-if value="{{ st.hasDelta }}" hint-placeholder-val="{{ false }}"><span class="lv-o" style="position: absolute; left: 4px; top: 0px; bottom: 0px; display: flex; align-items: center; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 10px; font-weight: 800">{{ st.delta }}</span></sc-if>
+<span class="lv-o" style="position: absolute; right: 5px; top: 0px; bottom: 0px; display: flex; align-items: center; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 11.5px; font-weight: 800; font-variant-numeric: tabular-nums">{{ st.v }}</span>
+</div>
+
+</div>
+</sc-for>
+</div>
+<div style="display: flex; gap: 6px; margin-top: 8px">
+<div role="meter" aria-label="Age 15 of an expected 71 years" aria-valuenow="15" aria-valuemin="0" aria-valuemax="80" style="flex: 1.35; min-width: 0; display: flex; align-items: center; gap: 6px; height: 30px; box-sizing: border-box; padding: 0 8px; border: 2px solid {{ c.outline }}; border-radius: 6px; background: {{ c.face }}">
+<span style="flex: none; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 12px; font-weight: 800">AGE 15</span>
+<span aria-hidden="true" style="position: relative; flex: 1; height: 10px; box-sizing: border-box; border: 1.5px solid {{ c.outline }}; border-radius: 3px; background: {{ c.track }}"><span style="display: block; width: 18.75%; height: 100%; background: {{ c.ageFill }}"></span><span style="position: absolute; left: 88.75%; top: -4px; width: 2px; height: 14px; background: {{ c.outline }}"></span></span>
+<span style="flex: none; font-size: 10.5px; font-weight: 700; color: {{ c.muted }}">~71</span>
+</div>
+<div aria-label="Savings {{ money }}" style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 5px; height: 30px; box-sizing: border-box; padding: 0 8px; border: 2px solid {{ c.outline }}; border-radius: 6px; background: {{ c.face }}">
+<svg width="18" height="14" viewBox="0 0 26 18" aria-hidden="true" style="flex: none"><rect x="1" y="1" width="24" height="16" rx="3" fill="{{ c.money }}" stroke="{{ c.outline }}" stroke-width="2"></rect><circle cx="13" cy="9" r="3.6" fill="none" stroke="{{ c.outline }}" stroke-width="1.8"></circle></svg>
+<span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 13px; font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap">{{ money }}</span>
+<span style="font-size: 10.5px; font-weight: 800; color: {{ moneyDeltaInk }}; white-space: nowrap">{{ moneyDelta }}</span>
+</div>
+<div aria-label="Now: {{ status }}" style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 5px; height: 30px; box-sizing: border-box; padding: 0 8px; border: 2px solid {{ c.outline }}; border-radius: 6px; background: {{ c.face }}">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M2 9l10-5 10 5-10 5Z"></path><path d="M6 11v5c3 2 9 2 12 0v-5"></path></svg>
+<span style="min-width: 0; overflow: hidden; text-overflow: ellipsis; font-size: 12px; font-weight: 700; white-space: nowrap">{{ status }}</span>
+</div>
+</div>
+</section>
+<section aria-label="Life journal" style="position: absolute; left: 10px; right: 10px; top: 402px; bottom: 110px; display: flex; flex-direction: column; box-sizing: border-box; border: 2px solid {{ c.outline }}; border-radius: 6px; background: {{ c.paper }}; box-shadow: 0 3px 0 {{ c.outline }}; overflow: hidden">
+<div style="flex: none; display: flex; align-items: center; justify-content: space-between; height: 34px; box-sizing: border-box; padding: 0 12px; border-bottom: 2px solid {{ c.outline }}; background: {{ c.journalHead }}">
+<span style="display: flex; align-items: center; gap: 6px; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 0.06em"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3Z"></path><path d="M5 17a3 3 0 0 1 3-3h11"></path></svg>LIFE JOURNAL</span>
+<span style="font-family: 'Courier Prime', ui-monospace, monospace; font-size: 12px; font-weight: 700; color: {{ c.muted }}">p. 15</span>
+</div>
+<div aria-hidden="true" style="position: absolute; right: 18px; top: 32px; width: 12px; height: 26px; background: {{ c.accent }}; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%)"></div>
+<div class="lv-scroll" style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 0 12px 16px">
+<sc-for list="{{ years }}" as="yr" hint-placeholder-count="2">
+<div>
+<h2 style="display: flex; align-items: center; gap: 8px; margin: 12px 0 0; font-family: 'Courier Prime', ui-monospace, monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; color: {{ c.muted }}"><span>{{ yr.title }}</span><span aria-hidden="true" style="flex: 1; height: 0; border-top: 1px dashed {{ c.rule }}"></span></h2>
+<ol style="list-style: none; margin: 0; padding: 0">
+<sc-for list="{{ yr.items }}" as="it" hint-placeholder-count="3">
+<li style="display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 8px; padding: 9px 0; border-bottom: 1px dashed {{ c.rule }}">
+<span style="padding-top: 1px; font-family: 'Courier Prime', ui-monospace, monospace; font-size: 12px; font-weight: 700; line-height: 18px; color: {{ c.muted }}">{{ it.m }}</span>
+<span style="min-width: 0">
+<span style="display: flex; align-items: flex-start; gap: 8px">
+<sc-if value="{{ it.hasWho }}" hint-placeholder-val="{{ false }}"><span style="flex: none; width: 24px; height: 24px; box-sizing: border-box; border: 1.5px solid {{ c.outline }}; border-radius: 4px; overflow: hidden; background: {{ c.tile }}"><img src="{{ it.who }}" alt="" style="display: block; width: 21px; height: 24px"></span></sc-if>
+<span style="font-size: 14px; line-height: 1.4">{{ it.text }}</span>
+</span>
+<span style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px">
+<sc-for list="{{ it.fx }}" as="fx" hint-placeholder-count="1"><span style="display: inline-flex; align-items: center; gap: 4px; height: 20px; padding: 0 6px; border-radius: 4px; background: {{ c.tile }}; font-size: 11.5px; font-weight: 700; white-space: nowrap"><span style="width: 7px; height: 7px; border-radius: 2px; background: {{ fx.dot }}"></span>{{ fx.t }}</span></sc-for>
+</span>
+</span>
+</li>
+</sc-for>
+</ol>
+</div>
+</sc-for>
+<button type="button" style="display: block; width: 100%; min-height: 44px; margin-top: 10px; border: 0; background: transparent; color: {{ c.muted }}; font-family: 'Courier Prime', ui-monospace, monospace; font-size: 13px; font-weight: 700; cursor: pointer">← Earlier pages: ages 0–13</button>
+</div>
+</section>
+<nav aria-label="Sections" style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 88px; box-sizing: border-box; padding: 6px 6px 22px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 2px solid {{ c.outline }}; background: {{ c.panel }}">
+<button type="button" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 0; border: 0; background: transparent; color: {{ c.muted }}; font-family: inherit; font-size: 11px; font-weight: 700; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="3"></circle><path d="M3.5 19c0-3.1 2.4-5.2 5.5-5.2s5.5 2.1 5.5 5.2"></path><circle cx="16.5" cy="9.5" r="2.5"></circle><path d="M16.2 13.8c2.6 0 4.3 1.9 4.3 4.7"></path></svg>Family</button>
+<button type="button" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 0; border: 0; background: transparent; color: {{ c.muted }}; font-family: inherit; font-size: 11px; font-weight: 700; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M14.6 9.4c-.5-.8-1.4-1.3-2.6-1.3-1.5 0-2.6.8-2.6 1.9 0 2.7 5.3 1.4 5.3 4.1 0 1.1-1.1 1.9-2.7 1.9-1.2 0-2.2-.5-2.7-1.3M12 6.6v1.5M12 15.9v1.5"></path></svg>Money</button>
+<a href="{{ selfHref }}" aria-current="page" style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 3px; color: {{ c.ink }}; font-size: 11px; font-weight: 800; text-decoration: none">
+<span style="position: absolute; left: 50%; top: -26px; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; width: 58px; height: 52px; box-sizing: border-box; border: 2px solid {{ c.outline }}; border-radius: 12px; background: {{ c.accent }}; box-shadow: 0 4px 0 {{ c.outline }}; color: {{ c.youInk }}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v-8"></path><path d="M12 12c0-4 3-6.5 7-6.5 0 4-3 6.5-7 6.5Z"></path><path d="M12 14.5c0-3-2.4-5-5.8-5 0 3 2.4 5 5.8 5Z"></path></svg></span>
+Life</a>
+<a href="{{ oddsHref }}" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: {{ c.muted }}; font-size: 11px; font-weight: 700; text-decoration: none"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Odds</a>
+<button type="button" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 0; border: 0; background: transparent; color: {{ c.muted }}; font-family: inherit; font-size: 11px; font-weight: 700; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17" rx="2"></rect><path d="M9 8h6M9 12h6M9 16h3"></path></svg>Story</button>
+</nav>
+<sc-if value="{{ sheetOn }}" hint-placeholder-val="{{ true }}">
+<section role="dialog" aria-modal="false" aria-labelledby="lv-ask" style="position: absolute; left: 0px; right: 0px; bottom: 0px; box-sizing: border-box; padding: 14px 14px 28px; border-top: 2px solid {{ c.outline }}; border-radius: 12px 12px 0 0; background: {{ c.panel }}; box-shadow: 0 -10px 30px {{ c.sheetGlow }}">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="flex: none; width: 50px; height: 50px; box-sizing: border-box; border: 2px solid {{ c.outline }}; border-radius: 8px; overflow: hidden; background: {{ c.dadBg }}"><img src="/_blob/8d95e2321f6dfb98740afbad525a37f9" alt="" style="display: block; width: 46px; height: 52px"></span>
+<span style="flex: 1; min-width: 0"><span style="display: block; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 17px; font-weight: 800; line-height: 1.2">Dad · Rohan, 42</span><span style="display: block; margin-top: 2px; font-size: 12px; font-weight: 600; line-height: 1.3; color: {{ c.muted }}">October 2041</span></span>
+<span style="display: inline-flex; align-items: center; gap: 5px; height: 26px; box-sizing: border-box; padding: 0 8px; border: 2px solid {{ c.outline }}; border-radius: 6px; background: {{ c.face }}; font-size: 11px; font-weight: 800; letter-spacing: 0.04em"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M9 6v12M15 6v12"></path></svg>PAUSED</span>
+</div>
+<p id="lv-ask" style="margin: 12px 0 0; padding: 10px 12px; border: 2px solid {{ c.outline }}; border-radius: 6px; background: {{ c.paper }}; font-size: 16px; line-height: 1.45">{{ line }}</p>
+<sc-if value="{{ asking }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px">
+<sc-for list="{{ options }}" as="op" hint-placeholder-count="3">
+<button type="button" onClick="{{ op.pick }}" style="display: block; width: 100%; box-sizing: border-box; padding: 9px 12px 10px; border: 2px solid {{ c.outline }}; border-radius: 10px; background: {{ c.face }}; box-shadow: 0 3px 0 {{ c.outline }}; color: {{ c.ink }}; font-family: inherit; text-align: left; cursor: pointer">
+<span style="display: block; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 16px; font-weight: 800; line-height: 1.25">{{ op.label }}</span>
+<span style="display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin-top: 5px"><span style="font-size: 12.5px; line-height: 1.3; color: {{ c.muted }}">{{ op.hint }}</span><sc-for list="{{ op.fx }}" as="fx" hint-placeholder-count="2"><span style="display: inline-flex; align-items: center; gap: 4px; height: 20px; padding: 0 6px; border-radius: 4px; background: {{ c.tile }}; font-size: 11.5px; font-weight: 700; white-space: nowrap"><span style="width: 7px; height: 7px; border-radius: 2px; background: {{ fx.dot }}"></span>{{ fx.t }}</span></sc-for></span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ answered }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px">
+<sc-for list="{{ effects }}" as="fx" hint-placeholder-count="2"><span style="display: inline-flex; align-items: center; gap: 5px; height: 24px; padding: 0 8px; border-radius: 4px; background: {{ c.tile }}; font-size: 12.5px; font-weight: 700; white-space: nowrap"><span style="width: 8px; height: 8px; border-radius: 2px; background: {{ fx.dot }}"></span>{{ fx.t }}</span></sc-for>
+</div>
+<button type="button" onClick="{{ resume }}" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 54px; margin-top: 16px; box-sizing: border-box; border: 2px solid {{ c.outline }}; border-radius: 10px; background: {{ c.accent }}; box-shadow: 0 4px 0 {{ c.outline }}; color: {{ c.youInk }}; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 18px; font-weight: 800; cursor: pointer">Continue life<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+</sc-if>
+</section>
+</sc-if>
+<svg width="393" height="852" aria-hidden="true" style="position: absolute; left: 0px; top: 0px; pointer-events: none; mix-blend-mode: {{ c.grainBlend }}; opacity: {{ c.grainOp }}">
+<filter id="{{ ids.grain }}"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
+<rect width="393" height="852" filter="{{ urls.grain }}"></rect>
+</svg>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"frame":{"editor":"enum","options":["decision","journal"],"default":"decision"},"$preview":{"width":393,"height":852}}'>
+// The life screen, built like a mobile game rather than a web page: ink-outlined panels and
+// chunky buttons that echo the outlines of the characters, and few rounded corners.
+// Top: the family on their rooftop at the player's current age, with menu, date and pause
+// above and speed and statistics below. Under it a flat strip of four stat bars and the age bar,
+// then the life journal as a framed notebook, the section bar with Life in the centre,
+// and a decision panel that pauses time. `frame` starts on the open decision or after it.
+var SCENES = {
+  light: {
+    label: 'A bright afternoon on a Lucknow rooftop in 2041. Aarav, 15, stands with his mother Priya, his father Rohan and his sister Ananya, 18; kites fill the sky.',
+    sky0: '#8fc6ea', sky1: '#cfe7f4', day: 1, night: 0,
+    string: '#17352e', stringOp: 0.35, kite1: '#f2b33d', kite3: '#ffffff',
+    b1: '#f2a7a0', b2: '#e9b35f', dome: '#fbf7f0', b4: '#9ed3b8', finial: '#e9b35f', win: '#17352e', winOp: 0.18,
+    parapet: '#fbf7f0', floor: '#e9c9a6', floorEdge: '#dcb68c', shadow: 'rgba(120,80,40,0.22)', tank: '#17352e', tankLid: '#2c5148',
+    pole: '#8a5a3a', line: '#ffffff', cl1: '#e5533c', cl2: '#4f8fc0', cl3: '#f2b33d'
+  },
+  dark: {
+    label: 'A purple night over a Lucknow rooftop in 2041. Aarav, 15, stands with his mother Priya, his father Rohan and his sister Ananya, 18, under a crescent moon.',
+    sky0: '#120f2e', sky1: '#3a2b9a', day: 0, night: 1,
+    string: '#f6f1ea', stringOp: 0.3, kite1: '#f2d7a6', kite3: '#f6cfe0',
+    b1: '#2c2468', b2: '#231c55', dome: '#43379a', b4: '#231c55', finial: '#f2d7a6', win: '#f2d7a6', winOp: 0.9,
+    parapet: '#3a3070', floor: '#221d3d', floorEdge: '#2e2752', shadow: 'rgba(0,0,0,0.35)', tank: '#0e0c18', tankLid: '#2a2346',
+    pole: '#3e3462', line: '#8e88a0', cl1: '#a8455e', cl2: '#4a5aa6', cl3: '#b8925a'
+  }
+};
+
+var COLORS = {
+  light: {
+    bg: '#f4ede1', ink: '#17352e', muted: '#4e5f58', accent: '#e5533c', youInk: '#ffffff',
+    outline: '#17352e', face: '#fffaf3', panel: '#fffaf3', paper: '#fffdf7', journalHead: '#f7efe0',
+    track: '#ece3d3', ageFill: '#17352e', tile: 'rgba(23,53,46,0.07)', rule: 'rgba(23,53,46,0.22)',
+    health: '#d6566a', joy: '#e39b2d', mind: '#5b6ee1', ties: '#2f9e83', money: '#8fcf5a',
+    up: '#1f6b4f', down: '#b23a32', upBg: '#2f9e5a', downBg: '#d0443a', dadBg: '#d6eaf6', sheetGlow: 'rgba(23,53,46,0.18)',
+    figFilter: 'none', grainBlend: 'multiply', grainOp: 0.14
+  },
+  dark: {
+    bg: '#18171c', ink: '#f6f1ea', muted: '#a9a3b8', accent: '#ff9eb0', youInk: '#18171c',
+    outline: '#0a090e', face: '#2c2836', panel: '#211f28', paper: '#26222e', journalHead: '#2c2836',
+    track: '#141218', ageFill: '#f6f1ea', tile: 'rgba(255,255,255,0.07)', rule: 'rgba(246,241,234,0.2)',
+    health: '#ff8fa3', joy: '#ffc66d', mind: '#9eabff', ties: '#6fd8bd', money: '#8fcf5a',
+    up: '#8fd8b8', down: '#ff9eb0', upBg: '#2f9e5a', downBg: '#d0443a', dadBg: 'rgba(154,136,255,0.2)', sheetGlow: 'rgba(0,0,0,0.55)',
+    figFilter: 'brightness(0.82) saturate(0.9)', grainBlend: 'overlay', grainOp: 0.26
+  }
+};
+
+var ICONS = {
+  health: 'M12 19.5s-7-4.3-7-9.6A3.9 3.9 0 0 1 12 7.6a3.9 3.9 0 0 1 7 2.3c0 5.3-7 9.6-7 9.6Z',
+  joy: 'M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4',
+  mind: 'M4 6.5c2.6-1.2 5.3-1.2 8 .8 2.7-2 5.4-2 8-.8V18c-2.6-1.2-5.3-1.2-8 .8-2.7-2-5.4-2-8-.8ZM12 7.3v11.5',
+  ties: 'M9 11a3 3 0 1 0 0-6a3 3 0 1 0 0 6M3 19c0-3.3 2.7-5 6-5s6 1.7 6 5M16 11a2.5 2.5 0 1 0 0-5M17 14c2.4.3 4 1.9 4 4.5'
+};
+var NAMES = { health: 'Health', joy: 'Happiness', mind: 'Education', ties: 'Relationships', money: 'Money' };
+var BASE = { health: 73, joy: 64, mind: 71, ties: 58 };
+
+var WHO = { ananya: '/_blob/74d3092d1f603aad42d80848d9c28b7c', mum: '/_blob/cbd2aafdafb840b2db88bb1c3b4c0ef3', dad: '/_blob/8d95e2321f6dfb98740afbad525a37f9' };
+
+var ASK = '“The shop isn’t doing well, beta. I need you at the counter. Grade 11 can wait.”';
+var CHOICES = [
+  { label: 'Stay in school', hint: 'Sundays at the shop', fx: { mind: 6, money: -4 }, status: 'Grade 11', savings: -400,
+    reply: '“…Fine. Study, then. But on Sundays you’re at the counter.”', log: 'Started grade 11. Sundays at the shop.' },
+  { label: 'Work the counter', hint: 'Grade 10 is your last', fx: { money: 5, mind: -6 }, status: 'Shop hand', savings: 1500,
+    reply: '“Good. We open at seven. Wear the clean shirt.”', log: 'Left school. First week behind the shop counter.' },
+  { label: 'Both: shop by day, study at night', hint: 'You’ll be tired', fx: { mind: 3, money: 2, health: -5 }, status: 'Shop + night school', savings: 600,
+    reply: '“If you can manage it, I won’t stop you.”', log: 'Night classes, days at the shop.' }
+];
+
+// The journal, newest first. Each effect names a stat (or money) and a change.
+var YEARS = [
+  { title: 'AGE 15 · 2041', items: [
+    { m: 'Sep', who: 'ananya', text: 'Ananya left for college in Delhi.', fx: { joy: -3 } },
+    { m: 'Jul', text: 'Dengue in the monsoon: a week in bed.', fx: { health: -9 } },
+    { m: 'Mar', text: 'Passed the grade 10 board exams with 81%.', fx: { mind: 4 } }
+  ] },
+  { title: 'AGE 14 · 2040', items: [
+    { m: 'Dec', text: 'Made the school cricket team.', fx: { ties: 5, health: 2 } },
+    { m: 'Aug', who: 'dad', text: 'Grandfather Hari died at 71. Dad took over the shop.', fx: { joy: -6 } },
+    { m: 'Jan', who: 'mum', text: 'Mum started stitching blouses for the neighbours.', fx: { money: 3 } }
+  ] }
+];
+
+class Component extends DCLogic {
+  renderVals() {
+    const theme = this.props.theme === 'dark' ? 'dark' : 'light';
+    const c = COLORS[theme];
+    const st = this.state || {};
+    const journalFrame = this.props.frame === 'journal';
+    const picked = typeof st.picked === 'number' ? st.picked : journalFrame ? 0 : null;
+    const done = st.done !== undefined ? st.done : journalFrame;
+    const choice = picked === null ? null : CHOICES[picked];
+    const speeds = [1, 2, 4];
+    const speed = st.speed || 1;
+    const stopped = !!st.paused || !done;
+    const fxList = (fx) => Object.keys(fx).map((k) => ({
+      t: (fx[k] > 0 ? '+' : '−') + Math.abs(fx[k]) + ' ' + NAMES[k],
+      dot: c[k]
+    }));
+    const stat = (key) => {
+      const d = choice && done && choice.fx[key] ? choice.fx[key] : 0;
+      const v = Math.max(0, Math.min(100, BASE[key] + d));
+      return {
+        name: NAMES[key], v: v, w: v + '%', color: c[key], icon: ICONS[key],
+        delta: d ? (d > 0 ? '+' : '−') + Math.abs(d) : '',
+        hasDelta: !!d,
+        deltaBg: d > 0 ? c.upBg : c.downBg
+      };
+    };
+    const item = (it) => ({ m: it.m, text: it.text, fx: fxList(it.fx), hasWho: !!it.who, who: it.who ? WHO[it.who] : '' });
+    const years = YEARS.map((y, i) => ({
+      title: y.title,
+      items: (i === 0 && choice && done ? [{ m: 'Oct', who: 'dad', text: choice.log, fx: choice.fx }] : []).concat(y.items).map(item)
+    }));
+    return {
+      theme: theme,
+      c: c,
+      s: SCENES[theme],
+      ids: { sky: 'lv-sky-' + theme, grain: 'lv-grain-' + theme },
+      urls: { sky: 'url(#lv-sky-' + theme + ')', grain: 'url(#lv-grain-' + theme + ')' },
+      selfHref: theme === 'dark' ? 'LiveDark.dc.html' : 'Live.dc.html',
+      oddsHref: theme === 'dark' ? 'OddsDark.dc.html' : 'Odds.dc.html',
+      stats: ['health', 'joy', 'mind', 'ties'].map(stat),
+      // The pocket money Aarav has saved, and what he does now.
+      money: '₹' + (3400 + (choice && done ? choice.savings : 0)).toLocaleString('en-IN'),
+      moneyDelta: choice && done ? (choice.savings > 0 ? '+' : '−') + Math.abs(choice.savings) : '',
+      moneyDeltaInk: choice && done && choice.savings > 0 ? c.up : c.down,
+      status: choice && done ? choice.status : 'Student',
+      years: years,
+      sheetOn: !done,
+      asking: !done && !choice,
+      answered: !done && !!choice,
+      line: choice ? choice.reply : ASK,
+      effects: choice ? fxList(choice.fx) : [],
+      options: CHOICES.map((o, i) => ({ label: o.label, hint: o.hint, fx: fxList(o.fx), pick: () => this.setState({ picked: i, done: false }) })),
+      resume: () => this.setState({ done: true, paused: false }),
+      speed: speed,
+      speedLabel: 'Speed ×' + speed + ', change',
+      running: !stopped,
+      stopped: stopped,
+      pauseLabel: stopped ? 'Resume' : 'Pause',
+      togglePause: () => { if (done) this.setState({ paused: !st.paused }); },
+      cycleSpeed: () => this.setState({ speed: speeds[(speeds.indexOf(speed) + 1) % speeds.length] })
+    };
+  }
+}
+</script>
+</body>
+</html>

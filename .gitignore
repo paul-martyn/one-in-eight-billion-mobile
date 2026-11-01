@@ -11,3 +11,6 @@ artifacts/
 .DS_Store
 Thumbs.db
 .codebase-memory/
+
+# Производный core генерируется из reference/ командой npm run core:extract
+src/core/generated/

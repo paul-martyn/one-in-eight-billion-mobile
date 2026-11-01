@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Person</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<svg width="{{ w }}" height="{{ h }}" viewBox="{{ vb }}" role="img" aria-label="{{ label }}" style="display: block; overflow: visible">
+<defs><filter id="pp-wobble" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="1" seed="3"></feTurbulence><feDisplacementMap in="SourceGraphic" scale="{{ wobble }}"></feDisplacementMap></filter></defs>
+<g filter="url(#pp-wobble)" stroke="{{ C.ink }}" stroke-width="{{ S.ink }}" stroke-linejoin="round" stroke-linecap="round">
+<path d="{{ L.hairBack }}" fill="{{ C.hair }}"></path>
+<path d="{{ L.legs }}" fill="{{ C.skin }}"></path>
+<path d="{{ L.pants }}" fill="{{ C.bottom }}"></path>
+<path d="{{ L.shoes }}" fill="{{ C.shoe }}"></path>
+<path d="{{ L.skirt }}" fill="{{ C.bottom }}"></path>
+<path d="{{ L.cane }}" fill="none" stroke="{{ C.cane }}" stroke-width="2.4"></path>
+<path d="{{ L.arms }}" fill="{{ C.skin }}"></path>
+<path d="{{ L.sleeves }}" fill="{{ C.sleeve }}"></path>
+<path d="{{ L.thumbs }}" fill="{{ C.skin }}"></path>
+<path d="{{ L.hands }}" fill="{{ C.skin }}"></path>
+<path d="{{ L.neck }}" fill="{{ C.skin }}"></path>
+<path d="{{ L.torso }}" fill="{{ C.top }}"></path>
+<path d="{{ L.detail }}" fill="{{ C.accent }}"></path>
+<path d="{{ L.folds }}" fill="none" stroke-width="{{ S.fine }}" stroke-opacity="0.55"></path>
+<path d="{{ L.neckline }}" fill="{{ C.skin }}"></path>
+<path d="{{ L.head }}" fill="{{ C.skin }}"></path>
+<path d="{{ L.beard }}" fill="{{ C.hair }}"></path>
+<path d="{{ L.cheeks }}" fill="{{ C.blush }}" stroke="none"></path>
+<path d="{{ L.freckles }}" fill="{{ C.freckle }}" stroke="none"></path>
+<path d="{{ L.wrinkles }}" fill="none" stroke-width="{{ S.fine }}" stroke-opacity="0.6"></path>
+<path d="{{ L.eyes }}" fill="{{ C.ink }}" stroke="none"></path>
+<path d="{{ L.lids }}" fill="none" stroke-width="{{ S.feature }}"></path>
+<path d="{{ L.brows }}" fill="none" stroke-width="{{ S.brow }}"></path>
+<path d="{{ L.nose }}" fill="none" stroke-width="{{ S.feature }}"></path>
+<path d="{{ L.mouth }}" fill="none" stroke-width="{{ S.feature }}"></path>
+<path d="{{ L.mouthFill }}" fill="#4a1f22" stroke-width="{{ S.feature }}"></path>
+<path d="{{ L.mustache }}" fill="{{ C.hair }}" stroke-width="{{ S.fine }}"></path>
+<path d="{{ L.hairFront }}" fill="{{ C.hair }}"></path>
+<path d="{{ L.ears }}" fill="{{ C.skin }}"></path>
+<path d="{{ L.earLines }}" fill="none" stroke-width="{{ S.fine }}"></path>
+<path d="{{ L.headwear }}" fill="{{ C.accent }}" fill-rule="evenodd"></path>
+<path d="{{ L.bindi }}" fill="{{ C.bindi }}" stroke="none"></path>
+<path d="{{ L.glasses }}" fill="none" stroke-width="{{ S.feature }}"></path>
+</g>
+</svg>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"seed":{"editor":"int","default":7},"age":{"editor":"int","default":30,"min":0,"max":100},"sex":{"editor":"enum","options":["f","m"],"default":"f"},"region":{"editor":"enum","options":["south-asia","east-asia","west-africa","europe","latin-america","middle-east"],"default":"south-asia"},"facing":{"editor":"enum","options":["front","left","right"],"default":"front"},"pose":{"editor":"enum","options":["auto","stand","hips","wave","raise-left","raise-right"],"default":"auto"},"outfit":{"editor":"text","default":""},"hair":{"editor":"text","default":""},"hairColor":{"editor":"text","default":""},"skin":{"editor":"int","default":-1,"min":-1,"max":7},"build":{"editor":"enum","options":["auto","slim","average","heavy"],"default":"auto"},"beard":{"editor":"text","default":""},"mouth":{"editor":"text","default":""},"top":{"editor":"text","default":""},"bottom":{"editor":"text","default":""},"accent":{"editor":"text","default":""},"height":{"editor":"int","default":300,"min":40,"max":800},"crop":{"editor":"enum","options":["full","portrait"],"default":"full"},"night":{"editor":"float","default":0,"min":0,"max":1,"step":0.1},"$preview":{"width":150,"height":300}}'>
+// A person drawn from a handful of traits, in a hand-inked flat style (after Open Peeps):
+// bold outlines, flat colour, dot eyes, calm faces. The same seed always gives the same person;
+// any trait can be pinned with a prop. Figures stand in a 100×200 box with feet on the bottom
+// edge, so people of every age line up on one ground line at one scale.
+var SKIN = ['#f6d7bf', '#ecbf9a', '#d9a17a', '#c28461', '#a86a48', '#8d5537', '#6e4128', '#52301f'];
+var HAIR = { black: '#1f1a17', darkBrown: '#3b2a1f', brown: '#6b4a2f', auburn: '#8d4325', blonde: '#e0bd72', grey: '#b2aea6', white: '#ece8e0' };
+var BRIGHT = ['#e5533c', '#f2b33d', '#4f8fc0', '#9ed3b8', '#f2a7a0', '#6e5ce6', '#2f9e8f', '#d94f7a', '#8fa7df', '#78c785'];
+var PALE = ['#ffffff', '#f4e6c8', '#9ed3b8', '#a9d3ee', '#ffcf77', '#e9e2d0', '#f2a7a0', '#9ddadb'];
+var DARK = ['#2c3a4a', '#3d3a36', '#17352e', '#4a3f35', '#33405c', '#5a4a6a'];
+var LIGHT = ['#f1ebe0', '#e9e2d0', '#d8cdb8'];
+var ROBE = ['#2a2730', '#3b3550', '#1f3a3a', '#4a3f35'];
+var SCARF = ['#d9c7b0', '#2a2730', '#6e5ce6', '#9ed3b8', '#c98b4e', '#f2a7a0'];
+var SWADDLE = ['#fffaf0', '#f9d9d2', '#d6eaf6', '#fbe7be'];
+var SHOES = ['#2b2420', '#3d3a36', '#6b4a35', '#1d2633', '#8a3b2e'];
+var INK = '#1d1a1a';
+// The dark theme tints everyone towards the night sky from direction A.
+var NIGHT = '#2c2468';
+
+// Body measurements in box units. sw/ww/hw: shoulder, waist and hip widths.
+var STAGES = {
+  toddler: { legH: 21, torsoH: 25, sw: 23, ww: 23, hw: 24, armL: 23, thigh: 9, ankle: 6.2, armTop: 6.8, armEnd: 5.2, r: 13.8, shoe: 8.5, shoeH: 5 },
+  child: { legH: 40, torsoH: 32, sw: 25, ww: 22, hw: 24, armL: 32, thigh: 10, ankle: 6.4, armTop: 7, armEnd: 5.2, r: 14.4, shoe: 10, shoeH: 5.4 },
+  teen: { legH: 61, torsoH: 45, sw: 30, ww: 25, hw: 27, armL: 45, thigh: 12, ankle: 7, armTop: 8, armEnd: 5.6, r: 15, shoe: 12, shoeH: 6.2 },
+  adult: { legH: 69, torsoH: 52, sw: 36, ww: 30, hw: 31, armL: 51, thigh: 13.5, ankle: 7.8, armTop: 9.2, armEnd: 6.2, r: 15.4, shoe: 13, shoeH: 6.6 },
+  elder: { legH: 65, torsoH: 51, sw: 35, ww: 33, hw: 33, armL: 49, thigh: 13, ankle: 7.8, armTop: 9, armEnd: 6.1, r: 15.4, shoe: 13, shoeH: 6.6 }
+};
+var FEMALE = { sw: -5, ww: -5, hw: 2, legH: -3, torsoH: -2, armL: -3, armTop: -0.9, armEnd: -0.4, r: -0.4, shoe: -1.5 };
+
+// What people commonly wear and look like, by region. beard = [mustache, full beard] odds.
+var REGIONS = {
+  'south-asia': { skin: [3, 4, 5, 6], hair: ['black', 'black', 'darkBrown'], m: ['kurta', 'shirt', 'tee'], f: ['sari', 'kameez', 'sari'], boy: ['tee', 'shirt'], girl: ['kameez', 'dress'], mHair: ['short', 'side'], fHair: ['bun', 'braid', 'long'], beard: [0.5, 0.2] },
+  'east-asia': { skin: [0, 1, 2], hair: ['black', 'black', 'darkBrown'], m: ['shirt', 'tee'], f: ['tee', 'dress', 'skirt'], boy: ['tee', 'shirt'], girl: ['dress', 'tee'], mHair: ['short', 'side', 'buzz'], fHair: ['long', 'bob', 'ponytail'], beard: [0.08, 0.04] },
+  'west-africa': { skin: [5, 6, 7], hair: ['black'], m: ['kaftan', 'shirt', 'tee'], f: ['wrap', 'wrap', 'dress'], boy: ['tee', 'shirt'], girl: ['dress', 'wrap'], mHair: ['buzz', 'buzz', 'afro'], fHair: ['gele', 'afro', 'braid'], beard: [0.1, 0.2] },
+  'europe': { skin: [0, 1, 2], hair: ['blonde', 'brown', 'darkBrown', 'auburn', 'black'], m: ['shirt', 'tee'], f: ['dress', 'skirt', 'tee'], boy: ['tee', 'shirt'], girl: ['dress', 'tee', 'skirt'], mHair: ['short', 'side', 'curly'], fHair: ['long', 'ponytail', 'bob', 'bun'], beard: [0.1, 0.22] },
+  'latin-america': { skin: [1, 2, 3, 4], hair: ['black', 'darkBrown', 'brown'], m: ['shirt', 'tee'], f: ['dress', 'tee', 'skirt'], boy: ['tee', 'shirt'], girl: ['dress', 'tee'], mHair: ['short', 'curly', 'side'], fHair: ['long', 'ponytail', 'curlyLong'], beard: [0.2, 0.15] },
+  'middle-east': { skin: [1, 2, 3], hair: ['black', 'darkBrown'], m: ['thobe', 'shirt'], f: ['abaya', 'abaya', 'dress'], boy: ['tee', 'shirt'], girl: ['dress', 'tee'], mHair: ['short', 'side'], fHair: ['long', 'bun'], beard: [0.2, 0.5] }
+};
+
+var WORDS = { infant: ['Baby', 'Baby'], toddler: ['Toddler', 'Toddler'], child: ['Girl', 'Boy'], teen: ['Teenage girl', 'Teenage boy'], adult: ['Woman', 'Man'], elder: ['Old woman', 'Old man'] };
+
+// Head shapes in head units: u runs from the back of the head (-1) to the face side (+1), v runs down.
+var HEAD = {
+  front: 'M 0 -1.02 C 0.62 -1.02 0.98 -0.6 0.97 -0.05 C 0.96 0.45 0.62 1 0 1.04 C -0.62 1 -0.96 0.45 -0.97 -0.05 C -0.98 -0.6 -0.62 -1.02 0 -1.02 Z',
+  turned: 'M 0.05 -1.02 C 0.6 -1.04 0.98 -0.62 0.95 -0.08 C 0.93 0.42 0.62 0.98 0.2 1.05 C -0.25 1.1 -0.68 0.82 -0.85 0.45 C -1.05 0.02 -1.02 -0.72 -0.58 -0.95 C -0.38 -1.04 -0.15 -1.04 0.05 -1.02 Z'
+};
+var EAR = 'M 0.9 -0.16 C 1.2 -0.3 1.3 0.34 0.9 0.4 Z';
+var EAR_LINE = 'M 0.96 -0.04 C 1.1 -0.06 1.12 0.2 0.97 0.24';
+var HAIRS = {
+  short: { front: 'M -0.98 0.15 C -1.12 -0.6 -0.7 -1.22 0 -1.22 C 0.7 -1.22 1.12 -0.6 0.98 0.15 C 0.92 -0.15 0.86 -0.35 0.75 -0.45 C 0.4 -0.6 -0.1 -0.58 -0.45 -0.48 C -0.7 -0.4 -0.86 -0.15 -0.98 0.15 Z' },
+  side: { front: 'M -0.98 0.12 C -1.15 -0.62 -0.7 -1.25 0.05 -1.24 C 0.8 -1.22 1.15 -0.6 0.98 0.1 C 0.9 -0.2 0.8 -0.34 0.6 -0.32 C 0.3 -0.3 -0.05 -0.42 -0.32 -0.62 C -0.55 -0.42 -0.8 -0.2 -0.98 0.12 Z' },
+  buzz: { front: 'M -0.95 0 C -1.05 -0.65 -0.65 -1.12 0 -1.12 C 0.65 -1.12 1.05 -0.65 0.95 0 C 0.85 -0.4 0.5 -0.62 0 -0.62 C -0.5 -0.62 -0.85 -0.4 -0.95 0 Z' },
+  curly: { front: 'M -0.98 0.15 C -1.12 -0.6 -0.7 -1.22 0 -1.22 C 0.7 -1.22 1.12 -0.6 0.98 0.15 C 0.9 -0.2 0.7 -0.5 0.35 -0.52 C 0 -0.55 -0.4 -0.5 -0.65 -0.35 C -0.85 -0.2 -0.92 0 -0.98 0.15 Z', bumps: [0.92, 0.4, 175, 5, 9] },
+  afro: { back: 'circle 0 -0.35 1.45', front: 'M -0.95 0 C -1.05 -0.65 -0.65 -1.12 0 -1.12 C 0.65 -1.12 1.05 -0.65 0.95 0 C 0.85 -0.4 0.5 -0.62 0 -0.62 C -0.5 -0.62 -0.85 -0.4 -0.95 0 Z' },
+  long: { back: 'M -0.9 -0.8 C -1.3 -0.3 -1.32 0.8 -1.26 1.9 C -0.6 2.15 0.6 2.15 1.26 1.9 C 1.32 0.8 1.3 -0.3 0.9 -0.8 Z', front: 'M -1 0.6 C -1.15 -0.5 -0.7 -1.24 0 -1.24 C 0.7 -1.24 1.15 -0.5 1 0.6 C 0.9 0.2 0.8 -0.3 0.55 -0.55 C 0.35 -0.72 0.1 -0.72 0 -0.6 C -0.1 -0.72 -0.35 -0.72 -0.55 -0.55 C -0.8 -0.3 -0.9 0.2 -1 0.6 Z', hidesEars: true },
+  bob: { back: 'M -0.95 -0.7 C -1.28 -0.2 -1.26 0.7 -1.16 1.05 C -0.5 1.16 0.5 1.16 1.16 1.05 C 1.26 0.7 1.28 -0.2 0.95 -0.7 Z', front: 'M -1.02 0.5 C -1.15 -0.5 -0.7 -1.24 0 -1.24 C 0.7 -1.24 1.15 -0.5 1.02 0.5 C 0.95 0.1 0.9 -0.2 0.82 -0.28 C 0.4 -0.31 -0.4 -0.31 -0.82 -0.28 C -0.9 -0.2 -0.95 0.1 -1.02 0.5 Z', hidesEars: true },
+  curlyLong: { back: 'M -0.95 -0.8 C -1.42 -0.3 -1.45 0.9 -1.36 1.95 C -0.6 2.25 0.6 2.25 1.36 1.95 C 1.45 0.9 1.42 -0.3 0.95 -0.8 Z', front: 'M -1 0.6 C -1.15 -0.5 -0.7 -1.24 0 -1.24 C 0.7 -1.24 1.15 -0.5 1 0.6 C 0.9 0.2 0.8 -0.3 0.55 -0.55 C 0.35 -0.72 0.1 -0.72 0 -0.6 C -0.1 -0.72 -0.35 -0.72 -0.55 -0.55 C -0.8 -0.3 -0.9 0.2 -1 0.6 Z', bumps: [0.95, 0.44, 172, 8, 7], hidesEars: true },
+  bun: { back: 'circle 0 -1.25 0.42', front: 'M -0.97 0.05 C -1.08 -0.62 -0.68 -1.18 0 -1.18 C 0.68 -1.18 1.08 -0.62 0.97 0.05 C 0.88 -0.3 0.55 -0.52 0 -0.54 C -0.55 -0.52 -0.88 -0.3 -0.97 0.05 Z' },
+  ponytail: { back: 'M 0.5 -0.85 C 1.35 -0.85 1.55 0.3 1.3 1.2 C 1.2 1.5 1.05 1.6 0.95 1.6 C 1.05 1.1 1 0.3 0.7 -0.2 Z', front: 'M -0.97 0.05 C -1.08 -0.62 -0.68 -1.18 0 -1.18 C 0.68 -1.18 1.08 -0.62 0.97 0.05 C 0.88 -0.3 0.55 -0.52 0 -0.54 C -0.55 -0.52 -0.88 -0.3 -0.97 0.05 Z' },
+  braid: { back: 'braid', front: 'M -0.97 0.05 C -1.08 -0.62 -0.68 -1.18 0 -1.18 C 0.68 -1.18 1.08 -0.62 0.97 0.05 C 0.88 -0.3 0.55 -0.52 0 -0.54 C -0.55 -0.52 -0.88 -0.3 -0.97 0.05 Z' },
+  pigtails: { back: 'pigtails', front: 'M -0.98 0.15 C -1.12 -0.6 -0.7 -1.22 0 -1.22 C 0.7 -1.22 1.12 -0.6 0.98 0.15 C 0.92 -0.15 0.86 -0.35 0.75 -0.45 C 0.4 -0.6 -0.1 -0.58 -0.45 -0.48 C -0.7 -0.4 -0.86 -0.15 -0.98 0.15 Z' },
+  balding: { front: 'M -0.98 0.2 C -1.05 -0.25 -0.9 -0.6 -0.65 -0.72 C -0.62 -0.45 -0.68 -0.15 -0.72 0.25 Z M 0.98 0.2 C 1.05 -0.25 0.9 -0.6 0.65 -0.72 C 0.62 -0.45 0.68 -0.15 0.72 0.25 Z' },
+  bald: { front: '' },
+  gele: { front: '' }
+};
+var SCARF_SHAPE = 'M 0 -1.28 C 0.8 -1.28 1.2 -0.7 1.18 0 C 1.16 0.55 1 1 0.8 1.2 L 1.5 2 C 0.7 2.4 -0.7 2.4 -1.5 2 L -0.8 1.2 C -1 1 -1.16 0.55 -1.18 0 C -1.2 -0.7 -0.8 -1.28 0 -1.28 Z M 0 -0.72 C 0.5 -0.72 0.78 -0.35 0.76 0.15 C 0.74 0.7 0.42 1.02 0 1.02 C -0.42 1.02 -0.74 0.7 -0.76 0.15 C -0.78 -0.35 -0.5 -0.72 0 -0.72 Z';
+var GELE_SHAPE = 'M -1.05 -0.15 C -1.4 -0.9 -0.9 -1.75 0.05 -1.72 C 1 -1.7 1.42 -0.9 1.05 -0.15 C 0.7 -0.5 0.35 -0.58 0 -0.58 C -0.35 -0.58 -0.7 -0.5 -1.05 -0.15 Z';
+var BEARD = 'M -0.92 0.15 C -0.9 0.8 -0.45 1.18 0 1.2 C 0.45 1.18 0.9 0.8 0.92 0.15 C 0.75 0.45 0.55 0.6 0.3 0.6 C 0.2 0.8 -0.2 0.8 -0.3 0.6 C -0.55 0.6 -0.75 0.45 -0.92 0.15 Z';
+var MUSTACHE = 'M -0.3 0.55 C -0.2 0.43 -0.05 0.44 0 0.5 C 0.05 0.44 0.2 0.43 0.3 0.55 C 0.15 0.6 -0.15 0.6 -0.3 0.55 Z';
+var MOUTHS = {
+  smile: 'M -0.24 0.6 Q 0 0.78 0.24 0.6',
+  flat: 'M -0.17 0.66 L 0.17 0.66',
+  small: 'M -0.13 0.63 Q 0 0.71 0.13 0.63',
+  grin: 'M -0.26 0.57 Q 0 0.63 0.26 0.57 Q 0.18 0.86 0 0.86 Q -0.18 0.86 -0.26 0.57 Z'
+};
+var NOSE = { front: 'M 0.03 0.1 C 0.15 0.3 0.13 0.4 -0.04 0.42', turned: 'M 0.52 0.06 C 0.68 0.26 0.68 0.4 0.46 0.42' };
+var WRINKLES = {
+  forehead: 'M -0.3 -0.55 Q 0 -0.6 0.3 -0.55 M -0.2 -0.45 Q 0 -0.49 0.2 -0.45',
+  crows: 'M 0.55 0.02 L 0.66 -0.03 M 0.55 0.11 L 0.66 0.15 M -0.55 0.02 L -0.66 -0.03 M -0.55 0.11 L -0.66 0.15',
+  folds: 'M 0.22 0.36 Q 0.36 0.5 0.3 0.68 M -0.22 0.36 Q -0.36 0.5 -0.3 0.68',
+  bags: 'M 0.26 0.2 Q 0.34 0.25 0.42 0.2 M -0.26 0.2 Q -0.34 0.25 -0.42 0.2'
+};
+
+function rng(seed) {
+  var s = (Math.floor(Number(seed) || 1) * 2654435761) >>> 0;
+  return function () {
+    s = (s + 0x6d2b79f5) >>> 0;
+    var t = s;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function at(list, v) { return list[Math.floor(v * list.length) % list.length]; }
+function n(v) { return Math.round(v * 10) / 10; }
+// Tagged template that rounds every number it is given, for compact path strings.
+function P(s) {
+  var out = s[0];
+  for (var i = 1; i < arguments.length; i++) out += n(arguments[i]) + s[i];
+  return out;
+}
+function circle(x, y, r) { return P`M${x - r} ${y}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0Z`; }
+function ellipse(x, y, rx, ry) { return P`M${x - rx} ${y}a${rx} ${ry} 0 1 0 ${2 * rx} 0a${rx} ${ry} 0 1 0 ${-2 * rx} 0Z`; }
+function poly(pts, close) { return pts.map(function (p, i) { return (i ? 'L' : 'M') + n(p[0]) + ' ' + n(p[1]); }).join('') + (close ? 'Z' : ''); }
+function mix(a, b, t) {
+  var x = parseInt(a.slice(1), 16), y = parseInt(b.slice(1), 16);
+  var ch = function (sh) {
+    var p = (x >> sh) & 255, q = (y >> sh) & 255;
+    return ('0' + Math.round(p + (q - p) * t).toString(16)).slice(-2);
+  };
+  return '#' + ch(16) + ch(8) + ch(0);
+}
+function bez(a, b, c, d, t) { var u = 1 - t; return u * u * u * a + 3 * u * u * t * b + 3 * u * t * t * c + t * t * t * d; }
+function stageOf(age) { return age < 1 ? 'infant' : age < 4 ? 'toddler' : age < 12 ? 'child' : age < 18 ? 'teen' : age < 60 ? 'adult' : 'elder'; }
+
+// Maps a path written in head units onto the figure. `warp` bends u for a turned head.
+function headMapper(cx, hy, r, dir, warp) {
+  return function (str, kind) {
+    var out = '', pend = null;
+    str.trim().split(/[\s,]+/).forEach(function (tok) {
+      if (/^[A-Za-z]$/.test(tok)) { out += tok; return; }
+      var val = parseFloat(tok);
+      if (pend === null) { pend = val; return; }
+      var u = warp ? warp(pend, kind) : pend;
+      out += n(cx + dir * u * r) + ' ' + n(hy + val * r) + ' ';
+      pend = null;
+    });
+    return out.trim();
+  };
+}
+
+// A tapered limb through joints, as a closed outline.
+function limb(pts, widths) {
+  var left = [], right = [];
+  for (var i = 0; i < pts.length; i++) {
+    var a = pts[Math.max(0, i - 1)], b = pts[Math.min(pts.length - 1, i + 1)];
+    var dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1;
+    var nx = -dy / len, ny = dx / len, w = widths[i] / 2;
+    left.push([pts[i][0] + nx * w, pts[i][1] + ny * w]);
+    right.push([pts[i][0] - nx * w, pts[i][1] - ny * w]);
+  }
+  return poly(left.concat(right.reverse()), true);
+}
+// The first `frac` of a limb, by length, with its widths.
+function partial(pts, widths, frac) {
+  var segs = [], total = 0, i;
+  for (i = 1; i < pts.length; i++) { segs.push(Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1])); total += segs[i - 1]; }
+  var want = total * frac, outP = [pts[0]], outW = [widths[0]];
+  for (i = 1; i < pts.length; i++) {
+    if (want <= segs[i - 1] || i === pts.length - 1) {
+      var t = Math.min(1, want / segs[i - 1]);
+      outP.push([pts[i - 1][0] + (pts[i][0] - pts[i - 1][0]) * t, pts[i - 1][1] + (pts[i][1] - pts[i - 1][1]) * t]);
+      outW.push(widths[i - 1] + (widths[i] - widths[i - 1]) * t);
+      return { pts: outP, widths: outW, dir: [pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]] };
+    }
+    want -= segs[i - 1];
+    outP.push(pts[i]);
+    outW.push(widths[i]);
+  }
+  return { pts: outP, widths: outW, dir: [1, 0] };
+}
+
+function drawPerson(o) {
+  var r = rng(o.seed);
+  var reg = REGIONS[o.region] || REGIONS['south-asia'];
+  var stage = stageOf(o.age);
+  var f = o.sex === 'f';
+  var kid = stage === 'toddler' || stage === 'child';
+  var grown = stage === 'adult' || stage === 'elder';
+  // Every random pick is drawn up front and in the same order,
+  // so pinning one trait never reshuffles the others.
+  var v = [];
+  for (var i = 0; i < 24; i++) v.push(r());
+
+  var skinIdx = o.skin >= 0 && o.skin < SKIN.length ? o.skin : at(reg.skin, v[0]);
+  var skin = SKIN[skinIdx];
+  var hairColor = HAIR[o.hairColor] || (o.hairColor.charAt(0) === '#' ? o.hairColor : '') ||
+    (stage === 'elder' ? (v[1] < 0.5 ? HAIR.grey : HAIR.white) : o.age > 48 && v[1] < 0.35 ? HAIR.grey : HAIR[at(reg.hair, v[2])]);
+  var frame = o.build !== 'auto' ? o.build : kid || stage === 'infant' ? 'average' : v[3] < 0.3 ? 'slim' : v[3] < 0.8 ? 'average' : 'heavy';
+
+  var outfits = stage === 'toddler' ? (f ? ['romper', 'dress'] : ['romper', 'tee']) : kid || stage === 'teen' ? (f ? reg.girl : reg.boy) : f ? reg.f : reg.m;
+  var outfit = o.outfit || at(outfits, v[4]);
+
+  var hairs;
+  if (stage === 'elder') hairs = f ? reg.fHair : ['balding', 'short', 'bald', 'balding'];
+  else if (stage === 'adult') hairs = f ? reg.fHair : reg.mHair;
+  else if (stage === 'teen') hairs = f ? (o.region === 'west-africa' ? ['braid', 'afro', 'pigtails'] : ['long', 'ponytail', 'braid']) : reg.mHair.concat(['curly']);
+  else if (stage === 'child') hairs = f ? (o.region === 'west-africa' ? ['pigtails', 'braid'] : ['pigtails', 'ponytail', 'bob']) : (o.region === 'west-africa' ? ['buzz', 'afro'] : ['short', 'buzz', 'curly']);
+  else hairs = f ? ['pigtails', 'short'] : ['short', 'curly'];
+  var hair = o.hair || at(hairs, v[5]);
+  if (hair === 'gele' && !grown) hair = 'braid';
+  if (!HAIRS[hair]) hair = 'short';
+
+  var beard = o.beard || (!f && grown ? (v[6] < reg.beard[0] ? 'mustache' : v[6] < reg.beard[0] + reg.beard[1] ? 'beard' : 'none') : 'none');
+  var bindi = f && grown && o.region === 'south-asia' && v[7] < 0.55;
+  var glasses = (stage === 'elder' && v[8] < 0.45) || (stage === 'adult' && v[8] < 0.12);
+  var cane = stage === 'elder' && v[9] < 0.35;
+  var mouth = o.mouth || at(kid ? ['smile', 'grin', 'smile', 'small'] : stage === 'elder' ? ['smile', 'flat', 'small'] : ['smile', 'flat', 'small', 'grin', 'smile'], v[14]);
+  if (!MOUTHS[mouth]) mouth = 'smile';
+  var eyesKind = mouth === 'grin' && v[15] < 0.45 ? 'happy' : stage === 'elder' && v[15] < 0.35 ? 'sleepy' : 'open';
+  var browLift = at([0, 0, 0.06, -0.03], v[16]);
+  var pose = o.pose !== 'auto' ? o.pose : cane ? 'stand' : at(kid ? ['stand', 'stand', 'wave', 'hips'] : ['stand', 'stand', 'stand', 'hips', 'wave'], v[17]);
+  var freckles = skinIdx <= 1 && v[18] < 0.35;
+
+  // Clothes: the garment's length and cut, then its colours.
+  var top = '', bottom = '', accent = '', len = 'hip', flare = 1, sleeve = 0.36, neck = 'round', detail = '', pants = 'long', skirt = '', headwear = '';
+  switch (outfit) {
+    case 'shirt': top = at(PALE, v[10]); bottom = at(DARK, v[11]); accent = mix(top, '#000000', 0.12); sleeve = kid ? 0.42 : 0.86; neck = 'v'; detail = 'placket'; break;
+    case 'kurta': top = at(['#ffffff', '#f4e6c8', '#9ed3b8', '#a9d3ee', '#ffcf77'], v[10]); bottom = at(LIGHT, v[11]); accent = '#c9a35a'; len = 'knee'; flare = 1.08; sleeve = 0.88; neck = 'v'; detail = 'placket'; break;
+    case 'kaftan': top = at(BRIGHT.concat(['#ffffff']), v[10]); bottom = top; accent = at(BRIGHT, v[12]); len = 'knee'; flare = 1.1; sleeve = 0.88; detail = 'yoke'; break;
+    case 'thobe': top = '#f6f3ec'; bottom = '#ece6da'; accent = '#d8cdb8'; len = 'ankle'; flare = 1.05; sleeve = 0.92; break;
+    case 'sari': top = at(BRIGHT, v[10]); accent = at(['#f2b33d', '#17352e', '#e5533c', '#6e5ce6'], v[12]); len = 'ankle'; flare = 1.28; sleeve = 0.3; detail = 'pallu'; pants = 'none'; break;
+    case 'kameez': top = at(BRIGHT, v[10]); bottom = at(LIGHT.concat(BRIGHT), v[11]); accent = at(PALE, v[12]); len = 'knee'; flare = 1.12; sleeve = 0.86; detail = 'dupatta'; break;
+    case 'dress': top = at(BRIGHT, v[10]); len = 'knee'; flare = 1.3; pants = 'none'; break;
+    case 'skirt': top = at(PALE, v[10]); bottom = at(BRIGHT, v[11]); skirt = 'knee'; pants = 'none'; break;
+    case 'wrap': top = at(BRIGHT, v[10]); accent = at(BRIGHT, v[12]); bottom = accent; skirt = 'ankle'; pants = 'none'; break;
+    case 'abaya': top = at(ROBE, v[10]); accent = at(SCARF, v[12]); len = 'ankle'; flare = 1.15; sleeve = 0.94; neck = 'none'; pants = 'none'; headwear = 'scarf'; break;
+    case 'romper': top = at(BRIGHT.concat(PALE), v[10]); len = 'romper'; flare = 1.12; sleeve = 0.3; pants = 'none'; break;
+    default: top = at(BRIGHT.concat(PALE), v[10]); bottom = at(DARK, v[11]);
+  }
+  if (!bottom) bottom = at(DARK, v[11]);
+  if (!accent) accent = at(BRIGHT, v[12]);
+  if (accent === top) accent = top === '#f2b33d' ? '#17352e' : '#f2b33d';
+  if (kid && (outfit === 'tee' || outfit === 'shirt')) pants = 'shorts';
+  if (hair === 'gele' && grown) headwear = 'gele';
+  top = o.top || top;
+  bottom = o.bottom || bottom;
+  accent = o.accent || accent;
+
+  var cx = 50, hy, rad;
+  var L = { hairBack: '', legs: '', pants: '', shoes: '', skirt: '', cane: '', arms: '', sleeves: '', thumbs: '', hands: '', neck: '', torso: '', detail: '', folds: '', neckline: '', head: '', beard: '', cheeks: '', freckles: '', wrinkles: '', eyes: '', lids: '', brows: '', nose: '', mouth: '', mouthFill: '', mustache: '', hairFront: '', ears: '', earLines: '', headwear: '', bindi: '', glasses: '' };
+  var C = { skin: skin, hair: hairColor, top: top, bottom: bottom, accent: accent, sleeve: outfit === 'sari' ? accent : top, shoe: at(SHOES, v[13]), ink: INK, blush: 'rgba(229,83,60,0.18)', freckle: mix(skin, '#000000', 0.38), cane: '#8a5a3a', bindi: '#c2304a' };
+  var S = { ink: 1.7, fine: 1, feature: 1.3, brow: 1.8 };
+
+  if (stage === 'infant') {
+    // A newborn is a swaddled bundle with a sleeping face.
+    C.top = o.top || at(SWADDLE, v[10]);
+    C.accent = mix(C.top, '#000000', 0.1);
+    rad = 8.6;
+    hy = 170;
+    L.torso = ellipse(cx, 182, 15, 17.5);
+    L.detail = P`M${cx - 13.5} 186Q${cx} 177 ${cx + 13.5} 184L${cx + 12.8} 188Q${cx} 181 ${cx - 12.8} 190Z`;
+  } else {
+    var st = STAGES[stage];
+    var g = function (key) { return st[key] + (f && FEMALE[key] && stage !== 'toddler' ? FEMALE[key] * (kid ? 0.3 : stage === 'teen' ? 0.6 : 1) : 0); };
+    var k = frame === 'slim' ? 0.9 : frame === 'heavy' ? 1.18 : 1;
+    var sw = g('sw') * k, ww = g('ww') * Math.pow(k, 1.6), hw = g('hw') * Math.pow(k, 1.3);
+    var legH = g('legH'), torsoH = g('torsoH'), armL = g('armL');
+    var armTop = g('armTop') * k, armEnd = g('armEnd') * Math.sqrt(k), ankle = st.ankle * Math.sqrt(k);
+    var shoeL = g('shoe'), shoeH = st.shoeH;
+    rad = g('r');
+    var ankleY = 199.3 - shoeH, hipY = ankleY - legH, sY = hipY - torsoH;
+    hy = sY - 6 - rad * 0.98;
+    var hemY = len === 'knee' ? hipY + legH * 0.5 : len === 'ankle' ? 192 : len === 'romper' ? hipY + 8 : hipY + 3;
+    var hemW = hw * flare;
+
+    // Legs taper from thigh to ankle, feet set a little apart.
+    var fa = hw * 0.27 + 1.5;
+    var legPath = function (s, t0, t1) {
+      var ax = cx + s * fa;
+      var ox = [cx + s * hw / 2, cx + s * (hw / 2 + 0.8), ax + s * (ankle / 2 + 0.8), ax + s * ankle / 2];
+      var oy = [hipY - 3, hipY + legH * 0.35, ankleY - legH * 0.35, ankleY];
+      var ix = [cx + s * 0.6, cx + s * 2.5, ax - s * (ankle / 2 + 0.6), ax - s * ankle / 2];
+      var iy = [hipY + 5, hipY + legH * 0.3, ankleY - legH * 0.4, ankleY];
+      var outer = [], inner = [];
+      for (var q = 0; q <= 8; q++) {
+        var t = t0 + (t1 - t0) * q / 8;
+        outer.push([bez(ox[0], ox[1], ox[2], ox[3], t), bez(oy[0], oy[1], oy[2], oy[3], t)]);
+        inner.push([bez(ix[0], ix[1], ix[2], ix[3], t), bez(iy[0], iy[1], iy[2], iy[3], t)]);
+      }
+      return poly(outer.concat(inner.reverse()), true);
+    };
+    L.legs = legPath(-1, 0, 1) + legPath(1, 0, 1);
+    if (pants !== 'none') {
+      var pantT = pants === 'shorts' ? 0.45 : 1;
+      L.pants = legPath(-1, 0, pantT) + legPath(1, 0, pantT);
+    }
+    // Shoes point outward, like a relaxed stance.
+    [-1, 1].forEach(function (s) {
+      var ax = cx + s * fa, hx = -ankle * 0.55, tx = shoeL - ankle * 0.55;
+      var X = function (x) { return ax + s * x; };
+      L.shoes += P`M${X(hx)} ${ankleY - 1.2}C${X(hx - 1.2)} ${ankleY + 1} ${X(hx - 1.2)} ${ankleY + shoeH} ${X(hx + 0.5)} ${ankleY + shoeH}L${X(tx - 2.5)} ${ankleY + shoeH}C${X(tx + 0.5)} ${ankleY + shoeH} ${X(tx + 0.3)} ${ankleY + shoeH * 0.25} ${X(tx - 3)} ${ankleY + shoeH * 0.15}C${X(tx - 6)} ${ankleY} ${X(ankle * 0.5 + 1)} ${ankleY} ${X(ankle * 0.5)} ${ankleY - 1.2}Z`;
+    });
+    if (skirt) {
+      var skY = skirt === 'ankle' ? 192 : hipY + legH * 0.5, sb = hw * (skirt === 'ankle' ? 1.25 : 1.35);
+      L.skirt = P`M${cx - hw / 2} ${hipY - 2}L${cx + hw / 2} ${hipY - 2}L${cx + sb / 2} ${skY}Q${cx} ${skY + 2.5} ${cx - sb / 2} ${skY}Z`;
+      L.folds += P`M${cx - hw * 0.18} ${hipY + 4}L${cx - sb * 0.22} ${skY - 3}M${cx + hw * 0.2} ${hipY + 4}L${cx + sb * 0.24} ${skY - 3}`;
+    }
+
+    // Arms: shoulder, elbow, wrist, tapering; hands are mittens with a thumb.
+    var armPts = function (side, kind) {
+      var S0 = [cx + side * (sw / 2 - armTop * 0.45), sY + armTop * 0.5];
+      if (kind === 'hips') return [S0, [S0[0] + side * armL * 0.42, S0[1] + armL * 0.38], [cx + side * (ww / 2 + 1.5), sY + torsoH * 0.72]];
+      if (kind === 'wave') return [S0, [S0[0] + side * armL * 0.44, S0[1] + armL * 0.14], [S0[0] + side * armL * 0.54, S0[1] - armL * 0.34]];
+      if (kind === 'raise') return [S0, [S0[0] + side * armL * 0.32, S0[1] - armL * 0.32], [S0[0] + side * armL * 0.6, S0[1] - armL * 0.76]];
+      // Hanging arms swing clear of the body, as in Humaaans and Open Peeps.
+      return [S0, [S0[0] + side * armL * 0.13, S0[1] + armL * 0.47], [S0[0] + side * armL * 0.17, S0[1] + armL * 0.94]];
+    };
+    var kinds = [
+      pose === 'raise-left' ? 'raise' : pose === 'hips' ? 'hips' : 'stand',
+      pose === 'raise-right' ? 'raise' : pose === 'hips' ? 'hips' : pose === 'wave' ? 'wave' : 'stand'
+    ];
+    var widths = [armTop, (armTop + armEnd) / 2, armEnd];
+    var wrists = [];
+    [-1, 1].forEach(function (side, si) {
+      var pts = armPts(side, kinds[si]);
+      L.arms += limb(pts, widths);
+      if (sleeve > 0) {
+        var part = partial(pts, widths, sleeve);
+        L.sleeves += limb(part.pts, part.widths);
+      }
+      var w = pts[2], e = pts[1], dx = w[0] - e[0], dy = w[1] - e[1], dl = Math.hypot(dx, dy) || 1;
+      dx /= dl; dy /= dl;
+      var nx = -dy, ny = dx;
+      if ((nx * (cx - w[0])) < 0) { nx = -nx; ny = -ny; }
+      L.thumbs += circle(w[0] + dx * armEnd * 0.2 + nx * armEnd * 0.62, w[1] + dy * armEnd * 0.2 + ny * armEnd * 0.62, armEnd * 0.38);
+      L.hands += circle(w[0] + dx * armEnd * 0.55, w[1] + dy * armEnd * 0.55, armEnd * 0.8);
+      wrists.push({ x: w[0] + dx * armEnd * 0.55, y: w[1] + dy * armEnd * 0.55, up: kinds[si] !== 'stand' });
+    });
+    if (cane) {
+      var hand = wrists[1].up ? wrists[0] : wrists[1];
+      L.cane = P`M${hand.x + 0.5} ${hand.y - 2}L${hand.x + 2.5} 199.5`;
+    }
+
+    // Neck and torso: rounded shoulders, a soft waist, then the garment's hem.
+    var nw = rad * 0.58;
+    L.neck = P`M${cx - nw / 2} ${hy + rad * 0.6}L${cx - nw / 2 - 0.8} ${sY + 3}L${cx + nw / 2 + 0.8} ${sY + 3}L${cx + nw / 2} ${hy + rad * 0.6}Z`;
+    var side = function (s) {
+      return P`C${cx + s * (sw / 2 - 1)} ${sY} ${cx + s * (sw / 2 + 0.5)} ${sY + 3} ${cx + s * sw / 2} ${sY + 8}C${cx + s * (sw / 2 - 0.5)} ${sY + torsoH * 0.4} ${cx + s * ww / 2} ${sY + torsoH * 0.55} ${cx + s * ww / 2} ${sY + torsoH * 0.72}C${cx + s * ww / 2} ${hipY - 4} ${cx + s * hw / 2} ${hipY - 3} ${cx + s * hw / 2} ${hipY}`;
+    };
+    var sideUp = function (s) {
+      return P`C${cx + s * hw / 2} ${hipY - 3} ${cx + s * ww / 2} ${hipY - 4} ${cx + s * ww / 2} ${sY + torsoH * 0.72}C${cx + s * ww / 2} ${sY + torsoH * 0.55} ${cx + s * (sw / 2 - 0.5)} ${sY + torsoH * 0.4} ${cx + s * sw / 2} ${sY + 8}C${cx + s * (sw / 2 + 0.5)} ${sY + 3} ${cx + s * (sw / 2 - 1)} ${sY} ${cx + s * (sw / 2 - 6)} ${sY}`;
+    };
+    L.torso = P`M${cx - sw / 2 + 6} ${sY}L${cx + sw / 2 - 6} ${sY}` + side(1) + P`L${cx + hemW / 2} ${hemY}Q${cx} ${hemY + 2.5} ${cx - hemW / 2} ${hemY}L${cx - hw / 2} ${hipY}` + sideUp(-1) + 'Z';
+    if (len !== 'hip' && len !== 'romper') L.folds += P`M${cx - hw * 0.2} ${hipY + 3}L${cx - hemW * 0.24} ${hemY - 3}M${cx + hw * 0.22} ${hipY + 3}L${cx + hemW * 0.26} ${hemY - 3}`;
+    if (pants === 'long' && len === 'hip') L.folds += P`M${cx} ${hipY + 4}L${cx} ${hipY + 9}`;
+    if (detail === 'placket') L.detail = P`M${cx - 0.9} ${sY + rad * 0.7}h1.8v${Math.min(16, hemY - sY - 12)}h-1.8Z`;
+    if (detail === 'yoke') L.detail = P`M${cx - rad * 0.78} ${sY}Q${cx} ${sY + rad * 1.35} ${cx + rad * 0.78} ${sY}L${cx + rad * 0.46} ${sY}Q${cx} ${sY + rad * 0.85} ${cx - rad * 0.46} ${sY}Z`;
+    if (detail === 'pallu') L.detail = P`M${cx - sw / 2 + 2} ${sY + 3}L${cx - sw / 2 + 10} ${sY}L${cx + hw / 2 + 1} ${hipY + 8}L${cx + hw / 2 - 5} ${hipY + 15}Z` + P`M${cx - hemW / 2 + 0.5} ${hemY - 3.5}L${cx + hemW / 2 - 0.5} ${hemY - 3.5}L${cx + hemW / 2} ${hemY}Q${cx} ${hemY + 2.5} ${cx - hemW / 2} ${hemY}Z`;
+    if (detail === 'dupatta') L.detail = P`M${cx - sw / 2 + 3} ${sY + 1}Q${cx} ${sY + 18} ${cx + sw / 2 - 3} ${sY + 1}L${cx + sw / 2 - 2} ${sY + 6}Q${cx} ${sY + 23} ${cx - sw / 2 + 2} ${sY + 6}Z`;
+    if (neck === 'round') L.neckline = P`M${cx - rad * 0.42} ${sY}Q${cx} ${sY + rad * 0.55} ${cx + rad * 0.42} ${sY}Z`;
+    if (neck === 'v') L.neckline = P`M${cx - rad * 0.36} ${sY}L${cx} ${sY + rad * 0.9}L${cx + rad * 0.36} ${sY}Z`;
+  }
+
+  // Head and face, drawn front-on or turned three-quarters towards `facing`.
+  var turned = o.facing === 'left' || o.facing === 'right';
+  var dir = o.facing === 'left' ? -1 : 1;
+  var warp = turned ? function (u, kind) {
+    if (kind === 'feature') return u * 0.82 + 0.3;
+    if (kind === 'hair') return u < 0 ? u * 1.04 - 0.04 : u * 0.98 - 0.02;
+    return u;
+  } : null;
+  var H = headMapper(cx, hy, rad, dir, warp);
+  L.head = H(turned ? HEAD.turned : HEAD.front);
+  var eyeU = [-0.34, 0.34], eyeV = 0.05, eyeRy = kid || stage === 'infant' ? 0.13 : 0.115, eyeRx = eyeRy * 0.65;
+  eyeU.forEach(function (u) {
+    var ex = cx + dir * (turned ? u * 0.82 + 0.3 : u) * rad, ey = hy + eyeV * rad;
+    if (stage === 'infant') {
+      L.lids += P`M${ex - rad * 0.1} ${ey}Q${ex} ${ey + rad * 0.09} ${ex + rad * 0.1} ${ey}`;
+    } else if (eyesKind === 'happy') {
+      L.lids += P`M${ex - rad * 0.1} ${ey + rad * 0.04}Q${ex} ${ey - rad * 0.06} ${ex + rad * 0.1} ${ey + rad * 0.04}`;
+    } else {
+      L.eyes += ellipse(ex, ey, eyeRx * rad, eyeRy * rad);
+      if (eyesKind === 'sleepy') L.lids += P`M${ex - rad * 0.11} ${ey - rad * 0.03}L${ex + rad * 0.11} ${ey - rad * 0.03}`;
+    }
+  });
+  if (stage !== 'infant') {
+    var bl = browLift;
+    // Brows arch gently; a worried slant would read as sad on every face.
+    L.brows = H(P`M -0.5 ${-0.22 - bl} Q -0.34 ${-0.31 - bl} -0.18 ${-0.25 - bl} M 0.5 ${-0.22 - bl} Q 0.34 ${-0.31 - bl} 0.18 ${-0.25 - bl}`, 'feature');
+    L.nose = turned ? H(NOSE.turned) : H(NOSE.front, 'feature');
+    if (mouth === 'grin') L.mouthFill = H(MOUTHS.grin, 'feature');
+    else L.mouth = H(MOUTHS[mouth], 'feature');
+  } else {
+    L.mouth = H(MOUTHS.small, 'feature');
+  }
+  if (kid || f || stage === 'infant') L.cheeks = ellipse(cx + dir * (turned ? 0.82 * -0.56 + 0.3 : -0.56) * rad, hy + 0.38 * rad, 0.14 * rad, 0.09 * rad) + ellipse(cx + dir * (turned ? 0.82 * 0.56 + 0.3 : 0.56) * rad, hy + 0.38 * rad, 0.14 * rad, 0.09 * rad);
+  if (freckles && stage !== 'infant') {
+    [[-0.5, 0.3], [-0.42, 0.24], [-0.58, 0.24], [0.5, 0.3], [0.42, 0.24], [0.58, 0.24]].forEach(function (p) {
+      L.freckles += circle(cx + dir * (turned ? p[0] * 0.82 + 0.3 : p[0]) * rad, hy + p[1] * rad, 0.03 * rad);
+    });
+  }
+  if (o.age >= 45) L.wrinkles += H(WRINKLES.folds, 'feature');
+  if (o.age >= 58) L.wrinkles += H(WRINKLES.crows, 'feature') + H(WRINKLES.bags, 'feature');
+  if (o.age >= 66) L.wrinkles += H(WRINKLES.forehead, 'feature');
+  if (beard === 'beard') L.beard = H(BEARD, turned ? 'hair' : '');
+  if (beard === 'mustache' || beard === 'beard') L.mustache = H(MUSTACHE, 'feature');
+  if (bindi) L.bindi = circle(cx + dir * (turned ? 0.3 : 0) * rad, hy - rad * 0.3, 0.06 * rad);
+  if (glasses) {
+    var gx = eyeU.map(function (u) { return cx + dir * (turned ? u * 0.82 + 0.3 : u) * rad; });
+    L.glasses = circle(gx[0], hy + eyeV * rad, rad * 0.21) + circle(gx[1], hy + eyeV * rad, rad * 0.21) + P`M${Math.min(gx[0], gx[1]) + rad * 0.21} ${hy + eyeV * rad}L${Math.max(gx[0], gx[1]) - rad * 0.21} ${hy + eyeV * rad}`;
+  }
+
+  if (stage === 'infant') {
+    L.hairFront = P`M${cx - 3} ${hy - rad * 0.86}q3 -3.4 6 0q-3 -1.3 -6 0Z`;
+  } else {
+    var hs = HAIRS[hair];
+    var hairShape = function (spec) {
+      if (!spec) return '';
+      if (spec === 'braid') {
+        var plait = '';
+        for (var b = 0; b < 5; b++) plait += ellipse(cx + dir * (0.95 + b * 0.03) * rad, hy + (0.5 + b * 0.42) * rad, rad * 0.24, rad * 0.3);
+        return plait;
+      }
+      if (spec === 'pigtails') return circle(cx - rad * 1.12, hy + rad * 0.1, rad * 0.38) + circle(cx + rad * 1.12, hy + rad * 0.1, rad * 0.38);
+      if (spec.indexOf('circle') === 0) {
+        var c = spec.split(' ').slice(1).map(Number);
+        return circle(cx + dir * c[0] * rad, hy + c[1] * rad, c[2] * rad);
+      }
+      return H(spec, 'hair');
+    };
+    L.hairBack = hairShape(hs.back);
+    L.hairFront = hairShape(hs.front);
+    if (hs.bumps) {
+      var bb = hs.bumps;
+      for (var q = 0; q < bb[4]; q++) {
+        var ang = (bb[2] + (bb[3] - bb[2]) * q / (bb[4] - 1)) * Math.PI / 180;
+        L.hairFront += circle(cx + Math.cos(ang) * bb[0] * rad, hy - 0.2 * rad - Math.sin(ang) * bb[0] * rad, bb[1] * rad);
+      }
+    }
+    var showEars = !hs.hidesEars && headwear !== 'scarf';
+    if (showEars) {
+      var earSides = turned ? [-1] : [-1, 1];
+      earSides.forEach(function (s) {
+        var E = headMapper(cx, hy, rad, dir * s, turned ? function (u) { return u * 0.96 + 0.02; } : null);
+        L.ears += E(EAR);
+        L.earLines += E(EAR_LINE);
+      });
+    }
+    if (headwear === 'gele') L.headwear = H(GELE_SHAPE, 'hair') + ellipse(cx + dir * 0.6 * rad, hy - 1.45 * rad, 0.38 * rad, 0.28 * rad);
+    if (headwear === 'scarf') {
+      L.headwear = H(SCARF_SHAPE, turned ? 'hair' : '');
+      L.hairBack = '';
+      L.hairFront = '';
+    }
+  }
+
+  if (o.night > 0) {
+    Object.keys(C).forEach(function (key) {
+      if (C[key].charAt(0) === '#') C[key] = mix(C[key], NIGHT, o.night * 0.45);
+    });
+  }
+  return { L: L, C: C, S: S, hy: hy, label: WORDS[stage][f ? 0 : 1] + ', ' + o.age + (stage === 'infant' ? '' : ', ' + outfit) };
+}
+
+class Component extends DCLogic {
+  num(key, fallback) {
+    var v = this.props[key];
+    if (v === undefined || v === null || v === '') return fallback;
+    v = Number(v);
+    return isFinite(v) ? v : fallback;
+  }
+  str(key, fallback) {
+    var v = this.props[key];
+    return v === undefined || v === null || v === '' ? fallback : String(v);
+  }
+  renderVals() {
+    var o = {
+      seed: this.num('seed', 7), age: Math.max(0, this.num('age', 30)), sex: this.str('sex', 'f'), region: this.str('region', 'south-asia'),
+      facing: this.str('facing', 'front'), pose: this.str('pose', 'auto'),
+      outfit: this.str('outfit', ''), hair: this.str('hair', ''), hairColor: this.str('hairColor', ''), skin: this.num('skin', -1),
+      build: this.str('build', 'auto'), beard: this.str('beard', ''), mouth: this.str('mouth', ''),
+      top: this.str('top', ''), bottom: this.str('bottom', ''), accent: this.str('accent', ''), night: this.num('night', 0)
+    };
+    var key = JSON.stringify(o);
+    if (this.key !== key) {
+      this.key = key;
+      this.person = drawPerson(o);
+    }
+    var p = this.person, h = this.num('height', 300), portrait = this.str('crop', 'full') === 'portrait';
+    return {
+      L: p.L, C: p.C, S: p.S, label: p.label, h: h,
+      w: portrait ? h : h / 2,
+      wobble: portrait ? 0.8 : 1.2,
+      vb: portrait ? '22 ' + n(p.hy - 27) + ' 56 56' : '0 0 100 200'
+    };
+  }
+}
+</script>
+</body>
+</html>

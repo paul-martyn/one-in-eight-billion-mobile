@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mono Novel — Welcome</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#ffffff}a:hover{color:#d6d6d6}
+a:focus-visible,button:focus-visible{outline:3px solid #ffffff;outline-offset:4px}
+</style>
+</helmet>
+<main style="position: relative; width: 393px; height: 852px; box-sizing: border-box; padding: 48px 16px 40px; overflow: hidden; background: #000000; color: #ffffff; font-family: Onest, system-ui, sans-serif; display: flex; flex-direction: column">
+<article style="box-sizing: border-box; padding: 14px 14px 22px; border-radius: 28px; border: 1.5px solid #4a4a4a; background: linear-gradient(180deg, #333333 0%, #222222 100%)">
+<div style="position: relative; height: 320px; border-radius: 18px; overflow: hidden; background: linear-gradient(180deg, #000000 0%, #1a1a1a 45%, #5a5a5a 100%)">
+<div style="position: absolute; left: 32px; top: 18px; width: 270px; height: 270px">
+<dc-import name="Globe" size="270" variant="halftone" land="#ffffff" ocean="#3a3a3a" shade="#0a0a0a" rim="#ffffff" grid="rgba(255,255,255,0.16)" night="rgba(0,0,0,0.55)" flash="#ffffff" marker="#ffffff" marker-ring="#000000" dot="1.05" spin="6" start-lon="60" focus="{{ born }}" hint-size="270px,270px"></dc-import>
+</div>
+<svg width="333" height="320" viewBox="0 0 333 320" aria-hidden="true" style="position: absolute; left: 0; top: 0; pointer-events: none">
+<defs>
+<radialGradient id="mw-bubble" cx="0.35" cy="0.3" r="0.75"><stop offset="0" stop-color="#f4f4f4"></stop><stop offset="0.6" stop-color="#9a9a9a"></stop><stop offset="1" stop-color="#3c3c3c"></stop></radialGradient>
+</defs>
+<g fill="url(#mw-bubble)" stroke="#ffffff" stroke-width="2.5">
+<circle cx="6" cy="300" r="46"></circle>
+<circle cx="70" cy="318" r="40"></circle>
+<circle cx="270" cy="316" r="42"></circle>
+<circle cx="336" cy="290" r="50"></circle>
+<circle cx="130" cy="336" r="34"></circle>
+</g>
+<g fill="rgba(0,0,0,0.35)" stroke="#ffffff" stroke-width="2.5">
+<circle cx="300" cy="36" r="22"></circle>
+<circle cx="300" cy="90" r="22"></circle>
+</g>
+<text x="300" y="42" text-anchor="middle" fill="#ffffff" font-family="Onest, system-ui, sans-serif" font-size="18" font-weight="600">8</text>
+<g fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round">
+<path d="M300 78 C292 84 292 96 300 102 C308 96 308 84 300 78 Z"></path>
+<path d="M300 102 L300 106 M290 90 L310 90"></path>
+</g>
+</svg>
+</div>
+<h1 style="margin: 20px 4px 0; font-size: 44px; font-weight: 600; line-height: 1; letter-spacing: -1px; white-space: nowrap">1 in 8 B</h1>
+<sc-if value="{{ unborn }}" hint-placeholder-val="{{ true }}">
+<p style="margin: 12px 4px 0; font-size: 15px; line-height: 1.5; color: #c8c8c8">Eight billion people. One of them is about to be you. No setup, no choosing: be born by chance and live a whole life, one year at a time.</p>
+</sc-if>
+<sc-if value="{{ born }}" hint-placeholder-val="{{ false }}">
+<p style="margin: 12px 4px 0; font-size: 15px; line-height: 1.5; color: #c8c8c8">14 March 2026, 04:12. A boy, Aarav, in Lucknow, India. One of 63,000 born there today.</p>
+</sc-if>
+<div style="height: 1px; margin: 18px 4px 16px; background: #4a4a4a"></div>
+<div style="display: flex; align-items: flex-end; gap: 28px; padding: 0 4px">
+<div><p style="margin: 0; font-size: 22px; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums">{{ bornCount }}</p><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.35; color: #9e9e9e">born since<br>you opened</p></div>
+<div><p style="margin: 0; font-size: 22px; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums">{{ diedCount }}</p><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.35; color: #9e9e9e">lives<br>ended</p></div>
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#ffffff" stroke-width="2" aria-hidden="true" style="margin-left: auto"><circle cx="20" cy="20" r="18"></circle><ellipse cx="20" cy="20" rx="8" ry="18"></ellipse><path d="M2 20h36"></path></svg>
+</div>
+</article>
+<sc-if value="{{ unborn }}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{ beBorn }}" style="margin-top: auto; width: 100%; min-height: 58px; border: 0; border-radius: 29px; background: #ffffff; color: #000000; font-family: inherit; font-size: 17px; font-weight: 600; cursor: pointer">Be Born</button>
+</sc-if>
+<sc-if value="{{ born }}" hint-placeholder-val="{{ false }}">
+<a href="MonoLife.dc.html" style="margin-top: auto; display: flex; align-items: center; justify-content: center; width: 100%; min-height: 58px; box-sizing: border-box; border-radius: 29px; background: #ffffff; color: #000000; font-size: 17px; font-weight: 600; text-decoration: none">Begin life</a>
+</sc-if>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    this.openedAt = Date.now();
+    this.timer = setInterval(() => this.forceUpdate(), 250);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+  renderVals() {
+    const born = !!(this.state && this.state.born);
+    const secs = this.openedAt ? (Date.now() - this.openedAt) / 1000 : 0;
+    // About 4.2 births and 2 deaths every second worldwide.
+    return {
+      born: born,
+      unborn: !born,
+      bornCount: Math.floor(secs * 4.2).toLocaleString('en-US'),
+      diedCount: Math.floor(secs * 2).toLocaleString('en-US'),
+      beBorn: () => this.setState({ born: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

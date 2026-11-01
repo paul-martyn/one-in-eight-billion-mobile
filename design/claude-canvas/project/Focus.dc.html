@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Focus</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:#294d5e}a:hover{color:#1d3b4b}
+a:focus-visible,button:focus-visible,label:focus-within{outline:3px solid #294d5e;outline-offset:3px}
+</style>
+</helmet>
+<main style="width: 393px; height: 852px; box-sizing: border-box; padding: 52px 24px 28px; display: flex; flex-direction: column; background: #f4f2eb; color: #253f4c; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+<a href="Life.dc.html" aria-label="Back to life" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-left: -12px; border-radius: 22px; color: #253f4c">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+</a>
+<h1 style="margin: 8px 0 0; font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Iowan Old Style', Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1.15; letter-spacing: -0.5px">What fills your days?</h1>
+<p style="margin: 8px 0 0; font-size: 15px; line-height: 1.5; color: #5e6d70">Most of your time this year goes here. You can change it whenever you like.</p>
+<fieldset style="margin: 20px 0 0; padding: 0; border: 0; min-width: 0">
+<legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap">Focus for age 15</legend>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<label style="display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; border: 1.5px solid {{ study.ring }}; border-radius: 16px; background: {{ study.fill }}; cursor: pointer">
+<input type="radio" name="focus" value="study" checked="{{ study.on }}" onChange="{{ study.pick }}" style="flex: none; width: 20px; height: 20px; margin: 1px 0 0; accent-color: #294d5e">
+<span style="flex-grow: 1; min-width: 0">
+<span style="display: block; font-size: 16px; font-weight: 600; line-height: 1.4">School and study</span>
+<span style="display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 4px; font-size: 13px; line-height: 1.4"><span style="color: #3f6b57">Knowledge ↑↑</span><span style="color: #a4553a">Happiness ↓</span></span>
+</span>
+</label>
+<label style="display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; border: 1.5px solid {{ friends.ring }}; border-radius: 16px; background: {{ friends.fill }}; cursor: pointer">
+<input type="radio" name="focus" value="friends" checked="{{ friends.on }}" onChange="{{ friends.pick }}" style="flex: none; width: 20px; height: 20px; margin: 1px 0 0; accent-color: #294d5e">
+<span style="flex-grow: 1; min-width: 0">
+<span style="display: block; font-size: 16px; font-weight: 600; line-height: 1.4">Friends and cricket</span>
+<span style="display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 4px; font-size: 13px; line-height: 1.4"><span style="color: #3f6b57">Happiness ↑</span><span style="color: #3f6b57">Relationships ↑</span><span style="color: #a4553a">Knowledge ↓</span></span>
+</span>
+</label>
+<label style="display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; border: 1.5px solid {{ shop.ring }}; border-radius: 16px; background: {{ shop.fill }}; cursor: pointer">
+<input type="radio" name="focus" value="shop" checked="{{ shop.on }}" onChange="{{ shop.pick }}" style="flex: none; width: 20px; height: 20px; margin: 1px 0 0; accent-color: #294d5e">
+<span style="flex-grow: 1; min-width: 0">
+<span style="display: block; font-size: 16px; font-weight: 600; line-height: 1.4">Help at the shop</span>
+<span style="display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 4px; font-size: 13px; line-height: 1.4"><span style="color: #3f6b57">Family income ↑</span><span style="color: #3f6b57">Relationships ↑</span><span style="color: #a4553a">Knowledge ↓</span></span>
+</span>
+</label>
+<label style="display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; border: 1.5px solid {{ sport.ring }}; border-radius: 16px; background: {{ sport.fill }}; cursor: pointer">
+<input type="radio" name="focus" value="sport" checked="{{ sport.on }}" onChange="{{ sport.pick }}" style="flex: none; width: 20px; height: 20px; margin: 1px 0 0; accent-color: #294d5e">
+<span style="flex-grow: 1; min-width: 0">
+<span style="display: block; font-size: 16px; font-weight: 600; line-height: 1.4">Sport and fitness</span>
+<span style="display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 4px; font-size: 13px; line-height: 1.4"><span style="color: #3f6b57">Health ↑↑</span><span style="color: #3f6b57">Happiness ↑</span></span>
+</span>
+</label>
+<label style="display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; border: 1.5px solid {{ rest.ring }}; border-radius: 16px; background: {{ rest.fill }}; cursor: pointer">
+<input type="radio" name="focus" value="rest" checked="{{ rest.on }}" onChange="{{ rest.pick }}" style="flex: none; width: 20px; height: 20px; margin: 1px 0 0; accent-color: #294d5e">
+<span style="flex-grow: 1; min-width: 0">
+<span style="display: block; font-size: 16px; font-weight: 600; line-height: 1.4">Rest and free time</span>
+<span style="display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 4px; font-size: 13px; line-height: 1.4"><span style="color: #3f6b57">Happiness ↑</span><span style="color: #3f6b57">Health ↑</span></span>
+</span>
+</label>
+</div>
+</fieldset>
+<a href="Life.dc.html" style="display: flex; align-items: center; justify-content: center; width: 100%; min-height: 60px; box-sizing: border-box; margin-top: auto; padding: 16px 24px; border-radius: 18px; background: #294d5e; color: #ffffff; font-size: 18px; font-weight: 600; line-height: 1.5; text-decoration: none">Done</a>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const focus = (this.state && this.state.focus) || 'study';
+    const opt = (k) => ({
+      on: focus === k,
+      ring: focus === k ? '#294d5e' : '#d4d9d2',
+      fill: focus === k ? '#ffffff' : 'transparent',
+      pick: () => this.setState({ focus: k })
+    });
+    return {
+      study: opt('study'),
+      friends: opt('friends'),
+      shop: opt('shop'),
+      sport: opt('sport'),
+      rest: opt('rest')
+    };
+  }
+}
+</script>
+</body>
+</html>

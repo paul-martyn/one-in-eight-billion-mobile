@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cozy Pixel — Life</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&amp;family=Rubik:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#ffb35c}a:hover{color:#fbefd9}
+a:focus-visible,button:focus-visible{outline:3px dashed #ffb35c;outline-offset:4px}
+</style>
+</helmet>
+<main style="position: relative; width: 393px; height: 852px; overflow: hidden; background: #241c2e; color: #fbefd9; font-family: Rubik, system-ui, sans-serif">
+<div style="position: absolute; left: 0; top: 0; width: 393px; height: 312px; overflow: hidden">
+<svg width="396" height="312" viewBox="0 0 66 52" shape-rendering="crispEdges" role="img" aria-label="Pixel art: sunset over a Lucknow rooftop. Aarav flies a kite; his parents sit on a woven cot by the laundry line." style="display: block">
+<path d="{{ sc.s0 }}" fill="#2b1f4a"></path>
+<path d="{{ sc.s1 }}" fill="#432a63"></path>
+<path d="{{ sc.s2 }}" fill="#6b3470"></path>
+<path d="{{ sc.s3 }}" fill="#a2476f"></path>
+<path d="{{ sc.s4 }}" fill="#d8656a"></path>
+<path d="{{ sc.s5 }}" fill="#f28f5c"></path>
+<path d="{{ sc.s6 }}" fill="#f7b964"></path>
+<path d="{{ sc.star }}" fill="#fbefd9"></path>
+<path d="{{ sc.sun }}" fill="#ffe08a"></path>
+<path d="{{ sc.kite }}" fill="#ff6b8a"></path>
+<path d="{{ sc.kiteD }}" fill="#c94a6a"></path>
+<path d="{{ sc.bb }}" fill="#4a2d5e"></path>
+<path d="{{ sc.bf }}" fill="#33203f"></path>
+<path d="{{ sc.win }}" fill="#f7c86a"></path>
+<path d="{{ sc.room }}" fill="#3a2a3e"></path>
+<path d="{{ sc.par }}" fill="#7a566a"></path>
+<path d="{{ sc.parH }}" fill="#9a6f7f"></path>
+<path d="{{ sc.floor }}" fill="#5a3f55"></path>
+<path d="{{ sc.floorL }}" fill="#4d3549"></path>
+<path d="{{ sc.line }}" fill="#c9b3c9"></path>
+<path d="{{ sc.cot }}" fill="#c9a27a"></path>
+<path d="{{ sc.cotD }}" fill="#a07a56"></path>
+<path d="{{ sc.h }}" fill="#1a1220"></path>
+<path d="{{ sc.s }}" fill="#c68863"></path>
+<path d="{{ sc.k }}" fill="#a06a4a"></path>
+<path d="{{ sc.w }}" fill="#e8d9b5"></path>
+<path d="{{ sc.p }}" fill="#ff6b8a"></path>
+<path d="{{ sc.b }}" fill="#5fa8d3"></path>
+<path d="{{ sc.d }}" fill="#2b1f3a"></path>
+<path d="{{ sc.g }}" fill="#9be08c"></path>
+</svg>
+</div>
+<div style="position: absolute; left: 16px; right: 16px; top: 46px; display: flex; align-items: center; justify-content: space-between">
+<span style="display: inline-flex; align-items: center; height: 34px; padding: 0 12px; background: #241c2e; box-shadow: 0 -3px 0 0 #fbefd9, 0 3px 0 0 #fbefd9, -3px 0 0 0 #fbefd9, 3px 0 0 0 #fbefd9; font-family: 'Pixelify Sans', monospace; font-size: 16px; font-weight: 600">AGE 15 · 2041</span>
+<div style="display: flex; gap: 12px">
+<button type="button" onClick="{{ cycleSpeed }}" aria-label="Change speed" style="width: 52px; height: 44px; padding: 0; border: 0; background: #241c2e; color: #ffb35c; box-shadow: 0 -3px 0 0 #fbefd9, 0 3px 0 0 #fbefd9, -3px 0 0 0 #fbefd9, 3px 0 0 0 #fbefd9; font-family: 'Pixelify Sans', monospace; font-size: 18px; font-weight: 700; cursor: pointer">{{ speed }}×</button>
+<button type="button" onClick="{{ togglePause }}" aria-label="{{ pauseLabel }}" style="width: 44px; height: 44px; padding: 0; border: 0; background: #241c2e; color: #fbefd9; box-shadow: 0 -3px 0 0 #fbefd9, 0 3px 0 0 #fbefd9, -3px 0 0 0 #fbefd9, 3px 0 0 0 #fbefd9; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<sc-if value="{{ running }}" hint-placeholder-val="{{ true }}"><svg width="16" height="16" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><path d="M1 1h2v6H1zM5 1h2v6H5z" fill="currentColor"></path></svg></sc-if>
+<sc-if value="{{ paused }}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><path d="M2 1h1v6H2zM3 2h1v4H3zM4 3h1v2H4z" fill="currentColor"></path></svg></sc-if>
+</button>
+</div>
+</div>
+<section style="position: absolute; left: 19px; right: 19px; top: 328px; box-sizing: border-box; padding: 12px 14px 14px; background: #31263d; box-shadow: 0 -3px 0 0 #5d4a73, 0 3px 0 0 #5d4a73, -3px 0 0 0 #5d4a73, 3px 0 0 0 #5d4a73">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px">
+<h1 style="margin: 0; font-family: 'Pixelify Sans', monospace; font-size: 22px; font-weight: 600; line-height: 1.2">Aarav Srivastava</h1>
+<span style="font-size: 12px; line-height: 1.3; color: #cdbeda">Lucknow, India</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 18px; margin-top: 12px">
+<sc-for list="{{ stats }}" as="st" hint-placeholder-count="4">
+<div aria-label="{{ st.aria }}">
+<div style="display: flex; justify-content: space-between; font-family: 'Pixelify Sans', monospace; font-size: 13px; line-height: 1.2"><span style="color: #cdbeda">{{ st.label }}</span><span>{{ st.v }}</span></div>
+<div aria-hidden="true" style="display: flex; gap: 2px; margin-top: 4px">
+<sc-for list="{{ st.segs }}" as="sg" hint-placeholder-count="10"><span style="width: 12px; height: 8px; background: {{ sg.bg }}"></span></sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+<ol style="position: absolute; left: 22px; right: 22px; top: 470px; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.45; color: #cdbeda">
+<li style="display: flex; gap: 10px"><span style="flex: none; font-family: 'Pixelify Sans', monospace; color: #9be08c">+4</span>Passed the grade 10 boards with 81%.</li>
+<li style="display: flex; gap: 10px"><span style="flex: none; font-family: 'Pixelify Sans', monospace; color: #ff6b8a">−3</span>Ananya left for college in Delhi.</li>
+</ol>
+<section aria-label="Your father speaks" style="position: absolute; left: 19px; right: 19px; bottom: 28px; box-sizing: border-box; padding: 14px; background: #fbefd9; color: #241c2e; box-shadow: 0 -4px 0 0 #241c2e, 0 4px 0 0 #241c2e, -4px 0 0 0 #241c2e, 4px 0 0 0 #241c2e, 0 -8px 0 0 #fbefd9, 0 8px 0 0 #fbefd9, -8px 0 0 0 #fbefd9, 8px 0 0 0 #fbefd9">
+<div style="display: flex; gap: 12px">
+<svg width="56" height="56" viewBox="0 0 12 12" shape-rendering="crispEdges" aria-hidden="true" style="flex: none">
+<path d="{{ pt.bg }}" fill="#5d4a73"></path>
+<path d="{{ pt.h }}" fill="#1a1220"></path>
+<path d="{{ pt.e }}" fill="#1a1220"></path>
+<path d="{{ pt.s }}" fill="#c68863"></path>
+<path d="{{ pt.k }}" fill="#a06a4a"></path>
+<path d="{{ pt.w }}" fill="#e8d9b5"></path>
+</svg>
+<div style="min-width: 0">
+<p style="margin: 0; font-family: 'Pixelify Sans', monospace; font-size: 14px; font-weight: 700; color: #a2476f">DAD</p>
+<p style="margin: 2px 0 0; font-size: 15px; line-height: 1.45">The shop isn’t doing well, beta. I need you at the counter. Grade 11 can wait.</p>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; margin-top: 12px">
+<button type="button" style="display: flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 12px; border: 0; background: #241c2e; color: #fbefd9; font-family: 'Pixelify Sans', monospace; font-size: 17px; font-weight: 600; text-align: left; cursor: pointer"><svg width="10" height="12" viewBox="0 0 5 6" shape-rendering="crispEdges" aria-hidden="true"><path d="M0 0h1v6H0zM1 1h1v4H1zM2 2h1v2H2z" fill="#ffb35c"></path></svg>Stay in school</button>
+<button type="button" style="display: flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 12px 0 32px; border: 0; background: transparent; color: #241c2e; font-family: 'Pixelify Sans', monospace; font-size: 17px; font-weight: 600; text-align: left; cursor: pointer">Work the counter</button>
+</div>
+</section>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+var SPRITES = {
+  mom: ['.hhh.', 'hsss.', '.sss.', '.ppp.', 'ppppp', 'ppppp', 'ppppp', '.ppp.', '.s.s.'],
+  dad: ['.hhh.', '.sss.', '.sss.', '.shs.', '.www.', 'wwwww', 'wwwww', 'wwwww', '.www.', '.d.d.'],
+  kid: ['.hhh.', 'hhhh.', '.sss.', '.sss.', '.bbb.', 'bbbb.', 'bbbb.', 'bbbb.', '.bbb.', '.dd..', '.d.d.', '.d.d.', '.d.d.', '.k.k.'],
+  dadFace: [
+    '....hhhh....',
+    '...hhhhhh...',
+    '..hhhhhhhh..',
+    '..hsssssshh.',
+    '..ssssssss..',
+    '..sesssses..',
+    '..ssssssss..',
+    '..sshhhhss..',
+    '..ssskksss..',
+    '...ssssss...',
+    '..wwwwwwww..',
+    '.wwwwwwwwww.'
+  ]
+};
+
+function grid(W, H, fill) {
+  var g = [];
+  for (var y = 0; y < H; y++) g.push(new Array(W).fill(fill));
+  return g;
+}
+
+// One path per colour key, built from horizontal runs of pixels.
+function toPaths(g) {
+  var out = {};
+  g.forEach(function (row, y) {
+    var x = 0;
+    while (x < row.length) {
+      var k = row[x], n = 1;
+      while (x + n < row.length && row[x + n] === k) n++;
+      if (k) out[k] = (out[k] || '') + 'M' + x + ' ' + y + 'h' + n + 'v1h-' + n + 'z';
+      x += n;
+    }
+  });
+  return out;
+}
+
+function buildScene() {
+  var W = 66, H = 52, g = grid(W, H, '');
+  var set = function (x, y, k) { if (x >= 0 && x < W && y >= 0 && y < H) g[y][x] = k; };
+  var rect = function (x0, y0, x1, y1, k) { for (var y = y0; y <= y1; y++) for (var x = x0; x <= x1; x++) set(x, y, k); };
+  var sprite = function (rows, x0, y0) {
+    rows.forEach(function (row, dy) {
+      for (var dx = 0; dx < row.length; dx++) if (row[dx] !== '.') set(x0 + dx, y0 + dy, row[dx]);
+    });
+  };
+  var line = function (x0, y0, x1, y1, k) {
+    var dx = Math.abs(x1 - x0), sx = x0 < x1 ? 1 : -1, dy = -Math.abs(y1 - y0), sy = y0 < y1 ? 1 : -1, err = dx + dy;
+    for (;;) {
+      set(x0, y0, k);
+      if (x0 === x1 && y0 === y1) break;
+      var e2 = 2 * err;
+      if (e2 >= dy) { err += dy; x0 += sx; }
+      if (e2 <= dx) { err += dx; y0 += sy; }
+    }
+  };
+  var x, y;
+  // Sunset sky in seven dithered bands.
+  for (y = 0; y < 41; y++) {
+    for (x = 0; x < W; x++) {
+      var t = Math.min(y, 33) * 7 / 34, band = Math.floor(t);
+      if (t - band > 0.6 && (x + y) % 2 === 0 && band < 6) band++;
+      set(x, y, 's' + band);
+    }
+  }
+  [[3, 2], [12, 5], [22, 1], [30, 4], [57, 3], [62, 7], [38, 2]].forEach(function (p) { set(p[0], p[1], 'star'); });
+  for (y = 22; y < 37; y++) for (x = 36; x < 53; x++) if ((x - 44) * (x - 44) + (y - 30) * (y - 30) <= 42) set(x, y, 'sun');
+  // Distant skyline with a domed imambara and two minarets.
+  [[0, 5, 28], [6, 8, 24], [9, 9, 18], [10, 22, 26], [23, 23, 18], [24, 30, 25], [31, 36, 29], [37, 43, 23], [44, 50, 27], [51, 58, 22], [59, 65, 26]].forEach(function (b) { rect(b[0], b[2], b[1], 40, 'bb'); });
+  for (y = 19; y < 27; y++) for (x = 10; x < 23; x++) if ((x - 16) * (x - 16) + (y - 26) * (y - 26) <= 38) set(x, y, 'bb');
+  set(16, 18, 'bb'); set(9, 17, 'bb'); set(23, 17, 'bb');
+  [[2, 31], [4, 34], [13, 29], [19, 29], [26, 28], [28, 32], [39, 26], [41, 30], [46, 30], [53, 25], [56, 29], [61, 29], [63, 33]].forEach(function (p) { set(p[0], p[1], 'win'); });
+  [[0, 7, 33], [8, 15, 31], [16, 26, 34], [27, 33, 32], [34, 41, 35], [42, 49, 31], [50, 53, 33]].forEach(function (b) { rect(b[0], b[2], b[1], 40, 'bf'); });
+  [[3, 35], [10, 34], [13, 37], [20, 37], [29, 35], [37, 37], [45, 34], [47, 37]].forEach(function (p) { set(p[0], p[1], 'win'); });
+  // Stair room with a lit door.
+  rect(54, 30, 65, 42, 'room');
+  rect(53, 29, 65, 29, 'parH');
+  rect(57, 35, 61, 42, 'win');
+  // Parapet and roof floor.
+  rect(0, 40, 53, 40, 'parH');
+  rect(0, 41, 53, 42, 'par');
+  for (x = 3; x < 52; x += 6) set(x, 41, 'floorL');
+  rect(0, 43, 65, 51, 'floor');
+  rect(0, 47, 65, 47, 'floorL');
+  for (x = 0; x < W; x += 8) rect(x, 43, x, 51, 'floorL');
+  // Laundry line.
+  rect(2, 30, 2, 42, 'cotD');
+  rect(31, 30, 31, 42, 'cotD');
+  var sag = function (px) { return 31 + Math.round(Math.sin(Math.PI * (px - 2) / 29) * 2); };
+  for (x = 2; x <= 31; x++) set(x, sag(x), 'line');
+  var hang = function (x0, x1, len, k) { for (var hx = x0; hx <= x1; hx++) rect(hx, sag(hx) + 1, hx, sag(hx) + len, k); };
+  hang(6, 8, 4, 'b'); hang(12, 15, 4, 'p'); hang(19, 21, 3, 'w'); hang(25, 27, 5, 'g');
+  // Charpai and the family.
+  for (x = 7; x <= 23; x++) set(x, 45, x % 2 ? 'cot' : 'cotD');
+  rect(8, 46, 8, 48, 'cotD');
+  rect(22, 46, 22, 48, 'cotD');
+  sprite(SPRITES.mom, 9, 36);
+  sprite(SPRITES.dad, 15, 35);
+  sprite(SPRITES.kid, 35, 37);
+  [[39, 41], [40, 40], [41, 39], [41, 38], [42, 37]].forEach(function (p) { set(p[0], p[1], 's'); });
+  // Kite and its string.
+  line(43, 36, 48, 12, 'star');
+  for (y = 5; y <= 11; y++) { var half = 3 - Math.abs(y - 8); for (x = 48 - half; x <= 48 + half; x++) set(x, y, 'kite'); }
+  rect(48, 5, 48, 11, 'kiteD');
+  rect(45, 8, 51, 8, 'kiteD');
+  [[49, 12], [50, 13], [49, 14], [50, 15]].forEach(function (p) { set(p[0], p[1], 'kite'); });
+  return g;
+}
+
+function buildPortrait() {
+  var g = grid(12, 12, 'bg');
+  SPRITES.dadFace.forEach(function (row, y) {
+    for (var x = 0; x < row.length; x++) if (row[x] !== '.') g[y][x] = row[x];
+  });
+  return g;
+}
+
+class Component extends DCLogic {
+  renderVals() {
+    if (!this.art) this.art = { sc: toPaths(buildScene()), pt: toPaths(buildPortrait()) };
+    const st = this.state || {};
+    const speeds = [1, 4, 16];
+    const speed = st.speed || 4;
+    const paused = !!st.paused;
+    const bar = (label, name, v, color) => ({
+      label: label,
+      v: v,
+      aria: name + ' ' + v,
+      segs: Array.from({ length: 10 }, (_, i) => ({ bg: i < Math.round(v / 10) ? color : '#241c2e' }))
+    });
+    return {
+      sc: this.art.sc,
+      pt: this.art.pt,
+      stats: [bar('HP', 'Health', 82, '#ff6b8a'), bar('JOY', 'Happiness', 64, '#ffb35c'), bar('INT', 'Knowledge', 71, '#5fa8d3'), bar('LUV', 'Relationships', 58, '#9be08c')],
+      speed: speed,
+      paused: paused,
+      running: !paused,
+      pauseLabel: paused ? 'Resume' : 'Pause',
+      togglePause: () => this.setState({ paused: !paused }),
+      cycleSpeed: () => this.setState({ speed: speeds[(speeds.indexOf(speed) + 1) % speeds.length] })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hub — cute</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+main a:focus-visible,main button:focus-visible{outline:3px solid #2593a3;outline-offset:3px}
+@keyframes kh-dim{from{opacity:0}to{opacity:1}}
+@keyframes kh-rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes kh-pop{0%{transform:scale(1)}40%{transform:scale(1.22)}70%{transform:scale(0.95)}100%{transform:scale(1)}}
+@keyframes kc-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.k-o{color:#ffffff;text-shadow:1.5px 0 0 #5a3418,-1.5px 0 0 #5a3418,0 1.5px 0 #5a3418,0 -1.5px 0 #5a3418,1.1px 1.1px 0 #5a3418,-1.1px 1.1px 0 #5a3418,1.1px -1.1px 0 #5a3418,-1.1px -1.1px 0 #5a3418,0 2px 0 #5a3418}
+.k-os{color:#ffffff;text-shadow:1px 0 0 #5a3418,-1px 0 0 #5a3418,0 1px 0 #5a3418,0 -1px 0 #5a3418,0.8px 0.8px 0 #5a3418,-0.8px 0.8px 0 #5a3418,0.8px -0.8px 0 #5a3418,-0.8px -0.8px 0 #5a3418,0 1.5px 0 #5a3418}
+.k-big{color:#ffffff;text-shadow:2.5px 0 0 #5a3418,-2.5px 0 0 #5a3418,0 2.5px 0 #5a3418,0 -2.5px 0 #5a3418,1.8px 1.8px 0 #5a3418,-1.8px 1.8px 0 #5a3418,1.8px -1.8px 0 #5a3418,-1.8px -1.8px 0 #5a3418,0 4px 0 #5a3418}
+</style>
+</helmet>
+<main style="position: relative; width: 393px; height: 852px; overflow: hidden; background: #f2e3c6; color: #5a3418; font-family: Fredoka, 'Baloo 2', system-ui, sans-serif">
+<div aria-hidden="true" style="position: absolute; left: -24px; top: 87px; width: 440px; height: 440px; border-radius: 50%; background: radial-gradient(closest-side, rgba(127,208,240,0.55) 0%, rgba(127,208,240,0.25) 60%, rgba(127,208,240,0) 100%)"></div>
+<div style="position: absolute; left: 0px; right: 0px; top: 0px; height: 160px; opacity: {{ upOp }}; transform: translateY({{ upY }}px); transition: transform 0.4s {{ ease }} {{ upDelay }}, opacity 0.35s ease {{ upDelay }}">
+<a href="{{ to.lang.href }}" onClick="{{ to.lang.go }}" aria-label="Settings: language and currency" style="position: absolute; left: 10px; top: 48px; width: 42px; height: 42px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 21px; background: #fff3d6; box-shadow: inset 0 -3px 0 rgba(90,52,24,0.22); display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.90 4.18 L10.34 1.53 L13.66 1.53 L14.10 4.18 L16.05 4.99 L18.23 3.42 L20.58 5.77 L19.01 7.95 L19.82 9.90 L22.47 10.34 L22.47 13.66 L19.82 14.10 L19.01 16.05 L20.58 18.23 L18.23 20.58 L16.05 19.01 L14.10 19.82 L13.66 22.47 L10.34 22.47 L9.90 19.82 L7.95 19.01 L5.77 20.58 L3.42 18.23 L4.99 16.05 L4.18 14.10 L1.53 13.66 L1.53 10.34 L4.18 9.90 L4.99 7.95 L3.42 5.77 L5.77 3.42 L7.95 4.99 Z" fill="#c9cfe0" stroke="#5a3418" stroke-width="1.7" stroke-linejoin="round"></path><circle cx="12" cy="12" r="3.6" fill="#fff3d6" stroke="#5a3418" stroke-width="1.7"></circle></svg></a>
+<div style="position: absolute; left: 60px; right: 10px; top: 54px; display: flex; gap: 14px">
+<div role="meter" aria-label="{{ energyLabel }}" aria-valuenow="{{ energy }}" aria-valuemin="0" aria-valuemax="5" style="position: relative; flex: 1; min-width: 0; height: 30px; margin-left: 14px; box-sizing: border-box; padding: 0 6px 0 30px; border: 2px solid #7b4b2a; border-radius: 15px; background: #5b4636; display: flex; align-items: center; justify-content: center">
+<svg width="38" height="38" viewBox="0 0 36 36" aria-hidden="true" style="position: absolute; left: -17px; top: -6px"><path d="M21.5 1.5 L6.5 20 H16.5 L13.5 34.5 L29.5 14 H19.5 Z" fill="#ffd75a" stroke="#5a3418" stroke-width="2.2" stroke-linejoin="round"></path></svg>
+<button type="button" aria-label="Get energy" style="position: absolute; left: 9px; top: 12px; width: 18px; height: 18px; box-sizing: border-box; padding: 0; border: 2px solid #7b4b2a; border-radius: 9px; background: #8fd14f; box-shadow: inset 0 -2px 0 rgba(90,52,24,0.22); display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="9" height="9" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16" stroke="#ffffff" stroke-width="5" stroke-linecap="round"></path></svg></button>
+<span class="k-os" style="font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums">{{ energyShown }}/5</span>
+<span style="position: absolute; left: 30px; right: 6px; top: 31px; text-align: center; font-size: 10px; font-weight: 700; line-height: 13px; color: #8a5a35; font-variant-numeric: tabular-nums; white-space: nowrap">{{ refill }}</span>
+</div>
+<div aria-label="{{ dollarsLabel }}" style="animation: {{ rw.pop }}; position: relative; flex: 1; min-width: 0; height: 30px; margin-left: 14px; box-sizing: border-box; padding: 0 6px 0 30px; border: 2px solid #7b4b2a; border-radius: 15px; background: #5b4636; display: flex; align-items: center; justify-content: center">
+<svg width="38" height="38" viewBox="0 0 36 36" aria-hidden="true" style="position: absolute; left: -17px; top: -6px"><g transform="rotate(-12 18 18)"><rect x="6.5" y="6" width="26" height="17" rx="3" fill="#b6e57f" stroke="#5a3418" stroke-width="2"></rect><rect x="3" y="11.5" width="26" height="17" rx="3" fill="#6cc04a" stroke="#5a3418" stroke-width="2"></rect><circle cx="16" cy="20" r="5.4" fill="#b6e57f" stroke="#5a3418" stroke-width="1.6"></circle><text x="16" y="23.7" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="10.5" font-weight="700" fill="#2f6a1a">$</text></g></svg>
+<button type="button" aria-label="Get dollars" style="position: absolute; left: 9px; top: 12px; width: 18px; height: 18px; box-sizing: border-box; padding: 0; border: 2px solid #7b4b2a; border-radius: 9px; background: #8fd14f; box-shadow: inset 0 -2px 0 rgba(90,52,24,0.22); display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="9" height="9" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16" stroke="#ffffff" stroke-width="5" stroke-linecap="round"></path></svg></button>
+<span class="k-os" style="font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums">{{ dollars }}</span>
+</div>
+<div aria-label="{{ gemsLabel }}" style="animation: {{ rw.pop }}; position: relative; flex: 1; min-width: 0; height: 30px; margin-left: 14px; box-sizing: border-box; padding: 0 6px 0 30px; border: 2px solid #7b4b2a; border-radius: 15px; background: #5b4636; display: flex; align-items: center; justify-content: center">
+<svg width="38" height="38" viewBox="0 0 36 36" aria-hidden="true" style="position: absolute; left: -17px; top: -6px"><path d="M10 5h16l7.5 9L18 32.5 2.5 14Z" fill="#ff7ad9"></path><path d="M10 5h16l7.5 9h-31Z" fill="#ffb3ec"></path><path d="M2.5 14h31M14 5l-3.5 9L18 32.5 25.5 14 22 5" fill="none" stroke="#5a3418" stroke-width="1.5" stroke-linejoin="round"></path><path d="M10 5h16l7.5 9L18 32.5 2.5 14Z" fill="none" stroke="#5a3418" stroke-width="2.2" stroke-linejoin="round"></path></svg>
+<button type="button" aria-label="Get gems" style="position: absolute; left: 9px; top: 12px; width: 18px; height: 18px; box-sizing: border-box; padding: 0; border: 2px solid #7b4b2a; border-radius: 9px; background: #8fd14f; box-shadow: inset 0 -2px 0 rgba(90,52,24,0.22); display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="9" height="9" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16" stroke="#ffffff" stroke-width="5" stroke-linecap="round"></path></svg></button>
+<span class="k-os" style="font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums">{{ gems }}</span>
+</div>
+</div>
+<h1 class="k-big" style="position: absolute; left: 0px; right: 0px; top: 108px; margin: 0; text-align: center; font-size: 38px; font-weight: 700; line-height: 44px; letter-spacing: -0.5px; white-space: nowrap">1 in <span style="color: #ffd75a">8</span> B</h1>
+</div>
+<div style="position: absolute; left: 51.5px; top: 162px; width: 290px; height: 290px">
+<dc-import name="Globe" size="290" variant="halftone" land="#5bb54a" ocean="#9fdcf5" shade="#5cb3e0" night="rgba(90,52,24,0.14)" rim="#7b4b2a" grid="" flash="#ff6f8a" marker="#ff6f8a" marker-ring="#fff3d6" dot="1.15" spin="8" start-lon="-40" hint-size="290px,290px"></dc-import>
+</div>
+<div role="group" aria-label="{{ countersLabel }}" style="position: absolute; left: 46.5px; top: 478px; display: grid; grid-template-columns: minmax(0, 1fr) 2px minmax(0, 1fr); align-items: center; width: 300px; height: 84px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 14px; background: #fffaf0; text-align: center; opacity: {{ midOp }}; transform: translateY({{ midY }}px); transition: opacity 0.35s ease {{ midDelay }}, transform 0.35s ease {{ midDelay }}">
+<span style="position: absolute; left: 50%; top: -11px; transform: translateX(-50%); padding: 0 10px; background: #f2e3c6; font-size: 12px; font-weight: 700; line-height: 18px; letter-spacing: 0.06em; text-transform: uppercase; color: #8a5a35; white-space: nowrap">Since you opened</span>
+<div>
+<p style="margin: 0; font-size: 30px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; color: #4a2c17">{{ bornCount }}</p>
+<p style="display: flex; align-items: center; justify-content: center; gap: 6px; margin: 7px 0 0; font-size: 13px; font-weight: 600; line-height: 1.2; color: #8a5a35"><span aria-hidden="true" style="width: 10px; height: 10px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 5px; background: #ff6f8a"></span>born</p>
+</div>
+<span aria-hidden="true" style="width: 2px; height: 46px; border-radius: 1px; background: #e2c595"></span>
+<div>
+<p style="margin: 0; font-size: 30px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; color: #4a2c17">{{ diedCount }}</p>
+<p style="display: flex; align-items: center; justify-content: center; gap: 6px; margin: 7px 0 0; font-size: 13px; font-weight: 600; line-height: 1.2; color: #8a5a35"><span aria-hidden="true" style="width: 10px; height: 10px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 5px; background: #c9b6ff"></span>passed away</p>
+</div>
+</div>
+<button type="button" onClick="{{ born }}" style="position: absolute; left: 50%; top: 598px; width: 250px; height: 66px; margin-left: -125px; box-sizing: border-box; padding: 0; border: 2px solid #7b4b2a; border-radius: 18px; background: #ffd75a; box-shadow: inset 0 -4px 0 rgba(90,52,24,0.22), inset 0 4px 0 rgba(255,255,255,0.5); display: flex; align-items: center; justify-content: center; gap: 12px; font-family: inherit; cursor: pointer; opacity: {{ btnOp }}; pointer-events: {{ btnPe }}; transform: scale({{ btnScale }}); transition: opacity 0.3s ease {{ btnDelay }}, transform 0.3s ease {{ btnDelay }}">
+<span class="k-o" style="font-size: 24px; font-weight: 700">Be Born!</span>
+<span aria-label="costs 1 energy" style="display: inline-flex; align-items: center; gap: 2px; height: 30px; box-sizing: border-box; padding: 0 10px 0 5px; border: 2px solid #7b4b2a; border-radius: 15px; background: #fff3d6; font-size: 17px; font-weight: 700; color: #5a3418"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2 L5 13.5 H11 L9.5 22 L19 9.5 H12.8 Z" fill="#ffd75a" stroke="#5a3418" stroke-width="1.8" stroke-linejoin="round"></path></svg>1</span>
+</button>
+<a href="{{ to.roll.href }}" onClick="{{ to.roll.go }}" ref="{{ goRef }}" tabIndex="-1" aria-hidden="true" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none">Birth roll</a>
+<nav aria-label="Main menu" style="position: absolute; left: 0px; right: 0px; bottom: 0px; z-index: 0; height: 124px; transform: translateY({{ navY }}px); transition: transform 0.4s {{ ease }} {{ navDelay }}">
+<div style="position: absolute; left: 8px; right: 8px; bottom: 42px; z-index: 3; display: flex; align-items: flex-end">
+<div style="position: relative; flex: {{ tb.shop.grow }} 1 0px; min-width: 0; height: 80px; overflow: hidden; transition: {{ tb.shop.wtr }}"><button type="button" onClick="{{ tb.shop.pick }}" aria-current="{{ tb.shop.cur }}" style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 66px; box-sizing: border-box; padding: 9px 0 0; border: 2px solid #7b4b2a; border-bottom: none; border-radius: 16px 16px 0 0; background: #8fd14f; box-shadow: inset 0 3px 0 rgba(255,255,255,0.45); display: flex; flex-direction: column; align-items: center; gap: 4px; font-family: inherit; cursor: pointer; transform: translateY({{ tb.shop.y }}px); transition: {{ tb.shop.tr }}"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; animation: {{ tb.shop.pop }}"><path d="M4.5 8.5h15l-1.3 12H5.8Z" fill="#ffffff" stroke="#5a3418" stroke-width="1.8" stroke-linejoin="round"></path><path d="M8.5 8.5V7a3.5 3.5 0 0 1 7 0v1.5" fill="none" stroke="#5a3418" stroke-width="1.8" stroke-linecap="round"></path><path d="M12 11.6l.9 1.9 2 .3-1.5 1.4.4 2-1.8-1-1.8 1 .4-2-1.5-1.4 2-.3Z" fill="#5a3418"></path></svg><span class="k-os" style="opacity: {{ tb.shop.lo }}; transition: opacity 0.18s ease {{ tb.shop.ld }}; font-size: 13px; font-weight: 700; line-height: 14px; letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap">Shop</span></button><span aria-hidden="true" style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 2px; background: #7b4b2a; opacity: {{ tb.shop.line }}; transition: opacity 0.1s ease"></span></div>
+<div style="position: relative; flex: {{ tb.world.grow }} 1 0px; min-width: 0; height: 80px; margin-left: -2px; overflow: hidden; transition: {{ tb.world.wtr }}"><button type="button" onClick="{{ tb.world.pick }}" aria-current="{{ tb.world.cur }}" style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 66px; box-sizing: border-box; padding: 9px 0 0; border: 2px solid #7b4b2a; border-bottom: none; border-radius: 16px 16px 0 0; background: #ffd75a; box-shadow: inset 0 3px 0 rgba(255,255,255,0.45); display: flex; flex-direction: column; align-items: center; gap: 4px; font-family: inherit; cursor: pointer; transform: translateY({{ tb.world.y }}px); transition: {{ tb.world.tr }}"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; animation: {{ tb.world.pop }}"><circle cx="12" cy="12" r="9" fill="#ffffff" stroke="#5a3418" stroke-width="1.8"></circle><path d="M5 8.5c2-.6 3.6.2 3.9 1.6.3 1.5-.9 2.3-2.2 2.6-1 .2-1.5 1.2-2.3 1.6M13 3.4c-.3 1.6.8 2.4 2.3 2.6 1.4.2 2.6 1 2.3 2.6-.2 1.2-1.6 1.5-2 2.6-.4 1.2.6 2.4-.2 3.6M9.5 20.4c.2-1.4 1-2.6 2.4-2.8" fill="none" stroke="#5a3418" stroke-width="1.6" stroke-linecap="round"></path></svg><span class="k-os" style="opacity: {{ tb.world.lo }}; transition: opacity 0.18s ease {{ tb.world.ld }}; font-size: 13px; font-weight: 700; line-height: 14px; letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap">World</span></button><span aria-hidden="true" style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 2px; background: #7b4b2a; opacity: {{ tb.world.line }}; transition: opacity 0.1s ease"></span></div>
+<div style="position: relative; flex: {{ tb.lives.grow }} 1 0px; min-width: 0; height: 80px; margin-left: -2px; overflow: hidden; transition: {{ tb.lives.wtr }}"><button type="button" onClick="{{ tb.lives.pick }}" aria-current="{{ tb.lives.cur }}" style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 66px; box-sizing: border-box; padding: 9px 0 0; border: 2px solid #7b4b2a; border-bottom: none; border-radius: 16px 16px 0 0; background: #b48cff; box-shadow: inset 0 3px 0 rgba(255,255,255,0.45); display: flex; flex-direction: column; align-items: center; gap: 4px; font-family: inherit; cursor: pointer; transform: translateY({{ tb.lives.y }}px); transition: {{ tb.lives.tr }}"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; animation: {{ tb.lives.pop }}"><rect x="4.5" y="3" width="15" height="18.5" rx="2.5" fill="#ffffff" stroke="#5a3418" stroke-width="1.8"></rect><path d="M8 3.5v17.5" stroke="#5a3418" stroke-width="1.6"></path><path d="M14 9.4c.9-1.6 3.5-1.2 3.5.8 0 1.6-2 2.8-3.5 4-1.5-1.2-3.5-2.4-3.5-4 0-2 2.6-2.4 3.5-.8Z" fill="#ff6b6b" stroke="#5a3418" stroke-width="1.3" stroke-linejoin="round"></path></svg><span class="k-os" style="opacity: {{ tb.lives.lo }}; transition: opacity 0.18s ease {{ tb.lives.ld }}; font-size: 13px; font-weight: 700; line-height: 14px; letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap">Lives</span><span aria-label="1 new life story" class="k-os" style="opacity: {{ rw.badgeO }}; position: absolute; right: 8px; top: -10px; display: flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; box-sizing: border-box; padding: 0 5px; border: 2px solid #7b4b2a; border-radius: 11px; background: #f2384c; box-shadow: inset 0 2px 0 rgba(255,255,255,0.45), inset 0 -2px 0 rgba(90,52,24,0.25); font-size: 12px; font-weight: 700; line-height: 1; animation: {{ rw.badgeAnim }}">1</span></button><span aria-hidden="true" style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 2px; background: #7b4b2a; opacity: {{ tb.lives.line }}; transition: opacity 0.1s ease"></span></div>
+</div>
+<div aria-hidden="true" style="position: absolute; left: 0px; right: 0px; bottom: 0px; z-index: 2; height: 44px; box-sizing: border-box; border-top: 2px solid #7b4b2a; background: {{ bandBg }}; transition: background-color 0.3s ease"></div>
+</nav>
+<sc-if value="{{ rw.popOn }}" hint-placeholder-val="{{ false }}">
+<div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; background: rgba(58,34,14,0.55); opacity: {{ rw.popOp }}; transition: opacity 0.3s ease; animation: kh-dim 0.35s ease both"></div>
+<section role="dialog" aria-modal="true" aria-labelledby="kh-lived" style="position: absolute; left: 22px; right: 22px; top: 236px; box-sizing: border-box; padding: 34px 14px 16px; border: 2px solid #7b4b2a; border-radius: 20px; background: #f4a940; box-shadow: 0 10px 26px rgba(58,34,14,0.35), inset 0 0 0 3px #f8c46b; opacity: {{ rw.popOp }}; transform: scale({{ rw.popScale }}); transition: opacity 0.25s ease, transform 0.25s ease; animation: kh-rise 0.45s cubic-bezier(.22,1,.36,1) both">
+<span aria-hidden="true" style="position: absolute; left: 50%; top: -112px; width: 92px; height: 92px; margin-left: -46px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 46px; overflow: hidden; background: #bfe8ef; animation: kh-pop 0.5s ease-out 0.2s both"><img src="/_blob/60abeeee8ef547960e0ea6b2a9d59a6f" alt="" style="display: block; width: 88px; height: 88px; object-fit: cover"></span>
+<svg id="kh-lived" width="196" height="46" viewBox="0 0 196 46" role="img" aria-label="A life lived" style="position: absolute; left: 50%; top: -26px; transform: translateX(-50%); overflow: visible"><path d="M4 14 H30 V40 H4 L13 27 Z M192 14 H166 V40 H192 L183 27 Z" fill="#2593a3" stroke="#7b4b2a" stroke-width="2.5" stroke-linejoin="round"></path><rect x="22" y="4" width="152" height="34" rx="7" fill="#3ec3d2" stroke="#7b4b2a" stroke-width="2.5"></rect><rect x="29" y="9" width="138" height="6" rx="3" fill="#ffffff" opacity="0.35"></rect><text x="98" y="29" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="20" font-weight="700" fill="#ffffff" stroke="#5a3418" stroke-width="3.4" paint-order="stroke" stroke-linejoin="round">A life lived</text></svg>
+<div style="display: flex; justify-content: center"><span style="display: inline-flex; align-items: center; height: 26px; padding: 0 14px; border-radius: 13px; background: #c0661a; color: #ffffff; font-size: 13px; font-weight: 700; white-space: nowrap">Aarav Srivastava · 2026 – 2100</span></div>
+<div style="margin-top: 10px; padding: 8px 12px 10px; border: 2px solid #7b4b2a; border-radius: 14px; background: #fff3d6">
+<p style="margin: 0 0 4px; font-size: 11px; font-weight: 700; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a5a35">Rewards for this life</p>
+<ul style="list-style: none; margin: 0; padding: 0">
+<sc-for list="{{ rw.list }}" as="r" hint-placeholder-count="5">
+<li style="display: flex; align-items: center; gap: 8px; min-height: 27px; animation: kh-rise 0.35s ease-out {{ r.delay }}s both"><span aria-hidden="true" style="flex: none; width: 10px; height: 10px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 5px; background: {{ r.dot }}"></span><span style="flex: 1; min-width: 0; font-size: 14px; font-weight: 500; line-height: 17px; color: #4a2c17">{{ r.text }}</span><span style="display: inline-flex; align-items: center; gap: 2px; font-size: 14px; font-weight: 700; color: #4a2c17; white-space: nowrap"><sc-if value="{{ r.bill }}" hint-placeholder-val="{{ true }}"><svg width="20" height="20" viewBox="0 0 36 36" aria-hidden="true" style="flex: none"><g transform="rotate(-12 18 18)"><rect x="6.5" y="6" width="26" height="17" rx="3" fill="#b6e57f" stroke="#5a3418" stroke-width="2"></rect><rect x="3" y="11.5" width="26" height="17" rx="3" fill="#6cc04a" stroke="#5a3418" stroke-width="2"></rect><circle cx="16" cy="20" r="5.4" fill="#b6e57f" stroke="#5a3418" stroke-width="1.6"></circle><text x="16" y="23.7" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="10.5" font-weight="700" fill="#2f6a1a">$</text></g></svg></sc-if><sc-if value="{{ r.gem }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 36 36" aria-hidden="true" style="flex: none"><path d="M10 5h16l7.5 9L18 32.5 2.5 14Z" fill="#ff7ad9"></path><path d="M10 5h16l7.5 9h-31Z" fill="#ffb3ec"></path><path d="M2.5 14h31M14 5l-3.5 9L18 32.5 25.5 14 22 5" fill="none" stroke="#5a3418" stroke-width="1.5" stroke-linejoin="round"></path><path d="M10 5h16l7.5 9L18 32.5 2.5 14Z" fill="none" stroke="#5a3418" stroke-width="2.2" stroke-linejoin="round"></path></svg></sc-if>{{ r.amount }}</span></li>
+</sc-for>
+</ul>
+<div style="display: flex; align-items: center; justify-content: space-between; margin-top: 6px; padding-top: 7px; border-top: 2px dashed #e2c595"><span style="font-size: 14px; font-weight: 700; color: #4a2c17">In all</span><span style="display: flex; gap: 6px"><span style="display: inline-flex; align-items: center; gap: 3px; height: 28px; box-sizing: border-box; padding: 0 10px 0 4px; border: 2px solid #7b4b2a; border-radius: 14px; background: #5b4636"><svg width="22" height="22" viewBox="0 0 36 36" aria-hidden="true" style="flex: none"><g transform="rotate(-12 18 18)"><rect x="6.5" y="6" width="26" height="17" rx="3" fill="#b6e57f" stroke="#5a3418" stroke-width="2"></rect><rect x="3" y="11.5" width="26" height="17" rx="3" fill="#6cc04a" stroke="#5a3418" stroke-width="2"></rect><circle cx="16" cy="20" r="5.4" fill="#b6e57f" stroke="#5a3418" stroke-width="1.6"></circle><text x="16" y="23.7" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="10.5" font-weight="700" fill="#2f6a1a">$</text></g></svg><span class="k-os" style="font-size: 15px; font-weight: 700">+250</span></span><span style="display: inline-flex; align-items: center; gap: 3px; height: 28px; box-sizing: border-box; padding: 0 10px 0 4px; border: 2px solid #7b4b2a; border-radius: 14px; background: #5b4636"><svg width="20" height="20" viewBox="0 0 36 36" aria-hidden="true" style="flex: none"><path d="M10 5h16l7.5 9L18 32.5 2.5 14Z" fill="#ff7ad9"></path><path d="M10 5h16l7.5 9h-31Z" fill="#ffb3ec"></path><path d="M2.5 14h31M14 5l-3.5 9L18 32.5 25.5 14 22 5" fill="none" stroke="#5a3418" stroke-width="1.5" stroke-linejoin="round"></path><path d="M10 5h16l7.5 9L18 32.5 2.5 14Z" fill="none" stroke="#5a3418" stroke-width="2.2" stroke-linejoin="round"></path></svg><span class="k-os" style="font-size: 15px; font-weight: 700">+2</span></span></span></div>
+</div>
+<div style="display: flex; justify-content: center; pointer-events: {{ rw.claimPe }}">
+<button type="button" onClick="{{ rw.claim }}" class="k-o" style="width: 200px; height: 56px; margin-top: 14px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 16px; background: #ffd75a; box-shadow: inset 0 -3px 0 rgba(90,52,24,0.22), inset 0 3px 0 rgba(255,255,255,0.5); font-family: inherit; font-size: 22px; font-weight: 700; cursor: pointer">Claim</button>
+</div>
+</section>
+</sc-if>
+<sc-if value="{{ rw.flyOn }}" hint-placeholder-val="{{ false }}">
+<div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; width: 393px; height: 0px; pointer-events: none">
+<span style="position: absolute; left: 150.5px; top: 124px; width: 92px; height: 92px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 46px; overflow: hidden; background: #bfe8ef; box-shadow: 0 6px 14px rgba(58,34,14,0.35); opacity: {{ rw.face.o }}; transform: {{ rw.face.t }}; transition: {{ rw.faceTr }}"><img src="/_blob/60abeeee8ef547960e0ea6b2a9d59a6f" alt="" style="display: block; width: 88px; height: 88px; object-fit: cover"></span>
+<span style="position: absolute; left: 207px; top: 470px; opacity: {{ rw.d.o }}; transform: {{ rw.d.t }}; transition: {{ rw.tr }}"><span style="display: inline-flex; align-items: center; gap: 3px; height: 28px; box-sizing: border-box; padding: 0 10px 0 4px; border: 2px solid #7b4b2a; border-radius: 14px; background: #5b4636; box-shadow: 0 6px 14px rgba(58,34,14,0.3)"><svg width="22" height="22" viewBox="0 0 36 36" aria-hidden="true" style="flex: none"><g transform="rotate(-12 18 18)"><rect x="6.5" y="6" width="26" height="17" rx="3" fill="#b6e57f" stroke="#5a3418" stroke-width="2"></rect><rect x="3" y="11.5" width="26" height="17" rx="3" fill="#6cc04a" stroke="#5a3418" stroke-width="2"></rect><circle cx="16" cy="20" r="5.4" fill="#b6e57f" stroke="#5a3418" stroke-width="1.6"></circle><text x="16" y="23.7" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="10.5" font-weight="700" fill="#2f6a1a">$</text></g></svg><span class="k-os" style="font-size: 15px; font-weight: 700">+250</span></span></span>
+<span style="position: absolute; left: 289px; top: 470px; opacity: {{ rw.g.o }}; transform: {{ rw.g.t }}; transition: {{ rw.tr }}"><span style="display: inline-flex; align-items: center; gap: 3px; height: 28px; box-sizing: border-box; padding: 0 10px 0 4px; border: 2px solid #7b4b2a; border-radius: 14px; background: #5b4636; box-shadow: 0 6px 14px rgba(58,34,14,0.3)"><svg width="20" height="20" viewBox="0 0 36 36" aria-hidden="true" style="flex: none"><path d="M10 5h16l7.5 9L18 32.5 2.5 14Z" fill="#ff7ad9"></path><path d="M10 5h16l7.5 9h-31Z" fill="#ffb3ec"></path><path d="M2.5 14h31M14 5l-3.5 9L18 32.5 25.5 14 22 5" fill="none" stroke="#5a3418" stroke-width="1.5" stroke-linejoin="round"></path><path d="M10 5h16l7.5 9L18 32.5 2.5 14Z" fill="none" stroke="#5a3418" stroke-width="2.2" stroke-linejoin="round"></path></svg><span class="k-os" style="font-size: 15px; font-weight: 700">+2</span></span></span>
+</div>
+</sc-if>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"demo":{"editor":"enum","options":["off","on"],"default":"off"},"rewards":{"editor":"enum","options":["off","on"],"default":"off"},"nav":{"editor":null},"$preview":{"width":393,"height":852}}'>
+// The hub between lives, in the cute style. At the top, the settings and the three currencies —
+// energy (one per life, refilling over time), dollars (the main currency) and gems (bought) —
+// each with a plus to get more; in the middle the spinning planet with the births and deaths since the
+// game was opened, and Be Born, which costs one energy.
+// The menu is one bar of three folder tabs over a band in the open tab's colour: Shop (a stub for
+// now), World (this screen) and Lives (every life played; a new story waits). The closed tabs
+// show only their icons; the open one widens a little and rises with its name, pushing the others
+// aside, and the band quickly takes its colour. The screen above stays as it is for now.
+// With `demo: on` the tabs take turns opening until the first tap. With `rewards: on` (back from a
+// finished life) a small pop-up says a life was lived and lists the rewards earned for what was done
+// in it; its one Claim button sends them flying into the dollar and gem counters and the portrait
+// into the Lives tab, where the story is kept.
+// Be Born spends the energy, then hides the whole interface — the top slides up, the menu down,
+// counters and button fade — leaving only the planet, where the birth roll has it, and moves on
+// to the roll. The hub arrives the same way played backwards: it starts hidden and everything
+// glides into place around the planet while the currencies count up.
+
+// Inside the prototype the host passes `nav` and moves between screens itself; on its own an
+// artboard follows plain links.
+function linkTo(self, stem) {
+  return typeof self.props.nav === 'function'
+    ? { href: null, go: () => self.props.nav(stem) }
+    : { href: stem + '.dc.html', go: null };
+}
+var STICKER_STEMS = { people: 'PeopleCute', activities: 'ActivitiesCute', life: 'LiveCute', money: 'MoneyCute', odds: 'OddsLife' };
+function stickerLinks(self) {
+  const out = {};
+  Object.keys(STICKER_STEMS).forEach((k) => { out[k] = linkTo(self, STICKER_STEMS[k]); });
+  return out;
+}
+
+// Bars fill and numbers count up once, as the screen appears.
+var ENTER_MS = 900;
+function startEnter(self) {
+  self.enterAt = Date.now();
+  self.enterTimer = setInterval(() => {
+    const p = Math.min(1, (Date.now() - self.enterAt) / ENTER_MS);
+    self.setState({ enterP: p });
+    if (p >= 1) clearInterval(self.enterTimer);
+  }, 30);
+}
+function entered(self) {
+  const p = (self.state && self.state.enterP) || 0;
+  return 1 - Math.pow(1 - p, 3);
+}
+
+var ENERGY = 3, ENERGY_MAX = 5, COST = 1;
+var DOLLARS = 2450, GEMS = 35;
+var REWARD_DOLLARS = 250, REWARD_GEMS = 2;
+// What the life earned, and for what.
+var REWARDS = [
+  { text: 'Stayed in school', amount: '+60', dot: '#6f8cff' },
+  { text: 'First job, at a bank', amount: '+40', dot: '#8fd14f' },
+  { text: 'Married Meera', amount: '+50', dot: '#ff6f8a' },
+  { text: 'Paid off the family’s old debt', amount: '+100', dot: '#ffc23d' },
+  { text: 'First life born in India', amount: '+2', dot: '#ff7ad9', gem: true }
+];
+// The pop-up opens after the hub has arrived; Claim can't be pressed until it has settled.
+var POPUP_AT = 800, READY_MS = 450, FLY_MS = 700, LAND_MS = 700;
+// From the pop-up's total to the dollar and gem counters, and from its portrait to the Lives tab.
+var FLY = { d: 'translate(-22px, -415px) scale(0.6)', g: 'translate(18px, -415px) scale(0.6)', face: 'translate(127px, 618px) scale(0.3)' };
+var REFILL_S = 18 * 60 + 24;
+var LEAVE_MS = 800, BACK_MS = 2800, SHOW_MS = 50;
+// Leaving speeds up as it goes; arriving is the same curve backwards, so it lands softly.
+var AWAY = 'cubic-bezier(.5,0,.75,0)', ARRIVE = 'cubic-bezier(.25,1,.5,1)';
+var TABS = [{ key: 'shop', color: '#8fd14f' }, { key: 'world', color: '#ffd75a' }, { key: 'lives', color: '#b48cff' }];
+// Quick out, soft landing: the tab never overshoots the band line. The widening may.
+var GLIDE = 'cubic-bezier(.2,.9,.3,1)', SPRING = 'cubic-bezier(.3,1.4,.5,1)';
+var TAB_MS = 300;
+var DEMO = ['lives', 'shop', 'world'];
+var DEMO_MS = 1600;
+
+class Component extends DCLogic {
+  componentDidMount() {
+    this.openedAt = Date.now();
+    this.timer = setInterval(() => this.forceUpdate(), 250);
+    startEnter(this);
+    this.show = setTimeout(() => this.setState({ shown: true }), SHOW_MS);
+    if (this.props.rewards === 'on') {
+      this.rewardTimers = [
+        setTimeout(() => this.setState({ rewardOpen: true }), SHOW_MS + POPUP_AT),
+        setTimeout(() => this.setState({ claimReady: true }), SHOW_MS + POPUP_AT + READY_MS)
+      ];
+    }
+    if (this.props.demo !== 'on') return;
+    let step = 0;
+    this.demo = setInterval(() => {
+      if ((this.state || {}).tapped) return clearInterval(this.demo);
+      this.setState({ tab: DEMO[step++ % DEMO.length] });
+    }, DEMO_MS);
+  }
+  // Claim: the pop-up goes, the rewards and the portrait fly, then the counters count up and the
+  // Lives tab gets its new story.
+  claim() {
+    const st = this.state || {};
+    if (st.rewardStep || !st.claimReady) return;
+    this.setState({ rewardStep: 1 });
+    this.rewardTimers.push(setTimeout(() => this.setState({ rewardStep: 2 }), 40));
+    this.rewardTimers.push(setTimeout(() => {
+      this.setState({ rewardStep: 3, landAt: Date.now() });
+      this.landTick = setInterval(() => this.forceUpdate(), 40);
+    }, 40 + FLY_MS));
+    this.rewardTimers.push(setTimeout(() => clearInterval(this.landTick), 40 + FLY_MS + LAND_MS + 100));
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+    clearInterval(this.demo);
+    clearInterval(this.enterTimer);
+    clearTimeout(this.show);
+    clearTimeout(this.leave);
+    clearTimeout(this.back);
+    (this.rewardTimers || []).forEach(clearTimeout);
+    clearInterval(this.landTick);
+  }
+  renderVals() {
+    const st = this.state || {};
+    const secs = this.openedAt ? (Date.now() - this.openedAt) / 1000 : 0;
+    // About 4.2 births and 2 deaths every second worldwide.
+    const born = Math.floor(secs * 4.2).toLocaleString('en-US');
+    const died = Math.floor(secs * 2).toLocaleString('en-US');
+    const leaving = !!st.leaving;
+    const step = st.rewardStep || 0;
+    const landed = step >= 3 ? Math.min(1, (Date.now() - st.landAt) / LAND_MS) : 0;
+    const landK = 1 - Math.pow(1 - landed, 3);
+    const rewards = this.props.rewards === 'on';
+    const flying = (key) => ({ o: step >= 2 ? 0.25 : 1, t: step >= 2 ? FLY[key] : 'translate(0px, 0px) scale(1)' });
+    // Hidden before the first show and again while leaving.
+    const hidden = leaving || !st.shown;
+    const k = entered(this);
+    const to = { lang: linkTo(this, 'LangCute'), roll: linkTo(this, 'RollCute') };
+    const tab = st.tab || 'world';
+    const energy = leaving ? ENERGY - COST : ENERGY;
+    const left = Math.max(0, Math.ceil(REFILL_S - secs));
+    const move = 'transform ' + TAB_MS + 'ms ' + GLIDE;
+    const widen = 'flex-grow ' + TAB_MS + 'ms ' + SPRING;
+    const tb = {};
+    TABS.forEach((t) => {
+      const on = t.key === tab;
+      tb[t.key] = {
+        cur: on ? 'page' : 'false',
+        // Each tab is cut off at the band's top line. The open one rises a little and widens a little,
+        // its line there goes so it runs into the band, its icon pops and its name fades in; a closing
+        // one sinks, gets its line back and its name fades out.
+        y: on ? 0 : 16, grow: on ? 1.3 : 1, tr: move, wtr: widen,
+        line: on ? 0 : 1, lo: on ? 1 : 0, ld: on ? '0.08s' : '0s',
+        pop: on ? 'kh-pop 0.35s ease-out' : 'none',
+        pick: () => { if (!st.leaving) this.setState({ tab: t.key, tapped: true }); }
+      };
+    });
+    return {
+      bornCount: born,
+      diedCount: died,
+      countersLabel: 'Since you opened the game: ' + born + ' born, ' + died + ' passed away',
+      energy: energy,
+      energyShown: Math.round(energy * k),
+      energyLabel: 'Energy ' + energy + ' of ' + ENERGY_MAX,
+      refill: '+1 in ' + Math.floor(left / 60) + ':' + String(left % 60).padStart(2, '0'),
+      dollars: Math.round(DOLLARS * k + REWARD_DOLLARS * landK).toLocaleString('en-US'),
+      dollarsLabel: (DOLLARS + (step >= 3 ? REWARD_DOLLARS : 0)).toLocaleString('en-US') + ' dollars',
+      gems: Math.round(GEMS * k + REWARD_GEMS * landK),
+      gemsLabel: (GEMS + (step >= 3 ? REWARD_GEMS : 0)) + ' gems',
+      rw: {
+        popOn: rewards && !!st.rewardOpen && step < 3, popOp: step >= 1 ? 0 : 1, popScale: step >= 1 ? 0.92 : 1,
+        claimPe: st.claimReady && !step ? 'auto' : 'none',
+        claim: () => this.claim(),
+        list: REWARDS.map((r, i) => ({ text: r.text, amount: r.amount, dot: r.dot, bill: !r.gem, gem: !!r.gem, delay: (0.35 + i * 0.1).toFixed(2) })),
+        flyOn: rewards && step >= 1 && step < 3,
+        d: flying('d'), g: flying('g'), face: flying('face'),
+        tr: 'transform ' + FLY_MS + 'ms cubic-bezier(.5,0,.75,0), opacity ' + FLY_MS + 'ms ease-in',
+        faceTr: 'transform ' + FLY_MS + 'ms cubic-bezier(.45,0,.7,1), opacity ' + FLY_MS + 'ms ease-in',
+        pop: step >= 3 ? 'kh-pop 0.4s ease-out' : 'none',
+        badgeO: !rewards || step >= 3 ? 1 : 0,
+        badgeAnim: rewards && step >= 3 ? 'kh-pop 0.45s ease-out' : 'kc-pulse 2s ease-in-out infinite'
+      },
+      to: to,
+      tb: tb,
+      bandBg: TABS.find((t) => t.key === tab).color,
+      // Be Born: the spent energy shows first, then everything but the planet leaves. Arriving runs
+      // it backwards — the top first, then the counters and the menu, the button last.
+      ease: leaving ? AWAY : ARRIVE,
+      upY: hidden ? -150 : 0, upOp: hidden ? 0 : 1, upDelay: leaving ? '0.25s' : '0s',
+      midY: hidden ? 24 : 0, midOp: hidden ? 0 : 1, midDelay: leaving ? '0.2s' : '0.1s',
+      btnScale: hidden ? 0.8 : 1, btnOp: hidden ? 0 : 1, btnPe: hidden ? 'none' : 'auto', btnDelay: leaving ? '0.1s' : '0.25s',
+      navY: hidden ? 140 : 0, navDelay: leaving ? '0.15s' : '0.1s',
+      goRef: (el) => { this.goEl = el; },
+      born: () => {
+        if (st.leaving) return;
+        this.setState({ leaving: true });
+        // In the prototype the host moves on to the roll and the hub stays hidden.
+        if (to.roll.go) {
+          this.leave = setTimeout(to.roll.go, LEAVE_MS);
+          return;
+        }
+        this.leave = setTimeout(() => { if (this.goEl) this.goEl.click(); }, LEAVE_MS);
+        // While editing the canvas links don't move, so the hub comes back.
+        this.back = setTimeout(() => this.setState({ leaving: false }), BACK_MS);
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,23 +1,36 @@
 {
   "name": "one-in-eight-billion-mobile",
-  "version": "0.1.0",
+  "version": "0.0.1-dev",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=24.16.0" },
+  "engines": {
+    "node": ">=24.16.0"
+  },
   "scripts": {
-    "dev": "vite --host 127.0.0.1 --port 4190 --strictPort",
+    "dev": "npm run core:extract && vite --host 127.0.0.1 --port 4190 --strictPort",
+    "core:extract": "node tools/core/extract-core.mjs",
     "typecheck": "tsc -b",
     "verify:core": "node tools/verify-core.mjs",
-    "test": "node --experimental-strip-types --test tests/*.test.mjs",
-    "check": "npm run verify:core && npm run typecheck && npm test",
-    "build": "npm run verify:core && npm run typecheck && vite build",
-    "preview": "vite preview --host 127.0.0.1 --port 4191 --strictPort"
+    "test": "node --experimental-strip-types --test tests/*.test.mjs tests/core/*.test.mjs",
+    "test:equivalence": "node --experimental-strip-types --test tests/core/equivalence.test.mjs",
+    "check": "npm run verify:core && npm run core:extract && npm run typecheck && npm test",
+    "build": "npm run verify:core && npm run core:extract && npm run typecheck && vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 4191 --strictPort",
+    "verify:build": "node --experimental-strip-types tools/harness/check-build.mjs"
   },
-  "dependencies": { "react": "19.3.1", "react-dom": "19.3.1" },
+  "dependencies": {
+    "@fontsource/caveat": "5.3.0",
+    "@fontsource/courier-prime": "5.3.0",
+    "@fontsource/fredoka": "5.3.0",
+    "motion": "14.2.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
   "devDependencies": {
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.2",
+    "acorn": "8.15.0",
     "typescript": "7.0.2",
     "vite": "8.3.5"
   }

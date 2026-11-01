@@ -1,0 +1,17 @@
+{
+  "death.title": "Life ended",
+  "death.continue": "Continue",
+  "death.years": "{born} – {died} · died at {age}",
+  "death.diedAt": "Died at {age}",
+  "death.cause": "Cause: {cause}",
+  "death.hold": "Hold to see your last day",
+  "death.lookBack": "Look back",
+  "death.summary": "Life summary",
+  "death.barRegion": "This life has ended",
+  "death.place": "Life ended · {place}, {year}",
+  "death.placeNoYear": "Life ended · {place}",
+  "death.barLabel": "Age {age} of 100. Life expectancy at birth here: {le}. This life has ended.",
+  "death.skip.title": "Living the rest of this life…",
+  "death.skip.who": "{name}, age {age}",
+  "death.skip.note": "Decisions are made along the way, the way the game makes them on its own."
+}

@@ -1,0 +1,12 @@
+{
+  "spend.activities.title": "Things to do",
+  "spend.income": "Yearly income: {amount}",
+  "spend.closed": "{title} opens once you can choose a focus for the year. Until then, your family decides.",
+  "spend.empty": "Nothing to buy or sell here right now.",
+  "spend.confirm.title": "Are you sure?",
+  "spend.confirm.cancel": "Cancel",
+  "spend.confirm.yes": "Confirm",
+  "spend.result.title": "Done!",
+  "spend.result.ok": "OK",
+  "spend.result.close": "Close"
+}

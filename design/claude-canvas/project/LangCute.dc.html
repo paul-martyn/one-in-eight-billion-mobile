@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Language — cute</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+main a:focus-visible,main button:focus-visible{outline:3px solid #2593a3;outline-offset:3px}
+.kl-scroll::-webkit-scrollbar{display:none}
+.k-o{color:#ffffff;text-shadow:1.5px 0 0 #5a3418,-1.5px 0 0 #5a3418,0 1.5px 0 #5a3418,0 -1.5px 0 #5a3418,1.1px 1.1px 0 #5a3418,-1.1px 1.1px 0 #5a3418,1.1px -1.1px 0 #5a3418,-1.1px -1.1px 0 #5a3418,0 2px 0 #5a3418}
+.k-os{color:#ffffff;text-shadow:1px 0 0 #5a3418,-1px 0 0 #5a3418,0 1px 0 #5a3418,0 -1px 0 #5a3418,0.8px 0.8px 0 #5a3418,-0.8px 0.8px 0 #5a3418,0.8px -0.8px 0 #5a3418,-0.8px -0.8px 0 #5a3418,0 1.5px 0 #5a3418}
+</style>
+</helmet>
+<main lang="{{ lang.tag }}" style="position: relative; width: 393px; height: 852px; overflow: hidden; background: #f2e3c6; color: #5a3418; font-family: Fredoka, Nunito, system-ui, sans-serif">
+<div aria-hidden="true" style="position: absolute; left: -24px; top: -40px; width: 440px; height: 440px; border-radius: 50%; background: radial-gradient(closest-side, rgba(127,208,240,0.5) 0%, rgba(127,208,240,0.2) 60%, rgba(127,208,240,0) 100%)"></div>
+<div aria-hidden="true" style="position: absolute; left: 50%; top: 34px; transform: translateX(-50%); width: 76px; height: 76px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 38px; background: #fff3d6; box-shadow: 0 4px 12px rgba(90,52,24,0.2), 0 1px 3px rgba(90,52,24,0.14); display: flex; align-items: center; justify-content: center">
+<svg width="54" height="46" viewBox="0 0 54 46"><path d="M22 3 H48 Q52 3 52 7 V23 Q52 27 48 27 H45 V33 L38 27 H22 Q18 27 18 23 V7 Q18 3 22 3 Z" fill="#3ec3d2" stroke="#7b4b2a" stroke-width="2" stroke-linejoin="round"></path><text x="35.5" y="21" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff" stroke="#5a3418" stroke-width="2.4" paint-order="stroke" stroke-linejoin="round">文</text><path d="M6 15 H30 Q34 15 34 19 V35 Q34 39 30 39 H16 L9 45 V39 H6 Q2 39 2 35 V19 Q2 15 6 15 Z" fill="#ffd75a" stroke="#7b4b2a" stroke-width="2" stroke-linejoin="round"></path><text x="18" y="33" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="15" font-weight="700" fill="#ffffff" stroke="#5a3418" stroke-width="2.6" paint-order="stroke" stroke-linejoin="round">Aa</text></svg>
+</div>
+<div style="position: absolute; left: 0px; right: 0px; top: 94px; display: flex; justify-content: center">
+<div style="position: relative; display: inline-flex; padding: 0 20px">
+<svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true" style="position: absolute; left: 0px; top: 10px"><path d="M2 2 H32 V32 H2 L11 17 Z" fill="#2593a3" stroke="#7b4b2a" stroke-width="2.5" stroke-linejoin="round"></path></svg>
+<svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true" style="position: absolute; right: 0px; top: 10px"><path d="M32 2 H2 V32 H32 L23 17 Z" fill="#2593a3" stroke="#7b4b2a" stroke-width="2.5" stroke-linejoin="round"></path></svg>
+<h1 class="k-o" dir="auto" style="position: relative; margin: 0; min-width: 160px; height: 42px; box-sizing: border-box; padding: 0 22px; display: flex; align-items: center; justify-content: center; border: 2.5px solid #7b4b2a; border-radius: 9px; background: #3ec3d2; box-shadow: inset 0 4px 0 rgba(255,255,255,0.3); font-size: 22px; font-weight: 700; white-space: nowrap">{{ t.title }}</h1>
+</div>
+</div>
+<section aria-label="{{ t.title }}" style="position: absolute; left: 14px; right: 14px; top: 166px; height: 326px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 18px; background: #fff3d6; box-shadow: 0 4px 12px rgba(90,52,24,0.2), 0 1px 3px rgba(90,52,24,0.14); overflow: hidden">
+<div class="kl-scroll" role="radiogroup" aria-label="{{ t.title }}" style="position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; overflow-y: auto; scrollbar-width: none; box-sizing: border-box; padding: 10px 10px 28px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; align-content: start">
+<sc-for list="{{ langs }}" as="l" hint-placeholder-count="19">
+<button type="button" role="radio" aria-checked="{{ l.sel }}" onClick="{{ l.pick }}" style="position: relative; display: flex; align-items: center; gap: 8px; height: 50px; box-sizing: border-box; padding: 0 8px; border: 2px solid #7b4b2a; border-radius: 12px; background: {{ l.bg }}; box-shadow: {{ l.shadow }}; font-family: inherit; text-align: start; cursor: pointer; transition: background-color 0.15s ease">
+<span class="k-os" aria-hidden="true" style="flex: none; width: 30px; height: 30px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 15px; background: {{ l.dot }}; display: flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 700">{{ l.short }}</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+<span dir="auto" lang="{{ l.tag }}" style="font-size: 15px; font-weight: 700; line-height: 18px; color: #4a2c17; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{ l.name }}</span>
+<span style="display: flex; align-items: center; gap: 3px; font-size: 10.5px; font-weight: 600; line-height: 13px; color: #8a5a35; white-space: nowrap; overflow: hidden"><sc-if value="{{ l.device }}" hint-placeholder-val="{{ false }}"><svg width="9" height="11" viewBox="0 0 18 24" aria-hidden="true" style="flex: none"><rect x="2" y="1.5" width="14" height="21" rx="3" fill="#fffaf0" stroke="#8a5a35" stroke-width="2.4"></rect><circle cx="9" cy="18" r="1.6" fill="#8a5a35"></circle></svg></sc-if>{{ l.en }}</span>
+</span>
+<sc-if value="{{ l.sel }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="position: absolute; right: -6px; top: -7px; width: 20px; height: 20px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 10px; background: #8fd14f; display: flex; align-items: center; justify-content: center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></sc-if>
+</button>
+</sc-for>
+</div>
+<div aria-hidden="true" style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 28px; background: linear-gradient(rgba(255,243,214,0), #fff3d6); pointer-events: none"></div>
+</section>
+<p class="k-os" dir="auto" style="position: absolute; left: 20px; right: 20px; top: 516px; margin: 0; font-size: 16px; font-weight: 700; line-height: 20px">{{ t.money }}</p>
+<div role="radiogroup" aria-label="{{ t.money }}" style="position: absolute; left: 20px; right: 20px; top: 546px; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 7px 6px">
+<sc-for list="{{ curs }}" as="c" hint-placeholder-count="7">
+<button type="button" role="radio" aria-checked="{{ c.sel }}" aria-label="{{ c.label }}" onClick="{{ c.pick }}" style="position: relative; aspect-ratio: 1 / 1; box-sizing: border-box; padding: 0; border: 2px solid #7b4b2a; border-radius: 10px; background: {{ c.bg }}; box-shadow: {{ c.shadow }}; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: inherit; cursor: pointer; transition: background-color 0.15s ease">
+<span dir="auto" style="font-size: {{ c.symSize }}; font-weight: 700; line-height: 18px; color: #4a2c17; white-space: nowrap">{{ c.sym }}</span>
+<span style="font-size: 8.5px; font-weight: 700; line-height: 10px; letter-spacing: 0.03em; color: #8a5a35">{{ c.code }}</span>
+<sc-if value="{{ c.sel }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="position: absolute; right: -6px; top: -7px; width: 18px; height: 18px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 9px; background: #8fd14f; display: flex; align-items: center; justify-content: center"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></sc-if>
+</button>
+</sc-for>
+</div>
+<a href="{{ to.start.href }}" onClick="{{ to.start.go }}" style="position: absolute; left: 50%; bottom: 100px; transform: translateX(-50%); display: flex; flex-direction: {{ rowDir }}; align-items: center; justify-content: center; gap: 10px; min-width: 230px; height: 64px; box-sizing: border-box; padding: 0 24px; border: 2px solid #7b4b2a; border-radius: 18px; background: #ffd75a; box-shadow: inset 0 -4px 0 rgba(90,52,24,0.22), inset 0 4px 0 rgba(255,255,255,0.5); text-decoration: none; cursor: pointer"><span class="k-o" dir="auto" style="font-size: 24px; font-weight: 700; white-space: nowrap">{{ t.go }}</span><svg width="34" height="30" viewBox="0 0 30 26" aria-hidden="true" style="flex: none; transform: scaleX({{ arrowFlip }})"><path d="M5 13 H22.5 M15.5 6 L22.5 13 L15.5 20" fill="none" stroke="#7b4b2a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 13 H22.5 M15.5 6 L22.5 13 L15.5 20" fill="none" stroke="#ffffff" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"nav":{"editor":null},"$preview":{"width":393,"height":852}}'>
+// The very first screen, before the counters: language and the player's own currency, in the cute
+// style. Each language is listed in its own script; the phone's language comes ticked. Tapping one
+// switches this screen into it at once (in the game every text follows), and the currency squares
+// show the currencies that language offers, as in the original game, its main one first — two rows
+// at most. `k` is the original game's price level per US dollar, kept for later screens.
+// Currency sets for en, ru, uk, pl, de, fr, es, it, pt, tr, id and ar come from the original;
+// those for ko, ja, zh, vi, th and fa are placeholders.
+var LANGS = [
+  { id: 'ru', short: 'RU', tag: 'ru', loc: 'ru-RU', name: 'Русский', en: 'Russian', post: true,
+    t: { title: 'Язык', money: 'Ваша валюта', go: 'Продолжить' },
+    cur: [['RUB', '₽', 'Россия', 29.6], ['KZT', '₸', 'Казахстан', 173], ['UAH', '₴', 'Украина', 12.9], ['BYN', 'Br', 'Беларусь', 0.91], ['ILS', '₪', 'Израиль', 3.49], ['EUR', '€', 'Германия', 0.71], ['USD', '$', 'США', 1]] },
+  { id: 'en', short: 'EN', tag: 'en', loc: 'en-US', name: 'English', en: 'From your phone', device: true,
+    t: { title: 'Language', money: 'Your currency', go: 'Continue' },
+    cur: [['USD', '$', 'US', 1], ['GBP', '£', 'UK', 0.68], ['EUR', '€', 'Ireland', 0.75], ['CAD', 'C$', 'Canada', 1.17], ['AUD', 'A$', 'Australia', 1.4], ['NZD', 'NZ$', 'New Zealand', 1.47], ['INR', '₹', 'India', 20.1], ['PKR', 'Rs', 'Pakistan', 67.8], ['PHP', '₱', 'Philippines', 19.1], ['SGD', 'S$', 'Singapore', 0.79], ['MYR', 'RM', 'Malaysia', 1.36], ['NGN', '₦', 'Nigeria', 195], ['GHS', 'GH₵', 'Ghana', 4.75], ['KES', 'KSh', 'Kenya', 43.5], ['ZAR', 'R', 'South Africa', 7.42]] },
+  { id: 'uk', short: 'UA', tag: 'uk', loc: 'uk-UA', name: 'Українська', en: 'Ukrainian', post: true,
+    t: { title: 'Мова', money: 'Ваша валюта', go: 'Продовжити' },
+    cur: [['UAH', '₴', 'Україна', 12.9], ['EUR', '€', 'Німеччина', 0.71], ['USD', '$', 'США', 1]] },
+  { id: 'pl', short: 'PL', tag: 'pl', loc: 'pl-PL', name: 'Polski', en: 'Polish', post: true,
+    t: { title: 'Język', money: 'Twoja waluta', go: 'Dalej' },
+    cur: [['PLN', 'zł', 'Polska', 2], ['EUR', '€', 'Niemcy', 0.71], ['GBP', '£', 'Wielka Brytania', 0.68], ['USD', '$', 'USA', 1]] },
+  { id: 'de', short: 'DE', tag: 'de', loc: 'de-DE', name: 'Deutsch', en: 'German', post: true,
+    t: { title: 'Sprache', money: 'Deine Währung', go: 'Weiter' },
+    cur: [['EUR', '€', 'Deutschland', 0.74], ['CHF', 'CHF', 'Schweiz', 0.93]] },
+  { id: 'fr', short: 'FR', tag: 'fr', loc: 'fr-FR', name: 'Français', en: 'French', post: true,
+    t: { title: 'Langue', money: 'Ta monnaie', go: 'Continuer' },
+    cur: [['EUR', '€', 'France', 0.73], ['CAD', '$', 'Canada', 1.17], ['CHF', 'CHF', 'Suisse', 0.93], ['XOF', 'FCFA', 'Côte d’Ivoire', 216], ['XAF', 'FCFA', 'Cameroun', 198], ['MAD', 'DH', 'Maroc', 3.93]] },
+  { id: 'es', short: 'ES', tag: 'es', loc: 'es-MX', name: 'Español', en: 'Spanish',
+    t: { title: 'Idioma', money: 'Tu moneda', go: 'Continuar' },
+    cur: [['MXN', '$', 'México', 10.3], ['EUR', '€', 'España', 0.6], ['COP', '$', 'Colombia', 1550], ['CLP', '$', 'Chile', 473], ['PEN', 'S/', 'Perú', 1.83], ['USD', 'US$', 'EE. UU.', 1]] },
+  { id: 'it', short: 'IT', tag: 'it', loc: 'it-IT', name: 'Italiano', en: 'Italian', post: true,
+    t: { title: 'Lingua', money: 'La tua valuta', go: 'Continua' },
+    cur: [['EUR', '€', 'Italia', 0.61], ['CHF', 'CHF', 'Svizzera', 0.93], ['USD', '$', 'Stati Uniti', 1]] },
+  { id: 'pt', short: 'PT', tag: 'pt-BR', loc: 'pt-BR', name: 'Português (Brasil)', en: 'Portuguese (Brazil)',
+    t: { title: 'Idioma', money: 'Sua moeda', go: 'Continuar' },
+    cur: [['BRL', 'R$', 'Brasil', 2.55], ['EUR', '€', 'Portugal', 0.534], ['MZN', 'MT', 'Moçambique', 23.7], ['USD', 'US$', 'Estados Unidos', 1]] },
+  { id: 'ko', short: 'KO', tag: 'ko', loc: 'ko-KR', name: '한국어', en: 'Korean',
+    t: { title: '언어', money: '통화', go: '계속' },
+    cur: [['KRW', '₩', '대한민국', 850], ['USD', '$', '미국', 1]] },
+  { id: 'ja', short: 'JA', tag: 'ja', loc: 'ja-JP', name: '日本語', en: 'Japanese',
+    t: { title: '言語', money: '通貨', go: '次へ' },
+    cur: [['JPY', '¥', '日本', 100], ['USD', '$', 'アメリカ', 1]] },
+  { id: 'zh-hant', short: '繁', tag: 'zh-Hant', loc: 'zh-TW', name: '繁體中文', en: 'Chinese (Traditional)',
+    t: { title: '語言', money: '你的貨幣', go: '繼續' },
+    cur: [['TWD', 'NT$', '台灣', 13], ['HKD', 'HK$', '香港', 5.6], ['USD', 'US$', '美國', 1]] },
+  { id: 'zh-hans', short: '简', tag: 'zh-Hans', loc: 'zh-CN', name: '简体中文', en: 'Chinese (Simplified)',
+    t: { title: '语言', money: '你的货币', go: '继续' },
+    cur: [['CNY', '¥', '中国', 3.6], ['USD', '$', '美国', 1]] },
+  { id: 'vi', short: 'VI', tag: 'vi', loc: 'vi-VN', name: 'Tiếng Việt', en: 'Vietnamese', post: true,
+    t: { title: 'Ngôn ngữ', money: 'Tiền tệ của bạn', go: 'Tiếp tục' },
+    cur: [['VND', '₫', 'Việt Nam', 7500], ['USD', '$', 'Hoa Kỳ', 1]] },
+  { id: 'th', short: 'TH', tag: 'th', loc: 'th-TH', name: 'ไทย', en: 'Thai',
+    t: { title: 'ภาษา', money: 'สกุลเงินของคุณ', go: 'ต่อไป' },
+    cur: [['THB', '฿', 'ไทย', 11], ['USD', '$', 'สหรัฐฯ', 1]] },
+  { id: 'id', short: 'ID', tag: 'id', loc: 'id-ID', name: 'Bahasa Indonesia', en: 'Indonesian',
+    t: { title: 'Bahasa', money: 'Mata uangmu', go: 'Lanjut' },
+    cur: [['IDR', 'Rp', 'Indonesia', 4720], ['MYR', 'RM', 'Malaysia', 1.36], ['USD', 'US$', 'Amerika Serikat', 1]] },
+  { id: 'tr', short: 'TR', tag: 'tr', loc: 'tr-TR', name: 'Türkçe', en: 'Turkish',
+    t: { title: 'Dil', money: 'Para birimin', go: 'Devam' },
+    cur: [['TRY', '₺', 'Türkiye', 22.6], ['EUR', '€', 'Almanya', 0.71], ['USD', '$', 'ABD', 1]] },
+  { id: 'ar', short: 'AR', tag: 'ar', loc: 'ar', name: 'العربية', en: 'Arabic', post: true, rtl: true,
+    t: { title: 'اللغة', money: 'عملتك', go: 'متابعة' },
+    cur: [['USD', '$', 'الولايات المتحدة', 1], ['SAR', 'ر.س', 'السعودية', 1.76], ['AED', 'د.إ', 'الإمارات', 2.33], ['EGP', 'ج.م', 'مصر', 8.6], ['MAD', 'د.م', 'المغرب', 3.93], ['DZD', 'د.ج', 'الجزائر', 42.8], ['TND', 'د.ت', 'تونس', 0.916], ['IQD', 'د.ع', 'العراق', 493], ['JOD', 'د.أ', 'الأردن', 0.301], ['KWD', 'د.ك', 'الكويت', 0.175], ['QAR', 'ر.ق', 'قطر', 2.05], ['OMR', 'ر.ع', 'عُمان', 0.181], ['BHD', 'د.ب', 'البحرين', 0.162]] },
+  { id: 'fa', short: 'FA', tag: 'fa', loc: 'fa-IR', name: 'فارسی', en: 'Persian', post: true, rtl: true,
+    t: { title: 'زبان', money: 'واحد پول شما', go: 'ادامه' },
+    cur: [['IRR', '﷼', 'ایران', 40000], ['USD', '$', 'آمریکا', 1]] }
+];
+var DOTS = ['#ff6b6b', '#5fa2ff', '#ffd75a', '#8fd14f', '#b48cff', '#3ec3d2', '#f4a940'];
+var DEVICE = 'en';
+// Two rows of seven squares.
+var MAX_CURRENCIES = 14;
+var PRESS = 'inset 0 -3px 0 rgba(90,52,24,0.22)';
+var PRESS_ON = 'inset 0 -3px 0 rgba(90,52,24,0.22), inset 0 3px 0 rgba(255,255,255,0.5)';
+
+// Inside the prototype the host passes `nav` and moves between screens itself; on its own an
+// artboard follows plain links.
+function linkTo(self, stem) {
+  return typeof self.props.nav === 'function'
+    ? { href: null, go: () => self.props.nav(stem) }
+    : { href: stem + '.dc.html', go: null };
+}
+var STICKER_STEMS = { people: 'PeopleCute', activities: 'ActivitiesCute', life: 'LiveCute', money: 'MoneyCute', odds: 'OddsLife' };
+function stickerLinks(self) {
+  const out = {};
+  Object.keys(STICKER_STEMS).forEach((k) => { out[k] = linkTo(self, STICKER_STEMS[k]); });
+  return out;
+}
+
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const lang = LANGS.find((l) => l.id === (st.lang || DEVICE));
+    const offered = lang.cur.slice(0, MAX_CURRENCIES);
+    const cur = offered.find((c) => c[0] === st.cur) || offered[0];
+    return {
+      lang: lang,
+      t: lang.t,
+      langs: LANGS.map((l, i) => {
+        const sel = l.id === lang.id;
+        return {
+          name: l.name, en: l.en, short: l.short, tag: l.tag, device: !!l.device, sel: sel,
+          dot: DOTS[i % DOTS.length],
+          bg: sel ? '#ffd75a' : '#fffaf0',
+          shadow: sel ? PRESS_ON : PRESS,
+          // A new language keeps your currency if it offers it, else starts from its own.
+          pick: () => this.setState({ lang: l.id, cur: l.cur.slice(0, MAX_CURRENCIES).some((c) => c[0] === cur[0]) ? cur[0] : null })
+        };
+      }),
+      curs: offered.map((c) => {
+        const sel = c[0] === cur[0];
+        return {
+          sym: c[1], code: c[0], label: c[2] + ' ' + c[0], sel: sel,
+          // Long symbols (FCFA, GH₵, ر.س) shrink to fit the square.
+          symSize: c[1].length >= 4 ? '11px' : c[1].length === 3 ? '13px' : '17px',
+          bg: sel ? '#ffd75a' : '#fffaf0',
+          shadow: sel ? PRESS_ON : PRESS,
+          pick: () => this.setState({ lang: lang.id, cur: c[0] })
+        };
+      }),
+      rowDir: lang.rtl ? 'row-reverse' : 'row',
+      arrowFlip: lang.rtl ? -1 : 1,
+      to: { start: linkTo(this, 'StartCute') }
+    };
+  }
+}
+</script>
+</body>
+</html>

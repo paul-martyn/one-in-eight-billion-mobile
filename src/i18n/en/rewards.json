@@ -1,0 +1,22 @@
+{
+  "rewards.title": "A life lived",
+  "rewards.nameYears": "{name} · {years}",
+  "rewards.listTitle": "Rewards for this life",
+  "rewards.school": "Finished {detail}",
+  "rewards.schoolPlain": "Finished school",
+  "rewards.firstJob": "First job: {detail}",
+  "rewards.firstJobPlain": "First job",
+  "rewards.married": "Married {detail}",
+  "rewards.marriedPlain": "Married",
+  "rewards.debtPaid": "Paid off your debts",
+  "rewards.firstInCountry": "First life born in {detail}",
+  "rewards.firstInCountryPlain": "First life born in this country",
+  "rewards.none": "No rewards this time. The life is still kept in Lives.",
+  "rewards.total": "In all",
+  "rewards.totalValue": "+{dollars} $ · +{gems} gems",
+  "rewards.amountDollars": "+{n} dollars",
+  "rewards.amountGems": "+{n} gems",
+  "rewards.amountGemOne": "+1 gem",
+  "rewards.claim": "Claim",
+  "rewards.claimed": "Claimed +{dollars} $ and +{gems} gems. The life is kept in Lives."
+}

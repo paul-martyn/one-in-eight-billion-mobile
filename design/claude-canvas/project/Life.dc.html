@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Life</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:#294d5e}a:hover{color:#1d3b4b}
+a:focus-visible,button:focus-visible{outline:3px solid #294d5e;outline-offset:3px}
+</style>
+</helmet>
+<main style="width: 393px; height: 852px; box-sizing: border-box; padding-top: 52px; display: flex; flex-direction: column; background: #f4f2eb; color: #253f4c; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+<header style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 0 24px">
+<div style="min-width: 0">
+<p style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.3">Aarav Srivastava</p>
+<p style="margin: 2px 0 0; font-size: 14px; line-height: 1.4; color: #5e6d70">Lucknow, India · October 2041</p>
+</div>
+<button type="button" aria-label="{{ pauseLabel }}" onClick="{{ togglePause }}" style="flex: none; width: 44px; height: 44px; padding: 0; border-radius: 22px; border: 1px solid #d4d9d2; background: transparent; color: #253f4c; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<sc-if value="{{ running }}" hint-placeholder-val="{{ true }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M9 6v12M15 6v12"></path></svg></sc-if>
+<sc-if value="{{ paused }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5Z" fill="currentColor"></path></svg></sc-if>
+</button>
+</header>
+<section aria-label="Age" style="padding: 14px 24px 0">
+<div style="display: flex; align-items: baseline; gap: 10px">
+<span style="font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Iowan Old Style', Georgia, serif; font-size: 64px; line-height: 1; letter-spacing: -2px; font-variant-numeric: lining-nums">15</span>
+<span style="font-size: 15px; color: #5e6d70">years old</span>
+</div>
+<div aria-hidden="true" style="margin-top: 14px; height: 4px; border-radius: 2px; background: #e1e5df; overflow: hidden">
+<div style="width: 58%; height: 4px; border-radius: 2px; background: #294d5e"></div>
+</div>
+<div style="display: flex; justify-content: space-between; margin-top: 6px; font-size: 12px; line-height: 1.4; color: #5e6d70"><span>Age 15</span><span>16 in 5 months</span></div>
+</section>
+<section aria-label="Wellbeing" style="margin: 22px 24px 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; row-gap: 16px">
+<div>
+<div style="display: flex; align-items: center; gap: 8px; font-size: 14px; line-height: 1.4; color: #5e6d70">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M12 19.5s-7-4.3-7-9.6A3.9 3.9 0 0 1 12 7.6a3.9 3.9 0 0 1 7 2.3c0 5.3-7 9.6-7 9.6Z"></path></svg>
+<span style="flex-grow: 1">Health</span>
+<span style="font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Iowan Old Style', Georgia, serif; font-size: 19px; line-height: 1; color: #253f4c; font-variant-numeric: tabular-nums lining-nums">82</span>
+</div>
+<div aria-hidden="true" style="margin-top: 8px; height: 4px; border-radius: 2px; background: #e1e5df"><div style="width: 82%; height: 4px; border-radius: 2px; background: #253f4c"></div></div>
+</div>
+<div>
+<div style="display: flex; align-items: center; gap: 8px; font-size: 14px; line-height: 1.4; color: #5e6d70">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="8"></circle><path d="M9 14c.8 1 1.8 1.5 3 1.5s2.2-.5 3-1.5"></path><path d="M9.5 10h.01M14.5 10h.01" stroke-width="2.4"></path></svg>
+<span style="flex-grow: 1">Happiness</span>
+<span style="font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Iowan Old Style', Georgia, serif; font-size: 19px; line-height: 1; color: #253f4c; font-variant-numeric: tabular-nums lining-nums">64</span>
+</div>
+<div aria-hidden="true" style="margin-top: 8px; height: 4px; border-radius: 2px; background: #e1e5df"><div style="width: 64%; height: 4px; border-radius: 2px; background: #253f4c"></div></div>
+</div>
+<div>
+<div style="display: flex; align-items: center; gap: 8px; font-size: 14px; line-height: 1.4; color: #5e6d70">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M4 6.5c2.6-1.2 5.3-1.2 8 .8 2.7-2 5.4-2 8-.8V18c-2.6-1.2-5.3-1.2-8 .8-2.7-2-5.4-2-8-.8Z"></path><path d="M12 7.3v11.5"></path></svg>
+<span style="flex-grow: 1">Knowledge</span>
+<span style="font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Iowan Old Style', Georgia, serif; font-size: 19px; line-height: 1; color: #253f4c; font-variant-numeric: tabular-nums lining-nums">71</span>
+</div>
+<div aria-hidden="true" style="margin-top: 8px; height: 4px; border-radius: 2px; background: #e1e5df"><div style="width: 71%; height: 4px; border-radius: 2px; background: #253f4c"></div></div>
+</div>
+<div>
+<div style="display: flex; align-items: center; gap: 8px; font-size: 14px; line-height: 1.4; color: #5e6d70">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><circle cx="9" cy="9" r="3"></circle><path d="M3.5 19c0-3.1 2.4-5.2 5.5-5.2s5.5 2.1 5.5 5.2"></path><circle cx="16.5" cy="9.5" r="2.5"></circle><path d="M16.2 13.8c2.6 0 4.3 1.9 4.3 4.7"></path></svg>
+<span style="flex-grow: 1">Relationships</span>
+<span style="font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Iowan Old Style', Georgia, serif; font-size: 19px; line-height: 1; color: #253f4c; font-variant-numeric: tabular-nums lining-nums">58</span>
+</div>
+<div aria-hidden="true" style="margin-top: 8px; height: 4px; border-radius: 2px; background: #e1e5df"><div style="width: 58%; height: 4px; border-radius: 2px; background: #253f4c"></div></div>
+</div>
+</section>
+<nav aria-label="Life details" style="margin: 20px 24px 0; border-top: 1px solid #d4d9d2">
+<a href="Focus.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 56px; box-sizing: border-box; padding: 6px 0; border-bottom: 1px solid #d4d9d2; color: #253f4c; text-decoration: none">
+<span style="flex-grow: 1; min-width: 0"><span style="display: block; font-size: 12px; line-height: 1.4; color: #5e6d70">Focus</span><span style="display: block; font-size: 16px; line-height: 1.4">School and study</span></span>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5e6d70" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M9 6l6 6-6 6"></path></svg>
+</a>
+<a href="Money.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 56px; box-sizing: border-box; padding: 6px 0; border-bottom: 1px solid #d4d9d2; color: #253f4c; text-decoration: none">
+<span style="flex-grow: 1; min-width: 0"><span style="display: block; font-size: 12px; line-height: 1.4; color: #5e6d70">Household</span><span style="display: block; font-size: 16px; line-height: 1.4">38th percentile in India</span></span>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5e6d70" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M9 6l6 6-6 6"></path></svg>
+</a>
+</nav>
+<section aria-labelledby="year-heading" style="margin: 20px 24px 0; flex-grow: 1; min-height: 0; overflow: hidden">
+<h2 id="year-heading" style="margin: 0 0 4px; font-size: 13px; font-weight: 600; line-height: 1.4; color: #5e6d70">This year</h2>
+<ol style="list-style: none; margin: 0; padding: 0">
+<li style="display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid #e1e5df">
+<span style="flex: none; width: 32px; font-size: 12px; line-height: 1.9; color: #5e6d70">Mar</span>
+<span style="flex-grow: 1; min-width: 0; font-size: 15px; line-height: 1.45">Passed the grade 10 board exams with 81%. <span style="color: #3f6b57; font-weight: 600; white-space: nowrap">Knowledge +4</span></span>
+</li>
+<li style="display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid #e1e5df">
+<span style="flex: none; width: 32px; font-size: 12px; line-height: 1.9; color: #5e6d70">Jul</span>
+<span style="flex-grow: 1; min-width: 0; font-size: 15px; line-height: 1.45">Dengue in the monsoon: a week in bed. <span style="color: #a4553a; font-weight: 600; white-space: nowrap">Health −9</span></span>
+</li>
+<li style="display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid #e1e5df">
+<span style="flex: none; width: 32px; font-size: 12px; line-height: 1.9; color: #5e6d70">Sep</span>
+<span style="flex-grow: 1; min-width: 0; font-size: 15px; line-height: 1.45">Ananya left for college in Delhi. <span style="color: #a4553a; font-weight: 600; white-space: nowrap">Happiness −3</span></span>
+</li>
+</ol>
+</section>
+<div style="display: flex; align-items: center; gap: 12px; padding: 10px 24px; border-top: 1px solid #d4d9d2">
+<div role="group" aria-label="Speed" style="display: flex; gap: 2px; padding: 3px; border-radius: 14px; background: #e7eae4">
+<button type="button" aria-pressed="{{ x1.on }}" onClick="{{ x1.pick }}" style="width: 52px; height: 44px; padding: 0; border: 0; border-radius: 11px; background: {{ x1.bg }}; box-shadow: {{ x1.shadow }}; color: {{ x1.fg }}; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer">1×</button>
+<button type="button" aria-pressed="{{ x4.on }}" onClick="{{ x4.pick }}" style="width: 52px; height: 44px; padding: 0; border: 0; border-radius: 11px; background: {{ x4.bg }}; box-shadow: {{ x4.shadow }}; color: {{ x4.fg }}; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer">4×</button>
+<button type="button" aria-pressed="{{ x16.on }}" onClick="{{ x16.pick }}" style="width: 52px; height: 44px; padding: 0; border: 0; border-radius: 11px; background: {{ x16.bg }}; box-shadow: {{ x16.shadow }}; color: {{ x16.fg }}; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer">16×</button>
+</div>
+<a href="Decision.dc.html" style="flex-grow: 1; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; border-radius: 14px; background: #294d5e; color: #ffffff; font-size: 15px; font-weight: 600; text-decoration: none">Next choice<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6l6 6-6 6M13 6l6 6-6 6"></path></svg></a>
+</div>
+<nav aria-label="Sections" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 4px 8px 16px; border-top: 1px solid #d4d9d2">
+<a href="Life.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 52px; color: #253f4c; font-size: 11px; font-weight: 700; line-height: 1.3; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v-8"></path><path d="M12 12c0-4 3-6.5 7-6.5 0 4-3 6.5-7 6.5Z"></path><path d="M12 14.5c0-3-2.4-5-5.8-5 0 3 2.4 5 5.8 5Z"></path></svg>
+<span>Life</span>
+</a>
+<button type="button" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 52px; padding: 0; border: 0; background: transparent; color: #5e6d70; font-family: inherit; font-size: 11px; font-weight: 500; line-height: 1.3; cursor: pointer">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="3"></circle><path d="M3.5 19c0-3.1 2.4-5.2 5.5-5.2s5.5 2.1 5.5 5.2"></path><circle cx="16.5" cy="9.5" r="2.5"></circle><path d="M16.2 13.8c2.6 0 4.3 1.9 4.3 4.7"></path></svg>
+<span>People</span>
+</button>
+<a href="Money.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 52px; color: #5e6d70; font-size: 11px; font-weight: 500; line-height: 1.3; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M14.6 9.4c-.5-.8-1.4-1.3-2.6-1.3-1.5 0-2.6.8-2.6 1.9 0 2.7 5.3 1.4 5.3 4.1 0 1.1-1.1 1.9-2.7 1.9-1.2 0-2.2-.5-2.7-1.3M12 6.6v1.5M12 15.9v1.5"></path></svg>
+<span>Money</span>
+</a>
+<button type="button" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 52px; padding: 0; border: 0; background: transparent; color: #5e6d70; font-family: inherit; font-size: 11px; font-weight: 500; line-height: 1.3; cursor: pointer">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17" rx="2"></rect><path d="M9 8h6M9 12h6M9 16h3"></path></svg>
+<span>Story</span>
+</button>
+</nav>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const speed = st.speed || 1;
+    const paused = !!st.paused;
+    const seg = (v) => ({
+      on: speed === v,
+      bg: speed === v ? '#ffffff' : 'transparent',
+      fg: speed === v ? '#253f4c' : '#5e6d70',
+      shadow: speed === v ? '0 1px 3px rgba(37,63,76,.18)' : 'none',
+      pick: () => this.setState({ speed: v })
+    });
+    return {
+      x1: seg(1),
+      x4: seg(4),
+      x16: seg(16),
+      paused: paused,
+      running: !paused,
+      pauseLabel: paused ? 'Resume' : 'Pause',
+      togglePause: () => this.setState({ paused: !paused })
+    };
+  }
+}
+</script>
+</body>
+</html>

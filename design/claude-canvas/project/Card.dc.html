@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Birth and character card</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&amp;family=Figtree:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+main[data-theme=light] a:focus-visible,main[data-theme=light] button:focus-visible{outline:3px solid #17352e;outline-offset:4px}
+main[data-theme=dark] a:focus-visible,main[data-theme=dark] button:focus-visible{outline:3px solid #f6cfe0;outline-offset:4px}
+.cd-scroll::-webkit-scrollbar{display:none}
+</style>
+</helmet>
+<main data-theme="{{ theme }}" style="position: relative; width: 393px; height: 852px; overflow: hidden; background: {{ c.bg }}; color: {{ c.ink }}; font-family: Figtree, system-ui, sans-serif">
+<div aria-hidden="true" style="position: absolute; left: -33px; top: 240px; width: 460px; height: 460px; border-radius: 50%; background: {{ c.glow }}; opacity: {{ v.glowOp }}; transform: translateY({{ v.glowY }}px); transition: {{ v.glowTr }}"></div>
+<p role="status" style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap">{{ status }}</p>
+<button type="button" onClick="{{ replay }}" aria-label="Replay the birth" style="position: absolute; right: 16px; top: 48px; width: 44px; height: 44px; box-sizing: border-box; padding: 0; border: 1.5px solid {{ c.dialLine }}; border-radius: 22px; background: {{ c.dialBg }}; color: {{ c.muted }}; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: {{ v.replayOp }}; visibility: {{ v.replayVis }}; transition: opacity 0.6s ease"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"></path><path d="M20 4v4.5h-4.5"></path></svg></button>
+<p style="position: absolute; left: 0px; right: 0px; top: 140px; margin: 0; text-align: center; font-size: 12px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.muted }}; opacity: {{ v.titleOp }}; transition: {{ v.titleTr }}">Your parents</p>
+<svg width="393" height="852" aria-hidden="true" style="position: absolute; left: 0px; top: 0px; pointer-events: none; opacity: {{ v.treeOp }}; transition: {{ v.treeTr }}">
+<path d="M160 250 H196.5" pathLength="1" fill="none" stroke="{{ c.line }}" stroke-width="2.5" stroke-dasharray="1 1" style="stroke-dashoffset: {{ v.coupleOff }}; transition: {{ v.coupleTr }}"></path>
+<path d="M233 250 H196.5" pathLength="1" fill="none" stroke="{{ c.line }}" stroke-width="2.5" stroke-dasharray="1 1" style="stroke-dashoffset: {{ v.coupleOff }}; transition: {{ v.coupleTr }}"></path>
+<path d="M196.5 250 V396" pathLength="1" fill="none" stroke="{{ c.line }}" stroke-width="2.5" stroke-dasharray="1 1" style="stroke-dashoffset: {{ v.descOff }}; transition: {{ v.descTr }}"></path>
+<circle cx="196.5" cy="250" r="6" fill="{{ c.accent }}" style="opacity: {{ v.knotOp }}; transition: {{ v.knotTr }}"></circle>
+</svg>
+<div style="position: absolute; left: 36px; top: 202px; width: 140px; display: flex; flex-direction: column; align-items: center; text-align: center; opacity: {{ v.mum.op }}; transform: translateY({{ v.mum.y }}px) scale({{ v.mum.s }}); transition: {{ v.mum.tr }}">
+<div style="width: 96px; height: 96px; box-sizing: border-box; border: 3px solid {{ c.ring }}; border-radius: 48px; overflow: hidden; background: {{ c.mumBg }}"><img src="/_blob/1189acbca694517c19788f856303626e" alt="" style="display: block; width: 90px; height: 101px"></div>
+<p style="margin: 12px 0 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 20px; font-weight: 800; line-height: 1.15">Priya</p>
+<p style="margin: 2px 0 0; font-size: 13px; line-height: 1.3; color: {{ c.muted }}">Mum · 24</p>
+</div>
+<div style="position: absolute; left: 217px; top: 202px; width: 140px; display: flex; flex-direction: column; align-items: center; text-align: center; opacity: {{ v.dad.op }}; transform: translateY({{ v.dad.y }}px) scale({{ v.dad.s }}); transition: {{ v.dad.tr }}">
+<div style="width: 96px; height: 96px; box-sizing: border-box; border: 3px solid {{ c.ring }}; border-radius: 48px; overflow: hidden; background: {{ c.dadBg }}"><img src="/_blob/3b731192f118709d66789b3d13ba5c8f" alt="" style="display: block; width: 90px; height: 101px"></div>
+<p style="margin: 12px 0 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 20px; font-weight: 800; line-height: 1.15">Rohan</p>
+<p style="margin: 2px 0 0; font-size: 13px; line-height: 1.3; color: {{ c.muted }}">Dad · 27</p>
+</div>
+<div aria-hidden="true" style="position: absolute; left: 128.5px; top: 402px; width: 136px; height: 136px; opacity: {{ v.babyOp }}; transform: translateY({{ v.babyY }}px) scale({{ v.babyS }}); transition: {{ v.babyTr }}">
+<div style="position: absolute; left: 0px; top: 0px; width: 136px; height: 136px; box-sizing: border-box; border: 2px solid {{ c.accent }}; border-radius: 68px; opacity: {{ v.bloomOp }}; transform: scale({{ v.bloomS }}); transition: {{ v.bloomTr }}"></div>
+<div style="position: relative; width: 136px; height: 136px; box-sizing: border-box; border: 4px solid {{ c.ring }}; border-radius: 68px; overflow: hidden; background: {{ c.babyBg }}"><img src="/_blob/288778d3b88098142d309840ced390ca" alt="" style="display: block; width: 128px; height: 143px; margin-top: -4px"></div>
+</div>
+<div style="position: absolute; left: 20px; right: 20px; top: 556px; display: flex; flex-direction: column; align-items: center; text-align: center; opacity: {{ v.nameOp }}; transform: translateY({{ v.nameY }}px); transition: {{ v.nameTr }}">
+<p style="display: flex; align-items: center; gap: 6px; margin: 0; font-size: 12px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.muted }}"><span style="width: 7px; height: 7px; border-radius: 4px; background: {{ c.accent }}"></span>It’s a boy</p>
+<h1 style="margin: 6px 0 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 34px; font-weight: 800; line-height: 1.1; letter-spacing: -0.8px; white-space: nowrap">Aarav Srivastava</h1>
+<p style="margin: 6px 0 0; font-size: 14px; line-height: 1.35; color: {{ c.muted }}">04:12 · 14 March 2026 · Lucknow</p>
+</div>
+<section aria-label="What Aarav starts with" style="position: absolute; left: 0px; right: 0px; top: 272px; bottom: 0px; display: flex; flex-direction: column; overflow: hidden; border-radius: 28px 28px 0 0; background: {{ c.card }}; box-shadow: {{ c.sheetShadow }}; visibility: {{ v.sheetVis }}; transform: translateY({{ v.sheetY }}px); transition: {{ v.sheetTr }}">
+<div class="cd-scroll" style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; box-sizing: border-box; padding: 20px 22px 40px">
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<div style="padding: 12px; border-radius: 16px; background: {{ c.tile }}">
+<p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 24px; font-weight: 800; line-height: 1; letter-spacing: -0.5px; white-space: nowrap">1 in 6</p>
+<p style="margin: 6px 0 0; font-size: 12px; line-height: 1.3; color: {{ c.muted }}">babies today are born in India</p>
+</div>
+<div style="padding: 12px; border-radius: 16px; background: {{ c.tile }}">
+<p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 24px; font-weight: 800; line-height: 1; letter-spacing: -0.5px; white-space: nowrap">71<span style="font-size: 14px; letter-spacing: 0"> yrs</span></p>
+<p style="margin: 6px 0 0; font-size: 12px; line-height: 1.3; color: {{ c.muted }}">life expectancy for a boy here</p>
+</div>
+<div style="padding: 12px; border-radius: 16px; background: {{ c.tile }}">
+<p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 24px; font-weight: 800; line-height: 1; letter-spacing: -0.5px; white-space: nowrap">97%</p>
+<p style="margin: 6px 0 0; font-size: 12px; line-height: 1.3; color: {{ c.muted }}">of babies here live to age five</p>
+</div>
+</div>
+<h2 style="margin: 24px 0 0; font-size: 11px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.muted }}">Starting stats</h2>
+<dl style="margin: 8px 0 0; display: flex; flex-direction: column; gap: 6px">
+<div style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 28px; align-items: center; gap: 12px; min-height: 28px">
+<dt style="font-size: 14px; line-height: 1.2; color: {{ c.muted }}">Health</dt>
+<dd aria-hidden="true" style="margin: 0; height: 6px; border-radius: 3px; background: {{ c.track }}"><div style="width: 76%; height: 6px; border-radius: 3px; background: {{ c.ink }}"></div></dd>
+<dd style="margin: 0; text-align: right; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 17px; font-weight: 800; font-variant-numeric: tabular-nums">76</dd>
+</div>
+<div style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 28px; align-items: center; gap: 12px; min-height: 28px">
+<dt style="font-size: 14px; line-height: 1.2; color: {{ c.muted }}">Happiness</dt>
+<dd aria-hidden="true" style="margin: 0; height: 6px; border-radius: 3px; background: {{ c.track }}"><div style="width: 70%; height: 6px; border-radius: 3px; background: {{ c.ink }}"></div></dd>
+<dd style="margin: 0; text-align: right; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 17px; font-weight: 800; font-variant-numeric: tabular-nums">70</dd>
+</div>
+<div style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 28px; align-items: center; gap: 12px; min-height: 28px">
+<dt style="font-size: 14px; line-height: 1.2; color: {{ c.muted }}">Knowledge</dt>
+<dd aria-hidden="true" style="margin: 0; height: 6px; border-radius: 3px; background: {{ c.track }}"><div style="width: 50%; height: 6px; border-radius: 3px; background: {{ c.ink }}"></div></dd>
+<dd style="margin: 0; text-align: right; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 17px; font-weight: 800; font-variant-numeric: tabular-nums">50</dd>
+</div>
+<div style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 28px; align-items: center; gap: 12px; min-height: 28px">
+<dt style="font-size: 14px; line-height: 1.2; color: {{ c.muted }}">Relationships</dt>
+<dd aria-hidden="true" style="margin: 0; height: 6px; border-radius: 3px; background: {{ c.track }}"><div style="width: 72%; height: 6px; border-radius: 3px; background: {{ c.ink }}"></div></dd>
+<dd style="margin: 0; text-align: right; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 17px; font-weight: 800; font-variant-numeric: tabular-nums">72</dd>
+</div>
+</dl>
+<h2 style="margin: 24px 0 0; font-size: 11px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.muted }}">Family</h2>
+<ul style="list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<li style="display: flex; flex-direction: column; align-items: center; text-align: center">
+<span style="width: 52px; height: 52px; border-radius: 26px; overflow: hidden; background: {{ c.avatarBg }}"><img src="/_blob/1189acbca694517c19788f856303626e" alt="" style="display: block; width: 52px; height: 58px"></span>
+<span style="margin-top: 8px; font-size: 15px; font-weight: 700; line-height: 1.25">Priya</span>
+<span style="font-size: 12px; line-height: 1.35; color: {{ c.muted }}">Mum, 24<br>At home</span>
+</li>
+<li style="display: flex; flex-direction: column; align-items: center; text-align: center">
+<span style="width: 52px; height: 52px; border-radius: 26px; overflow: hidden; background: {{ c.avatarBg }}"><img src="/_blob/3b731192f118709d66789b3d13ba5c8f" alt="" style="display: block; width: 52px; height: 58px"></span>
+<span style="margin-top: 8px; font-size: 15px; font-weight: 700; line-height: 1.25">Rohan</span>
+<span style="font-size: 12px; line-height: 1.35; color: {{ c.muted }}">Dad, 27<br>Runs a phone shop</span>
+</li>
+<li style="display: flex; flex-direction: column; align-items: center; text-align: center">
+<span style="width: 52px; height: 52px; border-radius: 26px; overflow: hidden; background: {{ c.avatarBg }}"><img src="/_blob/210a5444081e41bbf72da5c94119d1d0" alt="" style="display: block; width: 52px; height: 58px"></span>
+<span style="margin-top: 8px; font-size: 15px; font-weight: 700; line-height: 1.25">Ananya</span>
+<span style="font-size: 12px; line-height: 1.35; color: {{ c.muted }}">Sister, 3</span>
+</li>
+</ul>
+<h2 style="margin: 24px 0 0; font-size: 11px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.muted }}">Born into</h2>
+<dl style="margin: 4px 0 0">
+<div style="display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 12px; padding: 11px 0; border-bottom: 1px solid {{ c.rule }}">
+<dt style="font-size: 14px; line-height: 1.35; color: {{ c.muted }}">Place</dt>
+<dd style="margin: 0; font-size: 15px; font-weight: 600; line-height: 1.35">Lucknow, Uttar Pradesh · city</dd>
+</div>
+<div style="display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 12px; padding: 11px 0; border-bottom: 1px solid {{ c.rule }}">
+<dt style="font-size: 14px; line-height: 1.35; color: {{ c.muted }}">Household</dt>
+<dd style="margin: 0; font-size: 15px; font-weight: 600; line-height: 1.35"><span aria-hidden="true" style="display: flex; gap: 4px; margin: 2px 0 6px"><sc-for list="{{ fifths.q2 }}" as="d" hint-placeholder-count="5"><span style="width: 9px; height: 9px; box-sizing: border-box; border-radius: 5px; border: 1.5px solid {{ d.line }}; background: {{ d.bg }}"></span></sc-for></span>2nd fifth · richer than 38% of India</dd>
+</div>
+<div style="display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 12px; padding: 11px 0; border-bottom: 1px solid {{ c.rule }}">
+<dt style="font-size: 14px; line-height: 1.35; color: {{ c.muted }}">Parents’ home</dt>
+<dd style="margin: 0; font-size: 15px; font-weight: 600; line-height: 1.35">Rented, two rooms</dd>
+</div>
+<div style="display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 12px; padding: 11px 0; border-bottom: 1px solid {{ c.rule }}">
+<dt style="font-size: 14px; line-height: 1.35; color: {{ c.muted }}">Religion</dt>
+<dd style="margin: 0; font-size: 15px; font-weight: 600; line-height: 1.35">Hindu</dd>
+</div>
+<div style="display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 12px; padding: 11px 0; border-bottom: 1px solid {{ c.rule }}">
+<dt style="font-size: 14px; line-height: 1.35; color: {{ c.muted }}">Registered</dt>
+<dd style="margin: 0; font-size: 15px; font-weight: 600; line-height: 1.35; font-variant-numeric: tabular-nums">No. IND-2026-26431118</dd>
+</div>
+</dl>
+<h2 style="margin: 24px 0 0; font-size: 11px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.muted }}">Born the same second</h2>
+<ul style="list-style: none; margin: 4px 0 0; padding: 0">
+<li style="display: flex; align-items: center; gap: 12px; min-height: 52px; border-bottom: 1px solid {{ c.rule }}">
+<span style="flex: 1; min-width: 0"><span style="display: block; font-size: 15px; font-weight: 600; line-height: 1.3">Chen Yu</span><span style="display: block; font-size: 12px; line-height: 1.35; color: {{ c.muted }}">Girl · Chongqing, China</span></span>
+<span aria-label="Household: 4th fifth of 5" style="display: flex; gap: 4px"><sc-for list="{{ fifths.q4 }}" as="d" hint-placeholder-count="5"><span style="width: 8px; height: 8px; box-sizing: border-box; border-radius: 4px; border: 1.5px solid {{ d.line }}; background: {{ d.bg }}"></span></sc-for></span>
+</li>
+<li style="display: flex; align-items: center; gap: 12px; min-height: 52px; border-bottom: 1px solid {{ c.rule }}">
+<span style="flex: 1; min-width: 0"><span style="display: block; font-size: 15px; font-weight: 600; line-height: 1.3">Amina Bello</span><span style="display: block; font-size: 12px; line-height: 1.35; color: {{ c.muted }}">Girl · a village near Kano, Nigeria</span></span>
+<span aria-label="Household: 1st fifth of 5" style="display: flex; gap: 4px"><sc-for list="{{ fifths.q1 }}" as="d" hint-placeholder-count="5"><span style="width: 8px; height: 8px; box-sizing: border-box; border-radius: 4px; border: 1.5px solid {{ d.line }}; background: {{ d.bg }}"></span></sc-for></span>
+</li>
+<li style="display: flex; align-items: center; gap: 12px; min-height: 52px; border-bottom: 1px solid {{ c.rule }}">
+<span style="flex: 1; min-width: 0"><span style="display: block; font-size: 15px; font-weight: 600; line-height: 1.3">Lucas Oliveira</span><span style="display: block; font-size: 12px; line-height: 1.35; color: {{ c.muted }}">Boy · Recife, Brazil</span></span>
+<span aria-label="Household: 3rd fifth of 5" style="display: flex; gap: 4px"><sc-for list="{{ fifths.q3 }}" as="d" hint-placeholder-count="5"><span style="width: 8px; height: 8px; box-sizing: border-box; border-radius: 4px; border: 1.5px solid {{ d.line }}; background: {{ d.bg }}"></span></sc-for></span>
+</li>
+<li style="display: flex; align-items: center; gap: 12px; min-height: 52px">
+<span style="flex: 1; min-width: 0"><span style="display: block; font-size: 15px; font-weight: 600; line-height: 1.3">Emma Schulz</span><span style="display: block; font-size: 12px; line-height: 1.35; color: {{ c.muted }}">Girl · Leipzig, Germany</span></span>
+<span aria-label="Household: 4th fifth of 5" style="display: flex; gap: 4px"><sc-for list="{{ fifths.q4 }}" as="d" hint-placeholder-count="5"><span style="width: 8px; height: 8px; box-sizing: border-box; border-radius: 4px; border: 1.5px solid {{ d.line }}; background: {{ d.bg }}"></span></sc-for></span>
+</li>
+</ul>
+</div>
+<div style="position: relative; flex: none; display: flex; justify-content: center; padding: 10px 0 28px; background: {{ c.card }}">
+<div aria-hidden="true" style="position: absolute; left: 0px; right: 0px; top: -36px; height: 36px; background: {{ c.fade }}; pointer-events: none"></div>
+<a href="{{ lifeHref }}" style="display: flex; align-items: center; justify-content: space-between; width: 204px; min-height: 64px; box-sizing: border-box; padding: 0 8px 0 26px; border-radius: 32px; background: {{ c.btnBg }}; color: {{ c.btnInk }}; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 20px; font-weight: 800; text-decoration: none">Start life<span style="width: 48px; height: 48px; border-radius: 24px; background: {{ c.btnDot }}; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ c.btnArrow }}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
+</div>
+</section>
+<svg width="393" height="852" aria-hidden="true" style="position: absolute; left: 0px; top: 0px; pointer-events: none; mix-blend-mode: {{ c.grainBlend }}; opacity: {{ c.grainOp }}">
+<filter id="{{ ids.grain }}"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
+<rect width="393" height="852" filter="{{ urls.grain }}"></rect>
+</svg>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"frame":{"editor":"enum","options":["play","parents","born","card"],"default":"play"},"$preview":{"width":393,"height":852}}'>
+// The birth, told as a family tree: the parents appear, a line runs from them down to a newborn,
+// the name lands, then the parents fade, the baby rises and the character card slides up from below.
+// Portraits are rendered once from the accepted character parts (the generator) and uploaded.
+// `frame` pins one moment of the sequence for review; `play` runs it.
+// The card is one ink colour on purpose; the accent is kept for the way on. Its fields follow
+// the original game's birth certificate: odds, family, household fifth, home, religion, peers.
+var COLORS = {
+  light: {
+    bg: '#f4ede1', ink: '#17352e', muted: '#4e5f58', accent: '#e5533c',
+    card: '#fffaf3', tile: 'rgba(23,53,46,0.05)', track: 'rgba(23,53,46,0.1)', rule: 'rgba(23,53,46,0.1)', dotLine: 'rgba(23,53,46,0.35)',
+    fade: 'linear-gradient(rgba(255,250,243,0), #fffaf3)', avatarBg: '#f1e7d6',
+    dialBg: 'rgba(255,255,255,0.5)', dialLine: 'rgba(23,53,46,0.16)',
+    ring: '#fffaf3', mumBg: '#f9d9d2', dadBg: '#d6eaf6', babyBg: '#fbe7be', line: 'rgba(23,53,46,0.3)',
+    glow: 'radial-gradient(closest-side, rgba(242,179,61,0.42) 0%, rgba(242,179,61,0.16) 60%, rgba(242,179,61,0) 100%)',
+    sheetShadow: '0 -12px 40px rgba(23,53,46,0.1)',
+    btnBg: '#e5533c', btnInk: '#ffffff', btnDot: '#17352e', btnArrow: '#ffffff',
+    grainBlend: 'multiply', grainOp: 0.16
+  },
+  dark: {
+    bg: '#18171c', ink: '#f6f1ea', muted: '#a9a3b8', accent: '#ff9eb0',
+    card: '#211f28', tile: 'rgba(255,255,255,0.05)', track: 'rgba(246,241,234,0.12)', rule: 'rgba(246,241,234,0.1)', dotLine: 'rgba(246,241,234,0.4)',
+    fade: 'linear-gradient(rgba(33,31,40,0), #211f28)', avatarBg: 'rgba(255,255,255,0.07)',
+    dialBg: 'rgba(255,255,255,0.04)', dialLine: 'rgba(246,241,234,0.16)',
+    ring: '#211f28', mumBg: 'rgba(255,158,176,0.18)', dadBg: 'rgba(154,136,255,0.2)', babyBg: 'rgba(242,215,166,0.18)', line: 'rgba(246,241,234,0.28)',
+    glow: 'radial-gradient(closest-side, rgba(118,98,240,0.5) 0%, rgba(118,98,240,0.24) 58%, rgba(118,98,240,0) 100%)',
+    sheetShadow: '0 -12px 40px rgba(0,0,0,0.45)',
+    btnBg: '#f6cfe0', btnInk: '#18171c', btnDot: '#18171c', btnArrow: '#f6cfe0',
+    grainBlend: 'overlay', grainOp: 0.28
+  }
+};
+
+// When each step starts, in ms after the screen opens: mum, dad, the tree lines,
+// the birth, the name, and finally the card.
+var STEPS = [300, 800, 1500, 2700, 3300, 5800];
+var FRAMES = { parents: 3, born: 5, card: 6 };
+var POP = 'cubic-bezier(.3,1.45,.5,1)', GLIDE = 'cubic-bezier(.2,.8,.2,1)';
+
+class Component extends DCLogic {
+  componentDidMount() {
+    this.play();
+  }
+  componentWillUnmount() {
+    this.stop();
+  }
+  stop() {
+    (this.timers || []).forEach(clearTimeout);
+    this.timers = [];
+  }
+  play() {
+    this.stop();
+    // Jump back to the start without animating the reset.
+    this.setState({ phase: 0, instant: true });
+    this.timers = [setTimeout(() => this.setState({ instant: false }), 60)]
+      .concat(STEPS.map((ms, i) => setTimeout(() => this.setState({ phase: i + 1 }), ms)));
+  }
+  renderVals() {
+    const theme = this.props.theme === 'dark' ? 'dark' : 'light';
+    const c = COLORS[theme];
+    const st = this.state || {};
+    const pinned = FRAMES[this.props.frame];
+    const p = pinned || st.phase || 0;
+    const card = p >= 6;
+    const tr = (s) => (st.instant && !pinned ? 'none' : s);
+    const parent = (on) => ({
+      op: !card && on ? 1 : 0,
+      y: card ? -10 : on ? 0 : 14,
+      s: card ? 0.92 : on ? 1 : 0.85,
+      tr: tr(card ? 'opacity 0.35s ease, transform 0.4s ease' : 'opacity 0.45s ease, transform 0.6s ' + POP)
+    });
+    // Household wealth as five dots, one per fifth of the country, filled up to the family's own.
+    const fifth = (n) => Array.from({ length: 5 }, (_, i) => ({ bg: i < n ? c.ink : 'transparent', line: i < n ? c.ink : c.dotLine }));
+    return {
+      theme: theme,
+      c: c,
+      ids: { grain: 'cd-grain-' + theme },
+      urls: { grain: 'url(#cd-grain-' + theme + ')' },
+      lifeHref: theme === 'dark' ? 'PlayDark.dc.html' : 'Play.dc.html',
+      status: p >= 5 ? 'You are born: Aarav Srivastava, a boy, at 04:12 on 14 March 2026 in Lucknow.'
+        : p >= 1 ? 'Your parents: Priya, 24, and Rohan, 27.' : '',
+      replay: () => this.play(),
+      fifths: { q1: fifth(1), q2: fifth(2), q3: fifth(3), q4: fifth(4) },
+      v: {
+        titleOp: p >= 1 && !card ? 1 : 0,
+        titleTr: tr('opacity 0.4s ease'),
+        mum: parent(p >= 1),
+        dad: parent(p >= 2),
+        treeOp: card ? 0 : 1,
+        treeTr: tr('opacity 0.3s ease'),
+        coupleOff: p >= 3 ? 0 : 1,
+        coupleTr: tr('stroke-dashoffset 0.45s ease'),
+        descOff: p >= 3 ? 0 : 1,
+        descTr: tr('stroke-dashoffset 0.6s ease 0.45s'),
+        knotOp: p >= 3 ? 1 : 0,
+        knotTr: tr('opacity 0.3s ease 0.35s'),
+        // The newborn pops in at the end of the line, then rises to the top of the screen.
+        babyOp: p >= 4 ? 1 : 0,
+        babyY: card ? -358 : 0,
+        babyS: card ? 0.647 : p >= 4 ? 1 : 0.6,
+        babyTr: tr(card ? 'opacity 0.4s ease, transform 0.9s ' + GLIDE + ' 0.1s' : 'opacity 0.35s ease, transform 0.7s ' + POP),
+        bloomOp: p >= 4 ? 0 : 0.7,
+        bloomS: p >= 4 ? 1.9 : 1,
+        bloomTr: tr(p >= 4 ? 'opacity 1.2s ease-out, transform 1.2s ease-out' : 'none'),
+        glowOp: p >= 4 ? 1 : 0,
+        glowY: card ? -358 : 0,
+        glowTr: tr('opacity 1s ease, transform 0.9s ' + GLIDE + ' 0.1s'),
+        nameOp: p >= 5 ? 1 : 0,
+        nameY: card ? -384 : p >= 5 ? 0 : 14,
+        nameTr: tr(card ? 'transform 0.9s ' + GLIDE + ' 0.1s' : 'opacity 0.6s ease, transform 0.6s ' + GLIDE),
+        sheetY: card ? 0 : 600,
+        sheetVis: card ? 'visible' : 'hidden',
+        sheetTr: tr(card ? 'transform 0.8s ' + GLIDE + ' 0.3s' : 'none'),
+        replayOp: card ? 1 : 0,
+        replayVis: card ? 'visible' : 'hidden'
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

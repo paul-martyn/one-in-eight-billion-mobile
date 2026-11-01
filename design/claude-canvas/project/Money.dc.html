@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Money</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:#294d5e}a:hover{color:#1d3b4b}
+a:focus-visible,button:focus-visible{outline:3px solid #294d5e;outline-offset:3px}
+</style>
+</helmet>
+<main style="width: 393px; height: 852px; box-sizing: border-box; padding-top: 52px; display: flex; flex-direction: column; background: #f4f2eb; color: #253f4c; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+<div style="flex-grow: 1; min-height: 0; overflow: hidden; padding: 0 24px">
+<h1 style="margin: 0; font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Iowan Old Style', Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1.15; letter-spacing: -0.5px">Money</h1>
+<p style="margin: 6px 0 0; font-size: 14px; line-height: 1.4; color: #5e6d70">Household of 3 · Father runs a phone shop</p>
+<p style="margin: 22px 0 0; font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Iowan Old Style', Georgia, serif; font-size: 23px; line-height: 1.35">Your family is richer than 38% of people in India and 24% of people in the world.</p>
+<figure style="margin: 22px 0 0">
+<div role="img" aria-label="Of 100 people in the world, 24 are poorer than your family and 75 are richer" style="display: grid; grid-template-columns: repeat(20, minmax(0, 1fr)); gap: 7px 6px">
+<sc-for list="{{ dots }}" as="d" hint-placeholder-count="100">
+<sc-if value="{{ d.poorer }}" hint-placeholder-val="{{ true }}"><span style="display: block; width: 10px; height: 10px; border-radius: 5px; background: #253f4c"></span></sc-if>
+<sc-if value="{{ d.you }}" hint-placeholder-val="{{ false }}"><span style="display: block; width: 10px; height: 10px; border-radius: 5px; background: #a4553a; box-shadow: 0 0 0 2px #f4f2eb, 0 0 0 3.5px #a4553a"></span></sc-if>
+<sc-if value="{{ d.richer }}" hint-placeholder-val="{{ false }}"><span style="display: block; width: 10px; height: 10px; box-sizing: border-box; border-radius: 5px; border: 1.5px solid #7d8d8a"></span></sc-if>
+</sc-for>
+</div>
+<figcaption style="display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 14px; font-size: 13px; line-height: 1.4; color: #5e6d70">
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 4px; background: #253f4c"></span>Poorer than you</span>
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 4px; background: #a4553a"></span>Your family</span>
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; box-sizing: border-box; border-radius: 4px; border: 1.5px solid #7d8d8a"></span>Richer</span>
+<span>Each dot is 1% of the world.</span>
+</figcaption>
+</figure>
+<div style="margin-top: 24px; display: flex; flex-direction: column; gap: 14px">
+<div>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 14px; line-height: 1.4"><span style="color: #5e6d70">In India</span><span style="font-weight: 600">38th percentile</span></div>
+<div aria-hidden="true" style="margin-top: 8px; height: 6px; border-radius: 3px; background: #e1e5df"><div style="width: 38%; height: 6px; border-radius: 3px; background: #253f4c"></div></div>
+</div>
+<div>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 14px; line-height: 1.4"><span style="color: #5e6d70">In the world</span><span style="font-weight: 600">24th percentile</span></div>
+<div aria-hidden="true" style="margin-top: 8px; height: 6px; border-radius: 3px; background: #e1e5df"><div style="width: 24%; height: 6px; border-radius: 3px; background: #253f4c"></div></div>
+</div>
+</div>
+<h2 style="margin: 26px 0 4px; font-size: 13px; font-weight: 600; line-height: 1.4; color: #5e6d70">This year</h2>
+<dl style="margin: 0; font-size: 15px; line-height: 1.4">
+<div style="display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid #e1e5df"><dt style="color: #5e6d70">Income</dt><dd style="margin: 0; font-variant-numeric: tabular-nums">₹2,40,000</dd></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid #e1e5df"><dt style="color: #5e6d70">Spending</dt><dd style="margin: 0; font-variant-numeric: tabular-nums">−₹2,26,000</dd></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid #e1e5df"><dt style="color: #5e6d70">Saved</dt><dd style="margin: 0; color: #3f6b57; font-weight: 600; font-variant-numeric: tabular-nums">+₹14,000</dd></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid #e1e5df"><dt style="color: #5e6d70">Owed to a moneylender</dt><dd style="margin: 0; color: #a4553a; font-weight: 600; font-variant-numeric: tabular-nums">₹30,000</dd></div>
+</dl>
+</div>
+<nav aria-label="Sections" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 4px 8px 16px; border-top: 1px solid #d4d9d2">
+<a href="Life.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 52px; color: #5e6d70; font-size: 11px; font-weight: 500; line-height: 1.3; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v-8"></path><path d="M12 12c0-4 3-6.5 7-6.5 0 4-3 6.5-7 6.5Z"></path><path d="M12 14.5c0-3-2.4-5-5.8-5 0 3 2.4 5 5.8 5Z"></path></svg>
+<span>Life</span>
+</a>
+<button type="button" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 52px; padding: 0; border: 0; background: transparent; color: #5e6d70; font-family: inherit; font-size: 11px; font-weight: 500; line-height: 1.3; cursor: pointer">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="3"></circle><path d="M3.5 19c0-3.1 2.4-5.2 5.5-5.2s5.5 2.1 5.5 5.2"></path><circle cx="16.5" cy="9.5" r="2.5"></circle><path d="M16.2 13.8c2.6 0 4.3 1.9 4.3 4.7"></path></svg>
+<span>People</span>
+</button>
+<a href="Money.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 52px; color: #253f4c; font-size: 11px; font-weight: 700; line-height: 1.3; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M14.6 9.4c-.5-.8-1.4-1.3-2.6-1.3-1.5 0-2.6.8-2.6 1.9 0 2.7 5.3 1.4 5.3 4.1 0 1.1-1.1 1.9-2.7 1.9-1.2 0-2.2-.5-2.7-1.3M12 6.6v1.5M12 15.9v1.5"></path></svg>
+<span>Money</span>
+</a>
+<button type="button" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 52px; padding: 0; border: 0; background: transparent; color: #5e6d70; font-family: inherit; font-size: 11px; font-weight: 500; line-height: 1.3; cursor: pointer">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17" rx="2"></rect><path d="M9 8h6M9 12h6M9 16h3"></path></svg>
+<span>Story</span>
+</button>
+</nav>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const dots = [];
+    for (let i = 0; i < 100; i++) {
+      dots.push({ poorer: i < 24, you: i === 24, richer: i > 24 });
+    }
+    return { dots: dots };
+  }
+}
+</script>
+</body>
+</html>

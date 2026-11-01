@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Front vs three-quarter</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&amp;family=Figtree:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<main style="position: relative; width: 1240px; height: 820px; box-sizing: border-box; padding: 48px 56px; overflow: hidden; background: #f4ede1; color: #17352e; font-family: Figtree, system-ui, sans-serif">
+<p style="margin: 0; font-size: 12px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: #4e5f58">Test · same people, two head angles</p>
+<h1 style="margin: 8px 0 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 36px; font-weight: 800; line-height: 1.1; letter-spacing: -0.8px">Front-on or turned three-quarters?</h1>
+<sc-for list="{{ rows }}" as="row" hint-placeholder-count="2">
+<div style="display: grid; grid-template-columns: 140px repeat(7, minmax(0, 1fr)); align-items: end; height: 300px; border-bottom: 1.5px solid rgba(23,53,46,0.14)">
+<div style="align-self: center">
+<p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 20px; font-weight: 800; line-height: 1.2">{{ row.name }}</p>
+<p style="margin: 4px 0 0; font-size: 13px; line-height: 1.35; color: #4e5f58">{{ row.note }}</p>
+</div>
+<sc-for list="{{ row.people }}" as="p" hint-placeholder-count="7">
+<div style="display: flex; justify-content: center"><dc-import name="Person" seed="{{ p.seed }}" age="{{ p.age }}" sex="{{ p.sex }}" region="{{ p.region }}" outfit="{{ p.outfit }}" hair="{{ p.hair }}" beard="{{ p.beard }}" pose="{{ p.pose }}" facing="{{ p.facing }}" height="280" hint-size="140px,280px"></dc-import></div>
+</sc-for>
+</div>
+</sc-for>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1240,"height":820}}'>
+// The same seven people twice: heads straight on, then turned three-quarters (alternating sides).
+var CAST = [
+  { seed: 70, age: 70, sex: 'f', region: 'south-asia', outfit: '', hair: '', beard: '', pose: 'stand' },
+  { seed: 41, age: 41, sex: 'm', region: 'south-asia', outfit: 'kurta', hair: 'short', beard: 'mustache', pose: 'stand' },
+  { seed: 38, age: 38, sex: 'f', region: 'south-asia', outfit: 'sari', hair: 'bun', beard: '', pose: 'hips' },
+  { seed: 15, age: 15, sex: 'm', region: 'south-asia', outfit: 'tee', hair: 'side', beard: '', pose: 'wave' },
+  { seed: 8, age: 8, sex: 'f', region: 'west-africa', outfit: '', hair: '', beard: '', pose: 'stand' },
+  { seed: 33, age: 33, sex: 'm', region: 'europe', outfit: '', hair: 'curly', beard: '', pose: 'stand' },
+  { seed: 2, age: 2, sex: 'm', region: 'east-asia', outfit: '', hair: '', beard: '', pose: 'stand' }
+];
+
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      rows: [
+        { name: 'Front-on', note: 'Both ears, face centred', people: CAST.map((c) => Object.assign({ facing: 'front' }, c)) },
+        { name: 'Three-quarter', note: 'Head turned, one ear, nose in profile', people: CAST.map((c, i) => Object.assign({ facing: i % 2 ? 'left' : 'right' }, c)) }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

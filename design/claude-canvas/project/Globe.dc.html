@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Globe</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: {{ size }}px; height: {{ size }}px; position: relative">
+<canvas ref="{{ setCanvas }}" role="img" aria-label="{{ label }}" onPointerDown="{{ down }}" onPointerMove="{{ move }}" onPointerUp="{{ up }}" onPointerCancel="{{ up }}" style="display: block; width: {{ size }}px; height: {{ size }}px; touch-action: none; cursor: grab"></canvas>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"size":{"editor":"int","default":360,"min":120,"max":800},"variant":{"editor":"enum","options":["dot","square","halftone"],"default":"halftone"},"land":{"editor":"color","default":"#253f4c"},"ocean":{"editor":"color","default":"#e3e9e2"},"shade":{"editor":"color","default":"#b9c6bf"},"night":{"editor":"text","default":""},"rim":{"editor":"text","default":""},"glow":{"editor":"text","default":""},"grid":{"editor":"text","default":""},"flash":{"editor":"color","default":"#d97757"},"marker":{"editor":"color","default":"#d97757"},"markerRing":{"editor":"color","default":"#ffffff"},"dot":{"editor":"float","default":1,"min":0.4,"max":3,"step":0.1},"px":{"editor":"int","default":4,"min":2,"max":10},"spin":{"editor":"float","default":8,"min":0,"max":40},"startLon":{"editor":"float","default":30},"focus":{"editor":"boolean","default":false},"turns":{"editor":"int","default":1,"min":1,"max":8},"duration":{"editor":"int","default":2600,"min":600,"max":10000},"zoom":{"editor":"float","default":1,"min":1,"max":4,"step":0.1},"$preview":{"width":360,"height":360}}'>
+var LAND = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB//8////44AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPx/n/////AAAA/AAYAAAAfAAAAAAAAAAAAAAAAEO3v4f////+AAAPgAAAAAAAAcAAAAAAAAAAAAAADAAAfgP////+AAAHAAAAAAAAAMAAAAAAAAAAAAAAA9jjCAAP///+AAAAAAAAHgAAP/8AAPAAAAAAAAAAcAAAAAAD///8AAAAAAAAYAAD//gAAAAAAAAAAAAAe6zs/AAB///4AAAAAAABgDA/////wGAAAAwAEAAAI/wM//AAf4AH///////xwHf/////z/+AAAAB//wPI/+sEP4A///wAAAAf8AACHf////////8B8P4AAAAAPPIZ+H/gAD////8AAOcgEQAAAAAAAAAAAE/AAAAAAAAB+AfAAf////4AAHAAAgAAAAAAAAAAA54AAAAAAAALwG/gH/4H//wOB4AAAAAAAAAAAAAAAAAf///////Ng+AP4ADAAA/n////////////////+AD///////8COMAHwAAAAD/P///////////////v8AD/7/////4APwABgAAAAH/P//////////////wfAAA+AH////4APzAAAAAAAD/D/////////////JhgAAAFAAf///8AH/gAAAAAIAOD////////////4AHAAAAQAAP////wH/gAAAAAMBuP////////////wAPgAACAAAH////+f/8AAAAAWAhf////////////AAPAAAAAAAT////+f/+AAAAA3H//////////////+AOAAAAAAAB/////f/8AAAAAHn//////////////+AIAAAAAAAB//////8wAAAAAMf//////////////9AAAAAAAAAA//////2HAAAAAF///////////////4AAAAAAAAAAf/////+AgAAAAD///////////////4AAAAAAAAAAf//////wAAAAAB///yfx/////////wAAAAAAAAAAf/////yAAAAAAB/z/gPj/////////jAAAAAAAAAAf/////gAAAAAA/wY/gDx////////8HAAAAAAAAAAf/////AAAAAAA/gGfnn4////////wAAAAAAAAAAAf////+AAAAAAA/ACY//4///////1gGAAAAAAAAAAP////8AAAAAAA/ACM//4///////hwEAAAAAAAAAAH////4AAAAAAAOLgA//////////4wcAAAAAAAAAAH////4AAAAAAAN/gDC/////////wz8AAAAAAAAAAB////wAAAAAAAf/gAA/////////wDgAAAAAAAAAAA////AAAAAAAA//8YB/////////4EAAAAAAAAAAAAX///AAAAAAAA///f//////////4AAAAAAAAAAAAAX/5BAAAAAAAB//////z///////4AAAAAAAAAAAAAb/gBAAAAAAAH////8/5///////4AAAAAAAAAAAAAF/gBoAAAAAAP////+/4f//////wAAAAAAAAAAAAAE/gAAAAAAAAP////+f8wH/////gAAAAAAAAAAAAAAfgAAAAAAAAf/////P/4D/////IAAAAAAAAAAAAAAPgAQAAAAAAf/////v/8D/+f/4AAAAAAAAAAAAAAAPgwOAAAAAAf/////n/4Af8P+AAAAAAAAAAAAAAAAHxwAwAAAAAf/////n/wAfwH+wAAAAAAAAAAAAAAAB/gAAAAAAAf/////z/gAfgH+AMAAAAAAAAAAAAAAAT8AAAAAAAf/////z+AAfAF/AIAAAAAAAAAAAAAAAB+AAAAAAAf/////94AAOAB/gIAAAAAAAAAAAAAAAAMAAAAAAAf//////AAAOAA/gCAAAAAAAAAAAAAAAAEBQAAAAAP/////+MAAGAAHAFAAAAAAAAAAAAAAAACDfgAAAAH//////8AAGAACAAAAAAAAAAAAAAAAAABP/wAAAAH//////4AABABgADAAAAAAAAAAAAAAAAAP/4AAAAD//////4AABAAQABAAAAAAAAAAAAAAAAAP//gAAAA/H////wAAAACYBgAAAAAAAAAAAAAAAAAH//wAAAAAA////wAAAADYDAAAAAAAAAAAAAAAAAAP//wAAAAAA////gAAAABoPgAAAAAAAAAAAAAAAAAf//4AAAAAA///+AAAAAA4fuQAAAAAAAAAAAAAAAA///+AAAAAA///8AAAAAAYfASAAAAAAAAAAAAAAAA////AAAAAA///4AAAAAAcfYBYAAAAAAAAAAAAAAA////8AAAAAf//4AAAAAAOCEh/AAAAAAAAAAAAAAA/////AAAAAP//wAAAAAAGAAAPgAAAAAAAAAAAAAA/////gAAAAP//wAAAAAADIABPwIAAAAAAAAAAAAAf////gAAAAH//wAAAAAAAOAAPYCAAAAAAAAAAAAAP////AAAAAH//4AAAAAAAACAAMAAAAAAAAAAAAAAP///+AAAAAH//4AAAAAAAAAAAAAAAAAAAAAAAAAAH///+AAAAAH//4AAAAAAAAAHhAAAAAAAAAAAAAAAH///8AAAAAP//4IAAAAAAAAvjAAAAAAAAAAAAAAAD///8AAAAAP//4cAAAAAAAB/jgAAAAAAAAAAAAAAA///8AAAAAP//h4AAAAAAAD/7gAAAAAAAAAAAAAAAf//8AAAAAP//B4AAAAAAAH//wAAAAAAAAAAAAAAAf//4AAAAAH/+AwAAAAAAAf//4AQAAAAAAAAAAAAAf//4AAAAAH//BwAAAAAAB///8AIAAAAAAAAAAAAAf//gAAAAAD//BwAAAAAAD///+AAAAAAAAAAAAAAAf/8AAAAAAD/+BgAAAAAAD////AAAAAAAAAAAAAAAf/8AAAAAAD/8AAAAAAAAD////AAAAAAAAAAAAAAAf/8AAAAAAD/8AAAAAAAAD////AAAAAAAAAAAAAAA//4AAAAAAB/4AAAAAAAAB////AAAAAAAAAAAAAAA//wAAAAAAA/wAAAAAAAAB////AAAAAAAAAAAAAAA//gAAAAAAA/gAAAAAAAAB/h//AAAAAAAAAAAAAAA//AAAAAAAA+AAAAAAAAAB+Av+AAAAAAAAAAAAAAA/8AAAAAAAAAAAAAAAAAAAAAP8AAQAAAAAAAAAAAB/8AAAAAAAAAAAAAAAAAAAAAH8AAIAAAAAAAAAAAB/4AAAAAAAAAAAAAAAAAAAAADQAAOAAAAAAAAAAAB/gAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAB+AAAAAAAAAAAAAAAAAAAAAAAYAAIAAAAAAAAAAAB+AAAAAAAAAAAAAAAAAAAAAAAYAAwAAAAAAAAAAAD8AAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAD4AAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAAAAD8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAADwAACAefH/gAAAAAAAAAAAAAAAAEAAAAAAAAAAAB//8B///////4AAAAAAAAAAAAAAA/AAAAAAAAAAH///8P////////8AAAAAAAAAAAAAB3gAAAAATf//////8//////////+AAAAAAAAAAAgAHgAAAAH////////////////////AAAAAAAB4B////gAAAAP///////////////////4AAAAD////////4AAAAD////////////////////gAAALP///////8AAAAD/////////////////////gAABj////////wAAHg//////////////////////4AAAAD///////8AQ/AB////////////////////+AAAAB//////////AGP//////////////////////AAAAA///////////////////////////////////8AAD//gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+var D2R = Math.PI / 180;
+var TAU = Math.PI * 2;
+// Where the sample life begins: Lucknow, India.
+var HOME = { lat: 26.85, lon: 80.95 };
+// Rough birth density: most births happen in South and East Asia and in Africa.
+var BIRTH_ZONES = [
+  { lat: [5, 35], lon: [66, 125], w: 1 },
+  { lat: [-12, 16], lon: [-18, 45], w: 0.8 },
+  { lat: [-35, 25], lon: [-110, -35], w: 0.35 },
+  { lat: [25, 55], lon: [-10, 60], w: 0.25 },
+  { lat: [20, 50], lon: [-125, -70], w: 0.25 }
+];
+
+function landPoints() {
+  if (landPoints.cache) return landPoints.cache;
+  var bin = atob(LAND), W = 240, H = 120, out = [];
+  for (var r = 0; r < H; r++) {
+    var lat = 90 - (r + 0.5) * 1.5;
+    var step = Math.max(1, Math.round(1 / Math.cos(lat * D2R)));
+    for (var c = 0; c < W; c += step) {
+      var i = r * W + c;
+      if ((bin.charCodeAt(i >> 3) >> (7 - (i & 7))) & 1) {
+        var la = lat * D2R;
+        out.push([Math.sin(la), Math.cos(la), (-180 + (c + 0.5) * 1.5) * D2R, lat, -180 + (c + 0.5) * 1.5]);
+      }
+    }
+  }
+  landPoints.cache = out;
+  return out;
+}
+
+function birthWeight(p) {
+  for (var i = 0; i < BIRTH_ZONES.length; i++) {
+    var z = BIRTH_ZONES[i];
+    if (p[3] >= z.lat[0] && p[3] <= z.lat[1] && p[4] >= z.lon[0] && p[4] <= z.lon[1]) return z.w;
+  }
+  return 0.05;
+}
+
+class Component extends DCLogic {
+  opt(key, fallback) {
+    var v = this.props[key];
+    return v === undefined || v === null || v === '' ? fallback : v;
+  }
+
+  num(key, fallback) {
+    var v = Number(this.opt(key, fallback));
+    return isFinite(v) ? v : fallback;
+  }
+
+  focused() {
+    var f = this.props.focus;
+    return f === true || f === 'true';
+  }
+
+  // Zoomed in, the birthplace sits dead centre; otherwise the globe tilts a little less.
+  homeLat() {
+    return this.num('zoom', 1) > 1 ? HOME.lat : 18;
+  }
+
+  componentDidMount() {
+    this.pts = landPoints();
+    this.lon = this.num('startLon', 30);
+    this.lat = 12;
+    this.vel = 0;
+    this.flashes = [];
+    this.flashClock = 0;
+    this.markerT = 0;
+    this.zoomCur = 1;
+    this.locked = false;
+    if (this.focused()) {
+      this.lon = HOME.lon;
+      this.lat = this.homeLat();
+      this.locked = true;
+      this.markerT = 1;
+      this.zoomCur = this.num('zoom', 1);
+    }
+    this.last = performance.now();
+    var self = this;
+    var loop = function (now) {
+      self.draw(now);
+      self.raf = requestAnimationFrame(loop);
+    };
+    this.raf = requestAnimationFrame(loop);
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this.raf);
+  }
+
+  componentDidUpdate(prev) {
+    var was = prev.focus === true || prev.focus === 'true';
+    var now = this.focused();
+    if (was === now) return;
+    if (now) {
+      // Spin westward a number of full turns, then settle on the birthplace.
+      // Several turns play as a roulette: fast at first, slowing to a stop.
+      var turns = Math.max(1, Math.round(this.num('turns', 1)));
+      var back = ((this.lon - HOME.lon) % 360 + 360) % 360;
+      this.anim = { t0: performance.now(), dur: this.num('duration', 2600), lon0: this.lon, lat0: this.lat, dLon: -(back + 360 * turns), lat1: this.homeLat(), roulette: turns > 1 };
+      this.vel = 0;
+    } else {
+      this.anim = null;
+      this.locked = false;
+    }
+  }
+
+  pickBirth() {
+    var pts = this.pts;
+    for (var tries = 0; tries < 8; tries++) {
+      var p = pts[(Math.random() * pts.length) | 0];
+      if (Math.random() < birthWeight(p)) return p;
+    }
+    return pts[(Math.random() * pts.length) | 0];
+  }
+
+  line(g, project, lat, lon) {
+    var pen = false;
+    for (var k = 0; k <= 120; k++) {
+      var la = lat !== null ? lat : -90 + k * 1.5;
+      var lo = lon !== null ? lon : -180 + k * 3;
+      var p = project(Math.sin(la * D2R), Math.cos(la * D2R), lo * D2R);
+      if (p[2] > 0) {
+        if (pen) g.lineTo(p[0], p[1]);
+        else g.moveTo(p[0], p[1]);
+        pen = true;
+      } else {
+        pen = false;
+      }
+    }
+  }
+
+  draw(now) {
+    var cv = this.canvas;
+    if (!cv) return;
+    var dt = Math.min(0.05, (now - this.last) / 1000);
+    this.last = now;
+    var S = this.num('size', 360);
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    var px = Math.round(S * dpr);
+    // A fresh canvas is 300×150, so both sides must be checked.
+    if (cv.width !== px || cv.height !== px) {
+      cv.width = px;
+      cv.height = px;
+    }
+    var g = cv.getContext('2d');
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.clearRect(0, 0, S, S);
+
+    if (this.anim) {
+      var a = this.anim;
+      var t = Math.min(1, (now - a.t0) / a.dur);
+      var e = a.roulette ? 1 - Math.pow(1 - t, 4) : t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      this.lon = a.lon0 + a.dLon * e;
+      this.lat = a.lat0 + (a.lat1 - a.lat0) * e;
+      if (t >= 1) {
+        this.anim = null;
+        this.locked = true;
+      }
+    } else if (!this.dragging) {
+      this.lon += (this.locked ? 0 : -this.num('spin', 8)) * dt + this.vel * dt;
+      this.vel *= Math.pow(0.04, dt);
+      if (!this.locked) this.lat += (12 - this.lat) * Math.min(1, dt * 0.6);
+    }
+    var showMarker = this.focused() && !this.anim;
+    this.markerT += ((showMarker ? 1 : 0) - this.markerT) * Math.min(1, dt * 4);
+    // Once landed, close in on the birthplace. Everything stays inside the original disc.
+    this.zoomCur += ((showMarker ? this.num('zoom', 1) : 1) - this.zoomCur) * Math.min(1, dt * 1.8);
+
+    var R0 = S / 2 - S * 0.06, R = R0 * this.zoomCur, cx = S / 2, cy = S / 2;
+    var lam0 = this.lon * D2R, ph0 = this.lat * D2R;
+    var sp0 = Math.sin(ph0), cp0 = Math.cos(ph0);
+    var Lx = -0.42, Ly = 0.48, Lz = 0.77;
+    var variant = this.opt('variant', 'halftone');
+    var project = function (sl, cl, lo) {
+      var dl = lo - lam0, cd = Math.cos(dl);
+      var x = cl * Math.sin(dl), y = cp0 * sl - sp0 * cl * cd, z = sp0 * sl + cp0 * cl * cd;
+      return [cx + R * x, cy - R * y, z, x, y];
+    };
+
+    var glow = this.opt('glow', '');
+    if (glow) {
+      g.save();
+      g.shadowColor = glow;
+      g.shadowBlur = R0 * 0.3;
+      g.fillStyle = glow;
+      g.beginPath();
+      g.arc(cx, cy, R0, 0, TAU);
+      g.fill();
+      g.restore();
+    }
+
+    g.save();
+    g.beginPath();
+    g.arc(cx, cy, R0, 0, TAU);
+    g.clip();
+
+    var ocean = this.opt('ocean', '#e3e9e2');
+    var sea = g.createRadialGradient(cx + Lx * R * 0.55, cy - Ly * R * 0.55, R * 0.05, cx, cy, R * 1.02);
+    sea.addColorStop(0, ocean);
+    sea.addColorStop(1, this.opt('shade', ocean));
+    g.fillStyle = sea;
+    g.beginPath();
+    g.arc(cx, cy, R, 0, TAU);
+    g.fill();
+
+    var grid = this.opt('grid', '');
+    if (grid) {
+      g.strokeStyle = grid;
+      g.lineWidth = 0.75;
+      g.beginPath();
+      for (var gl = -60; gl <= 60; gl += 30) this.line(g, project, gl, null);
+      for (var gm = -180; gm < 180; gm += 30) this.line(g, project, null, gm);
+      g.stroke();
+    }
+
+    var base = this.num('dot', 1) * R0 / 150 * (1 + (this.zoomCur - 1) * 0.55);
+    var q = this.num('px', 4);
+    var pts = this.pts;
+    g.fillStyle = this.opt('land', '#253f4c');
+    for (var i = 0; i < pts.length; i++) {
+      var p = project(pts[i][0], pts[i][1], pts[i][2]);
+      if (p[2] <= 0.02) continue;
+      var light = Math.max(0, p[3] * Lx + p[4] * Ly + p[2] * Lz);
+      if (variant === 'square') {
+        g.globalAlpha = light > 0.55 ? 1 : light > 0.25 ? 0.7 : 0.4;
+        g.fillRect(Math.round(p[0] / q) * q - q / 2, Math.round(p[1] / q) * q - q / 2, q - 1, q - 1);
+      } else if (variant === 'halftone') {
+        g.globalAlpha = 1;
+        g.beginPath();
+        g.arc(p[0], p[1], base * (0.3 + 1.3 * light), 0, TAU);
+        g.fill();
+      } else {
+        g.globalAlpha = 0.3 + 0.7 * p[2];
+        g.beginPath();
+        g.arc(p[0], p[1], base * 1.15, 0, TAU);
+        g.fill();
+      }
+    }
+    g.globalAlpha = 1;
+
+    var night = this.opt('night', '');
+    if (night) {
+      var sh = g.createRadialGradient(cx + Lx * R * 0.7, cy - Ly * R * 0.7, R * 0.2, cx, cy, R * 1.05);
+      sh.addColorStop(0, 'rgba(0,0,0,0)');
+      sh.addColorStop(1, night);
+      g.fillStyle = sh;
+      g.beginPath();
+      g.arc(cx, cy, R, 0, TAU);
+      g.fill();
+    }
+
+    // Births: a ring blooms wherever a baby is born, then fades.
+    this.flashClock -= dt;
+    if (this.flashClock <= 0 && this.markerT < 0.5) {
+      this.flashClock = 0.16 + Math.random() * 0.2;
+      this.flashes.push({ p: this.pickBirth(), t: 0 });
+      if (this.flashes.length > 40) this.flashes.shift();
+    }
+    var flash = this.opt('flash', '#d97757');
+    g.strokeStyle = flash;
+    g.fillStyle = flash;
+    g.lineWidth = 1.2;
+    for (var f = this.flashes.length - 1; f >= 0; f--) {
+      var fl = this.flashes[f];
+      fl.t += dt / 1.8;
+      if (fl.t >= 1) {
+        this.flashes.splice(f, 1);
+        continue;
+      }
+      var fp = project(fl.p[0], fl.p[1], fl.p[2]);
+      if (fp[2] <= 0.1) continue;
+      g.globalAlpha = (1 - fl.t) * fp[2];
+      g.beginPath();
+      g.arc(fp[0], fp[1], base * 2 + fl.t * R0 * 0.09, 0, TAU);
+      g.stroke();
+      g.beginPath();
+      g.arc(fp[0], fp[1], base * 1.6, 0, TAU);
+      g.fill();
+    }
+    g.globalAlpha = 1;
+
+    if (this.markerT > 0.01) {
+      var hl = HOME.lat * D2R;
+      var mp = project(Math.sin(hl), Math.cos(hl), HOME.lon * D2R);
+      if (mp[2] > 0) {
+        var mk = this.opt('marker', '#d97757');
+        var phase = (now / 1600) % 1;
+        g.strokeStyle = mk;
+        g.fillStyle = mk;
+        g.lineWidth = 1.5;
+        for (var k = 0; k < 2; k++) {
+          var pt = (phase + k * 0.5) % 1;
+          g.globalAlpha = this.markerT * (1 - pt);
+          g.beginPath();
+          g.arc(mp[0], mp[1], 5 + pt * R0 * 0.16, 0, TAU);
+          g.stroke();
+        }
+        g.globalAlpha = this.markerT;
+        g.beginPath();
+        g.arc(mp[0], mp[1], 5.5, 0, TAU);
+        g.fill();
+        g.lineWidth = 2;
+        g.strokeStyle = this.opt('markerRing', '#ffffff');
+        g.stroke();
+        g.globalAlpha = 1;
+      }
+    }
+    g.restore();
+
+    var rim = this.opt('rim', '');
+    if (rim) {
+      g.strokeStyle = rim;
+      g.lineWidth = Math.max(1, R0 / 90);
+      g.beginPath();
+      g.arc(cx, cy, R0, 0, TAU);
+      g.stroke();
+    }
+  }
+
+  renderVals() {
+    var self = this;
+    if (!this.handlers) {
+      this.handlers = {
+        setCanvas: function (el) { self.canvas = el; },
+        down: function (e) {
+          self.dragging = true;
+          self.anim = null;
+          if (self.focused()) self.locked = true;
+          self.px = e.clientX;
+          self.py = e.clientY;
+          self.pt = performance.now();
+          self.vel = 0;
+          if (e.currentTarget && e.currentTarget.setPointerCapture) {
+            try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) {}
+          }
+        },
+        move: function (e) {
+          if (!self.dragging) return;
+          var S = self.num('size', 360), R = (S / 2 - S * 0.06) * (self.zoomCur || 1);
+          var now = performance.now(), dts = Math.max(0.008, (now - self.pt) / 1000);
+          var dLon = -(e.clientX - self.px) / R / D2R;
+          self.lon += dLon;
+          self.lat = Math.max(-60, Math.min(60, self.lat + (e.clientY - self.py) / R / D2R));
+          self.vel = 0.5 * self.vel + 0.5 * dLon / dts;
+          self.px = e.clientX;
+          self.py = e.clientY;
+          self.pt = now;
+        },
+        up: function () { self.dragging = false; }
+      };
+    }
+    return {
+      size: this.num('size', 360),
+      label: this.focused() ? 'Globe turned to Lucknow, India, where you were born' : 'A slowly turning globe. Each flash is a birth.',
+      setCanvas: this.handlers.setCanvas,
+      down: this.handlers.down,
+      move: this.handlers.move,
+      up: this.handlers.up
+    };
+  }
+}
+</script>
+</body>
+</html>

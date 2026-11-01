@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Your odds — cute</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+main[data-theme=light] a:focus-visible,main[data-theme=light] button:focus-visible{outline:3px solid #17352e;outline-offset:4px}
+main[data-theme=dark] a:focus-visible,main[data-theme=dark] button:focus-visible{outline:3px solid #f6cfe0;outline-offset:4px}
+.od-scroll::-webkit-scrollbar{display:none}
+.k-o{color:#ffffff;text-shadow:1.5px 0 0 #5a3418,-1.5px 0 0 #5a3418,0 1.5px 0 #5a3418,0 -1.5px 0 #5a3418,1.1px 1.1px 0 #5a3418,-1.1px 1.1px 0 #5a3418,1.1px -1.1px 0 #5a3418,-1.1px -1.1px 0 #5a3418,0 2px 0 #5a3418}
+</style>
+</helmet>
+<main data-theme="{{ theme }}" style="position: relative; width: 393px; height: {{ L.mainH }}; min-height: 852px; overflow: hidden; background: {{ c.bg }}; color: {{ c.ink }}; font-family: Fredoka, system-ui, sans-serif">
+<div class="od-scroll" style="position: {{ L.pos }}; left: 0px; right: 0px; top: {{ L.top }}; bottom: {{ L.bottom }}; margin-top: {{ L.mt }}; overflow-y: {{ L.ov }}; scrollbar-width: none; box-sizing: border-box; padding: 6px 22px {{ L.pb }}">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="flex: none; width: 48px; height: 48px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 24px; overflow: hidden; background: {{ c.babyBg }}"><img src="/_blob/288778d3b88098142d309840ced390ca" alt="" style="display: block; width: 48px; height: 54px; margin-top: -2px"></span>
+<span style="min-width: 0"><span style="display: block; font-family: Fredoka, system-ui, sans-serif; font-size: 20px; font-weight: 700; line-height: 1.15; letter-spacing: -0.3px">Aarav Srivastava</span><span style="display: block; margin-top: 2px; font-size: 13px; line-height: 1.35; color: {{ c.muted }}">Born 14 March 2026 · Lucknow, India</span></span>
+</div>
+<h2 style="margin: 22px 0 0; font-size: 11px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.muted }}">Starting stats</h2>
+<div style="margin-top: 10px; padding: 8px 10px 10px; border: 2px solid #7b4b2a; border-radius: 12px; background: #fff3d6; box-shadow: 0 4px 12px rgba(90,52,24,0.2), 0 1px 3px rgba(90,52,24,0.14)">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 12px">
+<sc-for list="{{ stats }}" as="st" hint-placeholder-count="4">
+<div role="meter" aria-label="{{ st.label }}" aria-valuenow="{{ st.v }}" aria-valuemin="0" aria-valuemax="100" style="min-width: 0">
+<p style="margin: 0; text-align: center; font-size: 12px; font-weight: 600; line-height: 15px; color: #7b4b2a">{{ st.label }}</p>
+<div aria-hidden="true" style="position: relative; height: 24px; margin-top: 3px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 6px; background: #f0dcae; overflow: hidden">
+<div style="width: {{ st.w }}; height: 100%; background: {{ st.color }}; box-shadow: inset 0 3px 0 rgba(255,255,255,0.45)"></div>
+<span style="position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; display: flex; align-items: center; justify-content: center; gap: 4px"><svg width="16" height="16" viewBox="0 0 24 24" style="flex: none"><path d="{{ st.icon }}" fill="#ffffff" stroke="#5a3418" stroke-width="2.2" stroke-linejoin="round"></path></svg><span class="k-o" style="font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums">{{ st.n }}</span></span>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+<h2 style="margin: 24px 0 0; font-size: 11px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.muted }}">Your odds</h2>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 10px">
+<div style="padding: 10px; border-radius: 10px; border: 2px solid #7b4b2a; background: {{ c.tile }}"><p style="margin: 0; font-family: Fredoka, system-ui, sans-serif; font-size: 20px; font-weight: 700; line-height: 1">{{ fig.age5 }}%</p><p style="margin: 4px 0 0; font-size: 12px; line-height: 1.25; color: {{ c.muted }}">reach age 5</p></div>
+<div style="padding: 10px; border-radius: 10px; border: 2px solid #7b4b2a; background: {{ c.tile }}"><p style="margin: 0; font-family: Fredoka, system-ui, sans-serif; font-size: 20px; font-weight: 700; line-height: 1">{{ fig.age18 }}%</p><p style="margin: 4px 0 0; font-size: 12px; line-height: 1.25; color: {{ c.muted }}">reach 18</p></div>
+<div style="padding: 10px; border-radius: 10px; border: 2px solid #7b4b2a; background: {{ c.tile }}"><p style="margin: 0; font-family: Fredoka, system-ui, sans-serif; font-size: 20px; font-weight: 700; line-height: 1">{{ fig.age65 }}%</p><p style="margin: 4px 0 0; font-size: 12px; line-height: 1.25; color: {{ c.muted }}">reach 65</p></div>
+<div style="padding: 10px; border-radius: 10px; border: 2px solid #7b4b2a; background: {{ c.tile }}"><p style="margin: 0; font-family: Fredoka, system-ui, sans-serif; font-size: 20px; font-weight: 700; line-height: 1">{{ fig.lifespan }}<span style="font-size: 12px"> yrs</span></p><p style="margin: 4px 0 0; font-size: 12px; line-height: 1.25; color: {{ c.muted }}">expected lifespan</p></div>
+<div style="padding: 10px; border-radius: 10px; border: 2px solid #7b4b2a; background: {{ c.tile }}"><p style="margin: 0; font-family: Fredoka, system-ui, sans-serif; font-size: 20px; font-weight: 700; line-height: 1">{{ fig.school }}%</p><p style="margin: 4px 0 0; font-size: 12px; line-height: 1.25; color: {{ c.muted }}">finish school</p></div>
+<div style="padding: 10px; border-radius: 10px; border: 2px solid #7b4b2a; background: {{ c.tile }}"><p style="margin: 0; font-family: Fredoka, system-ui, sans-serif; font-size: 20px; font-weight: 700; line-height: 1">{{ fig.uni }}%</p><p style="margin: 4px 0 0; font-size: 12px; line-height: 1.25; color: {{ c.muted }}">go to university</p></div>
+</div>
+<h2 style="margin: 24px 0 0; font-size: 11px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.muted }}">Born in India</h2>
+<div style="display: flex; align-items: center; gap: 14px; margin-top: 10px">
+<div role="img" aria-label="17 of every 100 babies born today are born in India" style="flex: none; display: grid; grid-template-columns: repeat(10, 7px); gap: 4px">
+<sc-for list="{{ share }}" as="d" hint-placeholder-count="100"><span style="display: block; width: 7px; height: 7px; box-sizing: border-box; border-radius: 4px; border: 1.2px solid {{ d.line }}; background: {{ d.bg }}"></span></sc-for>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.45"><strong style="font-family: Fredoka, system-ui, sans-serif; font-size: 20px; font-weight: 700">{{ fig.share }} of 100</strong><br>babies born today are born in India, about 1 in 6.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 12px">
+<div style="padding: 8px 0; border-top: 1px solid {{ c.hair }}"><p style="margin: 0; font-family: Fredoka, system-ui, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.15">{{ fig.people }} bn</p><p style="margin: 2px 0 0; font-size: 12px; line-height: 1.3; color: {{ c.muted }}">people</p></div>
+<div style="padding: 8px 0; border-top: 1px solid {{ c.hair }}"><p style="margin: 0; font-family: Fredoka, system-ui, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.15">{{ fig.births }} m</p><p style="margin: 2px 0 0; font-size: 12px; line-height: 1.3; color: {{ c.muted }}">babies born a year</p></div>
+<div style="padding: 8px 0; border-top: 1px solid {{ c.hair }}"><p style="margin: 0; font-family: Fredoka, system-ui, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.15">{{ fig.cities }}%</p><p style="margin: 2px 0 0; font-size: 12px; line-height: 1.3; color: {{ c.muted }}">live in cities</p></div>
+<div style="padding: 8px 0; border-top: 1px solid {{ c.hair }}"><p style="margin: 0; font-family: Fredoka, system-ui, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.15">{{ fig.income }}</p><p style="margin: 2px 0 0; font-size: 12px; line-height: 1.3; color: {{ c.muted }}">income per person, PPP</p></div>
+</div>
+<div style="display: flex; gap: 10px; margin-top: 8px; padding: 12px; border-radius: 10px; border: 2px solid #7b4b2a; background: {{ c.tile }}">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><path d="M12 21s-6.5-5.8-6.5-11a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11-6.5 11Z"></path><circle cx="12" cy="10" r="2.3"></circle></svg>
+<p style="margin: 0; font-size: 13px; line-height: 1.45"><strong style="font-weight: 700">Lucknow, Uttar Pradesh.</strong> A city birth. About half of the world’s babies are born in villages.</p>
+</div>
+<h2 style="margin: 24px 0 0; font-size: 11px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.muted }}">Born the same second</h2>
+<ul style="list-style: none; margin: 2px 0 0; padding: 0">
+<li style="display: flex; align-items: center; gap: 12px; min-height: 46px; border-bottom: 1px solid {{ c.hair }}"><span style="flex: 1; min-width: 0"><span style="display: block; font-size: 14px; font-weight: 600; line-height: 1.3">Chen Yu</span><span style="display: block; font-size: 12px; line-height: 1.35; color: {{ c.muted }}">Girl · Chongqing, China</span></span><span aria-label="Household: 4th fifth of 5" style="display: flex; gap: 4px"><sc-for list="{{ fifths.q4 }}" as="d" hint-placeholder-count="5"><span style="width: 8px; height: 8px; box-sizing: border-box; border-radius: 4px; border: 1.5px solid {{ d.line }}; background: {{ d.bg }}"></span></sc-for></span></li>
+<li style="display: flex; align-items: center; gap: 12px; min-height: 46px; border-bottom: 1px solid {{ c.hair }}"><span style="flex: 1; min-width: 0"><span style="display: block; font-size: 14px; font-weight: 600; line-height: 1.3">Amina Bello</span><span style="display: block; font-size: 12px; line-height: 1.35; color: {{ c.muted }}">Girl · a village near Kano, Nigeria</span></span><span aria-label="Household: 1st fifth of 5" style="display: flex; gap: 4px"><sc-for list="{{ fifths.q1 }}" as="d" hint-placeholder-count="5"><span style="width: 8px; height: 8px; box-sizing: border-box; border-radius: 4px; border: 1.5px solid {{ d.line }}; background: {{ d.bg }}"></span></sc-for></span></li>
+<li style="display: flex; align-items: center; gap: 12px; min-height: 46px; border-bottom: 1px solid {{ c.hair }}"><span style="flex: 1; min-width: 0"><span style="display: block; font-size: 14px; font-weight: 600; line-height: 1.3">Lucas Oliveira</span><span style="display: block; font-size: 12px; line-height: 1.35; color: {{ c.muted }}">Boy · Recife, Brazil</span></span><span aria-label="Household: 3rd fifth of 5" style="display: flex; gap: 4px"><sc-for list="{{ fifths.q3 }}" as="d" hint-placeholder-count="5"><span style="width: 8px; height: 8px; box-sizing: border-box; border-radius: 4px; border: 1.5px solid {{ d.line }}; background: {{ d.bg }}"></span></sc-for></span></li>
+<li style="display: flex; align-items: center; gap: 12px; min-height: 46px"><span style="flex: 1; min-width: 0"><span style="display: block; font-size: 14px; font-weight: 600; line-height: 1.3">Emma Schulz</span><span style="display: block; font-size: 12px; line-height: 1.35; color: {{ c.muted }}">Girl · Leipzig, Germany</span></span><span aria-label="Household: 4th fifth of 5" style="display: flex; gap: 4px"><sc-for list="{{ fifths.q4 }}" as="d" hint-placeholder-count="5"><span style="width: 8px; height: 8px; box-sizing: border-box; border-radius: 4px; border: 1.5px solid {{ d.line }}; background: {{ d.bg }}"></span></sc-for></span></li>
+</ul>
+<p style="margin: 6px 0 0; font-size: 12px; line-height: 1.35; color: {{ c.muted }}">Dots: household wealth, in fifths of each country.</p>
+<h2 style="margin: 24px 0 0; font-size: 11px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.muted }}">If you’d been born in Russia</h2>
+<table style="width: 100%; margin-top: 4px; border-collapse: collapse; font-size: 14px; line-height: 1.3">
+<thead><tr><th scope="col" style="padding: 6px 0; text-align: left; font-size: 11px; font-weight: 600; color: {{ c.muted }}">For a boy</th><th scope="col" style="padding: 6px 0; text-align: right; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: {{ c.muted }}">India</th><th scope="col" style="padding: 6px 0; text-align: right; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: {{ c.muted }}">Russia</th></tr></thead>
+<tbody>
+<tr style="border-top: 1px solid {{ c.hair }}"><th scope="row" style="padding: 8px 0; text-align: left; font-weight: 400; color: {{ c.muted }}">Expected lifespan</th><td style="padding: 8px 0; text-align: right; font-weight: 700">{{ fig.inLife }} yrs</td><td style="padding: 8px 0; text-align: right">{{ fig.ruLife }} yrs</td></tr>
+<tr style="border-top: 1px solid {{ c.hair }}"><th scope="row" style="padding: 8px 0; text-align: left; font-weight: 400; color: {{ c.muted }}">Die before age 5</th><td style="padding: 8px 0; text-align: right; font-weight: 700">{{ fig.inDie }} in 100</td><td style="padding: 8px 0; text-align: right">{{ fig.ruDie }} in 200</td></tr>
+<tr style="border-top: 1px solid {{ c.hair }}"><th scope="row" style="padding: 8px 0; text-align: left; font-weight: 400; color: {{ c.muted }}">Years at school</th><td style="padding: 8px 0; text-align: right; font-weight: 700">{{ fig.inSchool }}</td><td style="padding: 8px 0; text-align: right">{{ fig.ruSchool }}</td></tr>
+<tr style="border-top: 1px solid {{ c.hair }}; border-bottom: 1px solid {{ c.hair }}"><th scope="row" style="padding: 8px 0; text-align: left; font-weight: 400; color: {{ c.muted }}">Income per person</th><td style="padding: 8px 0; text-align: right; font-weight: 700">{{ fig.inIncome }}k</td><td style="padding: 8px 0; text-align: right">{{ fig.ruIncome }}k</td></tr>
+</tbody>
+</table>
+</div>
+<header style="position: absolute; left: 0px; right: 0px; top: 0px; height: 100px; background: {{ c.bg }}">
+<a href="{{ to.back.href }}" onClick="{{ to.back.go }}" aria-label="Back to the certificate" style="position: absolute; left: 14px; top: 48px; width: 42px; height: 42px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 21px; background: #fff3d6; box-shadow: inset 0 -3px 0 rgba(90,52,24,0.22); color: #7b4b2a; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></a>
+<h1 class="k-o" style="position: absolute; left: 72px; right: 72px; top: 55px; margin: 0; text-align: center; font-family: Fredoka, system-ui, sans-serif; font-size: 21px; font-weight: 700; line-height: 26px">Your start in life</h1>
+</header>
+<div style="position: {{ L.footPos }}; left: 0px; right: 0px; bottom: 0px; display: flex; justify-content: center; padding: 36px 0 32px; background: {{ c.footFade }}">
+<a href="{{ to.life.href }}" onClick="{{ to.life.go }}" style="display: flex; align-items: center; justify-content: center; gap: 10px; width: 220px; height: 60px; box-sizing: border-box; border: 2px solid #7b4b2a; border-radius: 18px; background: #ffd75a; box-shadow: inset 0 -4px 0 rgba(90,52,24,0.22), inset 0 4px 0 rgba(255,255,255,0.5); text-decoration: none; cursor: pointer"><span class="k-o" style="font-size: 22px; font-weight: 700">Start life</span><svg width="34" height="30" viewBox="0 0 30 26" aria-hidden="true" style="flex: none"><path d="M5 13 H22.5 M15.5 6 L22.5 13 L15.5 20" fill="none" stroke="#7b4b2a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 13 H22.5 M15.5 6 L22.5 13 L15.5 20" fill="none" stroke="#ffffff" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+</div>
+<svg width="100%" height="100%" aria-hidden="true" style="position: absolute; left: 0px; top: 0px; pointer-events: none; mix-blend-mode: {{ c.grainBlend }}; opacity: {{ c.grainOp }}">
+<filter id="{{ ids.grain }}"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
+<rect width="100%" height="100%" filter="{{ urls.grain }}"></rect>
+</svg>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"layout":{"editor":"enum","options":["phone","full"],"default":"phone"},"nav":{"editor":null},"$preview":{"width":393,"height":852}}'>
+// The odds screen in the cute idle-game style (Fredoka, brown outlines, chunky buttons).
+// Everything about the start of this life that a birth record doesn't hold: starting stats first,
+// then odds, the country, the babies born the same second and the player's real country.
+// Opened from the certificate now; later it can open from the life screen too.
+// `layout: full` lays the whole scroll out at once for review on the canvas.
+// One cute palette; the theme switch is kept so wrappers stay compatible.
+var CUTE = { bg: '#f2e3c6', ink: '#5a3418', muted: '#8a5a35', tile: '#fff3d6', hair: '#d9bf90', dotLine: '#a77a52', segOff: '#ecd8b0', health: '#ff6f8a', joy: '#ffc23d', mind: '#6f8cff', ties: '#4cc9a0', babyBg: '#ffe9a8', dialBg: '#fff3d6', dialLine: '#7b4b2a', footFade: 'linear-gradient(rgba(242,227,198,0) 0%, #f2e3c6 45%)', btnBg: '#ffd75a', btnInk: '#5a3418', btnDot: '#f4a940', btnArrow: '#ffffff', grainBlend: 'multiply', grainOp: 0 };
+var COLORS = { light: CUTE, dark: CUTE };
+
+// Filled shapes, drawn white inside the bars like on the life screen.
+var ICONS = {
+  health: 'M12 20.5s-7.5-4.6-7.5-10.3A4.2 4.2 0 0 1 12 7.9a4.2 4.2 0 0 1 7.5 2.3c0 5.7-7.5 10.3-7.5 10.3Z',
+  joy: 'M12 3.5l2.4 5 5.5.7-4 3.8 1 5.4L12 15.8l-4.9 2.6 1-5.4-4-3.8 5.5-.7Z',
+  mind: 'M3.5 6.5c2.8-1.3 5.7-1.3 8.5.8 2.8-2.1 5.7-2.1 8.5-.8V18.5c-2.8-1.3-5.7-1.3-8.5.8-2.8-2.1-5.7-2.1-8.5-.8Z',
+  ties: 'M8.5 11a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4ZM15.8 11a2.7 2.7 0 1 0 0-5.4 2.7 2.7 0 0 0 0 5.4ZM2.5 19.5c0-3.4 2.6-5.6 6-5.6s6 2.2 6 5.6ZM13.5 19.5c.2-2.5 1-4.5 2.6-4.9 2.6.1 4.9 1.8 5.4 4.9Z'
+};
+
+var LAYOUTS = {
+  phone: { mainH: '852px', pos: 'absolute', top: '100px', bottom: '0px', mt: '0px', ov: 'auto', pb: '130px', footPos: 'absolute' },
+  full: { mainH: 'auto', pos: 'relative', top: '0px', bottom: 'auto', mt: '100px', ov: 'visible', pb: '8px', footPos: 'relative' }
+};
+
+// Where the two links lead; like the palette, both themes share the cute screens.
+var NEXT = { back: 'CertCute', life: 'LiveCute' };
+var LINKS = { light: NEXT, dark: NEXT };
+
+// The figures that count up as the screen opens; the markup keeps their units. Decimals keep their
+// places, and the money ones get their dollar sign here.
+var FIGURES = {
+  age5: 97, age18: 95, age65: 72, lifespan: 71, school: 64, uni: 31,
+  share: 17, people: 1.45, births: 23, cities: 36, income: 10200,
+  inLife: 71, ruLife: 67, inDie: 3, ruDie: 1, inSchool: 12, ruSchool: 16, inIncome: 10, ruIncome: 40
+};
+var MONEY = ['income', 'inIncome', 'ruIncome'];
+
+// Inside the prototype the host passes `nav` and moves between screens itself; on its own an
+// artboard follows plain links.
+function linkTo(self, stem) {
+  return typeof self.props.nav === 'function'
+    ? { href: null, go: () => self.props.nav(stem) }
+    : { href: stem + '.dc.html', go: null };
+}
+var STICKER_STEMS = { people: 'PeopleCute', activities: 'ActivitiesCute', life: 'LiveCute', money: 'MoneyCute', odds: 'OddsLife' };
+function stickerLinks(self) {
+  const out = {};
+  Object.keys(STICKER_STEMS).forEach((k) => { out[k] = linkTo(self, STICKER_STEMS[k]); });
+  return out;
+}
+
+// Bars fill and numbers count up once, as the screen appears.
+var ENTER_MS = 900;
+function startEnter(self) {
+  self.enterAt = Date.now();
+  self.enterTimer = setInterval(() => {
+    const p = Math.min(1, (Date.now() - self.enterAt) / ENTER_MS);
+    self.setState({ enterP: p });
+    if (p >= 1) clearInterval(self.enterTimer);
+  }, 30);
+}
+function entered(self) {
+  const p = (self.state && self.state.enterP) || 0;
+  return 1 - Math.pow(1 - p, 3);
+}
+
+class Component extends DCLogic {
+  componentDidMount() {
+    startEnter(this);
+  }
+  componentWillUnmount() {
+    clearInterval(this.enterTimer);
+  }
+  renderVals() {
+    const theme = this.props.theme === 'dark' ? 'dark' : 'light';
+    const c = COLORS[theme];
+    const k = entered(this);
+    const count = (v) => {
+      const places = (String(v).split('.')[1] || '').length;
+      return (v * k).toLocaleString('en-US', { minimumFractionDigits: places, maximumFractionDigits: places });
+    };
+    const fig = {};
+    Object.keys(FIGURES).forEach((key) => { fig[key] = (MONEY.indexOf(key) >= 0 ? '$' : '') + count(FIGURES[key]); });
+    // Five dots per household, one per fifth of its country, filled up to the family's own fifth.
+    const dot = (on) => ({ bg: on ? c.ink : 'transparent', line: on ? c.ink : c.dotLine });
+    const fifth = (n) => Array.from({ length: 5 }, (_, i) => dot(i < n));
+    // Each stat is ten segments in its own colour; the bar and its number grow in, the meter
+    // reports the final value.
+    const stat = (key, label, v) => ({
+      label: label,
+      v: v,
+      n: Math.round(v * k),
+      w: v * k + '%',
+      color: c[key],
+      icon: ICONS[key],
+      aria: label + ' ' + v + ' of 100',
+      segs: Array.from({ length: 10 }, (_, i) => ({ bg: i < Math.round(v / 10) ? c[key] : c.segOff }))
+    });
+    return {
+      theme: theme,
+      c: c,
+      L: LAYOUTS[this.props.layout] || LAYOUTS.phone,
+      ids: { grain: 'od-grain-' + theme },
+      urls: { grain: 'url(#od-grain-' + theme + ')' },
+      to: { back: linkTo(this, LINKS[theme].back), life: linkTo(this, LINKS[theme].life) },
+      stats: [stat('health', 'Health', 76), stat('joy', 'Happiness', 70), stat('mind', 'Knowledge', 50), stat('ties', 'Relationships', 72)],
+      fig: fig,
+      fifths: { q1: fifth(1), q3: fifth(3), q4: fifth(4) },
+      // The India dots fill in step with their count.
+      share: Array.from({ length: 100 }, (_, i) => dot(i < Math.round(FIGURES.share * k)))
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Your odds</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&amp;family=Figtree:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+main[data-theme=light] a:focus-visible,main[data-theme=light] button:focus-visible{outline:3px solid #17352e;outline-offset:4px}
+main[data-theme=dark] a:focus-visible,main[data-theme=dark] button:focus-visible{outline:3px solid #f6cfe0;outline-offset:4px}
+.od-scroll::-webkit-scrollbar{display:none}
+</style>
+</helmet>
+<main data-theme="{{ theme }}" style="position: relative; width: 393px; height: {{ L.mainH }}; min-height: 852px; overflow: hidden; background: {{ c.bg }}; color: {{ c.ink }}; font-family: Figtree, system-ui, sans-serif">
+<div class="od-scroll" style="position: {{ L.pos }}; left: 0px; right: 0px; top: {{ L.top }}; bottom: {{ L.bottom }}; margin-top: {{ L.mt }}; overflow-y: {{ L.ov }}; scrollbar-width: none; box-sizing: border-box; padding: 6px 22px {{ L.pb }}">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="flex: none; width: 48px; height: 48px; border-radius: 24px; overflow: hidden; background: {{ c.babyBg }}"><img src="/_blob/288778d3b88098142d309840ced390ca" alt="" style="display: block; width: 48px; height: 54px; margin-top: -2px"></span>
+<span style="min-width: 0"><span style="display: block; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 20px; font-weight: 800; line-height: 1.15; letter-spacing: -0.3px">Aarav Srivastava</span><span style="display: block; margin-top: 2px; font-size: 13px; line-height: 1.35; color: {{ c.muted }}">Born 14 March 2026 · Lucknow, India</span></span>
+</div>
+<h2 style="margin: 22px 0 0; font-size: 11px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.muted }}">Starting stats</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 18px; margin-top: 10px">
+<sc-for list="{{ stats }}" as="st" hint-placeholder-count="4">
+<div aria-label="{{ st.aria }}">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 6px">
+<span style="display: flex; align-items: center; gap: 6px; min-width: 0; font-size: 13px; font-weight: 600; line-height: 1.2; color: {{ c.muted }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{ st.color }}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="{{ st.icon }}"></path></svg>{{ st.label }}</span>
+<span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 17px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums">{{ st.v }}</span>
+</div>
+<div aria-hidden="true" style="display: flex; gap: 3px; margin-top: 7px">
+<sc-for list="{{ st.segs }}" as="sg" hint-placeholder-count="10"><span style="flex: 1; height: 10px; border-radius: 3px; background: {{ sg.bg }}"></span></sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+<h2 style="margin: 24px 0 0; font-size: 11px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.muted }}">Your odds</h2>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 10px">
+<div style="padding: 10px; border-radius: 12px; background: {{ c.tile }}"><p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 20px; font-weight: 800; line-height: 1">97%</p><p style="margin: 4px 0 0; font-size: 12px; line-height: 1.25; color: {{ c.muted }}">reach age 5</p></div>
+<div style="padding: 10px; border-radius: 12px; background: {{ c.tile }}"><p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 20px; font-weight: 800; line-height: 1">95%</p><p style="margin: 4px 0 0; font-size: 12px; line-height: 1.25; color: {{ c.muted }}">reach 18</p></div>
+<div style="padding: 10px; border-radius: 12px; background: {{ c.tile }}"><p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 20px; font-weight: 800; line-height: 1">72%</p><p style="margin: 4px 0 0; font-size: 12px; line-height: 1.25; color: {{ c.muted }}">reach 65</p></div>
+<div style="padding: 10px; border-radius: 12px; background: {{ c.tile }}"><p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 20px; font-weight: 800; line-height: 1">71<span style="font-size: 12px"> yrs</span></p><p style="margin: 4px 0 0; font-size: 12px; line-height: 1.25; color: {{ c.muted }}">expected lifespan</p></div>
+<div style="padding: 10px; border-radius: 12px; background: {{ c.tile }}"><p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 20px; font-weight: 800; line-height: 1">64%</p><p style="margin: 4px 0 0; font-size: 12px; line-height: 1.25; color: {{ c.muted }}">finish school</p></div>
+<div style="padding: 10px; border-radius: 12px; background: {{ c.tile }}"><p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 20px; font-weight: 800; line-height: 1">31%</p><p style="margin: 4px 0 0; font-size: 12px; line-height: 1.25; color: {{ c.muted }}">go to university</p></div>
+</div>
+<h2 style="margin: 24px 0 0; font-size: 11px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.muted }}">Born in India</h2>
+<div style="display: flex; align-items: center; gap: 14px; margin-top: 10px">
+<div role="img" aria-label="17 of every 100 babies born today are born in India" style="flex: none; display: grid; grid-template-columns: repeat(10, 7px); gap: 4px">
+<sc-for list="{{ share }}" as="d" hint-placeholder-count="100"><span style="display: block; width: 7px; height: 7px; box-sizing: border-box; border-radius: 4px; border: 1.2px solid {{ d.line }}; background: {{ d.bg }}"></span></sc-for>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.45"><strong style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 20px; font-weight: 800">17 of 100</strong><br>babies born today are born in India, about 1 in 6.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 12px">
+<div style="padding: 8px 0; border-top: 1px solid {{ c.hair }}"><p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 18px; font-weight: 800; line-height: 1.15">1.45 bn</p><p style="margin: 2px 0 0; font-size: 12px; line-height: 1.3; color: {{ c.muted }}">people</p></div>
+<div style="padding: 8px 0; border-top: 1px solid {{ c.hair }}"><p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 18px; font-weight: 800; line-height: 1.15">23 m</p><p style="margin: 2px 0 0; font-size: 12px; line-height: 1.3; color: {{ c.muted }}">babies born a year</p></div>
+<div style="padding: 8px 0; border-top: 1px solid {{ c.hair }}"><p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 18px; font-weight: 800; line-height: 1.15">36%</p><p style="margin: 2px 0 0; font-size: 12px; line-height: 1.3; color: {{ c.muted }}">live in cities</p></div>
+<div style="padding: 8px 0; border-top: 1px solid {{ c.hair }}"><p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 18px; font-weight: 800; line-height: 1.15">$10,200</p><p style="margin: 2px 0 0; font-size: 12px; line-height: 1.3; color: {{ c.muted }}">income per person, PPP</p></div>
+</div>
+<div style="display: flex; gap: 10px; margin-top: 8px; padding: 12px; border-radius: 12px; background: {{ c.tile }}">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><path d="M12 21s-6.5-5.8-6.5-11a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11-6.5 11Z"></path><circle cx="12" cy="10" r="2.3"></circle></svg>
+<p style="margin: 0; font-size: 13px; line-height: 1.45"><strong style="font-weight: 700">Lucknow, Uttar Pradesh.</strong> A city birth. About half of the world’s babies are born in villages.</p>
+</div>
+<h2 style="margin: 24px 0 0; font-size: 11px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.muted }}">Born the same second</h2>
+<ul style="list-style: none; margin: 2px 0 0; padding: 0">
+<li style="display: flex; align-items: center; gap: 12px; min-height: 46px; border-bottom: 1px solid {{ c.hair }}"><span style="flex: 1; min-width: 0"><span style="display: block; font-size: 14px; font-weight: 600; line-height: 1.3">Chen Yu</span><span style="display: block; font-size: 12px; line-height: 1.35; color: {{ c.muted }}">Girl · Chongqing, China</span></span><span aria-label="Household: 4th fifth of 5" style="display: flex; gap: 4px"><sc-for list="{{ fifths.q4 }}" as="d" hint-placeholder-count="5"><span style="width: 8px; height: 8px; box-sizing: border-box; border-radius: 4px; border: 1.5px solid {{ d.line }}; background: {{ d.bg }}"></span></sc-for></span></li>
+<li style="display: flex; align-items: center; gap: 12px; min-height: 46px; border-bottom: 1px solid {{ c.hair }}"><span style="flex: 1; min-width: 0"><span style="display: block; font-size: 14px; font-weight: 600; line-height: 1.3">Amina Bello</span><span style="display: block; font-size: 12px; line-height: 1.35; color: {{ c.muted }}">Girl · a village near Kano, Nigeria</span></span><span aria-label="Household: 1st fifth of 5" style="display: flex; gap: 4px"><sc-for list="{{ fifths.q1 }}" as="d" hint-placeholder-count="5"><span style="width: 8px; height: 8px; box-sizing: border-box; border-radius: 4px; border: 1.5px solid {{ d.line }}; background: {{ d.bg }}"></span></sc-for></span></li>
+<li style="display: flex; align-items: center; gap: 12px; min-height: 46px; border-bottom: 1px solid {{ c.hair }}"><span style="flex: 1; min-width: 0"><span style="display: block; font-size: 14px; font-weight: 600; line-height: 1.3">Lucas Oliveira</span><span style="display: block; font-size: 12px; line-height: 1.35; color: {{ c.muted }}">Boy · Recife, Brazil</span></span><span aria-label="Household: 3rd fifth of 5" style="display: flex; gap: 4px"><sc-for list="{{ fifths.q3 }}" as="d" hint-placeholder-count="5"><span style="width: 8px; height: 8px; box-sizing: border-box; border-radius: 4px; border: 1.5px solid {{ d.line }}; background: {{ d.bg }}"></span></sc-for></span></li>
+<li style="display: flex; align-items: center; gap: 12px; min-height: 46px"><span style="flex: 1; min-width: 0"><span style="display: block; font-size: 14px; font-weight: 600; line-height: 1.3">Emma Schulz</span><span style="display: block; font-size: 12px; line-height: 1.35; color: {{ c.muted }}">Girl · Leipzig, Germany</span></span><span aria-label="Household: 4th fifth of 5" style="display: flex; gap: 4px"><sc-for list="{{ fifths.q4 }}" as="d" hint-placeholder-count="5"><span style="width: 8px; height: 8px; box-sizing: border-box; border-radius: 4px; border: 1.5px solid {{ d.line }}; background: {{ d.bg }}"></span></sc-for></span></li>
+</ul>
+<p style="margin: 6px 0 0; font-size: 12px; line-height: 1.35; color: {{ c.muted }}">Dots: household wealth, in fifths of each country.</p>
+<h2 style="margin: 24px 0 0; font-size: 11px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.muted }}">If you’d been born in Russia</h2>
+<table style="width: 100%; margin-top: 4px; border-collapse: collapse; font-size: 14px; line-height: 1.3">
+<thead><tr><th scope="col" style="padding: 6px 0; text-align: left; font-size: 11px; font-weight: 600; color: {{ c.muted }}">For a boy</th><th scope="col" style="padding: 6px 0; text-align: right; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: {{ c.muted }}">India</th><th scope="col" style="padding: 6px 0; text-align: right; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: {{ c.muted }}">Russia</th></tr></thead>
+<tbody>
+<tr style="border-top: 1px solid {{ c.hair }}"><th scope="row" style="padding: 8px 0; text-align: left; font-weight: 400; color: {{ c.muted }}">Expected lifespan</th><td style="padding: 8px 0; text-align: right; font-weight: 700">71 yrs</td><td style="padding: 8px 0; text-align: right">67 yrs</td></tr>
+<tr style="border-top: 1px solid {{ c.hair }}"><th scope="row" style="padding: 8px 0; text-align: left; font-weight: 400; color: {{ c.muted }}">Die before age 5</th><td style="padding: 8px 0; text-align: right; font-weight: 700">3 in 100</td><td style="padding: 8px 0; text-align: right">1 in 200</td></tr>
+<tr style="border-top: 1px solid {{ c.hair }}"><th scope="row" style="padding: 8px 0; text-align: left; font-weight: 400; color: {{ c.muted }}">Years at school</th><td style="padding: 8px 0; text-align: right; font-weight: 700">12</td><td style="padding: 8px 0; text-align: right">16</td></tr>
+<tr style="border-top: 1px solid {{ c.hair }}; border-bottom: 1px solid {{ c.hair }}"><th scope="row" style="padding: 8px 0; text-align: left; font-weight: 400; color: {{ c.muted }}">Income per person</th><td style="padding: 8px 0; text-align: right; font-weight: 700">$10k</td><td style="padding: 8px 0; text-align: right">$40k</td></tr>
+</tbody>
+</table>
+</div>
+<header style="position: absolute; left: 0px; right: 0px; top: 0px; height: 100px; background: {{ c.bg }}">
+<a href="{{ backHref }}" aria-label="Back to the certificate" style="position: absolute; left: 16px; top: 46px; width: 44px; height: 44px; box-sizing: border-box; border: 1.5px solid {{ c.dialLine }}; border-radius: 22px; background: {{ c.dialBg }}; color: {{ c.ink }}; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></a>
+<h1 style="position: absolute; left: 72px; right: 72px; top: 56px; margin: 0; text-align: center; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 18px; font-weight: 800; line-height: 24px">Your start in life</h1>
+</header>
+<div style="position: {{ L.footPos }}; left: 0px; right: 0px; bottom: 0px; display: flex; justify-content: center; padding: 36px 0 32px; background: {{ c.footFade }}">
+<a href="{{ lifeHref }}" style="display: flex; align-items: center; justify-content: space-between; width: 204px; min-height: 64px; box-sizing: border-box; padding: 0 8px 0 26px; border-radius: 32px; background: {{ c.btnBg }}; color: {{ c.btnInk }}; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 20px; font-weight: 800; text-decoration: none">Start life<span style="width: 48px; height: 48px; border-radius: 24px; background: {{ c.btnDot }}; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ c.btnArrow }}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
+</div>
+<svg width="100%" height="100%" aria-hidden="true" style="position: absolute; left: 0px; top: 0px; pointer-events: none; mix-blend-mode: {{ c.grainBlend }}; opacity: {{ c.grainOp }}">
+<filter id="{{ ids.grain }}"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
+<rect width="100%" height="100%" filter="{{ urls.grain }}"></rect>
+</svg>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"layout":{"editor":"enum","options":["phone","full"],"default":"phone"},"$preview":{"width":393,"height":852}}'>
+// Everything about the start of this life that a birth record doesn't hold: starting stats first,
+// then odds, the country, the babies born the same second and the player's real country.
+// Opened from the certificate now; later it can open from the life screen too.
+// `layout: full` lays the whole scroll out at once for review on the canvas.
+var COLORS = {
+  light: {
+    bg: '#f4ede1', ink: '#17352e', muted: '#4e5f58',
+    tile: 'rgba(23,53,46,0.06)', hair: 'rgba(23,53,46,0.12)', dotLine: 'rgba(23,53,46,0.35)', segOff: 'rgba(23,53,46,0.1)',
+    health: '#d6566a', joy: '#e39b2d', mind: '#5b6ee1', ties: '#2f9e83',
+    babyBg: '#fbe7be', dialBg: 'rgba(255,255,255,0.5)', dialLine: 'rgba(23,53,46,0.16)',
+    footFade: 'linear-gradient(rgba(244,237,225,0) 0%, #f4ede1 45%)',
+    btnBg: '#e5533c', btnInk: '#ffffff', btnDot: '#17352e', btnArrow: '#ffffff',
+    grainBlend: 'multiply', grainOp: 0.16
+  },
+  dark: {
+    bg: '#18171c', ink: '#f6f1ea', muted: '#a9a3b8',
+    tile: 'rgba(255,255,255,0.05)', hair: 'rgba(246,241,234,0.1)', dotLine: 'rgba(246,241,234,0.4)', segOff: 'rgba(246,241,234,0.1)',
+    health: '#ff8fa3', joy: '#ffc66d', mind: '#9eabff', ties: '#6fd8bd',
+    babyBg: 'rgba(242,215,166,0.18)', dialBg: 'rgba(255,255,255,0.04)', dialLine: 'rgba(246,241,234,0.16)',
+    footFade: 'linear-gradient(rgba(24,23,28,0) 0%, #18171c 45%)',
+    btnBg: '#f6cfe0', btnInk: '#18171c', btnDot: '#18171c', btnArrow: '#f6cfe0',
+    grainBlend: 'overlay', grainOp: 0.28
+  }
+};
+
+var ICONS = {
+  health: 'M12 19.5s-7-4.3-7-9.6A3.9 3.9 0 0 1 12 7.6a3.9 3.9 0 0 1 7 2.3c0 5.3-7 9.6-7 9.6Z',
+  joy: 'M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4',
+  mind: 'M4 6.5c2.6-1.2 5.3-1.2 8 .8 2.7-2 5.4-2 8-.8V18c-2.6-1.2-5.3-1.2-8 .8-2.7-2-5.4-2-8-.8ZM12 7.3v11.5',
+  ties: 'M9 11a3 3 0 1 0 0-6a3 3 0 1 0 0 6M3 19c0-3.3 2.7-5 6-5s6 1.7 6 5M16 11a2.5 2.5 0 1 0 0-5M17 14c2.4.3 4 1.9 4 4.5'
+};
+
+var LAYOUTS = {
+  phone: { mainH: '852px', pos: 'absolute', top: '100px', bottom: '0px', mt: '0px', ov: 'auto', pb: '130px', footPos: 'absolute' },
+  full: { mainH: 'auto', pos: 'relative', top: '0px', bottom: 'auto', mt: '100px', ov: 'visible', pb: '8px', footPos: 'relative' }
+};
+
+class Component extends DCLogic {
+  renderVals() {
+    const theme = this.props.theme === 'dark' ? 'dark' : 'light';
+    const c = COLORS[theme];
+    // Five dots per household, one per fifth of its country, filled up to the family's own fifth.
+    const dot = (on) => ({ bg: on ? c.ink : 'transparent', line: on ? c.ink : c.dotLine });
+    const fifth = (n) => Array.from({ length: 5 }, (_, i) => dot(i < n));
+    // Each stat is ten segments in its own colour.
+    const stat = (key, label, v) => ({
+      label: label,
+      v: v,
+      color: c[key],
+      icon: ICONS[key],
+      aria: label + ' ' + v + ' of 100',
+      segs: Array.from({ length: 10 }, (_, i) => ({ bg: i < Math.round(v / 10) ? c[key] : c.segOff }))
+    });
+    return {
+      theme: theme,
+      c: c,
+      L: LAYOUTS[this.props.layout] || LAYOUTS.phone,
+      ids: { grain: 'od-grain-' + theme },
+      urls: { grain: 'url(#od-grain-' + theme + ')' },
+      backHref: theme === 'dark' ? 'CertDark.dc.html' : 'Cert.dc.html',
+      lifeHref: theme === 'dark' ? 'LiveDark.dc.html' : 'Live.dc.html',
+      stats: [stat('health', 'Health', 76), stat('joy', 'Happiness', 70), stat('mind', 'Knowledge', 50), stat('ties', 'Relationships', 72)],
+      fifths: { q1: fifth(1), q3: fifth(3), q4: fifth(4) },
+      share: Array.from({ length: 100 }, (_, i) => dot(i < 17))
+    };
+  }
+}
+</script>
+</body>
+</html>

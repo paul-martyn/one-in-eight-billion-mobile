@@ -1,11 +1,16 @@
+import { useEffect } from 'react';
 import { PortraitShell } from '../components/PortraitShell';
-import { FoundationScreen } from '../screens/FoundationScreen';
-import { foundationFixture } from '../fixtures/foundation';
+import { GameProvider } from '../adapters/useGame';
+import { FlowHost } from '../flow/FlowHost';
+import { adapter, startBoot } from './game';
 
 export function App() {
+  useEffect(() => { void startBoot(); }, []);
   return (
     <PortraitShell>
-      <FoundationScreen model={foundationFixture} />
+      <GameProvider adapter={adapter}>
+        <FlowHost />
+      </GameProvider>
     </PortraitShell>
   );
 }

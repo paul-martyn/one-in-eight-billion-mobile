@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Prototype</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800&amp;family=Patrick+Hand&amp;display=swap">
+<style>
+body{margin:0}
+.pt-side button:focus-visible{outline:3px solid #2593a3;outline-offset:2px}
+@keyframes pt-fade-in{from{opacity:0}to{opacity:1}}
+@keyframes pt-push-in{from{transform:translateX(100%)}to{transform:translateX(0)}}
+@keyframes pt-push-out{from{transform:translateX(0);filter:brightness(1)}to{transform:translateX(-30%);filter:brightness(0.8)}}
+@keyframes pt-pop-in{from{transform:translateX(-30%);filter:brightness(0.8)}to{transform:translateX(0);filter:brightness(1)}}
+@keyframes pt-pop-out{from{transform:translateX(0)}to{transform:translateX(100%)}}
+@keyframes pt-rise-in{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes pt-zoom-in{from{opacity:0;transform:scale(1.08)}to{opacity:1;transform:scale(1)}}
+</style>
+</helmet>
+<div style="position: relative; width: 720px; height: 852px; background: #efe2c8; font-family: Fredoka, Nunito, system-ui, sans-serif; color: #4a2c17">
+<div style="position: absolute; left: 0px; top: 0px; width: 393px; height: 852px; overflow: hidden; border-radius: 32px; background: #f2e3c6; box-shadow: 0 0 0 2px #7b4b2a, 0 10px 30px rgba(90,52,24,0.25)">
+<sc-if value="{{ L.LangCute.on }}" hint-placeholder-val="{{ true }}">
+<div style="position: absolute; left: 0px; top: 0px; width: 393px; height: 852px; z-index: {{ L.LangCute.z }}; animation: {{ L.LangCute.anim }}; pointer-events: {{ L.LangCute.pe }}"><dc-import name="LangCute" nav="{{ L.LangCute.nav }}" hint-size="393px,852px"></dc-import></div>
+</sc-if>
+<sc-if value="{{ L.StartCute.on }}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 0px; top: 0px; width: 393px; height: 852px; z-index: {{ L.StartCute.z }}; animation: {{ L.StartCute.anim }}; pointer-events: {{ L.StartCute.pe }}"><dc-import name="StartCute" nav="{{ L.StartCute.nav }}" hint-size="393px,852px"></dc-import></div>
+</sc-if>
+<sc-if value="{{ L.RollCute.on }}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 0px; top: 0px; width: 393px; height: 852px; z-index: {{ L.RollCute.z }}; animation: {{ L.RollCute.anim }}; pointer-events: {{ L.RollCute.pe }}"><dc-import name="RollCute" nav="{{ L.RollCute.nav }}" hint-size="393px,852px"></dc-import></div>
+</sc-if>
+<sc-if value="{{ L.CertCute.on }}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 0px; top: 0px; width: 393px; height: 852px; z-index: {{ L.CertCute.z }}; animation: {{ L.CertCute.anim }}; pointer-events: {{ L.CertCute.pe }}"><dc-import name="CertCute" frame="{{ certFrame }}" nav="{{ L.CertCute.nav }}" hint-size="393px,852px"></dc-import></div>
+</sc-if>
+<sc-if value="{{ L.OddsCute.on }}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 0px; top: 0px; width: 393px; height: 852px; z-index: {{ L.OddsCute.z }}; animation: {{ L.OddsCute.anim }}; pointer-events: {{ L.OddsCute.pe }}"><dc-import name="OddsCute" nav="{{ L.OddsCute.nav }}" hint-size="393px,852px"></dc-import></div>
+</sc-if>
+<sc-if value="{{ L.LiveCute.on }}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 0px; top: 0px; width: 393px; height: 852px; z-index: {{ L.LiveCute.z }}; animation: {{ L.LiveCute.anim }}; pointer-events: {{ L.LiveCute.pe }}"><dc-import name="LiveCute" frame="{{ lifeFrame }}" nav="{{ L.LiveCute.nav }}" hint-size="393px,852px"></dc-import></div>
+</sc-if>
+<sc-if value="{{ L.PeopleCute.on }}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 0px; top: 0px; width: 393px; height: 852px; z-index: {{ L.PeopleCute.z }}; animation: {{ L.PeopleCute.anim }}; pointer-events: {{ L.PeopleCute.pe }}"><dc-import name="PeopleCute" nav="{{ L.PeopleCute.nav }}" hint-size="393px,852px"></dc-import></div>
+</sc-if>
+<sc-if value="{{ L.ActivitiesCute.on }}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 0px; top: 0px; width: 393px; height: 852px; z-index: {{ L.ActivitiesCute.z }}; animation: {{ L.ActivitiesCute.anim }}; pointer-events: {{ L.ActivitiesCute.pe }}"><dc-import name="ActivitiesCute" nav="{{ L.ActivitiesCute.nav }}" hint-size="393px,852px"></dc-import></div>
+</sc-if>
+<sc-if value="{{ L.MoneyCute.on }}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 0px; top: 0px; width: 393px; height: 852px; z-index: {{ L.MoneyCute.z }}; animation: {{ L.MoneyCute.anim }}; pointer-events: {{ L.MoneyCute.pe }}"><dc-import name="MoneyCute" nav="{{ L.MoneyCute.nav }}" hint-size="393px,852px"></dc-import></div>
+</sc-if>
+<sc-if value="{{ L.OddsLife.on }}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 0px; top: 0px; width: 393px; height: 852px; z-index: {{ L.OddsLife.z }}; animation: {{ L.OddsLife.anim }}; pointer-events: {{ L.OddsLife.pe }}"><dc-import name="OddsLife" nav="{{ L.OddsLife.nav }}" hint-size="393px,852px"></dc-import></div>
+</sc-if>
+<sc-if value="{{ L.EndCute.on }}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 0px; top: 0px; width: 393px; height: 852px; z-index: {{ L.EndCute.z }}; animation: {{ L.EndCute.anim }}; pointer-events: {{ L.EndCute.pe }}"><dc-import name="EndCute" nav="{{ L.EndCute.nav }}" hint-size="393px,852px"></dc-import></div>
+</sc-if>
+<sc-if value="{{ L.HubCute.on }}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 0px; top: 0px; width: 393px; height: 852px; z-index: {{ L.HubCute.z }}; animation: {{ L.HubCute.anim }}; pointer-events: {{ L.HubCute.pe }}"><dc-import name="HubCute" rewards="{{ hubRewards }}" nav="{{ L.HubCute.nav }}" hint-size="393px,852px"></dc-import></div>
+</sc-if>
+</div>
+<aside class="pt-side" lang="ru" style="position: absolute; left: 425px; top: 0px; width: 295px; height: 852px; box-sizing: border-box; padding: 4px 0 0">
+<h1 style="margin: 0; font-size: 26px; font-weight: 700; line-height: 32px; color: #5a3418">Прототип</h1>
+<p style="margin: 6px 0 0; font-size: 13.5px; font-weight: 500; line-height: 1.4; color: #7b4b2a">Нажимайте кнопки прямо на экране. В жизни: пауза → «Skip to the end» — жизнь останавливается, её накрывает экран смерти; удерживайте палец на пустом месте, чтобы ещё раз взглянуть на жизнь, «Look back» ведёт к итогам. Из итогов «To the hub»: в хабе попап с наградами за жизнь, «Claim» отправляет их в счётчики, а портрет — во вкладку Lives. «Be Born!» начинает новую жизнь.</p>
+<p role="status" style="display: flex; align-items: center; gap: 8px; margin: 14px 0 0; padding: 8px 12px; border: 2px solid #7b4b2a; border-radius: 12px; background: #fff3d6; font-size: 14px; font-weight: 600"><span style="color: #8a5a35">Сейчас:</span><b style="font-weight: 700">{{ curName }}</b></p>
+<sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
+<div>
+<h2 style="margin: 16px 0 6px; font-size: 12px; font-weight: 700; line-height: 16px; letter-spacing: 0.06em; text-transform: uppercase; color: #8a5a35">{{ g.title }}</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{ g.items }}" as="it" hint-placeholder-count="4">
+<button type="button" onClick="{{ it.pick }}" aria-current="{{ it.cur }}" style="height: 34px; box-sizing: border-box; padding: 0 12px; border: 2px solid #7b4b2a; border-radius: 10px; background: {{ it.bg }}; box-shadow: inset 0 -3px 0 rgba(90,52,24,0.22); font-family: inherit; font-size: 13.5px; font-weight: 600; color: #4a2c17; cursor: pointer">{{ it.label }}</button>
+</sc-for>
+</div>
+</div>
+</sc-for>
+<button type="button" onClick="{{ restart }}" style="display: flex; align-items: center; gap: 8px; margin-top: 22px; height: 40px; box-sizing: border-box; padding: 0 16px; border: 2px solid #7b4b2a; border-radius: 12px; background: #ffd75a; box-shadow: inset 0 -3px 0 rgba(90,52,24,0.22), inset 0 3px 0 rgba(255,255,255,0.5); font-family: inherit; font-size: 15px; font-weight: 700; color: #4a2c17; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5a3418" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.34-5.66"></path><path d="M4 4v4.5h4.5"></path></svg>Сначала: первый запуск</button>
+<p style="margin: 18px 0 0; font-size: 12.5px; font-weight: 500; line-height: 1.45; color: #8a5a35">Только светлая тема, без игровой логики: экраны переходят друг в друга, бары и цифры анимируются при появлении. Карта всех переходов — артборд «Flow map».</p>
+</aside>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":720,"height":852}}'>
+// The whole app in one phone, light theme, no game logic: every production screen is mounted
+// here and its buttons call `nav(stem)` instead of following links, so the host can move between
+// screens with a transition. The side panel jumps anywhere and restarts the first launch.
+// Transitions: setup screens fade or push sideways, the certificate rises from below, a new life
+// zooms in, tabs of the life cross-fade quickly (the sticker menu stays put), and the hub's own
+// Be Born! animation hands over to the birth roll with the planet in the same place. A life ends
+// inside the life screen (its death screen); the summary rises from below, and back in the hub the
+// life's rewards fly into the counters.
+var START = 'LangCute';
+var STEMS = ['LangCute', 'StartCute', 'RollCute', 'CertCute', 'OddsCute', 'LiveCute', 'PeopleCute', 'ActivitiesCute', 'MoneyCute', 'OddsLife', 'EndCute', 'HubCute'];
+var LIFE_TABS = ['LiveCute', 'PeopleCute', 'ActivitiesCute', 'MoneyCute', 'OddsLife'];
+var EASE = 'cubic-bezier(.22,1,.36,1)';
+// in / out: the arriving and the leaving screen; top: whether the arriving one is drawn above.
+var TRANS = {
+  fade: { ms: 380, top: true, in: 'pt-fade-in 380ms ease both', out: 'none' },
+  tab: { ms: 220, top: true, in: 'pt-fade-in 220ms ease both', out: 'none' },
+  push: { ms: 440, top: true, in: 'pt-push-in 440ms ' + EASE + ' both', out: 'pt-push-out 440ms ' + EASE + ' both' },
+  pop: { ms: 440, top: false, in: 'pt-pop-in 440ms ' + EASE + ' both', out: 'pt-pop-out 440ms ' + EASE + ' both' },
+  rise: { ms: 520, top: true, in: 'pt-rise-in 520ms ' + EASE + ' both', out: 'none' },
+  zoom: { ms: 480, top: true, in: 'pt-zoom-in 480ms ease-out both', out: 'none' }
+};
+var NAMES = {
+  LangCute: 'Язык и валюта', StartCute: 'Старт', RollCute: 'Выбор страны', CertCute: 'Свидетельство', OddsCute: 'Ваши шансы',
+  LiveCute: 'Жизнь', PeopleCute: 'People', ActivitiesCute: 'Activities', MoneyCute: 'Money', OddsLife: 'Odds', EndCute: 'Итоги жизни', HubCute: 'Хаб'
+};
+// Screens that are the life screen in another state.
+var ALIAS = { LiveCuteDied: { stem: 'LiveCute', frame: 'died', name: 'Смерть' } };
+var GROUPS = [
+  { title: 'Первый запуск', items: ['LangCute', 'StartCute', 'RollCute', 'CertCute', 'OddsCute'] },
+  { title: 'Жизнь', items: ['LiveCute', 'PeopleCute', 'ActivitiesCute', 'MoneyCute', 'OddsLife'] },
+  { title: 'Конец жизни', items: ['LiveCuteDied', 'EndCute'] },
+  { title: 'Между жизнями', items: ['HubCute'] }
+];
+
+function kindFor(from, to) {
+  if (LIFE_TABS.indexOf(from) >= 0 && LIFE_TABS.indexOf(to) >= 0) return 'tab';
+  if (from === 'RollCute' && to === 'CertCute') return 'rise';
+  if (from === 'CertCute' && to === 'OddsCute') return 'push';
+  if (from === 'OddsCute' && to === 'CertCute') return 'pop';
+  if (from === 'HubCute' && to === 'LangCute') return 'push';
+  if (from === 'LangCute' && to === 'HubCute') return 'pop';
+  if (to === 'LiveCute' && (from === 'CertCute' || from === 'OddsCute')) return 'zoom';
+  if (to === 'EndCute') return 'rise';
+  return 'fade';
+}
+
+class Component extends DCLogic {
+  componentWillUnmount() {
+    clearTimeout(this.done);
+  }
+  go(stem, kind) {
+    const st = this.state || {};
+    const from = st.cur || START;
+    const alias = ALIAS[stem];
+    const target = alias ? alias.stem : stem;
+    // Language opened from the hub's settings returns to the hub (its Continue, not the side panel).
+    const to = !kind && from === 'LangCute' && target === 'StartCute' && st.langFromHub ? 'HubCute' : target;
+    // A life that starts from the certificate or the odds opens on Dad's question.
+    const lifeFrame = alias ? alias.frame : to === 'LiveCute' ? (from === 'CertCute' || from === 'OddsCute' ? 'decision' : 'journal') : st.lifeFrame;
+    if (STEMS.indexOf(to) < 0) return;
+    if (to === from) {
+      // The same screen in another state starts afresh: take it away for a moment, then back.
+      if (to !== 'LiveCute' || lifeFrame === st.lifeFrame) return;
+      clearTimeout(this.done);
+      this.setState({ cur: null, prev: null });
+      this.done = setTimeout(() => this.setState({ cur: to, prev: null, kind: 'fade', lifeFrame: lifeFrame }), 30);
+      return;
+    }
+    const k = kind || kindFor(from, to);
+    clearTimeout(this.done);
+    this.setState({
+      cur: to, prev: from, kind: k,
+      langFromHub: to === 'LangCute' ? from === 'HubCute' : to === 'HubCute' ? false : st.langFromHub,
+      lifeFrame: lifeFrame,
+      // Back from a finished life the hub receives its rewards.
+      hubRewards: to === 'HubCute' ? (from === 'EndCute' ? 'on' : 'off') : st.hubRewards,
+      // Back from the odds, the certificate is already filled in rather than born again.
+      certFrame: to === 'CertCute' ? (from === 'OddsCute' ? 'certificate' : 'play') : st.certFrame
+    });
+    this.done = setTimeout(() => this.setState({ prev: null }), TRANS[k].ms + 40);
+  }
+  renderVals() {
+    const st = this.state || {};
+    const cur = st.cur === null ? null : st.cur || START;
+    const prev = st.prev || null;
+    const t = TRANS[st.kind || 'fade'];
+    const L = {};
+    STEMS.forEach((s) => {
+      const isCur = s === cur, isPrev = s === prev;
+      L[s] = {
+        on: isCur || isPrev,
+        z: isCur === t.top ? 2 : 1,
+        anim: !prev ? 'none' : isCur ? t.in : isPrev ? t.out : 'none',
+        pe: isCur ? 'auto' : 'none',
+        // Only the screen on top may move on: a leaving one's late timer (the hub's Be Born) is ignored.
+        nav: (stem) => { if (((this.state || {}).cur || START) === s) this.go(stem); }
+      };
+    });
+    return {
+      L: L,
+      lifeFrame: st.lifeFrame || 'journal',
+      certFrame: st.certFrame || 'play',
+      hubRewards: st.hubRewards || 'off',
+      curName: cur === 'LiveCute' && st.lifeFrame === 'died' ? ALIAS.LiveCuteDied.name : NAMES[cur] || '…',
+      groups: GROUPS.map((g) => ({
+        title: g.title,
+        items: g.items.map((s) => {
+          const a = ALIAS[s];
+          const here = a ? cur === a.stem && st.lifeFrame === a.frame : s === cur && !(s === 'LiveCute' && st.lifeFrame === 'died');
+          return { label: a ? a.name : NAMES[s], cur: here ? 'page' : 'false', bg: here ? '#ffd75a' : '#fffaf0', pick: () => this.go(s, 'fade') };
+        })
+      })),
+      restart: () => { clearTimeout(this.done); this.setState({ cur: START, prev: cur === START ? null : cur, kind: 'fade', langFromHub: false }); this.done = setTimeout(() => this.setState({ prev: null }), TRANS.fade.ms + 40); }
+    };
+  }
+}
+</script>
+</body>
+</html>

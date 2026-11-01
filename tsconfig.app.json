@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2023",
-    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2023",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "module": "ESNext",
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
@@ -15,8 +19,13 @@
     "allowImportingTsExtensions": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "types": ["vite/client"],
-    "tsBuildInfoFile": "./node_modules/.cache/tsconfig.app.tsbuildinfo"
+    "types": [
+      "vite/client"
+    ],
+    "tsBuildInfoFile": "./node_modules/.cache/tsconfig.app.tsbuildinfo",
+    "resolveJsonModule": true
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

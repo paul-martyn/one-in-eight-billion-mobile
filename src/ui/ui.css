@@ -1,0 +1,112 @@
+/* Общие элементы (размеры и цвета — из макетов холста, см. src/design/tokens.json). */
+.chunky {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-width: 230px; height: 64px; padding: 0 24px;
+  border: 2px solid var(--line); border-radius: 18px; background: var(--cta);
+  box-shadow: inset 0 -4px 0 rgba(90, 52, 24, 0.22), inset 0 4px 0 rgba(255, 255, 255, 0.5);
+  transition: transform 0.08s ease, filter 0.15s ease;
+}
+.chunky--green { background: var(--cta-green); }
+.chunky:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
+.chunky:disabled { filter: grayscale(0.6) opacity(0.6); }
+.chunky__label { font-size: 22px; font-weight: 700; line-height: 1; }
+[dir='rtl'] .chunky { flex-direction: row-reverse; }
+
+.soft-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 18px;
+  border: 2px solid var(--line); border-radius: 16px; background: var(--card); box-shadow: var(--lip);
+  color: var(--ink); font-size: 16px; font-weight: 700;
+}
+.soft-btn:active:not(:disabled) { transform: translateY(1px); }
+
+.round-btn {
+  display: grid; place-items: center; width: 42px; height: 42px; padding: 0;
+  border: 2px solid var(--line); border-radius: 50%; background: var(--card); box-shadow: var(--lip); color: var(--line);
+}
+.round-btn:active:not(:disabled) { transform: scale(0.94); }
+.round-btn:disabled { opacity: 0.55; }
+
+.ribbon { position: relative; display: inline-flex; justify-content: center; }
+.ribbon__body {
+  position: relative; z-index: 1; margin: 0; min-width: 150px; height: 42px; padding: 0 22px;
+  display: grid; place-items: center; border: 2.5px solid var(--line); border-radius: 9px; background: var(--teal);
+  box-shadow: inset 0 4px 0 rgba(255, 255, 255, 0.3); font-size: 21px; font-weight: 700; white-space: nowrap;
+}
+.ribbon__tail { position: absolute; top: 10px; z-index: 0; }
+.ribbon__tail--l { left: -20px; }
+.ribbon__tail--r { right: -20px; }
+
+.meter { min-width: 0; }
+.meter__label { margin: 0; font-size: 10px; font-weight: 600; line-height: 13px; color: #7b4b2a; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.meter__bar { position: relative; margin-top: 2px; border: 2px solid var(--line); border-radius: 5px; background: var(--track); overflow: hidden; }
+.meter__fill { position: absolute; inset: 0 auto 0 0; box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.45); transition: width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.meter__over { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 3px; }
+.meter__num { font-size: 12px; font-weight: 700; }
+.meter__delta { font-size: 9px; font-weight: 700; animation: delta-fade 1.6s ease forwards; }
+@keyframes delta-fade { 0%, 70% { opacity: 1; } 100% { opacity: 0; } }
+
+.status-pill {
+  display: inline-flex; align-items: center; gap: 5px; height: 26px; margin: 0; padding: 0 9px;
+  border: 2px solid var(--line); border-radius: 8px; background: var(--card); color: var(--line); font-size: 11.5px; font-weight: 700; white-space: nowrap;
+}
+
+.eyebrow { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin: 18px 4px 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+.eyebrow__meta { font-size: 11.5px; font-weight: 600; text-transform: none; letter-spacing: 0; }
+
+/* Стикер-меню */
+.stickers { position: absolute; left: 0; right: 0; bottom: 0; height: calc(100px + var(--safe-bottom)); z-index: 5; }
+.stickers__paper { position: absolute; inset: 0 0 auto 0; height: 100%; }
+.stickers__row { position: absolute; inset: 0; }
+.sticker { position: absolute; width: 64px; height: 62px; transition: transform 0.25s cubic-bezier(0.3, 1.6, 0.5, 1); }
+.sticker__btn {
+  position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 2px solid var(--line); border-radius: 16px; background: #fff;
+  box-shadow: 0 2px 0 rgba(90, 52, 24, 0.16), 0 4px 8px rgba(90, 52, 24, 0.14); transition: box-shadow 0.25s ease, transform 0.08s ease;
+}
+.sticker__btn:active { transform: scale(0.92); }
+.sticker.is-on .sticker__btn { box-shadow: 0 3px 0 rgba(90, 52, 24, 0.2), 0 9px 14px rgba(90, 52, 24, 0.24); animation: kc-stick 0.4s ease-out; }
+.sticker__face, .sticker__fill { position: absolute; inset: 3px; border-radius: 11px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.sticker__face { background: #fbf3e2; }
+.sticker__fill { clip-path: circle(0% at 50% 50%); transition: clip-path 0.2s ease-in; box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.45), inset 0 -3px 0 rgba(90, 52, 24, 0.22); }
+.sticker.is-on .sticker__fill { clip-path: circle(75% at 50% 50%); animation: kc-fill 0.2s ease-out; }
+.sticker__gloss { position: absolute; left: 6px; top: 5px; width: 14px; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.6); transform: rotate(-20deg); }
+.sticker__icon { fill: #fffaf0; stroke: #8a5a35; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.sticker__icon .fill-current { fill: currentColor; }
+.sticker__face .sticker__icon { color: #8a5a35; }
+.sticker__icon--on { fill: #fff; stroke: #5a3418; stroke-width: 1.8; color: #5a3418; }
+.sticker__label { font-size: 9.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #8a5a35; line-height: 1; }
+.sticker__fill .sticker__label { color: #fff; }
+.sticker__label.is-long { font-size: 8px; }
+.sticker__burst { position: absolute; left: 50%; top: 50%; width: 0; height: 0; pointer-events: none; }
+.sticker__ring { position: absolute; left: -35px; top: -35px; width: 70px; height: 70px; border: 3px solid; border-radius: 50%; animation: kc-ring 0.4s ease-out forwards; }
+.sticker__spark { position: absolute; left: -6px; top: -6px; opacity: 0; animation: kc-spark 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) 0.04s forwards; }
+.sticker__badge {
+  position: absolute; right: -10px; top: -10px; z-index: 4; min-width: 22px; height: 22px; padding: 0 5px; display: grid; place-items: center;
+  border: 2px solid var(--line); border-radius: 11px; background: #f2384c; font-size: 12px; font-weight: 700;
+  box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 0 rgba(90, 52, 24, 0.25); animation: kc-pulse 2s ease-in-out infinite;
+}
+@keyframes kc-stick { 0% { transform: scale(1) rotate(0); } 25% { transform: scale(1.28) rotate(-7deg); } 50% { transform: scale(0.9) rotate(4deg); } 75% { transform: scale(1.05) rotate(-1deg); } 100% { transform: scale(1) rotate(0); } }
+@keyframes kc-fill { from { clip-path: circle(0% at 50% 50%); } to { clip-path: circle(75% at 50% 50%); } }
+@keyframes kc-ring { from { opacity: 0.9; transform: scale(0.5); } to { opacity: 0; transform: scale(1.8); } }
+@keyframes kc-spark { 0% { opacity: 0; transform: translate(0, 0) scale(0.2) rotate(0); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1) rotate(140deg); } }
+@keyframes kc-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+/* Всплывающее окно */
+.popup-layer {
+  position: absolute; inset: 0; z-index: 30; background: var(--backdrop);
+  /* Карточка по центру доступной высоты: место сверху — под медальон и ленту, снизу — под кнопку закрытия. */
+  display: flex; flex-direction: column; justify-content: center;
+  padding: calc(116px + var(--safe-top)) 18px calc(78px + var(--safe-bottom));
+}
+.popup {
+  position: relative; padding: 34px 14px 16px; border: 2px solid var(--line); border-radius: 20px;
+  background: var(--popup); box-shadow: 0 10px 26px rgba(58, 34, 14, 0.35), inset 0 0 0 3px #f8c46b; transform-origin: 50% 0;
+  max-height: 100%; min-height: 0; display: flex; flex-direction: column; text-align: center;
+}
+.popup__body { min-height: 0; overflow-y: auto; scrollbar-width: none; }
+.popup__medallion { position: absolute; left: 50%; top: -112px; width: 92px; height: 92px; margin-left: -46px; display: grid; place-items: center; overflow: hidden; border: 2px solid var(--line); border-radius: 50%; }
+.popup__ribbon { position: absolute; left: 0; right: 0; top: -24px; display: flex; justify-content: center; pointer-events: none; }
+.popup__ribbon .ribbon__body { font-size: 19px; height: 38px; max-width: 280px; overflow: hidden; text-overflow: ellipsis; }
+.popup__close {
+  position: absolute; left: 50%; bottom: -66px; width: 48px; height: 48px; margin-left: -24px; display: grid; place-items: center;
+  border: 2px solid var(--line); border-radius: 50%; background: #ef7f7f; color: #fff; box-shadow: var(--lip), var(--gloss);
+}

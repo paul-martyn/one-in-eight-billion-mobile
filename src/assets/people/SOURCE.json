@@ -1,0 +1,64 @@
+{
+  "source": "../character-art/demo/generator.html",
+  "sourceBytes": 4046529,
+  "sourceSha256": "08168a71314fb059aba3d50c3ae2289e290f643103bc2ed282e0357159165555",
+  "tool": "tools/people/extract-generator.mjs",
+  "note": "Atlases are the generator data URIs decoded byte for byte; manifest.json is the generator <script id=\"manifest\"> JSON.",
+  "manifest": {
+    "path": "src/ui/people/manifest.json",
+    "bytes": 174947,
+    "sha256": "6efc3066cb375ea9751220930aca606eb634b54f126fd187c2dad123e3242904"
+  },
+  "files": {
+    "atlas_babies.png": {
+      "atlas": "babies",
+      "bytes": 36010,
+      "sha256": "fa50ad2e57e8a663705e855d13cd9d8bab9a8a9d9eec65cc75b821aaf3b39302"
+    },
+    "atlas_child_boy.png": {
+      "atlas": "child_boy",
+      "bytes": 90720,
+      "sha256": "c4748e821b466debb17997a5f5769b880607bd150103a218cda56524e4e9ab41"
+    },
+    "atlas_child_girl.png": {
+      "atlas": "child_girl",
+      "bytes": 94214,
+      "sha256": "7021a499ebb68ec32a773c1f4fb0f5b1516c65e73d09b1eeb86062b2d8d22964"
+    },
+    "atlas_elder_man.png": {
+      "atlas": "elder_man",
+      "bytes": 445241,
+      "sha256": "190d07ff32898e2b79506732f0574d4c4e88fec4367a6f6aee5372d18fc95c6e"
+    },
+    "atlas_elder_woman.png": {
+      "atlas": "elder_woman",
+      "bytes": 454579,
+      "sha256": "d68d8c8dd0439e588eb545efcb8196695267ab016f96d9a6f92e067f5488abcf"
+    },
+    "atlas_man.png": {
+      "atlas": "man",
+      "bytes": 449869,
+      "sha256": "1164e246089b58c121855e1584ce970d54bee1928cea67b0634fe61bb6409f67"
+    },
+    "atlas_teen_boy.png": {
+      "atlas": "teen_boy",
+      "bytes": 427738,
+      "sha256": "aa2c4977d596a373d8ce97617f126ebe1e6ec952cd3366fcc85019c24bfe98f6"
+    },
+    "atlas_teen_girl.png": {
+      "atlas": "teen_girl",
+      "bytes": 429053,
+      "sha256": "9a478ebec7563bb38fc5dab3f8484f2ab1d23b4da6613017dc2c511dacec9963"
+    },
+    "atlas_toddler.png": {
+      "atlas": "toddler",
+      "bytes": 50932,
+      "sha256": "d37e88491d8238666c1fbfedee4eb1a64aef1f10d1f3e81ff3386aa5151d1276"
+    },
+    "atlas_woman.png": {
+      "atlas": "woman",
+      "bytes": 457368,
+      "sha256": "004777c8f0e3c0964b34f85eda85c7eb637d2bc048e48ed0df7d900316ec58b9"
+    }
+  }
+}

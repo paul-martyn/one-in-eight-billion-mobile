@@ -1,0 +1,20 @@
+/* «1 · Start» (StartCute.dc.html). Макет 393 × 852: отступы 58 / 24 / 100,
+   планета 280, облачко, счётчики 300 × 84, кнопка 230 × 64 у нижнего края.
+   По высоте 568–932 сжимаются отступы (cqh), планета занимает оставшееся место. */
+.st {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: calc(var(--safe-top) + clamp(14px, calc(14px + (100cqh - 568px) * 0.155), 58px)) 24px calc(var(--safe-bottom) + clamp(16px, calc(16px + (100cqh - 568px) * 0.296), 100px));
+}
+.st__glow { top: calc(var(--safe-top) + clamp(30px, 10.8cqh, 92px)); }
+.st__title { flex: none; font-size: clamp(44px, 7.5cqh, 64px); line-height: 1.1; }
+.st__globe {
+  position: relative; flex: 1 1 0; width: 100%; min-height: 96px; max-height: 280px; margin-top: clamp(4px, 1.2cqh, 10px);
+  display: flex; align-items: center; justify-content: center;
+}
+.st__bubble { flex: none; margin-top: clamp(8px, 1.9cqh, 16px); }
+.st__counters { margin-top: clamp(16px, 3cqh, 26px); }
+.st__actions {
+  flex: none; margin-top: auto; padding-top: clamp(12px, 2.4cqh, 20px); width: 100%;
+  display: flex; flex-direction: column; align-items: center; gap: clamp(8px, 1.2cqh, 10px);
+}
+.st__actions .chunky { max-width: 100%; }

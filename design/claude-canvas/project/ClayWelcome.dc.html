@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ivory and Clay — Welcome</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..500&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#141413}a:hover{color:#d97757}
+a:focus-visible,button:focus-visible{outline:2px solid #d97757;outline-offset:4px}
+</style>
+</helmet>
+<main style="position: relative; width: 393px; height: 852px; box-sizing: border-box; padding: 52px 28px 36px; overflow: hidden; background: #faf9f5; color: #141413; font-family: 'Anthropic Sans', 'Instrument Sans', system-ui, sans-serif; display: flex; flex-direction: column">
+<div style="display: flex; align-items: center; justify-content: space-between; font-size: 13px; line-height: 1.4; color: #5e5d59">
+<span>A life by chance</span>
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 6px; height: 6px; border-radius: 3px; background: #d97757"></span>Live</span>
+</div>
+<div style="position: relative; width: 337px; height: 337px; margin: 18px 0 0">
+<svg width="337" height="337" viewBox="0 0 337 337" aria-hidden="true" style="position: absolute; left: 0; top: 0; pointer-events: none">
+<ellipse cx="168" cy="172" rx="166" ry="58" fill="none" stroke="rgba(31,30,29,0.22)" stroke-width="1" stroke-dasharray="2 6" transform="rotate(-14 168 172)"></ellipse>
+<circle cx="22" cy="214" r="4" fill="#d97757"></circle>
+</svg>
+<div style="position: absolute; left: 18px; top: 18px; width: 300px; height: 300px">
+<dc-import name="Globe" size="300" variant="dot" land="#d97757" ocean="#f0eee6" shade="#dedcd1" rim="rgba(31,30,29,0.18)" grid="rgba(31,30,29,0.07)" flash="#141413" marker="#d97757" marker-ring="#faf9f5" dot="1.15" spin="6" start-lon="10" focus="{{ born }}" hint-size="300px,300px"></dc-import>
+</div>
+</div>
+<h1 style="margin: 26px 0 0; font-family: 'Anthropic Serif', Newsreader, Georgia, serif; font-size: 76px; font-weight: 330; line-height: 1; letter-spacing: -1.5px; white-space: nowrap">1 <em style="font-style: italic; color: #d97757">in</em> 8 B</h1>
+<sc-if value="{{ unborn }}" hint-placeholder-val="{{ true }}">
+<p style="margin: 16px 0 0; font-size: 17px; line-height: 1.55; color: #3d3d3a">Somewhere on Earth a child is born every quarter of a second. Press the button and one of them will be you.</p>
+<p style="margin: 14px 0 0; font-size: 14px; line-height: 1.4; color: #5e5d59"><span style="color: #141413; font-weight: 600; font-variant-numeric: tabular-nums">{{ bornCount }}</span> born · <span style="color: #141413; font-weight: 600; font-variant-numeric: tabular-nums">{{ diedCount }}</span> passed away since you arrived</p>
+</sc-if>
+<sc-if value="{{ born }}" hint-placeholder-val="{{ false }}">
+<p style="margin: 16px 0 0; font-size: 17px; line-height: 1.55; color: #3d3d3a">14 March 2026, 04:12. You are Aarav, a boy born in Lucknow, India, the second child of Priya and Rohan.</p>
+</sc-if>
+<sc-if value="{{ unborn }}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{ beBorn }}" style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 58px; padding: 0 22px; border: 0; border-radius: 14px; background: #141413; color: #faf9f5; font-family: inherit; font-size: 17px; font-weight: 500; cursor: pointer">Be Born<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+</sc-if>
+<sc-if value="{{ born }}" hint-placeholder-val="{{ false }}">
+<a href="ClayLife.dc.html" style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 58px; box-sizing: border-box; padding: 0 22px; border-radius: 14px; background: #d97757; color: #141413; font-size: 17px; font-weight: 600; text-decoration: none">Begin life<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</sc-if>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    this.openedAt = Date.now();
+    this.timer = setInterval(() => this.forceUpdate(), 250);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+  renderVals() {
+    const born = !!(this.state && this.state.born);
+    const secs = this.openedAt ? (Date.now() - this.openedAt) / 1000 : 0;
+    // About 4.2 births and 2 deaths every second worldwide.
+    return {
+      born: born,
+      unborn: !born,
+      bornCount: Math.floor(secs * 4.2).toLocaleString('en-US'),
+      diedCount: Math.floor(secs * 2).toLocaleString('en-US'),
+      beBorn: () => this.setState({ born: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

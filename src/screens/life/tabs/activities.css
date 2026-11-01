@@ -1,0 +1,39 @@
+/* Вкладка Activities (ActivitiesCute.dc.html). Цвета и размеры — из макета (design-tabs §2). */
+.acts-ficon { flex: none; display: block; }
+
+/* Now */
+.acts-now__top { display: flex; align-items: center; gap: 10px; }
+.acts-now__id { flex: 1; min-width: 0; }
+.acts-now__eyebrow { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+.acts-now__title { display: block; font-size: 17px; font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; }
+.acts-now__sub { display: block; font-size: 12.5px; font-weight: 500; line-height: 1.35; color: var(--ink-dark); overflow-wrap: anywhere; }
+
+.acts-label { margin: 12px 0 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+.acts-label--inline { margin: 0; }
+
+/* Focus this year */
+.acts-focus { display: grid; gap: 6px; }
+.acts-focus__tile {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  min-width: 0; min-height: 58px; padding: 6px 4px 8px;
+  border: 2px solid var(--line); border-radius: 10px; background: var(--paper); box-shadow: var(--lip);
+  color: var(--ink); font-size: 12px; font-weight: 700; line-height: 1.15; text-align: center;
+  transition: transform 0.08s ease;
+}
+.acts-focus__tile[aria-pressed='true'] { background: var(--selected); }
+.acts-focus__tile:active:not(:disabled) { transform: translateY(1px) scale(0.98); }
+.acts-focus__tile:disabled { opacity: 0.6; }
+.acts-focus__name { max-width: 100%; overflow-wrap: anywhere; hyphens: auto; }
+
+.acts-effect { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 8px 0 0; font-size: 12px; font-weight: 600; line-height: 1.35; color: var(--muted); }
+.acts-hint { margin: 6px 0 0; font-size: 12px; font-weight: 500; line-height: 1.4; color: var(--muted); }
+.acts-baby { margin: 12px 0 0; padding: 9px 10px; border: 2px dashed #c9a874; border-radius: 10px; background: #f6ead2; font-size: 13.5px; font-weight: 500; line-height: 1.45; color: var(--ink-dark); }
+
+/* This year so far (доли S.fT) */
+.acts-year { margin-top: 10px; padding-top: 8px; border-top: 2px dashed var(--divider); }
+.acts-year__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 8px; margin: 0 0 6px; }
+.acts-year__meta { font-size: 11.5px; font-weight: 600; color: var(--muted); }
+.acts-year__bar { display: flex; height: 12px; border: 1.5px solid var(--line); border-radius: 4px; background: var(--track); overflow: hidden; }
+.acts-year__seg { flex: 0 1 0; min-width: 3px; box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.45); }
+.acts-year__seg + .acts-year__seg { border-left: 1.5px solid var(--line); }
+.acts-year__legend { display: flex; flex-wrap: wrap; gap: 4px; margin: 6px 0 0; }

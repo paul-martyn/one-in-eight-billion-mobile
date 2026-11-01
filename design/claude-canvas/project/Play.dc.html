@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Life</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&amp;family=Figtree:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+main[data-theme=light] a:focus-visible,main[data-theme=light] button:focus-visible{outline:3px solid #e5533c;outline-offset:3px}
+main[data-theme=dark] a:focus-visible,main[data-theme=dark] button:focus-visible{outline:3px solid #f6cfe0;outline-offset:3px}
+</style>
+</helmet>
+<main data-theme="{{ theme }}" style="position: relative; width: 393px; height: 852px; overflow: hidden; background: {{ c.bg }}; color: {{ c.ink }}; font-family: Figtree, system-ui, sans-serif">
+<div style="position: absolute; left: 0; top: 0; width: 393px; height: 320px; overflow: hidden; border-radius: 0 0 32px 32px">
+<svg width="393" height="330" viewBox="0 0 393 330" role="img" aria-label="{{ sceneLabel }}" style="display: block; margin-top: -10px">
+<defs>
+<linearGradient id="{{ ids.sky }}" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="240"><stop offset="0" stop-color="{{ s.sky0 }}"></stop><stop offset="1" stop-color="{{ s.sky1 }}"></stop></linearGradient>
+</defs>
+<rect width="393" height="330" fill="{{ urls.sky }}"></rect>
+<g opacity="{{ s.day }}">
+<circle cx="318" cy="74" r="30" fill="#f2b33d"></circle>
+<g fill="#ffffff">
+<ellipse cx="70" cy="64" rx="34" ry="13"></ellipse><ellipse cx="98" cy="54" rx="22" ry="13"></ellipse>
+<ellipse cx="196" cy="40" rx="30" ry="10"></ellipse><ellipse cx="220" cy="33" rx="17" ry="9"></ellipse>
+</g>
+</g>
+<g opacity="{{ s.night }}">
+<path d="M-10 118 C40 96 80 104 120 92 C160 80 180 60 220 66 L220 112 C180 112 150 128 100 132 C50 136 20 128 -10 134 Z" fill="#6e5ce6" opacity="0.35"></path>
+<path d="M60 86 C100 70 140 72 180 60 C200 54 214 50 230 52 L230 76 C200 80 170 94 130 98 C100 100 80 96 60 100 Z" fill="#8a78f0" opacity="0.22"></path>
+<circle cx="318" cy="74" r="46" fill="#8a78f0" opacity="0.22"></circle>
+<path d="M316.9 48 A26 26 0 1 0 342 84 A22 22 0 1 1 316.9 48 Z" fill="#f6f1ea"></path>
+<g fill="#ffffff">
+<circle cx="24" cy="30" r="1.2"></circle><circle cx="92" cy="22" r="1"></circle><circle cx="168" cy="28" r="1.4"></circle><circle cx="262" cy="24" r="1"></circle><circle cx="374" cy="128" r="1.2"></circle><circle cx="290" cy="140" r="0.9"></circle><circle cx="34" cy="150" r="0.9"></circle>
+</g>
+<g fill="#f2d7a6">
+<path d="M196 92 C196.6 96 198 97.4 202 98 C198 98.6 196.6 100 196 104 C195.4 100 194 98.6 190 98 C194 97.4 195.4 96 196 92 Z"></path>
+<path d="M372 30 C372.5 33.5 373.5 34.5 377 35 C373.5 35.5 372.5 36.5 372 40 C371.5 36.5 370.5 35.5 367 35 C370.5 34.5 371.5 33.5 372 30 Z"></path>
+</g>
+</g>
+<g stroke="{{ s.string }}" stroke-width="0.8" opacity="{{ s.stringOp }}" fill="none">
+<path d="M140 116 C150 170 130 220 120 330"></path>
+<path d="M60 152 C50 200 70 260 40 330"></path>
+<path d="M360 168 C340 220 370 280 350 330"></path>
+</g>
+<path d="M140 84 L150 98 L140 116 L130 98 Z" fill="{{ s.kite1 }}"></path>
+<path d="M60 136 L67 145 L60 154 L53 145 Z" fill="{{ s.kite2 }}"></path>
+<path d="M360 150 L368 160 L360 170 L352 160 Z" fill="{{ s.kite3 }}"></path>
+<path d="M0 240 L0 170 L70 170 L70 240 Z" fill="{{ s.b1 }}"></path>
+<path d="M70 240 L70 150 L142 150 L142 240 Z" fill="{{ s.b2 }}"></path>
+<path d="M146 240 L146 146 L151 136 L156 146 L156 240 Z M234 240 L234 146 L239 136 L244 146 L244 240 Z" fill="{{ s.dome }}"></path>
+<path d="M156 240 L156 196 C156 172 176 156 195 156 C214 156 234 172 234 196 L234 240 Z" fill="{{ s.dome }}"></path>
+<path d="M195 156 L195 142" stroke="{{ s.finial }}" stroke-width="3" stroke-linecap="round"></path>
+<path d="M250 240 L250 176 L322 176 L322 240 Z" fill="{{ s.b4 }}"></path>
+<path d="M322 240 L322 160 L393 160 L393 240 Z" fill="{{ s.b1 }}"></path>
+<g fill="{{ s.win }}" opacity="{{ s.winOp }}">
+<rect x="14" y="186" width="10" height="14" rx="5"></rect><rect x="40" y="186" width="10" height="14" rx="5"></rect>
+<rect x="88" y="168" width="10" height="14" rx="5"></rect><rect x="114" y="168" width="10" height="14" rx="5"></rect><rect x="88" y="200" width="10" height="14" rx="5"></rect>
+<rect x="186" y="204" width="18" height="26" rx="9"></rect>
+<rect x="266" y="192" width="10" height="14" rx="5"></rect><rect x="294" y="192" width="10" height="14" rx="5"></rect>
+<rect x="340" y="176" width="10" height="14" rx="5"></rect>
+</g>
+<rect x="0" y="236" width="393" height="22" fill="{{ s.parapet }}"></rect>
+<rect x="0" y="258" width="393" height="72" fill="{{ s.floor }}"></rect>
+<rect x="0" y="258" width="393" height="5" fill="{{ s.floorEdge }}"></rect>
+<path d="M330 196 C330 186 374 186 374 196 L374 250 C374 258 330 258 330 250 Z" fill="{{ s.tank }}"></path>
+<ellipse cx="352" cy="194" rx="22" ry="6" fill="{{ s.tankLid }}"></ellipse>
+<path d="M330 214 C344 219 360 219 374 214 M330 232 C344 237 360 237 374 232" stroke="{{ s.tankLid }}" stroke-width="2" fill="none"></path>
+<path d="M16 258 L16 176 M140 258 L140 172" stroke="{{ s.pole }}" stroke-width="3" stroke-linecap="round"></path>
+<path d="M16 182 Q78 198 140 178" stroke="{{ s.line }}" stroke-width="1.5" fill="none"></path>
+<path d="M34 187 L52 190 L50 216 L36 214 Z" fill="{{ s.cl1 }}"></path>
+<path d="M62 191 L80 192 L79 210 L63 210 Z" fill="{{ s.cl2 }}"></path>
+<path d="M92 192 L104 191 L106 228 L94 228 Z" fill="{{ s.cl3 }}"></path>
+<path d="M112 189 L128 186 L130 206 L114 208 Z" fill="{{ s.cl4 }}"></path>
+<ellipse cx="90" cy="306" rx="66" ry="5" fill="{{ s.shadow }}"></ellipse>
+<ellipse cx="252" cy="306" rx="20" ry="4" fill="{{ s.shadow }}"></ellipse>
+<rect x="30" y="272" width="120" height="10" rx="3" fill="{{ s.cot }}"></rect>
+<path d="M40 274 L50 280 M58 274 L68 280 M76 274 L86 280 M94 274 L104 280 M112 274 L122 280 M130 274 L140 280" stroke="{{ s.weave }}" stroke-width="1.5"></path>
+<path d="M36 282 L36 302 M144 282 L144 302" stroke="{{ s.pole }}" stroke-width="4" stroke-linecap="round"></path>
+<path d="M56 252 C52 264 52 270 54 274 L92 274 C92 266 88 256 84 252 C80 246 60 246 56 252 Z" fill="{{ s.mom }}"></path>
+<circle cx="72" cy="238" r="11" fill="{{ s.skin }}"></circle>
+<path d="M61 236 C61 222 83 222 83 236 C80 230 64 230 61 236 Z" fill="{{ s.hair }}"></path>
+<circle cx="83" cy="232" r="5" fill="{{ s.hair }}"></circle>
+<path d="M104 250 C100 262 101 270 103 274 L137 274 C139 266 137 256 134 250 C130 244 108 244 104 250 Z" fill="{{ s.dad }}"></path>
+<circle cx="120" cy="236" r="11.5" fill="{{ s.skin2 }}"></circle>
+<path d="M108 234 C108 220 132 220 132 234 C128 228 112 228 108 234 Z" fill="{{ s.hair }}"></path>
+<path d="M114 242 C118 240 122 240 126 242" stroke="{{ s.hair }}" stroke-width="2.5" stroke-linecap="round" fill="none"></path>
+<rect x="243" y="270" width="8" height="34" rx="3" fill="{{ s.legs }}"></rect>
+<rect x="255" y="270" width="8" height="34" rx="3" fill="{{ s.legs }}"></rect>
+<path d="M240 228 C236 246 237 262 239 274 L265 274 C267 262 267 246 264 228 C260 222 244 222 240 228 Z" fill="{{ s.kid }}"></path>
+<path d="M262 232 L278 202" stroke="{{ s.kid }}" stroke-width="8" stroke-linecap="round"></path>
+<circle cx="279" cy="199" r="4.5" fill="{{ s.skin }}"></circle>
+<circle cx="252" cy="214" r="11" fill="{{ s.skin }}"></circle>
+<path d="M240 212 C240 198 264 198 264 212 C258 204 246 204 240 212 Z" fill="{{ s.hair }}"></path>
+<path d="M280 197 C276 160 258 126 236 110" stroke="{{ s.string }}" stroke-width="1" fill="none"></path>
+<path d="M236 66 L254 88 L236 112 L218 88 Z" fill="{{ s.kite }}"></path>
+<path d="M236 66 L236 112 M218 88 L254 88" stroke="{{ s.kiteSpar }}" stroke-width="1.5"></path>
+<path d="M236 112 C230 122 242 128 236 138" stroke="{{ s.kite }}" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
+</svg>
+</div>
+<div style="position: absolute; left: 16px; right: 16px; top: 46px; display: flex; align-items: center; justify-content: space-between">
+<span style="display: inline-flex; align-items: center; gap: 10px; height: 36px; box-sizing: border-box; padding: 0 14px; border: 1px solid {{ c.hudLine }}; border-radius: 18px; background: {{ c.hudBg }}; color: {{ c.hudInk }}; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 15px; font-weight: 700">Age 15 · 2041<span aria-hidden="true" style="display: flex; width: 34px; height: 4px; border-radius: 2px; overflow: hidden; background: {{ c.track }}"><span style="width: 45%; background: {{ c.trackFill }}"></span></span></span>
+<div style="display: flex; gap: 8px">
+<button type="button" onClick="{{ cycleSpeed }}" aria-label="Change speed" style="height: 44px; min-width: 56px; box-sizing: border-box; padding: 0 14px; border: 1px solid {{ c.hudLine }}; border-radius: 22px; background: {{ c.hudBg }}; color: {{ c.hudInk }}; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 16px; font-weight: 800; cursor: pointer">{{ speed }}×</button>
+<button type="button" onClick="{{ togglePause }}" aria-label="{{ pauseLabel }}" style="width: 44px; height: 44px; box-sizing: border-box; padding: 0; border: 1px solid {{ c.hudLine }}; border-radius: 22px; background: {{ c.hudBg }}; color: {{ c.hudInk }}; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<sc-if value="{{ running }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M9 6v12M15 6v12"></path></svg></sc-if>
+<sc-if value="{{ paused }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5Z" fill="currentColor"></path></svg></sc-if>
+</button>
+</div>
+</div>
+<section aria-label="Aarav at fifteen" style="position: absolute; left: 16px; right: 16px; top: 334px; box-sizing: border-box; padding: 14px 16px 16px; border: 1px solid {{ c.cardLine }}; border-radius: 24px; background: {{ c.card }}">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px">
+<h1 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 24px; font-weight: 800; line-height: 1.1; letter-spacing: -0.4px">Aarav Srivastava</h1>
+<span style="font-size: 13px; line-height: 1.3; color: {{ c.muted }}; white-space: nowrap">Lucknow, India</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 20px; margin-top: 14px">
+<sc-for list="{{ stats }}" as="st" hint-placeholder-count="4">
+<div aria-label="{{ st.aria }}">
+<div style="display: flex; align-items: center; justify-content: space-between; font-size: 13px; line-height: 1.2">
+<span style="display: flex; align-items: center; gap: 6px; font-weight: 600; color: {{ c.muted }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{ st.color }}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ st.icon }}"></path></svg>{{ st.label }}</span>
+<span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-variant-numeric: tabular-nums">{{ st.v }}</span>
+</div>
+<div aria-hidden="true" style="display: flex; gap: 3px; margin-top: 6px">
+<sc-for list="{{ st.segs }}" as="sg" hint-placeholder-count="10"><span style="flex: 1; height: 8px; border-radius: 4px; background: {{ sg.bg }}"></span></sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+<div style="position: absolute; left: 20px; right: 20px; top: 494px">
+<p style="margin: 0; font-size: 12px; font-weight: 700; line-height: 1.3; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.muted }}">Spring 2041</p>
+<ol style="list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{ log }}" as="lg" hint-placeholder-count="2">
+<li style="display: flex; align-items: center; gap: 10px; font-size: 15px; line-height: 1.4">
+<span style="flex: none; min-width: 64px; height: 24px; box-sizing: border-box; padding: 0 9px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; background: {{ lg.bg }}; color: {{ lg.ink }}; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 13px; font-weight: 800; white-space: nowrap">{{ lg.delta }}</span>
+<span>{{ lg.text }}</span>
+</li>
+</sc-for>
+</ol>
+</div>
+<section aria-label="Your father speaks" style="position: absolute; left: 16px; right: 16px; bottom: 24px; box-sizing: border-box; padding: 16px; border-radius: 28px; background: {{ c.dlgBg }}; color: {{ c.dlgInk }}">
+<div style="display: flex; align-items: flex-start; gap: 12px">
+<svg width="52" height="52" viewBox="0 0 52 52" aria-hidden="true" style="flex: none">
+<defs><clipPath id="{{ ids.face }}"><circle cx="26" cy="26" r="26"></circle></clipPath></defs>
+<g clip-path="{{ urls.face }}">
+<rect width="52" height="52" fill="{{ f.bg }}"></rect>
+<path d="M6 56 C6 42 15 37 26 37 C37 37 46 42 46 56 Z" fill="{{ f.shirt }}"></path>
+<rect x="21.5" y="31" width="9" height="8" rx="3" fill="{{ f.skin }}"></rect>
+<path d="M22 37 L26 43 L30 37 Z" fill="{{ f.skin }}"></path>
+<ellipse cx="26" cy="23.5" rx="10.5" ry="12" fill="{{ f.skin }}"></ellipse>
+<path d="M15.2 22 C14.5 10 37.5 10 36.8 22 C33 16.5 19 16.5 15.2 22 Z" fill="{{ f.hair }}"></path>
+<path d="M18.5 19.6 L23.5 20.6 M33.5 19.6 L28.5 20.6" stroke="{{ f.hair }}" stroke-width="1.5" stroke-linecap="round"></path>
+<circle cx="21.8" cy="23.8" r="1.3" fill="{{ f.hair }}"></circle>
+<circle cx="30.2" cy="23.8" r="1.3" fill="{{ f.hair }}"></circle>
+<path d="M20.5 29.6 C23 27.8 29 27.8 31.5 29.6" stroke="{{ f.hair }}" stroke-width="2.6" stroke-linecap="round" fill="none"></path>
+</g>
+</svg>
+<div style="min-width: 0">
+<p style="margin: 0; font-size: 12px; font-weight: 800; line-height: 1.3; letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.dlgName }}">Dad</p>
+<p style="margin: 3px 0 0; font-size: 16px; line-height: 1.45">{{ line }}</p>
+</div>
+</div>
+<sc-if value="{{ asking }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 8px; margin-top: 14px">
+<sc-for list="{{ options }}" as="op" hint-placeholder-count="2">
+<button type="button" onClick="{{ op.pick }}" onMouseEnter="{{ op.point }}" style="display: flex; align-items: center; gap: 10px; min-height: 50px; padding: 0 14px 0 12px; border: 0; border-radius: 16px; background: {{ op.bg }}; color: {{ op.ink }}; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 17px; font-weight: 800; text-align: left; cursor: pointer">
+<span aria-hidden="true" style="display: flex; flex: none; width: 12px; opacity: {{ op.cursor }}"><svg width="12" height="14" viewBox="0 0 12 14"><path d="M1.5 1.5v11l9-5.5Z" fill="currentColor"></path></svg></span>
+<span style="flex: 1">{{ op.label }}</span>
+<span style="font-family: Figtree, system-ui, sans-serif; font-size: 12px; font-weight: 600; color: {{ op.hint }}; white-space: nowrap">{{ op.effect }}</span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ answered }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px">
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{ effects }}" as="ef" hint-placeholder-count="2"><span style="height: 26px; padding: 0 10px; border-radius: 13px; display: inline-flex; align-items: center; background: {{ ef.bg }}; color: {{ ef.ink }}; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 13px; font-weight: 800; white-space: nowrap">{{ ef.t }}</span></sc-for>
+</div>
+<button type="button" onClick="{{ again }}" style="flex: none; display: flex; align-items: center; gap: 8px; height: 46px; padding: 0 16px 0 18px; border: 0; border-radius: 23px; background: {{ c.nextBg }}; color: {{ c.nextInk }}; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 16px; font-weight: 800; cursor: pointer">Continue<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+</div>
+</sc-if>
+</section>
+<svg width="393" height="852" aria-hidden="true" style="position: absolute; left: 0; top: 0; pointer-events: none; mix-blend-mode: {{ c.grainBlend }}; opacity: {{ c.grainOp }}">
+<filter id="{{ ids.grain }}"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
+<rect width="393" height="852" filter="{{ urls.grain }}"></rect>
+</svg>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"$preview":{"width":393,"height":852}}'>
+// The layout follows the game screen from direction D; light is direction E by day, dark is direction A by night.
+var SCENES = {
+  light: {
+    label: 'A bright afternoon on a Lucknow rooftop. Kites fill the sky; Aarav flies his while his parents sit on a woven cot by the laundry and the black water tank.',
+    sky0: '#8fc6ea', sky1: '#cfe7f4', day: 1, night: 0,
+    string: '#17352e', stringOp: 0.35, kite1: '#f2b33d', kite2: '#17352e', kite3: '#ffffff',
+    b1: '#f2a7a0', b2: '#e9b35f', dome: '#fbf7f0', b4: '#9ed3b8', finial: '#e9b35f', win: '#17352e', winOp: 0.18,
+    parapet: '#fbf7f0', floor: '#e9c9a6', floorEdge: '#dcb68c', shadow: '#d4b08a', tank: '#17352e', tankLid: '#2c5148',
+    pole: '#8a5a3a', line: '#ffffff', cl1: '#e5533c', cl2: '#4f8fc0', cl3: '#f2b33d', cl4: '#9ed3b8',
+    cot: '#c98b4e', weave: '#a86f3a', skin: '#a86a48', skin2: '#9c6040', hair: '#17352e',
+    mom: '#e5533c', dad: '#ffffff', kid: '#f2b33d', legs: '#17352e', kite: '#e5533c', kiteSpar: '#b8402c'
+  },
+  dark: {
+    label: 'A purple night over a Lucknow rooftop. Windows glow under a crescent moon; Aarav flies his kite while his parents sit on a woven cot by the laundry.',
+    sky0: '#120f2e', sky1: '#3a2b9a', day: 0, night: 1,
+    string: '#f6f1ea', stringOp: 0.3, kite1: '#f2d7a6', kite2: '#8a78f0', kite3: '#f6cfe0',
+    b1: '#2c2468', b2: '#231c55', dome: '#43379a', b4: '#231c55', finial: '#f2d7a6', win: '#f2d7a6', winOp: 0.9,
+    parapet: '#3a3070', floor: '#221d3d', floorEdge: '#2e2752', shadow: '#17132b', tank: '#0e0c18', tankLid: '#2a2346',
+    pole: '#3e3462', line: '#8e88a0', cl1: '#a8455e', cl2: '#4a5aa6', cl3: '#b8925a', cl4: '#4f8a7c',
+    cot: '#5e4458', weave: '#463244', skin: '#7d5560', skin2: '#734c58', hair: '#100d1c',
+    mom: '#b04a63', dad: '#a49bd6', kid: '#f2d7a6', legs: '#100d1c', kite: '#ff9eb0', kiteSpar: '#d0708a'
+  }
+};
+
+var COLORS = {
+  light: {
+    bg: '#f4ede1', ink: '#17352e', muted: '#4e5f58',
+    hudBg: '#ffffff', hudInk: '#17352e', hudLine: 'rgba(23,53,46,0)', track: 'rgba(23,53,46,0.15)', trackFill: '#e5533c',
+    card: '#fffaf3', cardLine: 'rgba(23,53,46,0.08)', segOff: 'rgba(23,53,46,0.1)',
+    health: '#e5533c', joy: '#e9a21f', mind: '#4f8fc0', ties: '#3f9a72',
+    goodBg: '#d3ede1', goodInk: '#1f6b4f', badBg: '#f9d9d2', badInk: '#b8402c',
+    dlgBg: '#17352e', dlgInk: '#ffffff', dlgName: '#f2b33d',
+    optOnBg: '#f2b33d', optOnInk: '#17352e', optOnHint: '#3d5a50',
+    optOffBg: 'rgba(255,255,255,0.1)', optOffInk: '#ffffff', optOffHint: '#b9cdc6',
+    dlgGoodBg: 'rgba(158,211,184,0.18)', dlgGoodInk: '#9ed3b8', dlgBadBg: 'rgba(242,167,160,0.18)', dlgBadInk: '#f2a7a0',
+    nextBg: '#f2b33d', nextInk: '#17352e',
+    face: { bg: '#f2b33d', skin: '#9c6040', hair: '#17352e', shirt: '#ffffff' },
+    grainBlend: 'multiply', grainOp: 0.16
+  },
+  dark: {
+    bg: '#18171c', ink: '#f6f1ea', muted: '#a9a3b8',
+    hudBg: 'rgba(24,23,28,0.72)', hudInk: '#f6f1ea', hudLine: 'rgba(255,255,255,0.14)', track: 'rgba(255,255,255,0.18)', trackFill: '#ff9eb0',
+    card: '#211f28', cardLine: 'rgba(255,255,255,0.07)', segOff: 'rgba(246,241,234,0.1)',
+    health: '#ff9eb0', joy: '#f2d7a6', mind: '#9a88ff', ties: '#8fd8b8',
+    goodBg: 'rgba(143,216,184,0.14)', goodInk: '#8fd8b8', badBg: 'rgba(255,158,176,0.14)', badInk: '#ff9eb0',
+    dlgBg: 'linear-gradient(160deg, #3d3196 0%, #262058 100%)', dlgInk: '#f6f1ea', dlgName: '#f2d7a6',
+    optOnBg: '#f6cfe0', optOnInk: '#18171c', optOnHint: '#5a4a63',
+    optOffBg: 'rgba(255,255,255,0.08)', optOffInk: '#f6f1ea', optOffHint: '#b9b0d8',
+    dlgGoodBg: 'rgba(143,216,184,0.16)', dlgGoodInk: '#8fd8b8', dlgBadBg: 'rgba(255,158,176,0.16)', dlgBadInk: '#ff9eb0',
+    nextBg: '#f6cfe0', nextInk: '#18171c',
+    face: { bg: '#6e5ce6', skin: '#9c6040', hair: '#18171c', shirt: '#f6f1ea' },
+    grainBlend: 'overlay', grainOp: 0.28
+  }
+};
+
+var ICONS = {
+  health: 'M12 19.5s-7-4.3-7-9.6A3.9 3.9 0 0 1 12 7.6a3.9 3.9 0 0 1 7 2.3c0 5.3-7 9.6-7 9.6Z',
+  joy: 'M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4',
+  mind: 'M4 6.5c2.6-1.2 5.3-1.2 8 .8 2.7-2 5.4-2 8-.8V18c-2.6-1.2-5.3-1.2-8 .8-2.7-2-5.4-2-8-.8ZM12 7.3v11.5',
+  ties: 'M9 11a3 3 0 1 0 0-6a3 3 0 1 0 0 6M3 19c0-3.3 2.7-5 6-5s6 1.7 6 5M16 11a2.5 2.5 0 1 0 0-5M17 14c2.4.3 4 1.9 4 4.5'
+};
+
+var ASK = 'The shop isn’t doing well, beta. I need you at the counter. Grade 11 can wait.';
+
+var CHOICES = [
+  {
+    label: 'Stay in school', effect: '+Mind −Money', mind: 6,
+    reply: '…Fine. Study, then. But on Sundays you’re at the counter.',
+    effects: [{ t: '+6 Mind', good: true }, { t: '−4 Money', good: false }],
+    log: { delta: '+6 Mind', text: 'Started grade 11. Sundays at the shop.', good: true }
+  },
+  {
+    label: 'Work the counter', effect: '+Money −Mind', mind: -6,
+    reply: 'Good. We open at seven. Wear the clean shirt.',
+    effects: [{ t: '+5 Money', good: true }, { t: '−6 Mind', good: false }],
+    log: { delta: '+5 Money', text: 'First day behind the shop counter.', good: true }
+  }
+];
+
+var LOG = [
+  { delta: '+4 Mind', text: 'Passed the grade 10 boards with 81%.', good: true },
+  { delta: '−3 Joy', text: 'Ananya left for college in Delhi.', good: false }
+];
+
+class Component extends DCLogic {
+  renderVals() {
+    const theme = this.props.theme === 'dark' ? 'dark' : 'light';
+    const c = COLORS[theme];
+    const st = this.state || {};
+    const speeds = [1, 4, 16];
+    const speed = st.speed || 4;
+    const paused = !!st.paused;
+    const cur = st.cur || 0;
+    const picked = typeof st.picked === 'number' ? CHOICES[st.picked] : null;
+    const mind = 71 + (picked ? picked.mind : 0);
+    const bar = (key, label, v) => ({
+      label: label,
+      v: v,
+      color: c[key],
+      icon: ICONS[key],
+      aria: label + ' ' + v + ' of 100',
+      segs: Array.from({ length: 10 }, (_, i) => ({ bg: i < Math.round(v / 10) ? c[key] : c.segOff }))
+    });
+    const chip = (e, onDialog) => ({
+      delta: e.delta,
+      text: e.text,
+      t: e.t,
+      bg: onDialog ? (e.good ? c.dlgGoodBg : c.dlgBadBg) : (e.good ? c.goodBg : c.badBg),
+      ink: onDialog ? (e.good ? c.dlgGoodInk : c.dlgBadInk) : (e.good ? c.goodInk : c.badInk)
+    });
+    const log = LOG.concat(picked ? [picked.log] : []).map((e) => chip(e, false));
+    return {
+      theme: theme,
+      c: c,
+      f: c.face,
+      s: SCENES[theme],
+      sceneLabel: SCENES[theme].label,
+      ids: { sky: 'pl-sky-' + theme, face: 'pl-face-' + theme, grain: 'pl-grain-' + theme },
+      urls: { sky: 'url(#pl-sky-' + theme + ')', face: 'url(#pl-face-' + theme + ')', grain: 'url(#pl-grain-' + theme + ')' },
+      stats: [bar('health', 'Health', 82), bar('joy', 'Joy', 64), bar('mind', 'Mind', mind), bar('ties', 'Ties', 58)],
+      log: log,
+      line: picked ? picked.reply : ASK,
+      asking: !picked,
+      answered: !!picked,
+      effects: picked ? picked.effects.map((e) => chip(e, true)) : [],
+      options: CHOICES.map((o, i) => ({
+        label: o.label,
+        effect: o.effect,
+        bg: i === cur ? c.optOnBg : c.optOffBg,
+        ink: i === cur ? c.optOnInk : c.optOffInk,
+        hint: i === cur ? c.optOnHint : c.optOffHint,
+        cursor: i === cur ? 1 : 0,
+        point: () => { if (cur !== i) this.setState({ cur: i }); },
+        pick: () => this.setState({ cur: i, picked: i })
+      })),
+      again: () => this.setState({ picked: null, cur: 0 }),
+      speed: speed,
+      paused: paused,
+      running: !paused,
+      pauseLabel: paused ? 'Resume' : 'Pause',
+      togglePause: () => this.setState({ paused: !paused }),
+      cycleSpeed: () => this.setState({ speed: speeds[(speeds.indexOf(speed) + 1) % speeds.length] })
+    };
+  }
+}
+</script>
+</body>
+</html>

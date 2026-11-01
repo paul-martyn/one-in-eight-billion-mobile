@@ -1,0 +1,13 @@
+{
+  "activities.paused": "Paused · {age} · {year}",
+  "activities.pausedAge": "Paused · {age}",
+  "activities.unavailable": "Activities appear here once a life has begun.",
+  "activities.now": "Now",
+  "activities.now.label": "What you do now",
+  "activities.focus.title": "Focus this year",
+  "activities.focus.none": "Not chosen yet. If you don’t choose, one is picked for you.",
+  "activities.focus.note": "At the end of the year, each focus counts for as long as you kept it.",
+  "activities.year.title": "This year so far",
+  "activities.year.meta": "{pct}% of the year lived",
+  "activities.year.share": "{name} {pct}%"
+}

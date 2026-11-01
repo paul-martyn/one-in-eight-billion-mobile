@@ -1,76 +1,68 @@
+/* Базовые стили. Значения — из src/design/tokens.json (стиль Cute холста дизайна). */
 :root {
   color-scheme: light;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: #253f4c;
-  background: #e3e7e3;
+  font-family: Fredoka, 'Baloo 2', system-ui, sans-serif;
+  color: #5a3418;
+  background: #e6d4b1;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  --paper: #f4f2eb;
-  --ink: #253f4c;
-  --secondary: #5e6d70;
-  --land: #becfc4;
-  --font-story: Palatino, 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
-  --screen-gutter: 28px;
+  --page: #f2e3c6;
+  --ink: #5a3418;
+  --ink-dark: #4a2c17;
+  --line: #7b4b2a;
+  --muted: #8a5a35;
+  --card: #fff3d6;
+  --paper: #fffaf0;
+  --cta: #ffd75a;
+  --cta-green: #8fd14f;
+  --secondary: #e9cf9c;
+  --teal: #3ec3d2;
+  --teal-dark: #2593a3;
+  --selected: #8fd9e6;
+  --pink: #ff6f8a;
+  --divider: #e2c595;
+  --track: #f0dcae;
+  --orange: #c85a14;
+  --popup: #f4a940;
+  --backdrop: rgba(58, 34, 14, 0.55);
+  --shadow-card: 0 4px 12px rgba(90, 52, 24, 0.2), 0 1px 3px rgba(90, 52, 24, 0.14);
+  --lip: inset 0 -3px 0 rgba(90, 52, 24, 0.22);
+  --gloss: inset 0 3px 0 rgba(255, 255, 255, 0.45);
+  --font-typed: 'Courier Prime', 'Courier New', monospace;
+  --font-sign: Caveat, 'Segoe Script', cursive;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 * { box-sizing: border-box; }
 html, body, #root { margin: 0; width: 100%; min-height: 100%; }
-body { min-width: 0; }
-button, input, select, textarea { font: inherit; }
+body { min-width: 0; overscroll-behavior: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
 button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
-:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+button { cursor: pointer; }
+button:disabled { cursor: default; }
+:focus-visible { outline: 3px solid var(--teal-dark); outline-offset: 3px; }
 [hidden] { display: none !important; }
+.sr-only { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-.preview-stage {
-  min-height: 100svh;
-  display: grid;
-  place-items: center;
-}
+.preview-stage { min-height: 100svh; display: grid; place-items: center; }
 
 .mobile-viewport {
   width: 100%;
   height: 100dvh;
-  overflow: auto;
+  overflow: hidden;
   overscroll-behavior: contain;
-  background: var(--paper);
+  background: var(--page);
   color: var(--ink);
   isolation: isolate;
-  container-type: inline-size;
+  container-type: size;
   position: relative;
-  /* Эти отступы общие для всех будущих экранов. */
-  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
-    env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
 }
 
-.foundation-screen {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-  padding: 36px var(--screen-gutter) 28px;
-  text-align: center;
-}
-
-.foundation-caption, .foundation-footnote { margin: 0; font-size: 0.875rem; color: var(--secondary); }
-.foundation-title { max-width: 100%; padding-block: 20px; }
-.foundation-mark {
-  display: grid;
-  place-items: center;
-  width: 84px;
-  aspect-ratio: 1;
-  margin: 0 auto 32px;
-  border: 1px solid var(--land);
-  border-radius: 50%;
-  font: 3rem/1 var(--font-story);
-}
-.foundation-title h1 { max-width: 9ch; margin: 0 auto 24px; font: 400 clamp(2rem, 9cqi, 3rem)/1.08 var(--font-story); letter-spacing: -0.035em; }
-.foundation-title p { margin: 0; color: var(--secondary); font-size: 1rem; line-height: 1.6; }
 .orientation-notice { max-width: 28rem; padding: 24px; text-align: center; }
-.orientation-notice h1 { font: 400 2rem/1.2 var(--font-story); margin-block: 16px 8px; }
-.orientation-notice p { margin: 0; line-height: 1.5; color: var(--secondary); }
+.orientation-notice h1 { font-size: 2rem; line-height: 1.2; margin-block: 16px 8px; }
+.orientation-notice p { margin: 0; line-height: 1.5; color: var(--muted); }
 
 /* На планшете/компьютере меняется только окружение, не композиция приложения. */
 @media (min-width: 480px) {
@@ -78,12 +70,36 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
   .mobile-viewport {
     width: min(393px, calc((100svh - 48px) * 393 / 852));
     height: min(852px, calc(100svh - 48px));
-    border-radius: 28px;
-    box-shadow: 0 0 0 1px rgb(37 63 76 / 14%), 0 18px 60px rgb(37 63 76 / 8%);
+    border-radius: 32px;
+    box-shadow: 0 0 0 2px var(--line), 0 18px 60px rgba(90, 52, 24, 0.22);
   }
 }
 
-@media (max-width: 359px) { :root { --screen-gutter: 20px; } }
+/* Белые буквы с коричневым контуром — фирменный приём макетов. */
+.k-o {
+  color: #fff;
+  text-shadow: 1.5px 0 0 #5a3418, -1.5px 0 0 #5a3418, 0 1.5px 0 #5a3418, 0 -1.5px 0 #5a3418,
+    1.1px 1.1px 0 #5a3418, -1.1px 1.1px 0 #5a3418, 1.1px -1.1px 0 #5a3418, -1.1px -1.1px 0 #5a3418, 0 2px 0 #5a3418;
+}
+.k-os {
+  color: #fff;
+  text-shadow: 1px 0 0 #5a3418, -1px 0 0 #5a3418, 0 1px 0 #5a3418, 0 -1px 0 #5a3418,
+    0.8px 0.8px 0 #5a3418, -0.8px 0.8px 0 #5a3418, 0.8px -0.8px 0 #5a3418, -0.8px -0.8px 0 #5a3418, 0 1.5px 0 #5a3418;
+}
+.k-big {
+  color: #fff;
+  text-shadow: 2.5px 0 0 #5a3418, -2.5px 0 0 #5a3418, 0 2.5px 0 #5a3418, 0 -2.5px 0 #5a3418,
+    1.8px 1.8px 0 #5a3418, -1.8px 1.8px 0 #5a3418, 1.8px -1.8px 0 #5a3418, -1.8px -1.8px 0 #5a3418, 0 4px 0 #5a3418;
+}
+
+.screen { position: absolute; inset: 0; overflow: hidden; background: var(--page); }
+.scroll { overflow-y: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.scroll::-webkit-scrollbar { display: none; }
+.tabular { font-variant-numeric: tabular-nums; }
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+:root[data-motion='reduced'] *, :root[data-motion='reduced'] *::before, :root[data-motion='reduced'] *::after {
+  animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important;
 }

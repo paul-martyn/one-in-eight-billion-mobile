@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Daylight Grain — Welcome</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&amp;family=Figtree:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#17352e}a:hover{color:#e5533c}
+a:focus-visible,button:focus-visible{outline:3px solid #17352e;outline-offset:4px}
+</style>
+</helmet>
+<main style="position: relative; width: 393px; height: 852px; box-sizing: border-box; padding: 52px 28px 36px; overflow: hidden; background: #f4ede1; color: #17352e; font-family: Figtree, system-ui, sans-serif; display: flex; flex-direction: column">
+<svg width="393" height="852" viewBox="0 0 393 852" aria-hidden="true" style="position: absolute; left: 0; top: 0">
+<circle cx="318" cy="250" r="118" fill="#f2b33d"></circle>
+<circle cx="52" cy="472" r="9" fill="#e5533c"></circle>
+<circle cx="360" cy="452" r="5" fill="#17352e"></circle>
+<path d="M18 300 C40 240 90 196 150 184" fill="none" stroke="#17352e" stroke-width="1.5" stroke-dasharray="3 6" stroke-linecap="round"></path>
+</svg>
+<h1 style="position: relative; margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 92px; font-weight: 800; line-height: 0.95; letter-spacing: -3px; white-space: nowrap">1 in <span style="color: #e5533c">8</span> B</h1>
+<div style="position: relative; width: 330px; height: 330px; margin: 18px 0 0 6px; flex: none">
+<dc-import name="Globe" size="330" variant="halftone" land="#17352e" ocean="#a9d3ee" shade="#4f8fc0" night="rgba(23,53,46,0.22)" flash="#e5533c" marker="#e5533c" marker-ring="#f4ede1" dot="1.15" spin="8" start-lon="-40" focus="{{ born }}" hint-size="330px,330px"></dc-import>
+</div>
+<sc-if value="{{ unborn }}" hint-placeholder-val="{{ true }}">
+<p style="position: relative; margin: 14px 0 0; font-size: 17px; line-height: 1.5; color: #2f4a43">Somewhere right now a baby takes a first breath. Tap the button and that baby is you: a real country, a real family, one whole life.</p>
+<div style="position: relative; display: flex; gap: 28px; margin-top: 18px">
+<div><p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 34px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums">{{ bornCount }}</p><p style="margin: 4px 0 0; font-size: 13px; line-height: 1.3; color: #4e5f58">born since you opened</p></div>
+<div><p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 34px; font-weight: 800; line-height: 1; color: #4e5f58; font-variant-numeric: tabular-nums">{{ diedCount }}</p><p style="margin: 4px 0 0; font-size: 13px; line-height: 1.3; color: #4e5f58">lives ended</p></div>
+</div>
+</sc-if>
+<sc-if value="{{ born }}" hint-placeholder-val="{{ false }}">
+<p style="position: relative; margin: 14px 0 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 28px; font-weight: 800; line-height: 1.1">Hello, Aarav.</p>
+<p style="position: relative; margin: 8px 0 0; font-size: 17px; line-height: 1.5; color: #2f4a43">Born 14 March 2026 in Lucknow, India. Your sister Ananya is three.</p>
+</sc-if>
+<sc-if value="{{ unborn }}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{ beBorn }}" style="position: relative; margin-top: auto; display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 64px; padding: 0 8px 0 26px; border: 0; border-radius: 32px; background: #e5533c; color: #ffffff; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 20px; font-weight: 800; cursor: pointer">Be Born<span style="width: 48px; height: 48px; border-radius: 24px; background: #17352e; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></button>
+</sc-if>
+<sc-if value="{{ born }}" hint-placeholder-val="{{ false }}">
+<a href="DayLife.dc.html" style="position: relative; margin-top: auto; display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 64px; box-sizing: border-box; padding: 0 8px 0 26px; border-radius: 32px; background: #17352e; color: #ffffff; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 20px; font-weight: 800; text-decoration: none">Start growing up<span style="width: 48px; height: 48px; border-radius: 24px; background: #f2b33d; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17352e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
+</sc-if>
+<svg width="393" height="852" aria-hidden="true" style="position: absolute; left: 0; top: 0; pointer-events: none; mix-blend-mode: multiply; opacity: 0.18">
+<filter id="dw-grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
+<rect width="393" height="852" filter="url(#dw-grain)"></rect>
+</svg>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    this.openedAt = Date.now();
+    this.timer = setInterval(() => this.forceUpdate(), 250);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+  renderVals() {
+    const born = !!(this.state && this.state.born);
+    const secs = this.openedAt ? (Date.now() - this.openedAt) / 1000 : 0;
+    // About 4.2 births and 2 deaths every second worldwide.
+    return {
+      born: born,
+      unborn: !born,
+      bornCount: Math.floor(secs * 4.2).toLocaleString('en-US'),
+      diedCount: Math.floor(secs * 2).toLocaleString('en-US'),
+      beBorn: () => this.setState({ born: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

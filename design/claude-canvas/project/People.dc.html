@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Character generator</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&amp;family=Figtree:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+button:focus-visible{outline:3px solid #e5533c;outline-offset:3px}
+</style>
+</helmet>
+<main style="position: relative; width: 1240px; height: 1380px; box-sizing: border-box; padding: 48px 56px; overflow: hidden; background: {{ t.bg }}; color: {{ t.ink }}; font-family: Figtree, system-ui, sans-serif; transition: background 0.4s ease, color 0.4s ease">
+<header style="display: flex; align-items: flex-end; justify-content: space-between; gap: 40px">
+<div style="max-width: 720px">
+<p style="margin: 0; font-size: 12px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ t.muted }}">Character generator · one seed, one person</p>
+<h1 style="margin: 8px 0 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 44px; font-weight: 800; line-height: 1.05; letter-spacing: -1px">Every family, drawn from a seed</h1>
+<p style="margin: 12px 0 0; font-size: 17px; line-height: 1.5; color: {{ t.muted }}">Age, sex, region, skin tone, build, hair and clothes are picked from a seed. The same seed always draws the same person, at any age, full height or as a portrait. Nothing is stored as an image: each figure is about 25 SVG shapes.</p>
+</div>
+<div style="display: flex; gap: 10px; flex: none">
+<button type="button" onClick="{{ toggleNight }}" aria-pressed="{{ nightPressed }}" style="display: flex; align-items: center; gap: 8px; height: 48px; box-sizing: border-box; padding: 0 18px; border: 1.5px solid {{ t.line }}; border-radius: 24px; background: transparent; color: {{ t.ink }}; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 16px; font-weight: 700; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"></path></svg>Night</button>
+<button type="button" onClick="{{ shuffle }}" style="display: flex; align-items: center; gap: 8px; height: 48px; box-sizing: border-box; padding: 0 20px; border: 0; border-radius: 24px; background: {{ t.btnBg }}; color: {{ t.btnInk }}; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 16px; font-weight: 800; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"></rect><circle cx="8.5" cy="8.5" r="1.2" fill="currentColor" stroke="none"></circle><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"></circle><circle cx="15.5" cy="15.5" r="1.2" fill="currentColor" stroke="none"></circle></svg>Shuffle families</button>
+</div>
+</header>
+<div style="display: grid; grid-template-columns: 160px repeat(8, minmax(0, 1fr)); margin-top: 32px; padding-bottom: 10px; border-bottom: 1.5px solid {{ t.line }}">
+<span></span>
+<sc-for list="{{ cast }}" as="c" hint-placeholder-count="8">
+<span style="text-align: center; font-size: 13px; font-weight: 700; line-height: 1.3; color: {{ t.muted }}">{{ c.role }} · {{ c.age }}</span>
+</sc-for>
+</div>
+<sc-for list="{{ rows }}" as="row" hint-placeholder-count="6">
+<div style="display: grid; grid-template-columns: 160px repeat(8, minmax(0, 1fr)); align-items: end; height: 156px; border-bottom: 1.5px solid {{ t.line }}">
+<div style="align-self: center">
+<p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 18px; font-weight: 800; line-height: 1.2">{{ row.name }}</p>
+<p style="margin: 4px 0 0; font-size: 12px; line-height: 1.35; color: {{ t.muted }}">{{ row.note }}</p>
+</div>
+<sc-for list="{{ row.people }}" as="p" hint-placeholder-count="8">
+<div style="display: flex; justify-content: center"><dc-import name="Person" seed="{{ p.seed }}" age="{{ p.age }}" sex="{{ p.sex }}" region="{{ p.region }}" skin="{{ p.skin }}" height="150" night="{{ nightVal }}" hint-size="75px,150px"></dc-import></div>
+</sc-for>
+</div>
+</sc-for>
+<section aria-label="Portraits from the same seeds" style="margin-top: 28px">
+<p style="margin: 0; font-size: 12px; font-weight: 700; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ t.muted }}">Same seeds as portraits · for dialogs, the family list and the card</p>
+<div style="display: grid; grid-template-columns: 160px repeat(8, minmax(0, 1fr)); align-items: center; margin-top: 12px">
+<p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 18px; font-weight: 800; line-height: 1.2">{{ portraitRegion }}</p>
+<sc-for list="{{ portraits }}" as="p" hint-placeholder-count="8">
+<div style="display: flex; justify-content: center"><div style="width: 76px; height: 76px; border-radius: 38px; overflow: hidden; background: {{ p.bg }}"><dc-import name="Person" seed="{{ p.seed }}" age="{{ p.age }}" sex="{{ p.sex }}" region="{{ p.region }}" skin="{{ p.skin }}" crop="portrait" height="76" night="{{ nightVal }}" hint-size="76px,76px"></dc-import></div></div>
+</sc-for>
+</div>
+</section>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1240,"height":1380}}'>
+// Six regions, one family each, every member drawn by the Person component from a seed.
+// Shuffle picks new seeds; Night shows the tint used by the dark theme.
+var REGIONS = [
+  { id: 'south-asia', name: 'South Asia', note: 'India, Pakistan, Bangladesh', skin: [3, 6] },
+  { id: 'east-asia', name: 'East Asia', note: 'China, Japan, Korea', skin: [0, 2] },
+  { id: 'west-africa', name: 'West Africa', note: 'Nigeria, Ghana, Senegal', skin: [5, 7] },
+  { id: 'europe', name: 'Europe', note: 'Germany, Poland, Italy', skin: [0, 2] },
+  { id: 'latin-america', name: 'Latin America', note: 'Brazil, Mexico, Peru', skin: [1, 4] },
+  { id: 'middle-east', name: 'Middle East', note: 'Egypt, Iran, Saudi Arabia', skin: [1, 3] }
+];
+var CAST = [
+  { role: 'Grandma', age: 70, sex: 'f' }, { role: 'Grandpa', age: 73, sex: 'm' },
+  { role: 'Dad', age: 41, sex: 'm' }, { role: 'Mum', age: 38, sex: 'f' },
+  { role: 'Teen', age: 15 }, { role: 'Child', age: 8 }, { role: 'Toddler', age: 2 }, { role: 'Baby', age: 0 }
+];
+var THEMES = {
+  light: { bg: '#f4ede1', ink: '#17352e', muted: '#4e5f58', line: 'rgba(23,53,46,0.14)', btnBg: '#e5533c', btnInk: '#ffffff', tints: ['#fbe7be', '#d6eaf6', '#d3ede1', '#f9d9d2'] },
+  dark: { bg: '#18171c', ink: '#f6f1ea', muted: '#a9a3b8', line: 'rgba(246,241,234,0.12)', btnBg: '#f6cfe0', btnInk: '#18171c', tints: ['rgba(242,215,166,0.16)', 'rgba(154,136,255,0.18)', 'rgba(143,216,184,0.16)', 'rgba(255,158,176,0.16)'] }
+};
+
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const base = st.base || 2026;
+    const night = !!st.night;
+    const t = THEMES[night ? 'dark' : 'light'];
+    // Relatives share a skin tone, give or take one shade.
+    const rows = REGIONS.map((reg, ri) => {
+      const fam = base * 13 + ri * 101;
+      const lo = reg.skin[0], hi = reg.skin[1];
+      const skinBase = lo + (fam % (hi - lo + 1));
+      return {
+        name: reg.name,
+        note: reg.note,
+        people: CAST.map((c, ci) => {
+          const seed = fam * 7 + ci * 31;
+          return {
+            seed: seed,
+            age: c.age,
+            sex: c.sex || ((seed >> 3) % 2 ? 'm' : 'f'),
+            region: reg.id,
+            skin: Math.max(lo, Math.min(hi, skinBase + (seed % 3) - 1))
+          };
+        })
+      };
+    });
+    return {
+      t: t,
+      cast: CAST,
+      rows: rows,
+      nightVal: night ? 1 : 0,
+      nightPressed: night ? 'true' : 'false',
+      portraitRegion: rows[0].name,
+      portraits: rows[0].people.map((p, i) => Object.assign({ bg: t.tints[i % t.tints.length] }, p)),
+      shuffle: () => this.setState({ base: 1 + Math.floor(Math.random() * 99999) }),
+      toggleNight: () => this.setState({ night: !night })
+    };
+  }
+}
+</script>
+</body>
+</html>

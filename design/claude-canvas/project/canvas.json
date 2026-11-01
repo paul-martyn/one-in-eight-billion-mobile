@@ -1,0 +1,885 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Birth.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "v1",
+      "radius": 32,
+      "title": "02 · Birth",
+      "w": 393,
+      "x": 473,
+      "y": 0
+    },
+    "Card.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "deprecated",
+      "radius": 32,
+      "title": "Character card (old) · Light",
+      "w": 393,
+      "x": 0,
+      "y": 0
+    },
+    "CardDark.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "deprecated",
+      "radius": 32,
+      "title": "Character card (old) · Dark",
+      "w": 393,
+      "x": 473,
+      "y": 0
+    },
+    "ClayLife.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "directions",
+      "radius": 32,
+      "title": "C2 · Life",
+      "w": 393,
+      "x": 2605,
+      "y": 0
+    },
+    "ClayWelcome.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "directions",
+      "radius": 32,
+      "title": "C1 · Welcome",
+      "w": 393,
+      "x": 2132,
+      "y": 0
+    },
+    "DayLife.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "directions",
+      "radius": 32,
+      "title": "E2 · Life",
+      "w": 393,
+      "x": 4737,
+      "y": 0
+    },
+    "DayWelcome.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "directions",
+      "radius": 32,
+      "title": "E1 · Welcome",
+      "w": 393,
+      "x": 4264,
+      "y": 0
+    },
+    "Death.dc.html": {
+      "h": 1280,
+      "is_interactive": true,
+      "page": "v1",
+      "radius": 32,
+      "title": "07 · Life story (scroll)",
+      "w": 393,
+      "x": 2838,
+      "y": 0
+    },
+    "Decision.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "v1",
+      "radius": 32,
+      "title": "04 · Decision",
+      "w": 393,
+      "x": 1419,
+      "y": 0
+    },
+    "Focus.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "v1",
+      "radius": 32,
+      "title": "05 · Focus",
+      "w": 393,
+      "x": 1892,
+      "y": 0
+    },
+    "Globe.dc.html": {
+      "h": 360,
+      "is_interactive": true,
+      "page": "directions",
+      "title": "Globe component (drag to spin)",
+      "w": 360,
+      "x": 0,
+      "y": 972
+    },
+    "Life.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "v1",
+      "radius": 32,
+      "title": "03 · Life",
+      "w": 393,
+      "x": 946,
+      "y": 0
+    },
+    "Main.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "v1",
+      "radius": 32,
+      "title": "01 · Welcome",
+      "w": 393,
+      "x": 0,
+      "y": 0
+    },
+    "Money.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "v1",
+      "radius": 32,
+      "title": "06 · Money",
+      "w": 393,
+      "x": 2365,
+      "y": 0
+    },
+    "MonoLife.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "directions",
+      "radius": 32,
+      "title": "B2 · Life",
+      "w": 393,
+      "x": 1539,
+      "y": 0
+    },
+    "MonoWelcome.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "directions",
+      "radius": 32,
+      "title": "B1 · Welcome",
+      "w": 393,
+      "x": 1066,
+      "y": 0
+    },
+    "NightLife.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "directions",
+      "radius": 32,
+      "title": "A2 · Life",
+      "w": 393,
+      "x": 473,
+      "y": 0
+    },
+    "NightWelcome.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "directions",
+      "radius": 32,
+      "title": "A1 · Welcome",
+      "w": 393,
+      "x": 0,
+      "y": 0
+    },
+    "People.dc.html": {
+      "h": 1380,
+      "is_interactive": true,
+      "page": "people",
+      "radius": 24,
+      "title": "Character generator · families by region",
+      "w": 1240,
+      "x": 0,
+      "y": 0
+    },
+    "PeopleTest.dc.html": {
+      "h": 820,
+      "is_interactive": true,
+      "page": "people",
+      "radius": 24,
+      "title": "Front vs three-quarter heads (test)",
+      "w": 1240,
+      "x": 0,
+      "y": 1500
+    },
+    "Person.dc.html": {
+      "h": 300,
+      "is_interactive": true,
+      "page": "people",
+      "title": "Person component (one seed, one person)",
+      "w": 150,
+      "x": 1320,
+      "y": 0
+    },
+    "PixelLife.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "directions",
+      "radius": 32,
+      "title": "D2 · Life",
+      "w": 393,
+      "x": 3671,
+      "y": 0
+    },
+    "PixelWelcome.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "directions",
+      "radius": 32,
+      "title": "D1 · Welcome",
+      "w": 393,
+      "x": 3198,
+      "y": 0
+    },
+    "Play.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "deprecated",
+      "radius": 32,
+      "title": "Life (old) · Light",
+      "w": 393,
+      "x": 946,
+      "y": 0
+    },
+    "PlayDark.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "deprecated",
+      "radius": 32,
+      "title": "Life (old) · Dark",
+      "w": 393,
+      "x": 1419,
+      "y": 0
+    },
+    "Roll.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "final",
+      "radius": 32,
+      "title": "2 · Birth roll · Light",
+      "w": 393,
+      "x": 473,
+      "y": 0
+    },
+    "RollDark.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "final",
+      "radius": 32,
+      "title": "2 · Birth roll · Dark",
+      "w": 393,
+      "x": 473,
+      "y": 1265
+    },
+    "Start.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "final",
+      "radius": 32,
+      "title": "1 · Start · Light",
+      "w": 393,
+      "x": 0,
+      "y": 0
+    },
+    "StartDark.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "final",
+      "radius": 32,
+      "title": "1 · Start · Dark",
+      "w": 393,
+      "x": 0,
+      "y": 1265
+    },
+    "System.dc.html": {
+      "h": 860,
+      "page": "v1",
+      "title": "Visual language",
+      "w": 1280,
+      "x": 0,
+      "y": 1400
+    },
+    "Cert.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "final",
+      "radius": 32,
+      "title": "3 · Birth certificate · Light",
+      "w": 393,
+      "x": 946,
+      "y": 0
+    },
+    "CertDark.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "final",
+      "radius": 32,
+      "title": "3 · Birth certificate · Dark",
+      "w": 393,
+      "x": 946,
+      "y": 1265
+    },
+    "Odds.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "final",
+      "radius": 32,
+      "title": "3a · Your odds · Light",
+      "w": 393,
+      "x": 1419,
+      "y": 0
+    },
+    "OddsDark.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "final",
+      "radius": 32,
+      "title": "3a · Your odds · Dark",
+      "w": 393,
+      "x": 1419,
+      "y": 1265
+    },
+    "OddsFull.dc.html": {
+      "h": 1440,
+      "page": "final",
+      "radius": 32,
+      "title": "3a · Your odds · whole scroll",
+      "w": 393,
+      "x": 2838,
+      "y": 0
+    },
+    "Live.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "final",
+      "radius": 32,
+      "title": "4 · Life · Light",
+      "w": 393,
+      "x": 1892,
+      "y": 0
+    },
+    "LiveDark.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "final",
+      "radius": 32,
+      "title": "4 · Life · Dark",
+      "w": 393,
+      "x": 1892,
+      "y": 1265
+    },
+    "LiveJournal.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "final",
+      "radius": 32,
+      "title": "4 · Life · after the choice",
+      "w": 393,
+      "x": 2365,
+      "y": 0
+    },
+    "LiveCute.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "4 · Life",
+      "w": 393,
+      "x": 2365,
+      "y": 1250
+    },
+    "StartCute.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "1 · Start",
+      "w": 393,
+      "x": 473,
+      "y": 1250
+    },
+    "RollCute.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "2 · Birth roll",
+      "w": 393,
+      "x": 946,
+      "y": 1250
+    },
+    "CertCute.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "3 · Birth certificate",
+      "w": 393,
+      "x": 1419,
+      "y": 1250
+    },
+    "OddsCute.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "3a · Your odds",
+      "w": 393,
+      "x": 1892,
+      "y": 1250
+    },
+    "LiveCuteDark.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "final",
+      "radius": 32,
+      "title": "4b · Life · cute, dark",
+      "w": 393,
+      "x": 2838,
+      "y": 2530
+    },
+    "PeopleCute.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "5 · People",
+      "w": 393,
+      "x": 0,
+      "y": 2600
+    },
+    "PeopleCutePerson.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "5 · People · person card",
+      "w": 393,
+      "x": 473,
+      "y": 2600
+    },
+    "ActivitiesCute.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "6 · Activities",
+      "w": 393,
+      "x": 946,
+      "y": 2600
+    },
+    "ActivitiesCuteDetail.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "6 · Activities · open action",
+      "w": 393,
+      "x": 1419,
+      "y": 2600
+    },
+    "ActivitiesCuteStarted.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "6 · Activities · after starting",
+      "w": 393,
+      "x": 1892,
+      "y": 2600
+    },
+    "MoneyCute.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "7 · Money",
+      "w": 393,
+      "x": 2365,
+      "y": 2600
+    },
+    "MoneyCuteDetail.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "7 · Money · savings decision",
+      "w": 393,
+      "x": 2838,
+      "y": 2600
+    },
+    "OddsLife.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "8 · Odds",
+      "w": 393,
+      "x": 3311,
+      "y": 2600
+    },
+    "OddsLifeLives.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "8 · Odds · born in the same second",
+      "w": 393,
+      "x": 3784,
+      "y": 2600
+    },
+    "LiveCuteDecision.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "4 · Life · decision pop-up",
+      "w": 393,
+      "x": 2838,
+      "y": 1250
+    },
+    "LiveCuteMenuFolder.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "final",
+      "radius": 32,
+      "title": "4b · Life · menu A · folder tabs",
+      "w": 393,
+      "x": 3311,
+      "y": 2530
+    },
+    "LiveCuteMenuStickers.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "final",
+      "radius": 32,
+      "title": "4b · Life · menu B · stickers (chosen), switching",
+      "w": 393,
+      "x": 3784,
+      "y": 2530
+    },
+    "LiveCuteMenuPencil.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "final",
+      "radius": 32,
+      "title": "4b · Life · menu C · pencil tabs",
+      "w": 393,
+      "x": 4257,
+      "y": 2530
+    },
+    "LangCute.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "0 · Language & currency",
+      "w": 393,
+      "x": 0,
+      "y": 1250
+    },
+    "HubCute.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "9 · Hub between lives",
+      "w": 393,
+      "x": 0,
+      "y": 3950
+    },
+    "HubCuteTabs.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "final",
+      "radius": 32,
+      "title": "9 · Hub · tabs switching",
+      "w": 393,
+      "x": 473,
+      "y": 5060
+    },
+    "Prototype.dc.html": {
+      "h": 852,
+      "w": 720,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 0,
+      "title": "Prototype · tap through the whole app",
+      "x": 0,
+      "y": 0
+    },
+    "FlowMap.dc.html": {
+      "h": 900,
+      "w": 2576,
+      "page": "production",
+      "radius": 0,
+      "title": "Flow map",
+      "x": 800,
+      "y": 0
+    },
+    "LiveCutePause.dc.html": {
+      "h": 852,
+      "w": 393,
+      "is_interactive": true,
+      "page": "production",
+      "radius": 32,
+      "title": "4 · Life · pause pop-up",
+      "x": 3311,
+      "y": 1250
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-28T12:00:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas",
+    "page": "production"
+  },
+  "noteOrder": [
+    "finLight",
+    "finDark",
+    "flow",
+    "dirA",
+    "dirB",
+    "dirC",
+    "dirD",
+    "dirE",
+    "depr",
+    "cute",
+    "hub",
+    "prod",
+    "prodSetup",
+    "prodTabs",
+    "prodHub"
+  ],
+  "notes": {
+    "dirA": {
+      "kind": "title1",
+      "maxW": 866,
+      "page": "directions",
+      "text": "A · Night Moon",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "dirB": {
+      "kind": "title1",
+      "maxW": 866,
+      "page": "directions",
+      "text": "B · Mono Novel",
+      "w": 240,
+      "x": 1066,
+      "y": -300
+    },
+    "dirC": {
+      "kind": "title1",
+      "maxW": 866,
+      "page": "directions",
+      "text": "C · Ivory & Clay",
+      "w": 240,
+      "x": 2132,
+      "y": -300
+    },
+    "dirD": {
+      "kind": "title1",
+      "maxW": 866,
+      "page": "directions",
+      "text": "D · Cozy Pixel",
+      "w": 240,
+      "x": 3198,
+      "y": -300
+    },
+    "dirE": {
+      "kind": "title1",
+      "maxW": 866,
+      "page": "directions",
+      "text": "E · Daylight Grain",
+      "w": 240,
+      "x": 4264,
+      "y": -300
+    },
+    "finDark": {
+      "kind": "title1",
+      "maxW": 2285,
+      "page": "final",
+      "text": "Dark · Night (A colours)",
+      "w": 240,
+      "x": 0,
+      "y": 965
+    },
+    "finLight": {
+      "kind": "title1",
+      "maxW": 3231,
+      "page": "final",
+      "text": "Light · Day (E)",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "flow": {
+      "kind": "title1",
+      "maxW": 3231,
+      "page": "v1",
+      "text": "Мобильная версия — путь одной жизни",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "depr": {
+      "kind": "title1",
+      "maxW": 1812,
+      "page": "deprecated",
+      "text": "Deprecated · not in the flow",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "cute": {
+      "kind": "title1",
+      "maxW": 1812,
+      "page": "final",
+      "text": "Cute · explorations: dark theme, menu tests",
+      "w": 240,
+      "x": 2838,
+      "y": 2230
+    },
+    "hub": {
+      "kind": "title1",
+      "maxW": 1000,
+      "page": "final",
+      "text": "Cute · hub tabs demo",
+      "w": 240,
+      "x": 473,
+      "y": 4760
+    },
+    "prod": {
+      "kind": "title1",
+      "maxW": 3376,
+      "page": "production",
+      "text": "Production · UI flow",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "prodSetup": {
+      "kind": "title1",
+      "maxW": 3704,
+      "page": "production",
+      "text": "First launch → life",
+      "w": 240,
+      "x": 0,
+      "y": 1000
+    },
+    "prodTabs": {
+      "kind": "title1",
+      "maxW": 4177,
+      "page": "production",
+      "text": "Life tabs",
+      "w": 240,
+      "x": 0,
+      "y": 2350
+    },
+    "prodHub": {
+      "kind": "title1",
+      "maxW": 1000,
+      "page": "production",
+      "text": "Between lives",
+      "w": 240,
+      "x": 0,
+      "y": 3700
+    }
+  },
+  "order": [
+    "People.dc.html",
+    "PeopleTest.dc.html",
+    "Person.dc.html",
+    "Main.dc.html",
+    "Birth.dc.html",
+    "Life.dc.html",
+    "Decision.dc.html",
+    "Focus.dc.html",
+    "Money.dc.html",
+    "Death.dc.html",
+    "System.dc.html",
+    "Globe.dc.html",
+    "NightWelcome.dc.html",
+    "NightLife.dc.html",
+    "MonoWelcome.dc.html",
+    "MonoLife.dc.html",
+    "ClayWelcome.dc.html",
+    "ClayLife.dc.html",
+    "PixelWelcome.dc.html",
+    "PixelLife.dc.html",
+    "DayWelcome.dc.html",
+    "DayLife.dc.html",
+    "Start.dc.html",
+    "Roll.dc.html",
+    "Card.dc.html",
+    "Play.dc.html",
+    "StartDark.dc.html",
+    "RollDark.dc.html",
+    "CardDark.dc.html",
+    "PlayDark.dc.html",
+    "Cert.dc.html",
+    "CertDark.dc.html",
+    "Odds.dc.html",
+    "OddsDark.dc.html",
+    "OddsFull.dc.html",
+    "Live.dc.html",
+    "LiveDark.dc.html",
+    "LiveJournal.dc.html",
+    "LiveCute.dc.html",
+    "LiveCuteDecision.dc.html",
+    "LangCute.dc.html",
+    "StartCute.dc.html",
+    "RollCute.dc.html",
+    "CertCute.dc.html",
+    "OddsCute.dc.html",
+    "LiveCuteDark.dc.html",
+    "PeopleCute.dc.html",
+    "PeopleCutePerson.dc.html",
+    "ActivitiesCute.dc.html",
+    "ActivitiesCuteDetail.dc.html",
+    "ActivitiesCuteStarted.dc.html",
+    "MoneyCute.dc.html",
+    "MoneyCuteDetail.dc.html",
+    "OddsLife.dc.html",
+    "OddsLifeLives.dc.html",
+    "LiveCuteMenuFolder.dc.html",
+    "LiveCuteMenuStickers.dc.html",
+    "LiveCuteMenuPencil.dc.html",
+    "HubCute.dc.html",
+    "HubCuteTabs.dc.html",
+    "Prototype.dc.html",
+    "FlowMap.dc.html",
+    "LiveCutePause.dc.html"
+  ],
+  "pages": [
+    {
+      "id": "production",
+      "name": "Production · UI flow"
+    },
+    {
+      "id": "final",
+      "name": "Финал · Light / Dark"
+    },
+    {
+      "id": "people",
+      "name": "Персонажи"
+    },
+    {
+      "id": "directions",
+      "name": "Направления"
+    },
+    {
+      "id": "v1",
+      "name": "v1 · Бумага"
+    },
+    {
+      "id": "deprecated",
+      "name": "Deprecated"
+    }
+  ],
+  "title": "One in Eight Billion — Design"
+}

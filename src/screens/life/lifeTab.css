@@ -1,0 +1,185 @@
+/* Вкладка «Жизнь» (LiveCute.dc.html). Размеры из макета 393 × 852, гибко для 320–430 × 568–932. */
+.lt {
+  position: absolute; inset: 0; display: flex; flex-direction: column; overflow: hidden;
+  padding-bottom: calc(106px + var(--safe-bottom)); background: var(--page); color: var(--ink);
+  --scene-h: clamp(184px, 35.2cqh, 300px);
+}
+.lt--empty { display: grid; place-items: center; }
+.lt__wait { margin: 0; color: var(--muted); font-weight: 600; }
+
+/* ---- Сцена ---- */
+.lt-scene { position: relative; flex: none; height: var(--scene-h); overflow: hidden; border-bottom: 2px solid var(--line); }
+.lt-art { position: absolute; inset: 0; background: linear-gradient(180deg, #86cdee 0%, #cdeaf4 58%, #fde6c4 100%); }
+.lt-art__sun {
+  position: absolute; right: 16%; top: 40%; width: 38px; height: 38px; border-radius: 50%; background: #ffe27a;
+  box-shadow: 0 0 0 7px rgba(255, 226, 122, 0.35), 0 0 0 15px rgba(255, 226, 122, 0.16);
+}
+.lt-art__cloud { position: absolute; }
+.lt-art__cloud--a { left: 6%; top: 46%; }
+.lt-art__cloud--b { right: 32%; top: 37%; }
+.lt-art__hills { position: absolute; left: 0; bottom: 24%; width: 100%; height: 18%; display: block; }
+.lt-art__ground {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 25%; border-top: 2px solid #d9b47a;
+  background: repeating-linear-gradient(90deg, rgba(123, 75, 42, 0.06) 0 2px, transparent 2px 46px), linear-gradient(#f3d6a0, #e9c48a);
+}
+
+.lt-scene__top {
+  position: absolute; z-index: 2; left: 10px; right: 10px;
+  top: max(calc(var(--safe-top) + 6px), clamp(12px, 5.9cqh, 50px));
+  display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; column-gap: 8px; align-items: start;
+}
+.lt-round {
+  display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
+  border: 2px solid var(--line); border-radius: 50%; background: var(--card); box-shadow: var(--lip); color: var(--line);
+}
+.lt-round:active:not(:disabled):not([aria-disabled='true']) { transform: scale(0.94); }
+.lt-round:disabled { opacity: 0.55; }
+.lt-round[aria-disabled='true'] { cursor: default; }
+.lt-scene__mid { display: flex; flex-direction: column; align-items: center; min-width: 0; padding-top: 14px; }
+
+/* Полоса жизни 0–100 */
+.lt-bar { position: relative; width: 100%; height: 16px; border: 2px solid var(--line); border-radius: 5px; background: #5b4636; }
+.lt-bar__fill {
+  position: absolute; inset: 0; border-radius: 3px 0 0 3px; background: #ffd75a; box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.45);
+  transform-origin: 0 50%; transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.lt-bar__tick { position: absolute; top: -6px; bottom: -6px; width: 3px; margin-left: -1.5px; border-radius: 2px; background: #fff; box-shadow: 0 0 0 1.5px var(--line); }
+.lt-bar__le { position: absolute; top: 0; bottom: 0; display: flex; align-items: center; font-size: 10px; font-weight: 700; line-height: 1; pointer-events: none; }
+.lt-bar__rail { position: absolute; inset: 0; pointer-events: none; transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.lt-bar__knob { position: absolute; left: 0; top: 50%; margin: -12px 0 0 -12px; overflow: visible; font-family: inherit; }
+
+.lt-born {
+  display: inline-flex; align-items: center; gap: 4px; max-width: 100%; height: 20px; margin: 6px 0 0; padding: 0 8px;
+  border: 2px solid var(--line); border-radius: 5px; background: #8c7a66; color: #fff; font-size: 11px; font-weight: 600; white-space: nowrap;
+}
+.lt-born span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+
+/* Игрок: инициал в круге вместо фигуры из макета */
+.lt-hero {
+  --hero: clamp(44px, calc(var(--scene-h) * 0.24), 76px);
+  position: absolute; z-index: 1; left: 50%; bottom: calc(25% - 7px); transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; pointer-events: none;
+}
+.lt-hero__disc {
+  position: relative; display: grid; place-items: center; width: var(--hero); height: var(--hero);
+  border: 2.5px solid var(--line); border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff6cf 0%, #ffd75a 62%);
+  box-shadow: inset 0 -4px 0 rgba(90, 52, 24, 0.18), 0 3px 0 rgba(90, 52, 24, 0.14);
+}
+.lt-hero__disc .k-big { font-size: calc(var(--hero) * 0.5); font-weight: 700; line-height: 1; }
+.lt-hero__you {
+  position: absolute; z-index: 1; top: -8px; left: calc(50% + var(--hero) * 0.32);
+  display: flex; align-items: center; height: 22px; padding: 0 8px; border: 2px solid var(--line); border-radius: 11px;
+  background: #ffd75a; color: #5a3418; font-size: 12px; font-weight: 700; white-space: nowrap;
+}
+.lt-hero__shadow { width: calc(var(--hero) * 0.72); height: 8px; margin-top: 3px; border-radius: 50%; background: rgba(107, 66, 38, 0.2); }
+
+.lt-where {
+  position: absolute; z-index: 2; left: 10px; bottom: 10px; max-width: calc(100% - 132px);
+  display: flex; align-items: center; height: 26px; margin: 0; padding: 0 10px;
+  border: 2px solid var(--line); border-radius: 13px; background: rgba(255, 250, 240, 0.94); color: var(--ink);
+  font-size: 12px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.lt-where > span[aria-hidden] { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+
+.lt-time { position: absolute; z-index: 2; right: 10px; bottom: 8px; display: flex; gap: 6px; }
+.lt-sq {
+  display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
+  border: 2px solid var(--line); border-radius: 8px; box-shadow: var(--lip); color: #fff;
+}
+.lt-sq:active:not(:disabled) { transform: translateY(1px) scale(0.96); }
+.lt-sq:disabled { opacity: 0.55; }
+.lt-sq--ff { background: var(--card); transition: background-color 0.2s ease; }
+.lt-sq--ff.is-on { background: var(--teal); box-shadow: var(--lip), var(--gloss); }
+.lt-sq--speed { background: #f4a940; font-size: 15px; font-weight: 700; }
+.lt-ffbadge {
+  position: absolute; z-index: 2; right: 10px; bottom: 60px; display: inline-flex; align-items: center; gap: 4px;
+  max-width: calc(100% - 20px); height: 24px; margin: 0; padding: 0 9px; border: 2px solid var(--line); border-radius: 12px;
+  background: var(--teal); font-size: 11.5px; font-weight: 700; white-space: nowrap; color: #fff;
+  text-shadow: 1px 0 0 #5a3418, -1px 0 0 #5a3418, 0 1px 0 #5a3418, 0 -1px 0 #5a3418, 0 1.5px 0 #5a3418;
+}
+.lt-ffbadge svg { width: 14px; height: 14px; }
+
+.lt-year { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; height: 4px; background: rgba(90, 52, 24, 0.16); }
+.lt-year__fill { display: block; height: 100%; background: var(--teal-dark); transform-origin: 0 50%; }
+
+/* ---- Показатели ---- */
+.lt-stats {
+  flex: none; margin: 8px 10px 0; padding: 4px 8px 7px; border: 2px solid var(--line); border-radius: 10px;
+  background: var(--card); box-shadow: var(--shadow-card);
+}
+.lt-stats__meters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.lt-stats__chips { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr) minmax(0, 1.15fr); gap: 6px; margin-top: 6px; }
+.lt-chip {
+  display: flex; align-items: center; justify-content: center; gap: 4px; min-width: 0; height: 22px; margin: 0; padding: 0 6px;
+  border: 2px solid var(--line); border-radius: 5px; background: var(--paper); color: var(--ink);
+  font-size: 12px; font-weight: 700; white-space: nowrap;
+}
+.lt-chip > span:not(.sr-only) { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.lt-chip--status { justify-content: flex-start; }
+.lt-chip__dot { flex: none; width: 9px; height: 9px; border: 1.5px solid var(--line); border-radius: 50%; background: #ffd75a; }
+
+/* ---- Журнал жизни ---- */
+.lj { position: relative; flex: 1 1 auto; min-height: 96px; margin: 6px 10px 0; }
+.lj__paper {
+  position: absolute; left: 0; right: 0; top: 24px; bottom: 0; border: 2px solid #b8935e; border-radius: 14px;
+  background: #fdf9ee; box-shadow: inset 0 3px 7px rgba(90, 52, 24, 0.22);
+}
+.lj__paper::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; opacity: 0.16; mix-blend-mode: multiply; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.lj__tab {
+  position: absolute; z-index: 1; left: 20px; top: 0; display: flex; align-items: center; justify-content: center; gap: 5px;
+  min-width: 118px; max-width: calc(100% - 40px); height: 28px; margin: 0; padding: 0 12px 2px;
+  border: 2px solid #b8935e; border-bottom: 0; border-radius: 9px 9px 0 0; background: #fdf9ee;
+  font-size: 12px; font-weight: 700; color: #7b4b2a; white-space: nowrap; overflow: hidden;
+}
+.lj__scroll { position: absolute; left: 4px; right: 4px; top: 28px; bottom: 4px; padding: 2px 6px 12px; overscroll-behavior: contain; }
+.lj__scroll:focus-visible { outline-offset: -3px; border-radius: 12px; }
+.lj__empty { margin: 18px 6px; text-align: center; color: var(--muted); font-size: 13px; font-weight: 600; }
+.lj__head { display: flex; align-items: center; gap: 8px; margin: 6px 0 7px; font-size: 12px; font-weight: 600; color: #9a7650; }
+.lj__rule { flex: 1; height: 1.5px; background: #e4d2ab; }
+.lj__list { display: flex; flex-direction: column; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.lj__item {
+  display: flex; gap: 7px; padding: 7px 10px 8px 7px; border: 2px solid #d0b384; border-radius: 12px; background: #fffcf4;
+}
+.lj__item.is-mine { border-color: #bf9a64; background: #f4e7c8; }
+.lj__item.is-new { animation: lj-in 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes lj-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+.lj__kind { flex: none; display: grid; place-items: center; width: 26px; height: 18px; margin-top: 1px; border-radius: 5px; }
+.lj__body { flex: 1; min-width: 0; }
+.lj__q { margin: 0 0 2px; font-size: 11px; font-weight: 600; line-height: 1.3; color: #8a5a35; overflow-wrap: anywhere; }
+.lj__text { margin: 0; font-size: 13px; font-weight: 500; line-height: 1.35; color: #4a2c17; white-space: pre-line; overflow-wrap: anywhere; }
+.lj__fact { margin: 3px 0 0; font-size: 11.5px; font-weight: 500; line-height: 1.35; color: #8a5a35; overflow-wrap: anywhere; }
+.lj__fx { display: flex; flex-wrap: wrap; gap: 4px; margin: 4px 0 0; padding: 0; list-style: none; }
+.lj__fxchip {
+  display: inline-flex; align-items: center; gap: 4px; height: 18px; padding: 0 6px 0 5px; border-radius: 5px;
+  background: #f6ecd5; font-size: 10.5px; font-weight: 600; color: #7b4b2a; white-space: nowrap;
+}
+.is-mine .lj__fxchip { background: #e9d7ad; }
+.lj__fxdot { width: 7px; height: 7px; border-radius: 3px; }
+.lj__item.lj--big .lj__text, .lj__item.lj--loss .lj__text { font-weight: 700; }
+.lj__item.lj--dec .lj__text { font-weight: 600; }
+.lj__item.lj--death .lj__text { font-size: 14.5px; font-weight: 700; }
+.lj__item.lj--ms .lj__text { color: #1d6f7a; font-weight: 600; }
+.lj__item.lj--comp .lj__text { font-style: italic; }
+.lj__item.lj--note .lj__text { color: #6b4a2c; }
+.lj__item.lj--hist { border-left: 4px solid #b48cff; }
+.lj__item.lj--ledger .lj__text { font-variant-numeric: tabular-nums; }
+.lj__more {
+  display: block; min-height: 44px; margin: 12px auto 0; padding: 0 16px; border: 2px solid #b8935e; border-radius: 12px;
+  background: #f6ecd5; box-shadow: var(--lip); color: #7b4b2a; font-size: 13px; font-weight: 700;
+}
+
+/* ---- Жизнь закончилась (LiveCute v107, frame «died») ----
+   Семья остаётся в кадре, тише; значок «You» гаснет; плашка места — «Life ended · …». */
+.lt-art, .lt-scene .pa-home, .lt-hero { transition: filter 0.9s ease; }
+.lt-scene.is-over .lt-art, .lt-scene.is-over .pa-home, .lt-scene.is-over .lt-hero { filter: grayscale(0.55) brightness(0.72); }
+.lt-hero__you { transition: opacity 0.5s ease; }
+.lt-scene.is-over .lt-hero__you { opacity: 0; }
+.lt-born { transition: background-color 0.6s ease; }
+.lt-born.is-over { background: #5a4a6e; }
+.lt-round-gap { display: block; width: 44px; height: 44px; }
+/* Последняя запись жизни — сиреневая (LAST макета). */
+.lj__item.lj--death { border-color: #9b87c9; background: #ece4fb; }
+.lj__item.lj--death .lj__fxchip { background: #ddd2f5; }

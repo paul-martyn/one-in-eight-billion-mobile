@@ -1,0 +1,14 @@
+/* Окно «Start a new life?» на оранжевой карточке Popup: кремовая плашка
+   с текстом, зелёная «Keep living» и вторичная «Be born anew» с ценой. */
+.nlg { display: flex; flex-direction: column; gap: 14px; padding: 4px 2px 2px; }
+.nlg__text {
+  margin: 0; padding: 12px 14px; border: 2px solid var(--line); border-radius: 14px; background: var(--card);
+  font-size: 15.5px; font-weight: 600; line-height: 1.4; color: var(--ink-dark); text-align: left; overflow-wrap: anywhere;
+}
+.nlg__text strong { font-weight: 700; }
+.nlg__kept { display: block; margin-top: 6px; font-size: 14px; font-weight: 600; color: var(--muted); }
+.nlg__actions { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.chunky.nlg__keep { min-width: 0; width: min(250px, 100%); height: 58px; padding: 0 16px; }
+.soft-btn.nlg__new { width: min(250px, 100%); gap: 10px; }
+.nlg__new .meta-cost { height: 26px; font-size: 15px; }
+.soft-btn.nlg__new:disabled { opacity: 0.6; }

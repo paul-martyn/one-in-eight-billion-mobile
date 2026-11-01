@@ -1,0 +1,11 @@
+{
+  "roll.loading": "Getting your birth ready…",
+  "roll.skip": "Skip",
+  "roll.skipLabel": "Skip the spin",
+  "roll.oneInBirths": "1 in {n} babies starts here ({pct}).",
+  "roll.oneInPop": "1 in {n} people lives here ({pct}).",
+  "roll.oneInBirthsPast": "In {year}, 1 in {n} babies started here ({pct}).",
+  "roll.oneInPopPast": "In {year}, 1 in {n} people lived here ({pct}).",
+  "roll.thatsYou": "Today, that’s you!",
+  "roll.thatsYouPast": "This time, that’s you!"
+}
