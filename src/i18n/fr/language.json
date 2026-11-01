@@ -1,0 +1,15 @@
+{
+  "lang.title": "Langue",
+  "lang.money": "Votre monnaie",
+  "lang.go": "Continuer",
+  "lang.device": "Langue de l’appareil",
+  "lang.soon": "Pas encore traduit",
+  "lang.moneyHint": "(aux prix locaux)",
+  "lang.languagesLabel": "Langue",
+  "lang.currencyLabel": "Monnaie",
+  "lang.restarting": "Application…",
+  "lang.selected": "Sélectionnée",
+  "lang.available": "Disponible",
+  "lang.historyHint": "Les nouveaux événements seront dans la langue choisie. Les anciennes entrées garderont leur texte d’origine.",
+  "lang.failed": "Impossible de charger la langue. Réessayez."
+}

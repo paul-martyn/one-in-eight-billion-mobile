@@ -1,0 +1,11 @@
+{
+  "roll.loading": "Deine Geburt wird vorbereitet…",
+  "roll.skip": "Überspringen",
+  "roll.skipLabel": "Drehung überspringen",
+  "roll.oneInBirths": "1 von {n} Babys wird hier geboren ({pct}).",
+  "roll.oneInPop": "1 von {n} Menschen lebt hier ({pct}).",
+  "roll.oneInBirthsPast": "{year} wurde 1 von {n} Babys hier geboren ({pct}).",
+  "roll.oneInPopPast": "{year} lebte 1 von {n} Menschen hier ({pct}).",
+  "roll.thatsYou": "Heute bist du es!",
+  "roll.thatsYouPast": "Diesmal bist du es!"
+}

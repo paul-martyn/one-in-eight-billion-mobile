@@ -13,7 +13,8 @@ const reference = path.join(root, 'reference');
 const provenance = JSON.parse(fs.readFileSync(path.join(reference, 'provenance.json'), 'utf8'));
 const expected = new Set();
 const failures = [];
-for (const entry of provenance.files) {
+const locales = JSON.parse(fs.readFileSync(path.join(reference, 'locales-provenance.json'), 'utf8'));
+for (const entry of [...provenance.files, ...locales.files]) {
   const target = path.resolve(reference, entry.path);
   if (!target.startsWith(reference + path.sep)) throw new Error('Недопустимый путь эталона');
   expected.add(target);

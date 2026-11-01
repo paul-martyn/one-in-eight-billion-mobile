@@ -132,7 +132,7 @@ export function certificateVM(T: Top, certNo: string): CertificateVM {
   const surv = (a: number) => plain(T.pctStr(T.cohortL(S.born, S.sex, a)));
   return {
     certNo, name: S.name.full, given: S.name.g, family: S.name.base, sex: S.sex,
-    month: plain(T.monthEn ? T.monthEn(S.bm) : String(S.bm)), year: S.by,
+    month: new Intl.DateTimeFormat(T.LC.loc, { month: 'long', timeZone: 'UTC' }).format(new Date(Date.UTC(2000, S.bm - 1, 1))), year: S.by,
     country: plain(T.placeTag(B)), iso: S.born,
     place: S.urban ? plain(T.cityIn(B.ko, S.city)) : plain(T.ruralLbl()) + ', ' + plain(T.placeTag(B)), urban: !!S.urban,
     story: plain(T.birthStory()), quintile: S.q, quintileText: plain((T.notNation(S.born) ? T.QCERT_P : T.QCERT)[S.q]),

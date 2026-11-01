@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { ArrowIcon, CloseIcon, PauseIcon, StatIcon, TAB_ICON } from './icons';
 import tokens from '../design/tokens.json';
 import spec from '../design/motion.json';
+import { t } from '../i18n';
 import { useReducedMotion } from './motionPrefs';
 import './ui.css';
 
@@ -82,7 +83,7 @@ const SPARKLE_FILL = (c: string) => [c, '#ffffff', '#ffd75a', c, '#ffffff', '#ff
 export function StickerBar({ active, labels, badges, onSelect }: { active: TabId; labels: Record<TabId, string>; badges?: Partial<Record<TabId, { count: number; label: string }>>; onSelect: (t: TabId) => void }) {
   const reduced = useReducedMotion();
   return (
-    <nav className="stickers" aria-label={labels.life ? 'Sections' : undefined}>
+    <nav className="stickers" aria-label={t('tab.sections')}>
       <svg className="stickers__paper" width="100%" height="100" viewBox="0 0 393 100" preserveAspectRatio="none" aria-hidden="true">
         <defs>
           <filter id="kraft-grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" /><feColorMatrix type="saturate" values="0" /></filter>
@@ -98,7 +99,7 @@ export function StickerBar({ active, labels, badges, onSelect }: { active: TabId
           const badge = badges?.[s.id];
           return (
             <div key={s.id} className={`sticker ${on ? 'is-on' : ''}`} style={{ left: `${(s.left / 393) * 100}%`, top: s.top, transform: `rotate(${s.rot}deg) scale(${on ? 1.1 : 1})`, zIndex: on ? 3 : 1 }}>
-              <button type="button" className="sticker__btn" aria-current={on ? 'page' : undefined} onClick={() => onSelect(s.id)}>
+              <button type="button" className="sticker__btn" aria-label={labels[s.id]} aria-current={on ? 'page' : undefined} onClick={() => onSelect(s.id)}>
                 <span className="sticker__face">
                   <svg width="24" height="24" viewBox="0 0 24 24" className="sticker__icon" aria-hidden="true">{TAB_ICON[s.id]}</svg>
                   <span className={`sticker__label ${s.id === 'activities' ? 'is-long' : ''}`}>{labels[s.id]}</span>

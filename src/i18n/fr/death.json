@@ -1,0 +1,17 @@
+{
+  "death.title": "La vie s’est achevée",
+  "death.continue": "Continuer",
+  "death.years": "{born} – {died} · âge au décès : {age}",
+  "death.diedAt": "Âge au décès : {age}",
+  "death.cause": "Cause : {cause}",
+  "death.hold": "Maintenez pour voir votre dernier jour",
+  "death.lookBack": "Regarder en arrière",
+  "death.summary": "Bilan de vie",
+  "death.barRegion": "Cette vie s’est achevée",
+  "death.place": "La vie s’est achevée · {place}, {year}",
+  "death.placeNoYear": "La vie s’est achevée · {place}",
+  "death.barLabel": "Âge : {age} sur 100. Espérance de vie à la naissance : {le}. Cette vie s’est achevée.",
+  "death.skip.title": "Le reste de cette vie se déroule…",
+  "death.skip.who": "{name}, âge : {age}",
+  "death.skip.note": "Le jeu prend les décisions en chemin, selon ses règles habituelles."
+}

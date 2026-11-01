@@ -1,10 +1,9 @@
-// «0 · Language & currency» (LangCute.dc.html). Язык: в этой версии работает
-// только английский — остальные 18 языков оригинала показаны, но недоступны.
-// Валюта: настоящий выбор оригинала (CUR_SETS.en, one8b.cur.en).
+// «0 · Language & currency»: пять переведённых локалей; остальные показаны
+// как недоступные. Валюты — из набора оригинала для выбранного языка.
 import { useMemo, useState, type CSSProperties } from 'react';
-import { t } from '../../i18n';
+import { t, UI_LANG, setLocale, isLocale, type Locale } from '../../i18n';
 import { gestureId, useAdapter, useSnapshot } from '../../adapters/useGame';
-import { chooseCurrency } from '../../app/game';
+import { chooseLanguage } from '../../app/game';
 import { ChunkyButton, Ribbon } from '../../ui/components';
 import type { ScreenProps } from '../registry';
 import './language.css';
@@ -42,19 +41,21 @@ const Check = ({ size = 20 }: { size?: number }) => (
 export function LanguageScreen({ nav, active }: ScreenProps) {
   const adapter = useAdapter();
   const snap = useSnapshot();
-  const currencies = useMemo(() => adapter.currencies(), [adapter, snap.version]);
+  const [lang, setLang] = useState<Locale>(UI_LANG);
+  const currencies = useMemo(() => adapter.currencies(lang), [adapter, snap.version, lang]);
   const current = currencies.find(c => c.current)?.key ?? currencies[0]?.key ?? 'USD';
   const [cur, setCur] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [failed, setFailed] = useState(false);
   const picked = cur ?? current;
   const fromHub = snap.pastLives.length > 0 || !!snap.resume;
 
   const go = async () => {
     if (busy || !active) return;
     setBusy(true);
-    const ok = await chooseCurrency(gestureId(), picked);
+    const ok = await chooseLanguage(gestureId(), lang, picked);
     setBusy(false);
-    if (!ok) return;
+    if (!ok) { setFailed(true); return; }
     // Открыт из хаба или настроек — вернуться туда же (из настроек во время жизни — обратно к жизни).
     if (nav.canBack()) nav.back();
     else if (fromHub) nav.go({ id: 'hub' }, 'pop');
@@ -62,7 +63,7 @@ export function LanguageScreen({ nav, active }: ScreenProps) {
   };
 
   return (
-    <main className="screen lang" lang="en">
+    <main className="screen lang" lang={UI_LANG}>
       <div className="lang__glow" aria-hidden="true" />
       <div className="lang__badge" aria-hidden="true">
         <svg width="54" height="46" viewBox="0 0 54 46">
@@ -77,8 +78,8 @@ export function LanguageScreen({ nav, active }: ScreenProps) {
       <section className="lang__panel" aria-label={t('lang.languagesLabel')}>
         <div className="lang__list scroll" role="radiogroup" aria-label={t('lang.languagesLabel')}>
           {LANGS.map((l, i) => {
-            const on = l.id === 'en';
-            const avail = l.id === 'en';
+            const on = l.id === lang;
+            const avail = isLocale(l.id);
             return (
               <button
                 key={l.id}
@@ -86,7 +87,8 @@ export function LanguageScreen({ nav, active }: ScreenProps) {
                 role="radio"
                 aria-checked={on}
                 aria-disabled={!avail}
-                disabled={!avail}
+                disabled={!avail || busy}
+                onClick={() => { if (isLocale(l.id)) { setLang(l.id); setLocale(l.id); setCur(null); setFailed(false); } }}
                 className={`lang__chip ${on ? 'is-on' : ''}`}
                 lang={l.id}
                 dir={l.dir ?? 'auto'}
@@ -94,7 +96,7 @@ export function LanguageScreen({ nav, active }: ScreenProps) {
                 <span className="lang__dot k-os" style={{ background: DOTS[i % DOTS.length] }}>{l.short}</span>
                 <span className="lang__names">
                   <span className={`lang__name ${l.name.length >= 14 ? 'is-long' : ''}`}>{l.name}</span>
-                  <span className="lang__sub">{avail ? t('lang.device') : t('lang.soon')}</span>
+                  <span className="lang__sub">{avail ? (on ? t('lang.selected') : t('lang.available')) : t('lang.soon')}</span>
                 </span>
                 {on && <Check />}
               </button>
@@ -128,6 +130,8 @@ export function LanguageScreen({ nav, active }: ScreenProps) {
       </div>
 
       <div className="lang__cta">
+        {fromHub && <p className="lang__history">{t('lang.historyHint')}</p>}
+        {failed && <p role="alert" className="lang__history">{t('lang.failed')}</p>}
         <ChunkyButton onClick={go} disabled={busy} aria-busy={busy}>{busy ? t('lang.restarting') : t('lang.go')}</ChunkyButton>
       </div>
     </main>

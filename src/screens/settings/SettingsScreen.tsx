@@ -5,7 +5,7 @@
 // жестов. При открытии экрана команд нет. Настройки действуют со следующей жизни
 // (оригинал читает их в startNewLife/newLife).
 import { useId, useMemo, useState } from 'react';
-import { t } from '../../i18n';
+import { t, UI_LANG, LOCALE_NAMES } from '../../i18n';
 import { gestureId, useAdapter, useSnapshot } from '../../adapters/useGame';
 import type { GameAdapter } from '../../adapters/gameAdapter';
 import type { LifePrefsView } from '../../adapters/vm/spend';
@@ -114,7 +114,7 @@ export function SettingsScreen({ nav, active }: ScreenProps) {
           <span className="stg-link__icon k-os" aria-hidden="true">Aa</span>
           <span className="stg-link__text">
             <span className="stg-link__title">{t('settings.language')}</span>
-            <span className="stg-link__sub">{currency ? t('settings.languageSub', { currency }) : t('settings.languageSubNone')}</span>
+            <span className="stg-link__sub">{currency ? t('settings.languageSub', { language: LOCALE_NAMES[UI_LANG], currency }) : LOCALE_NAMES[UI_LANG]}</span>
           </span>
           <ChevronIcon size={22} className="stg-link__chev" />
         </button>

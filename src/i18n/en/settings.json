@@ -35,6 +35,6 @@
   "settings.paceLabel": "{n} minutes",
   "settings.paceNote": "Minutes of real time for a life as long as the life expectancy, at speed ×1. The game keeps every year at least 12 seconds, so at 10 min most lives take 12–17 min.",
   "settings.language": "Language & currency",
-  "settings.languageSub": "English · {currency}",
+  "settings.languageSub": "{language} · {currency}",
   "settings.languageSubNone": "English"
 }

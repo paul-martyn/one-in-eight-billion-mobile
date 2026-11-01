@@ -3,6 +3,7 @@
 import { useId } from 'react';
 import type { OddsChartVM, OddsVM } from '../../../../adapters/vm/odds';
 import { t } from '../../../../i18n';
+import { useAdapter } from '../../../../adapters/useGame';
 import { countText, useEnterProgress } from './enter';
 
 // Геометрия макета: viewBox 329×190, возраст 0→100 по x 34→319, доля 0→1 по y 152→14.
@@ -53,6 +54,7 @@ function Chart({ chart, k, label, you }: { chart: OddsChartVM; k: number; label:
 }
 
 export function SurvivalSection({ vm }: { vm: OddsVM }) {
+  const locale = useAdapter().formatLocale();
   const k = useEnterProgress();
   const { chart, survival } = vm;
   const who = t(vm.sex === 'F' ? 'odds.tab.girls' : 'odds.tab.boys');
@@ -61,7 +63,8 @@ export function SurvivalSection({ vm }: { vm: OddsVM }) {
   const current = chart.curves.find(c => c.id === 'current');
   const you = t('odds.tab.surv.you', { age: vm.age });
   const label = t('odds.tab.surv.aria', { who, country: vm.bornCountry, age: chart.markAge, pct: chart.markPct });
-  const le = chart.le.toFixed(1), worldLe = chart.worldLe.toFixed(1);
+  const oneDecimal = (n: number) => n.toLocaleString(locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const le = oneDecimal(chart.le), worldLe = oneDecimal(chart.worldLe);
   return (
     <section className="oat-card odds-section" aria-label={t('odds.tab.sec.survival')}>
       <h2 className="odds-section__title">{t('odds.tab.surv.title')}</h2>
@@ -73,11 +76,11 @@ export function SurvivalSection({ vm }: { vm: OddsVM }) {
       <Chart chart={chart} k={k} label={label} you={you} />
       <div className="odds-tiles">
         <div className="odds-tile">
-          <span className="odds-tile__value tabular">{countText(`${le} · ${worldLe}`, k)}</span>
+          <span className="odds-tile__value tabular">{countText(`${le} · ${worldLe}`, k, locale)}</span>
           <span className="odds-tile__label">{t('odds.tab.surv.leLabel', { country: vm.bornCountry })}</span>
         </div>
         <div className="odds-tile">
-          <span className="odds-tile__value tabular">{countText(survival.pct, k)}</span>
+          <span className="odds-tile__value tabular">{countText(survival.pct, k, locale)}</span>
           <span className="odds-tile__label">{t('odds.tab.surv.reachLabel', { who, age: survival.toAge })}</span>
         </div>
       </div>

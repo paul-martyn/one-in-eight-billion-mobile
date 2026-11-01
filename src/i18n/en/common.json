@@ -1,4 +1,7 @@
 {
+  "tab.sections": "Sections",
+  "orientation.title": "Rotate your phone",
+  "orientation.body": "This story lives in portrait mode.",
   "app.title": "1 in 8 B",
   "app.loading": "Getting the world ready…",
   "app.loadingDetail": "Loading the life simulation",

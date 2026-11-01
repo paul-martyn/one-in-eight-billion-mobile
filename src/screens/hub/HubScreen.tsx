@@ -7,7 +7,7 @@
 // новых жизней на вкладке Lives (snapshot.meta.unseenLives; открытие вкладки — seeLives).
 import { useCallback, useEffect, useId, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import spec from '../../design/motion.json';
-import { t } from '../../i18n';
+import { t, numberLocale } from '../../i18n';
 import { useAdapter, useSnapshot } from '../../adapters/useGame';
 import { META_RULES } from '../../adapters/meta';
 import type { PastLifeVM } from '../../adapters/viewModels';
@@ -224,11 +224,11 @@ function WorldPanelGlobe({ reduced }: { reduced: boolean }) {
 }
 
 const INITIAL_BG = ['#ffd2c8', '#cdeaf6', '#d6f0de', '#ffe9a8', '#e6dcff'];
-const DATE = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+const DATE = { format: (date: number | Date) => new Intl.DateTimeFormat(numberLocale(), { year: 'numeric', month: 'short', day: 'numeric' }).format(date) };
 
 /** Прожитые жизни (one8b.en.lives.v1 через snapshot.pastLives), новые сверху. */
 function LivesList({ lives }: { lives: PastLifeVM[] }) {
-  const count = lives.length === 1 ? t('hub.livesCountOne') : t('hub.livesCount', { n: fmtInt(lives.length) });
+  const count = lives.length === 1 ? t('hub.livesCountOne') : t('hub.livesCount', { n: fmtInt(lives.length), count: lives.length });
   return (
     <div className="hub-lives">
       <h2 className="hub-lives__head">

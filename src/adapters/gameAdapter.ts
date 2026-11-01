@@ -407,20 +407,30 @@ export class GameAdapter {
     }
   }
 
-  /** Валюта отображения оригинала (one8b.cur.en, читается core при загрузке). */
+  /** Сохранённый выбор валюты текущего языка, читается core при загрузке. */
   currencyKey(): string | null {
-    return this.host ? this.host.storage.getItem('one8b.cur.en') : null;
+    return this.host ? this.host.storage.getItem(this.host.top.LANG === 'es' ? this.host.top.ES_CUR_KEY : this.host.top.CUR_KEY) : null;
   }
 
-  /** Варианты валют английской сборки (CUR_SETS.en, 405-422) и текущая (CUR). */
-  currencies(): { key: string; sym: string; label: string; current: boolean }[] {
+  /** Формат уже готовых строк core; у испанского зависит и от выбранной валюты. */
+  formatLocale(): string { return this.host?.top.LC.loc ?? 'en-US'; }
+
+  /** Набор валют выбранного языка, включая особый набор ES_CURS оригинала. */
+  currencies(lang?: string): { key: string; sym: string; label: string; current: boolean }[] {
     const T = this.host?.top;
-    if (!T || !T.CURS) return [];
-    return Object.entries(T.CURS as Record<string, unknown>)
+    if (!T) return [];
+    const locale = lang ?? T.LANG;
+    const sets = locale === 'es' ? T.ES_CURS : T.CUR_SETS[locale];
+    if (!sets) return [];
+    const storageKey = locale === 'es' ? T.ES_CUR_KEY : 'one8b.cur.' + locale;
+    const saved = this.host?.storage.getItem(storageKey);
+    const fallback = locale === T.LANG ? (locale === 'es' ? T.ES_CUR : T.CUR) : sets.base;
+    const selected = saved && saved in sets ? saved : fallback;
+    return Object.entries(sets as Record<string, unknown>)
       .filter(([k]) => k !== 'base')
       .map(([key, v]) => {
-        const c = v as { sym?: string; lbl?: string };
-        return { key, sym: String(c.sym ?? '').trim(), label: String(c.lbl ?? key), current: key === T.CUR };
+        const c = v as { sym?: string; lbl?: string; pre?: string; post?: string; u?: string; place?: string };
+        return { key, sym: String(c.sym ?? c.pre ?? c.post ?? c.u ?? '').trim(), label: String(c.lbl ?? c.place ?? key), current: key === selected };
       });
   }
 
@@ -429,29 +439,51 @@ export class GameAdapter {
    * Здесь жизнь сохраняется и экземпляр core создаётся заново из того же хранилища.
    */
   async setCurrency(id: string, key: string, load: () => Promise<CoreHost>): Promise<boolean> {
+    return this.setLanguageCurrency(id, this.host?.top.LANG ?? 'en', key, load);
+  }
+
+  /** Язык и валюта применяются вместе. Состояние, RNG и номер свидетельства сохраняются. */
+  async setLanguageCurrency(id: string, lang: string, key: string, load: () => Promise<CoreHost>): Promise<boolean> {
     const host = this.host;
     if (!host || !this.accept(id)) return false;
     const T = host.top;
-    if (key !== 'base' && !Object.prototype.hasOwnProperty.call(T.CURS ?? {}, key)) return false;
-    if (key === T.CUR) {
+    if (!['en', 'ru', 'es', 'fr', 'de'].includes(lang) || !this.currencies(lang).some(c => c.key === key)) return false;
+    const storageKey = lang === 'es' ? T.ES_CUR_KEY : 'one8b.cur.' + lang;
+    if (lang === T.LANG && key === (lang === 'es' ? T.ES_CUR : T.CUR)) {
       // Та же валюта: только запоминаем явный выбор (первый запуск пройден).
-      host.storage.setItem('one8b.cur.en', key);
+      host.storage.setItem(storageKey, key);
       return true;
     }
     this.setClockActive(false);
+    const previousCurrency = host.storage.getItem(storageKey);
     try {
       if (T.S && (T.S.phase === 'life' || T.S.phase === 'birth')) T.save();
-      host.storage.setItem('one8b.cur.en', key);
+      host.storage.setItem(storageKey, key);
+      const next = await load();
+      // Без restore/renderAll: смена языка не расходует игровой RNG.
+      next.top.S = T.S;
+      next.top.RND_N = T.RND_N;
+      if (next.top.S?.phase === 'life') { next.top.S.paused = true; next.top.S.ff = false; }
+      Object.assign(next.top.UI.prefs, T.UI.prefs);
+      this.host = next;
+      installHooks(next.top, {
+        log: () => {}, decision: () => {}, death: () => {}, year: () => {},
+        focusPause: () => this.notice('focusPause'),
+        error: e => { next.recordError('hook', e); this.notice('coreError', String(e)); },
+      });
+      this.journalCache = new WeakMap();
+      this.replay = null;
+      this.afterRender();
+      this.publishLife({ certificate: this.certNo ? this.buildCertificate() : null,
+        pastLives: this.read(pastLives), resume: this.read(resumeVM), lastChoice: null, lastSpend: null, notices: [] });
+      return true;
     } catch (error) {
-      this.fail(error);
+      this.host = host;
+      if (previousCurrency == null) host.storage.removeItem(storageKey);
+      else host.storage.setItem(storageKey, previousCurrency);
+      host.recordError('command', error);
       return false;
     }
-    this.host = null;
-    this.booting = null;
-    this.certNo = null;
-    this.publish({ status: 'booting' });
-    await this.boot(load);
-    return this.snap.status === 'ready';
   }
 
   dismissLastSpend(): void {

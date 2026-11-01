@@ -1,0 +1,22 @@
+{
+  "rewards.title": "Ein gelebtes Leben",
+  "rewards.nameYears": "{name} · {years}",
+  "rewards.listTitle": "Belohnungen für dieses Leben",
+  "rewards.school": "Abschluss: {detail}",
+  "rewards.schoolPlain": "Schulabschluss",
+  "rewards.firstJob": "Erster Beruf: {detail}",
+  "rewards.firstJobPlain": "Erster Beruf",
+  "rewards.married": "Heirat mit {detail}",
+  "rewards.marriedPlain": "Heirat",
+  "rewards.debtPaid": "Schulden abbezahlt",
+  "rewards.firstInCountry": "Erstes Leben mit Geburt in {detail}",
+  "rewards.firstInCountryPlain": "Erstes Leben mit Geburt in diesem Land",
+  "rewards.none": "Diesmal keine Belohnungen. Das Leben bleibt unter Leben gespeichert.",
+  "rewards.total": "Insgesamt",
+  "rewards.totalValue": "+{dollars} $ · +{gems} Kristalle",
+  "rewards.amountDollars": "+{n} Dollar",
+  "rewards.amountGems": "+{n} Kristalle",
+  "rewards.amountGemOne": "+1 Kristall",
+  "rewards.claim": "Abholen",
+  "rewards.claimed": "+{dollars} $ und +{gems} Kristalle erhalten. Das Leben bleibt unter Leben gespeichert."
+}

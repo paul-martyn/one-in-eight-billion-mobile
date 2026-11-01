@@ -33,12 +33,12 @@ const cap = (T: Top, s: string) => (s && typeof T.capS === 'function' ? plain(T.
  */
 const DCERT_KEY = '281khouc24m';
 function dcertPiece(T: Top, re: RegExp, args: unknown[]): string {
-  if (T.LANG !== 'en') return '';
   const tpl = T.I18N_T?.[DCERT_KEY];
   const m = typeof tpl === 'string' ? re.exec(tpl) : null;
   if (!m || m[1] == null) return '';
-  const filled = m[1].replace(/\{(\d+)\}/g, (_: string, n: string) => String(args[Number(n)] ?? ''));
-  return safe(plain(T.curFix(T.enFix(filled))));
+  const fill = { ru: 'ruFill', es: 'esFill', fr: 'frFill', de: 'deFill' }[T.LANG as string];
+  const filled = fill ? T[fill](m[1], args) : T.enFix(m[1].replace(/\{(\d+)\}/g, (_: string, n: string) => String(args[Number(n)] ?? '')));
+  return safe(plain(T.curFix(filled)));
 }
 
 /** Абзацы HTML оригинала (несколько <p> подряд) как отдельные строки. */

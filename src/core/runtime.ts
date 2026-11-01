@@ -7,6 +7,8 @@ import { CoreEntropy } from './entropy.ts';
 export const STORAGE_PREFIX = '1in8b-mobile/v1:';
 /** Состояние потока случайности хранится рядом с сохранением жизни. */
 export const ENTROPY_KEY = 'mobile.entropy';
+// Оригинал разделял архив и жизнь по языкам. Здесь профиль общий.
+export const sharedSaveKey = (key: string) => key.replace(/^one8b\.(?:ru|es|fr|de)\.(save|lives|past|unlived)\./, 'one8b.en.$1.');
 
 export type CoreErrorRecord = { at: number; source: 'hook' | 'timer' | 'command' | 'read'; message: string };
 
@@ -80,15 +82,15 @@ export function createHost(mod: CoreModule, opts: HostOptions): CoreHost {
   // с того места, где было сделано последнее сохранение.
   let sandboxed = false;
   const coupled: StorageLike = {
-    getItem: k => storage.getItem(k),
+    getItem: k => storage.getItem(sharedSaveKey(k)),
     setItem: (k, v) => {
       if (sandboxed) throw new Error(`Запись ${k} из чтения представления запрещена`);
-      storage.setItem(k, v);
+      storage.setItem(sharedSaveKey(k), v);
       storage.setItem(ENTROPY_KEY, String(entropy.getState()));
     },
     removeItem: k => {
       if (sandboxed) throw new Error(`Удаление ${k} из чтения представления запрещено`);
-      storage.removeItem(k);
+      storage.removeItem(sharedSaveKey(k));
     },
     key: i => storage.key(i),
     get length() { return storage.length; },
@@ -164,6 +166,14 @@ export function createHost(mod: CoreModule, opts: HostOptions): CoreHost {
 
 /** Загрузка в браузере: модуль ~7 МБ подгружается отдельно от оболочки приложения. */
 export async function bootCore(opts: Omit<HostOptions, 'loadEra'>): Promise<CoreHost> {
-  const mod = (await import('./generated/game.en.core.js')) as unknown as CoreModule;
+  const loaders = {
+    en: () => import('./generated/game.en.core.js'),
+    ru: () => import('./generated/game.ru.core.js'),
+    es: () => import('./generated/game.es.core.js'),
+    fr: () => import('./generated/game.fr.core.js'),
+    de: () => import('./generated/game.de.core.js'),
+  };
+  const lang = opts.lang && opts.lang in loaders ? opts.lang as keyof typeof loaders : 'en';
+  const mod = (await loaders[lang]()) as unknown as CoreModule;
   return createHost(mod, { ...opts, loadEra: async () => (await import('./generated/era.core.js')).ERA });
 }

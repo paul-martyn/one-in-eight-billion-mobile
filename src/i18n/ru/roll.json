@@ -1,0 +1,11 @@
+{
+  "roll.loading": "Готовим твоё рождение…",
+  "roll.skip": "Пропустить",
+  "roll.skipLabel": "Пропустить вращение",
+  "roll.oneInBirths": "Здесь рождается 1 из {n} детей ({pct}).",
+  "roll.oneInPop": "Здесь живёт 1 из {n} людей ({pct}).",
+  "roll.oneInBirthsPast": "В {year} году здесь рождался 1 из {n} детей ({pct}).",
+  "roll.oneInPopPast": "В {year} году здесь жил 1 из {n} людей ({pct}).",
+  "roll.thatsYou": "Сегодня это ты!",
+  "roll.thatsYouPast": "На этот раз — ты!"
+}

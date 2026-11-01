@@ -1,0 +1,12 @@
+{
+  "spend.activities.title": "À faire",
+  "spend.income": "Revenu annuel : {amount}",
+  "spend.closed": "« {title} » s’ouvre quand vous pouvez choisir votre priorité de l’année. Avant, votre famille décide.",
+  "spend.empty": "Rien à acheter ou à vendre ici pour le moment.",
+  "spend.confirm.title": "Êtes-vous sûr ?",
+  "spend.confirm.cancel": "Annuler",
+  "spend.confirm.yes": "Confirmer",
+  "spend.result.title": "C’est fait !",
+  "spend.result.ok": "D’accord",
+  "spend.result.close": "Fermer"
+}

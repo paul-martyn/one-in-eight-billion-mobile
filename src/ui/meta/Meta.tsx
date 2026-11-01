@@ -5,12 +5,12 @@
 // Кнопки «+» видны, но недоступны: покупок в этой версии нет.
 import type { ButtonHTMLAttributes } from 'react';
 import type { MetaView } from '../../adapters/meta';
-import { t, UI_LANG } from '../../i18n';
+import { t, formatNumber } from '../../i18n';
 import { BanknotesBig, BoltBig, BoltSmall, GemBig, PlusGlyph } from './metaIcons';
 import { fmtCountdown, useSecondsLeft } from './useMeta';
 import './meta.css';
 
-const NUM = new Intl.NumberFormat(UI_LANG === 'en' ? 'en-US' : UI_LANG);
+const NUM = { format: formatNumber };
 
 /** «+» у плашки: показан по макету, но покупок нет (aria-disabled, подсказка). */
 function PlusButton({ label }: { label: string }) {

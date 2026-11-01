@@ -1,7 +1,8 @@
 /* Базовые стили. Значения — из src/design/tokens.json (стиль Cute холста дизайна). */
 :root {
   color-scheme: light;
-  font-family: Fredoka, 'Baloo 2', system-ui, sans-serif;
+  --font-ui: Fredoka, 'Baloo 2', system-ui, sans-serif;
+  font-family: var(--font-ui);
   color: #5a3418;
   background: #e6d4b1;
   font-synthesis: none;
@@ -33,6 +34,13 @@
   --font-sign: Caveat, 'Segoe Script', cursive;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Русская локаль: цельный округлый шрифт вместо системной подстановки кириллицы.
+   Подпись остаётся Caveat, в котором уже есть кириллические начертания. */
+:root:lang(ru) {
+  --font-ui: 'Nunito Variable', system-ui, sans-serif;
+  --font-typed: var(--font-ui);
 }
 
 * { box-sizing: border-box; }

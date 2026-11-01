@@ -10,6 +10,7 @@
 /* Заголовок «1 in 8 B» */
 .brand-title { position: relative; margin: 0; font-weight: 700; letter-spacing: -1px; white-space: nowrap; }
 .brand-title__eight { color: var(--cta); }
+.brand-title:lang(ru), .brand-title:lang(es), .brand-title:lang(fr), .brand-title:lang(de) { font-size: clamp(26px, 9cqw, 38px); letter-spacing: -0.6px; }
 
 /* Облачко-реплика */
 .bubble {

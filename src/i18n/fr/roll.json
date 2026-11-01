@@ -1,0 +1,11 @@
+{
+  "roll.loading": "Votre naissance se prépare…",
+  "roll.skip": "Passer",
+  "roll.skipLabel": "Passer le tirage",
+  "roll.oneInBirths": "1 bébé sur {n} naît ici ({pct}).",
+  "roll.oneInPop": "1 personne sur {n} vit ici ({pct}).",
+  "roll.oneInBirthsPast": "En {year}, 1 bébé sur {n} naissait ici ({pct}).",
+  "roll.oneInPopPast": "En {year}, 1 personne sur {n} vivait ici ({pct}).",
+  "roll.thatsYou": "Aujourd’hui, c’est vous !",
+  "roll.thatsYouPast": "Cette fois, c’est vous !"
+}

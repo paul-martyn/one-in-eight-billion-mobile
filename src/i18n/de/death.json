@@ -1,0 +1,17 @@
+{
+  "death.title": "Das Leben ist zu Ende",
+  "death.continue": "Weiter",
+  "death.years": "{born} – {died} · Sterbealter: {age}",
+  "death.diedAt": "Sterbealter: {age}",
+  "death.cause": "Ursache: {cause}",
+  "death.hold": "Gedrückt halten, um deinen letzten Tag zu sehen",
+  "death.lookBack": "Zurückblicken",
+  "death.summary": "Lebensrückblick",
+  "death.barRegion": "Dieses Leben ist zu Ende",
+  "death.place": "Leben beendet · {place}, {year}",
+  "death.placeNoYear": "Leben beendet · {place}",
+  "death.barLabel": "Alter: {age} von 100. Lebenserwartung bei der Geburt: {le}. Dieses Leben ist zu Ende.",
+  "death.skip.title": "Der Rest dieses Lebens wird gelebt…",
+  "death.skip.who": "{name}, Alter {age}",
+  "death.skip.note": "Das Spiel trifft unterwegs die Entscheidungen nach seinen üblichen Regeln."
+}

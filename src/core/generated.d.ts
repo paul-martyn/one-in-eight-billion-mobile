@@ -16,3 +16,47 @@ declare module '*/generated/game.en.core.js' {
 declare module '*/generated/era.core.js' {
   export const ERA: unknown;
 }
+declare module '*/generated/game.ru.core.js' {
+  export const CORE_META: {
+    generator: string; source: string; sourceSha256: string; sourceBytes: number;
+    freeGlobals: Record<string, 'builtin' | 'controlled' | 'late' | 'host'>;
+    topLevelCount: number;
+  };
+  export function instantiateCore(env: { globals: Record<string, unknown> }): {
+    top: Record<string, any>;
+    setLateGlobal(name: string, value: unknown): void;
+  };
+}
+declare module '*/generated/game.es.core.js' {
+  export const CORE_META: {
+    generator: string; source: string; sourceSha256: string; sourceBytes: number;
+    freeGlobals: Record<string, 'builtin' | 'controlled' | 'late' | 'host'>;
+    topLevelCount: number;
+  };
+  export function instantiateCore(env: { globals: Record<string, unknown> }): {
+    top: Record<string, any>;
+    setLateGlobal(name: string, value: unknown): void;
+  };
+}
+declare module '*/generated/game.fr.core.js' {
+  export const CORE_META: {
+    generator: string; source: string; sourceSha256: string; sourceBytes: number;
+    freeGlobals: Record<string, 'builtin' | 'controlled' | 'late' | 'host'>;
+    topLevelCount: number;
+  };
+  export function instantiateCore(env: { globals: Record<string, unknown> }): {
+    top: Record<string, any>;
+    setLateGlobal(name: string, value: unknown): void;
+  };
+}
+declare module '*/generated/game.de.core.js' {
+  export const CORE_META: {
+    generator: string; source: string; sourceSha256: string; sourceBytes: number;
+    freeGlobals: Record<string, 'builtin' | 'controlled' | 'late' | 'host'>;
+    topLevelCount: number;
+  };
+  export function instantiateCore(env: { globals: Record<string, unknown> }): {
+    top: Record<string, any>;
+    setLateGlobal(name: string, value: unknown): void;
+  };
+}

@@ -24,15 +24,16 @@ const check = process.argv.includes('--check');
 
 const sha256 = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 const provenance = JSON.parse(fs.readFileSync(path.join(reference, 'provenance.json'), 'utf8'));
+const locales = JSON.parse(fs.readFileSync(path.join(reference, 'locales-provenance.json'), 'utf8'));
 
 function readReference(relative) {
-  const entry = provenance.files.find(f => f.path === relative);
+  const entry = [...provenance.files, ...locales.files].find(f => f.path === relative);
   if (!entry) throw new Error(`Нет записи provenance для ${relative}`);
   const bytes = fs.readFileSync(path.join(reference, relative));
   if (bytes.length !== entry.bytes || sha256(bytes) !== entry.sha256) {
     throw new Error(`${relative} не совпадает с provenance — эталон изменён, генерация остановлена`);
   }
-  return { code: bytes.toString('utf8'), sha256: entry.sha256, bytes: entry.bytes };
+  return { code: bytes.toString('utf8'), sha256: entry.sha256, bytes: entry.bytes, path: relative };
 }
 
 // Встроенные объекты JS. Окружение передаёт их из того же realm без изменений;
@@ -73,14 +74,14 @@ function wrapGame(name, source) {
 
   const header = [
     '// АВТОМАТИЧЕСКИ СГЕНЕРИРОВАНО tools/core/extract-core.mjs — не редактировать вручную.',
-    `// Источник: reference/original-${'0.8.98'}/src/${name} (sha256 ${source.sha256}, ${source.bytes} байт).`,
+    `// Источник: reference/${source.path} (sha256 ${source.sha256}, ${source.bytes} байт).`,
     '// Тело оригинальной сборки ниже не изменено; добавлены только обёртка и таблица доступа.',
     '/* eslint-disable */',
   ].join('\n');
 
   const meta = {
     generator: GENERATOR_VERSION,
-    source: `original-0.8.98/src/${name}`,
+    source: source.path,
     sourceSha256: source.sha256,
     sourceBytes: source.bytes,
     freeGlobals: Object.fromEntries(free.map(n => [n, classify(n)])),
@@ -128,9 +129,9 @@ function wrapEra(source) {
 }
 
 const outputs = [];
-for (const lang of ['en']) {
+for (const lang of ['en', 'ru', 'es', 'fr', 'de']) {
   const name = `game.${lang}.js`;
-  const source = readReference(`original-0.8.98/src/${name}`);
+  const source = readReference(['en', 'ru'].includes(lang) ? `original-0.8.98/src/${name}` : `locales-0.8.98/${name}`);
   const { body, meta, freeCount } = wrapGame(name, source);
   outputs.push({ file: `game.${lang}.core.js`, text: body, note: `${name}: ${meta.topLevelCount} объявлений, ${freeCount} свободных имён связаны с окружением` });
   outputs.push({ file: `game.${lang}.core.meta.json`, text: JSON.stringify(meta, null, 2) + '\n', note: 'метаданные' });

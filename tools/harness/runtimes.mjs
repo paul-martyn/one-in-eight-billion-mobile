@@ -55,14 +55,15 @@ const read = file => {
  * Неизменённый оригинал в node:vm. Глобальный объект контекста — те же
  * привязки окружения, которые получает производный core.
  */
-export function createOriginalRuntime({ clockAt, entropySeed = 0x1a8b2026, variant = 'src', withEra = false, dom = 'null' } = {}) {
-  const files = ORIGINAL_FILES[variant];
+export function createOriginalRuntime({ clockAt, entropySeed = 0x1a8b2026, variant = 'src', withEra = false, dom = 'null', lang = 'en' } = {}) {
+  const files = { ...ORIGINAL_FILES[variant] };
+  if (lang !== 'en') files.game = lang === 'ru' ? path.join(refSrc, 'game.ru.js') : path.join(root, 'reference', 'locales-0.8.98', `game.${lang}.js`);
   const network = [];
   const env = makeEnv({ clockAt, entropySeed, network });
-  const metaFile = path.join(root, 'src', 'core', 'generated', 'game.en.core.meta.json');
+  const metaFile = path.join(root, 'src', 'core', 'generated', `game.${lang}.core.meta.json`);
   const required = Object.keys(JSON.parse(fs.readFileSync(metaFile, 'utf8')).freeGlobals);
   const consoleErrors = [];
-  const globals = createCoreGlobals({ ...env, lang: 'en', dom, onNetwork: a => network.push(a), console: quietConsole(consoleErrors) }, required);
+  const globals = createCoreGlobals({ ...env, lang, dom, onNetwork: a => network.push(a), console: quietConsole(consoleErrors) }, required);
   const context = vm.createContext({ ...globals });
   const run = (code, filename = 'harness') => vm.runInContext(code, context, { filename, timeout: 120_000 });
   if (withEra) run(read(files.era), 'era.js');
@@ -80,21 +81,25 @@ export function createOriginalRuntime({ clockAt, entropySeed = 0x1a8b2026, varia
 }
 
 let derivedModule = null;
+const localizedModules = new Map();
 let eraModule = null;
-export async function loadDerivedModules() {
+export async function loadDerivedModules(lang = 'en') {
   derivedModule ??= await import(pathToFileURL(path.join(root, 'src', 'core', 'generated', 'game.en.core.js')).href);
   eraModule ??= await import(pathToFileURL(path.join(root, 'src', 'core', 'generated', 'era.core.js')).href);
-  return { derivedModule, eraModule };
+  if (lang !== 'en' && !localizedModules.has(lang)) localizedModules.set(lang, await import(pathToFileURL(path.join(root, 'src', 'core', 'generated', `game.${lang}.core.js`)).href));
+  return { derivedModule: lang === 'en' ? derivedModule : localizedModules.get(lang), eraModule };
 }
 
 /** Производный core; перед вызовом нужен await loadDerivedModules(). */
-export function createDerivedRuntime({ clockAt, entropySeed = 0x1a8b2026, withEra = false, dom = 'null' } = {}) {
+export function createDerivedRuntime({ clockAt, entropySeed = 0x1a8b2026, withEra = false, dom = 'null', lang = 'en' } = {}) {
   if (!derivedModule) throw new Error('loadDerivedModules() не вызван');
   const network = [];
   const env = makeEnv({ clockAt, entropySeed, network });
   const consoleErrors = [];
-  const globals = createCoreGlobals({ ...env, lang: 'en', dom, onNetwork: a => network.push(a), console: quietConsole(consoleErrors) }, Object.keys(derivedModule.CORE_META.freeGlobals));
-  const core = derivedModule.instantiateCore({ globals });
+  const mod = lang === 'en' ? derivedModule : localizedModules.get(lang);
+  if (!mod) throw new Error(`Не загружена сборка ${lang}`);
+  const globals = createCoreGlobals({ ...env, lang, dom, onNetwork: a => network.push(a), console: quietConsole(consoleErrors) }, Object.keys(mod.CORE_META.freeGlobals));
+  const core = mod.instantiateCore({ globals });
   if (withEra) core.setLateGlobal('ERA', eraModule.ERA);
   const top = core.top;
   return {

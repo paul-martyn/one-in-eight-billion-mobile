@@ -5,30 +5,14 @@
 import { useEffect, useState } from 'react';
 import spec from '../../../../design/motion.json';
 import { useReducedMotion } from '../../../../ui/motionPrefs';
-
-type Parsed = { pre: string; value: number; decimals: number; grouped: boolean; post: string };
-
-function parse(text: string): Parsed | null {
-  const m = /^([^\d]*?)(\d[\d,]*(?:\.\d+)?)(.*)$/s.exec(text);
-  if (!m) return null;
-  const num = m[2]!;
-  const value = Number(num.replace(/,/g, ''));
-  if (!Number.isFinite(value) || value === 0) return null;
-  return { pre: m[1]!, value, decimals: (num.split('.')[1] ?? '').length, grouped: num.includes(','), post: m[3]! };
-}
-
-function format(p: Parsed, k: number): string {
-  const v = p.value * k;
-  const s = p.grouped
-    ? v.toLocaleString('en-US', { minimumFractionDigits: p.decimals, maximumFractionDigits: p.decimals })
-    : v.toFixed(p.decimals);
-  return p.pre + s + p.post;
-}
+import { useAdapter } from '../../../../adapters/useGame';
+import { scaleNumbers } from '../../../../i18n/numbers';
 
 const easeOutCubic = (x: number) => 1 - (1 - x) ** 3;
 
 /** Строка суммы со счётом при каждом входе (play: вкладка активна). */
 export function CountUp({ text, play }: { text: string; play: boolean }) {
+  const locale = useAdapter().formatLocale();
   const reduced = useReducedMotion();
   const [k, setK] = useState<number | null>(() => (play && !reduced ? 0 : null));
   useEffect(() => {
@@ -46,8 +30,7 @@ export function CountUp({ text, play }: { text: string; play: boolean }) {
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [play, reduced]);
-  const parsed = k === null ? null : parse(text);
-  const shown = k === null || !parsed ? text : format(parsed, k);
+  const shown = k === null ? text : scaleNumbers(text, k, locale, true);
   return (
     <>
       <span aria-hidden="true">{shown}</span>

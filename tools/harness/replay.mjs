@@ -12,7 +12,13 @@ import { GameAdapter, STEP_SECONDS } from '../../src/adapters/gameAdapter.ts';
 
 export async function replayLife(replay) {
   if (replay.format !== '1in8b-replay/1') throw new Error(`Неизвестный формат ${replay.format}`);
-  const mods = await loadDerivedModules();
+  let mods = await loadDerivedModules();
+  let lang = 'en';
+  for (const candidate of ['ru', 'es', 'fr', 'de']) {
+    if (replay.core === mods.derivedModule.CORE_META.sourceSha256) break;
+    lang = candidate;
+    mods = await loadDerivedModules(candidate);
+  }
   if (replay.core !== mods.derivedModule.CORE_META.sourceSha256) throw new Error('Журнал записан для другой сборки core');
   if (replay.stepSeconds !== STEP_SECONDS) throw new Error('Другая длина шага времени');
   let at = replay.commands[0]?.at ?? 0;
@@ -22,7 +28,7 @@ export async function replayLife(replay) {
   ]);
   const a = new GameAdapter();
   await a.boot(async () => createHost(mods.derivedModule, {
-    storage, seed: 'replay', clock: { now: () => at, monotonic: () => 0 }, viewRandom: () => 0.5,
+    storage, lang, seed: 'replay', clock: { now: () => at, monotonic: () => 0 }, viewRandom: () => 0.5,
     loadEra: async () => mods.eraModule.ERA,
   }));
   let n = 0;

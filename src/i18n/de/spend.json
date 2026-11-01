@@ -1,0 +1,12 @@
+{
+  "spend.activities.title": "Unternehmungen",
+  "spend.income": "Jahreseinkommen: {amount}",
+  "spend.closed": "„{title}“ öffnet sich, sobald du den Jahresfokus wählen kannst. Bis dahin entscheidet deine Familie.",
+  "spend.empty": "Hier gibt es gerade nichts zu kaufen oder zu verkaufen.",
+  "spend.confirm.title": "Bist du sicher?",
+  "spend.confirm.cancel": "Abbrechen",
+  "spend.confirm.yes": "Bestätigen",
+  "spend.result.title": "Erledigt!",
+  "spend.result.ok": "OK",
+  "spend.result.close": "Schließen"
+}

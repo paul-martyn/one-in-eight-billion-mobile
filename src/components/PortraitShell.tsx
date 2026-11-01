@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { usePortraitGuard } from '../app/usePortraitGuard';
+import { t } from '../i18n';
 
 export function PortraitShell({ children }: { children: ReactNode }) {
   const rotate = usePortraitGuard();
@@ -15,8 +16,8 @@ export function PortraitShell({ children }: { children: ReactNode }) {
             <rect x="12" y="4" width="40" height="72" rx="7" stroke="currentColor" strokeWidth="2" />
             <path d="M26 66h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
-          <h1>Поверните телефон</h1>
-          <p>Эта история живёт в портретном режиме.</p>
+          <h1>{t('orientation.title')}</h1>
+          <p>{t('orientation.body')}</p>
         </section>
       )}
     </div>

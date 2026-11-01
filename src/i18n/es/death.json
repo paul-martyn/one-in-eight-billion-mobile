@@ -1,0 +1,17 @@
+{
+  "death.title": "La vida terminó",
+  "death.continue": "Continuar",
+  "death.years": "{born} – {died} · edad al morir: {age}",
+  "death.diedAt": "Edad al morir: {age}",
+  "death.cause": "Causa: {cause}",
+  "death.hold": "Mantén pulsado para ver tu último día",
+  "death.lookBack": "Mirar atrás",
+  "death.summary": "Resumen de vida",
+  "death.barRegion": "Esta vida ha terminado",
+  "death.place": "La vida terminó · {place}, {year}",
+  "death.placeNoYear": "La vida terminó · {place}",
+  "death.barLabel": "Edad: {age} de 100. Esperanza de vida al nacer: {le}. Esta vida ha terminado.",
+  "death.skip.title": "Viviendo el resto de esta vida…",
+  "death.skip.who": "{name}, edad {age}",
+  "death.skip.note": "El juego toma las decisiones durante el camino, siguiendo sus reglas habituales."
+}

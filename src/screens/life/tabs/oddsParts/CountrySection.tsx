@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import type { OddsCountryVM } from '../../../../adapters/vm/odds';
 import { t } from '../../../../i18n';
+import { useAdapter } from '../../../../adapters/useGame';
 import { countText, useEnterProgress } from './enter';
 
 function titleOf(c: OddsCountryVM): string {
@@ -11,6 +12,7 @@ function titleOf(c: OddsCountryVM): string {
 }
 
 function CountryBody({ c }: { c: OddsCountryVM }) {
+  const locale = useAdapter().formatLocale();
   const k = useEnterProgress();
   return (
     <>
@@ -18,7 +20,7 @@ function CountryBody({ c }: { c: OddsCountryVM }) {
       <div className="odds-tiles odds-tiles--country">
         {c.tiles.map(r => (
           <div key={r.label} className="odds-tile">
-            <span className="odds-tile__value tabular">{countText(r.value, k)}</span>
+            <span className="odds-tile__value tabular">{countText(r.value, k, locale)}</span>
             <span className="odds-tile__label">{r.label}</span>
           </div>
         ))}

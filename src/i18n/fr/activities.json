@@ -1,0 +1,13 @@
+{
+  "activities.paused": "En pause · {age} · {year}",
+  "activities.pausedAge": "En pause · {age}",
+  "activities.unavailable": "Les activités apparaissent une fois la vie commencée.",
+  "activities.now": "En ce moment",
+  "activities.now.label": "Votre activité actuelle",
+  "activities.focus.title": "Priorité de l’année",
+  "activities.focus.none": "Pas encore choisie. Sans choix, le jeu en choisit une pour vous.",
+  "activities.focus.note": "À la fin de l’année, chaque priorité compte selon le temps qui lui a été consacré.",
+  "activities.year.title": "Cette année jusqu’ici",
+  "activities.year.meta": "{pct} % de l’année écoulée",
+  "activities.year.share": "{name} {pct} %"
+}

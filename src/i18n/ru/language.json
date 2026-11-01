@@ -1,0 +1,15 @@
+{
+  "lang.title": "Язык",
+  "lang.money": "Твоя валюта",
+  "lang.go": "Продолжить",
+  "lang.device": "Язык устройства",
+  "lang.soon": "Пока без перевода",
+  "lang.moneyHint": "(по местным ценам)",
+  "lang.languagesLabel": "Язык",
+  "lang.currencyLabel": "Валюта",
+  "lang.restarting": "Применяем…",
+  "lang.selected": "Выбран",
+  "lang.available": "Доступен",
+  "lang.historyHint": "Новые события будут на выбранном языке. Старые записи сохранят исходный текст.",
+  "lang.failed": "Не удалось загрузить язык. Попробуй ещё раз."
+}

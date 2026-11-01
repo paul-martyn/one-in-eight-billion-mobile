@@ -1,0 +1,11 @@
+{
+  "peopleArt.home": "Дома: {people}",
+  "peopleArt.entry": "{role}, {age}",
+  "peopleArt.role.me": "ты",
+  "peopleArt.role.par": "родитель",
+  "peopleArt.role.sib": "брат или сестра",
+  "peopleArt.role.pt": "партнёр",
+  "peopleArt.role.kid": "ребёнок",
+  "peopleArt.role.grandkid": "внук или внучка",
+  "peopleArt.role.inlaw": "родственник по браку"
+}

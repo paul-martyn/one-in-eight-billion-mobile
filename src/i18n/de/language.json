@@ -1,0 +1,15 @@
+{
+  "lang.title": "Sprache",
+  "lang.money": "Deine Währung",
+  "lang.go": "Weiter",
+  "lang.device": "Gerätesprache",
+  "lang.soon": "Noch nicht übersetzt",
+  "lang.moneyHint": "(zu örtlichen Preisen)",
+  "lang.languagesLabel": "Sprache",
+  "lang.currencyLabel": "Währung",
+  "lang.restarting": "Wird übernommen…",
+  "lang.selected": "Ausgewählt",
+  "lang.available": "Verfügbar",
+  "lang.historyHint": "Neue Ereignisse erscheinen in der gewählten Sprache. Frühere Einträge behalten ihren ursprünglichen Text.",
+  "lang.failed": "Die Sprache konnte nicht geladen werden. Versuche es erneut."
+}

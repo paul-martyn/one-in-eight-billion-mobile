@@ -3,8 +3,9 @@
 // (функции оригинала в песочнице). Отсчёт чисел при входе — только показ.
 import { useEffect, useState } from 'react';
 import spec from '../../design/motion.json';
-import { t } from '../../i18n';
-import { useCoreView, useSnapshot } from '../../adapters/useGame';
+import { t, formatNumber } from '../../i18n';
+import { scaleNumbers } from '../../i18n/numbers';
+import { useAdapter, useCoreView, useSnapshot } from '../../adapters/useGame';
 import { birthOddsView, type BirthOddsVM, type FactVM, type HomeCompareVM } from '../../adapters/vm/certificate';
 import type { CertificateVM, CompanionVM } from '../../adapters/viewModels';
 import { ChunkyButton, RoundButton, STAT_COLOR, type StatKey } from '../../ui/components';
@@ -37,21 +38,12 @@ function useEntrance(reduced: boolean): number {
 }
 
 /** Каждое число в готовой строке оригинала растёт от нуля с тем же числом знаков; итог — исходная строка. */
-const NUM = /\d[\d,]*(?:\.\d+)?/g;
-function countUp(text: string, k: number): string {
-  if (k >= 1) return text;
-  return text.replace(NUM, m => {
-    const dec = (m.split('.')[1] ?? '').length;
-    const v = Number(m.replace(/,/g, ''));
-    if (!Number.isFinite(v)) return m;
-    return (v * k).toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec, useGrouping: m.includes(',') });
-  });
-}
 function Count({ text, k }: { text: string; k: number }) {
+  const locale = useAdapter().formatLocale();
   if (k >= 1) return <>{text}</>;
   return (
     <>
-      <span aria-hidden="true">{countUp(text, k)}</span>
+      <span aria-hidden="true">{scaleNumbers(text, k, locale)}</span>
       <span className="sr-only">{text}</span>
     </>
   );
@@ -172,7 +164,7 @@ function Tile({ value, unit, caption, k }: { value: string; unit?: string; capti
 }
 
 function ShareBlock({ cert, view, k }: { cert: CertificateVM; view: BirthOddsVM | null; k: number }) {
-  const oneIn = cert.shareOneIn.toLocaleString('en-US');
+  const oneIn = formatNumber(cert.shareOneIn);
   const textKey = view?.pastEra
     ? (view.byPopulation ? 'birthOdds.sharePastPop' : 'birthOdds.sharePastBirths')
     : (view?.byPopulation ? 'birthOdds.sharePop' : 'birthOdds.shareBirths');

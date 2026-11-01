@@ -1,4 +1,8 @@
 {
+  "lang.selected": "Selected",
+  "lang.available": "Available",
+  "lang.historyHint": "New events use the selected language. Earlier entries keep their original text.",
+  "lang.failed": "The language could not be loaded. Please try again.",
   "lang.title": "Language",
   "lang.money": "Your currency",
   "lang.go": "Continue",

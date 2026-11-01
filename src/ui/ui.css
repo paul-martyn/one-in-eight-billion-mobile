@@ -9,7 +9,7 @@
 .chunky--green { background: var(--cta-green); }
 .chunky:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .chunky:disabled { filter: grayscale(0.6) opacity(0.6); }
-.chunky__label { font-size: 22px; font-weight: 700; line-height: 1; }
+.chunky__label { min-width: 0; font-size: clamp(17px, 5.6cqw, 22px); font-weight: 700; line-height: 1.1; overflow-wrap: anywhere; }
 [dir='rtl'] .chunky { flex-direction: row-reverse; }
 
 .soft-btn {

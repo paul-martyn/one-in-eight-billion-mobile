@@ -53,7 +53,7 @@ function itemText(it: RewardItem): string {
   }
 }
 
-const gemsText = (n: number) => (n === 1 ? t('rewards.amountGemOne') : t('rewards.amountGems', { n: fmtMeta(n) }));
+const gemsText = (n: number) => (n === 1 ? t('rewards.amountGemOne') : t('rewards.amountGems', { n: fmtMeta(n), count: n }));
 
 // ---------------------------------------------------------------- состояние
 

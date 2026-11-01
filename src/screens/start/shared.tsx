@@ -5,11 +5,10 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, typ
 import { gestureId, useAdapter } from '../../adapters/useGame';
 import { APPROX_WORLD_RATES, worldRates } from '../../adapters/vm/hub';
 import type { Nav } from '../../flow/FlowHost';
-import { t, UI_LANG } from '../../i18n';
+import { t, UI_LANG, formatNumber } from '../../i18n';
 import './world.css';
 
-const NUM = new Intl.NumberFormat(UI_LANG === 'en' ? 'en-US' : UI_LANG);
-export const fmtInt = (n: number) => NUM.format(n);
+export const fmtInt = (n: number) => formatNumber(n);
 
 /** Первая буква заглавной: «the United Kingdom» в крупном заголовке. Только показ. */
 export const capFirst = (s: string) => (s ? s.charAt(0).toLocaleUpperCase(UI_LANG) + s.slice(1) : s);

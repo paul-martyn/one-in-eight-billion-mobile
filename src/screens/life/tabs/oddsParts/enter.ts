@@ -4,6 +4,8 @@
 import { useEffect, useState } from 'react';
 import spec from '../../../../design/motion.json';
 import { useReducedMotion } from '../../../../ui/motionPrefs';
+import { numberLocale } from '../../../../i18n';
+import { scaleNumbers } from '../../../../i18n/numbers';
 
 const DURATION = spec.sequences.countUp.durationMs;
 const easeOutCubic = (p: number) => 1 - Math.pow(1 - p, 3);
@@ -32,13 +34,6 @@ export function useEnterProgress(): number {
  * показывается исходная строка без изменений. Числа после слова с пробелом
  * («per 1,000») не трогаются — это единица измерения, а не значение.
  */
-export function countText(s: string, k: number): string {
-  if (k >= 1) return s;
-  return s.replace(/(?<![\p{L}]\s)(?<![\d.,])\d[\d,]*(?:\.\d+)?/gu, m => {
-    const dec = m.includes('.') ? (m.split('.')[1]?.length ?? 0) : 0;
-    const v = Number(m.replace(/,/g, '')) * Math.max(0, k);
-    return m.includes(',')
-      ? v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec })
-      : v.toFixed(dec);
-  });
+export function countText(s: string, k: number, locale = numberLocale()): string {
+  return scaleNumbers(s, k, locale);
 }

@@ -97,7 +97,7 @@
 
 .cs-stamp {
   position: absolute; right: 20px; bottom: 16px; mix-blend-mode: multiply; pointer-events: none;
-  opacity: 0; transform: rotate(-12deg) scale(1.7); font-family: Fredoka, system-ui, sans-serif;
+  opacity: 0; transform: rotate(-12deg) scale(1.7); font-family: var(--font-ui);
 }
 .cs.is-done .cs-stamp {
   opacity: 0.9; transform: rotate(-12deg) scale(1);

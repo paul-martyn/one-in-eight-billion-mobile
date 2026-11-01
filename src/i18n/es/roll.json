@@ -1,0 +1,11 @@
+{
+  "roll.loading": "Preparando tu nacimiento…",
+  "roll.skip": "Omitir",
+  "roll.skipLabel": "Omitir el giro",
+  "roll.oneInBirths": "Aquí nace 1 de cada {n} bebés ({pct}).",
+  "roll.oneInPop": "Aquí vive 1 de cada {n} personas ({pct}).",
+  "roll.oneInBirthsPast": "En {year}, aquí nacía 1 de cada {n} bebés ({pct}).",
+  "roll.oneInPopPast": "En {year}, aquí vivía 1 de cada {n} personas ({pct}).",
+  "roll.thatsYou": "¡Hoy eres tú!",
+  "roll.thatsYouPast": "¡Esta vez eres tú!"
+}

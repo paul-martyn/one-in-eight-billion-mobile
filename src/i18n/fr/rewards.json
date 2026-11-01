@@ -1,0 +1,22 @@
+{
+  "rewards.title": "Une vie vécue",
+  "rewards.nameYears": "{name} · {years}",
+  "rewards.listTitle": "Récompenses de cette vie",
+  "rewards.school": "Études terminées : {detail}",
+  "rewards.schoolPlain": "Scolarité terminée",
+  "rewards.firstJob": "Premier emploi : {detail}",
+  "rewards.firstJobPlain": "Premier emploi",
+  "rewards.married": "Mariage avec {detail}",
+  "rewards.marriedPlain": "Mariage",
+  "rewards.debtPaid": "Dettes remboursées",
+  "rewards.firstInCountry": "Première vie née en {detail}",
+  "rewards.firstInCountryPlain": "Première vie née dans ce pays",
+  "rewards.none": "Pas de récompense cette fois. Cette vie reste conservée dans Vies.",
+  "rewards.total": "Au total",
+  "rewards.totalValue": "+{dollars} $ · +{gems} gemmes",
+  "rewards.amountDollars": "+{n} dollars",
+  "rewards.amountGems": "+{n} gemmes",
+  "rewards.amountGemOne": "+1 gemme",
+  "rewards.claim": "Récupérer",
+  "rewards.claimed": "Vous avez reçu +{dollars} $ et +{gems} gemmes. La vie est conservée dans Vies."
+}

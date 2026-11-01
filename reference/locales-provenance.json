@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "engineVersion": "0.8.98 beta",
+  "captureDate": "2026-10-31",
+  "sourceSnapshot": "recovery-life-2026-10-31",
+  "role": "Exact public localized bundles; additional immutable snapshot. Original reference unchanged.",
+  "files": [
+    {
+      "lang": "es",
+      "path": "locales-0.8.98/game.es.js",
+      "bytes": 5247351,
+      "sha256": "78381989e93936d1ef66c6e85f57d2590a8049451aae24bf21d190466d2021be",
+      "source": "https://1in8b.life/a/es.78381989e9.js"
+    },
+    {
+      "lang": "fr",
+      "path": "locales-0.8.98/game.fr.js",
+      "bytes": 5388800,
+      "sha256": "960869fa64801af49e9b64bf6f6c0e3c22ce7d4fbe99b22c2e94375de618ed32",
+      "source": "https://1in8b.life/a/fr.960869fa64.js"
+    },
+    {
+      "lang": "de",
+      "path": "locales-0.8.98/game.de.js",
+      "bytes": 5401623,
+      "sha256": "8c9e752e48c4bfa2ac5e7d3cfb205cef295442db33096ef8aa9dc67d70e5cd3d",
+      "source": "https://1in8b.life/a/de.8c9e752e48.js"
+    }
+  ]
+}
