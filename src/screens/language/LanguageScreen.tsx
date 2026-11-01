@@ -1,7 +1,7 @@
 // «0 · Language & currency» (LangCute.dc.html). Язык: в этой версии работает
 // только английский — остальные 18 языков оригинала показаны, но недоступны.
 // Валюта: настоящий выбор оригинала (CUR_SETS.en, one8b.cur.en).
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type CSSProperties } from 'react';
 import { t } from '../../i18n';
 import { gestureId, useAdapter, useSnapshot } from '../../adapters/useGame';
 import { chooseCurrency } from '../../app/game';
@@ -93,7 +93,7 @@ export function LanguageScreen({ nav, active }: ScreenProps) {
               >
                 <span className="lang__dot k-os" style={{ background: DOTS[i % DOTS.length] }}>{l.short}</span>
                 <span className="lang__names">
-                  <span className="lang__name">{l.name}</span>
+                  <span className={`lang__name ${l.name.length >= 14 ? 'is-long' : ''}`}>{l.name}</span>
                   <span className="lang__sub">{avail ? t('lang.device') : t('lang.soon')}</span>
                 </span>
                 {on && <Check />}
@@ -104,8 +104,8 @@ export function LanguageScreen({ nav, active }: ScreenProps) {
         <div className="lang__fade" aria-hidden="true" />
       </section>
 
-      <p className="lang__money k-os">{t('lang.money')}</p>
-      <div className="lang__curs" role="radiogroup" aria-label={t('lang.currencyLabel')}>
+      <p className="lang__money k-os">{t('lang.money')} <span className="lang__hint">{t('lang.moneyHint')}</span></p>
+      <div className="lang__curs" role="radiogroup" aria-label={t('lang.currencyLabel')} style={{ '--cols': Math.ceil(currencies.length / 2) } as CSSProperties}>
         {currencies.map(c => {
           const on = c.key === picked;
           return (
@@ -126,7 +126,6 @@ export function LanguageScreen({ nav, active }: ScreenProps) {
           );
         })}
       </div>
-      <p className="lang__note">{t('lang.moneyNote')}</p>
 
       <div className="lang__cta">
         <ChunkyButton onClick={go} disabled={busy} aria-busy={busy}>{busy ? t('lang.restarting') : t('lang.go')}</ChunkyButton>
