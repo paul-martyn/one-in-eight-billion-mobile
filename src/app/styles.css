@@ -1,7 +1,7 @@
 /* Базовые стили. Значения — из src/design/tokens.json (стиль Cute холста дизайна). */
 :root {
   color-scheme: light;
-  --font-ui: Fredoka, 'Baloo 2', system-ui, sans-serif;
+  --font-ui: Fredoka, Rubik, 'Baloo 2', system-ui, sans-serif;
   font-family: var(--font-ui);
   color: #5a3418;
   background: #e6d4b1;
@@ -30,17 +30,10 @@
   --shadow-card: 0 4px 12px rgba(90, 52, 24, 0.2), 0 1px 3px rgba(90, 52, 24, 0.14);
   --lip: inset 0 -3px 0 rgba(90, 52, 24, 0.22);
   --gloss: inset 0 3px 0 rgba(255, 255, 255, 0.45);
-  --font-typed: 'Courier Prime', 'Courier New', monospace;
+  --font-typed: 'Courier Prime', Rubik, 'Courier New', monospace;
   --font-sign: Caveat, 'Segoe Script', cursive;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
-}
-
-/* Русская локаль: цельный округлый шрифт вместо системной подстановки кириллицы.
-   Подпись остаётся Caveat, в котором уже есть кириллические начертания. */
-:root:lang(ru) {
-  --font-ui: 'Nunito Variable', system-ui, sans-serif;
-  --font-typed: var(--font-ui);
 }
 
 * { box-sizing: border-box; }

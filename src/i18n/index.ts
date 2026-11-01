@@ -1,7 +1,6 @@
 import { useSyncExternalStore } from 'react';
 import { isLocale, LOCALE_KEY, resolveLocale, type Locale } from './locales';
 import { translate } from './messages';
-import { loadLocaleFonts } from './fonts';
 export { isLocale, LOCALE_NAMES, SUPPORTED_LOCALES, type Locale } from './locales';
 
 const files = import.meta.glob<Record<string, string>>('./*/*.json', { eager: true, import: 'default' });
@@ -16,7 +15,6 @@ function initialLocale(): Locale {
   return resolveLocale(saved, typeof navigator === 'undefined' ? [] : navigator.languages);
 }
 export let UI_LANG: Locale = initialLocale();
-if (typeof document !== 'undefined') loadLocaleFonts(UI_LANG);
 export const UI_DIR = 'ltr' as const;
 const listeners = new Set<() => void>();
 export const getLocale = () => UI_LANG;
@@ -29,7 +27,6 @@ export function setLocale(locale: Locale, persist = false): void {
   UI_LANG = locale;
   if (persist) { try { localStorage.setItem(LOCALE_KEY, locale); } catch { /* работает до закрытия страницы */ } }
   if (typeof document !== 'undefined') {
-    loadLocaleFonts(locale);
     document.documentElement.lang = locale;
     document.documentElement.dir = UI_DIR;
     document.title = t('app.title');
