@@ -3,7 +3,7 @@
 import { test, before } from 'node:test';
 import assert from 'node:assert/strict';
 import { loadDerivedModules } from '../../tools/harness/runtimes.mjs';
-import { createHost } from '../../src/core/runtime.ts';
+import { createHost, STORAGE_PREFIX } from '../../src/core/runtime.ts';
 import { memoryStorage } from '../../src/core/env.ts';
 import { GameAdapter, STEP_SECONDS } from '../../src/adapters/gameAdapter.ts';
 import * as C from '../../src/adapters/commands.ts';
@@ -158,8 +158,8 @@ test('перезагрузка продолжает ту же жизнь и то
   // Снимок хранилища сразу после годового сохранения (HOOK.year в конце 3-го года).
   const snapshot = new Map();
   for (let i = 0; i < storage.length; i++) snapshot.set(storage.key(i), storage.getItem(storage.key(i)));
-  assert.ok(snapshot.get('1in8b-mobile/v1:one8b.en.save.v3'), 'сохранение в отдельном пространстве ключей');
-  for (const k of snapshot.keys()) assert.ok(k.startsWith('1in8b-mobile/v1:'), k);
+  assert.ok(snapshot.get(STORAGE_PREFIX + 'one8b.en.save.v3'), 'сохранение в отдельном пространстве ключей');
+  for (const k of snapshot.keys()) assert.ok(k.startsWith(STORAGE_PREFIX), k);
   live(a, 9);
   // «Перезагрузка»: новый экземпляр из снимка хранилища.
   const b = await adapterWith(memoryStorage(snapshot), 'seed не используется — поток восстанавливается');

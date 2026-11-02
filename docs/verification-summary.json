@@ -1,0 +1,226 @@
+{
+  "format": "independent-verification-summary/2",
+  "verifiedAt": "2026-11-02T18:02:16.401Z",
+  "selfContainedCheck": {
+    "command": "npm run check",
+    "tests": 65,
+    "passed": 65,
+    "failed": 0,
+    "durationMs": 10370.639
+  },
+  "originalSnapshotOracle": {
+    "scenarios": 55,
+    "passed": 55,
+    "failed": 0,
+    "commandSnapshots": 17390,
+    "durationMs": 41362,
+    "compared": "Full serialized state, RNG count, hooks and final storage after every command",
+    "normalizations": [],
+    "report": "oracle-comparison.json"
+  },
+  "originalHandlerTests": {
+    "tests": 19,
+    "passed": 19,
+    "failed": 0,
+    "durationMs": 55479.8475,
+    "files": [
+      "equivalence.test.mjs",
+      "commands.test.mjs"
+    ],
+    "normalizations": []
+  },
+  "productionMinifierParity": {
+    "command": "npm run verify:build",
+    "scenarios": 55,
+    "passed": 55,
+    "failed": 0,
+    "commandSnapshots": 17390,
+    "localDistributionBoundariesPassed": true,
+    "normalizations": []
+  },
+  "logs": [
+    {
+      "path": "artifacts/final-check.log",
+      "bytes": 7673,
+      "sha256": "05aefa3f36b15fd69a1c26f0c894aa73d68915063ac0e557891f6ff3c5362f3a"
+    },
+    {
+      "path": "artifacts/final-minified.log",
+      "bytes": 424,
+      "sha256": "2d6bc536b49c242ef854d5555588cae4e9b0ed2ce52e21843a19602e2798355f"
+    },
+    {
+      "path": "artifacts/final-original-handlers.log",
+      "bytes": 3005,
+      "sha256": "e2ed55233875f402ab60b27f1379cc45c677d47c1ed5486e1f28a03d16452103"
+    },
+    {
+      "path": "artifacts/final-original-oracle.log",
+      "bytes": 2636,
+      "sha256": "0e3137adc74a9583bf6ad7cee4e42df59885715e0e4506fe3bbd934e7fdf5e2c"
+    }
+  ],
+  "testedRuntime": [
+    {
+      "path": "src/adapters/commands.ts",
+      "bytes": 16111,
+      "sha256": "4c4e0cf606a3691d9f468127d3bffb72f1015574af6bbe01c6c90a5dd43cb566"
+    },
+    {
+      "path": "src/adapters/gameAdapter.ts",
+      "bytes": 33382,
+      "sha256": "a5b8860d594a40b5b908dbe0ac9827753c927514a4c9f93bdffb5da6a95209c2"
+    },
+    {
+      "path": "src/core/env.ts",
+      "bytes": 18485,
+      "sha256": "2efc7f88c94ff87cac338122d16ae682df13b9b1746039513be096e57274f4c7"
+    },
+    {
+      "path": "src/core/runtime.ts",
+      "bytes": 9743,
+      "sha256": "766601733aafdc8caf83e4fabfee4bb9ee25d8bdd285c2ce79f68e2a61f8ad72"
+    },
+    {
+      "path": "src/engine/era.js",
+      "bytes": 789776,
+      "sha256": "2adeb635aeb5f0cd449cc8863985a4b461e5a72000ef7f85cd7e038195f31906"
+    },
+    {
+      "path": "src/engine/game.de.js",
+      "bytes": 4405186,
+      "sha256": "991f9e1752cda8b54b035fa80b67058b01f372cfff1c2f1e38f5efaa911668d9"
+    },
+    {
+      "path": "src/engine/game.en.js",
+      "bytes": 5494444,
+      "sha256": "24e8716f92161ccb9f67bac44662d3d66228f767ffae874e39b690c3b3a4572b"
+    },
+    {
+      "path": "src/engine/game.es.js",
+      "bytes": 4251147,
+      "sha256": "47d82f246d65564b8b55ab687cdc894eb784cc0bb89ba89951ec41772928bccc"
+    },
+    {
+      "path": "src/engine/game.fr.js",
+      "bytes": 4392334,
+      "sha256": "54532e8c19d2acf4c515e269fc239db684b743a987750c32caeedc339d39e552"
+    },
+    {
+      "path": "src/engine/game.ru.js",
+      "bytes": 6979517,
+      "sha256": "581c0aba2f72bc34fa79ea25eab8c0ebff4c397a1ff9ec849e9fa47ee81bfadc"
+    },
+    {
+      "path": "src/engine/state-effects.js",
+      "bytes": 6205,
+      "sha256": "e7ae751f0869c1ee9ed9b1ecce5295033845149443d46cf9d942ea90ca1d0737"
+    }
+  ],
+  "rendererCompatibility": {
+    "baselineModified": false,
+    "implementation": "outputs/independent-prep/render-effects.mjs",
+    "preservedEffects": [
+      "Appearance memo traversal from sceneModel, with original ordering and SC_PPL cap",
+      "Sibling death-age lazy draws",
+      "Study-abroad city lazy draw",
+      "Home-language lazy draw",
+      "Adult rental ledger initialization",
+      "Parent occupations when missing",
+      "Partner occupation lazy draw",
+      "Legacy-save experience ledger initialization through statusLine/expIn",
+      "Focus-hint state and preference persistence",
+      "UI.dirty reset"
+    ],
+    "verification": {
+      "languages": [
+        "en",
+        "ru",
+        "es",
+        "fr",
+        "de"
+      ],
+      "directSeededCompleteLives": 150,
+      "directRenderPasses": 15773,
+      "targetedStateChecks": 40,
+      "mobileAdapterCompleteLives": 15,
+      "mobileSnapshotAndAllViewBuilderComparisons": 1935,
+      "assertions": [
+        "exact serialized S including canonical journal",
+        "RNG state",
+        "UI preferences",
+        "all current mobile view builders",
+        "mobile adapter snapshots"
+      ],
+      "latestLegacyExperienceChangeRecheck": "40 targeted states and 10 EN complete lives / 965 render passes pass"
+    },
+    "intentionalInternalDifferences": [
+      "Old DOM output and drawing are omitted. Semantic scKey cache is retained only for exact translation-tail provenance.",
+      "Absolute L_RI translation-call counter differs because discarded old UI translations are skipped. All consumers use relative ring order; logical final8 output/source entries match."
+    ],
+    "scripts": [
+      "node --experimental-strip-types outputs/independent-prep/check-render-effects.mjs --all",
+      "node --experimental-strip-types outputs/independent-prep/check-targeted-render-effects.mjs",
+      "node --experimental-strip-types outputs/independent-prep/check-adapter-render-effects.mjs --all"
+    ],
+    "translationRingFix": {
+      "oracleFixture": "one-in-eight-billion-independent/tests/core/fixtures/render-theme-net.json",
+      "fix": "Reconstruct exact semantic last8 translation tail using countryRows + pure scene model/caption/key + optional sceneWho. No DOM/canvas/network. Preserve scKey and original relative ring order; absolute L_RI can differ.",
+      "standaloneTests": "one-in-eight-billion-independent/tests/core/render-themes.test.mjs",
+      "scan": {
+        "lives": 200,
+        "entries": 69116,
+        "remainingRecoveredTextDifferences": 0,
+        "logicalRingChecks": 20579,
+        "dailyThemeRegexDifferences": 0
+      },
+      "regression": "render-ring-27, net theme, age16 sm_phone: tag must stay on outcome index69, absent from Decision index68, all5 languages.",
+      "defect": "Headless kept cached choice translations after render; original UI evicted them, shifting daily-theme tags.",
+      "targetedProjectionChecks": 50,
+      "allThemeClearIntermediateChecks": 370,
+      "exactProjectionAllThemeChecks": 37,
+      "standaloneFrozenTests": "5/5 pass after independent engine rebuild",
+      "helperSha256": "e7ae751f0869c1ee9ed9b1ecce5295033845149443d46cf9d942ea90ca1d0737"
+    }
+  },
+  "browser": {
+    "pageErrors": 0,
+    "report": "browser-report.md",
+    "externalRequests": 0,
+    "overflowStates": 0,
+    "failedRequests": 0,
+    "route": "Language -> birth -> certificate -> Life/People/Activities/Money/Odds -> skip -> ending -> hub/claim -> reload",
+    "consoleErrors": 0,
+    "viewports": [
+      "393x852",
+      "320x568 reduced motion"
+    ],
+    "states": 26
+  },
+  "eraRestore": {
+    "passed": 6,
+    "tests": 6,
+    "coverage": [
+      "saved boot",
+      "currency reload",
+      "locale swap"
+    ],
+    "eras": [
+      "CAN 1950",
+      "CAN future calendar 2045"
+    ],
+    "formulaChanges": false
+  },
+  "bootstrapViewStream": {
+    "gameDraws": 0,
+    "independentPresentationDraws": 1,
+    "verified": true,
+    "originalPresentationDraws": 1
+  },
+  "fallback": {
+    "sourceFilesVerified": 642,
+    "originalModified": false,
+    "archive": "../outputs/one-in-eight-billion-mobile-fallback-2026-11-02.zip",
+    "sha256": "50d824c5dcf6eb44e4d86a702dae6e1a1a95ad9a75611438e66ba26445cd3bdd"
+  }
+}

@@ -1,0 +1,2211 @@
+{
+  "schema": 1,
+  "copyDate": "2026-11-02",
+  "source": "../one-in-eight-billion-mobile",
+  "destination": ".",
+  "note": "Imported byte-for-byte source inventory before independent-app integration edits. importedSha256 records the original copied bytes; later source changes do not rewrite this provenance.",
+  "excluded": [
+    ".git",
+    "reference",
+    "node_modules (except selected font license texts)",
+    "src/core/generated",
+    "dist",
+    "artifacts",
+    "cache",
+    "old AGENTS.md",
+    "old docs",
+    "old tools and tests except tools/core/scope.mjs"
+  ],
+  "files": [
+    {
+      "source": ".gitattributes",
+      "destination": ".gitattributes",
+      "bytes": 201,
+      "importedSha256": "5871c8a8898032a9b3738afcb3ea84b6d08c0399aa664b608cb3b3731b6dcd51"
+    },
+    {
+      "source": ".gitignore",
+      "destination": ".gitignore",
+      "bytes": 260,
+      "importedSha256": "408e3f52cf3144adf33a65e11cdf3650e84a59967122f599d309d7faaebd77c4"
+    },
+    {
+      "source": ".node-version",
+      "destination": ".node-version",
+      "bytes": 8,
+      "importedSha256": "2722b61f414f07f08be7f1f1316012813818f26f1c40d6a24a748686cec7d2ff"
+    },
+    {
+      "source": ".npmrc",
+      "destination": ".npmrc",
+      "bytes": 27,
+      "importedSha256": "e6d444028a86af5427602e1c3840892cec130019679f6210da8c29e83d9e4751"
+    },
+    {
+      "source": "design/claude-canvas/assets/06309a7b119165e18071ca59d8f05442.png",
+      "destination": "design/claude-canvas/assets/06309a7b119165e18071ca59d8f05442.png",
+      "bytes": 31084,
+      "importedSha256": "2dabc6b35849e67a21ddfa9077eb293955216126b41d3f4d3ed2bca7c51d7a51"
+    },
+    {
+      "source": "design/claude-canvas/assets/1189acbca694517c19788f856303626e.png",
+      "destination": "design/claude-canvas/assets/1189acbca694517c19788f856303626e.png",
+      "bytes": 37307,
+      "importedSha256": "8ac39ae816e217310f23614c678e6d59d00969cf2457acb61525538a8296a604"
+    },
+    {
+      "source": "design/claude-canvas/assets/210a5444081e41bbf72da5c94119d1d0.png",
+      "destination": "design/claude-canvas/assets/210a5444081e41bbf72da5c94119d1d0.png",
+      "bytes": 34696,
+      "importedSha256": "28d098f3bf55cbc387ca32d11eeeadaeef6004473e1f9cfa981cf56eff13634a"
+    },
+    {
+      "source": "design/claude-canvas/assets/288778d3b88098142d309840ced390ca.png",
+      "destination": "design/claude-canvas/assets/288778d3b88098142d309840ced390ca.png",
+      "bytes": 52995,
+      "importedSha256": "c96dabdbae7ce25449a3dc71bc64627bbe53c6fb830ad5ac7d9f484cc0689704"
+    },
+    {
+      "source": "design/claude-canvas/assets/36fd60f21346e9dbb75db73a34fdf62d.png",
+      "destination": "design/claude-canvas/assets/36fd60f21346e9dbb75db73a34fdf62d.png",
+      "bytes": 20322,
+      "importedSha256": "912cd0805293984433d59ca0bd99988f39cb243a445556afc16d70f6267e9e6b"
+    },
+    {
+      "source": "design/claude-canvas/assets/3b731192f118709d66789b3d13ba5c8f.png",
+      "destination": "design/claude-canvas/assets/3b731192f118709d66789b3d13ba5c8f.png",
+      "bytes": 32578,
+      "importedSha256": "c853282d1855e57a2a970ce7d60bb4742829e950d35c8ed546f3d7c8a8a8c3eb"
+    },
+    {
+      "source": "design/claude-canvas/assets/5bd74f940ba8cdd903af2b4b1890b34f.png",
+      "destination": "design/claude-canvas/assets/5bd74f940ba8cdd903af2b4b1890b34f.png",
+      "bytes": 18580,
+      "importedSha256": "107d7a236fd8fa04d9764931da7904787de6df93a7021c5553ca78e52d1cbded"
+    },
+    {
+      "source": "design/claude-canvas/assets/60abeeee8ef547960e0ea6b2a9d59a6f.png",
+      "destination": "design/claude-canvas/assets/60abeeee8ef547960e0ea6b2a9d59a6f.png",
+      "bytes": 15639,
+      "importedSha256": "5605a587db223ed5b76138e269467afc9187aa51247b6101b3c984881a52386c"
+    },
+    {
+      "source": "design/claude-canvas/assets/654c2bebfb923395697e6324216e438e.png",
+      "destination": "design/claude-canvas/assets/654c2bebfb923395697e6324216e438e.png",
+      "bytes": 20664,
+      "importedSha256": "b87375079149f9858507f1149cc2ea9d9184cda109aa43666d3acbb552472381"
+    },
+    {
+      "source": "design/claude-canvas/assets/74d3092d1f603aad42d80848d9c28b7c.png",
+      "destination": "design/claude-canvas/assets/74d3092d1f603aad42d80848d9c28b7c.png",
+      "bytes": 21734,
+      "importedSha256": "e60623e81758b31f1f4ea4ccd330abe26681cc57ed3e0b51cd5ee14914741f10"
+    },
+    {
+      "source": "design/claude-canvas/assets/8d95e2321f6dfb98740afbad525a37f9.png",
+      "destination": "design/claude-canvas/assets/8d95e2321f6dfb98740afbad525a37f9.png",
+      "bytes": 17515,
+      "importedSha256": "dc087e7523461c49eb5bcdb54746ae9061a389f1e1b8ea4cbe3fcde15acfbda7"
+    },
+    {
+      "source": "design/claude-canvas/assets/a4686a07ba0291fccb319c9cc5c8501c.png",
+      "destination": "design/claude-canvas/assets/a4686a07ba0291fccb319c9cc5c8501c.png",
+      "bytes": 24012,
+      "importedSha256": "6e586cad7a726a0a2dcc9a944c898be0434c08f0baadc9cd8d8a8d793e070a1e"
+    },
+    {
+      "source": "design/claude-canvas/assets/a9f0f70f05c60c3cee07ab3966cd26df.png",
+      "destination": "design/claude-canvas/assets/a9f0f70f05c60c3cee07ab3966cd26df.png",
+      "bytes": 17458,
+      "importedSha256": "7da4b0b2f2a2e7d2319d7136c9ae0f9430e3862de43f92d018e58a9cffb84ae0"
+    },
+    {
+      "source": "design/claude-canvas/assets/b199b64e7eaa21e46ac924145292c6cd.png",
+      "destination": "design/claude-canvas/assets/b199b64e7eaa21e46ac924145292c6cd.png",
+      "bytes": 20475,
+      "importedSha256": "47c6edbd836c2a048dd789891efe4ad794b45bbe3f8e7284743b0fa1f9df0c83"
+    },
+    {
+      "source": "design/claude-canvas/assets/b724302d9cccb2fe173c62b57988cda7.svg",
+      "destination": "design/claude-canvas/assets/b724302d9cccb2fe173c62b57988cda7.svg",
+      "bytes": 6464,
+      "importedSha256": "8424d3a799eb44ed8b10533c78a8ffe41532b8d47697734d46e94dbc9bafc7e5"
+    },
+    {
+      "source": "design/claude-canvas/assets/bb082813efac1b9dc4251a1af5f0c3e5.svg",
+      "destination": "design/claude-canvas/assets/bb082813efac1b9dc4251a1af5f0c3e5.svg",
+      "bytes": 6645,
+      "importedSha256": "009a36fe1865ef57a294f00c459f83de8b2ba24db60548b6f6d850b148d92d36"
+    },
+    {
+      "source": "design/claude-canvas/assets/c2128b913ac0de53f21a0f1ef59e6e8c.png",
+      "destination": "design/claude-canvas/assets/c2128b913ac0de53f21a0f1ef59e6e8c.png",
+      "bytes": 31845,
+      "importedSha256": "370d306e6abc90c42603225c4f5a5f81ea0fce2ac3a2c95cc7785dd11e118aa3"
+    },
+    {
+      "source": "design/claude-canvas/assets/cbd2aafdafb840b2db88bb1c3b4c0ef3.png",
+      "destination": "design/claude-canvas/assets/cbd2aafdafb840b2db88bb1c3b4c0ef3.png",
+      "bytes": 20544,
+      "importedSha256": "56c09d6cf5709f3e4dd7f8884f55439260d57590b7e1c8f693b27db790e5d050"
+    },
+    {
+      "source": "design/claude-canvas/assets/d93e605dd61161882f28229f6b213f40.png",
+      "destination": "design/claude-canvas/assets/d93e605dd61161882f28229f6b213f40.png",
+      "bytes": 17873,
+      "importedSha256": "e58af7cffad50c79f312866d092ee8bb2586d2c88a32cb5362b6586b0237e0cc"
+    },
+    {
+      "source": "design/claude-canvas/assets/eb500ed323792a3dc80fed8b200f7f56.png",
+      "destination": "design/claude-canvas/assets/eb500ed323792a3dc80fed8b200f7f56.png",
+      "bytes": 27417,
+      "importedSha256": "10c43136c4e6ad90ece24b373c879c5e729b573f051ac271f5d7c0354e7cb244"
+    },
+    {
+      "source": "design/claude-canvas/assets/f66c866a3edf1a53f0a71af84cba0113.png",
+      "destination": "design/claude-canvas/assets/f66c866a3edf1a53f0a71af84cba0113.png",
+      "bytes": 19491,
+      "importedSha256": "c03ac843e037193caad8224657b95cb862ef5696f41fa1d7cba470ecdde4cc06"
+    },
+    {
+      "source": "design/claude-canvas/PRODUCTION-UI-v107.md",
+      "destination": "design/claude-canvas/PRODUCTION-UI-v107.md",
+      "bytes": 13339,
+      "importedSha256": "2cb04821b95765f1632d515d80ffc3e938082a2880832cfde7cfd0e48f0981e7"
+    },
+    {
+      "source": "design/claude-canvas/project/ActivitiesCute.dc.html",
+      "destination": "design/claude-canvas/project/ActivitiesCute.dc.html",
+      "bytes": 75416,
+      "importedSha256": "52309705177d17f509a3b08a5f956c2f2a4fb62e96362559dade1b3c65f2b5db"
+    },
+    {
+      "source": "design/claude-canvas/project/ActivitiesCuteDetail.dc.html",
+      "destination": "design/claude-canvas/project/ActivitiesCuteDetail.dc.html",
+      "bytes": 751,
+      "importedSha256": "30c58a4a7f7d21884f56e5cd801eb9c6486b2d223b29334426c0c724483a673e"
+    },
+    {
+      "source": "design/claude-canvas/project/ActivitiesCuteStarted.dc.html",
+      "destination": "design/claude-canvas/project/ActivitiesCuteStarted.dc.html",
+      "bytes": 746,
+      "importedSha256": "15796b273b6a0bd441eda6538623acee1756880d8dd69ef8727b6dd0a6ddc4d7"
+    },
+    {
+      "source": "design/claude-canvas/project/Birth.dc.html",
+      "destination": "design/claude-canvas/project/Birth.dc.html",
+      "bytes": 4292,
+      "importedSha256": "e66badebf1af7ab6197ef4d09054afeb616934fb5b511bbe50f5c4d2ff00b65d"
+    },
+    {
+      "source": "design/claude-canvas/project/canvas.json",
+      "destination": "design/claude-canvas/project/canvas.json",
+      "bytes": 18490,
+      "importedSha256": "688406a2d283d50957ec2d8a8fc6a69317102346ba0c3da9ac1955e4dc242efc"
+    },
+    {
+      "source": "design/claude-canvas/project/Card.dc.html",
+      "destination": "design/claude-canvas/project/Card.dc.html",
+      "bytes": 25708,
+      "importedSha256": "ee3dcaed5080e3f388a0472a790c8dab5b000a57b79a302484578b84cc772a77"
+    },
+    {
+      "source": "design/claude-canvas/project/CardDark.dc.html",
+      "destination": "design/claude-canvas/project/CardDark.dc.html",
+      "bytes": 770,
+      "importedSha256": "c2d382c4ec8de33cd5196486389d587c88cea8ef220f36b263a14b4f12c57605"
+    },
+    {
+      "source": "design/claude-canvas/project/Cert.dc.html",
+      "destination": "design/claude-canvas/project/Cert.dc.html",
+      "bytes": 28701,
+      "importedSha256": "95626f79b0ab058bbee1970e82893edfc5526a30102bb44331b08c412570ee91"
+    },
+    {
+      "source": "design/claude-canvas/project/CertCute.dc.html",
+      "destination": "design/claude-canvas/project/CertCute.dc.html",
+      "bytes": 29551,
+      "importedSha256": "c87ccfd6f0f7b327f549cad9ad7f6cadc749be198537534d002ca86a779c0d94"
+    },
+    {
+      "source": "design/claude-canvas/project/CertDark.dc.html",
+      "destination": "design/claude-canvas/project/CertDark.dc.html",
+      "bytes": 790,
+      "importedSha256": "856cdb1ee16d5193d0f5d6aeef39f62f7e3df019eb451fce5179a9f5d7ff4eb1"
+    },
+    {
+      "source": "design/claude-canvas/project/ClayLife.dc.html",
+      "destination": "design/claude-canvas/project/ClayLife.dc.html",
+      "bytes": 11459,
+      "importedSha256": "a0aa04798e9e05e8647b55b714d7233d8dd891d2c81706f6623d90722ade2c12"
+    },
+    {
+      "source": "design/claude-canvas/project/ClayWelcome.dc.html",
+      "destination": "design/claude-canvas/project/ClayWelcome.dc.html",
+      "bytes": 5121,
+      "importedSha256": "164629bd17a722beb6dbe472265762d8c98ad73a2731852e2a28f2bea759d8a9"
+    },
+    {
+      "source": "design/claude-canvas/project/DayLife.dc.html",
+      "destination": "design/claude-canvas/project/DayLife.dc.html",
+      "bytes": 12581,
+      "importedSha256": "312bef8cc8c7c1fcf59a0b0ddcd46444e4f1d9911be6bab87512e1a335b4cf00"
+    },
+    {
+      "source": "design/claude-canvas/project/DayWelcome.dc.html",
+      "destination": "design/claude-canvas/project/DayWelcome.dc.html",
+      "bytes": 6148,
+      "importedSha256": "5233f96d8c0bdee05b13999c11aef4fb452cc118566107b897b57e45ff7e1eef"
+    },
+    {
+      "source": "design/claude-canvas/project/Death.dc.html",
+      "destination": "design/claude-canvas/project/Death.dc.html",
+      "bytes": 10186,
+      "importedSha256": "61be17432c0d57538f5e5b1b1cd54cf2d62835c56b5b365870a652a503d8e8cb"
+    },
+    {
+      "source": "design/claude-canvas/project/Decision.dc.html",
+      "destination": "design/claude-canvas/project/Decision.dc.html",
+      "bytes": 6519,
+      "importedSha256": "907934d680932f14750000e3aa1f4d09bf99092fab3fc0153f56e6a4d4239321"
+    },
+    {
+      "source": "design/claude-canvas/project/EndCute.dc.html",
+      "destination": "design/claude-canvas/project/EndCute.dc.html",
+      "bytes": 23478,
+      "importedSha256": "a2c163db176bb361bf53e981dbd58def2d01c9e5401b08a345dab95e899ae804"
+    },
+    {
+      "source": "design/claude-canvas/project/FlowMap.dc.html",
+      "destination": "design/claude-canvas/project/FlowMap.dc.html",
+      "bytes": 24354,
+      "importedSha256": "a00e98cbf23c9f68b0f0bd41ed2566d11ebdd7b2344dbd1d62250c832ba6c6d8"
+    },
+    {
+      "source": "design/claude-canvas/project/Focus.dc.html",
+      "destination": "design/claude-canvas/project/Focus.dc.html",
+      "bytes": 6551,
+      "importedSha256": "a01f1002759672fb766442585aee0f376bb50dc4ba245110a20640e30174ff47"
+    },
+    {
+      "source": "design/claude-canvas/project/Globe.dc.html",
+      "destination": "design/claude-canvas/project/Globe.dc.html",
+      "bytes": 18241,
+      "importedSha256": "52b667cf2c54908be05aa6de7c1bfd59a505ad79dc8f44fddc9f14afadcd51f5"
+    },
+    {
+      "source": "design/claude-canvas/project/HubCute.dc.html",
+      "destination": "design/claude-canvas/project/HubCute.dc.html",
+      "bytes": 37802,
+      "importedSha256": "e0d78342ff0e3e26e7a85bd9867319c859af55f7f199c87952edd28b41576bfe"
+    },
+    {
+      "source": "design/claude-canvas/project/HubCuteRewards.dc.html",
+      "destination": "design/claude-canvas/project/HubCuteRewards.dc.html",
+      "bytes": 739,
+      "importedSha256": "568b1ee518d1152ace895ca5e0421bbb6fdc05179c15dd9d88aad22430744cd3"
+    },
+    {
+      "source": "design/claude-canvas/project/HubCuteTabs.dc.html",
+      "destination": "design/claude-canvas/project/HubCuteTabs.dc.html",
+      "bytes": 755,
+      "importedSha256": "65ec319b92ca0997535eb193a1c6b397c56009bf8cf9008d23164ad9c85ee0b7"
+    },
+    {
+      "source": "design/claude-canvas/project/LangCute.dc.html",
+      "destination": "design/claude-canvas/project/LangCute.dc.html",
+      "bytes": 18912,
+      "importedSha256": "7da0ad6fe4d397863d7adc9e442bd20e6c47f88686160420910f1221845212db"
+    },
+    {
+      "source": "design/claude-canvas/project/Life.dc.html",
+      "destination": "design/claude-canvas/project/Life.dc.html",
+      "bytes": 14464,
+      "importedSha256": "1348a386789f0938623d6f58fa59d07a38916b5bf9ec0a64d016700043abca52"
+    },
+    {
+      "source": "design/claude-canvas/project/Live.dc.html",
+      "destination": "design/claude-canvas/project/Live.dc.html",
+      "bytes": 34923,
+      "importedSha256": "01c410d1a151e4b95e1f0cde7852fade21afa9fa30f1a0a06a8c389186b228f4"
+    },
+    {
+      "source": "design/claude-canvas/project/LiveCute.dc.html",
+      "destination": "design/claude-canvas/project/LiveCute.dc.html",
+      "bytes": 134844,
+      "importedSha256": "494119b45a61ed3fb876bac78c79422d4564fffee1e522d4a97e6605c578417d"
+    },
+    {
+      "source": "design/claude-canvas/project/LiveCuteDark.dc.html",
+      "destination": "design/claude-canvas/project/LiveCuteDark.dc.html",
+      "bytes": 713,
+      "importedSha256": "c9416b148c5a739d2e99968ca1a0ee27b2fc0e1400c6d87a90b930d4ddc13376"
+    },
+    {
+      "source": "design/claude-canvas/project/LiveCuteDecision.dc.html",
+      "destination": "design/claude-canvas/project/LiveCuteDecision.dc.html",
+      "bytes": 747,
+      "importedSha256": "7ef276c9926b0530e07024e17bf90efb888f98990eb63e69491502d8fa0cdb15"
+    },
+    {
+      "source": "design/claude-canvas/project/LiveCuteDied.dc.html",
+      "destination": "design/claude-canvas/project/LiveCuteDied.dc.html",
+      "bytes": 746,
+      "importedSha256": "2f00d11dd3e7204204820012c80c774e776601f4cd7b5e31a11780b1fca3df3c"
+    },
+    {
+      "source": "design/claude-canvas/project/LiveCuteMenuFolder.dc.html",
+      "destination": "design/claude-canvas/project/LiveCuteMenuFolder.dc.html",
+      "bytes": 831,
+      "importedSha256": "a57fabbf94dc29264ff873607ed4f964f5b0d65509439c99d5c70f3c7542b858"
+    },
+    {
+      "source": "design/claude-canvas/project/LiveCuteMenuPencil.dc.html",
+      "destination": "design/claude-canvas/project/LiveCuteMenuPencil.dc.html",
+      "bytes": 831,
+      "importedSha256": "7f600c1a4bea10f6fec055a53aa4ae63593feb7ba5bdc8160123ec145d42304b"
+    },
+    {
+      "source": "design/claude-canvas/project/LiveCuteMenuStickers.dc.html",
+      "destination": "design/claude-canvas/project/LiveCuteMenuStickers.dc.html",
+      "bytes": 778,
+      "importedSha256": "7ad59c81b438a197d312077c71eb083f9dc3b2e8896c9ffe834922e45386806a"
+    },
+    {
+      "source": "design/claude-canvas/project/LiveCutePause.dc.html",
+      "destination": "design/claude-canvas/project/LiveCutePause.dc.html",
+      "bytes": 766,
+      "importedSha256": "56bcaa16729b8e380179c8345279ebb22d736ed2a16bacbfcba6f43282b21330"
+    },
+    {
+      "source": "design/claude-canvas/project/LiveDark.dc.html",
+      "destination": "design/claude-canvas/project/LiveDark.dc.html",
+      "bytes": 712,
+      "importedSha256": "546daa59d6e263158f189ff57cecc3bb71fa4031c6f3109d59416bc94956e9a7"
+    },
+    {
+      "source": "design/claude-canvas/project/LiveJournal.dc.html",
+      "destination": "design/claude-canvas/project/LiveJournal.dc.html",
+      "bytes": 772,
+      "importedSha256": "3ac21ea33c4d5accd781094fde6cc327da0e702ad6f39ed2cdb3e02f1ee169b9"
+    },
+    {
+      "source": "design/claude-canvas/project/Main.dc.html",
+      "destination": "design/claude-canvas/project/Main.dc.html",
+      "bytes": 5394,
+      "importedSha256": "e0e1cd29c569ac4d2260f5be4cca96ad0aeeb62e1fdb8c362503370eedb0df40"
+    },
+    {
+      "source": "design/claude-canvas/project/Money.dc.html",
+      "destination": "design/claude-canvas/project/Money.dc.html",
+      "bytes": 8042,
+      "importedSha256": "662d50ac00ef7c900b9924650e0e3273a04b0389830526678f81d22fd23e4297"
+    },
+    {
+      "source": "design/claude-canvas/project/MoneyCute.dc.html",
+      "destination": "design/claude-canvas/project/MoneyCute.dc.html",
+      "bytes": 46900,
+      "importedSha256": "88daa89cde52039402c18b115dea861ea95d21ea0cae6fab17c19396bdd8491d"
+    },
+    {
+      "source": "design/claude-canvas/project/MoneyCuteDetail.dc.html",
+      "destination": "design/claude-canvas/project/MoneyCuteDetail.dc.html",
+      "bytes": 725,
+      "importedSha256": "4b99bb8a0293bb31412eaa98a0aa4cc1d721a603b749b2bded37e0eb0a60c2e9"
+    },
+    {
+      "source": "design/claude-canvas/project/MonoLife.dc.html",
+      "destination": "design/claude-canvas/project/MonoLife.dc.html",
+      "bytes": 7658,
+      "importedSha256": "2ac1cb0830476687c293539601a87cc8a7eddf63f874f5edaccaa68c1ef5dd7c"
+    },
+    {
+      "source": "design/claude-canvas/project/MonoWelcome.dc.html",
+      "destination": "design/claude-canvas/project/MonoWelcome.dc.html",
+      "bytes": 5707,
+      "importedSha256": "1c02aaf4c95fd036fbf1bdfa1462b1c644254e8bb6393994903de46ec9c3d8d8"
+    },
+    {
+      "source": "design/claude-canvas/project/NightLife.dc.html",
+      "destination": "design/claude-canvas/project/NightLife.dc.html",
+      "bytes": 12649,
+      "importedSha256": "3e1e28dd3927c62642a959504701f0ce17b37d1ae6c9e68effc9d6e6c3b1fdd8"
+    },
+    {
+      "source": "design/claude-canvas/project/NightWelcome.dc.html",
+      "destination": "design/claude-canvas/project/NightWelcome.dc.html",
+      "bytes": 7765,
+      "importedSha256": "3c72de7b95e24a298bfbebdfee2e3617354d5c23fe4231c546173e19696923f1"
+    },
+    {
+      "source": "design/claude-canvas/project/Odds.dc.html",
+      "destination": "design/claude-canvas/project/Odds.dc.html",
+      "bytes": 19703,
+      "importedSha256": "88c191d1980993a702e5c6eb8f969fc02de1031cd4bd32f3486fc247569c4083"
+    },
+    {
+      "source": "design/claude-canvas/project/OddsCute.dc.html",
+      "destination": "design/claude-canvas/project/OddsCute.dc.html",
+      "bytes": 22635,
+      "importedSha256": "f921373ef3fc70fca70a4021886d25f6f2ec3e22e30a8947b7bcc857c671d732"
+    },
+    {
+      "source": "design/claude-canvas/project/OddsDark.dc.html",
+      "destination": "design/claude-canvas/project/OddsDark.dc.html",
+      "bytes": 717,
+      "importedSha256": "3d5f1bac7d28eb1687e69fef34c58e0ca260c2566c52d195c012ee7e6e21bf95"
+    },
+    {
+      "source": "design/claude-canvas/project/OddsFull.dc.html",
+      "destination": "design/claude-canvas/project/OddsFull.dc.html",
+      "bytes": 776,
+      "importedSha256": "c034a5a571b680fdc1295fb7e50992f405ab9d0e87612f3a47565f5603028a89"
+    },
+    {
+      "source": "design/claude-canvas/project/OddsLife.dc.html",
+      "destination": "design/claude-canvas/project/OddsLife.dc.html",
+      "bytes": 72809,
+      "importedSha256": "41c28c360cb1414b89e201dcbf2b64dadf45e393c0e41c76449da2d7e9a7030f"
+    },
+    {
+      "source": "design/claude-canvas/project/OddsLifeLives.dc.html",
+      "destination": "design/claude-canvas/project/OddsLifeLives.dc.html",
+      "bytes": 738,
+      "importedSha256": "77e2c78f89ac7593d36b5e7c8dc21d57eeb48db0d9e3dab0ea037c013fc5e69f"
+    },
+    {
+      "source": "design/claude-canvas/project/People.dc.html",
+      "destination": "design/claude-canvas/project/People.dc.html",
+      "bytes": 8280,
+      "importedSha256": "11eb395f6f9c307848e03e97d336763bd11ba2258258e7fe2ce57f2af9a64083"
+    },
+    {
+      "source": "design/claude-canvas/project/PeopleCute.dc.html",
+      "destination": "design/claude-canvas/project/PeopleCute.dc.html",
+      "bytes": 55131,
+      "importedSha256": "2458a43487ba00691403d5af5dbe68618466eecf79c2f89cd3b69054099db368"
+    },
+    {
+      "source": "design/claude-canvas/project/PeopleCutePerson.dc.html",
+      "destination": "design/claude-canvas/project/PeopleCutePerson.dc.html",
+      "bytes": 718,
+      "importedSha256": "4051c8d4cf2f0d078c3de603839f9af93f396a9a0bf25500732c75a143b818ee"
+    },
+    {
+      "source": "design/claude-canvas/project/PeopleTest.dc.html",
+      "destination": "design/claude-canvas/project/PeopleTest.dc.html",
+      "bytes": 3321,
+      "importedSha256": "5839e3f6b867626c5fa4b687bd74f16ddaf6529c66b58c151cbe9ed4f83bb074"
+    },
+    {
+      "source": "design/claude-canvas/project/Person.dc.html",
+      "destination": "design/claude-canvas/project/Person.dc.html",
+      "bytes": 37543,
+      "importedSha256": "b4aa680ad1bfc12b00fc71e5308ed72185cc1bb00f54e2a6bd0cbe8d85c31ea7"
+    },
+    {
+      "source": "design/claude-canvas/project/PixelLife.dc.html",
+      "destination": "design/claude-canvas/project/PixelLife.dc.html",
+      "bytes": 14096,
+      "importedSha256": "d788b4c2173f6cf947744b4e84b4a3065a95feb341c4b82e51deff6fd9363f05"
+    },
+    {
+      "source": "design/claude-canvas/project/PixelWelcome.dc.html",
+      "destination": "design/claude-canvas/project/PixelWelcome.dc.html",
+      "bytes": 5804,
+      "importedSha256": "5b697df90ec9da1c96cba96bbda430f081079cc98ec25f18322590e7e55cf40c"
+    },
+    {
+      "source": "design/claude-canvas/project/Play.dc.html",
+      "destination": "design/claude-canvas/project/Play.dc.html",
+      "bytes": 24637,
+      "importedSha256": "beb899893a95ff2126c9ba49cdc176d8f6f828e9115db361f158740698f6339a"
+    },
+    {
+      "source": "design/claude-canvas/project/PlayDark.dc.html",
+      "destination": "design/claude-canvas/project/PlayDark.dc.html",
+      "bytes": 712,
+      "importedSha256": "d0c17ad493bc967820c9f104cf9cd27ceb1797776042b3f313bbbf66442d05e6"
+    },
+    {
+      "source": "design/claude-canvas/project/Prototype.dc.html",
+      "destination": "design/claude-canvas/project/Prototype.dc.html",
+      "bytes": 15795,
+      "importedSha256": "1f2096268218c5a875da9257fc3e34ba463dfd0cbeeaf69c72c3e9c054b2459f"
+    },
+    {
+      "source": "design/claude-canvas/project/Roll.dc.html",
+      "destination": "design/claude-canvas/project/Roll.dc.html",
+      "bytes": 9937,
+      "importedSha256": "b7402bba8f8a5c9e52b8483d4a26bb430774c720507fa90483a612c6acf5b289"
+    },
+    {
+      "source": "design/claude-canvas/project/RollCute.dc.html",
+      "destination": "design/claude-canvas/project/RollCute.dc.html",
+      "bytes": 9305,
+      "importedSha256": "e8e99c757fe3741b690a1e9e2becd5816e22853edb4f956409348dfc6cf91c25"
+    },
+    {
+      "source": "design/claude-canvas/project/RollDark.dc.html",
+      "destination": "design/claude-canvas/project/RollDark.dc.html",
+      "bytes": 718,
+      "importedSha256": "7cb15563193e70ff37db3451183d2d7ceb13544dac58790ec2c67550f01f5015"
+    },
+    {
+      "source": "design/claude-canvas/project/Start.dc.html",
+      "destination": "design/claude-canvas/project/Start.dc.html",
+      "bytes": 7473,
+      "importedSha256": "ae57fb8f04a16ad012a59845ae9e6c6ad69f490a0d6b84e5e5619b3a728f8b25"
+    },
+    {
+      "source": "design/claude-canvas/project/StartCute.dc.html",
+      "destination": "design/claude-canvas/project/StartCute.dc.html",
+      "bytes": 6597,
+      "importedSha256": "2b5878e8059cd50820abfcee8507eeb078c1033d01acaa885fe7897740451c87"
+    },
+    {
+      "source": "design/claude-canvas/project/StartDark.dc.html",
+      "destination": "design/claude-canvas/project/StartDark.dc.html",
+      "bytes": 763,
+      "importedSha256": "606e65a4be9b8018eab2fff4369fe827881b8c1ae27d1fbfbb682c1a262a22b1"
+    },
+    {
+      "source": "design/claude-canvas/project/System.dc.html",
+      "destination": "design/claude-canvas/project/System.dc.html",
+      "bytes": 11480,
+      "importedSha256": "e420cffd39f3a574fe0c7573a6b7741a95161ebd07f1d0339f72b4acd48f1652"
+    },
+    {
+      "source": "design/claude-canvas/SHA256SUMS.txt",
+      "destination": "design/claude-canvas/SHA256SUMS.txt",
+      "bytes": 8572,
+      "importedSha256": "a3242c5d237048e573d76fd0794b6f90a598424d0ba4a6a3bdecb31160ad29c2"
+    },
+    {
+      "source": "design/claude-canvas/SOURCE.md",
+      "destination": "design/claude-canvas/SOURCE.md",
+      "bytes": 1204,
+      "importedSha256": "9edacca8ab45fac1699927266c014a6774449b6dfee1747e005c0915425bc980"
+    },
+    {
+      "source": "design/claude-canvas/tools/base/LiveCute.base.dc.html",
+      "destination": "design/claude-canvas/tools/base/LiveCute.base.dc.html",
+      "bytes": 58388,
+      "importedSha256": "4958dad3013c94d78b381e61dee87e636de55017590645c6322a22796205749b"
+    },
+    {
+      "source": "design/claude-canvas/tools/check-dc.js",
+      "destination": "design/claude-canvas/tools/check-dc.js",
+      "bytes": 5271,
+      "importedSha256": "12c5285b905482960a43b424e138ad5dc62823b6cfe3d2fb4eba96935371d1b2"
+    },
+    {
+      "source": "design/claude-canvas/tools/gen-activities.js",
+      "destination": "design/claude-canvas/tools/gen-activities.js",
+      "bytes": 16703,
+      "importedSha256": "6bece35188a01b831b5243c30c9ed5ea17afcb88e2c71f41ef39bca87d1a210e"
+    },
+    {
+      "source": "design/claude-canvas/tools/gen-flowmap.js",
+      "destination": "design/claude-canvas/tools/gen-flowmap.js",
+      "bytes": 9585,
+      "importedSha256": "7aa9f656392f51aa84b88fa4639e1c7e8d5a1313467a05d8fdbc8cf1b429359a"
+    },
+    {
+      "source": "design/claude-canvas/tools/gen-money.js",
+      "destination": "design/claude-canvas/tools/gen-money.js",
+      "bytes": 13140,
+      "importedSha256": "c41faa218e59e6cd854707e8a577a326e84cbab0627e9820b8e968cef18d25f1"
+    },
+    {
+      "source": "design/claude-canvas/tools/gen-odds.js",
+      "destination": "design/claude-canvas/tools/gen-odds.js",
+      "bytes": 17855,
+      "importedSha256": "ce3c7696bb3882dd57f7a60fd584ff2621695b7e88054b2bce32272d9cf19715"
+    },
+    {
+      "source": "design/claude-canvas/tools/gen-people.js",
+      "destination": "design/claude-canvas/tools/gen-people.js",
+      "bytes": 19175,
+      "importedSha256": "120d9d8a1412b7ab2335efb1c33cca724f74c37eee57fb0bae329c71345fa5f4"
+    },
+    {
+      "source": "design/claude-canvas/tools/menu-tabs3.js",
+      "destination": "design/claude-canvas/tools/menu-tabs3.js",
+      "bytes": 16025,
+      "importedSha256": "e4b89ffb3144c609312d87063584a9242525057a03e5c4bb76a350e3c381e5d4"
+    },
+    {
+      "source": "design/claude-canvas/tools/sticker-nav.js",
+      "destination": "design/claude-canvas/tools/sticker-nav.js",
+      "bytes": 11705,
+      "importedSha256": "94c5922478306979373c3cac0d5a41ad0067b6e64d4d4a714a6d17668cc28c36"
+    },
+    {
+      "source": "design/claude-canvas/tools/tabs-common.js",
+      "destination": "design/claude-canvas/tools/tabs-common.js",
+      "bytes": 15640,
+      "importedSha256": "bbf2785bdf50e778d2037b87b6ac0dc3798dac70b22d77d351b3b5788a511fe0"
+    },
+    {
+      "source": "index.html",
+      "destination": "index.html",
+      "bytes": 667,
+      "importedSha256": "3d399caaf6cb3c67fab75e939637a2e74177c3ac00d412c9785e7fc48dc6741c"
+    },
+    {
+      "source": "reference/original-0.8.98/licenses/acorn-LICENSE.txt",
+      "destination": "licenses/recovered-engine/acorn-LICENSE.txt",
+      "bytes": 1099,
+      "importedSha256": "76a876cf886ff9be2a8b5e2e86514fed06223c8c9f0c1e9ee9606e93841e00b7"
+    },
+    {
+      "source": "reference/original-0.8.98/licenses/fonts/hahmlet-OFL.txt",
+      "destination": "licenses/recovered-engine/fonts/hahmlet-OFL.txt",
+      "bytes": 4477,
+      "importedSha256": "ddadb10d28a303e3ef3b1f7ec55d3027903b9ec566d2f87d3ee03f3c87c91711"
+    },
+    {
+      "source": "reference/original-0.8.98/licenses/fonts/ibmplexmono-OFL.txt",
+      "destination": "licenses/recovered-engine/fonts/ibmplexmono-OFL.txt",
+      "bytes": 4456,
+      "importedSha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+    },
+    {
+      "source": "reference/original-0.8.98/licenses/fonts/ibmplexsansarabic-OFL.txt",
+      "destination": "licenses/recovered-engine/fonts/ibmplexsansarabic-OFL.txt",
+      "bytes": 4456,
+      "importedSha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+    },
+    {
+      "source": "reference/original-0.8.98/licenses/fonts/ibmplexsanskr-OFL.txt",
+      "destination": "licenses/recovered-engine/fonts/ibmplexsanskr-OFL.txt",
+      "bytes": 4456,
+      "importedSha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+    },
+    {
+      "source": "reference/original-0.8.98/licenses/fonts/nanumpenscript-OFL.txt",
+      "destination": "licenses/recovered-engine/fonts/nanumpenscript-OFL.txt",
+      "bytes": 4534,
+      "importedSha256": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f"
+    },
+    {
+      "source": "reference/original-0.8.98/licenses/prettier-LICENSE.txt",
+      "destination": "licenses/recovered-engine/prettier-LICENSE.txt",
+      "bytes": 1065,
+      "importedSha256": "b0f2417199889f1c0d28ec4e0244eacf1a15de5819d61f641dd7d8f45153ac9c"
+    },
+    {
+      "source": "reference/original-0.8.98/licenses/prettier-THIRD-PARTY-NOTICES.md",
+      "destination": "licenses/recovered-engine/prettier-THIRD-PARTY-NOTICES.md",
+      "bytes": 268414,
+      "importedSha256": "d780be09f96043b2958d83054a54657a1967ddd979fe3eb6512bd473c0d75dcd"
+    },
+    {
+      "source": "reference/original-0.8.98/LICENSES.md",
+      "destination": "licenses/recovered-engine/SOURCE-NOTICES.md",
+      "bytes": 2864,
+      "importedSha256": "9ad55b68b11cd5b34a1afba5caadf13e6aaccaf58b9747a762f6604b6ebaa263"
+    },
+    {
+      "source": "package-lock.json",
+      "destination": "package-lock.json",
+      "bytes": 45463,
+      "importedSha256": "a14d6782d893192d97b5476b8bc157478def2d0fe2ed313b4c255a5c7269c090"
+    },
+    {
+      "source": "package.json",
+      "destination": "package.json",
+      "bytes": 1370,
+      "importedSha256": "25d668eb8da150eb652e47f1dec93dc1f79e6524d1d823aa45cdcd6f715387a8"
+    },
+    {
+      "source": "public/icon.svg",
+      "destination": "public/icon.svg",
+      "bytes": 279,
+      "importedSha256": "1adaa2412ca710e41669a6f478008fd22dcfc59600e9440e28c6543953a616eb"
+    },
+    {
+      "source": "node_modules/@fontsource/caveat/LICENSE",
+      "destination": "public/licenses/caveat-OFL.txt",
+      "bytes": 4384,
+      "importedSha256": "163a2b400e16916ad3196296c946c526d0efce6baf22a2164269ffc62fb9f671"
+    },
+    {
+      "source": "node_modules/@fontsource/courier-prime/LICENSE",
+      "destination": "public/licenses/courier-prime-OFL.txt",
+      "bytes": 4783,
+      "importedSha256": "195bfcfb42f32343efc8475e902c3c4936cda7a9c435c39634e03c1e85fa862b"
+    },
+    {
+      "source": "node_modules/@fontsource/fredoka/LICENSE",
+      "destination": "public/licenses/fredoka-OFL.txt",
+      "bytes": 4387,
+      "importedSha256": "9bbd4f5f107895d5a213579b73821fadd05105241cf4360e86050199fcfd6034"
+    },
+    {
+      "source": "public/licenses/rubik-OFL.txt",
+      "destination": "public/licenses/rubik-OFL.txt",
+      "bytes": 4486,
+      "importedSha256": "46a250495a963b0b84f2736c0185d0e3af8df9d23427bd425b92a8ece020283c"
+    },
+    {
+      "source": "public/manifest.webmanifest",
+      "destination": "public/manifest.webmanifest",
+      "bytes": 344,
+      "importedSha256": "50e1f5608dffd632ca03ccac0f4e25ae31a01ec5baab8e329f6d8d3ff70b3396"
+    },
+    {
+      "source": "src/adapters/boot.ts",
+      "destination": "src/adapters/boot.ts",
+      "bytes": 1070,
+      "importedSha256": "d68231133bbcb2241676836d8a9fe3b50190b6100268cbd48cb7f955097c2ebd"
+    },
+    {
+      "source": "src/adapters/commands.ts",
+      "destination": "src/adapters/commands.ts",
+      "bytes": 16111,
+      "importedSha256": "4c4e0cf606a3691d9f468127d3bffb72f1015574af6bbe01c6c90a5dd43cb566"
+    },
+    {
+      "source": "src/adapters/gameAdapter.ts",
+      "destination": "src/adapters/gameAdapter.ts",
+      "bytes": 32705,
+      "importedSha256": "6b443e72d53dbf0a68e21eb9d92efcee0a177bfff8f40522ce37331094e32fab"
+    },
+    {
+      "source": "src/adapters/hooks.ts",
+      "destination": "src/adapters/hooks.ts",
+      "bytes": 2812,
+      "importedSha256": "83d6ff38b3bac350aca6a7e7ca99264fcfa1589eef7b0a15e224ba0326998d92"
+    },
+    {
+      "source": "src/adapters/meta.ts",
+      "destination": "src/adapters/meta.ts",
+      "bytes": 4888,
+      "importedSha256": "0247162e7ad9923a2b13e8c2371822e9edebfeb2d15662fcbe00a0614cde94c6"
+    },
+    {
+      "source": "src/adapters/README.md",
+      "destination": "src/adapters/README.md",
+      "bytes": 1872,
+      "importedSha256": "9ddd0f6ae142feb6fce079206f4e26d513507adc7f0d7d94d74efc99425aec35"
+    },
+    {
+      "source": "src/adapters/text.ts",
+      "destination": "src/adapters/text.ts",
+      "bytes": 2102,
+      "importedSha256": "e2fd46d034936ef770d3aefd35bb6b9f5e126f369f09215b5d3ce9e56f839e47"
+    },
+    {
+      "source": "src/adapters/useGame.tsx",
+      "destination": "src/adapters/useGame.tsx",
+      "bytes": 2186,
+      "importedSha256": "e50c48299d69a313ce169200dec07dc061c4655e8a2bf41f0457648f70ea2b68"
+    },
+    {
+      "source": "src/adapters/viewModels.ts",
+      "destination": "src/adapters/viewModels.ts",
+      "bytes": 9756,
+      "importedSha256": "1327b17c7559d38f9c66063ae73774f65e2c100f28d827962595936859360a11"
+    },
+    {
+      "source": "src/adapters/vm/activities.ts",
+      "destination": "src/adapters/vm/activities.ts",
+      "bytes": 3401,
+      "importedSha256": "0bb289e60b0b8b31fa760f2a61579eff949af89964d79f1801b0a68d11e6bcdf"
+    },
+    {
+      "source": "src/adapters/vm/appearance.ts",
+      "destination": "src/adapters/vm/appearance.ts",
+      "bytes": 15368,
+      "importedSha256": "b31acd8d47bf420c89d8cfdd5a5c25003d844cf8691b9052dbf697766628c786"
+    },
+    {
+      "source": "src/adapters/vm/certificate.ts",
+      "destination": "src/adapters/vm/certificate.ts",
+      "bytes": 4914,
+      "importedSha256": "987de18da3abe50e30c3b87c4138ff73779bccb4eb27481d1d48b7f22e1635d8"
+    },
+    {
+      "source": "src/adapters/vm/death.ts",
+      "destination": "src/adapters/vm/death.ts",
+      "bytes": 3396,
+      "importedSha256": "04c3bbdfa8d76af4bafcb9f882806a2ca4f139e5a2f5fd09a2819ae92ae41b4d"
+    },
+    {
+      "source": "src/adapters/vm/end.ts",
+      "destination": "src/adapters/vm/end.ts",
+      "bytes": 15253,
+      "importedSha256": "7e1e0532cfe82d2051364cc606d0e9ff1edc848b475a578b8c4195be387a7200"
+    },
+    {
+      "source": "src/adapters/vm/hub.ts",
+      "destination": "src/adapters/vm/hub.ts",
+      "bytes": 1362,
+      "importedSha256": "28f2c995f2b0fa46c84276ead7514b0ec8ae4f5b6c76a5bc4346fc068595a40c"
+    },
+    {
+      "source": "src/adapters/vm/life.ts",
+      "destination": "src/adapters/vm/life.ts",
+      "bytes": 5530,
+      "importedSha256": "e487083ce6ce9c85b4483e006f1295a68ce8386fc036e51797f42c9bab51732f"
+    },
+    {
+      "source": "src/adapters/vm/money.ts",
+      "destination": "src/adapters/vm/money.ts",
+      "bytes": 7391,
+      "importedSha256": "aab037b9f9f2dd3992bbed8307613ec1a8671eb2ea9ea6689d33e5e5c58fd42f"
+    },
+    {
+      "source": "src/adapters/vm/odds.ts",
+      "destination": "src/adapters/vm/odds.ts",
+      "bytes": 7461,
+      "importedSha256": "2574779636b3dff2c9cc98d7e8e2e79aa3c8b014aa5536fc9fd8147f51b91351"
+    },
+    {
+      "source": "src/adapters/vm/people.ts",
+      "destination": "src/adapters/vm/people.ts",
+      "bytes": 21191,
+      "importedSha256": "68fdb13b248a9170fbe4ef20fb327c13c88a1a579c5f24b9ceb482c7924d2cec"
+    },
+    {
+      "source": "src/adapters/vm/rewards.ts",
+      "destination": "src/adapters/vm/rewards.ts",
+      "bytes": 4456,
+      "importedSha256": "0e5c463dd41629e0eda964c7f7216cdf8d0ebfcd77d962ebcdfd103f00bac080"
+    },
+    {
+      "source": "src/adapters/vm/roll.ts",
+      "destination": "src/adapters/vm/roll.ts",
+      "bytes": 5295,
+      "importedSha256": "c60300a6123c424a65b8837ee3f8990cb206b6b786b0d1c453f4df32d79803f9"
+    },
+    {
+      "source": "src/adapters/vm/spend.ts",
+      "destination": "src/adapters/vm/spend.ts",
+      "bytes": 9222,
+      "importedSha256": "b0cda37eec5cc33a39690564f2c4ebbca07307ba12799479abd15335c160b6bc"
+    },
+    {
+      "source": "src/app/App.tsx",
+      "destination": "src/app/App.tsx",
+      "bytes": 581,
+      "importedSha256": "1a0dd6b02687f3be56d014c54823b466176c230250481cfed893a25397c5bed0"
+    },
+    {
+      "source": "src/app/game.ts",
+      "destination": "src/app/game.ts",
+      "bytes": 1236,
+      "importedSha256": "46aac0b511048675ee9a72695a3796d389d3b4b4318d20781053a7e8e96ca62c"
+    },
+    {
+      "source": "src/app/orientation.ts",
+      "destination": "src/app/orientation.ts",
+      "bytes": 702,
+      "importedSha256": "c28af1a8ff87d5590de51089d9fc7db37569ea612d5f7d68c86c8c7092dd70ea"
+    },
+    {
+      "source": "src/app/styles.css",
+      "destination": "src/app/styles.css",
+      "bytes": 4343,
+      "importedSha256": "c8357451e215bc76fd974c6a5891f7955d4495686a672b827c3ee45ca57036db"
+    },
+    {
+      "source": "src/app/usePortraitGuard.ts",
+      "destination": "src/app/usePortraitGuard.ts",
+      "bytes": 1079,
+      "importedSha256": "2593fa00500992e1ce2a46ae1d05851c896b764b017fa1fe28ee23298f9333f6"
+    },
+    {
+      "source": "src/assets/people/atlas_babies.png",
+      "destination": "src/assets/people/atlas_babies.png",
+      "bytes": 36010,
+      "importedSha256": "fa50ad2e57e8a663705e855d13cd9d8bab9a8a9d9eec65cc75b821aaf3b39302"
+    },
+    {
+      "source": "src/assets/people/atlas_child_boy.png",
+      "destination": "src/assets/people/atlas_child_boy.png",
+      "bytes": 90720,
+      "importedSha256": "c4748e821b466debb17997a5f5769b880607bd150103a218cda56524e4e9ab41"
+    },
+    {
+      "source": "src/assets/people/atlas_child_girl.png",
+      "destination": "src/assets/people/atlas_child_girl.png",
+      "bytes": 94214,
+      "importedSha256": "7021a499ebb68ec32a773c1f4fb0f5b1516c65e73d09b1eeb86062b2d8d22964"
+    },
+    {
+      "source": "src/assets/people/atlas_elder_man.png",
+      "destination": "src/assets/people/atlas_elder_man.png",
+      "bytes": 445241,
+      "importedSha256": "190d07ff32898e2b79506732f0574d4c4e88fec4367a6f6aee5372d18fc95c6e"
+    },
+    {
+      "source": "src/assets/people/atlas_elder_woman.png",
+      "destination": "src/assets/people/atlas_elder_woman.png",
+      "bytes": 454579,
+      "importedSha256": "d68d8c8dd0439e588eb545efcb8196695267ab016f96d9a6f92e067f5488abcf"
+    },
+    {
+      "source": "src/assets/people/atlas_man.png",
+      "destination": "src/assets/people/atlas_man.png",
+      "bytes": 449869,
+      "importedSha256": "1164e246089b58c121855e1584ce970d54bee1928cea67b0634fe61bb6409f67"
+    },
+    {
+      "source": "src/assets/people/atlas_teen_boy.png",
+      "destination": "src/assets/people/atlas_teen_boy.png",
+      "bytes": 427738,
+      "importedSha256": "aa2c4977d596a373d8ce97617f126ebe1e6ec952cd3366fcc85019c24bfe98f6"
+    },
+    {
+      "source": "src/assets/people/atlas_teen_girl.png",
+      "destination": "src/assets/people/atlas_teen_girl.png",
+      "bytes": 429053,
+      "importedSha256": "9a478ebec7563bb38fc5dab3f8484f2ab1d23b4da6613017dc2c511dacec9963"
+    },
+    {
+      "source": "src/assets/people/atlas_toddler.png",
+      "destination": "src/assets/people/atlas_toddler.png",
+      "bytes": 50932,
+      "importedSha256": "d37e88491d8238666c1fbfedee4eb1a64aef1f10d1f3e81ff3386aa5151d1276"
+    },
+    {
+      "source": "src/assets/people/atlas_woman.png",
+      "destination": "src/assets/people/atlas_woman.png",
+      "bytes": 457368,
+      "importedSha256": "004777c8f0e3c0964b34f85eda85c7eb637d2bc048e48ed0df7d900316ec58b9"
+    },
+    {
+      "source": "src/assets/people/SOURCE.json",
+      "destination": "src/assets/people/SOURCE.json",
+      "bytes": 2202,
+      "importedSha256": "efbf6dd95ec6a9ddd8e4948a054fd0f1aeff3fed2b8fa0edf693a766f90e593a"
+    },
+    {
+      "source": "src/components/PortraitShell.tsx",
+      "destination": "src/components/PortraitShell.tsx",
+      "bytes": 1088,
+      "importedSha256": "cd4697c36e7ae3bf838cea19bbc7e24e6ad6f3373c66bdd89f3aed59a3e5a049"
+    },
+    {
+      "source": "src/contracts/foundation.ts",
+      "destination": "src/contracts/foundation.ts",
+      "bytes": 266,
+      "importedSha256": "f0eefc0af3754042ae33e90fc73b96248d865eedba55be8642cabe0b033f1ee3"
+    },
+    {
+      "source": "src/core/entropy.ts",
+      "destination": "src/core/entropy.ts",
+      "bytes": 1684,
+      "importedSha256": "0396fbb51a8cdd7a95695548e6d374fc069d52c7b3917093ab9082a19fa6b9cb"
+    },
+    {
+      "source": "src/core/env.ts",
+      "destination": "src/core/env.ts",
+      "bytes": 18893,
+      "importedSha256": "2e0835cb4369242c99df41b4a5fd348e307a63f0ab52d3cb1193a09d92c0eebf"
+    },
+    {
+      "source": "src/core/generated.d.ts",
+      "destination": "src/core/generated.d.ts",
+      "bytes": 2370,
+      "importedSha256": "9dbad50c5588b912302731321fec9f43964fcb8e6061bc8b0bd28468d8665b21"
+    },
+    {
+      "source": "src/core/localization/ru.ts",
+      "destination": "src/core/localization/ru.ts",
+      "bytes": 1383,
+      "importedSha256": "8597d42b0295e098cb44c3e73530530b70756e22228f88980789d400fd4cd1cd"
+    },
+    {
+      "source": "src/core/runtime.ts",
+      "destination": "src/core/runtime.ts",
+      "bytes": 9906,
+      "importedSha256": "e7b3b42cb2a0f2edafb4b7ab5437f39edc4ee2c01d2d44a2b79b4149e134fc7e"
+    },
+    {
+      "source": "src/design/motion.json",
+      "destination": "src/design/motion.json",
+      "bytes": 5857,
+      "importedSha256": "7aba5435b95409c73126b4176e76588da69ac2b56f5440aa8beea35f8a64399c"
+    },
+    {
+      "source": "src/design/tokens.json",
+      "destination": "src/design/tokens.json",
+      "bytes": 2909,
+      "importedSha256": "329a28b85ffe47ca049ec5f1d4da964205e81120b0ce30b6f7c9a03e037e1a4f"
+    },
+    {
+      "source": "src/fixtures/foundation.ts",
+      "destination": "src/fixtures/foundation.ts",
+      "bytes": 451,
+      "importedSha256": "511da3ee455470f8d4073f84d9ca4ed03f2707a9e679d0bd3d68f23210788fc8"
+    },
+    {
+      "source": "src/flow/flow.ts",
+      "destination": "src/flow/flow.ts",
+      "bytes": 4028,
+      "importedSha256": "8e1adad63e5b394df58b1efa208e3c634e24358a928a4956d9622c1ebed56c53"
+    },
+    {
+      "source": "src/flow/FlowHost.tsx",
+      "destination": "src/flow/FlowHost.tsx",
+      "bytes": 6535,
+      "importedSha256": "88225283b923b7a1ce9e6854ca2fee347dc739950e321806e23c70e8710ac5d8"
+    },
+    {
+      "source": "src/i18n/de/activities.json",
+      "destination": "src/i18n/de/activities.json",
+      "bytes": 670,
+      "importedSha256": "8596054624acf4b978da74787bb7563dde7d623c5d8fe443c74b6b19d6cc8794"
+    },
+    {
+      "source": "src/i18n/de/birthOdds.json",
+      "destination": "src/i18n/de/birthOdds.json",
+      "bytes": 1895,
+      "importedSha256": "2b76ed547272996819c51c6f9c71557eecb855f30810470ccc57765a7cf26d21"
+    },
+    {
+      "source": "src/i18n/de/certificate.json",
+      "destination": "src/i18n/de/certificate.json",
+      "bytes": 2120,
+      "importedSha256": "ca7a3ab0d4007b4fe0a33abd36017e72269b942833f1a3ed96446dbcbe574871"
+    },
+    {
+      "source": "src/i18n/de/common.json",
+      "destination": "src/i18n/de/common.json",
+      "bytes": 3624,
+      "importedSha256": "2c14ecc739b6c84c3d487fb8b3bd5be72e10069104afaa8ad2207877f45ada41"
+    },
+    {
+      "source": "src/i18n/de/death.json",
+      "destination": "src/i18n/de/death.json",
+      "bytes": 825,
+      "importedSha256": "d19c6a9b1fd4a0da4990057985d84caa18145df2633ed04f2ceee8bcfc8ad7c7"
+    },
+    {
+      "source": "src/i18n/de/ended.json",
+      "destination": "src/i18n/de/ended.json",
+      "bytes": 1870,
+      "importedSha256": "ab4e6f641d8e809b63c3e02add5ce000a7b274263634eb4bd4425dedbf27bfab"
+    },
+    {
+      "source": "src/i18n/de/hub.json",
+      "destination": "src/i18n/de/hub.json",
+      "bytes": 2005,
+      "importedSha256": "7e5f382a999d28260831faada9f2214819ba4ec5e423c7d1df3e38c28da1c2f2"
+    },
+    {
+      "source": "src/i18n/de/language.json",
+      "destination": "src/i18n/de/language.json",
+      "bytes": 609,
+      "importedSha256": "81236c157b63e9d88b7a0b64d2b2f3f493bb4a6e7afea3a792788092cb38d74f"
+    },
+    {
+      "source": "src/i18n/de/life.json",
+      "destination": "src/i18n/de/life.json",
+      "bytes": 2050,
+      "importedSha256": "ee3be5e2e172f0e02b11b27d8aa2c88a6602bf25f9dfe0e21f76b23641d7021f"
+    },
+    {
+      "source": "src/i18n/de/money.json",
+      "destination": "src/i18n/de/money.json",
+      "bytes": 1426,
+      "importedSha256": "ecb87c3c9b5ee8b84af138c20484e202600336d1b3a9f8ca943b282d6c0fca90"
+    },
+    {
+      "source": "src/i18n/de/odds.json",
+      "destination": "src/i18n/de/odds.json",
+      "bytes": 4370,
+      "importedSha256": "62add6a2ecb52011678789a87de85ec0b3fc5682d0216dfd3c2209bd23762c80"
+    },
+    {
+      "source": "src/i18n/de/people.json",
+      "destination": "src/i18n/de/people.json",
+      "bytes": 1579,
+      "importedSha256": "1a3df97645d44912d652bcb4bfd7086914785e455e00b75340bfa06cfea2e34e"
+    },
+    {
+      "source": "src/i18n/de/peopleArt.json",
+      "destination": "src/i18n/de/peopleArt.json",
+      "bytes": 355,
+      "importedSha256": "6b6d3047d080e5f35d2384587a8ce41b6cd7a295554f42b2a3fb42f08daf59ab"
+    },
+    {
+      "source": "src/i18n/de/rewards.json",
+      "destination": "src/i18n/de/rewards.json",
+      "bytes": 1036,
+      "importedSha256": "21aab6df9a0da0aca4365cb089cfed6eff1fea2fe796bdfc50dbdd5dd3e9821a"
+    },
+    {
+      "source": "src/i18n/de/roll.json",
+      "destination": "src/i18n/de/roll.json",
+      "bytes": 500,
+      "importedSha256": "3015786b4f584f0aa533d3b220571c52d727f34a0c0128ae2ecfefd1463c57f8"
+    },
+    {
+      "source": "src/i18n/de/settings.json",
+      "destination": "src/i18n/de/settings.json",
+      "bytes": 2612,
+      "importedSha256": "313d4dd7ed7c787bc2397fedcb9e7f4cc160f1915959965553fc481af7c67ef6"
+    },
+    {
+      "source": "src/i18n/de/spend.json",
+      "destination": "src/i18n/de/spend.json",
+      "bytes": 523,
+      "importedSha256": "75c0c79ddd56621916d418fdadc584b4509d2646fc4b710ef54cb8a3804f3c47"
+    },
+    {
+      "source": "src/i18n/de/start.json",
+      "destination": "src/i18n/de/start.json",
+      "bytes": 164,
+      "importedSha256": "726772fe1001f1e4d2f026d8998ea537c34440105b7124fdcdf6db4e595d5ee1"
+    },
+    {
+      "source": "src/i18n/en/activities.json",
+      "destination": "src/i18n/en/activities.json",
+      "bytes": 633,
+      "importedSha256": "9463e26e8ebfb054a7bfb9ae03fe6c2f1cbb31f3dd67a38187e25a23e66930e9"
+    },
+    {
+      "source": "src/i18n/en/birthOdds.json",
+      "destination": "src/i18n/en/birthOdds.json",
+      "bytes": 1790,
+      "importedSha256": "a22da47f0b6b96007d755cd223712899d026e7f375854b323ee345a56353ff21"
+    },
+    {
+      "source": "src/i18n/en/certificate.json",
+      "destination": "src/i18n/en/certificate.json",
+      "bytes": 2068,
+      "importedSha256": "8f8d2c5e4cf61c019862a1c801e98a41cf5e8f5dd118df9f08f0727191a95184"
+    },
+    {
+      "source": "src/i18n/en/common.json",
+      "destination": "src/i18n/en/common.json",
+      "bytes": 3398,
+      "importedSha256": "c70063d67792f477103eec4e4eb538fb859cb7eae20fd93221d776fe1615ed1e"
+    },
+    {
+      "source": "src/i18n/en/death.json",
+      "destination": "src/i18n/en/death.json",
+      "bytes": 741,
+      "importedSha256": "a0a2727d13c55a7daa041230e63f4113b269627ac0ab06aa869f137fe2d117a2"
+    },
+    {
+      "source": "src/i18n/en/ended.json",
+      "destination": "src/i18n/en/ended.json",
+      "bytes": 1765,
+      "importedSha256": "1f5f42358ccfff38f494cd6644086373ec352640fe6b7112d8613ce2f3ca6df5"
+    },
+    {
+      "source": "src/i18n/en/hub.json",
+      "destination": "src/i18n/en/hub.json",
+      "bytes": 1838,
+      "importedSha256": "92516f36c28efa5ca39ea024e8b80ce8f9ed6eec0cdfa2866e2a8d7a14408a0f"
+    },
+    {
+      "source": "src/i18n/en/language.json",
+      "destination": "src/i18n/en/language.json",
+      "bytes": 553,
+      "importedSha256": "6103b6dd589dd50dbd7b9fb711022cf029166f4b37f97ff8fa8557fc44159fd5"
+    },
+    {
+      "source": "src/i18n/en/life.json",
+      "destination": "src/i18n/en/life.json",
+      "bytes": 1882,
+      "importedSha256": "5d8bc8775feecb63987f1c821f761b0b90f118e76bc9f2f59f523803f74ee78d"
+    },
+    {
+      "source": "src/i18n/en/money.json",
+      "destination": "src/i18n/en/money.json",
+      "bytes": 1325,
+      "importedSha256": "acb62c3c09553fc429f6d480b65c0c4f10d1af363e1a94cbcc4f0965b6b69e87"
+    },
+    {
+      "source": "src/i18n/en/odds.json",
+      "destination": "src/i18n/en/odds.json",
+      "bytes": 4158,
+      "importedSha256": "3f05c9e13c6b5c42250bdb8d05983e8396855380089283b28b27189b68b16647"
+    },
+    {
+      "source": "src/i18n/en/people.json",
+      "destination": "src/i18n/en/people.json",
+      "bytes": 1509,
+      "importedSha256": "2bb7180b445c3e2686d1c4697bd7497e4da7cc8a69c969231c38071d5df9d68d"
+    },
+    {
+      "source": "src/i18n/en/peopleArt.json",
+      "destination": "src/i18n/en/peopleArt.json",
+      "bytes": 327,
+      "importedSha256": "5cc85a09df51a619bccc11084d75cf15fa52859b4b8a30151e07bc544c40bc72"
+    },
+    {
+      "source": "src/i18n/en/rewards.json",
+      "destination": "src/i18n/en/rewards.json",
+      "bytes": 945,
+      "importedSha256": "a2708f0416d0f11c5619ccc138564e651e51de9128bd94359e5d8ba021471f46"
+    },
+    {
+      "source": "src/i18n/en/roll.json",
+      "destination": "src/i18n/en/roll.json",
+      "bytes": 477,
+      "importedSha256": "b54bd587134a9f955bb76532b2222204169c83603129d00fc7477cde70cb127c"
+    },
+    {
+      "source": "src/i18n/en/settings.json",
+      "destination": "src/i18n/en/settings.json",
+      "bytes": 2486,
+      "importedSha256": "ed41fa8ac72bc3c7430ee575860aef1056cca02968762672e8196c75b3caeef8"
+    },
+    {
+      "source": "src/i18n/en/spend.json",
+      "destination": "src/i18n/en/spend.json",
+      "bytes": 466,
+      "importedSha256": "c6acc79cd2c2262154a731b8ac1b3d5a5d9254f9f0b768022f9b7cddd5e35cc3"
+    },
+    {
+      "source": "src/i18n/en/start.json",
+      "destination": "src/i18n/en/start.json",
+      "bytes": 148,
+      "importedSha256": "635957422817029662945fe1e651026182af70219c16bd62a8c98940b51c27ad"
+    },
+    {
+      "source": "src/i18n/es/activities.json",
+      "destination": "src/i18n/es/activities.json",
+      "bytes": 664,
+      "importedSha256": "5f1d482ad1a1f05784d348061e88e2817f330162c61b9f2f26cea9fe39a449be"
+    },
+    {
+      "source": "src/i18n/es/birthOdds.json",
+      "destination": "src/i18n/es/birthOdds.json",
+      "bytes": 1961,
+      "importedSha256": "b3ba18c51daae76688463dc00197949934302194d7fbd52c1b8b373b74cbd125"
+    },
+    {
+      "source": "src/i18n/es/certificate.json",
+      "destination": "src/i18n/es/certificate.json",
+      "bytes": 2135,
+      "importedSha256": "7c92d372bb1fda7341adfdafea53737b43126bec83c6efd8364a89d807f59e14"
+    },
+    {
+      "source": "src/i18n/es/common.json",
+      "destination": "src/i18n/es/common.json",
+      "bytes": 3646,
+      "importedSha256": "3f72c5890820aaeee0d4f5e2bac5a2c0e40d823e480737ded6690801dd28459b"
+    },
+    {
+      "source": "src/i18n/es/death.json",
+      "destination": "src/i18n/es/death.json",
+      "bytes": 810,
+      "importedSha256": "928928f6f3e68c7a288ea48efb6374a60fd4def197a095e83490b29f64ccdeca"
+    },
+    {
+      "source": "src/i18n/es/ended.json",
+      "destination": "src/i18n/es/ended.json",
+      "bytes": 1870,
+      "importedSha256": "54738d53455b1f91d22dc3396fdf77172734a40d80fc5d5ee4f4fdf17b1adf37"
+    },
+    {
+      "source": "src/i18n/es/hub.json",
+      "destination": "src/i18n/es/hub.json",
+      "bytes": 1992,
+      "importedSha256": "52dfcb32fcab7cdf45ff517e51fcf0c50867196a6c63b852fdf6be2cd3901652"
+    },
+    {
+      "source": "src/i18n/es/language.json",
+      "destination": "src/i18n/es/language.json",
+      "bytes": 578,
+      "importedSha256": "a549899490e99beda1872a92b496b7eadf4442c40277654c050e92c8b35d661c"
+    },
+    {
+      "source": "src/i18n/es/life.json",
+      "destination": "src/i18n/es/life.json",
+      "bytes": 1968,
+      "importedSha256": "1224f101bf95f6fcf2498686f01fbd746a625792c2b6e4cfec020ea790bc6f0e"
+    },
+    {
+      "source": "src/i18n/es/money.json",
+      "destination": "src/i18n/es/money.json",
+      "bytes": 1386,
+      "importedSha256": "8a9dd38e618bdb3d46c625c700c83aef16d79e86515a5d305fee56b92a6bc23f"
+    },
+    {
+      "source": "src/i18n/es/odds.json",
+      "destination": "src/i18n/es/odds.json",
+      "bytes": 4348,
+      "importedSha256": "529ca98d4a1a53cc91e8f2c1214736026ada42b99bd2929701239208a41e6edc"
+    },
+    {
+      "source": "src/i18n/es/people.json",
+      "destination": "src/i18n/es/people.json",
+      "bytes": 1568,
+      "importedSha256": "f62c7b83e370aa3f54d6233e8c7986ae8ffa8bdef94ed73297f7eadb2dc5d183"
+    },
+    {
+      "source": "src/i18n/es/peopleArt.json",
+      "destination": "src/i18n/es/peopleArt.json",
+      "bytes": 361,
+      "importedSha256": "ee71fa278abc642469482868d098bafab1078150f1847c437263f40474f0913a"
+    },
+    {
+      "source": "src/i18n/es/rewards.json",
+      "destination": "src/i18n/es/rewards.json",
+      "bytes": 1008,
+      "importedSha256": "290cac7d2dd47fab4cd7cbb491e02fb29f2d900ad1892093e18bff227a9da92c"
+    },
+    {
+      "source": "src/i18n/es/roll.json",
+      "destination": "src/i18n/es/roll.json",
+      "bytes": 496,
+      "importedSha256": "3170d3881f77bf7f40957d8bde4676ef7611cbaeac9e60f1a09b098ed4ea0168"
+    },
+    {
+      "source": "src/i18n/es/settings.json",
+      "destination": "src/i18n/es/settings.json",
+      "bytes": 2541,
+      "importedSha256": "e455acdae32a79c81983d21f181e096a8cd5d6a9fef29214a0c5f4be8d342bef"
+    },
+    {
+      "source": "src/i18n/es/spend.json",
+      "destination": "src/i18n/es/spend.json",
+      "bytes": 497,
+      "importedSha256": "53d8c4034dd2ed807b34b109f685662f665ac848d6cea4122006a1595c19eb39"
+    },
+    {
+      "source": "src/i18n/es/start.json",
+      "destination": "src/i18n/es/start.json",
+      "bytes": 161,
+      "importedSha256": "08b1ac74cb3bc87dd7c31858819562b3bd8da16cddb18d5a940ee0a52aa204a4"
+    },
+    {
+      "source": "src/i18n/fr/activities.json",
+      "destination": "src/i18n/fr/activities.json",
+      "bytes": 713,
+      "importedSha256": "eb0b0cc552fb1df580da35a19b1034059074f332e53c368e9f8c38df064b8562"
+    },
+    {
+      "source": "src/i18n/fr/birthOdds.json",
+      "destination": "src/i18n/fr/birthOdds.json",
+      "bytes": 1934,
+      "importedSha256": "bb5fb2b07f0888d6d9345b352a82873d83da4f3fea416897b04a2c508ec0c519"
+    },
+    {
+      "source": "src/i18n/fr/certificate.json",
+      "destination": "src/i18n/fr/certificate.json",
+      "bytes": 2136,
+      "importedSha256": "8a7e9f1f8cfa5cdb6d4cec1c0b5b2c2ba9b8b01249806777b9eeb5eaec68fa0a"
+    },
+    {
+      "source": "src/i18n/fr/common.json",
+      "destination": "src/i18n/fr/common.json",
+      "bytes": 3706,
+      "importedSha256": "9a79b7cd21357394e0947680a7857839d8cecda6ba903bba266e7564e7154b52"
+    },
+    {
+      "source": "src/i18n/fr/death.json",
+      "destination": "src/i18n/fr/death.json",
+      "bytes": 853,
+      "importedSha256": "0f78a7e3052567944b29af651de0e5ddb2f817d1553d9619572a0a53d14dbde1"
+    },
+    {
+      "source": "src/i18n/fr/ended.json",
+      "destination": "src/i18n/fr/ended.json",
+      "bytes": 1912,
+      "importedSha256": "9a8b163a4501d1271e95c70e8a39be074aefafe2ac34395d389a360c2763df59"
+    },
+    {
+      "source": "src/i18n/fr/hub.json",
+      "destination": "src/i18n/fr/hub.json",
+      "bytes": 2092,
+      "importedSha256": "0271343a5700b4b2beeb739fef706322c4826fdfa21b18443232dac3b1802e0a"
+    },
+    {
+      "source": "src/i18n/fr/language.json",
+      "destination": "src/i18n/fr/language.json",
+      "bytes": 593,
+      "importedSha256": "425173de409ee0f38969b7f95652604bb435553b594855114cbd30a7d498b814"
+    },
+    {
+      "source": "src/i18n/fr/life.json",
+      "destination": "src/i18n/fr/life.json",
+      "bytes": 2075,
+      "importedSha256": "98664fffe3f28457758cd3e9ff66ba973638af788a7d0533efebfc6c9cc88355"
+    },
+    {
+      "source": "src/i18n/fr/money.json",
+      "destination": "src/i18n/fr/money.json",
+      "bytes": 1427,
+      "importedSha256": "1f6c3452d4fc64317664dd699c9ed08369567043a17f30da99c71531b416ca7a"
+    },
+    {
+      "source": "src/i18n/fr/odds.json",
+      "destination": "src/i18n/fr/odds.json",
+      "bytes": 4311,
+      "importedSha256": "1744c2bc1c96aab7dc1e81f8d38b928e92cdb9e255a47490a0338a6b9555f9cb"
+    },
+    {
+      "source": "src/i18n/fr/people.json",
+      "destination": "src/i18n/fr/people.json",
+      "bytes": 1593,
+      "importedSha256": "43a82780444cfb74a1793f7b5cc5d3f3830b13f727566ab12a31cd3310b1b430"
+    },
+    {
+      "source": "src/i18n/fr/peopleArt.json",
+      "destination": "src/i18n/fr/peopleArt.json",
+      "bytes": 368,
+      "importedSha256": "9b42b8a287ba2be4379cf07877512bc4c2e1eb487294895eed51d9ec5240eb8c"
+    },
+    {
+      "source": "src/i18n/fr/rewards.json",
+      "destination": "src/i18n/fr/rewards.json",
+      "bytes": 1030,
+      "importedSha256": "521e647eac3c1e2f83ce70df91145110125eda415781282a5dabeb192bc0b3cd"
+    },
+    {
+      "source": "src/i18n/fr/roll.json",
+      "destination": "src/i18n/fr/roll.json",
+      "bytes": 499,
+      "importedSha256": "fcff15eeffdb13e5d25cba3d2c3319afa494adc5f630f8bc74d9e492c0be6fcb"
+    },
+    {
+      "source": "src/i18n/fr/settings.json",
+      "destination": "src/i18n/fr/settings.json",
+      "bytes": 2708,
+      "importedSha256": "cd697c4b1e8462f2485313045caaede3998b17f57e4b932e5f846e0da317b517"
+    },
+    {
+      "source": "src/i18n/fr/spend.json",
+      "destination": "src/i18n/fr/spend.json",
+      "bytes": 520,
+      "importedSha256": "f7d155118607b80d34c69a8abefa44ddf88e33edbbe7eb36eaf9ad7799694bcb"
+    },
+    {
+      "source": "src/i18n/fr/start.json",
+      "destination": "src/i18n/fr/start.json",
+      "bytes": 163,
+      "importedSha256": "6a30ada21ce9d25babbf84c14b2688f155acbca6cd888147d1af593afa5c2534"
+    },
+    {
+      "source": "src/i18n/index.ts",
+      "destination": "src/i18n/index.ts",
+      "bytes": 2209,
+      "importedSha256": "41e0dbcb58e136f3691296fbbbe001a66ac1c4f6a0fc344ebf88048c2eb5ba3d"
+    },
+    {
+      "source": "src/i18n/locales.ts",
+      "destination": "src/i18n/locales.ts",
+      "bytes": 843,
+      "importedSha256": "8e0ed7b2084c3a0fe1f4b3c3c9074db0a717cff2191ef13d0ca734276a49abe5"
+    },
+    {
+      "source": "src/i18n/messages.ts",
+      "destination": "src/i18n/messages.ts",
+      "bytes": 707,
+      "importedSha256": "1b121d0421b43a1ba26eb1033ac758cbae176d1a979868062020e5d9e501ea70"
+    },
+    {
+      "source": "src/i18n/numbers.ts",
+      "destination": "src/i18n/numbers.ts",
+      "bytes": 1485,
+      "importedSha256": "deb7a9760d5ccb5de28b91cbb7dc725e969369cb674e26a9f179ca3117883517"
+    },
+    {
+      "source": "src/i18n/ru/activities.json",
+      "destination": "src/i18n/ru/activities.json",
+      "bytes": 839,
+      "importedSha256": "7f3c329adb20a5566e4e67ffce12cf5ab85412c081725d1ffc20b85205a52752"
+    },
+    {
+      "source": "src/i18n/ru/birthOdds.json",
+      "destination": "src/i18n/ru/birthOdds.json",
+      "bytes": 2614,
+      "importedSha256": "5fb6dcbbab2c335bf751c62c5e2017fd5117e7e937057d67287b9fb782c015a4"
+    },
+    {
+      "source": "src/i18n/ru/certificate.json",
+      "destination": "src/i18n/ru/certificate.json",
+      "bytes": 3077,
+      "importedSha256": "4295daaa347cc53d5b38b0f6814333a27504ff217bb3deb7d0deb94176820366"
+    },
+    {
+      "source": "src/i18n/ru/common.json",
+      "destination": "src/i18n/ru/common.json",
+      "bytes": 4887,
+      "importedSha256": "7068b613a321634746598621b417a4a57a7d1f5516f0d0852a051687236e0943"
+    },
+    {
+      "source": "src/i18n/ru/death.json",
+      "destination": "src/i18n/ru/death.json",
+      "bytes": 1144,
+      "importedSha256": "f10643a99396e452a41647f25f1aebc86c596780ce7f039b505e4dd225daa148"
+    },
+    {
+      "source": "src/i18n/ru/ended.json",
+      "destination": "src/i18n/ru/ended.json",
+      "bytes": 2413,
+      "importedSha256": "2a9e1dacf39f22732e0a5eeecf10f05c3a131964b1a6a33439e094ab5cd8b3bd"
+    },
+    {
+      "source": "src/i18n/ru/hub.json",
+      "destination": "src/i18n/ru/hub.json",
+      "bytes": 2883,
+      "importedSha256": "da758784439414a32d998b6d3f4d2b2f0a363a7647b1855dec85039cdbf5c577"
+    },
+    {
+      "source": "src/i18n/ru/language.json",
+      "destination": "src/i18n/ru/language.json",
+      "bytes": 739,
+      "importedSha256": "4b486b7972a8c2e2054628a63df770a215150e5235f9a5a2991671480b548f21"
+    },
+    {
+      "source": "src/i18n/ru/life.json",
+      "destination": "src/i18n/ru/life.json",
+      "bytes": 2512,
+      "importedSha256": "7eb95818ca42efbc7d43b0d951b28d79b2e2ea28fa4296e1a9bfb06a1992625a"
+    },
+    {
+      "source": "src/i18n/ru/money.json",
+      "destination": "src/i18n/ru/money.json",
+      "bytes": 1755,
+      "importedSha256": "1e7d78e482cf88d4157a1741440c089c86aede30c8b6ff9dbf37754305a0aa20"
+    },
+    {
+      "source": "src/i18n/ru/odds.json",
+      "destination": "src/i18n/ru/odds.json",
+      "bytes": 6133,
+      "importedSha256": "a013654bb54bda5ce0e6eb3e05f6f76628bf3e458ce9f926d3f3f18d98f2cdd5"
+    },
+    {
+      "source": "src/i18n/ru/people.json",
+      "destination": "src/i18n/ru/people.json",
+      "bytes": 1855,
+      "importedSha256": "eb7b04249814788465a747214bf9af7795b834a8ff71bdfb7293368135e9b3f6"
+    },
+    {
+      "source": "src/i18n/ru/peopleArt.json",
+      "destination": "src/i18n/ru/peopleArt.json",
+      "bytes": 426,
+      "importedSha256": "c0265b7bada5a4fc282bec6462c929941cfe0a20606869070cf1a85bff3649e6"
+    },
+    {
+      "source": "src/i18n/ru/rewards.json",
+      "destination": "src/i18n/ru/rewards.json",
+      "bytes": 1927,
+      "importedSha256": "13c4e3628b32ee91f7e9c9cc264e50254af9ed83b32b3eedfe9d398292c2b758"
+    },
+    {
+      "source": "src/i18n/ru/roll.json",
+      "destination": "src/i18n/ru/roll.json",
+      "bytes": 637,
+      "importedSha256": "9f4193b5332764bdd2e9e5559cea8296221826bc3a2ad47e960f4e44237e4550"
+    },
+    {
+      "source": "src/i18n/ru/settings.json",
+      "destination": "src/i18n/ru/settings.json",
+      "bytes": 3653,
+      "importedSha256": "6c4a1296b7d50211b37f4b9a173655e461127a4eea6b7e906c5514d8a5520bce"
+    },
+    {
+      "source": "src/i18n/ru/spend.json",
+      "destination": "src/i18n/ru/spend.json",
+      "bytes": 657,
+      "importedSha256": "683b5deacd5dddf305657948ffcf0bda9c47c4f3090db8f63ca93a7033518a4c"
+    },
+    {
+      "source": "src/i18n/ru/start.json",
+      "destination": "src/i18n/ru/start.json",
+      "bytes": 216,
+      "importedSha256": "eb006e479f7d68f8d9c771d2e2b15d828b683c723d0d7ead9801ba8bf381a73d"
+    },
+    {
+      "source": "src/main.tsx",
+      "destination": "src/main.tsx",
+      "bytes": 1007,
+      "importedSha256": "5aa11699457a017024376823ff67e834171841ec70dabe64a4690eea42379b9d"
+    },
+    {
+      "source": "src/screens/birthOdds/birthOdds.css",
+      "destination": "src/screens/birthOdds/birthOdds.css",
+      "bytes": 6363,
+      "importedSha256": "6f7c55637b121aa44cb8d1bb4c5fd2a11ba361527e1947952bd7dd8c3e554825"
+    },
+    {
+      "source": "src/screens/birthOdds/BirthOddsScreen.tsx",
+      "destination": "src/screens/birthOdds/BirthOddsScreen.tsx",
+      "bytes": 11450,
+      "importedSha256": "1ee70cbf1efd16f7455afc8568eeff4c9299559de33ced9b8b83cc94247ebec0"
+    },
+    {
+      "source": "src/screens/certificate/certificate.css",
+      "destination": "src/screens/certificate/certificate.css",
+      "bytes": 13944,
+      "importedSha256": "4808ac49ecb9fecdb0d88f3a30876a1681a0be010948f205a88f583f364a8ee7"
+    },
+    {
+      "source": "src/screens/certificate/CertificateScreen.tsx",
+      "destination": "src/screens/certificate/CertificateScreen.tsx",
+      "bytes": 22130,
+      "importedSha256": "22b992da308076bb74aeeb1341f53c495464156dbde51cce0cc6eb27b470b1a2"
+    },
+    {
+      "source": "src/screens/certificate/parts.tsx",
+      "destination": "src/screens/certificate/parts.tsx",
+      "bytes": 5500,
+      "importedSha256": "3c740ee52648f1ccdeddfef725abfd13a14a5fe9874e6745fbc92fb952951beb"
+    },
+    {
+      "source": "src/screens/ended/ended.css",
+      "destination": "src/screens/ended/ended.css",
+      "bytes": 12654,
+      "importedSha256": "0976ae93e6c8967c92082412a44728a549f533829756de00f546a2c1796b8fb3"
+    },
+    {
+      "source": "src/screens/ended/EndedScreen.tsx",
+      "destination": "src/screens/ended/EndedScreen.tsx",
+      "bytes": 20178,
+      "importedSha256": "24061c122ac5db09fa960f1293d44ae8e6cc39f7f57a2fdd8a3056bda39cb747"
+    },
+    {
+      "source": "src/screens/FoundationScreen.tsx",
+      "destination": "src/screens/FoundationScreen.tsx",
+      "bytes": 587,
+      "importedSha256": "02acadc3127714544828eda44b36675ef9fa296476764712b1f256fdc934eae0"
+    },
+    {
+      "source": "src/screens/hub/hub.css",
+      "destination": "src/screens/hub/hub.css",
+      "bytes": 7921,
+      "importedSha256": "638b883dc95e6f2f16051a9313d14cd9a277bdea0b90766b8478fa5e66fb5cae"
+    },
+    {
+      "source": "src/screens/hub/HubScreen.tsx",
+      "destination": "src/screens/hub/HubScreen.tsx",
+      "bytes": 14098,
+      "importedSha256": "ed729459a98e8b4bc6d477b852180cda07bdec0c0f9ecd799a4781e3c0b479e2"
+    },
+    {
+      "source": "src/screens/hub/rewards.css",
+      "destination": "src/screens/hub/rewards.css",
+      "bytes": 6262,
+      "importedSha256": "727cbe0442ebb448d7b32f1667399d1f684ab9702c6f256bf5d4f4c4fa2c5dd2"
+    },
+    {
+      "source": "src/screens/hub/Rewards.tsx",
+      "destination": "src/screens/hub/Rewards.tsx",
+      "bytes": 18728,
+      "importedSha256": "610da1d9c8eb4322986316df1debc9362a415cfee6d77bc023119766bbc326ad"
+    },
+    {
+      "source": "src/screens/language/language.css",
+      "destination": "src/screens/language/language.css",
+      "bytes": 4824,
+      "importedSha256": "661021c0a25046270974eb8bc954939695fa2585b634e85e989cc0e815a89818"
+    },
+    {
+      "source": "src/screens/language/LanguageScreen.tsx",
+      "destination": "src/screens/language/LanguageScreen.tsx",
+      "bytes": 7441,
+      "importedSha256": "49a90da37601b18cf7ff52518d394dcdf06fbcd18a76f0e87ab89d286cd5b334"
+    },
+    {
+      "source": "src/screens/life/life.css",
+      "destination": "src/screens/life/life.css",
+      "bytes": 18552,
+      "importedSha256": "e219dccb9fa3351498d08981c994effa1a8052bcf2caa72fb461e58fd544dffd"
+    },
+    {
+      "source": "src/screens/life/LifeScreen.tsx",
+      "destination": "src/screens/life/LifeScreen.tsx",
+      "bytes": 7577,
+      "importedSha256": "50121e1d8cc3e388c29e78ab40d9cfcc2454890217bd2a15cda15e8a8f527eb4"
+    },
+    {
+      "source": "src/screens/life/lifeTab.css",
+      "destination": "src/screens/life/lifeTab.css",
+      "bytes": 12533,
+      "importedSha256": "524a15b9dcbe1e2ad48203f6688609dff74a1e7e3000b92dd8d96bfd045af124"
+    },
+    {
+      "source": "src/screens/life/LifeTab.tsx",
+      "destination": "src/screens/life/LifeTab.tsx",
+      "bytes": 6834,
+      "importedSha256": "65ff5aca2dc25a5593fe2aa2719b742cf200317624469a871c506ba824d979da"
+    },
+    {
+      "source": "src/screens/life/parts/DeathLayer.tsx",
+      "destination": "src/screens/life/parts/DeathLayer.tsx",
+      "bytes": 8402,
+      "importedSha256": "c36aab6fe6968d06ae3d7869995eca51ea7bd0a8ef7eea66e5a7bf0d81b06bd1"
+    },
+    {
+      "source": "src/screens/life/parts/DecisionDialog.tsx",
+      "destination": "src/screens/life/parts/DecisionDialog.tsx",
+      "bytes": 8603,
+      "importedSha256": "263d6fb655d4cb9661d566ab70a35b0c0f896caa3d569b92e2a0c60de5a9bfcb"
+    },
+    {
+      "source": "src/screens/life/parts/Journal.tsx",
+      "destination": "src/screens/life/parts/Journal.tsx",
+      "bytes": 4426,
+      "importedSha256": "fdee7f578335f51a12593723b753990e8e11e1f628864805506f7773ed7a5816"
+    },
+    {
+      "source": "src/screens/life/parts/LifeDialog.tsx",
+      "destination": "src/screens/life/parts/LifeDialog.tsx",
+      "bytes": 3957,
+      "importedSha256": "7be1514dbe355e11432b40947c8d7f1ce26616c189261b2b6d64286ba718c639"
+    },
+    {
+      "source": "src/screens/life/parts/lifeHooks.ts",
+      "destination": "src/screens/life/parts/lifeHooks.ts",
+      "bytes": 2146,
+      "importedSha256": "47d105242eba2b3a68c8b2f0b372398b354b2ca777d834b3a93feec8c9dee157"
+    },
+    {
+      "source": "src/screens/life/parts/lifeIcons.tsx",
+      "destination": "src/screens/life/parts/lifeIcons.tsx",
+      "bytes": 11674,
+      "importedSha256": "a000e3c15a9bffdb9f6193518798e6e2aef007d129b4c7ae8f75b62543f6c579"
+    },
+    {
+      "source": "src/screens/life/parts/LifeToasts.tsx",
+      "destination": "src/screens/life/parts/LifeToasts.tsx",
+      "bytes": 4612,
+      "importedSha256": "208fdbee018682cc5deb062b81f05722c4122bbddd5dc05517181a1ee5494709"
+    },
+    {
+      "source": "src/screens/life/parts/PauseDialog.tsx",
+      "destination": "src/screens/life/parts/PauseDialog.tsx",
+      "bytes": 3184,
+      "importedSha256": "164288f40c05f4acf0b3429d4b85917d2dd571f1e065eb241bda368496e0629b"
+    },
+    {
+      "source": "src/screens/life/parts/Scene.tsx",
+      "destination": "src/screens/life/parts/Scene.tsx",
+      "bytes": 10212,
+      "importedSha256": "e34927cb59145867c823795582c22c2356d9483cebc6d573a6241aba1ad2f4f1"
+    },
+    {
+      "source": "src/screens/life/parts/SkipLayer.tsx",
+      "destination": "src/screens/life/parts/SkipLayer.tsx",
+      "bytes": 3339,
+      "importedSha256": "34b322aa2cd6e05df86b1428e7fd4c7e5275725cbb92096d630f1ddbb3e18558"
+    },
+    {
+      "source": "src/screens/life/parts/StatsPanel.tsx",
+      "destination": "src/screens/life/parts/StatsPanel.tsx",
+      "bytes": 2533,
+      "importedSha256": "8ebe35ce5e80a7370aa91c7f2cb6e5d665e7976053173c51b42c08b5dbb7ffe2"
+    },
+    {
+      "source": "src/screens/life/tabs/activities.css",
+      "destination": "src/screens/life/tabs/activities.css",
+      "bytes": 2859,
+      "importedSha256": "28ea4274e0a9b25cd11cfb76a4d0eff67defaa8e55d4068bf14b793e82bc37a7"
+    },
+    {
+      "source": "src/screens/life/tabs/activitiesParts/focusIcons.tsx",
+      "destination": "src/screens/life/tabs/activitiesParts/focusIcons.tsx",
+      "bytes": 5111,
+      "importedSha256": "c411f4285b29e26b32750a03f2850e71f0e20b7b892092e269c13c7972603eee"
+    },
+    {
+      "source": "src/screens/life/tabs/activitiesParts/NowCard.tsx",
+      "destination": "src/screens/life/tabs/activitiesParts/NowCard.tsx",
+      "bytes": 4498,
+      "importedSha256": "30b91af3b77edbf076d707b7be1e2a2513368a1eac15e82145a6785637767f93"
+    },
+    {
+      "source": "src/screens/life/tabs/ActivitiesTab.tsx",
+      "destination": "src/screens/life/tabs/ActivitiesTab.tsx",
+      "bytes": 2533,
+      "importedSha256": "95ef8eff216199c1676d41f2b204e41923ce18a488ee05ba765c601c8866cd46"
+    },
+    {
+      "source": "src/screens/life/tabs/money.css",
+      "destination": "src/screens/life/tabs/money.css",
+      "bytes": 3062,
+      "importedSha256": "cf8fd834912e55e61ba96f5aaf6e5fbf7170fe32cad72d9f6a3f43d1799c3206"
+    },
+    {
+      "source": "src/screens/life/tabs/moneyParts/CountUp.tsx",
+      "destination": "src/screens/life/tabs/moneyParts/CountUp.tsx",
+      "bytes": 1838,
+      "importedSha256": "e5e3d3eedb8eddf25aa17037e37add93f1b007222493bfa2b4bc9d8ca219c3f3"
+    },
+    {
+      "source": "src/screens/life/tabs/MoneyTab.tsx",
+      "destination": "src/screens/life/tabs/MoneyTab.tsx",
+      "bytes": 7808,
+      "importedSha256": "2ed3f978b185d227638899496130db0cedad592bd8ca0426ffecd7052582482c"
+    },
+    {
+      "source": "src/screens/life/tabs/odds.css",
+      "destination": "src/screens/life/tabs/odds.css",
+      "bytes": 7958,
+      "importedSha256": "9b6ff0a4611df75f08b5fcb796b8f9ef497c072954de5289916da8f8984b31c6"
+    },
+    {
+      "source": "src/screens/life/tabs/oddsParts/CountrySection.tsx",
+      "destination": "src/screens/life/tabs/oddsParts/CountrySection.tsx",
+      "bytes": 2786,
+      "importedSha256": "f9b3af5eb7567daaff34011017de675358ee00f8e3e0b3e74c89cde8148d7fdf"
+    },
+    {
+      "source": "src/screens/life/tabs/oddsParts/enter.ts",
+      "destination": "src/screens/life/tabs/oddsParts/enter.ts",
+      "bytes": 1984,
+      "importedSha256": "b9bf7b9ec4d374053d749af2982649bfa5b76ad860639ec6e4e4dba32975364e"
+    },
+    {
+      "source": "src/screens/life/tabs/oddsParts/FactsSection.tsx",
+      "destination": "src/screens/life/tabs/oddsParts/FactsSection.tsx",
+      "bytes": 1757,
+      "importedSha256": "5473582c0086f60ae32403725fddf517c1f9465a1623eb3b1f7deeac336e7266"
+    },
+    {
+      "source": "src/screens/life/tabs/oddsParts/LivesSection.tsx",
+      "destination": "src/screens/life/tabs/oddsParts/LivesSection.tsx",
+      "bytes": 5020,
+      "importedSha256": "7382ffb29e04a406f3bf8c05ea5b324a3d1e671cb7f8d3eaf6ec6f1a66fba322"
+    },
+    {
+      "source": "src/screens/life/tabs/oddsParts/shell.css",
+      "destination": "src/screens/life/tabs/oddsParts/shell.css",
+      "bytes": 2312,
+      "importedSha256": "8ac4fa8de4aa97725ffdecdaac3a7301e0618f24674f7a31dc16e255615979a8"
+    },
+    {
+      "source": "src/screens/life/tabs/oddsParts/SurvivalSection.tsx",
+      "destination": "src/screens/life/tabs/oddsParts/SurvivalSection.tsx",
+      "bytes": 6111,
+      "importedSha256": "203349ce1359a3cd6b8817b3e7b17b94751fd9c8287b68acc716567fd94730a9"
+    },
+    {
+      "source": "src/screens/life/tabs/oddsParts/TabShell.tsx",
+      "destination": "src/screens/life/tabs/oddsParts/TabShell.tsx",
+      "bytes": 917,
+      "importedSha256": "41d99adbde2fc834bb2993e76a297547610af7e05e62742a411803c6fe5e6c52"
+    },
+    {
+      "source": "src/screens/life/tabs/oddsParts/WhereYouStand.tsx",
+      "destination": "src/screens/life/tabs/oddsParts/WhereYouStand.tsx",
+      "bytes": 3280,
+      "importedSha256": "d6bc73636a041bf1f747f635d810075a8e4bb8dd769bcbbd083af3a2083f353b"
+    },
+    {
+      "source": "src/screens/life/tabs/OddsTab.tsx",
+      "destination": "src/screens/life/tabs/OddsTab.tsx",
+      "bytes": 3913,
+      "importedSha256": "a1344d9689d75b6c1bfc709cca4e897d7cf99187af4a08ce455ed70feed81439"
+    },
+    {
+      "source": "src/screens/life/tabs/people.css",
+      "destination": "src/screens/life/tabs/people.css",
+      "bytes": 5972,
+      "importedSha256": "4653834db867c14b80bbf127be8db9e9f31292c0e7f611cae909272c220f15da"
+    },
+    {
+      "source": "src/screens/life/tabs/peopleParts/personParts.tsx",
+      "destination": "src/screens/life/tabs/peopleParts/personParts.tsx",
+      "bytes": 3844,
+      "importedSha256": "43b0974c988f9517927b6a51517a4458462df167c02e87c75b425b6968d38b0e"
+    },
+    {
+      "source": "src/screens/life/tabs/peopleParts/tabframe.css",
+      "destination": "src/screens/life/tabs/peopleParts/tabframe.css",
+      "bytes": 2387,
+      "importedSha256": "1cfce5d9d25a365807ef324d250dfe1004c6a61ddefe639765beff01dbff42f4"
+    },
+    {
+      "source": "src/screens/life/tabs/peopleParts/TabFrame.tsx",
+      "destination": "src/screens/life/tabs/peopleParts/TabFrame.tsx",
+      "bytes": 2127,
+      "importedSha256": "9b105cbe64e116219405e1ac1bfe5364d86eee949d4d4d6e4eef1ad53fd80d66"
+    },
+    {
+      "source": "src/screens/life/tabs/PeopleTab.tsx",
+      "destination": "src/screens/life/tabs/PeopleTab.tsx",
+      "bytes": 13413,
+      "importedSha256": "2fca3ea8cc4cc1968bd8fa045755f99dbd79a86ac89312edbef9db7e3f9001e1"
+    },
+    {
+      "source": "src/screens/life/tabs/spendParts/spend.css",
+      "destination": "src/screens/life/tabs/spendParts/spend.css",
+      "bytes": 9605,
+      "importedSha256": "6ad909dc759d810ed725b020f5aaa8428d3616df0270089a6178abc8a58d0a23"
+    },
+    {
+      "source": "src/screens/life/tabs/spendParts/spendData.ts",
+      "destination": "src/screens/life/tabs/spendParts/spendData.ts",
+      "bytes": 1450,
+      "importedSha256": "e8a02077a4ebbe09be9beb452a2221eec3cd342f69204403d941044ae7289208"
+    },
+    {
+      "source": "src/screens/life/tabs/spendParts/SpendDialogs.tsx",
+      "destination": "src/screens/life/tabs/spendParts/SpendDialogs.tsx",
+      "bytes": 5377,
+      "importedSha256": "d7fb0be91b69a5b6af3916f0e1acd1e32d5eb7c90082a74535f2a93cc122b8a7"
+    },
+    {
+      "source": "src/screens/life/tabs/spendParts/spendIcons.tsx",
+      "destination": "src/screens/life/tabs/spendParts/spendIcons.tsx",
+      "bytes": 2669,
+      "importedSha256": "739ef38a3246309f3a58b2da5c3cf545a060552c206b16b91bcb9cfdc7e97ea3"
+    },
+    {
+      "source": "src/screens/life/tabs/spendParts/SpendItemCard.tsx",
+      "destination": "src/screens/life/tabs/spendParts/SpendItemCard.tsx",
+      "bytes": 3971,
+      "importedSha256": "1d691f77da39d1c1b5ae1ec4f67bcd2d6e73b6a10e4e6bec5553165c91437b65"
+    },
+    {
+      "source": "src/screens/life/tabs/spendParts/SpendSection.tsx",
+      "destination": "src/screens/life/tabs/spendParts/SpendSection.tsx",
+      "bytes": 7379,
+      "importedSha256": "4fe3f61de1a76ca27d033adbf7a5eefeb48a88e257c84be98114e1604a955acb"
+    },
+    {
+      "source": "src/screens/life/tabs/spendParts/SpendWays.tsx",
+      "destination": "src/screens/life/tabs/spendParts/SpendWays.tsx",
+      "bytes": 2959,
+      "importedSha256": "142a1cd625da5bd064164e906a58c29c516172e049e9057c64a33d405e8d9f6b"
+    },
+    {
+      "source": "src/screens/life/tabs/types.ts",
+      "destination": "src/screens/life/tabs/types.ts",
+      "bytes": 477,
+      "importedSha256": "7d5177cc97ebbae860355eab6411d4316212eb1aee030b1817e6119f1afe6bb7"
+    },
+    {
+      "source": "src/screens/registry.ts",
+      "destination": "src/screens/registry.ts",
+      "bytes": 1156,
+      "importedSha256": "260ef00a9d575377652181b2739b34d9aa767ec266cff7820ecd228f81e9dac8"
+    },
+    {
+      "source": "src/screens/roll/roll.css",
+      "destination": "src/screens/roll/roll.css",
+      "bytes": 5225,
+      "importedSha256": "5d1e9c0a6a51ea77bc76d7a839f6588448858986e7d672ee90636aa890ff996c"
+    },
+    {
+      "source": "src/screens/roll/RollScreen.tsx",
+      "destination": "src/screens/roll/RollScreen.tsx",
+      "bytes": 9232,
+      "importedSha256": "98ddddc4cfb460c63407ac7bb02af6189919a625497fe0f5895d9a9d28c1a7f9"
+    },
+    {
+      "source": "src/screens/settings/settings.css",
+      "destination": "src/screens/settings/settings.css",
+      "bytes": 6409,
+      "importedSha256": "cee37c7c76439cfb13b522119d7736441ecbbb3271ae880e50ffca4aaf7013dc"
+    },
+    {
+      "source": "src/screens/settings/SettingsScreen.tsx",
+      "destination": "src/screens/settings/SettingsScreen.tsx",
+      "bytes": 11597,
+      "importedSha256": "f90d5d135a8466755adc8c7d309706bce5565c71b25c488524fc46efe75f0aec"
+    },
+    {
+      "source": "src/screens/start/newLife.css",
+      "destination": "src/screens/start/newLife.css",
+      "bytes": 1038,
+      "importedSha256": "16b759b6e60fae6b80a606d06dd3fd85b64383e7195a140fcbafa4825ef84e0e"
+    },
+    {
+      "source": "src/screens/start/newLife.tsx",
+      "destination": "src/screens/start/newLife.tsx",
+      "bytes": 5489,
+      "importedSha256": "b61d04701ca9b85b27b5b95e769a1ee9278b1c064732a00bde87b23e603de03a"
+    },
+    {
+      "source": "src/screens/start/shared.tsx",
+      "destination": "src/screens/start/shared.tsx",
+      "bytes": 6288,
+      "importedSha256": "bcd1209cd4051608b44fd885311ec14ea9b6fd52a919a5bd3ec41f9ed52004a4"
+    },
+    {
+      "source": "src/screens/start/start.css",
+      "destination": "src/screens/start/start.css",
+      "bytes": 1336,
+      "importedSha256": "dae408d0885384ca25f97b634a7e20e8c83a02563ab8f91a19c36d278d6ecd06"
+    },
+    {
+      "source": "src/screens/start/StartScreen.tsx",
+      "destination": "src/screens/start/StartScreen.tsx",
+      "bytes": 3282,
+      "importedSha256": "6240415e0d88564c736fadfee50b8c173773232275a6ff290d4d304640fa3189"
+    },
+    {
+      "source": "src/screens/start/world.css",
+      "destination": "src/screens/start/world.css",
+      "bytes": 3777,
+      "importedSha256": "ed4d009f9248a417d3d1ca5e271f39bbf204aafda9acfeed08d663453b7b30d1"
+    },
+    {
+      "source": "src/screens/system.css",
+      "destination": "src/screens/system.css",
+      "bytes": 1188,
+      "importedSha256": "f8935b72bbc7dbdeb5649cdb8c5fe1c71d5b367fffcf0d4874faa233c1e97ad2"
+    },
+    {
+      "source": "src/screens/SystemScreens.tsx",
+      "destination": "src/screens/SystemScreens.tsx",
+      "bytes": 1325,
+      "importedSha256": "ea64b60a628e5da38e0a8e40e6797ccd247d3bbd1b34fcb58202adfa8fa3fe7c"
+    },
+    {
+      "source": "src/ui/components.tsx",
+      "destination": "src/ui/components.tsx",
+      "bytes": 10760,
+      "importedSha256": "254c333c797dd5bb3530b7ded0e15a5613d9afd9857f1851e9f986e2557910f6"
+    },
+    {
+      "source": "src/ui/globe/Globe.tsx",
+      "destination": "src/ui/globe/Globe.tsx",
+      "bytes": 11031,
+      "importedSha256": "52260a572436357837bb9bb3df049547318214f31bc6d58c841c3c2e711ae7ef"
+    },
+    {
+      "source": "src/ui/globe/land.ts",
+      "destination": "src/ui/globe/land.ts",
+      "bytes": 5036,
+      "importedSha256": "36f7192cb199e3486f84bec024e0441d888a8a6308edfe8eddfc8a9f9cf72bfb"
+    },
+    {
+      "source": "src/ui/icons.tsx",
+      "destination": "src/ui/icons.tsx",
+      "bytes": 5977,
+      "importedSha256": "d44c66039bef932503454011547d895f0a10f49f93a84b8afccd296cb77d8ea1"
+    },
+    {
+      "source": "src/ui/meta/meta.css",
+      "destination": "src/ui/meta/meta.css",
+      "bytes": 3238,
+      "importedSha256": "5fcf2b33cd590a94f5cb7549111e1f677893e3e4f4794acca41c2573dbd80cb4"
+    },
+    {
+      "source": "src/ui/meta/Meta.tsx",
+      "destination": "src/ui/meta/Meta.tsx",
+      "bytes": 6148,
+      "importedSha256": "c806ed94acc075f3b1d1f6b67371b7ff6de72fbdd1654f519e085ac5ecb53107"
+    },
+    {
+      "source": "src/ui/meta/metaIcons.tsx",
+      "destination": "src/ui/meta/metaIcons.tsx",
+      "bytes": 2756,
+      "importedSha256": "83e8eba11cbdb02ad35ab2adc44ce06c6938e382a8348a312453e06675a4ffb6"
+    },
+    {
+      "source": "src/ui/meta/useMeta.ts",
+      "destination": "src/ui/meta/useMeta.ts",
+      "bytes": 4943,
+      "importedSha256": "04f0302f9dc1b018fbf1fca032ab70dd1c328962d82585572e738d29a47a4a33"
+    },
+    {
+      "source": "src/ui/motionPrefs.ts",
+      "destination": "src/ui/motionPrefs.ts",
+      "bytes": 1265,
+      "importedSha256": "7d91cd85bada08bb385f21a2a83f541b7bacb87605696e4ed42ac9b6645644f8"
+    },
+    {
+      "source": "src/ui/people/assemble.ts",
+      "destination": "src/ui/people/assemble.ts",
+      "bytes": 19739,
+      "importedSha256": "e890016cd57695f15d186ee8bb91a2d4cc2390fedd56f19314fdc20d291e1f41"
+    },
+    {
+      "source": "src/ui/people/hooks.ts",
+      "destination": "src/ui/people/hooks.ts",
+      "bytes": 2358,
+      "importedSha256": "0bee225c83d1015c3a37ecbbe912ae03094d63c10dcf0b11fdcbaa00e0a04130"
+    },
+    {
+      "source": "src/ui/people/Household.tsx",
+      "destination": "src/ui/people/Household.tsx",
+      "bytes": 2793,
+      "importedSha256": "c9fb5349100b2958d821c54204872418075d183aeb42a3b8126903be55d89fe5"
+    },
+    {
+      "source": "src/ui/people/manifest.json",
+      "destination": "src/ui/people/manifest.json",
+      "bytes": 174947,
+      "importedSha256": "6efc3066cb375ea9751220930aca606eb634b54f126fd187c2dad123e3242904"
+    },
+    {
+      "source": "src/ui/people/mentions.ts",
+      "destination": "src/ui/people/mentions.ts",
+      "bytes": 977,
+      "importedSha256": "85e086705429f66ea9ffd4e0be24844dd26100f9617b2dff5c55624efe33d588"
+    },
+    {
+      "source": "src/ui/people/people.css",
+      "destination": "src/ui/people/people.css",
+      "bytes": 1988,
+      "importedSha256": "eb487f59ed9e40c646d26f29676f1292dcc640b1cc630fdd68e622b56e4069d8"
+    },
+    {
+      "source": "src/ui/people/PersonArt.tsx",
+      "destination": "src/ui/people/PersonArt.tsx",
+      "bytes": 5823,
+      "importedSha256": "040050a7d44854346acf7953884a8eb6743050324c2159b2d405203d1271d222"
+    },
+    {
+      "source": "src/ui/people/pick.ts",
+      "destination": "src/ui/people/pick.ts",
+      "bytes": 6447,
+      "importedSha256": "541c84dcfe79cb8d783c4630b44b61c28ac0f15bfa35e0d3a96849adc964df57"
+    },
+    {
+      "source": "src/ui/people/store.ts",
+      "destination": "src/ui/people/store.ts",
+      "bytes": 6343,
+      "importedSha256": "2e46c84afe464538d6e38791a07cd8cb6a4bf823195cba33f5572ab9a5facba7"
+    },
+    {
+      "source": "src/ui/people/types.ts",
+      "destination": "src/ui/people/types.ts",
+      "bytes": 2831,
+      "importedSha256": "2d9be02e2d74e70ff086b66dc6009d4a5842f287a2bba4e10b0f3689a173c00e"
+    },
+    {
+      "source": "src/ui/ui.css",
+      "destination": "src/ui/ui.css",
+      "bytes": 8839,
+      "importedSha256": "99111a3d0641cba25daba5049d284270d617adec0c16f56e0576058080c7551c"
+    },
+    {
+      "source": "tools/core/scope.mjs",
+      "destination": "tools/engine/scope.mjs",
+      "bytes": 12386,
+      "importedSha256": "689e2dac9c4f54ef5ee0e7a7a9ae77a12886b1c9d88621e82f1d964e0a8ec345"
+    },
+    {
+      "source": "tsconfig.app.json",
+      "destination": "tsconfig.app.json",
+      "bytes": 693,
+      "importedSha256": "d7d79ed6b77195e0a1305f77cb0b6f1097fb6161b60433bf50d37e2be306c7f7"
+    },
+    {
+      "source": "tsconfig.json",
+      "destination": "tsconfig.json",
+      "bytes": 107,
+      "importedSha256": "e8d6f7b50828db3953e21c7e92584f9206b3cd2551b4012507372afbb7fe9ce3"
+    },
+    {
+      "source": "tsconfig.node.json",
+      "destination": "tsconfig.node.json",
+      "bytes": 309,
+      "importedSha256": "42d5997fb4417148c1954df17fa734e25ea352a1671da8bb0f0350f6639a0ffb"
+    },
+    {
+      "source": "vite.config.ts",
+      "destination": "vite.config.ts",
+      "bytes": 408,
+      "importedSha256": "b5910d100b8782f8b2e09656979b65435add67938ccfc51deb5576c5e94e14fe"
+    }
+  ]
+}

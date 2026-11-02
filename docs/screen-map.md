@@ -1,8 +1,10 @@
-# Карта экранов и подключение к core
+# Карта экранов и подключение к локальному движку
 
-Источник макетов — холст «One in Eight Billion — Design», страница Production (`design/claude-canvas/project/*Cute.dc.html`, `OddsLife`, `FlowMap`, `Prototype`). Номера строк — `reference/original-0.8.98/src/game.en.js`.
+Источник макетов — холст «One in Eight Billion — Design», страница Production: локальные [материалы дизайна](../design/claude-canvas/) (`*Cute.dc.html`, `OddsLife`, `FlowMap`, `Prototype`). Карта сохраняет продуктовые решения мобильной версии от 1 ноября 2026 года и адаптирована для самостоятельного движка 2 ноября. Исходный документ и его SHA-256 — в [описи документации](documentation-import-2026-11-02.json).
 
-Статусы: **готово** — экран подключён к реальным данным и командам; **адаптировано** — макет изменён, потому что в оригинале нет данных или механики; **ждёт решения** — нужно согласование с вами; **новый** — экрана нет в макетах.
+Таблица ниже описывает текущие адаптеры и функции локального движка, а не вызов обработчиков старой страницы. Прежние номера строк сюда не переносятся: происхождение и границы выделения см. в [independent-engine.md](independent-engine.md), назначение старых модулей — в [аудите сервисов](service-audit-2026-11-02.ru.md). Эти исторические сведения не нужны для запуска экранов.
+
+Статусы: **готово** — экран подключён к реальным данным и командам; **адаптировано** — макет изменён, потому что в оригинале нет данных или механики; **ждёт решения** — требуется продуктовое решение; **новый** — экрана нет в макетах.
 
 ## Путь игрока
 
@@ -23,40 +25,42 @@ Hub ──Be Born!──► Roll (−1 энергии)      Hub ──Continue�
 | Экран / элемент | Данные или функция core | Команда | Условие | Результат | Дальше |
 |---|---|---|---|---|---|
 | Language · валюта | `CUR_SETS[lang]`, для es — `ES_CURS` | `setLanguageCurrency` | валюта из списка выбранного языка | деньги в выбранной валюте, жизнь на паузе, состояние и RNG сохранены | Start / предыдущий экран |
-| Language · язык | en, ru, es, fr, de; словари UI и соответствующий производный core | `chooseLanguage` / `setLanguageCurrency` | остальные 14 языков пока недоступны | выбор сохраняется; общий профиль и архив; новые события на выбранном языке, старые записи сохраняют исходный текст | Start / предыдущий экран |
-| Start · Be Born! | — | `startLife` = `startNewLife` 199725 | нет начатой жизни (`lifeSeq` совпадает) | `newLife`, `S.by`, `S.bm`, `tdStart`, `phase=birth`, 4 сопутствующие жизни | Roll |
-| Start · счётчики | `TOTAL_BIRTHS`, `DEATHS_PER_YEAR`, `SEC_YEAR` (как `tickCounters` 199715) | — | — | только отображение | — |
+| Language · язык | en, ru, es, fr, de; словари UI и соответствующий локальный модуль движка | `chooseLanguage` / `setLanguageCurrency` | остальные 14 языков исходной версии пока недоступны | выбор сохраняется; общий профиль и архив; новые события на выбранном языке, старые записи сохраняют исходный текст | Start / предыдущий экран |
+| Start · Be Born! | — | `startLife` | нет начатой жизни (`lifeSeq` совпадает) | локальная ERA при необходимости, `newLife`, `S.by`, `S.bm`, `tdStart`, `phase=birth`, 4 сопутствующие жизни | Roll |
+| Start · счётчики | `TOTAL_BIRTHS`, `DEATHS_PER_YEAR`, `SEC_YEAR` | — | — | только отображение | — |
 | Roll · страна, город | `placeTag(BB())`, `S.city`/`S.urban`, `share`, `fmtShare` | — | страна уже выбрана в `newLife` | анимация повторяет готовый результат | — |
-| Roll · Who am I? | — | `revealCertificate` = `showCert` 200286 | `companionsReady` | номер свидетельства `ri`, `save` | Certificate |
+| Roll · Who am I? | — | `revealCertificate` | `companionsReady` | номер свидетельства `ri`, `save` | Certificate |
 | Certificate · поля | `birthStory`, `QCERT`, `parentJobName`, `pHomeWord`, `relName`, `sibList`, `fam.mom/dad` | — | — | — | — |
-| Certificate · Start life | — | `beginLife` 200471 | `phase=birth`, номер показан | `phase=life`, запись рождения, `renderAll`, `save` | Life |
-| Your odds | `st`, `cohortL`, `leOf`, `share`, `countryRows`, `ruralLine`, `S.comps` | — | — | — | Certificate (назад), Life |
-| Life · часы | `S.t`, `S.age`, `S.speed`, `yearSec` | `step` = `frame0` | экран Life виден, нет окна результата | `tick`, события, `endYear`, `renderAll` | — |
-| Life · пауза | `S.paused` | `togglePause` 208385 | нет решения | `S.paused`, `save` | окно паузы |
-| Life · скорость | `SPEEDS` 1,2,4,8,12,16 | `setSpeed` 200519 | — | `S.speed`, prefs | — |
-| Life · до решения | `S.ff` | `toggleFastForward` 208413 | нет решения | ×24 до решения/утраты/диагноза | — |
+| Certificate · Start life | — | `beginLife` | `phase=birth`, номер показан | `phase=life`, запись рождения, эффекты состояния, `save` | Life |
+| Your odds | `S.st`, `cohortL`, `leOf`, `share`, `countryRows`, `ruralLine`, `S.comps` | — | — | — | Certificate (назад), Life |
+| Life · часы | `S.t`, `S.age`, `S.speed`, `yearSec` | `step`, фиксированные шаги по 1/60 с | экран Life виден, нет окна результата | `tick`, события, `endYear`, эффекты состояния | — |
+| Life · пауза | `S.paused` | `togglePause` | нет решения | `S.paused`, `save` | окно паузы |
+| Life · скорость | `SPEEDS` 1,2,4,8,12,16 | `setSpeed` | — | `S.speed`, prefs | — |
+| Life · до решения | `S.ff` | `toggleFastForward` | нет решения | ×24 до решения/утраты/диагноза | — |
 | Life · показатели | `S.st.hl/h/sm/so` | — | — | — | — |
 | Life · журнал | `S.log[]` (`a, text, kind, fact, q, fx, d`) | — | — | — | — |
-| Life · решение | `S.pending.view` (`title, body, fact, choices[k,label,sub], q, input, ph`) | `choose` = `pickChoice` 203519 | ключ из `view.choices`, 700 мс от появления | `choose(k, note)`, `renderAll`, `save` | результат → Continue |
+| Life · решение | `S.pending.view` (`title, body, fact, choices[k,label,sub], q, input, ph`) | `GameAdapter.choose` → `chooseOption` | ключ из `view.choices`, 700 мс от появления | `choose(k, note)`, эффекты состояния, `save` | результат → Continue |
 | Пауза · Exit to hub | — | `leaveLife` | — | `save` (жизнь продолжится) | Hub |
-| People | `famRows` (через `renderAll`), `S.fam`, друзья, питомцы, `bondWord` | — | — | только чтение | — |
-| Activities · фокус года | `focusOptions`, `FOCUS`, `focusD`, `S.focus` | `setFocus` 208415 | вариант есть в `focusOptions()` | `S.focus`, флаги | — |
+| People | `peopleVM`: `S.fam`, друзья, питомцы, отношения и готовые поисковые формы родства | — | — | только чтение в песочнице | — |
+| Activities · фокус года | `focusOptions`, `FOCUS`, `focusD`, `S.focus` | `setFocus` | вариант есть в `focusOptions()` | `S.focus`, флаги | — |
 | Money | `netWorth`, `wonStr`, `S.income`, `pctOfIncome`, `worldPct`, `rankStr`, `S.lastFl`, `ownList` | — | — | только чтение | — |
-| Activities/Money · пункты листа | `shopItems`, `shopTop` в песочнице; цены `wonStr` | `buy` = data-buy 208322 (`buyShop`, запись в журнал, `renderAll`, `save`) | `shopCan`, `avail` пункта; рискованные — подтверждение | деньги, показатели, флаги, следующие события | результат → окно |
-| Activities/Money · вход во вкладку | — | `openSpend` = изменяющая часть `openShop` 208723 | жизнь идёт, есть фокусы | снимается «до решения» | — |
-| Money · образ жизни | `INV_KS`, `invOK`, `invCostNote`, `insOn`, `surOK`, `S.flags.gift` | `setInvest` 208359, `setInsurance` 208354, `setGift` 208333, `setSurname` 208358 | условия оригинала (возраст, страна) | `S.invest` и флаги, запись в журнал | — |
-| Activities · питание, автопривычки | `S.flags.diet`, `shopSets` | `setDiet` 208337, `toggleHabit` 208349 | 18+ / условия пункта | флаги, запись в журнал | — |
-| Settings | `UI.prefs`: `mode`, `era`/`eraAny`/`eraY`, `pace` | `setLifePref` = обработчики 208169-208183, `initEraSel` 204441 | — | следующая жизнь | назад |
+| Activities/Money · пункты листа | `shopItems`, `shopTop` в песочнице; цены `wonStr` | `buy` (`buyShop`, запись в журнал, эффекты состояния, `save`) | `shopCan`, `avail` пункта; рискованные — подтверждение | деньги, показатели, флаги, следующие события | результат → окно |
+| Activities/Money · вход во вкладку | — | `openSpend` | жизнь идёт, есть фокусы | снимается «до решения» | — |
+| Money · образ жизни | `INV_KS`, `invOK`, `invCostNote`, `insOn`, `surOK`, `S.flags.gift` | `setInvest` , `setInsurance` , `setGift` , `setSurname` | условия оригинала (возраст, страна) | `S.invest` и флаги, запись в журнал | — |
+| Activities · питание, автопривычки | `S.flags.diet`, `shopSets` | `setDiet` , `toggleHabit` | 18+ / условия пункта | флаги, запись в журнал | — |
+| Settings | `UI.prefs`: `mode`, `era`/`eraAny`/`eraY`, `pace` | `setLifePref` | — | следующая жизнь | назад |
 | Hub · энергия | мобильный слой `meta.ts` (не core) | списание в `startLife` | энергии ≥ 1 | −1 энергия, отсчёт восстановления | Roll |
 | Odds | `survL`, `lifeTable`, `leOf`, `countryRows`, `S.comps` + `compStatus`, `S.log[].fact` | — | — | только чтение | — |
-| Пауза · Skip to the end | — | `skipToEnd` = авто-режим оригинала (`autoChoice` + `pickChoice(k, true)`) и шаги `frame0` с «до решения» | жизнь идёт | жизнь доживается без игрока, ввод закрыт до конца | смерть |
+| Пауза · Skip to the end | — | `skipToEnd`: `autoChoice`, `autoAnswer` и фиксированные шаги с «до решения» | жизнь идёт | жизнь доживается без игрока, ввод закрыт до конца | смерть |
 | Смерть · окно «Life ended» | `die` → HOOK.death: `endingData`, `recordLife`; `S.deathAt` (причина, доля) | — | `phase=dead` | архив жизни, удаление сохранения, награда мета-слоя ждёт Claim | This life |
 | This life (итог, EndCute) | `summaryOf`/`storyOf`, `leOf`, `momentsOf`, `S.deathAt`, `famRows`, `netWorth`/`ownList`, журнал последнего года | — | `phase=dead` | только чтение | Hub |
 | Hub · «A life lived» | `vm/rewards.ts` (мета-слой, читает итог жизни) | `claimReward` | есть ожидающая награда | доллары и кристаллы зачислены, бейдж Lives | Hub |
-| Hub · Continue | сохранение `one8b.en.save.v3` | `resume` = `restore0` 206472 | есть сохранение | жизнь на паузе | Life |
+| Hub · Continue | сохранение `one8b.en.save.v3` и состояние RNG | `resume` / восстановление адаптера | есть сохранение; локальная ERA готова для прошлого/будущего | та же жизнь на паузе | Life |
 | Hub · Lives | `one8b.en.lives.v1` (`recordLife`) | `seeLives` (мета-слой) | вкладка открыта | бейдж новых жизней снят | — |
 
 ## Решения от 1 ноября 2026
+
+Эти решения перенесены вместе с интерфейсом. Самостоятельная версия сохраняет flow; загрузка локальной ERA добавлена до рождения, восстановления и смены языка/валюты. При ошибке рождения энергия возвращается, а сегодняшние показатели не подставляются вместо выбранной эпохи.
 
 | Вопрос | Решение | Что сделано |
 |---|---|---|
@@ -68,7 +72,7 @@ Hub ──Be Born!──► Roll (−1 энергии)      Hub ──Continue�
 | Результат решения | держать до Continue | время стоит, пока открыт результат |
 | Внешность людей | подключить генератор; фоны, животные и анимации верхнего блока — позже | перенос генератора персонажей; фон сцены нейтральный |
 
-Холст версии 107 (1 ноября): окно смерти «Life ended» на экране жизни с подсказкой «Hold to see your last day» и кнопкой «Look back»; экран итога EndCute; хаб после жизни с окном «A life lived» и одной кнопкой Claim (монеты и кристаллы летят в счётчики, портрет — во вкладку Lives с бейджем); в окне паузы — «Skip to the end». Описание автора макетов — `design/claude-canvas/PRODUCTION-UI-v107.md`.
+Холст версии 107 (1 ноября): окно смерти «Life ended» на экране жизни с подсказкой «Hold to see your last day» и кнопкой «Look back»; экран итога EndCute; хаб после жизни с окном «A life lived» и одной кнопкой Claim (монеты и кристаллы летят в счётчики, портрет — во вкладку Lives с бейджем); в окне паузы — «Skip to the end». Описание автора макетов — [PRODUCTION-UI-v107.md](../design/claude-canvas/PRODUCTION-UI-v107.md).
 
 ## Расхождения макетов с оригиналом
 

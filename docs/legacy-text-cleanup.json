@@ -1,0 +1,3234 @@
+{
+  "schema": 1,
+  "date": "2026-11-02",
+  "scope": "Only demonstrably unreferenced legacy service/community/memorial/payment/support/cloud/lab/share marketing entries in I18N_T. Product name, gameplay/educational text, save keys, CONFIG and source identity remain. Additionally, the referenced death-certificate translation keeps its certificate prefix while removing only its unused deadstack/share/feedback tail; both adapter regex captures are byte-identical for every language.",
+  "method": {
+    "sourceFiles": 206,
+    "possibleTemplateHashes": 42623,
+    "sourceLiteralStrings": 28573,
+    "hash": "Unchanged lHash; cooked template parts joined with U+0001, every non-dictionary string literal and static string-array template, across all five engine ASTs and application/helper ASTs and JSON; direct key references also protected.",
+    "safety": "Every removed key has zero direct-key or possible literal/template hash uses outside its I18N_T dictionaries in all examined sources. Dynamic translation helpers remain; this is conservative targeted service-text removal, not a claim to solve arbitrary runtime string construction.",
+    "protectedExamples": [
+      "281khouc24m (death-certificate template used by adapter)",
+      "1xraxhz0cpu (mortgage explanation explicitly retained)",
+      "general title and LANG_CFG brand names",
+      "RUSSIAN_TEXT_OVERRIDES keys"
+    ]
+  },
+  "removedKeyCount": 233,
+  "removedKeys": [
+    "10jjcuniwr7",
+    "1100fy3dum5",
+    "117m15zr6p4",
+    "11lht1x0q4u",
+    "11rif4deprs",
+    "120v9odinni",
+    "12ijmi5j8ge",
+    "12wkbzwd5xu",
+    "12xpl51qoby",
+    "132iis8rn5y",
+    "137817egt4c",
+    "13jahc87c03",
+    "13zpob51u9q",
+    "1425tdvbf0h",
+    "143yprj661s",
+    "14fxqlzoo1e",
+    "14ghnfy4vox",
+    "14jgbz6q3x3",
+    "14m1vbg5eaf",
+    "14u5fssjjmh",
+    "15ei5mo105p",
+    "15i8wtk6gyj",
+    "16gmmglmlfw",
+    "16v9k0fd4ya",
+    "184mm6gtxb2",
+    "18fjflnty16",
+    "18qy424hpbf",
+    "196apl702te",
+    "19pa113hild",
+    "1a5dj1wsyqi",
+    "1ajstfjvlyg",
+    "1be95dnhjjr",
+    "1bfjrx62gm0",
+    "1bp26lotg0o",
+    "1d5853h39bn",
+    "1dkqbxpch5",
+    "1dnry13v1yj",
+    "1eez6ko7nqo",
+    "1fcmqm4j3eq",
+    "1fpnnn3ogca",
+    "1g9cgbtl7zc",
+    "1gj0y23xlda",
+    "1gv1nm0jkdn",
+    "1hbasgc844h",
+    "1hzbf9m4vdy",
+    "1i4tn3lardt",
+    "1i5vqok4pyi",
+    "1igpygbwtbd",
+    "1im2krzpzx9",
+    "1ir5f26lmcd",
+    "1iysllwmk",
+    "1joie43ehsy",
+    "1ka52n130tr",
+    "1ka7vsg34k8",
+    "1kkh18w4mg8",
+    "1kwvn639ozx",
+    "1lx94dkoeyw",
+    "1lzr8yhl5k",
+    "1n8445wr05m",
+    "1nuqpk34vyi",
+    "1nzff8tqitk",
+    "1ova97p7y75",
+    "1pcr4b25ffx",
+    "1q1w469nyux",
+    "1q5z9rd9rn2",
+    "1q8p1bfxvio",
+    "1qv4ogn882",
+    "1qyw8kp6pyw",
+    "1r6loqbr11k",
+    "1rwq6wh3544",
+    "1s5qddpx6gu",
+    "1s9umylp13h",
+    "1sw4o9hcqg0",
+    "1sxxndm7a3c",
+    "1t5i4lns6e4",
+    "1tsvjsz9ys2",
+    "1tyl3qgg4sl",
+    "1tz15yyhcxo",
+    "1u6bkypnkar",
+    "1u6s59y3j9q",
+    "1ullg0sduzi",
+    "1unybg9ayo6",
+    "1up325cuolx",
+    "1uuvmhaqxyn",
+    "1v8eqhz2eqo",
+    "1v8lxc1wuee",
+    "1vc0w7zhf5d",
+    "1viml5rlwf",
+    "1vtc6uqdwci",
+    "1waz38oft8j",
+    "1wm39z4fb4v",
+    "1wqqtjx9aq2",
+    "1wvz02xzqgd",
+    "1wya5rdaxwz",
+    "1x5vbuwwtzc",
+    "1xpxnagedov",
+    "1xv8aioq1ft",
+    "1xy5me7fdr9",
+    "1yd6m168alq",
+    "1yoov1ij0d7",
+    "1yqsuh064rx",
+    "1zsfib5z6lb",
+    "1zzuq7krd6v",
+    "20d13dftekz",
+    "218ca8rgak3",
+    "21keh49pck8",
+    "2235kjkm9w7",
+    "226ah9vhp2i",
+    "22dvembccl0",
+    "23lekei8kn1",
+    "23s463wyq89",
+    "248m3j9sw5h",
+    "24jrlzdd8rq",
+    "24pmf6ylysd",
+    "266tcrqr15",
+    "26d6bv2hnre",
+    "26oka4wmc9v",
+    "26ws6m44k1i",
+    "27o7jsxt4rv",
+    "27v99y71icp",
+    "28oz3mm1njz",
+    "29nqrem8nl8",
+    "2ab9t4hdxq4",
+    "2awoedaq8p2",
+    "2ba4ds35980",
+    "2bb72lgqqu6",
+    "2bdvsyi7rug",
+    "2c55pxs1nxe",
+    "2cztri5cwqn",
+    "2d3juj5edl8",
+    "2d7x4fbzyn8",
+    "2djh6x9qbqy",
+    "2e63abf06ts",
+    "2eh2gao8ky8",
+    "2enj1jg3s6q",
+    "2f5vko6qila",
+    "2f93ru9vw29",
+    "2fpjx1rh1us",
+    "2fqfcburd0",
+    "2fx80ql2mz6",
+    "2gneoo8ks5",
+    "30em1uuidc",
+    "3692v9an72",
+    "3hlind9j6e",
+    "3w001wedeg",
+    "4b0ors8plc",
+    "5ed3c88fns",
+    "5fxxme18tz",
+    "5mr4naw3hy",
+    "5urwx39d45",
+    "5zikyj1gb7",
+    "6mh0wmb8oj",
+    "6pyt3oarxc",
+    "7b4unkxwc4",
+    "7efefx8ltb",
+    "7hkqcicf79",
+    "7t49pky4f2",
+    "7vmzuub5x2",
+    "89irrro276",
+    "8r2n58p6ea",
+    "8ra28abibq",
+    "8sqy1dg4j6",
+    "967mhm4oi",
+    "9yuvjlp0ax",
+    "afj44bjqth",
+    "agojwjqqp4",
+    "b037bj1l4r",
+    "baaoxvh1l8",
+    "bob34bafbi",
+    "btqoupq0qs",
+    "bukee5fvbj",
+    "c4wncxz4gz",
+    "ccbybxr7vx",
+    "cmf3hhpacz",
+    "cz6lfai5cy",
+    "eeuh63jl2y",
+    "enblmoovlf",
+    "ez96xbsr4j",
+    "fw643q0v7u",
+    "fxhvwzpqwn",
+    "g8h5zwc84g",
+    "gwcqno3fy1",
+    "h2dqkdaxpy",
+    "hdcleaunav",
+    "hjnn9r86xd",
+    "hl2h74ggr7",
+    "hrmxvhde40",
+    "hvg5nghpky",
+    "hxdtwizenx",
+    "ibyowhfkor",
+    "iyjn4s39ud",
+    "j0v05y3ofy",
+    "kbcpcuyvo8",
+    "kk43pj96b",
+    "kmpf8qovon",
+    "kra8apa39i",
+    "lg33vcyxgg",
+    "lh3pk7s82x",
+    "m1p0xz28rf",
+    "n4qruzbuqp",
+    "nenkrk6tm5",
+    "o3w4vklgdv",
+    "o5680rex8n",
+    "o7u9x681cq",
+    "oslho5k554",
+    "pdzbaooemt",
+    "pk8dfzj1ce",
+    "ps520wp1ar",
+    "qifrw8hcm6",
+    "qmp90pv2xe",
+    "qqll0ubpgl",
+    "s5ef5myjon",
+    "sezdthizcb",
+    "sit0hqie3e",
+    "smti21asd1",
+    "swr8s8285w",
+    "tuz0c3tawk",
+    "ubywslbo0o",
+    "ufvsoz5uqf",
+    "upt8pa6efn",
+    "v660a4z8fn",
+    "v9aozszq45",
+    "vf6wiwjmhx",
+    "vrs99llyxh",
+    "vtmtrcwwfw",
+    "w2dxgc3ofi",
+    "w6pvuu7cj1",
+    "wsyi1tce3q",
+    "y8sgjxbte3",
+    "ycttp3g7m5",
+    "yvbavpsztx",
+    "z3mde2fmov",
+    "zd5lq1ic3v"
+  ],
+  "entries": [
+    {
+      "key": "1kkh18w4mg8",
+      "englishText": "#1in8Billion",
+      "originalEnglishLine": 28122,
+      "localeLines": {
+        "en": 28122,
+        "ru": 28555,
+        "es": 13939,
+        "fr": 14013,
+        "de": 14000
+      }
+    },
+    {
+      "key": "2gneoo8ks5",
+      "englishText": "In {0} I was born a {3} into {2} in {1}.\nOne in {4} of the babies born that year, with a {5} chance of dying before age 5.\nWhere would you be born? #1in8Billion{6}",
+      "originalEnglishLine": 28190,
+      "localeLines": {
+        "en": 28190,
+        "ru": 28626,
+        "es": 14003,
+        "fr": 14077,
+        "de": 14063
+      }
+    },
+    {
+      "key": "kra8apa39i",
+      "englishText": "I was born a {2} in {0}, into {1}.\nOdds of being born there: 1 in {3}. Chance of dying before age 5: {4}.\nWhere will you be born? #1in8Billion{5}",
+      "originalEnglishLine": 28193,
+      "localeLines": {
+        "en": 28193,
+        "ru": 28629,
+        "es": 14006,
+        "fr": 14080,
+        "de": 14066
+      }
+    },
+    {
+      "key": "hxdtwizenx",
+      "englishText": "Share this life",
+      "originalEnglishLine": 28210,
+      "localeLines": {
+        "en": 28210,
+        "ru": 28645,
+        "es": 14021,
+        "fr": 14095,
+        "de": 14081
+      }
+    },
+    {
+      "key": "1fcmqm4j3eq",
+      "englishText": "A whole life has ended. Add one line on how it felt to live it, and share this life?",
+      "originalEnglishLine": 28212,
+      "localeLines": {
+        "en": 28212,
+        "ru": 28647,
+        "es": 14023,
+        "fr": 14097,
+        "de": 14083
+      }
+    },
+    {
+      "key": "qmp90pv2xe",
+      "englishText": "Please write between 4 and 300 characters.",
+      "originalEnglishLine": 28271,
+      "localeLines": {
+        "en": 28271,
+        "ru": 28708,
+        "es": 14068,
+        "fr": 14143,
+        "de": 14129
+      }
+    },
+    {
+      "key": "12xpl51qoby",
+      "englishText": "Links and contact details can't be shared. Please take that part out and share again.",
+      "originalEnglishLine": 28272,
+      "localeLines": {
+        "en": 28272,
+        "ru": 28709,
+        "es": 14069,
+        "fr": 14144,
+        "de": 14130
+      }
+    },
+    {
+      "key": "16gmmglmlfw",
+      "englishText": "Details that could identify the real you, such as your school, class or where you live, can't be posted. Please take them out and share again.",
+      "originalEnglishLine": 28274,
+      "localeLines": {
+        "en": 28274,
+        "ru": 28711,
+        "es": 14070,
+        "fr": 14145,
+        "de": 14131
+      }
+    },
+    {
+      "key": "zd5lq1ic3v",
+      "englishText": "Some words here could hurt someone. Please reword it a little.",
+      "originalEnglishLine": 28276,
+      "localeLines": {
+        "en": 28276,
+        "ru": 28713,
+        "es": 14071,
+        "fr": 14147,
+        "de": 14132
+      }
+    },
+    {
+      "key": "2fqfcburd0",
+      "englishText": "The same words have already been shared, or it's too short. Please write a little more, in your own words.",
+      "originalEnglishLine": 28278,
+      "localeLines": {
+        "en": 28278,
+        "ru": 28716,
+        "es": 14072,
+        "fr": 14148,
+        "de": 14133
+      }
+    },
+    {
+      "key": "1n8445wr05m",
+      "englishText": "You shared something a moment ago. Please share again in a few minutes.",
+      "originalEnglishLine": 28280,
+      "localeLines": {
+        "en": 28280,
+        "ru": 28718,
+        "es": 14073,
+        "fr": 14149,
+        "de": 14135
+      }
+    },
+    {
+      "key": "iyjn4s39ud",
+      "englishText": "So many people are sharing right now that this hour's places are full. Please share again in about an hour. What you wrote is still here.",
+      "originalEnglishLine": 28282,
+      "localeLines": {
+        "en": 28282,
+        "ru": 28720,
+        "es": 14075,
+        "fr": 14150,
+        "de": 14136
+      }
+    },
+    {
+      "key": "2cztri5cwqn",
+      "englishText": "It's very busy right now. Please try again in a moment. What you wrote is still here.",
+      "originalEnglishLine": 28284,
+      "localeLines": {
+        "en": 28284,
+        "ru": 28722,
+        "es": 14076,
+        "fr": 14151,
+        "de": 14137
+      }
+    },
+    {
+      "key": "143yprj661s",
+      "englishText": "This wasn't posted. If things feel very hard right now, please reach out to a crisis line: {@c}. Someone will listen, any time of day.",
+      "originalEnglishLine": 28286,
+      "localeLines": {
+        "en": 28286,
+        "ru": 28724,
+        "es": 14077,
+        "fr": 14152,
+        "de": 14138
+      }
+    },
+    {
+      "key": "1fpnnn3ogca",
+      "englishText": "Sharing isn't possible right now. Please try again in a moment.",
+      "originalEnglishLine": 28289,
+      "localeLines": {
+        "en": 28289,
+        "ru": 28727,
+        "es": 14078,
+        "fr": 14153,
+        "de": 14139
+      }
+    },
+    {
+      "key": "hdcleaunav",
+      "englishText": "The connection dropped for a moment. Please try again shortly.",
+      "originalEnglishLine": 28291,
+      "localeLines": {
+        "en": 28291,
+        "ru": 28729,
+        "es": 14079,
+        "fr": 14154,
+        "de": 14140
+      }
+    },
+    {
+      "key": "14fxqlzoo1e",
+      "englishText": "{0} days ago",
+      "originalEnglishLine": 28293,
+      "localeLines": {
+        "en": 28293,
+        "ru": 28731,
+        "es": 14080,
+        "fr": 14155,
+        "de": 14141
+      }
+    },
+    {
+      "key": "hl2h74ggr7",
+      "englishText": "You remembered this life",
+      "originalEnglishLine": 28294,
+      "localeLines": {
+        "en": 28294,
+        "ru": 28732,
+        "es": 14081,
+        "fr": 14156,
+        "de": 14142
+      }
+    },
+    {
+      "key": "fw643q0v7u",
+      "englishText": "Someone remembered this life",
+      "originalEnglishLine": 28295,
+      "localeLines": {
+        "en": 28295,
+        "ru": 28733,
+        "es": 14082,
+        "fr": 14157,
+        "de": 14143
+      }
+    },
+    {
+      "key": "1u6s59y3j9q",
+      "englishText": "<article class=\"cm-post\" data-id=\"{0}\">\n    <div class=\"cm-h\"><b>{1}</b><span>{2} · {3} · age {4}</span><time>{5}</time></div>\n    <p class=\"cm-story\" tabindex=\"0\" role=\"button\" aria-expanded=\"false\" title=\"{6}\">{7}</p>\n    <p class=\"cm-text\">“{8}”</p>\n    <div class=\"cm-f\"><button class=\"cm-rem\" data-cm-rem=\"{9}\" aria-pressed=\"{10}\"{11}>{12}</button><span class=\"cm-note\">{13}</span>\n      {14}</div>\n  </article>",
+      "originalEnglishLine": 28296,
+      "localeLines": {
+        "en": 28296,
+        "ru": 28734,
+        "es": 14083,
+        "fr": 14158,
+        "de": 14144
+      }
+    },
+    {
+      "key": "11lht1x0q4u",
+      "englishText": "Tap to read it all",
+      "originalEnglishLine": 28303,
+      "localeLines": {
+        "en": 28303,
+        "ru": 28741,
+        "es": 14090,
+        "fr": 14165,
+        "de": 14151
+      }
+    },
+    {
+      "key": "hjnn9r86xd",
+      "englishText": "Remembered",
+      "originalEnglishLine": 28304,
+      "localeLines": {
+        "en": 28304,
+        "ru": 28742,
+        "es": 14091,
+        "fr": 14166,
+        "de": 14152
+      }
+    },
+    {
+      "key": "1ajstfjvlyg",
+      "englishText": "Remember",
+      "originalEnglishLine": 28305,
+      "localeLines": {
+        "en": 28305,
+        "ru": 28743,
+        "es": 14092,
+        "fr": 14167,
+        "de": 14153
+      }
+    },
+    {
+      "key": "ufvsoz5uqf",
+      "englishText": "<button class=\"ghost sm cm-act\" data-cm-del=\"{0}\">Delete</button>",
+      "originalEnglishLine": 28306,
+      "localeLines": {
+        "en": 28306,
+        "ru": 28744,
+        "es": 14093,
+        "fr": 14168,
+        "de": 14154
+      }
+    },
+    {
+      "key": "12wkbzwd5xu",
+      "englishText": "<button class=\"ghost sm cm-act\" data-cm-rep=\"{0}\">Report</button>",
+      "originalEnglishLine": 28308,
+      "localeLines": {
+        "en": 28308,
+        "ru": 28746,
+        "es": 14094,
+        "fr": 14169,
+        "de": 14155
+      }
+    },
+    {
+      "key": "1joie43ehsy",
+      "englishText": "<p class=\"cm-empty\">No lives have been shared yet. Once you've lived a life to its end, you can share it here.</p>",
+      "originalEnglishLine": 28310,
+      "localeLines": {
+        "en": 28310,
+        "ru": 28748,
+        "es": 14095,
+        "fr": 14170,
+        "de": 14156
+      }
+    },
+    {
+      "key": "ycttp3g7m5",
+      "englishText": "Shared lives",
+      "originalEnglishLine": 28311,
+      "localeLines": {
+        "en": 28311,
+        "ru": 28750,
+        "es": 14096,
+        "fr": 14171,
+        "de": 14157
+      }
+    },
+    {
+      "key": "1s5qddpx6gu",
+      "englishText": "<p class=\"cm-sub\">Lives people have lived here, and what they felt. No names, no contact details: only the lives remain.</p><div id=\"cmList\"><p>Loading…</p></div><button class=\"ghost\" id=\"cmMore\" hidden>Show more</button>",
+      "originalEnglishLine": 28312,
+      "localeLines": {
+        "en": 28312,
+        "ru": 28751,
+        "es": 14097,
+        "fr": 14172,
+        "de": 14158
+      }
+    },
+    {
+      "key": "1t5i4lns6e4",
+      "englishText": "<p class=\"cm-empty\">No lives have been shared yet.</p>",
+      "originalEnglishLine": 28314,
+      "localeLines": {
+        "en": 28314,
+        "ru": 28753,
+        "es": 14098,
+        "fr": 14173,
+        "de": 14159
+      }
+    },
+    {
+      "key": "lg33vcyxgg",
+      "englishText": "<p class=\"cm-empty\">This can't be loaded right now. Please open it again in a moment.</p>",
+      "originalEnglishLine": 28315,
+      "localeLines": {
+        "en": 28315,
+        "ru": 28755,
+        "es": 14099,
+        "fr": 14174,
+        "de": 14160
+      }
+    },
+    {
+      "key": "1ka7vsg34k8",
+      "englishText": "<div class=\"panel cm-form\"><h3><span>Share this life</span></h3><p>You shared this life in 'Shared lives'.</p><button class=\"ghost\" id=\"cmOpen2\">See shared lives</button></div>",
+      "originalEnglishLine": 28316,
+      "localeLines": {
+        "en": 28316,
+        "ru": 28757,
+        "es": 14100,
+        "fr": 14175,
+        "de": 14161
+      }
+    },
+    {
+      "key": "1lzr8yhl5k",
+      "englishText": "<div class=\"panel cm-form\" id=\"cmForm\"><h3><span>Share this life</span><span class=\"lbl\">Posted to 'Shared lives'</span></h3>\n    <p class=\"cm-prev\"><b>{0}</b> · {1} · {2} · age {3}</p>\n    <textarea id=\"cmText\" maxlength=\"300\" rows=\"3\" placeholder=\"Share what you felt living this life. e.g. I never knew where you're born could change so much.\"></textarea>\n    <div class=\"cm-row\"><small>Only this life's story and your words are posted. Names, contact details and links aren't allowed, and posts that get several reports are hidden. Shared posts may be quoted, without names, in posts introducing 1 in 8 Billion. {4}</small><button class=\"cta\" id=\"cmPostBtn\">Share</button></div>\n    <p class=\"cm-msg\" id=\"cmMsg\" hidden></p></div>",
+      "originalEnglishLine": 28318,
+      "localeLines": {
+        "en": 28318,
+        "ru": 28759,
+        "es": 14102,
+        "fr": 14177,
+        "de": 14163
+      }
+    },
+    {
+      "key": "8r2n58p6ea",
+      "englishText": "You shared this life. Thank you.",
+      "originalEnglishLine": 28323,
+      "localeLines": {
+        "en": 28323,
+        "ru": 28764,
+        "es": 14107,
+        "fr": 14182,
+        "de": 14168
+      }
+    },
+    {
+      "key": "14u5fssjjmh",
+      "englishText": "Report this?",
+      "originalEnglishLine": 28324,
+      "localeLines": {
+        "en": 28324,
+        "ru": 28765,
+        "es": 14108,
+        "fr": 14183,
+        "de": 14169
+      }
+    },
+    {
+      "key": "vtmtrcwwfw",
+      "englishText": "Report",
+      "originalEnglishLine": 28325,
+      "localeLines": {
+        "en": 28325,
+        "ru": 28766,
+        "es": 14109,
+        "fr": 14184,
+        "de": 14170
+      }
+    },
+    {
+      "key": "sit0hqie3e",
+      "englishText": "<p class=\"cm-empty\">Reported. Thank you for letting us know.</p>",
+      "originalEnglishLine": 28326,
+      "localeLines": {
+        "en": 28326,
+        "ru": 28767,
+        "es": 14110,
+        "fr": 14185,
+        "de": 14171
+      }
+    },
+    {
+      "key": "4b0ors8plc",
+      "englishText": "Delete this?",
+      "originalEnglishLine": 28328,
+      "localeLines": {
+        "en": 28328,
+        "ru": 28769,
+        "es": 14111,
+        "fr": 14186,
+        "de": 14172
+      }
+    },
+    {
+      "key": "1up325cuolx",
+      "englishText": "Delete",
+      "originalEnglishLine": 28329,
+      "localeLines": {
+        "en": 28329,
+        "ru": 28770,
+        "es": 14112,
+        "fr": 14187,
+        "de": 14173
+      }
+    },
+    {
+      "key": "bukee5fvbj",
+      "englishText": "Couldn't delete it. Please try again in a moment.",
+      "originalEnglishLine": 28330,
+      "localeLines": {
+        "en": 28330,
+        "ru": 28771,
+        "es": 14113,
+        "fr": 14188,
+        "de": 14174
+      }
+    },
+    {
+      "key": "266tcrqr15",
+      "englishText": "Your post has been deleted.",
+      "originalEnglishLine": 28331,
+      "localeLines": {
+        "en": 28331,
+        "ru": 28773,
+        "es": 14114,
+        "fr": 14189,
+        "de": 14175
+      }
+    },
+    {
+      "key": "2djh6x9qbqy",
+      "englishText": "This is a try-out. With a pass you can decorate the room like this and put it in the memorial.",
+      "originalEnglishLine": 28558,
+      "localeLines": {
+        "en": 28558,
+        "ru": 29004,
+        "es": 14338,
+        "fr": 14413,
+        "de": 14398
+      }
+    },
+    {
+      "key": "2ab9t4hdxq4",
+      "englishText": "The people who lived with them at the time of the memorial's cover picture stand in the room too.",
+      "originalEnglishLine": 28569,
+      "localeLines": {
+        "en": 28569,
+        "ru": 29016,
+        "es": 14348,
+        "fr": 14423,
+        "de": 14408
+      }
+    },
+    {
+      "key": "16v9k0fd4ya",
+      "englishText": "When the memorial's cover picture shows people living with them, they can stand in the room too.",
+      "originalEnglishLine": 28571,
+      "localeLines": {
+        "en": 28571,
+        "ru": 29018,
+        "es": 14349,
+        "fr": 14424,
+        "de": 14409
+      }
+    },
+    {
+      "key": "2ba4ds35980",
+      "englishText": "When visitors turn on ♪ Music in the memorial, this room's tune plays. Tap one to hear it.",
+      "originalEnglishLine": 28575,
+      "localeLines": {
+        "en": 28575,
+        "ru": 29021,
+        "es": 14351,
+        "fr": 14426,
+        "de": 14411
+      }
+    },
+    {
+      "key": "2c55pxs1nxe",
+      "englishText": "House of Past Lives",
+      "originalEnglishLine": 28583,
+      "localeLines": {
+        "en": 28583,
+        "ru": 29030,
+        "es": 14357,
+        "fr": 14432,
+        "de": 14416
+      }
+    },
+    {
+      "key": "1zsfib5z6lb",
+      "englishText": "A house with a room for every life you have lived. Each life you put up as a memorial becomes a room here, with the things that life had.",
+      "originalEnglishLine": 28584,
+      "localeLines": {
+        "en": 28584,
+        "ru": 29031,
+        "es": 14358,
+        "fr": 14433,
+        "de": 14417
+      }
+    },
+    {
+      "key": "1ir5f26lmcd",
+      "englishText": "Tap a room to walk into that life's memorial; 'Dress it' there changes its scenes, words and mood.",
+      "originalEnglishLine": 28586,
+      "localeLines": {
+        "en": 28586,
+        "ru": 29033,
+        "es": 14359,
+        "fr": 14434,
+        "de": 14419
+      }
+    },
+    {
+      "key": "2fpjx1rh1us",
+      "englishText": "There is no keepsake pass on this device. With a pass you get a House of Past Lives, and a room for every life you put up as a memorial.",
+      "originalEnglishLine": 28589,
+      "localeLines": {
+        "en": 28589,
+        "ru": 29036,
+        "es": 14361,
+        "fr": 14436,
+        "de": 14421
+      }
+    },
+    {
+      "key": "23lekei8kn1",
+      "englishText": "Open the house: anyone with the link can visit, and visitors to your memorials can walk to its other rooms",
+      "originalEnglishLine": 28597,
+      "localeLines": {
+        "en": 28597,
+        "ru": 29043,
+        "es": 14367,
+        "fr": 14442,
+        "de": 14426
+      }
+    },
+    {
+      "key": "ibyowhfkor",
+      "englishText": "No rooms yet. When a life ends, put it up as a memorial under 'Keep this life' and its room appears here.",
+      "originalEnglishLine": 28603,
+      "localeLines": {
+        "en": 28603,
+        "ru": 29050,
+        "es": 14372,
+        "fr": 14447,
+        "de": 14432
+      }
+    },
+    {
+      "key": "2bb72lgqqu6",
+      "englishText": "1 in 8 Billion · House of Past Lives",
+      "originalEnglishLine": 28618,
+      "localeLines": {
+        "en": 28618,
+        "ru": 29065,
+        "es": 14383,
+        "fr": 14458,
+        "de": 14442
+      }
+    },
+    {
+      "key": "5fxxme18tz",
+      "englishText": "Visit the memorials",
+      "originalEnglishLine": 28621,
+      "localeLines": {
+        "en": 28621,
+        "ru": 29068,
+        "es": 14386,
+        "fr": 14461,
+        "de": 14446
+      }
+    },
+    {
+      "key": "1nzff8tqitk",
+      "englishText": "Someone's House of Past Lives",
+      "originalEnglishLine": 28622,
+      "localeLines": {
+        "en": 28622,
+        "ru": 29069,
+        "es": 14387,
+        "fr": 14462,
+        "de": 14447
+      }
+    },
+    {
+      "key": "o3w4vklgdv",
+      "englishText": "Each room holds one life lived in the life simulation 1 in 8 Billion. Tap a room to walk into that life's memorial.",
+      "originalEnglishLine": 28623,
+      "localeLines": {
+        "en": 28623,
+        "ru": 29070,
+        "es": 14388,
+        "fr": 14463,
+        "de": 14448
+      }
+    },
+    {
+      "key": "qqll0ubpgl",
+      "englishText": "See the memorial",
+      "originalEnglishLine": 28641,
+      "localeLines": {
+        "en": 28641,
+        "ru": 29087,
+        "es": 14404,
+        "fr": 14479,
+        "de": 14464
+      }
+    },
+    {
+      "key": "ccbybxr7vx",
+      "englishText": "Make a memorial",
+      "originalEnglishLine": 28642,
+      "localeLines": {
+        "en": 28642,
+        "ru": 29088,
+        "es": 14405,
+        "fr": 14480,
+        "de": 14465
+      }
+    },
+    {
+      "key": "1be95dnhjjr",
+      "englishText": "In a memorial",
+      "originalEnglishLine": 28645,
+      "localeLines": {
+        "en": 28645,
+        "ru": 29091,
+        "es": 14407,
+        "fr": 14482,
+        "de": 14467
+      }
+    },
+    {
+      "key": "5mr4naw3hy",
+      "englishText": "Other people see only the lives you keep in a memorial.",
+      "originalEnglishLine": 28649,
+      "localeLines": {
+        "en": 28649,
+        "ru": 29095,
+        "es": 14411,
+        "fr": 14486,
+        "de": 14471
+      }
+    },
+    {
+      "key": "1rwq6wh3544",
+      "englishText": "Lives I lived in the life simulation 1 in 8 Billion",
+      "originalEnglishLine": 28651,
+      "localeLines": {
+        "en": 28651,
+        "ru": 29098,
+        "es": 14413,
+        "fr": 14488,
+        "de": 14473
+      }
+    },
+    {
+      "key": "1sw4o9hcqg0",
+      "englishText": "My past lives in the life simulation 1 in 8 Billion",
+      "originalEnglishLine": 28654,
+      "localeLines": {
+        "en": 28654,
+        "ru": 29101,
+        "es": 14416,
+        "fr": 14492,
+        "de": 14476
+      }
+    },
+    {
+      "key": "7t49pky4f2",
+      "englishText": "Share this life's grain?",
+      "originalEnglishLine": 28856,
+      "localeLines": {
+        "en": 28856,
+        "ru": 29314,
+        "es": 14585,
+        "fr": 14661,
+        "de": 14646
+      }
+    },
+    {
+      "key": "1100fy3dum5",
+      "englishText": "A grain shows in a life's record and memorial after it ends.",
+      "originalEnglishLine": 28867,
+      "localeLines": {
+        "en": 28867,
+        "ru": 29324,
+        "es": 14595,
+        "fr": 14671,
+        "de": 14656
+      }
+    },
+    {
+      "key": "gwcqno3fy1",
+      "englishText": "Find memorials by grain",
+      "originalEnglishLine": 28871,
+      "localeLines": {
+        "en": 28871,
+        "ru": 29328,
+        "es": 14598,
+        "fr": 14674,
+        "de": 14658
+      }
+    },
+    {
+      "key": "1ka52n130tr",
+      "englishText": "From lives lived in the life simulation 1 in 8 Billion",
+      "originalEnglishLine": 28897,
+      "localeLines": {
+        "en": 28897,
+        "ru": 29355,
+        "es": 14619,
+        "fr": 14694,
+        "de": 14680
+      }
+    },
+    {
+      "key": "24pmf6ylysd",
+      "englishText": "The life I wish for, found through the lives I lived in the life simulation 1 in 8 Billion",
+      "originalEnglishLine": 28902,
+      "localeLines": {
+        "en": 28902,
+        "ru": 29360,
+        "es": 14623,
+        "fr": 14698,
+        "de": 14684
+      }
+    },
+    {
+      "key": "b037bj1l4r",
+      "englishText": "Tap a house to enter that life's memorial.",
+      "originalEnglishLine": 29887,
+      "localeLines": {
+        "en": 29887,
+        "ru": 30364,
+        "es": 15485,
+        "fr": 15561,
+        "de": 15549
+      }
+    },
+    {
+      "key": "248m3j9sw5h",
+      "englishText": "Village of Past Lives",
+      "originalEnglishLine": 29921,
+      "localeLines": {
+        "en": 29921,
+        "ru": 30401,
+        "es": 15518,
+        "fr": 15594,
+        "de": 15581
+      }
+    },
+    {
+      "key": "vf6wiwjmhx",
+      "englishText": "With a pass, every life kept in a memorial gets a house.",
+      "originalEnglishLine": 29979,
+      "localeLines": {
+        "en": 29979,
+        "ru": 30463,
+        "es": 15569,
+        "fr": 15645,
+        "de": 15633
+      }
+    },
+    {
+      "key": "1igpygbwtbd",
+      "englishText": "See the village in House of Past Lives",
+      "originalEnglishLine": 29980,
+      "localeLines": {
+        "en": 29980,
+        "ru": 30465,
+        "es": 15570,
+        "fr": 15646,
+        "de": 15634
+      }
+    },
+    {
+      "key": "sezdthizcb",
+      "englishText": "Choose which of the lives kept in a memorial live in the village of House of Past Lives.",
+      "originalEnglishLine": 29990,
+      "localeLines": {
+        "en": 29990,
+        "ru": 30474,
+        "es": 15576,
+        "fr": 15652,
+        "de": 15639
+      }
+    },
+    {
+      "key": "15ei5mo105p",
+      "englishText": "Lives lived in the life simulation 1 in 8 Billion, living as neighbours",
+      "originalEnglishLine": 29998,
+      "localeLines": {
+        "en": 29998,
+        "ru": 30483,
+        "es": 15583,
+        "fr": 15659,
+        "de": 15647
+      }
+    },
+    {
+      "key": "1tyl3qgg4sl",
+      "englishText": "What my past lives from the life simulation 1 in 8 Billion said to each other as neighbors",
+      "originalEnglishLine": 30003,
+      "localeLines": {
+        "en": 30003,
+        "ru": 30488,
+        "es": 15586,
+        "fr": 15663,
+        "de": 15650
+      }
+    },
+    {
+      "key": "29nqrem8nl8",
+      "englishText": "My past lives from the life simulation 1 in 8 Billion, living side by side as neighbours",
+      "originalEnglishLine": 30006,
+      "localeLines": {
+        "en": 30006,
+        "ru": 30492,
+        "es": 15589,
+        "fr": 15665,
+        "de": 15652
+      }
+    },
+    {
+      "key": "132iis8rn5y",
+      "englishText": "You can close it again at any time from your House of Past Lives.",
+      "originalEnglishLine": 30011,
+      "localeLines": {
+        "en": 30011,
+        "ru": 30496,
+        "es": 15591,
+        "fr": 15667,
+        "de": 15654
+      }
+    },
+    {
+      "key": "o7u9x681cq",
+      "englishText": "1 in 8 Billion · Village of Past Lives",
+      "originalEnglishLine": 30038,
+      "localeLines": {
+        "en": 30038,
+        "ru": 30524,
+        "es": 15609,
+        "fr": 15685,
+        "de": 15673
+      }
+    },
+    {
+      "key": "kmpf8qovon",
+      "englishText": "Someone's Village of Past Lives",
+      "originalEnglishLine": 30040,
+      "localeLines": {
+        "en": 30040,
+        "ru": 30526,
+        "es": 15611,
+        "fr": 15688,
+        "de": 15675
+      }
+    },
+    {
+      "key": "eeuh63jl2y",
+      "englishText": "A village where lives lived in the life simulation 1 in 8 Billion live as neighbours.",
+      "originalEnglishLine": 30041,
+      "localeLines": {
+        "en": 30041,
+        "ru": 30527,
+        "es": 15612,
+        "fr": 15689,
+        "de": 15676
+      }
+    },
+    {
+      "key": "y8sgjxbte3",
+      "englishText": "The rooms inside the houses are in the House of Past Lives that comes with a keepsake pass.",
+      "originalEnglishLine": 30044,
+      "localeLines": {
+        "en": 30044,
+        "ru": 30531,
+        "es": 15614,
+        "fr": 15691,
+        "de": 15678
+      }
+    },
+    {
+      "key": "1gj0y23xlda",
+      "englishText": "The keepsake pass can't be paid for from the country you're in.",
+      "originalEnglishLine": 30265,
+      "localeLines": {
+        "en": 30265,
+        "ru": 30756,
+        "es": 15828,
+        "fr": 15904,
+        "de": 15892
+      }
+    },
+    {
+      "key": "1hzbf9m4vdy",
+      "englishText": "Keepsakes are not offered in South Korea.",
+      "originalEnglishLine": 30267,
+      "localeLines": {
+        "en": 30267,
+        "ru": 30758,
+        "es": 15829,
+        "fr": 15905,
+        "de": 15893
+      }
+    },
+    {
+      "key": "1wm39z4fb4v",
+      "englishText": "This payment was refunded, so the pass can't be used.",
+      "originalEnglishLine": 30268,
+      "localeLines": {
+        "en": 30268,
+        "ru": 30759,
+        "es": 15830,
+        "fr": 15906,
+        "de": 15894
+      }
+    },
+    {
+      "key": "10jjcuniwr7",
+      "englishText": "You have put up many memorials today. Please come back tomorrow for more.",
+      "originalEnglishLine": 30273,
+      "localeLines": {
+        "en": 30273,
+        "ru": 30765,
+        "es": 15834,
+        "fr": 15911,
+        "de": 15899
+      }
+    },
+    {
+      "key": "1lx94dkoeyw",
+      "englishText": "Your words and thoughts were not put on the memorial. If things feel very hard right now, please reach out to a crisis line: {@c}. Someone will listen, any time of day.",
+      "originalEnglishLine": 30283,
+      "localeLines": {
+        "en": 30283,
+        "ru": 30775,
+        "es": 15840,
+        "fr": 15916,
+        "de": 15904
+      }
+    },
+    {
+      "key": "1vc0w7zhf5d",
+      "englishText": "Your words or thoughts include something that could hurt others. The memorial can go up without them.",
+      "originalEnglishLine": 30285,
+      "localeLines": {
+        "en": 30285,
+        "ru": 30777,
+        "es": 15841,
+        "fr": 15918,
+        "de": 15906
+      }
+    },
+    {
+      "key": "1hbasgc844h",
+      "englishText": "Your words or thoughts include a link or contact details. The memorial can go up without them.",
+      "originalEnglishLine": 30287,
+      "localeLines": {
+        "en": 30287,
+        "ru": 30779,
+        "es": 15842,
+        "fr": 15919,
+        "de": 15907
+      }
+    },
+    {
+      "key": "oslho5k554",
+      "englishText": "Your words or thoughts include details that could identify the real you, such as a school, a class or where you live. The memorial can go up without them.",
+      "originalEnglishLine": 30289,
+      "localeLines": {
+        "en": 30289,
+        "ru": 30781,
+        "es": 15843,
+        "fr": 15920,
+        "de": 15908
+      }
+    },
+    {
+      "key": "7b4unkxwc4",
+      "englishText": "The memorial can't be changed right now. Please try again in a moment.",
+      "originalEnglishLine": 30299,
+      "localeLines": {
+        "en": 30299,
+        "ru": 30792,
+        "es": 15848,
+        "fr": 15925,
+        "de": 15913
+      }
+    },
+    {
+      "key": "13jahc87c03",
+      "englishText": "Within {0} days of payment we refund in full, no questions asked.",
+      "originalEnglishLine": 30305,
+      "localeLines": {
+        "en": 30305,
+        "ru": 30798,
+        "es": 15851,
+        "fr": 15928,
+        "de": 15916
+      }
+    },
+    {
+      "key": "26oka4wmc9v",
+      "englishText": "The seller is Link, a Stripe company, which handles payment and receipts. Payment must be made by an adult, so if you are a minor, please ask a parent or guardian to pay.",
+      "originalEnglishLine": 30307,
+      "localeLines": {
+        "en": 30307,
+        "ru": 30800,
+        "es": 15852,
+        "fr": 15929,
+        "de": 15918
+      }
+    },
+    {
+      "key": "1q1w469nyux",
+      "englishText": "Refunds",
+      "originalEnglishLine": 30310,
+      "localeLines": {
+        "en": 30310,
+        "ru": 30803,
+        "es": 15854,
+        "fr": 15931,
+        "de": 15919
+      }
+    },
+    {
+      "key": "1i5vqok4pyi",
+      "englishText": "Email I paid with: \n\nDecoration pack to refund: {0}\nRefund code: {1}\n(Made by the pass on this device. Please send it as it is.)",
+      "originalEnglishLine": 30311,
+      "localeLines": {
+        "en": 30311,
+        "ru": 30804,
+        "es": 15855,
+        "fr": 15932,
+        "de": 15920
+      }
+    },
+    {
+      "key": "14m1vbg5eaf",
+      "englishText": "Email I paid with: \n\nDecoration pack to refund: {0}",
+      "originalEnglishLine": 30316,
+      "localeLines": {
+        "en": 30316,
+        "ru": 30809,
+        "es": 15860,
+        "fr": 15937,
+        "de": 15925
+      }
+    },
+    {
+      "key": "967mhm4oi",
+      "englishText": "Email I paid with: \n\nRefund code: {0}\n(Made by the pass on this device. Please send it as it is.)",
+      "originalEnglishLine": 30319,
+      "localeLines": {
+        "en": 30319,
+        "ru": 30812,
+        "es": 15863,
+        "fr": 15940,
+        "de": 15928
+      }
+    },
+    {
+      "key": "14jgbz6q3x3",
+      "englishText": "Decoration pack refund",
+      "originalEnglishLine": 30324,
+      "localeLines": {
+        "en": 30324,
+        "ru": 30817,
+        "es": 15868,
+        "fr": 15945,
+        "de": 15933
+      }
+    },
+    {
+      "key": "1g9cgbtl7zc",
+      "englishText": "Keepsake pass refund",
+      "originalEnglishLine": 30325,
+      "localeLines": {
+        "en": 30325,
+        "ru": 30818,
+        "es": 15869,
+        "fr": 15946,
+        "de": 15934
+      }
+    },
+    {
+      "key": "12ijmi5j8ge",
+      "englishText": "Ask for a refund",
+      "originalEnglishLine": 30326,
+      "localeLines": {
+        "en": 30326,
+        "ru": 30819,
+        "es": 15870,
+        "fr": 15947,
+        "de": 15935
+      }
+    },
+    {
+      "key": "1dkqbxpch5",
+      "englishText": "Send the text below by email and the refund code will refund it straight away. Within {0} days of payment, no questions asked.",
+      "originalEnglishLine": 30327,
+      "localeLines": {
+        "en": 30327,
+        "ru": 30820,
+        "es": 15871,
+        "fr": 15948,
+        "de": 15936
+      }
+    },
+    {
+      "key": "2bdvsyi7rug",
+      "englishText": "Send the text below by email. Within {0} days of payment, no questions asked.",
+      "originalEnglishLine": 30329,
+      "localeLines": {
+        "en": 30329,
+        "ru": 30822,
+        "es": 15872,
+        "fr": 15949,
+        "de": 15937
+      }
+    },
+    {
+      "key": "8sqy1dg4j6",
+      "englishText": "Ask for a refund",
+      "originalEnglishLine": 30337,
+      "localeLines": {
+        "en": 30337,
+        "ru": 30832,
+        "es": 15878,
+        "fr": 15955,
+        "de": 15943
+      }
+    },
+    {
+      "key": "89irrro276",
+      "englishText": "Inside apps like Instagram, Threads or Facebook, videos and PDFs can't be saved. After paying, press 'Move to Safari or Chrome' to move this life there and make them. Memorials can be put up from inside the app too.",
+      "originalEnglishLine": 30350,
+      "localeLines": {
+        "en": 30350,
+        "ru": 30847,
+        "es": 15888,
+        "fr": 15965,
+        "de": 15953
+      }
+    },
+    {
+      "key": "3w001wedeg",
+      "englishText": "Keepsake pass · {0}",
+      "originalEnglishLine": 30352,
+      "localeLines": {
+        "en": 30352,
+        "ru": 30849,
+        "es": 15889,
+        "fr": 15967,
+        "de": 15954
+      }
+    },
+    {
+      "key": "w2dxgc3ofi",
+      "englishText": "Videos and PDFs can't be saved inside this app. Move this life to Safari or Chrome first. Memorials can be put up from here too.",
+      "originalEnglishLine": 30353,
+      "localeLines": {
+        "en": 30353,
+        "ru": 30850,
+        "es": 15890,
+        "fr": 15968,
+        "de": 15956
+      }
+    },
+    {
+      "key": "6pyt3oarxc",
+      "englishText": "If it isn't for you, we refund in full within {0} days of payment, no questions asked.",
+      "originalEnglishLine": 30374,
+      "localeLines": {
+        "en": 30374,
+        "ru": 30873,
+        "es": 15906,
+        "fr": 15984,
+        "de": 15971
+      }
+    },
+    {
+      "key": "226ah9vhp2i",
+      "englishText": "No two of 8 billion lives are alike. In a memorial, anyone can stop by this life's room and photo album.",
+      "originalEnglishLine": 30430,
+      "localeLines": {
+        "en": 30430,
+        "ru": 30939,
+        "es": 15956,
+        "fr": 16033,
+        "de": 16020
+      }
+    },
+    {
+      "key": "1sxxndm7a3c",
+      "englishText": "Memorial preview",
+      "originalEnglishLine": 30432,
+      "localeLines": {
+        "en": 30432,
+        "ru": 30941,
+        "es": 15957,
+        "fr": 16035,
+        "de": 16021
+      }
+    },
+    {
+      "key": "o5680rex8n",
+      "englishText": "A memorial with its room in the House of Past Lives, a life film, videos and photos for social media and a life album, all with one pass.",
+      "originalEnglishLine": 30437,
+      "localeLines": {
+        "en": 30437,
+        "ru": 30944,
+        "es": 15960,
+        "fr": 16038,
+        "de": 16025
+      }
+    },
+    {
+      "key": "agojwjqqp4",
+      "englishText": "A memorial, a life film, videos and photos for social media, a life album and unlived wishes, all with one pass.",
+      "originalEnglishLine": 30439,
+      "localeLines": {
+        "en": 30439,
+        "ru": 30946,
+        "es": 15961,
+        "fr": 16039,
+        "de": 16026
+      }
+    },
+    {
+      "key": "2f5vko6qila",
+      "englishText": "Memorial",
+      "originalEnglishLine": 30442,
+      "localeLines": {
+        "en": 30442,
+        "ru": 30949,
+        "es": 15963,
+        "fr": 16041,
+        "de": 16028
+      }
+    },
+    {
+      "key": "26d6bv2hnre",
+      "englishText": "Every memorial gets that life's room, with the things the life had. You choose everything else: wallpaper, furniture, the view and music.",
+      "originalEnglishLine": 30445,
+      "localeLines": {
+        "en": 30445,
+        "ru": 30952,
+        "es": 15966,
+        "fr": 16043,
+        "de": 16030
+      }
+    },
+    {
+      "key": "j0v05y3ofy",
+      "englishText": "1 in 8 Billion is free from start to finish. Keepsakes are digital works made from a finished life, and they change nothing about a life in the simulation.",
+      "originalEnglishLine": 30465,
+      "localeLines": {
+        "en": 30465,
+        "ru": 30972,
+        "es": 15977,
+        "fr": 16055,
+        "de": 16041
+      }
+    },
+    {
+      "key": "1xy5me7fdr9",
+      "englishText": "Share the memorial",
+      "originalEnglishLine": 30470,
+      "localeLines": {
+        "en": 30470,
+        "ru": 30976,
+        "es": 15979,
+        "fr": 16057,
+        "de": 16044
+      }
+    },
+    {
+      "key": "ubywslbo0o",
+      "englishText": "This life has a memorial.",
+      "originalEnglishLine": 30471,
+      "localeLines": {
+        "en": 30471,
+        "ru": 30977,
+        "es": 15980,
+        "fr": 16058,
+        "de": 16045
+      }
+    },
+    {
+      "key": "18qy424hpbf",
+      "englishText": "Give {0}'s life a memorial",
+      "originalEnglishLine": 30472,
+      "localeLines": {
+        "en": 30472,
+        "ru": 30978,
+        "es": 15981,
+        "fr": 16059,
+        "de": 16046
+      }
+    },
+    {
+      "key": "1yqsuh064rx",
+      "englishText": "Take the memorial down",
+      "originalEnglishLine": 30493,
+      "localeLines": {
+        "en": 30493,
+        "ru": 31001,
+        "es": 16000,
+        "fr": 16078,
+        "de": 16065
+      }
+    },
+    {
+      "key": "yvbavpsztx",
+      "englishText": "Anyone can visit a memorial. The name, the last moments, the scenes and captions you chose, and the words and thoughts left all show there.",
+      "originalEnglishLine": 30497,
+      "localeLines": {
+        "en": 30497,
+        "ru": 31005,
+        "es": 16003,
+        "fr": 16081,
+        "de": 16067
+      }
+    },
+    {
+      "key": "ez96xbsr4j",
+      "englishText": "{0}'s memorial",
+      "originalEnglishLine": 30499,
+      "localeLines": {
+        "en": 30499,
+        "ru": 31007,
+        "es": 16004,
+        "fr": 16082,
+        "de": 16068
+      }
+    },
+    {
+      "key": "1xpxnagedov",
+      "englishText": "A memorial for every life you want to remember",
+      "originalEnglishLine": 30512,
+      "localeLines": {
+        "en": 30512,
+        "ru": 31021,
+        "es": 16014,
+        "fr": 16092,
+        "de": 16079
+      }
+    },
+    {
+      "key": "1a5dj1wsyqi",
+      "englishText": "Your past lives are kept on our server too, automatically, so you can bring them back after clearing your browser (you can turn this off)",
+      "originalEnglishLine": 30514,
+      "localeLines": {
+        "en": 30514,
+        "ru": 31025,
+        "es": 16017,
+        "fr": 16095,
+        "de": 16081
+      }
+    },
+    {
+      "key": "6mh0wmb8oj",
+      "englishText": "A House of Past Lives comes with it, with every wallpaper, piece of furniture and tune to decorate its rooms",
+      "originalEnglishLine": 30517,
+      "localeLines": {
+        "en": 30517,
+        "ru": 31027,
+        "es": 16018,
+        "fr": 16096,
+        "de": 16082
+      }
+    },
+    {
+      "key": "1gv1nm0jkdn",
+      "englishText": "Dress the memorial",
+      "originalEnglishLine": 30528,
+      "localeLines": {
+        "en": 30528,
+        "ru": 31039,
+        "es": 16028,
+        "fr": 16106,
+        "de": 16093
+      }
+    },
+    {
+      "key": "13zpob51u9q",
+      "englishText": "Found and opened the pass paid with the address entered at checkout ({0}). The receipt went to that address, so it may never have reached you. The address you typed will open it next time too.",
+      "originalEnglishLine": 30535,
+      "localeLines": {
+        "en": 30535,
+        "ru": 31047,
+        "es": 16034,
+        "fr": 16112,
+        "de": 16098
+      }
+    },
+    {
+      "key": "2d7x4fbzyn8",
+      "englishText": "When a life ends, look under its record after the last moments: 'Keep this life' makes the life film and the life album and puts up a memorial. For a life you already finished, press 'See again' under 'Past lives' on the first screen and do the same. Past lives are kept separately in each browser.",
+      "originalEnglishLine": 30540,
+      "localeLines": {
+        "en": 30540,
+        "ru": 31051,
+        "es": 16036,
+        "fr": 16114,
+        "de": 16101
+      }
+    },
+    {
+      "key": "5ed3c88fns",
+      "englishText": "Thank you. Confirming the payment and opening your pass on this device.",
+      "originalEnglishLine": 30544,
+      "localeLines": {
+        "en": 30544,
+        "ru": 31056,
+        "es": 16038,
+        "fr": 16116,
+        "de": 16103
+      }
+    },
+    {
+      "key": "s5ef5myjon",
+      "englishText": "This device has a keepsake pass.",
+      "originalEnglishLine": 30546,
+      "localeLines": {
+        "en": 30546,
+        "ru": 31058,
+        "es": 16040,
+        "fr": 16117,
+        "de": 16104
+      }
+    },
+    {
+      "key": "1ullg0sduzi",
+      "englishText": "Keepsake pass",
+      "originalEnglishLine": 30553,
+      "localeLines": {
+        "en": 30553,
+        "ru": 31064,
+        "es": 16044,
+        "fr": 16121,
+        "de": 16109
+      }
+    },
+    {
+      "key": "1eez6ko7nqo",
+      "englishText": "Confirming the payment…",
+      "originalEnglishLine": 30554,
+      "localeLines": {
+        "en": 30554,
+        "ru": 31065,
+        "es": 16045,
+        "fr": 16122,
+        "de": 16110
+      }
+    },
+    {
+      "key": "baaoxvh1l8",
+      "englishText": "Anyone can visit a memorial. The name, the last moments, the scenes and captions you chose, and the words and thoughts left all show there. Tap once more to put it up.",
+      "originalEnglishLine": 30572,
+      "localeLines": {
+        "en": 30572,
+        "ru": 31083,
+        "es": 16057,
+        "fr": 16134,
+        "de": 16122
+      }
+    },
+    {
+      "key": "1uuvmhaqxyn",
+      "englishText": "Making the memorial…",
+      "originalEnglishLine": 30575,
+      "localeLines": {
+        "en": 30575,
+        "ru": 31087,
+        "es": 16060,
+        "fr": 16136,
+        "de": 16124
+      }
+    },
+    {
+      "key": "3692v9an72",
+      "englishText": "The memorial is up, without your words and thoughts. Share the link and anyone can stop by.",
+      "originalEnglishLine": 30577,
+      "localeLines": {
+        "en": 30577,
+        "ru": 31089,
+        "es": 16062,
+        "fr": 16138,
+        "de": 16127
+      }
+    },
+    {
+      "key": "2f93ru9vw29",
+      "englishText": "If you take the memorial down, its link stops working. You get the memorial back to use again. Press once more to take it down.",
+      "originalEnglishLine": 30579,
+      "localeLines": {
+        "en": 30579,
+        "ru": 31091,
+        "es": 16063,
+        "fr": 16139,
+        "de": 16128
+      }
+    },
+    {
+      "key": "afj44bjqth",
+      "englishText": "The memorial is down. You have one memorial back to use.",
+      "originalEnglishLine": 30581,
+      "localeLines": {
+        "en": 30581,
+        "ru": 31093,
+        "es": 16064,
+        "fr": 16140,
+        "de": 16129
+      }
+    },
+    {
+      "key": "1tz15yyhcxo",
+      "englishText": "A life someone lived in 1 in 8 Billion: {0} ({1}–{2})",
+      "originalEnglishLine": 30582,
+      "localeLines": {
+        "en": 30582,
+        "ru": 31094,
+        "es": 16065,
+        "fr": 16141,
+        "de": 16130
+      }
+    },
+    {
+      "key": "1u6bkypnkar",
+      "englishText": "A life I lived in 1 in 8 Billion: {0} ({1}–{2})",
+      "originalEnglishLine": 30583,
+      "localeLines": {
+        "en": 30583,
+        "ru": 31096,
+        "es": 16066,
+        "fr": 16142,
+        "de": 16131
+      }
+    },
+    {
+      "key": "120v9odinni",
+      "englishText": "The memorial is open. Would you like to show this life to your friends?",
+      "originalEnglishLine": 30584,
+      "localeLines": {
+        "en": 30584,
+        "ru": 31097,
+        "es": 16067,
+        "fr": 16143,
+        "de": 16132
+      }
+    },
+    {
+      "key": "184mm6gtxb2",
+      "englishText": "The picture that comes with the link to {0}'s memorial",
+      "originalEnglishLine": 30589,
+      "localeLines": {
+        "en": 30589,
+        "ru": 31100,
+        "es": 16070,
+        "fr": 16147,
+        "de": 16135
+      }
+    },
+    {
+      "key": "2eh2gao8ky8",
+      "englishText": "Memorial cover picture",
+      "originalEnglishLine": 30621,
+      "localeLines": {
+        "en": 30621,
+        "ru": 31132,
+        "es": 16101,
+        "fr": 16177,
+        "de": 16166
+      }
+    },
+    {
+      "key": "1yoov1ij0d7",
+      "englishText": "The picture shown when you share the link and in the list of memorials.",
+      "originalEnglishLine": 30622,
+      "localeLines": {
+        "en": 30622,
+        "ru": 31133,
+        "es": 16102,
+        "fr": 16178,
+        "de": 16167
+      }
+    },
+    {
+      "key": "kk43pj96b",
+      "englishText": "It colours the whole memorial.",
+      "originalEnglishLine": 30625,
+      "localeLines": {
+        "en": 30625,
+        "ru": 31136,
+        "es": 16104,
+        "fr": 16180,
+        "de": 16169
+      }
+    },
+    {
+      "key": "27o7jsxt4rv",
+      "englishText": "Apply to the memorial",
+      "originalEnglishLine": 30636,
+      "localeLines": {
+        "en": 30636,
+        "ru": 31148,
+        "es": 16114,
+        "fr": 16191,
+        "de": 16179
+      }
+    },
+    {
+      "key": "z3mde2fmov",
+      "englishText": "Choose among the scenes the memorial holds, and dress their captions, a title, your words, the home's mood, the photo frames, the flowers and the life's room, all in one place.",
+      "originalEnglishLine": 30645,
+      "localeLines": {
+        "en": 30645,
+        "ru": 31155,
+        "es": 16121,
+        "fr": 16197,
+        "de": 16186
+      }
+    },
+    {
+      "key": "117m15zr6p4",
+      "englishText": "Choose among the memorial's scenes, rewrite their captions, add a title and your words, and set the home's mood, the photo frames and the flowers.",
+      "originalEnglishLine": 30649,
+      "localeLines": {
+        "en": 30649,
+        "ru": 31159,
+        "es": 16123,
+        "fr": 16199,
+        "de": 16188
+      }
+    },
+    {
+      "key": "137817egt4c",
+      "englishText": "This is a try-out. Your choices are used for the film and the album too, and with a pass you can put the memorial up just like this.",
+      "originalEnglishLine": 30669,
+      "localeLines": {
+        "en": 30669,
+        "ru": 31179,
+        "es": 16136,
+        "fr": 16212,
+        "de": 16202
+      }
+    },
+    {
+      "key": "1x5vbuwwtzc",
+      "englishText": "Anyone can visit a memorial. Words that could identify the real you (names, contact details, schools, where you live) are not put up.",
+      "originalEnglishLine": 30672,
+      "localeLines": {
+        "en": 30672,
+        "ru": 31181,
+        "es": 16137,
+        "fr": 16213,
+        "de": 16203
+      }
+    },
+    {
+      "key": "1pcr4b25ffx",
+      "englishText": "Your choices are used for the film, the album and the memorial alike. Anyone can visit a memorial, so words that could identify the real you (names, contact details, schools, where you live) are not put up.",
+      "originalEnglishLine": 30674,
+      "localeLines": {
+        "en": 30674,
+        "ru": 31184,
+        "es": 16138,
+        "fr": 16214,
+        "de": 16204
+      }
+    },
+    {
+      "key": "1wqqtjx9aq2",
+      "englishText": "Scenes in this memorial",
+      "originalEnglishLine": 30678,
+      "localeLines": {
+        "en": 30678,
+        "ru": 31188,
+        "es": 16140,
+        "fr": 16217,
+        "de": 16206
+      }
+    },
+    {
+      "key": "w6pvuu7cj1",
+      "englishText": "These are the scenes this memorial holds. To choose from the whole life record, open the life in past lives on the device where it was lived.",
+      "originalEnglishLine": 30679,
+      "localeLines": {
+        "en": 30679,
+        "ru": 31189,
+        "es": 16141,
+        "fr": 16218,
+        "de": 16207
+      }
+    },
+    {
+      "key": "2enj1jg3s6q",
+      "englishText": "No scenes from this stage in the memorial.",
+      "originalEnglishLine": 30711,
+      "localeLines": {
+        "en": 30711,
+        "ru": 31221,
+        "es": 16170,
+        "fr": 16246,
+        "de": 16235
+      }
+    },
+    {
+      "key": "27v99y71icp",
+      "englishText": "Saved. The memorial will look like this when you put it up, and the film and the album use the same choices.",
+      "originalEnglishLine": 30749,
+      "localeLines": {
+        "en": 30749,
+        "ru": 31259,
+        "es": 16196,
+        "fr": 16272,
+        "de": 16261
+      }
+    },
+    {
+      "key": "1v8lxc1wuee",
+      "englishText": "The memorial is dressed anew. Links you already shared show it at once.",
+      "originalEnglishLine": 30752,
+      "localeLines": {
+        "en": 30752,
+        "ru": 31263,
+        "es": 16198,
+        "fr": 16274,
+        "de": 16263
+      }
+    },
+    {
+      "key": "1v8eqhz2eqo",
+      "englishText": "This is a preview. The memorial does not change until you apply it.",
+      "originalEnglishLine": 30754,
+      "localeLines": {
+        "en": 30754,
+        "ru": 31265,
+        "es": 16199,
+        "fr": 16275,
+        "de": 16264
+      }
+    },
+    {
+      "key": "1yd6m168alq",
+      "englishText": "After the credits of a life lived in 1 in 8 Billion: {0}, at {1}",
+      "originalEnglishLine": 30760,
+      "localeLines": {
+        "en": 30760,
+        "ru": 31269,
+        "es": 16202,
+        "fr": 16278,
+        "de": 16268
+      }
+    },
+    {
+      "key": "5zikyj1gb7",
+      "englishText": "It also hangs in the memorial, under ‘Days given’.",
+      "originalEnglishLine": 31055,
+      "localeLines": {
+        "en": 31055,
+        "ru": 31588,
+        "es": 16426,
+        "fr": 16499,
+        "de": 16492
+      }
+    },
+    {
+      "key": "g8h5zwc84g",
+      "englishText": "If you put up a memorial, this picture will hang there too.",
+      "originalEnglishLine": 31056,
+      "localeLines": {
+        "en": 31056,
+        "ru": 31589,
+        "es": 16427,
+        "fr": 16500,
+        "de": 16493
+      }
+    },
+    {
+      "key": "5urwx39d45",
+      "englishText": "Hanging it in the memorial…",
+      "originalEnglishLine": 31057,
+      "localeLines": {
+        "en": 31057,
+        "ru": 31590,
+        "es": 16428,
+        "fr": 16502,
+        "de": 16494
+      }
+    },
+    {
+      "key": "1vtc6uqdwci",
+      "englishText": "It now hangs in the memorial too, under ‘Days given’.",
+      "originalEnglishLine": 31058,
+      "localeLines": {
+        "en": 31058,
+        "ru": 31591,
+        "es": 16429,
+        "fr": 16503,
+        "de": 16495
+      }
+    },
+    {
+      "key": "19pa113hild",
+      "englishText": "It could not be hung in the memorial yet.",
+      "originalEnglishLine": 31059,
+      "localeLines": {
+        "en": 31059,
+        "ru": 31593,
+        "es": 16430,
+        "fr": 16504,
+        "de": 16496
+      }
+    },
+    {
+      "key": "h2dqkdaxpy",
+      "englishText": "A day I gave {0} in the life simulation 1 in 8 Billion: {1}",
+      "originalEnglishLine": 31063,
+      "localeLines": {
+        "en": 31063,
+        "ru": 31597,
+        "es": 16434,
+        "fr": 16508,
+        "de": 16500
+      }
+    },
+    {
+      "key": "1bfjrx62gm0",
+      "englishText": "This is one life lived in the life simulation 1 in 8 Billion, not a real person.",
+      "originalEnglishLine": 31172,
+      "localeLines": {
+        "en": 31172,
+        "ru": 31708,
+        "es": 16535,
+        "fr": 16608,
+        "de": 16600
+      }
+    },
+    {
+      "key": "ps520wp1ar",
+      "englishText": "So many people are visiting that the memorial could not open just now. Please try again in a moment.",
+      "originalEnglishLine": 31232,
+      "localeLines": {
+        "en": 31232,
+        "ru": 31771,
+        "es": 16587,
+        "fr": 16660,
+        "de": 16652
+      }
+    },
+    {
+      "key": "1waz38oft8j",
+      "englishText": "This memorial can't be found. It may have been taken down, or the address may be different.",
+      "originalEnglishLine": 31235,
+      "localeLines": {
+        "en": 31235,
+        "ru": 31774,
+        "es": 16589,
+        "fr": 16662,
+        "de": 16654
+      }
+    },
+    {
+      "key": "1qv4ogn882",
+      "englishText": "from the person who opened this memorial",
+      "originalEnglishLine": 31263,
+      "localeLines": {
+        "en": 31263,
+        "ru": 31800,
+        "es": 16615,
+        "fr": 16688,
+        "de": 16680
+      }
+    },
+    {
+      "key": "n4qruzbuqp",
+      "englishText": "A life someone lived in the life simulation 1 in 8 Billion.",
+      "originalEnglishLine": 31288,
+      "localeLines": {
+        "en": 31288,
+        "ru": 31825,
+        "es": 16637,
+        "fr": 16711,
+        "de": 16703
+      }
+    },
+    {
+      "key": "pdzbaooemt",
+      "englishText": "Visit other memorials",
+      "originalEnglishLine": 31291,
+      "localeLines": {
+        "en": 31291,
+        "ru": 31829,
+        "es": 16640,
+        "fr": 16714,
+        "de": 16706
+      }
+    },
+    {
+      "key": "8ra28abibq",
+      "englishText": "This is a preview. No one else can see it until you put the memorial up.",
+      "originalEnglishLine": 31294,
+      "localeLines": {
+        "en": 31294,
+        "ru": 31832,
+        "es": 16644,
+        "fr": 16717,
+        "de": 16709
+      }
+    },
+    {
+      "key": "1nuqpk34vyi",
+      "englishText": "1 in 8 Billion · House of Past Lives preview",
+      "originalEnglishLine": 31305,
+      "localeLines": {
+        "en": 31305,
+        "ru": 31844,
+        "es": 16652,
+        "fr": 16725,
+        "de": 16717
+      }
+    },
+    {
+      "key": "28oz3mm1njz",
+      "englishText": "Beyond the memorials, people also share the lives they lived and what they felt.",
+      "originalEnglishLine": 31313,
+      "localeLines": {
+        "en": 31313,
+        "ru": 31853,
+        "es": 16659,
+        "fr": 16733,
+        "de": 16725
+      }
+    },
+    {
+      "key": "enblmoovlf",
+      "englishText": "See shared lives",
+      "originalEnglishLine": 31315,
+      "localeLines": {
+        "en": 31315,
+        "ru": 31855,
+        "es": 16660,
+        "fr": 16734,
+        "de": 16726
+      }
+    },
+    {
+      "key": "15i8wtk6gyj",
+      "englishText": "No life with this grain has a memorial yet.",
+      "originalEnglishLine": 31316,
+      "localeLines": {
+        "en": 31316,
+        "ru": 31856,
+        "es": 16662,
+        "fr": 16735,
+        "de": 16727
+      }
+    },
+    {
+      "key": "1ova97p7y75",
+      "englishText": "No memorials yet.",
+      "originalEnglishLine": 31318,
+      "localeLines": {
+        "en": 31318,
+        "ru": 31858,
+        "es": 16664,
+        "fr": 16737,
+        "de": 16729
+      }
+    },
+    {
+      "key": "1qyw8kp6pyw",
+      "englishText": "Grains find memorials made since grains began.",
+      "originalEnglishLine": 31319,
+      "localeLines": {
+        "en": 31319,
+        "ru": 31859,
+        "es": 16665,
+        "fr": 16738,
+        "de": 16730
+      }
+    },
+    {
+      "key": "1r6loqbr11k",
+      "englishText": "There are no memorials from far away yet, so here is another life.",
+      "originalEnglishLine": 31326,
+      "localeLines": {
+        "en": 31326,
+        "ru": 31867,
+        "es": 16669,
+        "fr": 16743,
+        "de": 16734
+      }
+    },
+    {
+      "key": "hrmxvhde40",
+      "englishText": "There are no memorials to open on this device. If you put one up on another device, open your pass here with the email you paid with and it will show up.",
+      "originalEnglishLine": 31331,
+      "localeLines": {
+        "en": 31331,
+        "ru": 31873,
+        "es": 16672,
+        "fr": 16746,
+        "de": 16738
+      }
+    },
+    {
+      "key": "11rif4deprs",
+      "englishText": "My memorials",
+      "originalEnglishLine": 31333,
+      "localeLines": {
+        "en": 31333,
+        "ru": 31875,
+        "es": 16674,
+        "fr": 16747,
+        "de": 16739
+      }
+    },
+    {
+      "key": "2e63abf06ts",
+      "englishText": "The memorials you put up. Open one and tap 'Dress it' to change its scenes and captions, its title and words, its mood, frames, flowers and cover. It works on any device with the same pass.",
+      "originalEnglishLine": 31334,
+      "localeLines": {
+        "en": 31334,
+        "ru": 31876,
+        "es": 16675,
+        "fr": 16748,
+        "de": 16740
+      }
+    },
+    {
+      "key": "1unybg9ayo6",
+      "englishText": "No memorials have been put up with this pass yet. When a life ends, you can put one up from 'Keep this life'.",
+      "originalEnglishLine": 31336,
+      "localeLines": {
+        "en": 31336,
+        "ru": 31879,
+        "es": 16676,
+        "fr": 16749,
+        "de": 16741
+      }
+    },
+    {
+      "key": "qifrw8hcm6",
+      "englishText": "Someone left “{1}” at the memorial of {0}.",
+      "originalEnglishLine": 31339,
+      "localeLines": {
+        "en": 31339,
+        "ru": 31881,
+        "es": 16677,
+        "fr": 16751,
+        "de": 16742
+      }
+    },
+    {
+      "key": "1zzuq7krd6v",
+      "englishText": "Someone lit a candle at the memorial of {0}.",
+      "originalEnglishLine": 31340,
+      "localeLines": {
+        "en": 31340,
+        "ru": 31882,
+        "es": 16678,
+        "fr": 16752,
+        "de": 16744
+      }
+    },
+    {
+      "key": "smti21asd1",
+      "englishText": "1 in 8 Billion · A memorial for a life in the simulation",
+      "originalEnglishLine": 31343,
+      "localeLines": {
+        "en": 31343,
+        "ru": 31885,
+        "es": 16681,
+        "fr": 16755,
+        "de": 16747
+      }
+    },
+    {
+      "key": "tuz0c3tawk",
+      "englishText": "1in8b-memorial-{0}.png",
+      "originalEnglishLine": 31345,
+      "localeLines": {
+        "en": 31345,
+        "ru": 31889,
+        "es": 16683,
+        "fr": 16757,
+        "de": 16749
+      }
+    },
+    {
+      "key": "vrs99llyxh",
+      "englishText": "Story image of the memorial of {0}",
+      "originalEnglishLine": 31346,
+      "localeLines": {
+        "en": 31346,
+        "ru": 31890,
+        "es": 16684,
+        "fr": 16758,
+        "de": 16750
+      }
+    },
+    {
+      "key": "1s9umylp13h",
+      "englishText": "Post it to your Instagram or Threads story and add the memorial's address with a link sticker.",
+      "originalEnglishLine": 31353,
+      "localeLines": {
+        "en": 31353,
+        "ru": 31897,
+        "es": 16690,
+        "fr": 16763,
+        "de": 16755
+      }
+    },
+    {
+      "key": "kbcpcuyvo8",
+      "englishText": "Copy the memorial link",
+      "originalEnglishLine": 31355,
+      "localeLines": {
+        "en": 31355,
+        "ru": 31899,
+        "es": 16691,
+        "fr": 16764,
+        "de": 16756
+      }
+    },
+    {
+      "key": "22dvembccl0",
+      "englishText": "Back to the memorial",
+      "originalEnglishLine": 31365,
+      "localeLines": {
+        "en": 31365,
+        "ru": 31909,
+        "es": 16697,
+        "fr": 16771,
+        "de": 16763
+      }
+    },
+    {
+      "key": "1dnry13v1yj",
+      "englishText": "Keepsakes",
+      "originalEnglishLine": 31373,
+      "localeLines": {
+        "en": 31373,
+        "ru": 31918,
+        "es": 16704,
+        "fr": 16777,
+        "de": 16769
+      }
+    },
+    {
+      "key": "c4wncxz4gz",
+      "englishText": "If you refund the pass, its decoration packs are refunded too.",
+      "originalEnglishLine": 31393,
+      "localeLines": {
+        "en": 31393,
+        "ru": 31937,
+        "es": 16718,
+        "fr": 16791,
+        "de": 16784
+      }
+    },
+    {
+      "key": "1wya5rdaxwz",
+      "englishText": "Opening checkout…",
+      "originalEnglishLine": 31395,
+      "localeLines": {
+        "en": 31395,
+        "ru": 31939,
+        "es": 16719,
+        "fr": 16792,
+        "de": 16785
+      }
+    },
+    {
+      "key": "v660a4z8fn",
+      "englishText": "In 'Dress the memorial', open 'Room' to try the things marked Preview.",
+      "originalEnglishLine": 31398,
+      "localeLines": {
+        "en": 31398,
+        "ru": 31942,
+        "es": 16722,
+        "fr": 16795,
+        "de": 16788
+      }
+    },
+    {
+      "key": "20d13dftekz",
+      "englishText": "Thank you. Confirming the payment…",
+      "originalEnglishLine": 31403,
+      "localeLines": {
+        "en": 31403,
+        "ru": 31946,
+        "es": 16724,
+        "fr": 16797,
+        "de": 16790
+      }
+    },
+    {
+      "key": "7efefx8ltb",
+      "englishText": "This payment was refunded.",
+      "originalEnglishLine": 31408,
+      "localeLines": {
+        "en": 31408,
+        "ru": 31952,
+        "es": 16728,
+        "fr": 16801,
+        "de": 16793
+      }
+    },
+    {
+      "key": "1xv8aioq1ft",
+      "englishText": "Lives lived here are not kept in your records or the memorial, and nothing is sent anywhere.",
+      "originalEnglishLine": 31428,
+      "localeLines": {
+        "en": 31428,
+        "ru": 31973,
+        "es": 16746,
+        "fr": 16819,
+        "de": 16810
+      }
+    },
+    {
+      "key": "lh3pk7s82x",
+      "englishText": "Lab lives are worked out on this device only and are not kept in records or the memorial.",
+      "originalEnglishLine": 31552,
+      "localeLines": {
+        "en": 31552,
+        "ru": 32098,
+        "es": 16844,
+        "fr": 16916,
+        "de": 16908
+      }
+    },
+    {
+      "key": "wsyi1tce3q",
+      "englishText": "With a keepsake pass, you can see every life again.",
+      "originalEnglishLine": 31590,
+      "localeLines": {
+        "en": 31590,
+        "ru": 32136,
+        "es": 16869,
+        "fr": 16942,
+        "de": 16933
+      }
+    },
+    {
+      "key": "21keh49pck8",
+      "englishText": "They are kept on the server too, automatically, so you can bring them back even after the browser's data is cleared.",
+      "originalEnglishLine": 31591,
+      "localeLines": {
+        "en": 31591,
+        "ru": 32137,
+        "es": 16870,
+        "fr": 16943,
+        "de": 16934
+      }
+    },
+    {
+      "key": "1tsvjsz9ys2",
+      "englishText": "This is not the official 1 in 8 Billion site. The official site is {0}.",
+      "originalEnglishLine": 31602,
+      "localeLines": {
+        "en": 31602,
+        "ru": 32149,
+        "es": 16880,
+        "fr": 16953,
+        "de": 16944
+      }
+    },
+    {
+      "key": "1wvz02xzqgd",
+      "englishText": "Memorial could not go up",
+      "originalEnglishLine": 31612,
+      "localeLines": {
+        "en": 31612,
+        "ru": 32159,
+        "es": 16889,
+        "fr": 16962,
+        "de": 16954
+      }
+    },
+    {
+      "key": "1q5z9rd9rn2",
+      "englishText": "Memorial could not be changed",
+      "originalEnglishLine": 31615,
+      "localeLines": {
+        "en": 31615,
+        "ru": 32160,
+        "es": 16891,
+        "fr": 16963,
+        "de": 16955
+      }
+    },
+    {
+      "key": "1d5853h39bn",
+      "englishText": "Pass check delayed after payment",
+      "originalEnglishLine": 31618,
+      "localeLines": {
+        "en": 31618,
+        "ru": 32163,
+        "es": 16894,
+        "fr": 16966,
+        "de": 16958
+      }
+    },
+    {
+      "key": "hvg5nghpky",
+      "englishText": "Keepsake pass check code: {0}",
+      "originalEnglishLine": 31626,
+      "localeLines": {
+        "en": 31626,
+        "ru": 32174,
+        "es": 16902,
+        "fr": 16975,
+        "de": 16966
+      }
+    },
+    {
+      "key": "nenkrk6tm5",
+      "englishText": "Keepsake pass: none on this device",
+      "originalEnglishLine": 31627,
+      "localeLines": {
+        "en": 31627,
+        "ru": 32175,
+        "es": 16903,
+        "fr": 16976,
+        "de": 16967
+      }
+    },
+    {
+      "key": "cmf3hhpacz",
+      "englishText": "1 in 8 Billion problem report",
+      "originalEnglishLine": 31630,
+      "localeLines": {
+        "en": 31630,
+        "ru": 32178,
+        "es": 16906,
+        "fr": 16979,
+        "de": 16970
+      }
+    },
+    {
+      "key": "upt8pa6efn",
+      "englishText": "For things to fix and ideas, please use 'Send feedback' rather than email.",
+      "originalEnglishLine": 31631,
+      "localeLines": {
+        "en": 31631,
+        "ru": 32179,
+        "es": 16907,
+        "fr": 16980,
+        "de": 16971
+      }
+    },
+    {
+      "key": "2fx80ql2mz6",
+      "englishText": "Send feedback",
+      "originalEnglishLine": 31635,
+      "localeLines": {
+        "en": 31635,
+        "ru": 32184,
+        "es": 16910,
+        "fr": 16982,
+        "de": 16974
+      }
+    },
+    {
+      "key": "bob34bafbi",
+      "englishText": "For a problem that needs a reply (a payment, the pass, keepsakes, records gone missing), please email us. What we need to find the cause is already filled in below. You can read it and delete anything before sending.",
+      "originalEnglishLine": 31636,
+      "localeLines": {
+        "en": 31636,
+        "ru": 32185,
+        "es": 16911,
+        "fr": 16983,
+        "de": 16975
+      }
+    },
+    {
+      "key": "18fjflnty16",
+      "englishText": "The keepsake pass ({0}) is paid for separately.",
+      "originalEnglishLine": 32485,
+      "localeLines": {
+        "en": 32485,
+        "ru": 33049,
+        "es": 17617,
+        "fr": 17688,
+        "de": 17680
+      }
+    },
+    {
+      "key": "3hlind9j6e",
+      "englishText": "Posts by other people, sending your life or your words anywhere, and payments are all turned off.",
+      "originalEnglishLine": 32679,
+      "localeLines": {
+        "en": 32679,
+        "ru": 33249,
+        "es": 17761,
+        "fr": 17834,
+        "de": 17826
+      }
+    },
+    {
+      "key": "14ghnfy4vox",
+      "englishText": "Your lives are kept in this browser and, with your keepsake pass, on our server too.",
+      "originalEnglishLine": 32937,
+      "localeLines": {
+        "en": 32937,
+        "ru": 33506,
+        "es": 17970,
+        "fr": 18042,
+        "de": 18035
+      }
+    },
+    {
+      "key": "2235kjkm9w7",
+      "englishText": "With a keepsake pass you can keep them on our server too, and bring them back in any browser with the pass.",
+      "originalEnglishLine": 32939,
+      "localeLines": {
+        "en": 32939,
+        "ru": 33508,
+        "es": 17972,
+        "fr": 18043,
+        "de": 18036
+      }
+    },
+    {
+      "key": "26ws6m44k1i",
+      "englishText": "This record stays in 'Past lives' in this browser and, with your keepsake pass, on our server too.",
+      "originalEnglishLine": 32953,
+      "localeLines": {
+        "en": 32953,
+        "ru": 33522,
+        "es": 17979,
+        "fr": 18051,
+        "de": 18044
+      }
+    },
+    {
+      "key": "9yuvjlp0ax",
+      "englishText": "Turn on 'Keep my past lives on the server too' under 'Past lives' on the first screen, and your pass can bring them back even if your browser data is cleared.",
+      "originalEnglishLine": 32961,
+      "localeLines": {
+        "en": 32961,
+        "ru": 33530,
+        "es": 17984,
+        "fr": 18056,
+        "de": 18048
+      }
+    },
+    {
+      "key": "30em1uuidc",
+      "englishText": "If this is a life you'd like to keep for a long time, the keepsake pass in 'Keep this life' can keep it on our server too.",
+      "originalEnglishLine": 32964,
+      "localeLines": {
+        "en": 32964,
+        "ru": 33532,
+        "es": 17985,
+        "fr": 18057,
+        "de": 18050
+      }
+    },
+    {
+      "key": "24jrlzdd8rq",
+      "englishText": "<p><b>Good to see you again.</b> Add 1 in 8 Billion to your home screen and it opens like an app with one tap, and your records are less likely to be wiped.</p><div class=\"a2-act\"><button class=\"ghost sm a2-go\" id=\"a2Go\">Add to home screen</button><button class=\"ghost sm\" id=\"a2No\">No thanks</button></div>",
+      "originalEnglishLine": 32968,
+      "localeLines": {
+        "en": 32968,
+        "ru": 33537,
+        "es": 17988,
+        "fr": 18059,
+        "de": 18052
+      }
+    },
+    {
+      "key": "v9aozszq45",
+      "englishText": "1 in 8 Billion has no login: your lives are kept in this browser only, so another app or a new phone starts empty. One code moves them over as they are.",
+      "originalEnglishLine": 33016,
+      "localeLines": {
+        "en": 33016,
+        "ru": 33586,
+        "es": 18020,
+        "fr": 18092,
+        "de": 18085
+      }
+    },
+    {
+      "key": "cz6lfai5cy",
+      "englishText": "Your keepsake pass opens in this browser too when you type the email you paid with.",
+      "originalEnglishLine": 33107,
+      "localeLines": {
+        "en": 33107,
+        "ru": 33673,
+        "es": 18083,
+        "fr": 18154,
+        "de": 18148
+      }
+    },
+    {
+      "key": "fxhvwzpqwn",
+      "englishText": "Our server has no room to keep them right now.",
+      "originalEnglishLine": 33113,
+      "localeLines": {
+        "en": 33113,
+        "ru": 33680,
+        "es": 18088,
+        "fr": 18159,
+        "de": 18152
+      }
+    },
+    {
+      "key": "1i4tn3lardt",
+      "englishText": "Three browsers already keep their lives on our server with this pass.",
+      "originalEnglishLine": 33115,
+      "localeLines": {
+        "en": 33115,
+        "ru": 33682,
+        "es": 18090,
+        "fr": 18161,
+        "de": 18155
+      }
+    },
+    {
+      "key": "2d3juj5edl8",
+      "englishText": "Please bring back the lives kept on our server first.",
+      "originalEnglishLine": 33117,
+      "localeLines": {
+        "en": 33117,
+        "ru": 33684,
+        "es": 18091,
+        "fr": 18162,
+        "de": 18156
+      }
+    },
+    {
+      "key": "7hkqcicf79",
+      "englishText": "Your lives are too large to keep on our server.",
+      "originalEnglishLine": 33118,
+      "localeLines": {
+        "en": 33118,
+        "ru": 33685,
+        "es": 18092,
+        "fr": 18163,
+        "de": 18157
+      }
+    },
+    {
+      "key": "1kwvn639ozx",
+      "englishText": "Keep my past lives on the server too",
+      "originalEnglishLine": 33119,
+      "localeLines": {
+        "en": 33119,
+        "ru": 33687,
+        "es": 18093,
+        "fr": 18164,
+        "de": 18158
+      }
+    },
+    {
+      "key": "btqoupq0qs",
+      "englishText": "While you have the pass, this browser's past lives, the lives you can see again and a life in progress are kept on our server too.",
+      "originalEnglishLine": 33120,
+      "localeLines": {
+        "en": 33120,
+        "ru": 33688,
+        "es": 18094,
+        "fr": 18165,
+        "de": 18159
+      }
+    },
+    {
+      "key": "1im2krzpzx9",
+      "englishText": "Turn it off, or have the pass refunded, and what is kept on the server is deleted at once.",
+      "originalEnglishLine": 33124,
+      "localeLines": {
+        "en": 33124,
+        "ru": 33693,
+        "es": 18096,
+        "fr": 18168,
+        "de": 18161
+      }
+    },
+    {
+      "key": "196apl702te",
+      "englishText": "Lives are waiting on our server · {0} past lives · {1}",
+      "originalEnglishLine": 33130,
+      "localeLines": {
+        "en": 33130,
+        "ru": 33699,
+        "es": 18102,
+        "fr": 18173,
+        "de": 18167
+      }
+    },
+    {
+      "key": "23s463wyq89",
+      "englishText": "Bring back the lives kept on the server",
+      "originalEnglishLine": 33133,
+      "localeLines": {
+        "en": 33133,
+        "ru": 33702,
+        "es": 18104,
+        "fr": 18175,
+        "de": 18169
+      }
+    },
+    {
+      "key": "pk8dfzj1ce",
+      "englishText": "Your past lives are now kept on our server too, automatically.",
+      "originalEnglishLine": 33134,
+      "localeLines": {
+        "en": 33134,
+        "ru": 33703,
+        "es": 18105,
+        "fr": 18176,
+        "de": 18170
+      }
+    },
+    {
+      "key": "1bp26lotg0o",
+      "englishText": "Turning it off deletes everything kept on the server at once.",
+      "originalEnglishLine": 33137,
+      "localeLines": {
+        "en": 33137,
+        "ru": 33707,
+        "es": 18107,
+        "fr": 18178,
+        "de": 18172
+      }
+    },
+    {
+      "key": "swr8s8285w",
+      "englishText": "This browser's lives will be kept on our server too.",
+      "originalEnglishLine": 33142,
+      "localeLines": {
+        "en": 33142,
+        "ru": 33712,
+        "es": 18111,
+        "fr": 18183,
+        "de": 18176
+      }
+    },
+    {
+      "key": "m1p0xz28rf",
+      "englishText": "Everything kept on the server has been deleted.",
+      "originalEnglishLine": 33144,
+      "localeLines": {
+        "en": 33144,
+        "ru": 33715,
+        "es": 18114,
+        "fr": 18185,
+        "de": 18178
+      }
+    },
+    {
+      "key": "2awoedaq8p2",
+      "englishText": "Bringing back the lives kept on the server…",
+      "originalEnglishLine": 33149,
+      "localeLines": {
+        "en": 33149,
+        "ru": 33720,
+        "es": 18117,
+        "fr": 18188,
+        "de": 18181
+      }
+    },
+    {
+      "key": "1425tdvbf0h",
+      "englishText": "Lives kept on the server",
+      "originalEnglishLine": 33156,
+      "localeLines": {
+        "en": 33156,
+        "ru": 33727,
+        "es": 18124,
+        "fr": 18195,
+        "de": 18188
+      }
+    },
+    {
+      "key": "1iysllwmk",
+      "englishText": "[1 in 8 Billion feedback]\nType: {0}\nMessage: {1}{2}\nPlay info: {3}",
+      "originalEnglishLine": 33321,
+      "localeLines": {
+        "en": 33321,
+        "ru": 33900,
+        "es": 18256,
+        "fr": 18329,
+        "de": 18322
+      }
+    },
+    {
+      "key": "218ca8rgak3",
+      "englishText": "\n    <div class=\"fbtypes\" role=\"group\" aria-label=\"Type of feedback\">{0}</div>\n    <label class=\"field\"><span class=\"lbl\">Message</span><textarea id=\"fbText\" maxlength=\"{1}\" placeholder=\"e.g. I was born in Mali and got a decision about going to university at 15\"></textarea></label><p class=\"fbcount\"><span id=\"fbCount\"></span> <span>{2}</span></p>\n    <label class=\"field\"><span class=\"lbl\">Nickname (optional)</span><input id=\"fbNick\" maxlength=\"40\" autocomplete=\"nickname\"></label>\n    <div class=\"ctxbox\">{3}</div><div class=\"sheetact\">{4}</div>",
+      "originalEnglishLine": 33338,
+      "localeLines": {
+        "en": 33338,
+        "ru": 33917,
+        "es": 18269,
+        "fr": 18342,
+        "de": 18335
+      }
+    },
+    {
+      "key": "1viml5rlwf",
+      "englishText": "For a problem that needs a reply (a payment, the pass, records gone missing), <a href=\"#\" data-help=\"1\">email us</a>.",
+      "originalEnglishLine": 33347,
+      "localeLines": {
+        "en": 33347,
+        "ru": 33926,
+        "es": 18276,
+        "fr": 18349,
+        "de": 18342
+      }
+    },
+    {
+      "key": "1q8p1bfxvio",
+      "englishText": "I put this life in a memorial. Come and look around its room and photo album.",
+      "originalEnglishLine": 33408,
+      "localeLines": {
+        "en": 33408,
+        "ru": 33994,
+        "es": 18330,
+        "fr": 18403,
+        "de": 18395
+      }
+    },
+    {
+      "key": "7vmzuub5x2",
+      "englishText": "If you write one, it opens your post.",
+      "originalEnglishLine": 33428,
+      "localeLines": {
+        "en": 33428,
+        "ru": 34018,
+        "es": 18348,
+        "fr": 18422,
+        "de": 18414
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "src/engine/game.en.js",
+      "beforeBytes": 5494444,
+      "afterBytes": 5469497,
+      "beforeSha256": "24e8716f92161ccb9f67bac44662d3d66228f767ffae874e39b690c3b3a4572b",
+      "afterSha256": "78348d8555dbce834db89679dc36808825d482334ecb9db915a30b5e89a25b92",
+      "removedEntries": 233,
+      "retainedEntries": 15937,
+      "afterUnusedEntryRemovalSha256": "cb8bea95e209d5ad9bb0011f2cfb9fdddc19e5be284bc519e1840ff68673cff5",
+      "afterUnusedEntryRemovalBytes": 5471444
+    },
+    {
+      "path": "src/engine/game.ru.js",
+      "beforeBytes": 6979517,
+      "afterBytes": 6937646,
+      "beforeSha256": "581c0aba2f72bc34fa79ea25eab8c0ebff4c397a1ff9ec849e9fa47ee81bfadc",
+      "afterSha256": "e732639804fbd98a8512a179bbc9936848a2eb68e7766648205fd990deab287f",
+      "removedEntries": 233,
+      "retainedEntries": 15937,
+      "afterUnusedEntryRemovalSha256": "abef740be9e35ae083a3a92ca92466d1e539e3d50dd2776cf39b3900c9983e7e",
+      "afterUnusedEntryRemovalBytes": 6940361
+    },
+    {
+      "path": "src/engine/game.es.js",
+      "beforeBytes": 4251147,
+      "afterBytes": 4223929,
+      "beforeSha256": "47d82f246d65564b8b55ab687cdc894eb784cc0bb89ba89951ec41772928bccc",
+      "afterSha256": "c41e2182e10c792733545daec6726ec1b3ca5f398426972abfa72d16b6bb3a71",
+      "removedEntries": 233,
+      "retainedEntries": 15937,
+      "afterUnusedEntryRemovalSha256": "c0495b46627a2e369b5a30b04bc78f462c86ffa5d58e5089d66a6fc4f61ff6b1",
+      "afterUnusedEntryRemovalBytes": 4225966
+    },
+    {
+      "path": "src/engine/game.fr.js",
+      "beforeBytes": 4392334,
+      "afterBytes": 4363554,
+      "beforeSha256": "54532e8c19d2acf4c515e269fc239db684b743a987750c32caeedc339d39e552",
+      "afterSha256": "ad5a4e3d363e3201ae9b7632fc2e82d9433cc54daa7133b52852f4341846f018",
+      "removedEntries": 233,
+      "retainedEntries": 15937,
+      "afterUnusedEntryRemovalSha256": "0c89d3a3f9298dec44668c903bb724c3a86fb833090a7490cd8b3777975afa00",
+      "afterUnusedEntryRemovalBytes": 4365659
+    },
+    {
+      "path": "src/engine/game.de.js",
+      "beforeBytes": 4405186,
+      "afterBytes": 4376519,
+      "beforeSha256": "991f9e1752cda8b54b035fa80b67058b01f372cfff1c2f1e38f5efaa911668d9",
+      "afterSha256": "8f9c9c5611c3f5fe92cc21c540f8f0c398256ef5523f24385b0977df155ad89d",
+      "removedEntries": 233,
+      "retainedEntries": 15937,
+      "afterUnusedEntryRemovalSha256": "bcbfb658d3112db0088818cefe08430fc1edc67f8d248f8031ba536a95ac789f",
+      "afterUnusedEntryRemovalBytes": 4378619
+    }
+  ],
+  "trimmedTemplate": {
+    "key": "281khouc24m",
+    "cutBefore": "<div class=\"deadstack\">",
+    "reason": "The current end adapter reads only the cause-label and first cohort paragraph from the certificate section. Unused farewell/share/feedback/old-screen tail removed; key and used certificate retained.",
+    "selectors": {
+      "cohort": "<p class=\"ctx\">\\{13\\}([\\s\\S]*?)<\\/p>",
+      "causeLabel": "<div class=\"cause\">([^<{]*)<b>\\{12\\}<\\/b>"
+    },
+    "files": [
+      {
+        "lang": "en",
+        "path": "src/engine/game.en.js",
+        "beforeValueBytes": 3037,
+        "afterValueBytes": 1042,
+        "beforeValueSha256": "42e16cccda05a2ba3ee68bd65961c86eac64250032a7c246729c04eacd060fb5",
+        "afterValueSha256": "270448edae1b441d709d55cfebb96a9861a11c885f79679244ac9e06da0e2987",
+        "captures": {
+          "cohort": {
+            "utf8Bytes": 185,
+            "beforeSha256": "168a2fa3c18d13610aeff0ffb96ea26143703108487391d2a29268fd2f1b8508",
+            "afterSha256": "168a2fa3c18d13610aeff0ffb96ea26143703108487391d2a29268fd2f1b8508",
+            "identical": true
+          },
+          "causeLabel": {
+            "utf8Bytes": 15,
+            "beforeSha256": "01815ab1106e3a5303ff68f7f58fcee6e5e03a6a2faac5be6b3536c48f64469d",
+            "afterSha256": "01815ab1106e3a5303ff68f7f58fcee6e5e03a6a2faac5be6b3536c48f64469d",
+            "identical": true
+          }
+        }
+      },
+      {
+        "lang": "ru",
+        "path": "src/engine/game.ru.js",
+        "beforeValueBytes": 4213,
+        "afterValueBytes": 1450,
+        "beforeValueSha256": "a41beb669ebabf88b529afe5430403a1961e8990c8fe898f68652f4bd6981626",
+        "afterValueSha256": "3f05895d7dc70beaac35cc3b2865716980ec9273b02d40fb63f1516fbee59a01",
+        "captures": {
+          "cohort": {
+            "utf8Bytes": 479,
+            "beforeSha256": "7e70741ed63e1179ab088f85228e4a0fc097a651c61e06d3bfd5644a46b78551",
+            "afterSha256": "7e70741ed63e1179ab088f85228e4a0fc097a651c61e06d3bfd5644a46b78551",
+            "identical": true
+          },
+          "causeLabel": {
+            "utf8Bytes": 28,
+            "beforeSha256": "ea2c5f8cace12b0da94572d58e632949c497c5f39fa57fa2ecbda80e1d528b45",
+            "afterSha256": "ea2c5f8cace12b0da94572d58e632949c497c5f39fa57fa2ecbda80e1d528b45",
+            "identical": true
+          }
+        }
+      },
+      {
+        "lang": "es",
+        "path": "src/engine/game.es.js",
+        "beforeValueBytes": 3223,
+        "afterValueBytes": 1138,
+        "beforeValueSha256": "7e65e3cac4ed18c3667a2c725760db6d45dfb4574941c8c7449be0bcc4b08b42",
+        "afterValueSha256": "7d6ce81c4676893e4a4f14a1a39039af22ce82e63f9b297da0eb33dd18c68fa4",
+        "captures": {
+          "cohort": {
+            "utf8Bytes": 237,
+            "beforeSha256": "a50c78b9785a1b566444c34348186b68beb4315315ad77c5a8cb6763a51ff9c7",
+            "afterSha256": "a50c78b9785a1b566444c34348186b68beb4315315ad77c5a8cb6763a51ff9c7",
+            "identical": true
+          },
+          "causeLabel": {
+            "utf8Bytes": 16,
+            "beforeSha256": "facb8b471e2a3fa8b645b66a1537a63de56a39a3d34da90a988756054a2327ff",
+            "afterSha256": "facb8b471e2a3fa8b645b66a1537a63de56a39a3d34da90a988756054a2327ff",
+            "identical": true
+          }
+        }
+      },
+      {
+        "lang": "fr",
+        "path": "src/engine/game.fr.js",
+        "beforeValueBytes": 3268,
+        "afterValueBytes": 1115,
+        "beforeValueSha256": "88e02c5dc7884ad9730e5687d0c7bf8d45d69f84c5d1eb1f448987c4192c6192",
+        "afterValueSha256": "4f6caa21fb9b49641215736ed2625b941c3fde0d356c2591365303782dd699d6",
+        "captures": {
+          "cohort": {
+            "utf8Bytes": 230,
+            "beforeSha256": "a241ac1cf6c3885b1ef798b83c7a1d3935d06ec07d6ba166e909ab37744025d5",
+            "afterSha256": "a241ac1cf6c3885b1ef798b83c7a1d3935d06ec07d6ba166e909ab37744025d5",
+            "identical": true
+          },
+          "causeLabel": {
+            "utf8Bytes": 17,
+            "beforeSha256": "2fad7d998e02838d0ea8344b26db49e01bb7e423c8a7b472b584b5c6db3319de",
+            "afterSha256": "2fad7d998e02838d0ea8344b26db49e01bb7e423c8a7b472b584b5c6db3319de",
+            "identical": true
+          }
+        }
+      },
+      {
+        "lang": "de",
+        "path": "src/engine/game.de.js",
+        "beforeValueBytes": 3231,
+        "afterValueBytes": 1083,
+        "beforeValueSha256": "4d35a7a58b264bd3c0529088748f4c05990f65a03ad790967d38bf08d57d7042",
+        "afterValueSha256": "6a3aef9ba92a29924a9c8d74f39980cd911b5b376a442e2241446e82dbc6c6cf",
+        "captures": {
+          "cohort": {
+            "utf8Bytes": 216,
+            "beforeSha256": "4f306ba127fbc55380ffb1095d95b2331567ec59ce2f16599a6a1402fc2bb37f",
+            "afterSha256": "4f306ba127fbc55380ffb1095d95b2331567ec59ce2f16599a6a1402fc2bb37f",
+            "identical": true
+          },
+          "causeLabel": {
+            "utf8Bytes": 13,
+            "beforeSha256": "6485b3b64d9ba269526e165c0a28b75a2240d22073baaa9fc1d0eb386341a883",
+            "afterSha256": "6485b3b64d9ba269526e165c0a28b75a2240d22073baaa9fc1d0eb386341a883",
+            "identical": true
+          }
+        }
+      }
+    ]
+  },
+  "validation": {
+    "beforeFinalTemplateTrim": "66/66 local npm tests passed after entry removal and key guard. Final full check/build/oracle will be run by the coordinating agent after this template trim.",
+    "templateCaptureChecks": "10/10 exact UTF-8 capture comparisons passed (2 selectors × 5 locales)."
+  }
+}

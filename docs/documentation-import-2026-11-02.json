@@ -1,0 +1,44 @@
+{
+  "format": "documentation-import/1",
+  "date": "2026-11-02",
+  "sourceArchive": "one-in-eight-billion-mobile-fallback-2026-11-02.zip",
+  "sourceArchiveSha256": "50d824c5dcf6eb44e4d86a702dae6e1a1a95ad9a75611438e66ba26445cd3bdd",
+  "sourceRole": "Read-only fallback of the preceding mobile UI; original document hashes describe immutable imported evidence, not current adapted files.",
+  "sources": [
+    {
+      "source": "one-in-eight-billion-mobile/docs/motion-spec.md",
+      "bytes": 6421,
+      "sha256": "9acea7f02e290f48a35fbe2c800b241f008b7ba7f25c3354a9ec8ea30bcbf48e",
+      "destination": "docs/motion-spec.md",
+      "mode": "ported and adapted"
+    },
+    {
+      "source": "one-in-eight-billion-mobile/docs/screen-map.md",
+      "bytes": 18453,
+      "sha256": "526736f7b5ed6aa8fe8444e39e8ef04d673e510d787c668fa46e81abf3f1efc0",
+      "destination": "docs/screen-map.md",
+      "mode": "ported and adapted"
+    },
+    {
+      "source": "one-in-eight-billion-mobile/docs/localization.md",
+      "bytes": 9381,
+      "sha256": "4ea36bf57d20b866f877b3af02dccebe55775e2dbe033c70933bd54b01d356da",
+      "destination": "docs/localization.md",
+      "mode": "ported and adapted"
+    },
+    {
+      "source": "one-in-eight-billion-mobile/docs/replay-format.md",
+      "bytes": 3393,
+      "sha256": "71d5572cd9d82d9d53ea0791c040fa3c038f09547072f4465976e3e0f305e8c2",
+      "destination": "docs/replay-format.md",
+      "mode": "ported and adapted"
+    },
+    {
+      "source": "one-in-eight-billion-mobile/docs/architecture.md",
+      "bytes": 7420,
+      "sha256": "ac91914673e5c6e67221f1d23ccb2240c2a7464c82b1d7fc8af50171efb60a2b",
+      "destination": "docs/architecture.md",
+      "mode": "architecture reference; rewritten for local engine"
+    }
+  ]
+}

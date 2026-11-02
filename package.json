@@ -1,22 +1,23 @@
 {
-  "name": "one-in-eight-billion-mobile",
-  "version": "0.0.1-dev",
+  "name": "one-in-eight-billion-independent",
+  "version": "0.1.0-experimental",
   "private": true,
   "type": "module",
   "engines": {
     "node": ">=24.16.0"
   },
   "scripts": {
-    "dev": "npm run core:extract && vite --host 127.0.0.1 --port 4190 --strictPort",
-    "core:extract": "node tools/core/extract-core.mjs",
+    "dev": "vite --host 127.0.0.1 --port 4192 --strictPort",
     "typecheck": "tsc -b",
-    "verify:core": "node tools/verify-core.mjs",
+    "verify:core": "npm run verify:engine",
     "test": "node --experimental-strip-types --test tests/*.test.mjs tests/core/*.test.mjs",
-    "test:equivalence": "node --experimental-strip-types --test tests/core/equivalence.test.mjs",
-    "check": "npm run verify:core && npm run core:extract && npm run typecheck && npm test",
-    "build": "npm run verify:core && npm run core:extract && npm run typecheck && vite build",
-    "preview": "vite preview --host 127.0.0.1 --port 4191 --strictPort",
-    "verify:build": "node --experimental-strip-types tools/harness/check-build.mjs"
+    "test:equivalence": "node --experimental-strip-types --test tests/core/regressions.test.mjs",
+    "check": "npm run verify:engine && npm run typecheck && npm test",
+    "build": "npm run verify:engine && npm run typecheck && vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 4193 --strictPort",
+    "verify:build": "node --experimental-strip-types tools/harness/check-build.mjs",
+    "verify:engine": "node tools/verify-engine.mjs",
+    "test:oracle": "node --experimental-strip-types tools/verification/run-oracle-tests.mjs"
   },
   "dependencies": {
     "@fontsource/caveat": "5.3.0",
