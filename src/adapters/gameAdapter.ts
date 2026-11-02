@@ -144,6 +144,8 @@ export class GameAdapter {
         document.addEventListener('visibilitychange', this.onVisibility);
         addEventListener('pagehide', this.onPageHide);
       }
+      const savedLife = host.top.lsGet(host.top.SAVE_KEY, null)?.S;
+      if (savedLife?.phase === 'life' || savedLife?.phase === 'birth') await this.prepareLifeEra(host, savedLife);
       this.resumeFromSave();
       this.publish({ status: 'ready' });
     } catch (error) {
@@ -460,6 +462,9 @@ export class GameAdapter {
       if (T.S && (T.S.phase === 'life' || T.S.phase === 'birth')) T.save();
       host.storage.setItem(storageKey, key);
       const next = await load();
+      // The new language/currency host has its own optional era module. Prepare
+      // it before transferring S or building any demographic/economic views.
+      await this.prepareLifeEra(next, T.S);
       // Без restore/renderAll: смена языка не расходует игровой RNG.
       next.top.S = T.S;
       next.top.RND_N = T.RND_N;
@@ -566,6 +571,11 @@ export class GameAdapter {
     if (T?.S && (T.S.phase === 'life' || T.S.phase === 'birth')) {
       try { T.save(); } catch (e) { this.host?.recordError('command', e); }
     }
+  }
+
+  /** Country/economy functions must see the life era before restore or host swap. */
+  private async prepareLifeEra(host: CoreHost, life: { era?: unknown } | null | undefined): Promise<void> {
+    if (life?.era && life.era !== 'now' && !host.top.eraLoaded()) await host.top.eraLoad();
   }
 
   private resumeFromSave(): void {

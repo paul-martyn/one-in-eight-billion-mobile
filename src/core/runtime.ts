@@ -1,10 +1,10 @@
-// Хост производного core. Единственное место, где создаётся экземпляр игры;
+// Хост самостоятельного движка. Единственное место, где создаётся экземпляр игры;
 // адаптер получает CoreHost и больше никто.
 import { createCoreGlobals, CoreTimers, namespacedStorage, memoryStorage, type CoreClock, type NetworkAttempt, type StorageLike } from './env.ts';
 import { CoreEntropy } from './entropy.ts';
 import { installRussianTextOverrides } from './localization/ru.ts';
 
-/** Пространство ключей веб-версии: не пересекается с сохранениями прежней копии игры. */
+/** Совместимые ключи веб-версии; изоляцию профилей определяет origin браузера. */
 export const STORAGE_PREFIX = '1in8b-mobile/v1:';
 /** Состояние потока случайности хранится рядом с сохранением жизни. */
 export const ENTROPY_KEY = 'mobile.entropy';
@@ -38,7 +38,7 @@ export type CoreHost = {
 
 type CoreModule = {
   CORE_META: { sourceSha256: string; generator: string; freeGlobals: Record<string, string> };
-  instantiateCore(env: { globals: Record<string, unknown> }): { top: Record<string, any>; setLateGlobal(name: string, value: unknown): void };
+  instantiateCore(env: { globals: Record<string, unknown>; loadEra?: () => Promise<unknown> }): { top: Record<string, any>; setLateGlobal(name: string, value: unknown): void };
 };
 
 export type HostOptions = {
@@ -104,15 +104,14 @@ export function createHost(mod: CoreModule, opts: HostOptions): CoreHost {
     storage: coupled,
     timers,
     lang: opts.lang ?? 'en',
-    dom: 'inert',
+    dom: 'null',
     onNetwork: a => network.push(a),
-    loadScript: async src => {
-      if (!/^\/era\.js(\?|$)/.test(src) || !opts.loadEra) throw new Error(`Неизвестный скрипт ${src}`);
-      core!.setLateGlobal('ERA', await opts.loadEra());
-    },
     console: { log: () => {}, info: () => {}, debug: () => {}, warn: (...a: unknown[]) => console.warn('[core]', ...a), error: (...a: unknown[]) => recordError('hook', new Error(a.map(String).join(' '))) },
   }, Object.keys(mod.CORE_META.freeGlobals));
-  core = mod.instantiateCore({ globals });
+  // The removed page bootstrap consumed one presentation-only random value.
+  // Preserve the position of a seeded view stream without retaining telemetry.
+  viewRandom();
+  core = mod.instantiateCore({ globals, loadEra: opts.loadEra });
   randomSource = entropy.next;
   const discardedBootTimers = timers.discardAll();
   const top = core.top;
@@ -166,16 +165,16 @@ export function createHost(mod: CoreModule, opts: HostOptions): CoreHost {
   };
 }
 
-/** Загрузка в браузере: модуль ~7 МБ подгружается отдельно от оболочки приложения. */
+/** Локальные исходники движка подгружаются отдельно от оболочки приложения. */
 export async function bootCore(opts: Omit<HostOptions, 'loadEra'>): Promise<CoreHost> {
   const loaders = {
-    en: () => import('./generated/game.en.core.js'),
-    ru: () => import('./generated/game.ru.core.js'),
-    es: () => import('./generated/game.es.core.js'),
-    fr: () => import('./generated/game.fr.core.js'),
-    de: () => import('./generated/game.de.core.js'),
+    en: () => import('../engine/game.en.js'),
+    ru: () => import('../engine/game.ru.js'),
+    es: () => import('../engine/game.es.js'),
+    fr: () => import('../engine/game.fr.js'),
+    de: () => import('../engine/game.de.js'),
   };
   const lang = opts.lang && opts.lang in loaders ? opts.lang as keyof typeof loaders : 'en';
   const mod = (await loaders[lang]()) as unknown as CoreModule;
-  return createHost(mod, { ...opts, loadEra: async () => (await import('./generated/era.core.js')).ERA });
+  return createHost(mod, { ...opts, loadEra: async () => (await import('../engine/era.js')).ERA });
 }

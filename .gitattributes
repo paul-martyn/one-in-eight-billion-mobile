@@ -1,4 +1,3 @@
-* text=auto
-# Эталонные файлы должны оставаться побайтно идентичными снимку.
-reference/original-0.8.98/** -text
-reference/locales-0.8.98/** -text
+* text=auto eol=lf
+# Preserve audited engine bytes on checkout, including inherited line endings.
+src/engine/** -text

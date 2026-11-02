@@ -1,0 +1,562 @@
+{
+  "format": "independent-engine-oracle/1",
+  "testedAt": "2026-11-02T18:01:41.177Z",
+  "method": "Unmodified locale snapshot in node:vm versus standalone engine; byte-exact full state, RNG counter, hook count and errors after each command, plus final storage.",
+  "baseline": "Immutable public locale snapshots 0.8.98 in an external optional development oracle",
+  "total": 55,
+  "passed": 55,
+  "failed": 0,
+  "milliseconds": 41362,
+  "results": [
+    {
+      "lang": "en",
+      "scenario": "can-f-auto",
+      "pass": true,
+      "commands": 229,
+      "age": 49,
+      "decisions": 36,
+      "sourceSha256": "f98bd80cd361531ffcf27a660b7ea2706af0dbd9d0a56217e61c41c7967effb5",
+      "milliseconds": 855
+    },
+    {
+      "lang": "en",
+      "scenario": "ind-m-first",
+      "pass": true,
+      "commands": 379,
+      "age": 85,
+      "decisions": 59,
+      "sourceSha256": "f98bd80cd361531ffcf27a660b7ea2706af0dbd9d0a56217e61c41c7967effb5",
+      "milliseconds": 926
+    },
+    {
+      "lang": "en",
+      "scenario": "nga-f-last",
+      "pass": true,
+      "commands": 180,
+      "age": 42,
+      "decisions": 22,
+      "sourceSha256": "f98bd80cd361531ffcf27a660b7ea2706af0dbd9d0a56217e61c41c7967effb5",
+      "milliseconds": 355
+    },
+    {
+      "lang": "en",
+      "scenario": "usa-m-rotate",
+      "pass": true,
+      "commands": 355,
+      "age": 75,
+      "decisions": 60,
+      "sourceSha256": "f98bd80cd361531ffcf27a660b7ea2706af0dbd9d0a56217e61c41c7967effb5",
+      "milliseconds": 683
+    },
+    {
+      "lang": "en",
+      "scenario": "kor-m-auto",
+      "pass": true,
+      "commands": 425,
+      "age": 93,
+      "decisions": 71,
+      "sourceSha256": "f98bd80cd361531ffcf27a660b7ea2706af0dbd9d0a56217e61c41c7967effb5",
+      "milliseconds": 834
+    },
+    {
+      "lang": "en",
+      "scenario": "chn-f-rotate",
+      "pass": true,
+      "commands": 351,
+      "age": 85,
+      "decisions": 42,
+      "sourceSha256": "f98bd80cd361531ffcf27a660b7ea2706af0dbd9d0a56217e61c41c7967effb5",
+      "milliseconds": 737
+    },
+    {
+      "lang": "en",
+      "scenario": "bra-m-last",
+      "pass": true,
+      "commands": 334,
+      "age": 67,
+      "decisions": 64,
+      "sourceSha256": "f98bd80cd361531ffcf27a660b7ea2706af0dbd9d0a56217e61c41c7967effb5",
+      "milliseconds": 597
+    },
+    {
+      "lang": "en",
+      "scenario": "rus-f-first",
+      "pass": true,
+      "commands": 385,
+      "age": 92,
+      "decisions": 50,
+      "sourceSha256": "f98bd80cd361531ffcf27a660b7ea2706af0dbd9d0a56217e61c41c7967effb5",
+      "milliseconds": 777
+    },
+    {
+      "lang": "en",
+      "scenario": "random-country-auto",
+      "pass": true,
+      "commands": 291,
+      "age": 64,
+      "decisions": 45,
+      "sourceSha256": "f98bd80cd361531ffcf27a660b7ea2706af0dbd9d0a56217e61c41c7967effb5",
+      "milliseconds": 569
+    },
+    {
+      "lang": "en",
+      "scenario": "past-1950-auto",
+      "pass": true,
+      "commands": 324,
+      "age": 74,
+      "decisions": 45,
+      "sourceSha256": "f98bd80cd361531ffcf27a660b7ea2706af0dbd9d0a56217e61c41c7967effb5",
+      "milliseconds": 1155
+    },
+    {
+      "lang": "en",
+      "scenario": "future-2045-rotate",
+      "pass": true,
+      "commands": 265,
+      "age": 56,
+      "decisions": 45,
+      "sourceSha256": "f98bd80cd361531ffcf27a660b7ea2706af0dbd9d0a56217e61c41c7967effb5",
+      "milliseconds": 877
+    },
+    {
+      "lang": "ru",
+      "scenario": "can-f-auto",
+      "pass": true,
+      "commands": 229,
+      "age": 49,
+      "decisions": 36,
+      "sourceSha256": "860d64db64b952552780a491ec3bce39308a25c32ba050b74d8c4cbcbcbd34c6",
+      "milliseconds": 893
+    },
+    {
+      "lang": "ru",
+      "scenario": "ind-m-first",
+      "pass": true,
+      "commands": 379,
+      "age": 85,
+      "decisions": 59,
+      "sourceSha256": "860d64db64b952552780a491ec3bce39308a25c32ba050b74d8c4cbcbcbd34c6",
+      "milliseconds": 977
+    },
+    {
+      "lang": "ru",
+      "scenario": "nga-f-last",
+      "pass": true,
+      "commands": 180,
+      "age": 42,
+      "decisions": 22,
+      "sourceSha256": "860d64db64b952552780a491ec3bce39308a25c32ba050b74d8c4cbcbcbd34c6",
+      "milliseconds": 438
+    },
+    {
+      "lang": "ru",
+      "scenario": "usa-m-rotate",
+      "pass": true,
+      "commands": 355,
+      "age": 75,
+      "decisions": 60,
+      "sourceSha256": "860d64db64b952552780a491ec3bce39308a25c32ba050b74d8c4cbcbcbd34c6",
+      "milliseconds": 769
+    },
+    {
+      "lang": "ru",
+      "scenario": "kor-m-auto",
+      "pass": true,
+      "commands": 249,
+      "age": 53,
+      "decisions": 41,
+      "sourceSha256": "860d64db64b952552780a491ec3bce39308a25c32ba050b74d8c4cbcbcbd34c6",
+      "milliseconds": 487
+    },
+    {
+      "lang": "ru",
+      "scenario": "chn-f-rotate",
+      "pass": true,
+      "commands": 351,
+      "age": 85,
+      "decisions": 42,
+      "sourceSha256": "860d64db64b952552780a491ec3bce39308a25c32ba050b74d8c4cbcbcbd34c6",
+      "milliseconds": 761
+    },
+    {
+      "lang": "ru",
+      "scenario": "bra-m-last",
+      "pass": true,
+      "commands": 334,
+      "age": 67,
+      "decisions": 64,
+      "sourceSha256": "860d64db64b952552780a491ec3bce39308a25c32ba050b74d8c4cbcbcbd34c6",
+      "milliseconds": 703
+    },
+    {
+      "lang": "ru",
+      "scenario": "rus-f-first",
+      "pass": true,
+      "commands": 340,
+      "age": 73,
+      "decisions": 55,
+      "sourceSha256": "860d64db64b952552780a491ec3bce39308a25c32ba050b74d8c4cbcbcbd34c6",
+      "milliseconds": 772
+    },
+    {
+      "lang": "ru",
+      "scenario": "random-country-auto",
+      "pass": true,
+      "commands": 291,
+      "age": 64,
+      "decisions": 45,
+      "sourceSha256": "860d64db64b952552780a491ec3bce39308a25c32ba050b74d8c4cbcbcbd34c6",
+      "milliseconds": 618
+    },
+    {
+      "lang": "ru",
+      "scenario": "past-1950-auto",
+      "pass": true,
+      "commands": 345,
+      "age": 81,
+      "decisions": 45,
+      "sourceSha256": "860d64db64b952552780a491ec3bce39308a25c32ba050b74d8c4cbcbcbd34c6",
+      "milliseconds": 1271
+    },
+    {
+      "lang": "ru",
+      "scenario": "future-2045-rotate",
+      "pass": true,
+      "commands": 265,
+      "age": 56,
+      "decisions": 45,
+      "sourceSha256": "860d64db64b952552780a491ec3bce39308a25c32ba050b74d8c4cbcbcbd34c6",
+      "milliseconds": 920
+    },
+    {
+      "lang": "es",
+      "scenario": "can-f-auto",
+      "pass": true,
+      "commands": 229,
+      "age": 49,
+      "decisions": 36,
+      "sourceSha256": "78381989e93936d1ef66c6e85f57d2590a8049451aae24bf21d190466d2021be",
+      "milliseconds": 782
+    },
+    {
+      "lang": "es",
+      "scenario": "ind-m-first",
+      "pass": true,
+      "commands": 379,
+      "age": 85,
+      "decisions": 59,
+      "sourceSha256": "78381989e93936d1ef66c6e85f57d2590a8049451aae24bf21d190466d2021be",
+      "milliseconds": 891
+    },
+    {
+      "lang": "es",
+      "scenario": "nga-f-last",
+      "pass": true,
+      "commands": 180,
+      "age": 42,
+      "decisions": 22,
+      "sourceSha256": "78381989e93936d1ef66c6e85f57d2590a8049451aae24bf21d190466d2021be",
+      "milliseconds": 354
+    },
+    {
+      "lang": "es",
+      "scenario": "usa-m-rotate",
+      "pass": true,
+      "commands": 355,
+      "age": 75,
+      "decisions": 60,
+      "sourceSha256": "78381989e93936d1ef66c6e85f57d2590a8049451aae24bf21d190466d2021be",
+      "milliseconds": 727
+    },
+    {
+      "lang": "es",
+      "scenario": "kor-m-auto",
+      "pass": true,
+      "commands": 425,
+      "age": 93,
+      "decisions": 71,
+      "sourceSha256": "78381989e93936d1ef66c6e85f57d2590a8049451aae24bf21d190466d2021be",
+      "milliseconds": 876
+    },
+    {
+      "lang": "es",
+      "scenario": "chn-f-rotate",
+      "pass": true,
+      "commands": 351,
+      "age": 85,
+      "decisions": 42,
+      "sourceSha256": "78381989e93936d1ef66c6e85f57d2590a8049451aae24bf21d190466d2021be",
+      "milliseconds": 737
+    },
+    {
+      "lang": "es",
+      "scenario": "bra-m-last",
+      "pass": true,
+      "commands": 334,
+      "age": 67,
+      "decisions": 64,
+      "sourceSha256": "78381989e93936d1ef66c6e85f57d2590a8049451aae24bf21d190466d2021be",
+      "milliseconds": 622
+    },
+    {
+      "lang": "es",
+      "scenario": "rus-f-first",
+      "pass": true,
+      "commands": 385,
+      "age": 92,
+      "decisions": 50,
+      "sourceSha256": "78381989e93936d1ef66c6e85f57d2590a8049451aae24bf21d190466d2021be",
+      "milliseconds": 867
+    },
+    {
+      "lang": "es",
+      "scenario": "random-country-auto",
+      "pass": true,
+      "commands": 291,
+      "age": 64,
+      "decisions": 45,
+      "sourceSha256": "78381989e93936d1ef66c6e85f57d2590a8049451aae24bf21d190466d2021be",
+      "milliseconds": 613
+    },
+    {
+      "lang": "es",
+      "scenario": "past-1950-auto",
+      "pass": true,
+      "commands": 324,
+      "age": 74,
+      "decisions": 45,
+      "sourceSha256": "78381989e93936d1ef66c6e85f57d2590a8049451aae24bf21d190466d2021be",
+      "milliseconds": 1192
+    },
+    {
+      "lang": "es",
+      "scenario": "future-2045-rotate",
+      "pass": true,
+      "commands": 265,
+      "age": 56,
+      "decisions": 45,
+      "sourceSha256": "78381989e93936d1ef66c6e85f57d2590a8049451aae24bf21d190466d2021be",
+      "milliseconds": 920
+    },
+    {
+      "lang": "fr",
+      "scenario": "can-f-auto",
+      "pass": true,
+      "commands": 229,
+      "age": 49,
+      "decisions": 36,
+      "sourceSha256": "960869fa64801af49e9b64bf6f6c0e3c22ce7d4fbe99b22c2e94375de618ed32",
+      "milliseconds": 823
+    },
+    {
+      "lang": "fr",
+      "scenario": "ind-m-first",
+      "pass": true,
+      "commands": 379,
+      "age": 85,
+      "decisions": 59,
+      "sourceSha256": "960869fa64801af49e9b64bf6f6c0e3c22ce7d4fbe99b22c2e94375de618ed32",
+      "milliseconds": 945
+    },
+    {
+      "lang": "fr",
+      "scenario": "nga-f-last",
+      "pass": true,
+      "commands": 180,
+      "age": 42,
+      "decisions": 22,
+      "sourceSha256": "960869fa64801af49e9b64bf6f6c0e3c22ce7d4fbe99b22c2e94375de618ed32",
+      "milliseconds": 333
+    },
+    {
+      "lang": "fr",
+      "scenario": "usa-m-rotate",
+      "pass": true,
+      "commands": 355,
+      "age": 75,
+      "decisions": 60,
+      "sourceSha256": "960869fa64801af49e9b64bf6f6c0e3c22ce7d4fbe99b22c2e94375de618ed32",
+      "milliseconds": 624
+    },
+    {
+      "lang": "fr",
+      "scenario": "kor-m-auto",
+      "pass": true,
+      "commands": 425,
+      "age": 93,
+      "decisions": 71,
+      "sourceSha256": "960869fa64801af49e9b64bf6f6c0e3c22ce7d4fbe99b22c2e94375de618ed32",
+      "milliseconds": 769
+    },
+    {
+      "lang": "fr",
+      "scenario": "chn-f-rotate",
+      "pass": true,
+      "commands": 351,
+      "age": 85,
+      "decisions": 42,
+      "sourceSha256": "960869fa64801af49e9b64bf6f6c0e3c22ce7d4fbe99b22c2e94375de618ed32",
+      "milliseconds": 691
+    },
+    {
+      "lang": "fr",
+      "scenario": "bra-m-last",
+      "pass": true,
+      "commands": 334,
+      "age": 67,
+      "decisions": 64,
+      "sourceSha256": "960869fa64801af49e9b64bf6f6c0e3c22ce7d4fbe99b22c2e94375de618ed32",
+      "milliseconds": 548
+    },
+    {
+      "lang": "fr",
+      "scenario": "rus-f-first",
+      "pass": true,
+      "commands": 385,
+      "age": 92,
+      "decisions": 50,
+      "sourceSha256": "960869fa64801af49e9b64bf6f6c0e3c22ce7d4fbe99b22c2e94375de618ed32",
+      "milliseconds": 742
+    },
+    {
+      "lang": "fr",
+      "scenario": "random-country-auto",
+      "pass": true,
+      "commands": 291,
+      "age": 64,
+      "decisions": 45,
+      "sourceSha256": "960869fa64801af49e9b64bf6f6c0e3c22ce7d4fbe99b22c2e94375de618ed32",
+      "milliseconds": 533
+    },
+    {
+      "lang": "fr",
+      "scenario": "past-1950-auto",
+      "pass": true,
+      "commands": 324,
+      "age": 74,
+      "decisions": 45,
+      "sourceSha256": "960869fa64801af49e9b64bf6f6c0e3c22ce7d4fbe99b22c2e94375de618ed32",
+      "milliseconds": 1027
+    },
+    {
+      "lang": "fr",
+      "scenario": "future-2045-rotate",
+      "pass": true,
+      "commands": 265,
+      "age": 56,
+      "decisions": 45,
+      "sourceSha256": "960869fa64801af49e9b64bf6f6c0e3c22ce7d4fbe99b22c2e94375de618ed32",
+      "milliseconds": 779
+    },
+    {
+      "lang": "de",
+      "scenario": "can-f-auto",
+      "pass": true,
+      "commands": 229,
+      "age": 49,
+      "decisions": 36,
+      "sourceSha256": "8c9e752e48c4bfa2ac5e7d3cfb205cef295442db33096ef8aa9dc67d70e5cd3d",
+      "milliseconds": 700
+    },
+    {
+      "lang": "de",
+      "scenario": "ind-m-first",
+      "pass": true,
+      "commands": 379,
+      "age": 85,
+      "decisions": 59,
+      "sourceSha256": "8c9e752e48c4bfa2ac5e7d3cfb205cef295442db33096ef8aa9dc67d70e5cd3d",
+      "milliseconds": 781
+    },
+    {
+      "lang": "de",
+      "scenario": "nga-f-last",
+      "pass": true,
+      "commands": 180,
+      "age": 42,
+      "decisions": 22,
+      "sourceSha256": "8c9e752e48c4bfa2ac5e7d3cfb205cef295442db33096ef8aa9dc67d70e5cd3d",
+      "milliseconds": 293
+    },
+    {
+      "lang": "de",
+      "scenario": "usa-m-rotate",
+      "pass": true,
+      "commands": 355,
+      "age": 75,
+      "decisions": 60,
+      "sourceSha256": "8c9e752e48c4bfa2ac5e7d3cfb205cef295442db33096ef8aa9dc67d70e5cd3d",
+      "milliseconds": 628
+    },
+    {
+      "lang": "de",
+      "scenario": "kor-m-auto",
+      "pass": true,
+      "commands": 425,
+      "age": 93,
+      "decisions": 71,
+      "sourceSha256": "8c9e752e48c4bfa2ac5e7d3cfb205cef295442db33096ef8aa9dc67d70e5cd3d",
+      "milliseconds": 782
+    },
+    {
+      "lang": "de",
+      "scenario": "chn-f-rotate",
+      "pass": true,
+      "commands": 351,
+      "age": 85,
+      "decisions": 42,
+      "sourceSha256": "8c9e752e48c4bfa2ac5e7d3cfb205cef295442db33096ef8aa9dc67d70e5cd3d",
+      "milliseconds": 596
+    },
+    {
+      "lang": "de",
+      "scenario": "bra-m-last",
+      "pass": true,
+      "commands": 334,
+      "age": 67,
+      "decisions": 64,
+      "sourceSha256": "8c9e752e48c4bfa2ac5e7d3cfb205cef295442db33096ef8aa9dc67d70e5cd3d",
+      "milliseconds": 557
+    },
+    {
+      "lang": "de",
+      "scenario": "rus-f-first",
+      "pass": true,
+      "commands": 385,
+      "age": 92,
+      "decisions": 50,
+      "sourceSha256": "8c9e752e48c4bfa2ac5e7d3cfb205cef295442db33096ef8aa9dc67d70e5cd3d",
+      "milliseconds": 829
+    },
+    {
+      "lang": "de",
+      "scenario": "random-country-auto",
+      "pass": true,
+      "commands": 291,
+      "age": 64,
+      "decisions": 45,
+      "sourceSha256": "8c9e752e48c4bfa2ac5e7d3cfb205cef295442db33096ef8aa9dc67d70e5cd3d",
+      "milliseconds": 525
+    },
+    {
+      "lang": "de",
+      "scenario": "past-1950-auto",
+      "pass": true,
+      "commands": 324,
+      "age": 74,
+      "decisions": 45,
+      "sourceSha256": "8c9e752e48c4bfa2ac5e7d3cfb205cef295442db33096ef8aa9dc67d70e5cd3d",
+      "milliseconds": 1104
+    },
+    {
+      "lang": "de",
+      "scenario": "future-2045-rotate",
+      "pass": true,
+      "commands": 265,
+      "age": 56,
+      "decisions": 45,
+      "sourceSha256": "8c9e752e48c4bfa2ac5e7d3cfb205cef295442db33096ef8aa9dc67d70e5cd3d",
+      "milliseconds": 883
+    }
+  ]
+}

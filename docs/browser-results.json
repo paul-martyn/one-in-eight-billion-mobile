@@ -1,0 +1,815 @@
+{
+  "base": "http://127.0.0.1:4192/",
+  "results": [
+    {
+      "name": "phone",
+      "width": 393,
+      "height": 852,
+      "reduced": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "externalRequests": [],
+      "failedRequests": [],
+      "stages": [
+        {
+          "stage": "language",
+          "status": "ready",
+          "phase": "none",
+          "lastChoice": false,
+          "lifeSeq": 0,
+          "skipping": false,
+          "meta": {
+            "energy": 5,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": null,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 393,
+            "scroll": 393
+          }
+        },
+        {
+          "stage": "certificate",
+          "status": "ready",
+          "phase": "birth",
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643509352,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 393,
+            "scroll": 393
+          }
+        },
+        {
+          "stage": "life",
+          "status": "ready",
+          "phase": "life",
+          "age": 0,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643509352,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 393,
+            "scroll": 393
+          }
+        },
+        {
+          "stage": "People",
+          "status": "ready",
+          "phase": "life",
+          "age": 0,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643509352,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 393,
+            "scroll": 393
+          }
+        },
+        {
+          "stage": "Activities",
+          "status": "ready",
+          "phase": "life",
+          "age": 0,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643509352,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 393,
+            "scroll": 393
+          }
+        },
+        {
+          "stage": "Money",
+          "status": "ready",
+          "phase": "life",
+          "age": 0,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643509352,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 393,
+            "scroll": 393
+          }
+        },
+        {
+          "stage": "Odds",
+          "status": "ready",
+          "phase": "life",
+          "age": 0,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643509352,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 393,
+            "scroll": 393
+          }
+        },
+        {
+          "stage": "Life",
+          "status": "ready",
+          "phase": "life",
+          "age": 0,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643509352,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 393,
+            "scroll": 393
+          }
+        },
+        {
+          "stage": "pause",
+          "status": "ready",
+          "phase": "life",
+          "age": 0,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643509352,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 393,
+            "scroll": 393
+          }
+        },
+        {
+          "stage": "dead",
+          "status": "ready",
+          "phase": "dead",
+          "age": 64,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643509352,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": {
+              "lifeId": "1793641728444",
+              "name": "Owen Clark",
+              "given": "Owen",
+              "sex": "M",
+              "age": 64,
+              "iso": "USA",
+              "years": "2026–2090",
+              "look": {
+                "id": "me",
+                "band": "elder",
+                "sex": "m",
+                "tone": 1,
+                "toneFrom": "game",
+                "seed": 184906442
+              },
+              "items": [
+                {
+                  "kind": "school",
+                  "detail": "high school",
+                  "dollars": 60,
+                  "gems": 0
+                },
+                {
+                  "kind": "firstJob",
+                  "detail": "salesperson",
+                  "dollars": 40,
+                  "gems": 0
+                },
+                {
+                  "kind": "married",
+                  "detail": "Chloe Clark",
+                  "dollars": 50,
+                  "gems": 0
+                },
+                {
+                  "kind": "firstInCountry",
+                  "detail": "the United States",
+                  "dollars": 0,
+                  "gems": 2
+                }
+              ],
+              "dollars": 150,
+              "gems": 2
+            },
+            "unseenLives": 0
+          },
+          "pastLives": 1,
+          "layout": {
+            "width": 393,
+            "scroll": 393
+          }
+        },
+        {
+          "stage": "ended",
+          "status": "ready",
+          "phase": "dead",
+          "age": 64,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643509352,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": {
+              "lifeId": "1793641728444",
+              "name": "Owen Clark",
+              "given": "Owen",
+              "sex": "M",
+              "age": 64,
+              "iso": "USA",
+              "years": "2026–2090",
+              "look": {
+                "id": "me",
+                "band": "elder",
+                "sex": "m",
+                "tone": 1,
+                "toneFrom": "game",
+                "seed": 184906442
+              },
+              "items": [
+                {
+                  "kind": "school",
+                  "detail": "high school",
+                  "dollars": 60,
+                  "gems": 0
+                },
+                {
+                  "kind": "firstJob",
+                  "detail": "salesperson",
+                  "dollars": 40,
+                  "gems": 0
+                },
+                {
+                  "kind": "married",
+                  "detail": "Chloe Clark",
+                  "dollars": 50,
+                  "gems": 0
+                },
+                {
+                  "kind": "firstInCountry",
+                  "detail": "the United States",
+                  "dollars": 0,
+                  "gems": 2
+                }
+              ],
+              "dollars": 150,
+              "gems": 2
+            },
+            "unseenLives": 0
+          },
+          "pastLives": 1,
+          "layout": {
+            "width": 393,
+            "scroll": 393
+          }
+        },
+        {
+          "stage": "claimed",
+          "status": "ready",
+          "phase": "dead",
+          "age": 64,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643509352,
+            "dollars": 150,
+            "gems": 2,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 1
+          },
+          "pastLives": 1,
+          "layout": {
+            "width": 393,
+            "scroll": 393
+          }
+        },
+        {
+          "stage": "reloaded",
+          "status": "ready",
+          "phase": "none",
+          "lastChoice": false,
+          "lifeSeq": 0,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643509352,
+            "dollars": 150,
+            "gems": 2,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 1
+          },
+          "pastLives": 1,
+          "layout": {
+            "width": 393,
+            "scroll": 393
+          }
+        }
+      ],
+      "success": true
+    },
+    {
+      "name": "small-reduced",
+      "width": 320,
+      "height": 568,
+      "reduced": true,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "externalRequests": [],
+      "failedRequests": [],
+      "stages": [
+        {
+          "stage": "language",
+          "status": "ready",
+          "phase": "none",
+          "lastChoice": false,
+          "lifeSeq": 0,
+          "skipping": false,
+          "meta": {
+            "energy": 5,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": null,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 320,
+            "scroll": 320
+          }
+        },
+        {
+          "stage": "certificate",
+          "status": "ready",
+          "phase": "birth",
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643535698,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 320,
+            "scroll": 320
+          }
+        },
+        {
+          "stage": "life",
+          "status": "ready",
+          "phase": "life",
+          "age": 0,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643535698,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 320,
+            "scroll": 320
+          }
+        },
+        {
+          "stage": "People",
+          "status": "ready",
+          "phase": "life",
+          "age": 0,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643535698,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 320,
+            "scroll": 320
+          }
+        },
+        {
+          "stage": "Activities",
+          "status": "ready",
+          "phase": "life",
+          "age": 0,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643535698,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 320,
+            "scroll": 320
+          }
+        },
+        {
+          "stage": "Money",
+          "status": "ready",
+          "phase": "life",
+          "age": 0,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643535698,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 320,
+            "scroll": 320
+          }
+        },
+        {
+          "stage": "Odds",
+          "status": "ready",
+          "phase": "life",
+          "age": 0,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643535698,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 320,
+            "scroll": 320
+          }
+        },
+        {
+          "stage": "Life",
+          "status": "ready",
+          "phase": "life",
+          "age": 0,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643535698,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 320,
+            "scroll": 320
+          }
+        },
+        {
+          "stage": "pause",
+          "status": "ready",
+          "phase": "life",
+          "age": 0,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643535698,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 0
+          },
+          "pastLives": 0,
+          "layout": {
+            "width": 320,
+            "scroll": 320
+          }
+        },
+        {
+          "stage": "dead",
+          "status": "ready",
+          "phase": "dead",
+          "age": 17,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643535698,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": {
+              "lifeId": "1793641737301",
+              "name": "Kunal Patidar",
+              "given": "Kunal",
+              "sex": "M",
+              "age": 17,
+              "iso": "IND",
+              "years": "2026–2043",
+              "look": {
+                "id": "me",
+                "band": "teen",
+                "sex": "m",
+                "tone": 3,
+                "toneFrom": "game",
+                "seed": 982043706
+              },
+              "items": [
+                {
+                  "kind": "firstInCountry",
+                  "detail": "India",
+                  "dollars": 0,
+                  "gems": 2
+                }
+              ],
+              "dollars": 0,
+              "gems": 2
+            },
+            "unseenLives": 0
+          },
+          "pastLives": 1,
+          "layout": {
+            "width": 320,
+            "scroll": 320
+          }
+        },
+        {
+          "stage": "ended",
+          "status": "ready",
+          "phase": "dead",
+          "age": 17,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643535698,
+            "dollars": 0,
+            "gems": 0,
+            "canStartLife": true,
+            "pendingReward": {
+              "lifeId": "1793641737301",
+              "name": "Kunal Patidar",
+              "given": "Kunal",
+              "sex": "M",
+              "age": 17,
+              "iso": "IND",
+              "years": "2026–2043",
+              "look": {
+                "id": "me",
+                "band": "teen",
+                "sex": "m",
+                "tone": 3,
+                "toneFrom": "game",
+                "seed": 982043706
+              },
+              "items": [
+                {
+                  "kind": "firstInCountry",
+                  "detail": "India",
+                  "dollars": 0,
+                  "gems": 2
+                }
+              ],
+              "dollars": 0,
+              "gems": 2
+            },
+            "unseenLives": 0
+          },
+          "pastLives": 1,
+          "layout": {
+            "width": 320,
+            "scroll": 320
+          }
+        },
+        {
+          "stage": "claimed",
+          "status": "ready",
+          "phase": "dead",
+          "age": 17,
+          "lastChoice": false,
+          "lifeSeq": 1,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643535698,
+            "dollars": 0,
+            "gems": 2,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 1
+          },
+          "pastLives": 1,
+          "layout": {
+            "width": 320,
+            "scroll": 320
+          }
+        },
+        {
+          "stage": "reloaded",
+          "status": "ready",
+          "phase": "none",
+          "lastChoice": false,
+          "lifeSeq": 0,
+          "skipping": false,
+          "meta": {
+            "energy": 4,
+            "max": 5,
+            "lifeCost": 1,
+            "nextRefillAt": 1793643535698,
+            "dollars": 0,
+            "gems": 2,
+            "canStartLife": true,
+            "pendingReward": null,
+            "unseenLives": 1
+          },
+          "pastLives": 1,
+          "layout": {
+            "width": 320,
+            "scroll": 320
+          }
+        }
+      ],
+      "success": true
+    }
+  ]
+}

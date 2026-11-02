@@ -1,0 +1,66 @@
+{
+  "baselineModified": false,
+  "implementation": "outputs/independent-prep/render-effects.mjs",
+  "preservedEffects": [
+    "Appearance memo traversal from sceneModel, with original ordering and SC_PPL cap",
+    "Sibling death-age lazy draws",
+    "Study-abroad city lazy draw",
+    "Home-language lazy draw",
+    "Adult rental ledger initialization",
+    "Parent occupations when missing",
+    "Partner occupation lazy draw",
+    "Legacy-save experience ledger initialization through statusLine/expIn",
+    "Focus-hint state and preference persistence",
+    "UI.dirty reset"
+  ],
+  "verification": {
+    "languages": [
+      "en",
+      "ru",
+      "es",
+      "fr",
+      "de"
+    ],
+    "directSeededCompleteLives": 150,
+    "directRenderPasses": 15773,
+    "targetedStateChecks": 40,
+    "mobileAdapterCompleteLives": 15,
+    "mobileSnapshotAndAllViewBuilderComparisons": 1935,
+    "assertions": [
+      "exact serialized S including canonical journal",
+      "RNG state",
+      "UI preferences",
+      "all current mobile view builders",
+      "mobile adapter snapshots"
+    ],
+    "latestLegacyExperienceChangeRecheck": "40 targeted states and 10 EN complete lives / 965 render passes pass"
+  },
+  "intentionalInternalDifferences": [
+    "Old DOM output and drawing are omitted. Semantic scKey cache is retained only for exact translation-tail provenance.",
+    "Absolute L_RI translation-call counter differs because discarded old UI translations are skipped. All consumers use relative ring order; logical final8 output/source entries match."
+  ],
+  "scripts": [
+    "node --experimental-strip-types outputs/independent-prep/check-render-effects.mjs --all",
+    "node --experimental-strip-types outputs/independent-prep/check-targeted-render-effects.mjs",
+    "node --experimental-strip-types outputs/independent-prep/check-adapter-render-effects.mjs --all"
+  ],
+  "translationRingFix": {
+    "oracleFixture": "one-in-eight-billion-independent/tests/core/fixtures/render-theme-net.json",
+    "fix": "Reconstruct exact semantic last8 translation tail using countryRows + pure scene model/caption/key + optional sceneWho. No DOM/canvas/network. Preserve scKey and original relative ring order; absolute L_RI can differ.",
+    "standaloneTests": "one-in-eight-billion-independent/tests/core/render-themes.test.mjs",
+    "scan": {
+      "lives": 200,
+      "entries": 69116,
+      "remainingRecoveredTextDifferences": 0,
+      "logicalRingChecks": 20579,
+      "dailyThemeRegexDifferences": 0
+    },
+    "regression": "render-ring-27, net theme, age16 sm_phone: tag must stay on outcome index69, absent from Decision index68, all5 languages.",
+    "defect": "Headless kept cached choice translations after render; original UI evicted them, shifting daily-theme tags.",
+    "targetedProjectionChecks": 50,
+    "allThemeClearIntermediateChecks": 370,
+    "exactProjectionAllThemeChecks": 37,
+    "standaloneFrozenTests": "5/5 pass after independent engine rebuild",
+    "helperSha256": "e7ae751f0869c1ee9ed9b1ecce5295033845149443d46cf9d942ea90ca1d0737"
+  }
+}

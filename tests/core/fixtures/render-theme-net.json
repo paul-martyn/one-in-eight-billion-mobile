@@ -1,0 +1,188 @@
+{
+  "description": "Frozen 0.8.98 original inert renderer oracle; SHA-256 covers canonical full S and entropy state; net daily theme must tag outcome, not cached decision label.",
+  "seed": "render-ring-27",
+  "clock": "2026-11-02T09:00:00.000Z",
+  "theme": {
+    "k": "net",
+    "md": "01-01",
+    "y": "26",
+    "dn": ""
+  },
+  "fixtures": [
+    {
+      "lang": "en",
+      "originalSourceSha256": "f98bd80cd361531ffcf27a660b7ea2706af0dbd9d0a56217e61c41c7967effb5",
+      "initialHash": "a0aec3b362a16d97b337714ea6f184bb317ededff39e9a87c52ffbd895ccb9d8",
+      "before": {
+        "step": 66,
+        "decisionId": "sm_phone",
+        "hash": "04a259fa16bec015dcab9a5905fa97feed7149aa000bb259f8982db0f8f93fb7"
+      },
+      "after": {
+        "step": 66,
+        "hash": "7d8f6b955a822103814dace3b4d40ee3d6a439bcb07d60268fd3e7a8d59e0f1f",
+        "entries": [
+          {
+            "a": 16,
+            "text": "Decision: Put the phone away before sleep",
+            "kind": "dec",
+            "q": "The phone at bedtime"
+          },
+          {
+            "a": 16,
+            "text": "You left the phone outside the bed. Mornings felt much lighter.",
+            "kind": "big",
+            "td": 1,
+            "d": "sm_phone",
+            "fx": {
+              "hl": 2
+            }
+          }
+        ]
+      },
+      "finalHash": "5d13ee80f66c2d17e8f4b4f2a320aece173a286c98a4f18688fe679984045e47",
+      "finalEntropy": -1124759661,
+      "finalAge": 63
+    },
+    {
+      "lang": "ru",
+      "originalSourceSha256": "860d64db64b952552780a491ec3bce39308a25c32ba050b74d8c4cbcbcbd34c6",
+      "initialHash": "07af65d71b0ed30d2d9ac43588ad42e20a5cb32d0497aa088f766baa21c76f56",
+      "before": {
+        "step": 66,
+        "decisionId": "sm_phone",
+        "hash": "e676c3016434be7fec46849c3020ed453e2f247851d0fc677cb9648899ebe78b"
+      },
+      "after": {
+        "step": 66,
+        "hash": "2b12a0bbfc57abff07f2990fe51fbbba4b551d647ccc7f30d2de427ed916f50b",
+        "entries": [
+          {
+            "a": 16,
+            "text": "Решение: Перед сном отложить телефон",
+            "kind": "dec",
+            "q": "Телефон перед сном"
+          },
+          {
+            "a": 16,
+            "text": "Вы оставили телефон вне кровати и уснули. Утро стало намного легче.",
+            "kind": "big",
+            "td": 1,
+            "d": "sm_phone",
+            "fx": {
+              "hl": 2
+            }
+          }
+        ]
+      },
+      "finalHash": "8f3435d9e928c9ac08de55457e45c34022509046e7ed55e8b692dd4a678d8e24",
+      "finalEntropy": -1124759661,
+      "finalAge": 63
+    },
+    {
+      "lang": "es",
+      "originalSourceSha256": "78381989e93936d1ef66c6e85f57d2590a8049451aae24bf21d190466d2021be",
+      "initialHash": "a0aec3b362a16d97b337714ea6f184bb317ededff39e9a87c52ffbd895ccb9d8",
+      "before": {
+        "step": 66,
+        "decisionId": "sm_phone",
+        "hash": "68e874621c3094ad4954be4e4d3837ec159bbf2f591803d7042c1101cab0b88a"
+      },
+      "after": {
+        "step": 66,
+        "hash": "761753f9516311b19d3066416f5a8391c47261a99fcf3023404417d72834ae23",
+        "entries": [
+          {
+            "a": 16,
+            "text": "Decisión: Dejar el celular antes de dormir",
+            "kind": "dec",
+            "q": "El celular antes de dormir"
+          },
+          {
+            "a": 16,
+            "text": "Dormiste con el celular lejos de la cama. Las mañanas se volvieron mucho más ligeras.",
+            "kind": "big",
+            "td": 1,
+            "d": "sm_phone",
+            "fx": {
+              "hl": 2
+            }
+          }
+        ]
+      },
+      "finalHash": "046896f2864f40796df4371e6b2b52a16fe22b6a75e9667b36a7b0154cfd131e",
+      "finalEntropy": -1124759661,
+      "finalAge": 63
+    },
+    {
+      "lang": "fr",
+      "originalSourceSha256": "960869fa64801af49e9b64bf6f6c0e3c22ce7d4fbe99b22c2e94375de618ed32",
+      "initialHash": "a0aec3b362a16d97b337714ea6f184bb317ededff39e9a87c52ffbd895ccb9d8",
+      "before": {
+        "step": 66,
+        "decisionId": "sm_phone",
+        "hash": "9050b861c072975215179c300c60dccaf0cc0b93ba2813cdf3ccf9d43a7dbab2"
+      },
+      "after": {
+        "step": 66,
+        "hash": "4b0ea1f9c93453d4c5c13152fa5dea727965a5efae61c662982639c787d35d98",
+        "entries": [
+          {
+            "a": 16,
+            "text": "Décision : Poser le téléphone avant de dormir",
+            "kind": "dec",
+            "q": "Le téléphone au coucher"
+          },
+          {
+            "a": 16,
+            "text": "Vous avez dormi avec le téléphone loin du lit. Les matins sont devenus bien plus légers.",
+            "kind": "big",
+            "td": 1,
+            "d": "sm_phone",
+            "fx": {
+              "hl": 2
+            }
+          }
+        ]
+      },
+      "finalHash": "8818e8cf040034b0f7906a61498e7d6310c17aa782d0ef1b97451ac2f7dc8f7d",
+      "finalEntropy": -1124759661,
+      "finalAge": 63
+    },
+    {
+      "lang": "de",
+      "originalSourceSha256": "8c9e752e48c4bfa2ac5e7d3cfb205cef295442db33096ef8aa9dc67d70e5cd3d",
+      "initialHash": "a0aec3b362a16d97b337714ea6f184bb317ededff39e9a87c52ffbd895ccb9d8",
+      "before": {
+        "step": 66,
+        "decisionId": "sm_phone",
+        "hash": "0f83617a277d146fed09652cf9b04f1c76b7aec19d8af982d1d9852eab0f9222"
+      },
+      "after": {
+        "step": 66,
+        "hash": "d739c0f5fcbb6872730e4da3608329e06ab2c441a3204e3e44b81c78c7626ab7",
+        "entries": [
+          {
+            "a": 16,
+            "text": "Entscheidung: Vor dem Schlafen das Handy weglegen",
+            "kind": "dec",
+            "q": "Das Handy vor dem Schlafen"
+          },
+          {
+            "a": 16,
+            "text": "Du hast das Handy nicht mit ins Bett genommen. Die Morgen fühlten sich viel leichter an.",
+            "kind": "big",
+            "td": 1,
+            "d": "sm_phone",
+            "fx": {
+              "hl": 2
+            }
+          }
+        ]
+      },
+      "finalHash": "8e9975aa6fcde6624f9cf9a25417483b72f8fb2dc589cf600f51dcaa9e8fbe81",
+      "finalEntropy": -1124759661,
+      "finalAge": 63
+    }
+  ]
+}

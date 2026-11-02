@@ -39,8 +39,6 @@ export type MoneyVM = {
   way: string;
   /** Как хранятся сбережения (INV_N[S.invest || 'cash']). */
   invest: string;
-  /** В оригинале доступен лист «Spend & invest» (shopCan). */
-  shopInOriginal: boolean;
   debt: { amount: string; detail: string; maxed: boolean } | null;
 };
 
@@ -140,7 +138,6 @@ export function moneyVM(T: Top): MoneyVM {
     belongings: t ? (T.ownList() as string[]).map(plain).filter(Boolean) : [],
     way,
     invest: t ? plain(T.INV_N[S.invest || 'cash'] ?? '') : '',
-    shopInOriginal: !!T.shopCan(),
     debt,
   };
 }

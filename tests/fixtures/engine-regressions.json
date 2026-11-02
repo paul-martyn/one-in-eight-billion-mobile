@@ -1,0 +1,129 @@
+{
+  "format": "immutable-engine-oracle-regressions/1",
+  "version": "0.8.98 beta",
+  "capturedDate": "2026-10-31",
+  "clockAt": 1793102400000,
+  "method": "SHA-256 of exact JSON.stringify({S,rnd:RND_N,ev:hookCount,err:hookErrors}) after deterministic complete lives in unmodified public locale scripts. No live API used.",
+  "cases": [
+    {
+      "lang": "en",
+      "scenario": "can-f-auto",
+      "commands": 228,
+      "age": 49,
+      "decisions": 36,
+      "sha256": "3ec2272e02d50aea53a7d71701d132ff523b3d6e4706c4bd2415fed297e35f6c"
+    },
+    {
+      "lang": "en",
+      "scenario": "ind-m-first",
+      "commands": 378,
+      "age": 85,
+      "decisions": 59,
+      "sha256": "f8d42cec0ea3cc88c2e1698742a69302e1fa4f518e6a571458541a0b489a54ee"
+    },
+    {
+      "lang": "en",
+      "scenario": "nga-f-last",
+      "commands": 179,
+      "age": 42,
+      "decisions": 22,
+      "sha256": "cf95fb48167040554b74e539e99b669ca8b0fd3bf3b9ddd6b97a72345752a164"
+    },
+    {
+      "lang": "en",
+      "scenario": "usa-m-rotate",
+      "commands": 354,
+      "age": 75,
+      "decisions": 60,
+      "sha256": "80a69a0c24dfa8c407d3c2e72fc77987dc72c7964c42b82f2d489bc83087afaa"
+    },
+    {
+      "lang": "en",
+      "scenario": "kor-m-auto",
+      "commands": 424,
+      "age": 93,
+      "decisions": 71,
+      "sha256": "14d9fa2a5768da7e5fdb27a0464269c228def9f077ae8e71b42e04b5cd7b8afd"
+    },
+    {
+      "lang": "en",
+      "scenario": "chn-f-rotate",
+      "commands": 350,
+      "age": 85,
+      "decisions": 42,
+      "sha256": "a8ce87e68c595e5246bffce4a18446e2956356980fa91c8dd8cf8c80e044055b"
+    },
+    {
+      "lang": "en",
+      "scenario": "bra-m-last",
+      "commands": 333,
+      "age": 67,
+      "decisions": 64,
+      "sha256": "51eb45a1b18ce012c0525a1128c85ea90ef6e2bcad9d452b32b6c080304ca87d"
+    },
+    {
+      "lang": "en",
+      "scenario": "rus-f-first",
+      "commands": 384,
+      "age": 92,
+      "decisions": 50,
+      "sha256": "67859cd7ef8b9d32b6a45ebe09626f1152e34988940574d2b7250c5217884a84"
+    },
+    {
+      "lang": "en",
+      "scenario": "random-country-auto",
+      "commands": 290,
+      "age": 64,
+      "decisions": 45,
+      "sha256": "5d5f6d6474b5dfc4414c63b0be9bccde2cc29db82303fa8556181200cfc15374"
+    },
+    {
+      "lang": "en",
+      "scenario": "past-1950-auto",
+      "commands": 323,
+      "age": 74,
+      "decisions": 45,
+      "sha256": "c2072ebc3467978993179002a3fb34012abe13a9721bffedde6c7ffd8f071a2e"
+    },
+    {
+      "lang": "en",
+      "scenario": "future-2045-rotate",
+      "commands": 264,
+      "age": 56,
+      "decisions": 45,
+      "sha256": "0da6626f53abd08338a57749ce0f66d4fad195b7d2c1f03abe83daf57dd51cd7"
+    },
+    {
+      "lang": "ru",
+      "scenario": "can-f-auto",
+      "commands": 228,
+      "age": 49,
+      "decisions": 36,
+      "sha256": "76ff57ae3632d850bfa94c6d935155d1a21b684ba038c48ccc70725d082d9a46"
+    },
+    {
+      "lang": "es",
+      "scenario": "can-f-auto",
+      "commands": 228,
+      "age": 49,
+      "decisions": 36,
+      "sha256": "01946ce2ae9f64bd5ff1faee02f9d3322eb8e6b21ea3d6d95df0a55a16f7213c"
+    },
+    {
+      "lang": "fr",
+      "scenario": "can-f-auto",
+      "commands": 228,
+      "age": 49,
+      "decisions": 36,
+      "sha256": "8998a6f9e612dcf94048778473fe3faf2bed3cad7ee76bac4327e0d53646246c"
+    },
+    {
+      "lang": "de",
+      "scenario": "can-f-auto",
+      "commands": 228,
+      "age": 49,
+      "decisions": 36,
+      "sha256": "53382b50dfcca9d297d567b9c40bf4ded0aa93db041183f1c86d1e5b44b2bc19"
+    }
+  ]
+}

@@ -1,10 +1,9 @@
-// Контролируемое окружение производного core.
+// Контролируемое окружение самостоятельного движка.
 //
 // Оригинальная сборка писалась для страницы браузера. Здесь ей передаются
 // только явно созданные объекты: изолированный Math.random, управляемые часы
 // и таймеры, отдельное пространство ключей хранилища, инертный DOM, закрытая
-// сеть. Старый интерфейс не запускается: точка входа claude.hot.ready
-// принимает функцию start, но хост её не вызывает.
+// сеть. Движок не содержит точки запуска старой страницы.
 //
 // Этот модуль не зависит от DOM и используется как в браузере, так и в
 // Node-проверках эквивалентности.
@@ -87,8 +86,6 @@ export type CoreEnvOptions = {
   timers: CoreTimers;
   /** Язык сборки; путь страницы оригинала /<lang>/. */
   lang: string;
-  /** Загрузчик дополнительных скриптов оригинала (era.js). */
-  loadScript?: (src: string) => Promise<void>;
   onNetwork?: (attempt: NetworkAttempt) => void;
   /** Сообщения console.* из core. */
   console?: Pick<Console, 'log' | 'warn' | 'error' | 'info' | 'debug'>;
@@ -168,17 +165,14 @@ export function createCoreGlobals(opts: CoreEnvOptions, required: readonly strin
 
   const permissive = opts.dom === 'inert';
   const head = inertElement('head', permissive);
-  // Единственная используемая загрузка: era.js по требованию eraLoad().
+  // Данные эпох загружаются прямым локальным импортом хоста. Попытки
+  // исполнения скрипта через браузерный элемент всегда отклоняются.
   head.appendChild = (node: unknown) => {
     const script = node as { tagName?: string; src?: string; onload?: (() => void) | null; onerror?: ((e: unknown) => void) | null };
     if (String(script?.tagName).toUpperCase() === 'SCRIPT' && script.src) {
       const src = script.src;
-      if (!opts.loadScript) {
-        net('script', src);
-        opts.timers.setTimeout(() => script.onerror?.(new Error('offline')), 0);
-      } else {
-        opts.loadScript(src).then(() => script.onload?.(), e => script.onerror?.(e));
-      }
+      net('script', src);
+      opts.timers.setTimeout(() => script.onerror?.(new Error('offline')), 0);
     }
     return node;
   };
@@ -236,8 +230,6 @@ export function createCoreGlobals(opts: CoreEnvOptions, required: readonly strin
   const coreConsole = opts.console ?? { log: noop, warn: noop, error: noop, info: noop, debug: noop };
 
   const window: Record<string, unknown> = {
-    // Встраивание через hot-хост: оригинал отдаёт start(), хост его не вызывает.
-    claude: { hot: { ready: noop } },
     document, location, navigator, history, localStorage: opts.storage, sessionStorage: opts.storage,
     matchMedia, fetch, performance, crypto: coreCrypto, console: coreConsole,
     innerWidth: 393, innerHeight: 852, scrollY: 0, devicePixelRatio: 1,
