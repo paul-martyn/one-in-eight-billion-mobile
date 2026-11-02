@@ -1,6 +1,6 @@
 {
   "format": "github-migration-verification/1",
-  "verifiedAt": "2026-11-02T18:36:30.286Z",
+  "verifiedAt": "2026-11-02T18:44:10.519Z",
   "base": "9a7e2517490b1cc7e7d4d8ee4e2186fb6a739ac5",
   "cleanSourceTree": "a589067792f041717e1dfac764830e9b333ef814",
   "subsequentChanges": [
@@ -8,9 +8,12 @@
     "docs/independent-engine.md",
     "docs/testing.md",
     "docs/migration-oracle-comparison.json",
-    "docs/github-migration-verification.json"
+    "docs/github-migration-verification.json",
+    "tests/frozen-environment.mjs",
+    "tests/core/regressions.test.mjs",
+    "tests/core/render-themes.test.mjs"
   ],
-  "subsequentChangesScope": "Documentation and verification reports only; the tested runtime and tooling are unchanged.",
+  "subsequentChangesScope": "Documentation/reports and an explicit capture timezone for frozen tests only; the tested application runtime and build tooling are unchanged. Expected oracle hashes are unchanged.",
   "purpose": "Post-cleanup verification; historical verification-summary.json and its source hashes describe the earlier extraction checkpoint.",
   "commands": {
     "check": {
@@ -42,7 +45,7 @@
     }
   },
   "runtimeAudit": {
-    "inspectedTextFiles": 237,
+    "inspectedTextFiles": 238,
     "matches": {
       "originalDomain": [],
       "oldApi": [],
@@ -626,6 +629,50 @@
       "sha256": "2d9be02e2d74e70ff086b66dc6009d4a5842f287a2bba4e10b0f3689a173c00e"
     }
   ],
+  "frozenTestEnvironment": {
+    "timeZone": "Europe/Minsk",
+    "reason": "The captured Intl default timezone also selected currency and regional support text. UTC reproduced exactly the initial Linux failures in S.log[].fact; no game formula or expected hash was changed.",
+    "utcHostCheck": {
+      "command": "TZ=UTC npm run check (environment supplied by the parent process)",
+      "passed": true,
+      "tests": 66,
+      "failed": 0
+    },
+    "utcOriginalComparison": {
+      "passed": true,
+      "scenarios": 55,
+      "commandSnapshots": 17390,
+      "expectedStateNormalizations": []
+    },
+    "initialCiFailure": "https://github.com/paul-martyn/one-in-eight-billion-mobile/actions/runs/41502393801",
+    "files": [
+      {
+        "path": "tests/frozen-environment.mjs",
+        "bytes": 352,
+        "sha256": "77ce29539df990badfaf01a7991a210110a58e374759d298d5c68f36438f0173"
+      },
+      {
+        "path": "tests/core/regressions.test.mjs",
+        "bytes": 1556,
+        "sha256": "59523e7eb6848d8007a6d246f3ffeecb89d72d52382aa8f3cc5bcd2830670ad7"
+      },
+      {
+        "path": "tests/core/render-themes.test.mjs",
+        "bytes": 2388,
+        "sha256": "9aff26461cdccfc0687391f4768feb42f5b2328220cb774b1d1c53fe6bf1bb27"
+      },
+      {
+        "path": "tests/fixtures/engine-regressions.json",
+        "bytes": 3533,
+        "sha256": "cbc15da2b7cd2c965e1756d5eb3552c757b62cbeadc34a95393f0739887f8196"
+      },
+      {
+        "path": "tests/core/fixtures/render-theme-net.json",
+        "bytes": 6216,
+        "sha256": "0723594d1b79bd026ca84361f8696c9fa2b878d5da0446188074d2b9989e4478"
+      }
+    ]
+  },
   "tooling": [
     {
       "path": ".gitattributes",
@@ -765,6 +812,16 @@
       "path": "artifacts/migration-oracle.log",
       "bytes": 5860,
       "sha256": "6489ca0d5163310ca7b4edd80d7100fd26dc2f40167616139058db35cd4d9f7d"
+    },
+    {
+      "path": "artifacts/migration-utc-check.log",
+      "bytes": 7796,
+      "sha256": "8c9f9b77bb7831206c1ceb24f2ccb9222e909b691897da9811055991ba93e597"
+    },
+    {
+      "path": "artifacts/migration-utc-oracle.log",
+      "bytes": 2639,
+      "sha256": "451e67fd64b260adea8acc66b62053be381ab9d2e144db8463899fc79e162f4d"
     }
   ],
   "cleanCheckout": {

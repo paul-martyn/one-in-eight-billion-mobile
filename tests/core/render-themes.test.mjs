@@ -1,4 +1,5 @@
 // Frozen trusted-original oracle: standalone checks need no recovery files.
+import '../frozen-environment.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

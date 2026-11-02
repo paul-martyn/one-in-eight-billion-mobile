@@ -1,4 +1,5 @@
 // Small frozen oracle results make these tests independent of the preserved project.
+import '../frozen-environment.mjs';
 import { test, before } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
