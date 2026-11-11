@@ -1,9 +1,9 @@
-// Вкладка «Жизнь» (LiveCute.dc.html, frame=journal): сцена, полоса жизни,
-// управление временем, показатели и журнал жизни. Все значения — из снимка
+// Вкладка «Жизнь» (LiveCute холста, вариант B2): светлая шапка с семьёй и показателями
+// наверху, управление временем, фокус года под шапкой и журнал жизни. Все значения — из снимка
 // адаптера (life, journal); формул здесь нет. После смерти (frame «died»)
 // вкладка замирает: управление временем скрыто, сцена приглушена, сверху
 // журнала — последняя запись die() оригинала.
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { t } from '../../i18n';
 import { useSnapshot } from '../../adapters/useGame';
 import type { Snapshot } from '../../adapters/gameAdapter';
@@ -11,13 +11,12 @@ import type { JournalEntryVM } from '../../adapters/viewModels';
 import type { StatKey } from '../../ui/components';
 import { useReducedMotion } from '../../ui/motionPrefs';
 import type { TabProps } from './tabs/types';
-import { Scene } from './parts/Scene';
-import { StatsPanel, type StatFlash } from './parts/StatsPanel';
+import { FocusRow, Scene, type StatFlash } from './parts/Scene';
 import { Journal } from './parts/Journal';
 import { useCountUp } from './parts/lifeHooks';
 import './lifeTab.css';
 
-export function LifeTab({ active, nav }: TabProps) {
+export function LifeTab({ active }: TabProps) {
   const snap = useSnapshot();
   const reduced = useReducedMotion();
   // Уходящая копия экрана (active=false при появлении) не повторяет входную анимацию.
@@ -27,14 +26,13 @@ export function LifeTab({ active, nav }: TabProps) {
   const life = snap.life;
   // Жизнь закончилась: экран замирает (LiveCute frame «died»), окно смерти — в LifeScreen.
   const over = snap.lifePhase === 'dead';
-  const openSettings = useCallback(() => nav.go({ id: 'settings' }), [nav]);
   if (!life) {
     return <section className="lt lt--empty"><p className="lt__wait" role="status">{t('life.loadingLife')}</p></section>;
   }
   return (
     <section className={`lt ${over ? 'is-over' : ''}`} aria-label={t('tab.life')}>
-      <Scene life={life} k={k} enabled={active} over={over} onMenu={openSettings} />
-      <StatsPanel life={life} k={k} flash={flash} />
+      <Scene life={life} k={k} enabled={active} over={over} flash={flash} />
+      {!over && <FocusRow life={life} enabled={active} />}
       <Journal journal={snap.journal} offset={track.offset} freshFrom={track.freshFrom} reduced={reduced} lifeSeq={snap.lifeSeq} over={over} />
     </section>
   );

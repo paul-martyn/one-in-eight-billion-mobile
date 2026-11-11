@@ -84,16 +84,16 @@
     "!important": 2
   },
   "src/screens/life/lifeTab.css": {
-    "grid": 16,
-    "pseudo-element": 1,
-    "keyframes": 2,
-    "box-shadow": 10,
-    "gradient": 4,
-    "calc / clamp / min / max": 14,
-    "vh / vw / cq / em / rem": 2,
-    "z-index": 8,
-    "attribute selector": 3,
-    "structural pseudo-class": 4,
+    "grid": 8,
+    "pseudo-element": 2,
+    "keyframes": 4,
+    "box-shadow": 7,
+    "gradient": 3,
+    "calc / clamp / min / max": 13,
+    "vh / vw / cq / em / rem": 4,
+    "z-index": 7,
+    "attribute selector": 4,
+    "structural pseudo-class": 2,
     "filter / backdrop-filter": 1
   },
   "src/screens/life/tabs/activities.css": {

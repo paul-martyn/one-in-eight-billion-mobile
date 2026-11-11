@@ -56,11 +56,11 @@
     "fontSize": 3
   },
   "src/screens/life/lifeTab.css": {
-    "hex": 14,
+    "hex": 10,
     "rgb": 10,
-    "duration": 6,
-    "easing": 0,
-    "fontSize": 0
+    "duration": 11,
+    "easing": 1,
+    "fontSize": 2
   },
   "src/screens/life/tabs/activities.css": {
     "hex": 1,
