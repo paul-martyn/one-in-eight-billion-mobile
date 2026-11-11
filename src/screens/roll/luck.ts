@@ -34,6 +34,14 @@ const TIERS: [number, string, string, string][] = [
 ];
 export const SCALE_KEYS: ScaleKey[] = ['life', 'money', 'school', 'safety'];
 
+/** Бледные цвета ступеней — основа силуэта, который заполняется цветом ступени. */
+const PALE: Record<string, string> = { great: '#d4edc8', good: '#e1f1ce', fair: '#f8e8b8', average: '#fbdcc4', hard: '#f8d2c8', veryHard: '#f5c8c2' };
+/** Ступень числа 0–100: ключ, цвет заливки, бледный цвет основы и чернила слов. */
+export function tierOf(n: number): { key: string; fill: string; pale: string; ink: string } {
+  const tier = TIERS.find(x => n >= x[0]) ?? TIERS[TIERS.length - 1]!;
+  return { key: tier[1], fill: tier[2], pale: PALE[tier[1]] ?? '#e6d6b8', ink: tier[3] };
+}
+
 const usd = (x: number) => new Intl.NumberFormat(numberLocale(), {
   style: 'currency', currency: 'USD', currencyDisplay: 'narrowSymbol', notation: 'compact', maximumFractionDigits: x >= 10000 ? 0 : 1,
 }).format(x);

@@ -79,3 +79,6 @@ export class PlanetCore {
 }
 
 export const WORLD_RATES: { born: number; died: number };
+
+/** Удача рождения страны по коду движка (0–1) или null, если у планеты нет её показателей. */
+export function luckOf(iso: string): number | null;
