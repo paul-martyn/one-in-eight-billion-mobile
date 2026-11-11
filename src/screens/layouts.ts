@@ -193,6 +193,28 @@ export function layRoll(f: FrameBox) {
   };
 }
 
+/**
+ * «3 · Birth certificate» (CertCute layout): телефоны от 16:9 (кадр 699) до 19,5:9 (852). На 852
+ * кнопки там же, где Meet me! на рулетке (84 от низа), на коротких экранах — ближе к низу;
+ * свидетельство начинается под верхом (60 / 28) и кончается в 14 над кнопками. Ниже 760 оно
+ * компактное: фото в углу 80 %, семейные фото 50 вместо 60, строки через 7 вместо 9.
+ * Сцена рождения стоит там, где была планета рулетки: малыш появляется на её месте.
+ */
+export function layCert(f: FrameBox) {
+  const H = f.H, tall = Math.max(0, Math.min(1, (H - 699) / (852 - 699)));
+  const cta = round(H - f.bottom - Math.round(20 + 64 * tall) - 70);
+  const certTop = Math.round(28 + 32 * tall) + f.top;
+  const compact = H < 760, photoS = compact ? 0.8 : 1, fam = compact ? 50 : 60;
+  const roll = layRoll(f);
+  return {
+    cta, certTop, certBottom: round(H - (cta - 14)),
+    headH: compact ? 70 : 84, photoS, gap: compact ? 7 : 9, famBox: fam,
+    label: roll.label, name: roll.name,
+    /** Середина малыша (и планеты рулетки). */
+    cy: roll.planet.cy,
+  };
+}
+
 /** Экраны, под которыми живёт общая планета. */
 export const PLANET_SCREENS: ReadonlySet<ScreenId> = new Set<ScreenId>(['language', 'start', 'roll', 'hub']);
 export const hasPlanet = (id: ScreenId) => PLANET_SCREENS.has(id);

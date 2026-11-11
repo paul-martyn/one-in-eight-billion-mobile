@@ -14,11 +14,11 @@
     "fontSize": 2
   },
   "src/screens/certificate/certificate.css": {
-    "hex": 0,
+    "hex": 1,
     "rgb": 5,
-    "duration": 16,
+    "duration": 3,
     "easing": 0,
-    "fontSize": 8
+    "fontSize": 10
   },
   "src/screens/ended/ended.css": {
     "hex": 9,
@@ -105,11 +105,11 @@
     "fontSize": 0
   },
   "src/screens/roll/roll.css": {
-    "hex": 5,
-    "rgb": 5,
-    "duration": 25,
+    "hex": 0,
+    "rgb": 1,
+    "duration": 11,
     "easing": 0,
-    "fontSize": 5
+    "fontSize": 3
   },
   "src/screens/roll/summary.css": {
     "hex": 3,
@@ -140,11 +140,11 @@
     "fontSize": 0
   },
   "src/ui/frame/frame.css": {
-    "hex": 2,
-    "rgb": 4,
-    "duration": 3,
+    "hex": 7,
+    "rgb": 10,
+    "duration": 5,
     "easing": 0,
-    "fontSize": 5
+    "fontSize": 7
   },
   "src/ui/meta/meta.css": {
     "hex": 0,

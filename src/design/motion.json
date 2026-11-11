@@ -30,17 +30,19 @@
     { "id": "screen.push", "trigger": "Your odds; Settings", "from": "certificate|hub", "to": "odds|language", "durationMs": 440, "delayMs": 0, "easing": "screen", "enter": { "translateX": ["100%", "0%"] }, "exit": { "translateX": ["0%", "-30%"], "brightness": [1, 0.8] }, "interrupt": "jump-to-end", "input": "arriving" },
     { "id": "screen.pop", "trigger": "Back", "from": "odds|language", "to": "certificate|hub", "durationMs": 440, "delayMs": 0, "easing": "screen", "enter": { "translateX": ["-30%", "0%"], "brightness": [0.8, 1] }, "exit": { "translateX": ["0%", "100%"] }, "zOrder": "leaving on top", "interrupt": "jump-to-end", "input": "arriving" },
     { "id": "screen.zoom", "trigger": "Start life", "from": "certificate|odds", "to": "life", "durationMs": 480, "delayMs": 0, "easing": "easeOut", "enter": { "opacity": [0, 1], "scale": [1.08, 1] }, "exit": null, "interrupt": "jump-to-end", "input": "arriving" },
-    { "id": "screen.glide", "trigger": "navigate between the planet screens", "from": "language|start|roll|hub", "to": "language|start|roll|hub", "durationMs": 760, "delayMs": 0, "easing": "ease", "enter": { "opacity": [0, 1], "durationMs": 460, "delayMs": 220 }, "exit": { "opacity": [1, 0], "durationMs": 320 }, "planet": { "moveMs": 750, "note": "one planet under these screens glides to its place on the next one and keeps turning" }, "interrupt": "jump-to-end", "input": "arriving; touches pass through to the planet" }
+    { "id": "screen.glide", "trigger": "navigate between the planet screens", "from": "language|start|roll|hub", "to": "language|start|roll|hub", "durationMs": 760, "delayMs": 0, "easing": "ease", "enter": { "opacity": [0, 1], "durationMs": 460, "delayMs": 220 }, "exit": { "opacity": [1, 0], "durationMs": 320 }, "planet": { "moveMs": 750, "note": "one planet under these screens glides to its place on the next one and keeps turning" }, "interrupt": "jump-to-end", "input": "arriving; touches pass through to the planet" },
+    { "id": "screen.birth", "trigger": "Meet me!", "from": "roll", "to": "certificate", "durationMs": 240, "delayMs": 0, "easing": "ease", "enter": { "opacity": [0, 1], "durationMs": 240 }, "exit": { "opacity": [1, 0], "durationMs": 200 }, "note": "the roll's words and buttons fade, the birth's paper comes up over the planet in place; the birth starts after it", "interrupt": "jump-to-end", "input": "arriving" }
   ],
   "sequences": {
     "roll": { "startDelayMs": 400, "spinMs": 4600, "turns": 3, "spinEasing": "easeOutQuart", "zoom": 2.4, "revealDelayMs": 1300, "nameFlips": 30, "flipEasing": "1-(1-p)^2", "reveal": { "durationMs": 600, "translateY": [10, 0], "ctaDelayMs": 150 }, "label": { "durationMs": 400, "easing": "pop", "scale": [0.94, 1] } },
     "certificate": {
-      "phasesMs": { "parents": 300, "dad": 800, "tree": 1500, "baby": 2700, "name": 3300, "toCertificate": 5800, "typing": 7100 },
-      "typing": { "intervalMs": 40, "charsPerTick": 5, "caretBlinkMs": 900 },
-      "babyFlight": { "durationMs": 900, "delayMs": 100, "easing": "glide", "to": { "x": 127, "y": -317, "rotate": -4, "scale": 0.516 } },
-      "certificateSlide": { "durationMs": 800, "delayMs": 150, "easing": "glide", "translateY": [900, 0] },
+      "phasesMs": { "parents": 80, "dad": 200, "tree": 380, "baby": 950, "name": 1150, "toCertificate": 2050, "typing": 2600 },
+      "typing": { "intervalMs": 25, "charsPerTick": 9, "caretBlinkMs": 900 },
+      "hurry": { "typingAfterMs": 320, "charsPerTick": 40, "flightMs": 350, "slideMs": 350 },
+      "babyFlight": { "durationMs": 600, "delayMs": 50, "easing": "glide", "to": { "rotate": -4, "note": "onto the corner photo of the certificate; the baby stays there as the photo" } },
+      "certificateSlide": { "durationMs": 550, "delayMs": 50, "easing": "glide", "translateY": [900, 0] },
       "stamp": { "opacity": [0, 0.9], "scale": [1.7, 1], "durationMs": 350, "delayMs": 250, "easing": "pop" },
-      "skip": "tap Skip or reduced motion: jump to the filled certificate; the record content is identical"
+      "skip": "a tap anywhere: before the certificate, straight to it and quick typing (hurry); while typing, the rest at once. Reduced motion: the filled certificate at once; the record content is identical"
     },
     "countUp": { "durationMs": 900, "easing": "easeOutCubic", "reducedMotion": "final values immediately" },
     "hubArrive": { "top": { "translateY": [-150, 0], "durationMs": 400, "easing": "arrive" }, "counters": { "translateY": [24, 0], "durationMs": 350, "delayMs": 100 }, "cta": { "scale": [0.8, 1], "durationMs": 300, "delayMs": 250 }, "nav": { "translateY": [140, 0], "durationMs": 400, "delayMs": 100, "easing": "arrive" } },

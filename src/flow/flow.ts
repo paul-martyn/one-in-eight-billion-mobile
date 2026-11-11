@@ -19,7 +19,7 @@ export type Screen =
   | { id: 'hub' };
 
 /** glide — между экранами с общей планетой: интерфейсы сменяются, планета перелетает (ставит FlowHost). */
-export type TransitionKind = 'none' | 'fade' | 'tab' | 'rise' | 'push' | 'pop' | 'zoom' | 'glide';
+export type TransitionKind = 'none' | 'fade' | 'tab' | 'rise' | 'push' | 'pop' | 'zoom' | 'glide' | 'birth';
 
 export type FlowState = {
   screen: Screen;
@@ -42,7 +42,8 @@ const LIFE_TABS = new Set(['life']);
 export function kindFor(from: Screen, to: Screen): TransitionKind {
   if (from.id === 'loading' || from.id === 'error') return 'fade';
   if (LIFE_TABS.has(from.id) && LIFE_TABS.has(to.id)) return 'tab';
-  if (from.id === 'roll' && to.id === 'certificate') return 'rise';
+  // Рулетка → рождение: слова и кнопки рулетки гаснут, «бумага» рождения проявляется над планетой.
+  if (from.id === 'roll' && to.id === 'certificate') return 'birth';
   if ((from.id === 'certificate' && to.id === 'birthOdds') || (from.id === 'hub' && to.id === 'language') || to.id === 'settings' || (from.id === 'settings' && to.id === 'language')) return 'push';
   if ((from.id === 'birthOdds' && to.id === 'certificate') || (from.id === 'language' && to.id === 'hub') || from.id === 'settings') return 'pop';
   if ((from.id === 'certificate' || from.id === 'birthOdds') && to.id === 'life') return 'zoom';
