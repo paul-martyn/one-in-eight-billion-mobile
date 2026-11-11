@@ -1,38 +1,52 @@
-/* Экран укладывается в высоту телефона: окно языков забирает свободное место, Continue всегда внизу.
-   `.screen.lang`, а не `.lang`: базовое `.screen { overflow: hidden }` подключается позже и иначе отключает прокрутку
-   (запасную — на очень низких экранах). */
-.screen.lang { display: flex; flex-direction: column; align-items: center; padding: calc(14px + var(--safe-top)) 14px calc(14px + var(--safe-bottom)); gap: 0; overflow-x: hidden; overflow-y: auto; }
-.lang__glow { position: absolute; left: -24px; top: -40px; width: 440px; height: 440px; border-radius: 50%; background: radial-gradient(closest-side, rgba(127, 208, 240, 0.5), rgba(127, 208, 240, 0.2) 60%, rgba(127, 208, 240, 0)); pointer-events: none; }
-.lang__badge { position: relative; z-index: 1; width: 64px; height: 64px; flex: none; display: grid; place-items: center; border: 2px solid var(--line); border-radius: 50%; background: var(--card); box-shadow: var(--shadow-card); }
-.lang__ribbon { position: relative; z-index: 2; flex: none; margin-top: -16px; }
-.lang__panel { position: relative; z-index: 1; align-self: stretch; margin-top: 10px; flex: 1 1 0; min-height: 132px; border: 2px solid var(--line); border-radius: 18px; background: var(--card); box-shadow: var(--shadow-card); overflow: hidden; }
-/* Два равных столбца и только вертикальная прокрутка: дорожки minmax(0, 1fr) не растягиваются по длинному названию. */
-.lang__list { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding: 8px 8px 26px; align-content: start; overflow-x: hidden; }
-.lang__fade { position: absolute; left: 0; right: 0; bottom: 0; height: 26px; background: linear-gradient(rgba(255, 243, 214, 0), #fff3d6); pointer-events: none; }
-.lang__chip {
-  position: relative; display: flex; align-items: center; gap: 6px; min-width: 0; min-height: 48px; padding: 0 6px; text-align: left;
-  border: 2px solid var(--line); border-radius: 12px; background: var(--paper); box-shadow: var(--lip); transition: background-color 0.15s ease;
+/* «0 · Language» (LangCute холста) в кадре 393 × H: место планеты 210 сверху, облачко
+   «Привет!», 19 языков в три колонки (плашки 36 px без «нажатой» тени — так задумано),
+   Continue 196 × 70. Места по высоте считает layLanguage. */
+
+/* «Привет!»: облачко выстреливает при выборе языка и дальше покачивается */
+.lng-hello { position: absolute; left: 0; right: 0; display: flex; justify-content: center; pointer-events: none; }
+.lng-hello__pop { animation: lng-pop 0.45s cubic-bezier(0.3, 1.5, 0.5, 1) both; }
+.lng-hello__bob { animation: lng-bob 2.6s ease-in-out 0.6s infinite; }
+.lng-hello svg { display: block; overflow: visible; filter: drop-shadow(0 6px 7px rgba(90, 52, 24, 0.22)); }
+@keyframes lng-pop { 0% { opacity: 0; transform: scale(0.5) rotate(-6deg); } 60% { opacity: 1; transform: scale(1.08) rotate(3deg); } 100% { transform: scale(1) rotate(-2deg); } }
+@keyframes lng-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+/* Языки */
+.lng-chips { position: absolute; left: 12px; right: 12px; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 5px; }
+.lng-chip {
+  position: relative; display: flex; align-items: center; gap: 5px; width: calc((100% - 10px) / 3); height: 36px; padding: 0 5px 0 6px;
+  border: 2px solid var(--color-line); border-radius: 11px; background: var(--color-paper); color: var(--color-ink-dark);
+  font-weight: 700; line-height: 1; white-space: nowrap; transition: background-color 0.15s ease, transform 140ms var(--ease-screen);
 }
-.lang__chip.is-on { background: var(--cta); box-shadow: var(--lip), inset 0 3px 0 rgba(255, 255, 255, 0.5); }
-.lang__chip:disabled { opacity: 0.55; }
-.lang__dot { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: 9.5px; font-weight: 700; border: 2px solid var(--line); }
-.lang__names { display: flex; flex-direction: column; min-width: 0; }
-.lang__name { font-size: 15px; font-weight: 700; color: var(--ink-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-/* «Português (Brasil)», «Bahasa Indonesia»: шрифт мельче и сжимается с шириной экрана, чтобы влезть в столбец и на 320 px. */
-.lang__name.is-long { font-size: clamp(10px, calc(6cqw - 9.6px), 13.5px); }
-.lang__sub { font-size: clamp(9.5px, 2.9cqw, 10.5px); font-weight: 600; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.lang__check { position: absolute; right: -6px; top: -7px; display: grid; place-items: center; border: 2px solid var(--line); border-radius: 50%; background: var(--cta-green); }
-.lang__money { position: relative; z-index: 1; flex: none; align-self: stretch; margin: 12px 6px 8px; font-size: 16px; font-weight: 700; }
-.lang__hint { font-size: 12px; font-weight: 600; color: var(--muted); text-shadow: none; }
-/* Все валюты в две строки: число столбцов приходит из разметки (--cols). */
-.lang__curs { position: relative; z-index: 1; flex: none; align-self: stretch; display: grid; grid-template-columns: repeat(var(--cols, 8), minmax(0, 1fr)); gap: 5px; padding: 0 6px; }
-.lang__cur {
-  position: relative; min-width: 0; height: clamp(36px, 10.4cqw, 44px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
-  border: 2px solid var(--line); border-radius: 10px; background: var(--paper); box-shadow: var(--lip); transition: background-color 0.15s ease; padding: 0;
+.lng-chip.is-on { background: var(--color-cta); }
+.lng-chip:active:not(:disabled) { transform: scale(0.97); }
+.lng-chip:disabled:not(.is-on) { opacity: 0.5; }
+.lng-chip__flag { flex: none; display: block; width: 20px; height: 20px; }
+.lng-chip__flag svg { display: block; }
+.lng-chip__name { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.lng-check {
+  position: absolute; right: -6px; top: -7px; display: flex; align-items: center; justify-content: center;
+  border: 2px solid var(--color-line); border-radius: 50%; background: var(--color-cta-green);
 }
-.lang__cur.is-on { background: var(--cta); }
-.lang__sym { font-size: clamp(13px, 4.3cqw, 17px); font-weight: 700; color: var(--ink-dark); line-height: 1; }
-.lang__sym.is-long { font-size: clamp(10px, 3.1cqw, 12px); }
-.lang__code { font-size: 8px; font-weight: 700; letter-spacing: 0.03em; color: var(--muted); }
-.lang__cta { position: relative; z-index: 1; flex: none; padding-top: 12px; }
-.lang__history { max-width: 320px; margin: 0 0 8px; font-size: 11px; line-height: 1.35; text-align: center; color: var(--muted); }
+
+.lng-note { position: absolute; left: 24px; right: 24px; margin: 0; font-size: 12px; font-weight: 600; line-height: 15px; text-align: center; color: var(--color-muted); }
+.lng-go { position: absolute; left: 98.5px; }
+
+/* Валюта: маленькая кнопка в углу и окно со списком */
+.lng-cur {
+  position: absolute; right: 12px; display: inline-flex; align-items: center; gap: 5px; height: 32px; padding: 0 10px 0 9px;
+  border: 2px solid var(--color-line); border-radius: 16px; background: var(--color-card); box-shadow: inset 0 -3px 0 rgba(90, 52, 24, 0.16);
+  color: var(--color-ink-dark); line-height: 1; transition: transform 140ms var(--ease-screen);
+}
+.lng-cur:active:not(:disabled) { transform: scale(0.96); }
+.lng-cur__sym { font-size: 15px; font-weight: 700; }
+.lng-cur__code { font-size: 12px; font-weight: 700; letter-spacing: 0.03em; color: var(--color-muted); }
+.lng-money { margin: 0 0 10px; font-size: var(--font-size-small); font-weight: 600; color: var(--color-ink-dark); }
+.lng-curs { display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); gap: 8px; padding: 8px 6px 4px; }
+.lng-curs__item {
+  position: relative; min-width: 0; height: 48px; padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  border: 2px solid var(--color-line); border-radius: 10px; background: var(--color-paper); box-shadow: var(--shadow-lip); transition: background-color 0.15s ease;
+}
+.lng-curs__item.is-on { background: var(--color-cta); }
+.lng-curs__sym { font-size: 17px; font-weight: 700; color: var(--color-ink-dark); line-height: 1; }
+.lng-curs__sym.is-long { font-size: var(--font-size-label); }
+.lng-curs__code { font-size: var(--font-size-label); font-weight: 700; letter-spacing: 0.03em; color: var(--color-muted); }

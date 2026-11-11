@@ -10,6 +10,7 @@ import { gestureId, useAdapter, useSnapshot } from '../../adapters/useGame';
 import { StickerBar, type TabId } from '../../ui/components';
 import { useReducedMotion } from '../../ui/motionPrefs';
 import type { LifeTab as LifeTabId } from '../../flow/flow';
+import { useBack } from '../../flow/useBack';
 import type { ScreenProps } from '../registry';
 import type { TabProps } from './tabs/types';
 import { PeopleTab } from './tabs/PeopleTab';
@@ -83,6 +84,15 @@ export function LifeScreen({ screen, nav, active }: ScreenProps) {
   const dialogOpen = decisionOpen || pauseOpen;
   const blocked = dialogOpen || dead || skipping;
   const lookBack = useCallback(() => nav.go({ id: 'ended' }), [nav]);
+
+  // «Назад» (Esc): с вкладки — на «Жизнь», на «Жизни» — пауза. Пока открыто окно
+  // решения, идёт пропуск или жизнь закончилась, нажатие не обрабатывается.
+  useBack(() => {
+    if (blocked || !life) return false;
+    if (tab !== 'life') { openTab('life'); return; }
+    if (life.paused) return false;
+    adapter.setPaused(gestureId(), true);
+  }, { layer: 'screen', enabled: active });
 
   const labels: Record<TabId, string> = {
     people: t('tab.people'), activities: t('tab.activities'), life: t('tab.life'), money: t('tab.money'), odds: t('tab.odds'),

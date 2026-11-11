@@ -13,6 +13,8 @@ import { gestureId, useAdapter, useCoreView, useSnapshot } from '../../adapters/
 import type { LifeReward, RewardItem, RewardKind } from '../../adapters/vm/rewards';
 import { playerAppearance } from '../../adapters/vm/appearance';
 import { Ribbon } from '../../ui/components';
+import { CtaText } from '../../ui/frame/parts';
+import type { Field } from '../../ui/frame/fit';
 import { fmtMeta } from '../../ui/meta/Meta';
 import { BanknotesBig, GemBig } from '../../ui/meta/metaIcons';
 import { useTweenProgress } from '../../ui/meta/useMeta';
@@ -31,6 +33,8 @@ const LAND_MS = 700;
 const SUM_SCALE = 0.6;
 const FACE_SCALE = 0.3;
 const FLY_OPACITY = 0.25;
+/** Надпись Claim: поле кнопки 196 × 70 (макет: кегль 30). */
+const CLAIM_FIT: Field = [160, 30, 16];
 const EASE_SUM: [number, number, number, number] = [0.5, 0, 0.75, 0];
 const EASE_FACE: [number, number, number, number] = [0.45, 0, 0.7, 1];
 
@@ -302,11 +306,12 @@ export function RewardsPopup({ reward, closing, ready, onClaim, sources }: {
               <button
                 ref={claimRef}
                 type="button"
-                className="chunky chunky--yellow hub-reward__claim"
+                className="cta hub-reward__claim"
+                aria-label={t('rewards.claim')}
                 aria-disabled={!ready || undefined}
                 onClick={onClaim}
               >
-                <span className="k-o chunky__label">{t('rewards.claim')}</span>
+                <CtaText field={CLAIM_FIT}>{t('rewards.claim')}</CtaText>
               </button>
             </div>
           </section>

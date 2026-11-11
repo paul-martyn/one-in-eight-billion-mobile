@@ -1,5 +1,11 @@
 {
   "start.starting": "Ein neues Leben wird vorbereitet…",
   "start.continueNewborn": "Fortsetzen: {name}, neugeboren",
-  "start.continuePlace": "Ort: {place}"
+  "start.continuePlace": "Ort: {place}",
+  "since.born": "geboren",
+  "since.died": "gestorben",
+  "planet.free": "Der Planet. Rosa Blitze sind Geburten, violette Todesfälle. Zum Drehen ziehen.",
+  "planet.hub": "Der Planet. Rosa Blitze sind Geburten, violette Todesfälle; tippe ein Gesicht an, um es zu fangen. Tippe ein Land an, um seine Zahlen zu sehen.",
+  "planet.perDay": "pro Tag",
+  "planet.open": "Land öffnen"
 }

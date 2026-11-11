@@ -11,6 +11,7 @@ import type { CoreHost } from '../core/runtime';
 import { CoreEntropy } from '../core/entropy.ts';
 import * as cmd from './commands.ts';
 import { installHooks } from './hooks.ts';
+import { plain } from './text.ts';
 import { MetaEconomy, type MetaView } from './meta.ts';
 import { lifePrefsView, type LifePrefsView } from './vm/spend.ts';
 import { lifeReward } from './vm/rewards.ts';
@@ -390,6 +391,34 @@ export class GameAdapter {
     if (!this.meta) return;
     this.meta.seeLives();
     this.publish({});
+  }
+
+  /** Лицо, пойманное на планете в хабе (мета-слой): доллар или кристалл. */
+  catchFlash(kind: 'coin' | 'gem'): void {
+    if (this.snap.status !== 'ready' || !this.meta) return;
+    this.meta.catchFlash(kind);
+    this.publish({});
+  }
+
+  /**
+   * Названия стран на языке игры для планеты: { код: [название, короткое] }.
+   * Таблица стран и placeTag оригинала от текущей жизни не зависят.
+   */
+  countryNames(): Record<string, [string, string]> | null {
+    const T = this.host?.top;
+    if (!T || !Array.isArray(T.COUNTRIES) || typeof T.placeTag !== 'function') return null;
+    const out: Record<string, [string, string]> = {};
+    try {
+      for (const c of T.COUNTRIES as { id?: string }[]) {
+        if (!c?.id) continue;
+        const name = plain(String(T.placeTag(c) ?? ''));
+        if (name) out[c.id] = [name, name];
+      }
+    } catch (error) {
+      this.host?.recordError('read', error);
+      return null;
+    }
+    return out;
   }
 
   /** Обновить энергию (восстановление по времени) — вызывает таймер обратного отсчёта UI. */

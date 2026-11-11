@@ -1,39 +1,39 @@
 /* Вкладка Money (MoneyCute.dc.html). Размеры и цвета — из макета. */
 
-.mny-hero__label { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+.mny-hero__label { margin: 0; font-size: var(--font-size-label); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-muted); }
 .mny-hero__big {
   display: flex; align-items: center; gap: 8px; margin: 2px 0 0; min-width: 0;
   font-size: clamp(28px, 9.2cqw, 36px); font-weight: 700; line-height: 1.1;
 }
 .mny-note { flex: none; }
-.mny-hero__num { min-width: 0; overflow-wrap: anywhere; }
-.mny-hero__num.is-none { color: var(--muted); }
-.mny-hero__note { margin: 4px 0 0; font-size: 12px; font-weight: 600; line-height: 1.35; color: var(--muted); overflow-wrap: anywhere; }
+.mny-hero__num { min-width: 0; overflow-wrap: break-word; hyphens: auto; }
+.mny-hero__num.is-none { color: var(--color-muted); }
+.mny-hero__note { margin: 4px 0 0; font-size: var(--font-size-small); font-weight: 600; line-height: var(--line-height-body); color: var(--color-muted); overflow-wrap: break-word; hyphens: auto; }
 
 .mny-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
 .mny-tiles.is-single { grid-template-columns: minmax(0, 1fr); }
-.mny-tile { display: flex; flex-direction: column; min-width: 0; padding: 7px 9px; border: 2px solid var(--line); border-radius: 10px; background: var(--paper); }
-.mny-tile__label { font-size: 11.5px; font-weight: 700; color: var(--muted); }
-.mny-tile__value { font-size: 17px; font-weight: 700; line-height: 1.3; overflow-wrap: anywhere; }
-.mny-tile__sub { margin-top: 1px; font-size: 11.5px; font-weight: 500; line-height: 1.3; color: var(--muted); overflow-wrap: anywhere; }
+.mny-tile { display: flex; flex-direction: column; min-width: 0; padding: 7px 9px; border: 2px solid var(--color-line); border-radius: 10px; background: var(--color-paper); }
+.mny-tile__label { font-size: var(--font-size-label); font-weight: 700; color: var(--color-muted); }
+.mny-tile__value { font-size: var(--font-size-lead); font-weight: 700; line-height: 1.3; overflow-wrap: break-word; hyphens: auto; }
+.mny-tile__sub { margin-top: 1px; font-size: var(--font-size-small); font-weight: 500; line-height: var(--line-height-body); color: var(--color-muted); overflow-wrap: break-word; hyphens: auto; }
 .mny .is-up { color: #2f7d1f; }
 .mny .is-down { color: #b8452f; }
-.mny .is-muted { color: var(--muted); }
+.mny .is-muted { color: var(--color-muted); }
 
 /* Строки карточек: подпись слева, сумма справа, пунктир между строками. */
-.mny-sub { margin: 6px 2px 2px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
-.mny-row { display: flex; align-items: center; gap: 8px; padding: 8px 2px; border-top: 1.5px dashed var(--divider); }
+.mny-sub { margin: 6px 2px 2px; font-size: var(--font-size-label); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-muted); }
+.mny-row { display: flex; align-items: center; gap: 8px; padding: 8px 2px; border-top: 1.5px dashed var(--color-divider); }
 .tabf-card > .mny-row:first-child, .tabf-card > .mny-sub + .mny-row { border-top: 0; }
 .mny-row__text { flex: 1 1 auto; min-width: 0; }
-.mny-row__label { display: block; font-size: 14px; font-weight: 600; line-height: 1.25; overflow-wrap: anywhere; }
-.mny-row__sub { display: block; margin-top: 1px; font-size: 12px; font-weight: 500; line-height: 1.35; color: var(--muted); overflow-wrap: anywhere; }
-.mny-row__value { flex: none; max-width: 48%; font-size: 15px; font-weight: 700; text-align: right; overflow-wrap: anywhere; }
-.mny-empty { margin: 8px 2px; font-size: 13px; font-weight: 500; color: var(--muted); }
+.mny-row__label { display: block; font-size: var(--font-size-small); font-weight: 600; line-height: 1.25; overflow-wrap: break-word; hyphens: auto; }
+.mny-row__sub { display: block; margin-top: 1px; font-size: var(--font-size-small); font-weight: 500; line-height: var(--line-height-body); color: var(--color-muted); overflow-wrap: break-word; hyphens: auto; }
+.mny-row__value { flex: none; max-width: 48%; font-size: var(--font-size-body); font-weight: 700; text-align: right; overflow-wrap: break-word; hyphens: auto; }
+.mny-empty { margin: 8px 2px; font-size: var(--font-size-body); line-height: var(--line-height-body); font-weight: 500; color: var(--color-muted); }
 
 /* Место по доходу: две плитки. */
-.mny-rank { padding: 2px 0 8px; border-top: 1.5px dashed var(--divider); }
+.mny-rank { padding: 2px 0 8px; border-top: 1.5px dashed var(--color-divider); }
 .tabf-card > .mny-rank:first-child { border-top: 0; }
 .mny-rank__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
-.mny-rank__cell { display: flex; flex-direction: column; min-width: 0; padding: 6px 8px; border: 1.5px solid var(--line); border-radius: 10px; background: var(--card); }
-.mny-rank__label { font-size: 11px; font-weight: 700; color: var(--muted); overflow-wrap: anywhere; }
-.mny-rank__value { font-size: 15px; font-weight: 700; }
+.mny-rank__cell { display: flex; flex-direction: column; min-width: 0; padding: 6px 8px; border: 1.5px solid var(--color-line); border-radius: 10px; background: var(--color-card); }
+.mny-rank__label { font-size: var(--font-size-label); font-weight: 700; color: var(--color-muted); overflow-wrap: break-word; hyphens: auto; }
+.mny-rank__value { font-size: var(--font-size-body); font-weight: 700; }

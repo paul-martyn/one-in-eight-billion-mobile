@@ -1,0 +1,240 @@
+{
+  "src/app/styles.css": {
+    "grid": 2,
+    "pseudo-element": 4,
+    "box-shadow": 1,
+    "calc / clamp / min / max": 4,
+    "vh / vw / cq / em / rem": 6,
+    "attribute selector": 4,
+    "!important": 9,
+    "@media / @container / @supports": 2
+  },
+  "src/screens/birthOdds/birthOdds.css": {
+    "grid": 10,
+    "box-shadow": 2,
+    "gradient": 1,
+    "calc / clamp / min / max": 7,
+    "vh / vw / cq / em / rem": 5,
+    "z-index": 2,
+    "structural pseudo-class": 3,
+    "@media / @container / @supports": 1
+  },
+  "src/screens/certificate/certificate.css": {
+    "grid": 10,
+    "pseudo-element": 2,
+    "keyframes": 4,
+    "box-shadow": 4,
+    "gradient": 1,
+    "calc / clamp / min / max": 41,
+    "vh / vw / cq / em / rem": 26,
+    "z-index": 6,
+    "attribute selector": 5,
+    "structural pseudo-class": 1,
+    "!important": 1,
+    "@media / @container / @supports": 1
+  },
+  "src/screens/ended/ended.css": {
+    "grid": 10,
+    "pseudo-element": 4,
+    "box-shadow": 7,
+    "gradient": 1,
+    "calc / clamp / min / max": 3,
+    "vh / vw / cq / em / rem": 1,
+    "attribute selector": 22,
+    "structural pseudo-class": 1,
+    "sibling combinator": 1,
+    "!important": 1,
+    "filter / backdrop-filter": 1
+  },
+  "src/screens/hub/hub.css": {
+    "grid": 4,
+    "keyframes": 4,
+    "box-shadow": 3,
+    "calc / clamp / min / max": 1,
+    "vh / vw / cq / em / rem": 3,
+    "z-index": 5,
+    "attribute selector": 13,
+    "structural pseudo-class": 3,
+    "sibling combinator": 1,
+    "!important": 1
+  },
+  "src/screens/hub/rewards.css": {
+    "grid": 4,
+    "keyframes": 12,
+    "box-shadow": 3,
+    "calc / clamp / min / max": 3,
+    "vh / vw / cq / em / rem": 2,
+    "z-index": 3,
+    "attribute selector": 7,
+    "!important": 2,
+    "@media / @container / @supports": 1
+  },
+  "src/screens/language/language.css": {
+    "grid": 2,
+    "keyframes": 4,
+    "box-shadow": 2,
+    "calc / clamp / min / max": 1,
+    "vh / vw / cq / em / rem": 2,
+    "structural pseudo-class": 3,
+    "filter / backdrop-filter": 1
+  },
+  "src/screens/life/life.css": {
+    "grid": 17,
+    "pseudo-element": 2,
+    "keyframes": 22,
+    "box-shadow": 13,
+    "gradient": 2,
+    "calc / clamp / min / max": 25,
+    "vh / vw / cq / em / rem": 7,
+    "z-index": 9,
+    "attribute selector": 2,
+    "structural pseudo-class": 5,
+    "sibling combinator": 1,
+    "!important": 2
+  },
+  "src/screens/life/lifeTab.css": {
+    "grid": 16,
+    "pseudo-element": 1,
+    "keyframes": 2,
+    "box-shadow": 10,
+    "gradient": 4,
+    "calc / clamp / min / max": 14,
+    "vh / vw / cq / em / rem": 2,
+    "z-index": 8,
+    "attribute selector": 3,
+    "structural pseudo-class": 4,
+    "filter / backdrop-filter": 1
+  },
+  "src/screens/life/tabs/activities.css": {
+    "grid": 1,
+    "box-shadow": 2,
+    "vh / vw / cq / em / rem": 2,
+    "attribute selector": 1,
+    "structural pseudo-class": 1,
+    "sibling combinator": 1
+  },
+  "src/screens/life/tabs/money.css": {
+    "grid": 5,
+    "calc / clamp / min / max": 1,
+    "vh / vw / cq / em / rem": 3,
+    "structural pseudo-class": 2,
+    "sibling combinator": 1
+  },
+  "src/screens/life/tabs/odds.css": {
+    "grid": 6,
+    "pseudo-element": 1,
+    "box-shadow": 2,
+    "vh / vw / cq / em / rem": 2,
+    "attribute selector": 2,
+    "structural pseudo-class": 1,
+    "filter / backdrop-filter": 1
+  },
+  "src/screens/life/tabs/oddsParts/shell.css": {
+    "box-shadow": 2,
+    "calc / clamp / min / max": 3,
+    "z-index": 1
+  },
+  "src/screens/life/tabs/people.css": {
+    "grid": 4,
+    "pseudo-element": 1,
+    "box-shadow": 3,
+    "vh / vw / cq / em / rem": 2,
+    "attribute selector": 1,
+    "structural pseudo-class": 1,
+    "filter / backdrop-filter": 1,
+    "@media / @container / @supports": 1
+  },
+  "src/screens/life/tabs/peopleParts/tabframe.css": {
+    "pseudo-element": 1,
+    "box-shadow": 2,
+    "calc / clamp / min / max": 5,
+    "vh / vw / cq / em / rem": 2,
+    "z-index": 1,
+    "attribute selector": 1
+  },
+  "src/screens/life/tabs/spendParts/spend.css": {
+    "grid": 6,
+    "box-shadow": 8,
+    "calc / clamp / min / max": 1,
+    "vh / vw / cq / em / rem": 1,
+    "attribute selector": 3,
+    "structural pseudo-class": 4,
+    "sibling combinator": 1
+  },
+  "src/screens/roll/roll.css": {
+    "grid": 4,
+    "pseudo-element": 2,
+    "keyframes": 5,
+    "calc / clamp / min / max": 30,
+    "vh / vw / cq / em / rem": 15,
+    "z-index": 1,
+    "attribute selector": 9,
+    "!important": 3
+  },
+  "src/screens/settings/settings.css": {
+    "grid": 10,
+    "box-shadow": 8,
+    "gradient": 3,
+    "calc / clamp / min / max": 3,
+    "vh / vw / cq / em / rem": 2,
+    "z-index": 2,
+    "attribute selector": 2,
+    "structural pseudo-class": 2
+  },
+  "src/screens/start/newLife.css": {
+    "calc / clamp / min / max": 2
+  },
+  "src/screens/start/world.css": {
+    "grid": 4,
+    "box-shadow": 2,
+    "gradient": 1,
+    "calc / clamp / min / max": 7,
+    "vh / vw / cq / em / rem": 6,
+    "structural pseudo-class": 1
+  },
+  "src/screens/system.css": {
+    "keyframes": 4,
+    "box-shadow": 1,
+    "gradient": 1,
+    "vh / vw / cq / em / rem": 1,
+    "attribute selector": 1
+  },
+  "src/ui/frame/frame.css": {
+    "keyframes": 2,
+    "box-shadow": 2,
+    "attribute selector": 4,
+    "structural pseudo-class": 1,
+    "filter / backdrop-filter": 2
+  },
+  "src/ui/meta/meta.css": {
+    "grid": 2,
+    "pseudo-element": 1,
+    "keyframes": 6,
+    "box-shadow": 1,
+    "attribute selector": 1,
+    "filter / backdrop-filter": 1,
+    "@media / @container / @supports": 2
+  },
+  "src/ui/people/people.css": {
+    "calc / clamp / min / max": 7,
+    "vh / vw / cq / em / rem": 1,
+    "z-index": 3,
+    "structural pseudo-class": 5
+  },
+  "src/ui/planet/planet.css": {
+    "keyframes": 2,
+    "filter / backdrop-filter": 1
+  },
+  "src/ui/ui.css": {
+    "grid": 10,
+    "keyframes": 12,
+    "box-shadow": 11,
+    "clip-path / mask": 4,
+    "calc / clamp / min / max": 4,
+    "vh / vw / cq / em / rem": 2,
+    "z-index": 5,
+    "attribute selector": 1,
+    "structural pseudo-class": 3,
+    "filter / backdrop-filter": 1
+  }
+}

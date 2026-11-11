@@ -1,5 +1,11 @@
 {
   "start.starting": "Getting a new life ready…",
   "start.continueNewborn": "Continue {name}, newborn",
-  "start.continuePlace": "In {place}"
+  "start.continuePlace": "In {place}",
+  "since.born": "born",
+  "since.died": "passed",
+  "planet.free": "The planet. Pink flashes are births, violet ones are deaths. Drag to turn it.",
+  "planet.hub": "The planet. Pink flashes are births, violet ones are deaths; tap a face to catch it. Tap a country to see its numbers.",
+  "planet.perDay": "a day",
+  "planet.open": "Open the country"
 }

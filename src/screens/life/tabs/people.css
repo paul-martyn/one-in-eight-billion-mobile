@@ -4,56 +4,56 @@
 .ppl-filters { display: flex; gap: 6px; margin: 8px 0 0 -4px; min-width: 0; }
 .ppl-chip {
   position: relative; flex: 0 1 auto; min-width: 0; display: inline-flex; align-items: center; gap: 5px; height: 32px; padding: 0 11px;
-  border: 2px solid var(--line); border-radius: 8px; background: var(--paper); box-shadow: var(--lip);
-  color: var(--ink); font-size: 13px; font-weight: 700; white-space: nowrap;
+  border: 2px solid var(--color-line); border-radius: 8px; background: var(--color-paper); box-shadow: var(--shadow-lip);
+  color: var(--color-ink); font-size: var(--font-size-small); font-weight: 700; white-space: nowrap;
 }
 .ppl-chip::after { content: ''; position: absolute; inset: -7px 0; } /* зона касания 46 px */
-.ppl-chip.is-on { background: var(--selected); }
+.ppl-chip.is-on { background: var(--color-selected); }
 .ppl-chip:active { transform: translateY(1px); }
 .ppl-chip__label { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-.ppl-chip__count { flex: none; font-size: 11px; color: var(--muted); }
+.ppl-chip__count { flex: none; font-size: var(--font-size-label); color: var(--color-muted); }
 @media (max-width: 350px) { .ppl-chip { padding: 0 8px; gap: 4px; } }
 
 /* Аватар: нейтральный инициал в пастельном круге. */
 .ppl-ava {
-  position: relative; flex: none; display: grid; place-items: center; border: 2px solid var(--line); border-radius: 50%;
-  box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.45), inset 0 -3px 0 rgba(90, 52, 24, 0.12);
+  position: relative; flex: none; display: grid; place-items: center; border: 2px solid var(--color-line); border-radius: 50%;
+  box-shadow: var(--shadow-gloss), inset 0 -3px 0 rgba(90, 52, 24, 0.12);
 }
 .ppl-ava.is-faded { filter: grayscale(0.7); }
 .ppl-ava__letter { font-weight: 700; line-height: 1; }
 .ppl-ava__paw {
   position: absolute; right: -4px; bottom: -4px; width: 22px; height: 22px; display: grid; place-items: center;
-  border: 2px solid var(--line); border-radius: 50%; background: #ffd75a;
+  border: 2px solid var(--color-line); border-radius: 50%; background: var(--color-cta);
 }
 
 /* Строка человека (кнопка-карточка). */
 .ppl-row {
   display: flex; align-items: center; gap: 10px; width: 100%; min-height: 44px; margin-top: 8px; padding: 8px 10px 10px 8px;
-  border: 2px solid var(--line); border-radius: 12px; background: var(--paper); box-shadow: var(--lip);
-  color: var(--ink); text-align: left;
+  border: 2px solid var(--color-line); border-radius: 12px; background: var(--color-paper); box-shadow: var(--shadow-lip);
+  color: var(--color-ink); text-align: left;
 }
 .ppl-row:active { transform: translateY(1px); }
-.ppl-row.is-memory { border-style: dashed; border-color: #c9a874; background: #f6ead2; box-shadow: none; }
-.ppl-row.is-away .ppl-row__name { color: var(--muted); }
+.ppl-row.is-memory { border-style: dashed; border-color: var(--color-rule); background: #f6ead2; box-shadow: none; }
+.ppl-row.is-away .ppl-row__name { color: var(--color-muted); }
 .ppl-row__text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; }
 .ppl-row__top { display: flex; align-items: baseline; flex-wrap: wrap; column-gap: 6px; max-width: 100%; }
-.ppl-row__name { min-width: 0; max-width: 100%; font-size: 16px; font-weight: 700; line-height: 1.25; overflow-wrap: anywhere; }
-.ppl-row.is-memory .ppl-row__name { font-size: 15px; }
-.ppl-row__role { font-size: 12px; font-weight: 600; color: var(--muted); }
+.ppl-row__name { min-width: 0; max-width: 100%; font-size: var(--font-size-body); font-weight: 700; line-height: 1.25; overflow-wrap: break-word; hyphens: auto; }
+.ppl-row.is-memory .ppl-row__name { font-size: var(--font-size-body); }
+.ppl-row__role { font-size: var(--font-size-small); font-weight: 600; color: var(--color-muted); }
 .ppl-row__line {
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
-  margin-top: 4px; font-size: 12.5px; font-weight: 500; line-height: 1.35; color: var(--ink-dark);
+  margin-top: 4px; font-size: var(--font-size-small); font-weight: 500; line-height: var(--line-height-body); color: var(--color-ink-dark);
 }
-.ppl-row__chev { flex: none; color: var(--line); }
+.ppl-row__chev { flex: none; color: var(--color-line); }
 [dir='rtl'] .ppl-row__chev { transform: scaleX(-1); }
 
 /* Слово близости с точкой тона. */
 .ppl-bond {
   display: inline-flex; align-items: center; gap: 4px; max-width: 100%; min-height: 20px; margin-top: 3px; padding: 0 7px 0 5px;
-  border-radius: 6px; background: #f6ecd5; font-size: 11.5px; font-weight: 700; color: var(--line); text-transform: none; letter-spacing: 0;
+  border-radius: 6px; background: var(--color-journal-life-chip-bg); font-size: var(--font-size-label); font-weight: 700; color: var(--color-line); text-transform: none; letter-spacing: 0;
 }
-.ppl-bond__dot { flex: none; width: 8px; height: 8px; border: 1.5px solid var(--line); border-radius: 4px; }
-.ppl-bond.is-big { min-height: 22px; font-size: 12.5px; margin-top: 0; }
+.ppl-bond__dot { flex: none; width: 8px; height: 8px; border: 1.5px solid var(--color-line); border-radius: 4px; }
+.ppl-bond.is-big { min-height: 22px; font-size: var(--font-size-small); margin-top: 0; }
 .ppl-bond.is-big .ppl-bond__dot { width: 9px; height: 9px; border-radius: 5px; }
 .eyebrow .ppl-bond { margin-top: 0; }
 
@@ -65,33 +65,33 @@
 .ppl-memhead { margin: 0; }
 .ppl-memtoggle {
   display: flex; align-items: center; gap: 8px; width: 100%; min-height: 44px; padding: 0 4px; border: 0; background: transparent;
-  color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; text-align: left;
+  color: var(--color-muted); font-size: var(--font-size-label); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; text-align: left;
 }
-.ppl-memtoggle__rule { flex: 1; height: 2px; border-radius: 1px; background: var(--divider); }
-.ppl-memtoggle__mark { flex: none; width: 16px; font-size: 16px; text-align: center; }
+.ppl-memtoggle__rule { flex: 1; height: 2px; border-radius: 1px; background: var(--color-divider); }
+.ppl-memtoggle__mark { flex: none; width: 16px; font-size: var(--font-size-body); text-align: center; }
 .ppl-mem .ppl-row:first-child { margin-top: 0; }
 
 /* Карточка человека. */
 .ppl-about { display: flex; align-items: center; gap: 12px; }
 .ppl-about__text { flex: 1 1 auto; min-width: 0; }
-.ppl-about__name { margin: 0; font-size: 20px; font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; }
-.ppl-about__role { margin: 2px 0 0; font-size: 13px; font-weight: 600; color: var(--muted); }
+.ppl-about__name { margin: 0; font-size: var(--font-size-title); font-weight: 700; line-height: 1.2; overflow-wrap: break-word; hyphens: auto; }
+.ppl-about__role { margin: 2px 0 0; font-size: var(--font-size-small); font-weight: 600; color: var(--color-muted); }
 .ppl-tags { display: flex; flex-wrap: wrap; gap: 4px; margin: 6px 0 0; padding: 0; list-style: none; }
 .ppl-tag {
-  display: inline-flex; align-items: center; min-height: 20px; padding: 1px 6px; border: 1.5px solid var(--line); border-radius: 6px;
-  background: var(--paper); font-size: 11px; font-weight: 700; line-height: 1.3; color: var(--line);
+  display: inline-flex; align-items: center; min-height: 20px; padding: 1px 6px; border: 1.5px solid var(--color-line); border-radius: 6px;
+  background: var(--color-paper); font-size: var(--font-size-label); font-weight: 700; line-height: 1.3; color: var(--color-line);
 }
 .ppl-between { padding: 9px 11px 10px; }
-.ppl-between__note { margin: 6px 0 0; font-size: 13px; font-weight: 500; line-height: 1.4; color: var(--ink-dark); }
+.ppl-between__note { margin: 6px 0 0; font-size: var(--font-size-body); font-weight: 500; line-height: var(--line-height-body); color: var(--color-ink-dark); }
 
 .ppl-lately { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; list-style: none; }
 .ppl-lately__item {
   display: flex; align-items: flex-start; gap: 8px; padding: 7px 10px 8px 7px;
-  border: 2px solid #d0b384; border-radius: 12px; background: #fffcf4;
+  border: 2px solid var(--color-journal-life-line); border-radius: 12px; background: var(--color-journal-life-bg);
 }
 .ppl-lately__tag {
-  flex: none; min-width: 58px; min-height: 19px; padding: 2px 6px; border-radius: 5px; background: #efe1c1;
-  font-size: 10px; font-weight: 700; line-height: 15px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--line); text-align: center;
+  flex: none; min-width: 58px; min-height: 19px; padding: 2px 6px; border-radius: 5px; background: var(--color-journal-life-pill-bg);
+  font-size: var(--font-size-label); font-weight: 700; line-height: 18px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--color-line); text-align: center;
 }
-.ppl-lately__text { min-width: 0; font-size: 13px; font-weight: 500; line-height: 1.4; color: var(--ink-dark); overflow-wrap: anywhere; }
+.ppl-lately__text { min-width: 0; font-size: var(--font-size-body); font-weight: 500; line-height: var(--line-height-body); color: var(--color-ink-dark); overflow-wrap: break-word; hyphens: auto; }
 .ppl-none { margin-top: 2px; }

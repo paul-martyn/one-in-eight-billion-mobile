@@ -4,7 +4,7 @@
 // «Keep living» продолжает её, «Be born anew» — startLife, и startNewLife
 // оригинала переносит сохранённую жизнь в непрожитые (199757-199760).
 // Команды вызываются только из обработчиков нажатий.
-import { useCallback, useEffect, useId, useState } from 'react';
+import { useCallback, useId, useState } from 'react';
 import { useAdapter, useSnapshot } from '../../adapters/useGame';
 import type { ResumeVM } from '../../adapters/viewModels';
 import type { Nav } from '../../flow/FlowHost';
@@ -68,13 +68,7 @@ export function NewLifeGuard({ open, resume, cost, canStart, onKeep, onNew, onCl
   open: boolean; resume: ResumeVM; cost: number | null; canStart: boolean; onKeep: () => void; onNew: () => void; onClose: () => void;
 }) {
   const textId = useId();
-  // Escape закрывает окно (только представление).
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
-    addEventListener('keydown', onKey);
-    return () => removeEventListener('keydown', onKey);
-  }, [open, onClose]);
+  // Escape закрывает окно через общий «Назад» в Popup (onClose).
 
   return (
     <Popup open={open && !!resume} title={t('hub.guard.title')} medallion={<BookGlyph />} medallionBg="#e6dcff" onClose={onClose} closeLabel={t('hub.guard.close')}>

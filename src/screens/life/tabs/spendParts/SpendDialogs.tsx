@@ -3,7 +3,7 @@
 //   цена и текст оригинала («Tap again to buy»), кнопки Cancel / Confirm;
 // - результат покупки (snapshot.lastSpend) — строки журнала с изменениями показателей.
 // Окна рисуются порталом в слой экрана жизни, чтобы затемнение закрывало и стикер-меню.
-import { useCallback, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { useCallback, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import type { JournalEntryVM } from '../../../../adapters/viewModels';
 import { Popup } from '../../../../ui/components';
@@ -24,12 +24,10 @@ export function useDialogLayer(): [(el: HTMLElement | null) => void, HTMLElement
   return [anchor, layer];
 }
 
-function Layer({ layer, onEscape, children }: { layer: HTMLElement | null; onEscape(): void; children: ReactNode }) {
+// Escape закрывает окно через общий «Назад» в Popup (onClose).
+function Layer({ layer, children }: { layer: HTMLElement | null; children: ReactNode }) {
   if (!layer) return null;
-  const onKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') { e.stopPropagation(); onEscape(); }
-  };
-  return createPortal(<div className="spd-layer" onKeyDown={onKeyDown}>{children}</div>, layer);
+  return createPortal(<div className="spd-layer">{children}</div>, layer);
 }
 
 /** Последнее непустое значение: содержимое окна не пропадает, пока оно закрывается. */
@@ -44,7 +42,7 @@ export function ConfirmDialog({ layer, ask, labels, onCancel, onConfirm }: {
 }) {
   const pick = useLast(ask);
   return (
-    <Layer layer={layer} onEscape={onCancel}>
+    <Layer layer={layer}>
       <Popup open={!!ask} title={t('spend.confirm.title')} medallion={<ConfirmMedallion />} medallionBg="#d6f0de" onClose={onCancel} closeLabel={t('spend.confirm.cancel')}>
         {pick && (
           <div className="spd-pop">
@@ -72,7 +70,7 @@ export function ResultDialog({ layer, result, onDone }: { layer: HTMLElement | n
   const what = shown?.what ?? null;
   const entries = shown?.entries ?? [];
   return (
-    <Layer layer={layer} onEscape={onDone}>
+    <Layer layer={layer}>
       <Popup open={!!result} title={t('spend.result.title')} medallion={<DoneMedallion />} medallionBg="#dff4f7" onClose={onDone} closeLabel={t('spend.result.close')}>
         <div className="spd-pop">
           {what && <p className="spd-pop__name spd-pop__name--top">{what}</p>}

@@ -15,6 +15,7 @@ import { StatIcon } from '../../ui/icons';
 import { useReducedMotion } from '../../ui/motionPrefs';
 import { PersonPortrait } from '../../ui/people/PersonArt';
 import type { ScreenProps } from '../registry';
+import { useBack } from '../../flow/useBack';
 import './ended.css';
 
 // Тайминги EndCute.dc.html: SHOW_MS, COUNT_AT, COUNT_MS; блок дорисовывается через 60 мс после раскрытия.
@@ -55,6 +56,8 @@ export function EndedScreen({ nav, active }: ScreenProps) {
   const shown = reduced || appeared;
 
   const toHub = () => { if (active) nav.go({ id: 'hub' }); };
+  // «Назад» (Esc) — то же, что единственная кнопка экрана: в главное меню.
+  useBack(toHub, { layer: 'screen', enabled: active });
 
   return (
     <main className={`screen en${reduced ? ' en--still' : ''}`} data-shown={shown || undefined}>
