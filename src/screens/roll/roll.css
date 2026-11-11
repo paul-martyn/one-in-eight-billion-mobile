@@ -29,6 +29,16 @@
 .rl-cta { position: absolute; left: 98.5px; }
 .rl-spin { transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0s; }
 .rl:not([data-phase='idle']) .rl-spin { opacity: 0; visibility: hidden; transform: scale(0.9); transition-delay: 0s, 0s, 0.3s; }
-.rl-meet, .rl-again { left: 310.5px; }
+.rl-meet, .rl-again {
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease, visibility 0s linear 0.6s;
+}
+.rl-again { left: 310.5px; }
+.rl[data-fast] .rl-meet, .rl[data-fast] .rl-again { transition-duration: 0.25s, 0.25s, 0s; }
+.rl[data-phase='revealed'] .rl-meet { opacity: 1; visibility: visible; transform: none; transition-delay: 0.15s, 0.15s, 0s; }
+.rl[data-phase='revealed'] .rl-again { opacity: 1; visibility: visible; transform: none; transition-delay: 0.25s, 0.25s, 0s; }
+.rl[data-phase='revealed'][data-fast] .rl-meet { transition-delay: 0.05s, 0.05s, 0s; }
+.rl[data-phase='revealed'][data-fast] .rl-again { transition-delay: 0.1s, 0.1s, 0s; }
+.rl[data-phase='revealed'] .rl-meet:active:not(:disabled) { transform: translateY(2px) scale(0.97); transition: transform 140ms var(--ease-screen); }
 .rl[data-phase='revealed'] .rl-again:active:not(:disabled) { transform: translateY(2px) scale(0.96); transition: transform 140ms var(--ease-screen); }
 .rl-wait { position: absolute; left: 24px; right: 24px; margin: 0; font-size: 12px; font-weight: 600; line-height: 15px; color: var(--color-muted); }

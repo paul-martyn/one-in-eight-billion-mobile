@@ -153,8 +153,8 @@
     "sibling combinator": 1
   },
   "src/screens/roll/roll.css": {
-    "attribute selector": 6,
-    "structural pseudo-class": 2,
+    "attribute selector": 15,
+    "structural pseudo-class": 3,
     "filter / backdrop-filter": 1
   },
   "src/screens/roll/summary.css": {
