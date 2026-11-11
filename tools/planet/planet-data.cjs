@@ -222,8 +222,16 @@ function gameTable(src) {
   const out = {};
   rows.forEach((r) => { out[r.id] = r; if (names[r.id]) out[norm(names[r.id])] = r; });
   out.lookup = (neName) => out[GAME_ALIAS[neName]] || out[norm(neName)] || null;
+  out.rows = rows;
+  out.names = names;
   return out;
 }
+
+// Where the game's small countries are that the 1:110m map leaves out: [latitude, longitude, names].
+const ISLANDS = {
+  SGP: [1.35, 103.82, 'EA'], HKG: [22.32, 114.17, 'CN'], MAC: [22.16, 113.56, 'CN'], BHR: [26.07, 50.55, 'ME'], MLT: [35.9, 14.45, 'EU'],
+  MUS: [-20.25, 57.55, 'AF'], COM: [-11.7, 43.3, 'AF'], MDV: [3.2, 73.2, 'SA'], CPV: [15.1, -23.6, 'AF']
+};
 
 function build(atlas, gameSrc) {
   const game = gameTable(gameSrc);
@@ -311,7 +319,27 @@ function build(atlas, gameSrc) {
     const cities = (CITIES[name] || []).map((c) => c.join(',')).join('|');
     META.push([LONG[name] || name, SHORT[name] || LONG[name] || name, b, d, +clat.toFixed(2), +clon.toFixed(2), +angR.toFixed(2), cities, poolFor(name, clat, clon), info, row ? row.id : '']);
   }
-  return { META, SHAPES: shapeStrs.join(';'), CODE, POOLS, stats: { totalB: Math.round(totalB), totalD: Math.round(totalD), missing, matched } };
+  // Small countries of the game that Natural Earth 1:110m does not draw: a dot of land where they
+  // are (a circle 0.8° across the middle), so a life can be born there and the planet can land on it.
+  const onMap = new Set(META.map((m) => m[10]).filter(Boolean));
+  const islands = [];
+  (game.rows || []).forEach((row) => {
+    const at = ISLANDS[row.id];
+    if (onMap.has(row.id) || !at) return;
+    const [lat, lon, pool] = at, name = (game.names && game.names[row.id]) || row.id;
+    const pts = [];
+    for (let k = 0; k < 12; k++) { const a = (k / 12) * Math.PI * 2; pts.push([Math.round((lon + 0.8 * Math.cos(a) / Math.cos(lat * D2R)) * 10), Math.round((lat + 0.8 * Math.sin(a)) * 10)]); }
+    let ring = pts[0][0] + ',' + pts[0][1] + ',0:';
+    for (let i = 1; i < pts.length; i++) ring += enc(pts[i][0] - pts[i - 1][0]) + enc(pts[i][1] - pts[i - 1][1]);
+    shapeStrs.push(ring);
+    const b = Math.round(row.b / 100) / 10, d = Math.round(row.pop * 0.07) / 10;
+    const wide = ['ssa', 'sa', 'mena'].includes(row.p) || (row.p === 'eap' && row.id !== 'CHN') ? 1 : 0;
+    const info = [row.pop, row.le, row.tfr, row.ppp, row.urb, row.net, row.eys, row.im, row.u5, row.gi, wide, row.war || 0, row.hom, row.mal || 0, row.hiv, row.cm, typeof row.wh === 'number' ? row.wh : -1, row.gap, row.ik || 1];
+    totalB += b; totalD += d;
+    META.push([name, name, b, d, lat, lon, 2, '', pool, info, row.id]);
+    islands.push(row.id);
+  });
+  return { META, SHAPES: shapeStrs.join(';'), CODE, POOLS, stats: { totalB: Math.round(totalB), totalD: Math.round(totalD), missing, matched, islands } };
 }
 
 module.exports = { build };

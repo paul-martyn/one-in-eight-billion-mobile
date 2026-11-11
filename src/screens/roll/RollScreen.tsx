@@ -1,197 +1,205 @@
-// «2 · Birth roll» (RollCute.dc.html): планета крутится как рулетка, под
-// заголовком мелькают страны, затем она останавливается на месте рождения.
-// Страна уже выбрана core (startLife) до открытия экрана: анимация только
-// повторяет результат. Пропуск, повтор и сокращённое движение не трогают игру.
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
-import spec from '../../design/motion.json';
+// «2 · Birth roll» (RollCute холста, вариант F): планета крупно посередине; палец
+// «смахивает» пунктирную орбиту, и слова «каждое рождение — бросок костей» объезжают
+// планету. Spin! (или смахнуть саму планету) запускает бросок: планета крутится и
+// останавливается на стране рождения, приближается к ней одним движением, ставит
+// булавку с местом; поднимается сводка о стране, на месте Spin! — Meet me!, рядом —
+// переброс. Тап во время вращения ускоряет его.
+// Страна уже выбрана core (startLife) до открытия экрана: планета получает её как
+// «судьбу» (PlanetStage) и только показывает результат. Переброс — новая жизнь без
+// энергии (adapter.rerollLife). Планета общая, под экраном; экран слушает её шину.
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { t } from '../../i18n';
-import { gestureId, useAdapter, useCoreView, useSnapshot } from '../../adapters/useGame';
-import { rollVM, type RollVM } from '../../adapters/vm/roll';
-import type { Nav } from '../../flow/FlowHost';
-import { ChunkyButton, RoundButton } from '../../ui/components';
-import { ReplayIcon } from '../../ui/icons';
-import { Globe, type GlobeTarget } from '../../ui/globe/Globe';
+import { gestureId, useAdapter, useSnapshot } from '../../adapters/useGame';
+import { rollVM } from '../../adapters/vm/roll';
+import { Frame, useFrame } from '../../ui/frame/Frame';
+import { CtaButton } from '../../ui/frame/parts';
 import { useReducedMotion } from '../../ui/motionPrefs';
+import { planetBus, usePlanetEvents } from '../../ui/planet/bus';
+import { layRoll } from '../layouts';
 import type { ScreenProps } from '../registry';
-import { capFirst, fmtInt, useFitSize } from '../start/shared';
+import { capFirst, fmtInt } from '../start/shared';
+import type { Land } from './luck';
+import { spendReroll, useRerolls } from './rerolls';
+import { Summary } from './Summary';
 import './roll.css';
 
-const R = spec.sequences.roll;
-type Stage = 'wait' | 'spin' | 'landed' | 'revealed';
-const bezier = (k: keyof typeof spec.easing) => `cubic-bezier(${(spec.easing[k] as number[]).join(',')})`;
-const ROOT_VARS = {
-  '--rl-label-ms': `${R.label.durationMs}ms`,
-  '--rl-label-ease': bezier('pop'),
-  '--rl-label-from': String(R.label.scale[0]),
-  '--rl-reveal-ms': `${R.reveal.durationMs}ms`,
-  '--rl-reveal-y': `${R.reveal.translateY[0]}px`,
-  '--rl-cta-delay': `${R.reveal.ctaDelayMs}ms`,
-} as CSSProperties;
-
-/**
- * Декоративная последовательность названий: nameFlips − 1 случайных стран
- * (Math.random браузера, с весом доли рождений, как ролик оригинала) и в
- * конце — настоящая страна рождения.
- */
-function flipSequence(names: RollVM['names'], final: string): string[] {
-  const n = Math.max(2, R.nameFlips);
-  const pool = names.map(x => ({ name: capFirst(x.name), w: x.w })).filter(x => x.name !== final && x.w > 0);
-  const total = pool.reduce((s, x) => s + x.w, 0);
-  const out: string[] = [];
-  for (let i = 0; i < n - 1; i++) {
-    let pick = pool[0]?.name ?? final;
-    if (total > 0) {
-      let r = Math.random() * total;
-      for (const x of pool) { r -= x.w; if (r <= 0) { pick = x.name; break; } }
-    }
-    if (out[out.length - 1] === pick && pool.length > 1) { i--; continue; }
-    out.push(pick);
-  }
-  out.push(final);
-  return out;
-}
+type Phase = 'idle' | 'spin' | 'landed' | 'revealed';
+/** Кегль названия страны: помещается в 330 (RollCute nameSize). */
+const nameSize = (name: string) => Math.max(28, Math.min(52, Math.floor(330 / Math.max(1, [...name].length * 0.58))));
 
 export function RollScreen({ nav, active }: ScreenProps) {
-  const snap = useSnapshot();
-  const data = useCoreView(rollVM);
-  if (!data || snap.lifePhase !== 'birth') {
-    return (
-      <main className="screen rl rl--wait" aria-busy="true">
-        <p className="rl__waiting" role="status">{t('roll.loading')}</p>
-      </main>
-    );
-  }
-  return <RollView key={`${snap.lifeSeq}-${data.iso}`} data={data} nav={nav} active={active} />;
-}
-
-function RollView({ data, nav, active }: { data: RollVM; nav: Nav; active: boolean }) {
   const adapter = useAdapter();
   const snap = useSnapshot();
+  const frame = useFrame();
   const reduced = useReducedMotion();
-  const country = capFirst(data.country);
-  const [run, setRun] = useState(0);
-  const [skipped, setSkipped] = useState(false);
-  const [stage, setStage] = useState<Stage>('wait');
-  const [flipIdx, setFlipIdx] = useState(0);
-  const [seq, setSeq] = useState(() => flipSequence(data.names, country));
-  const [opening, setOpening] = useState(false);
-  const [globeBox, size] = useFitSize<HTMLDivElement>(290);
-  const instant = reduced || skipped;
-  const shown: Stage = instant ? 'revealed' : stage;
-  const landed = shown === 'landed' || shown === 'revealed';
-  const revealed = shown === 'revealed';
-  const lastFlip = seq.length - 1;
+  const rerolls = useRerolls();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const data = useMemo(() => (snap.status === 'ready' && snap.lifePhase === 'birth' ? adapter.view(rollVM) : null), [adapter, snap.status, snap.lifePhase, snap.lifeSeq]);
+  const L = layRoll(frame);
+  const [phase, setPhase] = useState<Phase>('idle');
+  const [center, setCenter] = useState('');
+  const [land, setLand] = useState<Land | null>(null);
+  const [touched, setTouched] = useState(false);
+  const [fast, setFast] = useState(false);
+  const [busy, setBusy] = useState(false);
 
-  // Хронология рулетки (motion.json sequences.roll): только показ.
-  useEffect(() => {
-    if (instant) return;
-    let raf = 0;
-    let t0 = 0;
-    const tick = () => {
-      const p = Math.min(1, (performance.now() - t0) / R.spinMs);
-      setFlipIdx(Math.min(lastFlip, Math.floor((1 - Math.pow(1 - p, 2)) * (lastFlip + 1))));
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    const a = setTimeout(() => { t0 = performance.now(); setStage('spin'); raf = requestAnimationFrame(tick); }, R.startDelayMs);
-    const b = setTimeout(() => { setFlipIdx(lastFlip); setStage('landed'); }, R.startDelayMs + R.spinMs);
-    const c = setTimeout(() => setStage('revealed'), R.startDelayMs + R.spinMs + R.revealDelayMs);
-    return () => { clearTimeout(a); clearTimeout(b); clearTimeout(c); cancelAnimationFrame(raf); };
-  }, [run, instant, lastFlip]);
+  usePlanetEvents((type, p) => {
+    if (type === 'touch') setTouched(true);
+    else if (type === 'hurry') setFast(true);
+    else if (type === 'roll') {
+      setPhase('spin'); setCenter(''); setLand(null); setFast(false);
+      // Сокращённое движение: бросок сразу доигрывается (как после тапа).
+      if (reduced) planetBus.emit('cmd', 'hurry');
+    } else if (type === 'center') setCenter(String(p ?? ''));
+    else if (type === 'land') { setPhase('landed'); setLand(p as Land); }
+    else if (type === 'dive' && p === 'in') setPhase('revealed');
+    else if (type === 'dive' && p === 'out') { setPhase('idle'); setLand(null); setCenter(''); setTouched(false); }
+  }, active);
 
-  const target = useMemo<GlobeTarget | null>(
-    () => (data.coords ? { lat: data.coords.lat, lon: data.coords.lon, label: t('globe.landed', { place: data.placeFull }) } : null),
-    [data.coords?.lat, data.coords?.lon, data.placeFull],
-  );
+  const idle = phase === 'idle';
+  const landed = phase === 'landed' || phase === 'revealed';
+  const revealed = phase === 'revealed';
+  // Название страны — из core (историческое для жизней в прошлом); пока планета крутится — страна под её серединой.
+  const country = landed ? capFirst(data?.country ?? land?.short ?? '') : phase === 'spin' ? capFirst(center) : '';
+  const ready = !!data && snap.status === 'ready';
 
-  const skip = () => setSkipped(true);
-  const replay = () => {
-    if (reduced) return;
-    setSkipped(false);
-    setStage('wait');
-    setFlipIdx(0);
-    setSeq(flipSequence(data.names, country));
-    setRun(r => r + 1);
-  };
-  const openingRef = useRef(false);
-  const onWho = () => {
-    if (!active || openingRef.current || !snap.companionsReady) return;
-    openingRef.current = true;
-    setOpening(true);
+  const spin = () => { if (active && ready && idle) planetBus.emit('cmd', 'spin'); };
+  const opening = useRef(false);
+  const onMeet = () => {
+    if (!active || busy || opening.current || !snap.companionsReady) return;
+    opening.current = true;
     if (adapter.revealCertificate(gestureId())) nav.go({ id: 'certificate', filled: false });
-    else { openingRef.current = false; setOpening(false); }
+    else opening.current = false;
+  };
+  // Переброс: сначала команда (новая жизнь и новая «судьба» планеты), затем планета отъезжает.
+  const reroll = async () => {
+    if (!active || busy || opening.current) return;
+    setBusy(true);
+    const ok = await adapter.rerollLife(gestureId(), adapter.getSnapshot().lifeSeq);
+    setBusy(false);
+    if (!ok) return;
+    spendReroll();
+    setPhase('idle'); setLand(null); setCenter(''); setTouched(false);
+    planetBus.emit('cmd', 'reroll');
   };
 
-  const name = landed ? country : seq[Math.min(flipIdx, lastFlip)] ?? country;
-  const chars = [...name].length;
-  const lines = chars > 18 ? 2 : 1;
-  const nameVars = { '--len': String(lines === 1 ? chars : Math.ceil(chars / 2) + 2) } as CSSProperties;
-  const oneIn = data.shareOneIn > 0
+  const oneIn = data && data.shareOneIn > 0
     ? data.pastYear != null
       ? t(data.byPopulation ? 'roll.oneInPopPast' : 'roll.oneInBirthsPast', { year: data.pastYear, n: fmtInt(data.shareOneIn), pct: data.share })
       : t(data.byPopulation ? 'roll.oneInPop' : 'roll.oneInBirths', { n: fmtInt(data.shareOneIn), pct: data.share })
     : '';
+  const size = nameSize(country);
 
   return (
-    <main className="screen rl" style={ROOT_VARS} data-stage={shown} data-instant={instant || undefined}>
-      <div className="sky-glow rl__glow" aria-hidden="true" />
-      {revealed && !reduced && (
-        <div className="rl__corner">
-          <RoundButton className="rl__replay" onClick={replay} aria-label={t('roll.replay')}><ReplayIcon size={18} /></RoundButton>
-        </div>
-      )}
+    <main className="pscreen over-planet rl" data-phase={phase} data-fast={fast || undefined}>
+      <Frame>
+        <p className="rl-label" data-on={landed || undefined} style={{ top: L.label }}>{landed ? t('roll.bornIn') : t('roll.where')}</p>
+        <p className="rl-name" aria-hidden="true" data-on={landed || undefined} style={{ top: L.name, fontSize: size, WebkitTextStroke: `${(size / 52 * 5).toFixed(1)}px #5a3418`, textShadow: `0 ${(size / 52 * 4).toFixed(1)}px 0 #5a3418` }}>{country}</p>
+        <p className="sr-only" role="status">{landed && data ? t('roll.status', { place: data.placeFull }) : !ready ? t('roll.loading') : ''}</p>
 
-      <div className="rl__col">
-        <p className="rl__label" data-on={landed || undefined}>{landed ? t('roll.bornIn') : t('roll.where')}</p>
-        <p className="rl__name k-big" aria-hidden="true" data-lines={lines} data-on={landed || undefined} style={nameVars}>{name}</p>
-        <p className="sr-only" role="status">{landed ? t('roll.status', { place: data.placeFull }) : ''}</p>
+        <OrbitHint cx={L.planet.cx} cy={L.planet.cy} k={L.k} shown={idle} hand={idle && !touched} still={reduced} />
 
-        <div ref={globeBox} className="rl__globe">
-          {size > 0 && (
-            <Globe
-              key={instant ? 'instant' : 'anim'}
-              size={size}
-              target={target}
-              focus={!!target && shown !== 'wait'}
-              turns={R.turns}
-              durationMs={R.spinMs}
-              zoom={R.zoom}
-              startLon={-40}
-              reducedMotion={instant}
-              idleLabel={t('globe.idle')}
-            />
+        <Summary land={land} shown={revealed} fast={fast} style={{ bottom: L.summaryBottom }} fallback={oneIn} />
+
+        <CtaButton className="rl-cta rl-spin" style={{ top: L.cta }} label={t('roll.spin')} aria-label={t('roll.spinLabel')} onClick={spin} disabled={!ready} tabIndex={idle ? 0 : -1} />
+        <CtaButton className="rl-cta rl-meet" style={{ top: L.cta }} label={t('roll.meet')} onClick={onMeet} disabled={!snap.companionsReady || busy} aria-busy={!snap.companionsReady || undefined} tabIndex={revealed ? 0 : -1} />
+        <button type="button" className="rl-again" style={{ top: L.cta + 3 }} onClick={reroll} disabled={busy} tabIndex={revealed ? 0 : -1} aria-label={rerolls > 0 ? t('roll.again', { n: rerolls }) : t('roll.againAd')}>
+          <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5.27 10.07A7 7 0 0 1 17.20 7.32M18.73 13.93A7 7 0 0 1 6.80 16.68" fill="none" stroke="#2f5a17" strokeWidth="5.6" strokeLinecap="round" />
+            <path d="M19.19 4.45L20.15 10.59L14.14 9.00ZM4.81 19.55L3.85 13.41L9.86 15.00Z" fill="#2f5a17" stroke="#2f5a17" strokeWidth="3" strokeLinejoin="round" />
+            <path d="M5.27 10.07A7 7 0 0 1 17.20 7.32M18.73 13.93A7 7 0 0 1 6.80 16.68" fill="none" stroke="#ffffff" strokeWidth="2.6" strokeLinecap="round" />
+            <path d="M19.19 4.45L20.15 10.59L14.14 9.00ZM4.81 19.55L3.85 13.41L9.86 15.00Z" fill="#ffffff" />
+          </svg>
+          {rerolls > 0 ? (
+            <span className="rl-again__n" aria-hidden="true">{rerolls}</span>
+          ) : (
+            <span className="rl-again__ad" aria-hidden="true"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M2 1l7 4-7 4Z" fill="#2f5a17" /></svg>{t('roll.ad')}</span>
           )}
-        </div>
+        </button>
+        <p className="rl-wait" role="status" style={{ top: L.cta + 76 }}>{revealed && !snap.companionsReady ? t('roll.waitComps') : ''}</p>
+      </Frame>
+    </main>
+  );
+}
 
-        <div className="rl__info">
-          <p className="rl__hint" aria-hidden={landed || undefined}>{t('roll.hint')}</p>
-          <div className="rl__reveal" aria-hidden={!revealed || undefined}>
-            <span className="rl__chip">
-              <svg className="rl__pin" width="26" height="30" viewBox="0 0 24 28" aria-hidden="true">
-                <path d="M12 26s-8.5-7.6-8.5-14.4a8.5 8.5 0 0 1 17 0C20.5 18.4 12 26 12 26Z" fill="#ff6f8a" stroke="#7b4b2a" strokeWidth="2" strokeLinejoin="round" />
-                <circle cx="12" cy="11.5" r="3.2" fill="#ffffff" stroke="#7b4b2a" strokeWidth="1.8" />
-              </svg>
-              <span className="rl__chip-text">{capFirst(data.place)}</span>
-            </span>
-            <p className="bubble rl__bubble">
-              {oneIn}
-              <span className="bubble__accent">{data.pastYear != null ? t('roll.thatsYouPast') : t('roll.thatsYou')}</span>
-            </p>
-          </div>
-        </div>
+/**
+ * Орбита вокруг планеты с надписью и пальцем-подсказкой (RollCute ANIM): палец входит
+ * слева, быстро «смахивает» вправо, слова один раз объезжают планету (за ней их не
+ * видно) и останавливаются спереди; затем снова. Цикл 4,4 с. Координаты — макета
+ * (планета 368 с центром 196,5 × 386); группа сдвинута и сжата под место планеты.
+ */
+function OrbitHint({ cx, cy, k, shown, hand, still }: { cx: number; cy: number; k: number; shown: boolean; hand: boolean; still: boolean }) {
+  const root = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const r = root.current;
+    if (!r || !shown || still) return;
+    const handEl = r.querySelector<HTMLElement>('.rl-hand');
+    const tps = r.querySelectorAll<SVGTextPathElement>('.rl-tp');
+    const txts = r.querySelectorAll<SVGTextElement>('.rl-txt');
+    const dashes = r.querySelectorAll<SVGPathElement>('.rl-dash');
+    let raf = 0;
+    const tick = () => {
+      const c = performance.now() % 4400;
+      let u = 0, a = 0, tilt = 0, sc = 1;
+      if (c < 420) {
+        // Палец появляется слева на орбите и «нажимает».
+        const q = c / 420; a = q; u = 0.04; sc = 1.12 - 0.22 * q; tilt = -4 - 6 * q;
+      } else if (c < 820) {
+        // Быстрый взмах вправо с наклоном, в конце палец исчезает.
+        const q = (c - 420) / 400, e = 1 - Math.pow(1 - q, 3);
+        u = 0.04 + 0.92 * e; a = 1 - Math.max(0, (q - 0.55) / 0.45); sc = 0.9; tilt = -10 + 34 * Math.sin(Math.min(1, q * 1.25) * Math.PI / 2);
+      } else { a = 0; u = 0.96; }
+      const v = 1 - u;
+      const x = v * v * 77.8 + 2 * v * u * 196.5 + u * u * 315.2;
+      const y = v * v * 446.3 + 2 * v * u * 478.1 + u * u * 446.3;
+      if (handEl) {
+        handEl.style.opacity = a.toFixed(3);
+        handEl.style.transform = `translate(${(x - 18).toFixed(1)}px, ${(y - 5.6).toFixed(1)}px) rotate(${tilt.toFixed(1)}deg) scale(${sc.toFixed(3)})`;
+      }
+      // Слова уезжают вслед за пальцем: один круг, сначала быстро, и останавливаются спереди.
+      const tt = (c - 520) / 2900, p = tt <= 0 ? 0 : tt >= 1 ? 1 : 1 - Math.pow(1 - tt, 3);
+      const off = `${(100 / 6 + (p * 100) / 3).toFixed(3)}%`;
+      tps.forEach(el => el.setAttribute('startOffset', off));
+      // Инерция: сразу после толчка буквы чуть расходятся и снова сходятся.
+      const spread = tt > 0 && tt < 0.36 ? Math.sin((Math.PI * tt) / 0.36) : 0;
+      txts.forEach(el => { el.style.letterSpacing = `${(1.8 + 3.4 * spread).toFixed(2)}px`; });
+      dashes.forEach(el => { el.style.strokeDashoffset = (-p * 871).toFixed(1); });
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [shown, still]);
 
-        <div className="rl__cta">
-          <p className="rl__comps" role="status">{revealed ? (snap.companionsReady ? '' : t('roll.waitComps')) : ''}</p>
-          <div className="rl__slot">
-            {revealed ? (
-              <ChunkyButton className="rl__who" onClick={onWho} disabled={!snap.companionsReady || opening} aria-busy={!snap.companionsReady || opening || undefined}>
-                {t('roll.cta')}
-              </ChunkyButton>
-            ) : (
-              <button type="button" className="pill-btn rl__skip" onClick={skip} aria-label={t('roll.skipLabel')}>{t('roll.skip')}</button>
-            )}
-          </div>
+  const text = t('roll.orbit');
+  const words = (
+    <text className="rl-txt" fontSize="15" fontWeight="700" letterSpacing="1.8" fill="#ffffff" stroke="#5a3418" strokeWidth="3" strokeLinejoin="round" paintOrder="stroke">
+      <textPath className="rl-tp" href="#rl-orbit" startOffset={still ? '50%' : '16.667%'} textAnchor="middle"><tspan dy="-5">{text}</tspan></textPath>
+    </text>
+  );
+  return (
+    <div ref={root} className="rl-orbit" aria-hidden="true" data-on={shown || undefined} style={{ transform: `translate(${cx}px, ${cy}px) scale(${k}) translate(-196.5px, -386px)` }}>
+      <svg width="393" height="852" viewBox="0 0 393 852">
+        <defs>
+          <clipPath id="rl-front"><rect x="-60" y="411.8" width="513" height="300" /></clipPath>
+          <clipPath id="rl-back"><rect x="-60" y="111.8" width="513" height="300" /></clipPath>
+          <mask id="rl-disc" maskUnits="userSpaceOnUse" x="-60" y="0" width="513" height="852">
+            <rect x="-60" y="0" width="513" height="852" fill="#ffffff" />
+            <circle cx="196.5" cy="386" r="163.9" fill="#000000" />
+          </mask>
+          <path id="rl-orbit" d="M196.5 367.6A191.4 44.2 0 0 0 196.5 456.0A191.4 44.2 0 0 0 196.5 367.6A191.4 44.2 0 0 0 196.5 456.0A191.4 44.2 0 0 0 196.5 367.6A191.4 44.2 0 0 0 196.5 456.0A191.4 44.2 0 0 0 196.5 367.6" fill="none" />
+        </defs>
+        <g mask="url(#rl-disc)"><path className="rl-dash" d="M387.9 411.8A191.4 44.2 0 0 0 5.1 411.8" fill="none" stroke="#5a3418" strokeWidth="2" strokeLinecap="round" strokeDasharray="14 12" opacity="0.7" /></g>
+        <path className="rl-dash" d="M5.1 411.8A191.4 44.2 0 0 0 387.9 411.8" fill="none" stroke="#5a3418" strokeWidth="2" strokeLinecap="round" strokeDasharray="14 12" opacity="0.95" />
+        <g clipPath="url(#rl-back)" mask="url(#rl-disc)">{words}</g>
+        <g clipPath="url(#rl-front)">{words}</g>
+      </svg>
+      <div className="rl-hand-box" data-on={hand || undefined}>
+        <div className="rl-hand">
+          <svg width="40" height="40" viewBox="0 0 24 24">
+            <path d="M9 11V5.5a1.8 1.8 0 0 1 3.6 0V11M12.6 10.2a1.8 1.8 0 0 1 3.6 0V12M16.2 11a1.8 1.8 0 0 1 3.6 0v3.5c0 3.6-2.6 6.5-6.2 6.5h-1c-2.2 0-3.6-.9-4.9-2.5L4.6 14.8a1.7 1.7 0 0 1 2.6-2.2L9 14.5V11" fill="#fffaf0" stroke="#5a3418" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

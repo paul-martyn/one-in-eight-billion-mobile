@@ -6,6 +6,7 @@ import { gestureId, useAdapter } from '../../adapters/useGame';
 import { APPROX_WORLD_RATES, worldRates } from '../../adapters/vm/hub';
 import type { Nav } from '../../flow/FlowHost';
 import { t, UI_LANG, formatNumber } from '../../i18n';
+import { resetRerolls } from '../roll/rerolls';
 import './world.css';
 
 export const fmtInt = (n: number) => formatNumber(n);
@@ -99,6 +100,8 @@ export function useStartNewLife() {
     setBusy(true);
     // id создаётся синхронно, внутри обработчика нажатия.
     const ok = await adapter.startLife(gestureId(), snap.lifeSeq);
+    // Жизнь за энергию: снова три бесплатных переброса.
+    if (ok) resetRerolls();
     if (!ok) {
       busyRef.current = false;
       if (mounted.current) setBusy(false);

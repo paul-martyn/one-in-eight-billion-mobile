@@ -164,13 +164,20 @@ export class GameAdapter {
 
   // ---- Команды ----
 
-  /** Новая жизнь. expectLifeSeq защищает от двойного нажатия. */
-  async startLife(id: string, expectLifeSeq: number): Promise<boolean> {
+  /**
+   * Новая жизнь. expectLifeSeq защищает от двойного нажатия.
+   * opts.iso — родиться в выбранной стране («Be born here», переброс ребёнка);
+   * opts.free — без энергии: переброс уже начатого рождения (мета-слой: первые
+   * перебросы бесплатны, дальше — за рекламу; пока рекламы нет, тоже бесплатно).
+   */
+  async startLife(id: string, expectLifeSeq: number, opts: { iso?: string; free?: boolean } = {}): Promise<boolean> {
     if (!this.accept(id) || expectLifeSeq !== this.snap.lifeSeq) return false;
     const host = this.need();
     const T = host.top;
+    // Переброс возможен только из начатого рождения.
+    if (opts.free && T.S?.phase !== 'birth') return false;
     // Новая жизнь стоит энергии (мобильная мета-экономика).
-    if (!this.meta || !this.meta.spendLife(host.now())) {
+    if (!opts.free && (!this.meta || !this.meta.spendLife(host.now()))) {
       this.notice('noEnergy');
       return false;
     }
@@ -179,21 +186,27 @@ export class GameAdapter {
       this.certNo = null;
       this.steps = 0;
       this.replay = { format: '1in8b-replay/1', core: host.meta.sourceSha256, generator: host.meta.generator, entropy: host.entropy.getState(), prefs: JSON.parse(JSON.stringify(T.UI.prefs)), stepSeconds: STEP_SECONDS, commands: [] };
-      this.rec('startLife');
+      if (opts.iso) this.rec('startLife', opts.iso); else this.rec('startLife');
       const compRng = new CoreEntropy(host.entropy.getState() ^ 0x5bd1e995);
       cmd.startLife(T, {
         now: host.now(),
         companionRng: compRng.next,
         onCompanions: () => this.publish({ companionsReady: true, certificate: this.certNo ? this.buildCertificate() : this.snap.certificate }),
+        iso: opts.iso,
       });
       this.publishLife({ lifeSeq: this.snap.lifeSeq + 1, companionsReady: false, certificate: null, ended: null, lastChoice: null, lastSpend: null, family: [] });
       this.pumpTimers();
       return true;
     } catch (error) {
-      this.meta?.refundLife();
+      if (!opts.free) this.meta?.refundLife();
       this.fail(error);
       return false;
     }
+  }
+
+  /** Переброс рождения: новая жизнь без энергии; iso — в той же стране (свидетельство). */
+  rerollLife(id: string, expectLifeSeq: number, iso?: string): Promise<boolean> {
+    return this.startLife(id, expectLifeSeq, { free: true, iso });
   }
 
   /** Свидетельство о рождении: один раз на жизнь (после сопутствующих жизней). */

@@ -167,10 +167,12 @@ function classify(W, lon, lat) {
 
 function findCountry(W, name) {
   if (!name) return -1;
-  var n = String(name).toLowerCase();
-  for (var i = 0; i < W.countries.length; i++) {
-    var c = W.countries[i];
-    if (c.name.toLowerCase() === n || c.short.toLowerCase() === n || (c.iso && c.iso.toLowerCase() === n)) return i;
+  var n = String(name).toLowerCase(), i, c;
+  // The game's own id first (names change with the language).
+  for (i = 0; i < W.countries.length; i++) if (W.countries[i].iso && W.countries[i].iso.toLowerCase() === n) return i;
+  for (i = 0; i < W.countries.length; i++) {
+    c = W.countries[i];
+    if (c.name.toLowerCase() === n || c.short.toLowerCase() === n) return i;
   }
   return -1;
 }
@@ -209,6 +211,10 @@ function landSet(W, kind) {
       if (ci >= 0) list.push([la, lo, ci]);
     }
   }
+  // A country of the game too small for the grid still gets one dot, in its middle.
+  var dotted = {};
+  list.forEach(function (p) { dotted[p[2]] = 1; });
+  W.countries.forEach(function (co) { if (co.iso && !dotted[co.i]) list.push([co.clat, co.clon, co.i]); });
   var s = pointSet(list);
   s.kind = kind;
   s.by = W.countries.map(function () { return []; });
@@ -460,6 +466,7 @@ class Component extends DCLogic {
       if (this.dive) this.dive.cap = this.capFor(this.dive.ci);
     }
     if (prev.mode !== this.props.mode) this.reset();
+    if (prev.fate !== this.props.fate) this.fateUsed = false;
     if (prev.cmd !== this.props.cmd && this.props.cmd) this.command(String(this.props.cmd).split('#')[0]);
     if (prev.cx !== this.props.cx || prev.cy !== this.props.cy || prev.size !== this.props.size) {
       var to = this.target(), ms = this.num('moveMs', 750);
@@ -481,6 +488,7 @@ class Component extends DCLogic {
     else if (name === 'reset') this.reset();
     else if (name === 'reroll') this.reroll(now);
     else if (name === 'deselect') this.deselect(now, true);
+    else if (name === 'hurry' && (this.phase === 'roll' || this.phase === 'landed' || this.phase === 'diving')) this.hurry(now);
   }
   finishTween(now) {
     var tw = this.tween;
@@ -563,7 +571,7 @@ class Component extends DCLogic {
     // stats: the game's [people (k), life expectancy, kids per woman, income $, urban %, online %,
     // years at school, infants dying per 1000], when it has the country; better: the share of
     // today's babies born where life starts worse; fair: the same by the UN's three pillars.
-    return { name: co.name, short: co.short, bornDay: co.born * 1000 / 365, diedDay: co.died * 1000 / 365, share: co.born / this.W.totalBorn, city: city ? city.n : '', stats: co.info || null, better: startRank(this.W, ci), fair: fairStart(this.W, ci), scales: scalesOf(this.W, ci) };
+    return { iso: co.iso, name: co.name, short: co.short, bornDay: co.born * 1000 / 365, diedDay: co.died * 1000 / 365, share: co.born / this.W.totalBorn, city: city ? city.n : '', stats: co.info || null, better: startRank(this.W, ci), fair: fairStart(this.W, ci), scales: scalesOf(this.W, ci) };
   }
   select(ci, lat, lon, now) {
     // How far each dot of the country is from the finger, for the wave of light.
@@ -605,7 +613,8 @@ class Component extends DCLogic {
   // roll (when the spin starts), else on the spot.
   diveZoom(ci) {
     var G = this.geom(), co = this.W.countries[ci];
-    return Math.max(1.5, Math.min(24, 150 / (G.R0 * Math.sin(Math.max(0.004, co.angR)))));
+    // `diveR`: the radius the country fits up close (150 px on the designs; less on a short phone).
+    return Math.max(1.5, Math.min(24, this.num('diveR', 150) / (G.R0 * Math.sin(Math.max(0.004, co.angR)))));
   }
   closeUp(ci) {
     var G = this.geom(), Z = this.diveZoom(ci);
@@ -736,7 +745,9 @@ class Component extends DCLogic {
     while (T < 2.6 && k < 12) { k++; D = d0 + dir * 360 * k; T = 3 * Math.abs(D) / Math.abs(v); }
     var city = null;
     co.cities.forEach(function (c) { if (fate[1] && c.n.toLowerCase() === fate[1].toLowerCase()) city = c; });
-    if (!city && co.cities.length) city = rnd(co.cities);
+    // A free roll lands on one of the country's cities; a rigged one whose city the planet does not
+    // know (or a birth in the countryside) lands somewhere on the country's land.
+    if (!city && co.cities.length && !fate[0]) city = rnd(co.cities);
     if (!city) {
       var S = this.set(), j = rnd(S.by[ci]);
       city = { n: '', lat: S.lat[j], lon: S.lon[j] };
@@ -783,8 +794,9 @@ class Component extends DCLogic {
   // ---- every frame ----
   // The pin's label: the host's words for the rigged city (`pin-label`), else the city and country.
   placeLabel(ci, city) {
-    var co = this.W.countries[ci], rig = String(this.opt('fate', '')).split(',')[1];
-    if (rig && city.n && city.n.toLowerCase() === rig.toLowerCase() && this.opt('pinLabel', '')) return this.opt('pinLabel', '');
+    var co = this.W.countries[ci], fate = String(this.opt('fate', '')).split(',');
+    // The game's own words for the place whenever the roll was its (the country is the fated one).
+    if (this.opt('pinLabel', '') && fate[0] && findCountry(this.W, fate[0]) === ci) return this.opt('pinLabel', '');
     return city.n ? city.n + ', ' + co.short : 'Somewhere in ' + co.short;
   }
   // `born`: a board that opens already born (down on the fated country, the pin in place), so the
