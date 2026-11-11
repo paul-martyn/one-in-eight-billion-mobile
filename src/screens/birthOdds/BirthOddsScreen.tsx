@@ -1,256 +1,348 @@
-// «3a · Your odds» (OddsCute.dc.html): всё о начале жизни, чего нет в записи о
-// рождении. Числа — из snapshot.certificate (CertificateVM) и из birthOddsView
-// (функции оригинала в песочнице). Отсчёт чисел при входе — только показ.
-import { useEffect, useState } from 'react';
-import spec from '../../design/motion.json';
-import { t, formatNumber } from '../../i18n';
+// «3a · Your start in life» (OddsCute холста, дубль 2 · A): всё о начале жизни, чего нет
+// в записи о рождении. Шапка с кнопкой «назад» и именем не прокручивается; ниже —
+// прогноз срока жизни, стартовые показатели, жизнь впереди (доживут до 5, окончат школу,
+// доживут до 18, окончат университет, доживут до 65), страна рождения, родившиеся в ту
+// же секунду и сравнение со страной игрока. Блоки появляются по очереди, а те, что ниже, —
+// когда доезжают до экрана; силуэты заполняются, числа считают. Start life — только на
+// свидетельстве. Числа — из snapshot.certificate (CertificateVM) и birthOddsView (функции
+// оригинала в песочнице); удача рождения «соседей» — из таблиц планеты (страны движка).
+// Появление и отсчёт — только показ.
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { t, UI_LANG, formatNumber } from '../../i18n';
 import { scaleNumbers } from '../../i18n/numbers';
 import { useAdapter, useCoreView, useSnapshot } from '../../adapters/useGame';
+import { companionAppearances } from '../../adapters/vm/appearance';
 import { birthOddsView, type BirthOddsVM, type FactVM, type HomeCompareVM } from '../../adapters/vm/certificate';
-import type { CertificateVM, CompanionVM } from '../../adapters/viewModels';
-import { ChunkyButton, RoundButton, STAT_COLOR, type StatKey } from '../../ui/components';
-import { BackIcon, StatIcon } from '../../ui/icons';
+import type { CertificateVM } from '../../adapters/viewModels';
+import { Frame, useFrame } from '../../ui/frame/Frame';
+import { useFontsReady } from '../../ui/frame/fit';
 import { useReducedMotion } from '../../ui/motionPrefs';
+import { PersonPortrait } from '../../ui/people/PersonArt';
+import { BabyGlyph } from '../../ui/planet/glyphs';
+import { luckOf } from '../../ui/planet/planetCore.js';
 import type { ScreenProps } from '../registry';
-import { birthDate, Initial, PORTRAIT_BG, sexLabel, useStartLife } from '../certificate/parts';
+import { birthDate, Initial, PORTRAIT_BG, sexLabel } from '../certificate/parts';
+import { tierOf } from '../roll/luck';
+import { ICON, SIL } from './oddsArt';
 import '../certificate/certificate.css';
 import './birthOdds.css';
 
-const STATS: StatKey[] = ['hl', 'h', 'sm', 'so'];
-const ENTER_MS = spec.sequences.countUp.durationMs;
+type Block = 'forecast' | 'stats' | 'life' | 'born' | 'same' | 'cmp';
+const BLOCKS: Block[] = ['forecast', 'stats', 'life', 'born', 'same', 'cmp'];
+// Раньше этого блок не начинается (мс от открытия экрана): первые идут по очереди; блоки,
+// доехавшие до экрана вместе, стартуют через GAP друг за другом (OddsCute SLOT / GAP).
+const SLOT: Record<Block, number> = { forecast: 160, stats: 290, life: 420, born: 550, same: 0, cmp: 0 };
+const GAP = 130, IN_MS = 380, COUNT_MS = 760, STEP_MS = 90;
+/** Сколько длится блок вместе со своими строками. */
+const LONG: Record<Block, number> = { forecast: 1000, stats: 1000, life: 160 + 4 * STEP_MS + COUNT_MS + 60, born: 1160, same: 160 + 3 * STEP_MS + COUNT_MS + 60, cmp: 100 + 3 * 70 + IN_MS };
+const clamp01 = (x: number) => (x < 0 ? 0 : x > 1 ? 1 : x);
+const out3 = (x: number) => 1 - Math.pow(1 - x, 3);
+const outBack = (x: number) => { const c = 1.6; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
 
-/** Доля появления 0→1 с замедлением easeOutCubic (motion.json sequences.countUp). */
-function useEntrance(reduced: boolean): number {
-  const [k, setK] = useState(reduced ? 1 : 0);
-  useEffect(() => {
-    if (reduced) { setK(1); return; }
-    let raf = 0;
-    const t0 = performance.now();
-    const tick = (now: number) => {
-      const p = Math.min(1, (now - t0) / ENTER_MS);
-      setK(1 - Math.pow(1 - p, 3));
-      if (p < 1) raf = requestAnimationFrame(tick);
+/**
+ * Появление блоков: каждый играет один раз, когда попал на экран (IntersectionObserver),
+ * в порядке сверху вниз. p(блок, задержка, длительность) — доля 0–1 части блока.
+ */
+function useReveal(reduced: boolean) {
+  const t0 = useRef(performance.now());
+  const seen = useRef<Partial<Record<Block, number>>>({});
+  const els = useRef<Partial<Record<Block, Element | null>>>({});
+  const io = useRef<IntersectionObserver | null>(null);
+  const raf = useRef(0);
+  const [now, setNow] = useState(() => performance.now());
+
+  const play = () => {
+    if (raf.current) return;
+    const tick = () => {
+      raf.current = 0;
+      const n = performance.now();
+      setNow(n);
+      if (BLOCKS.some(k => seen.current[k] != null && n < seen.current[k]! + LONG[k])) raf.current = requestAnimationFrame(tick);
     };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    raf.current = requestAnimationFrame(tick);
+  };
+  const seeAll = (keys: (string | null)[]) => {
+    const n = performance.now();
+    const fresh = BLOCKS.filter(k => keys.includes(k) && seen.current[k] == null);
+    fresh.forEach((k, i) => { seen.current[k] = Math.max(n + i * GAP, t0.current + SLOT[k]); });
+    if (fresh.length) play();
+  };
+  useEffect(() => {
+    if (reduced) return;
+    if (typeof IntersectionObserver !== 'function') { seeAll(BLOCKS); return; }
+    io.current = new IntersectionObserver(list => seeAll(list.filter(e => e.isIntersecting).map(e => e.target.getAttribute('data-block'))), { threshold: 0.2 });
+    BLOCKS.forEach(k => { const el = els.current[k]; if (el) io.current!.observe(el); });
+    return () => { io.current?.disconnect(); io.current = null; cancelAnimationFrame(raf.current); raf.current = 0; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reduced]);
-  return k;
+
+  const watch = (k: Block) => (el: Element | null) => {
+    if (el === els.current[k]) return;
+    if (els.current[k] && io.current) io.current.unobserve(els.current[k]!);
+    els.current[k] = el;
+    if (el && io.current) io.current.observe(el);
+  };
+  const p = (k: Block, delay: number, ms: number) => (reduced ? 1 : seen.current[k] == null ? 0 : clamp01((now - seen.current[k]! - delay) / ms));
+  return { watch, p };
 }
 
-/** Каждое число в готовой строке оригинала растёт от нуля с тем же числом знаков; итог — исходная строка. */
-function Count({ text, k }: { text: string; k: number }) {
-  const locale = useAdapter().formatLocale();
-  if (k >= 1) return <>{text}</>;
+const rise = (x: number, dx: number, dy: number) => { const e = out3(x); return { opacity: +e.toFixed(3), transform: `translate(${((1 - e) * dx).toFixed(1)}px, ${((1 - e) * dy).toFixed(1)}px)` }; };
+/** Первое число в готовой строке оригинала («97 %», «97,3%») как число. */
+const firstNumber = (text: string) => { const m = /-?\d+(?:[.,]\d+)?/.exec(text.replace(/\s/g, '')); return m ? parseFloat(m[0].replace(',', '.')) : 0; };
+
+/** Силуэт, который заполняется снизу вверх: f — доля 0–1; цвета — ступени или собственные. */
+function Sil({ name, size, f, tier }: { name: string; size?: number; f: number; tier?: { fill: string; pale: string } }) {
+  const a = SIL[name]!;
+  const k = (size ?? a.box) / a.box;
+  const paint = (svg: string) => svg.replace(/\{off\}/g, tier?.pale ?? a.off).replace(/\{on\}/g, tier?.fill ?? a.on);
   return (
-    <>
-      <span aria-hidden="true">{scaleNumbers(text, k, locale)}</span>
-      <span className="sr-only">{text}</span>
-    </>
+    <span className="od-sil" style={{ width: a.box, height: a.box, transform: k === 1 ? undefined : `scale(${k})`, margin: k === 1 ? undefined : `${(a.box * (k - 1)) / 2}px` }} aria-hidden="true">
+      <span dangerouslySetInnerHTML={{ __html: paint(a.base) }} />
+      <span className="od-sil__fill" style={{ height: a.b0 + clamp01(f) * a.span }}>
+        <span dangerouslySetInnerHTML={{ __html: paint(a.fill) }} />
+      </span>
+      {a.over && <span className="od-sil__over" dangerouslySetInnerHTML={{ __html: a.over }} />}
+    </span>
   );
 }
+const Icon = ({ name }: { name: string }) => <span className="od-icon" aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICON[name] ?? '' }} />;
 
 export function BirthOddsScreen({ nav }: ScreenProps) {
   const snap = useSnapshot();
   const cert = snap.certificate;
   const view = useCoreView(birthOddsView);
-  const reduced = useReducedMotion();
-  const k = useEntrance(reduced);
-  const { start, busy } = useStartLife(nav);
+  const frame = useFrame();
+  useFontsReady();
   const back = () => nav.go({ id: 'certificate', filled: true }, 'pop');
+  // Шапка: на высоком экране — как в макете (46 сверху), на коротком — ниже отступ.
+  const tall = Math.max(0, Math.min(1, (frame.H - 699) / (852 - 699)));
+  const headPad = frame.top + Math.round(12 + 34 * tall);
 
   return (
-    <main className="screen bo">
-      <header className="bo-head">
-        <RoundButton className="bo-back" aria-label={t('odds.back')} onClick={back}><BackIcon size={20} /></RoundButton>
-        <h1 className="k-o bo-title">{t('odds.title')}</h1>
-        <span aria-hidden="true" />
-      </header>
-
-      <div className="bo-scroll scroll">
-        {cert ? <OddsContent cert={cert} view={view} k={k} /> : <p className="bo-wait" role="status">{t('birthOdds.loading')}</p>}
-      </div>
-
-      <footer className="bo-foot">
-        <ChunkyButton className="bo-cta" onClick={start} disabled={busy || !cert}>{t('cert.start')}</ChunkyButton>
-      </footer>
+    <main className="screen od">
+      <Frame>
+        <div className="od-scroll scroll" style={{ top: headPad + 62 }}>
+          {cert ? <OddsContent cert={cert} view={view} /> : <p className="od-wait" role="status">{t('birthOdds.loading')}</p>}
+        </div>
+        <header className="od-head" style={{ height: headPad + 62, paddingTop: headPad }}>
+          <button type="button" className="od-back" aria-label={t('odds.back')} onClick={back}><Icon name="back" /></button>
+          {cert && (
+            <div className="od-who">
+              <span className="od-who__text">
+                <b>{cert.name}</b>
+                <span>{t('birthOdds.born', { date: birthDate(cert.month, cert.year), place: cert.place })}</span>
+              </span>
+              <Initial name={cert.given || cert.name} bg={PORTRAIT_BG.baby} className="od-who__face" />
+            </div>
+          )}
+        </header>
+      </Frame>
     </main>
   );
 }
 
-function OddsContent({ cert, view, k }: { cert: CertificateVM; view: BirthOddsVM | null; k: number }) {
-  const date = birthDate(cert.month, cert.year);
+function OddsContent({ cert, view }: { cert: CertificateVM; view: BirthOddsVM | null }) {
+  const reduced = useReducedMotion();
+  const locale = useAdapter().formatLocale();
+  const looks = useCoreView(companionAppearances);
+  const { watch, p } = useReveal(reduced);
+  const block = (k: Block) => rise(p(k, 0, IN_MS), 0, 14);
+  /** Число в готовой строке растёт от нуля с тем же числом знаков; читалке — исходная строка. */
+  const count = (text: string, x: number): ReactNode => (x >= 1 ? text : (<><span aria-hidden="true">{scaleNumbers(text, out3(x), locale)}</span><span className="sr-only">{text}</span></>));
+  /** «97 %» — число крупно, знак процента мельче. */
+  const percent = (text: string, x: number): ReactNode => {
+    const m = /^(.*?)(\s*%)$/.exec(text);
+    return m ? <>{count(m[1]!, x)}<span className="od-pct">%</span></> : count(text, x);
+  };
+  /** «71 год»: число крупно, слово мельче (как в макете). */
+  const yearsBig = (n: number, x: number): ReactNode => {
+    const text = t('sum.yearsLong', { n }), m = /^(D*d+)(.*)$/.exec(text);
+    return m ? <>{count(m[1]!, x)}<span className="od-unit">{m[2]}</span></> : count(text, x);
+  };
+  const lower = (s: string) => (UI_LANG === 'de' ? s : s.toLocaleLowerCase(UI_LANG));
+
+  // Прогноз: ожидаемый срок жизни; рядом — мир и страна игрока (если она задана и другая).
+  const life = cert.lifeExpectancy;
+  const kLife = p('forecast', 120, COUNT_MS);
+  const home = view?.home && !view.home.same ? view.home : null;
+  const aside = [t('odds2.world', { n: 73 }), home ? t('odds2.homeLife', { country: home.home, n: Math.round(home.rows.lifeExpectancy.home) }) : ''].filter(Boolean).join(' · ');
+
+  // Стартовые показатели.
+  const kStats = out3(p('stats', 120, COUNT_MS));
+  const stats: [string, 'hl' | 'h' | 'sm' | 'so'][] = [['health', 'hl'], ['joy', 'h'], ['mind', 'sm'], ['ties', 'so']];
+
+  // Жизнь впереди: доли поколения страны (не прогноз для игрока).
+  const steps = useMemo(() => {
+    const rows: { art: string; value: string; label: string; sub?: string }[] = [
+      { art: 'age5', value: cert.survival.to5, label: t('birthOdds.reach5'), sub: t('odds2.withYou', { country: cert.country }) },
+    ];
+    if (view?.edu) rows.push({ art: 'school', value: view.edu.school, label: t(view.edu.oneSecondary ? 'birthOdds.schoolOneSec' : 'birthOdds.school') });
+    rows.push({ art: 'age18', value: cert.survival.to18, label: t('birthOdds.reach18') });
+    if (view?.edu) rows.push({ art: 'uni', value: view.edu.uni, label: t('birthOdds.uni') });
+    rows.push({ art: 'age65', value: cert.survival.to65, label: t('birthOdds.reach65') });
+    return rows;
+  }, [cert, view]);
+
+  // Где вы родились.
+  const bornKey = view?.pastEra ? (view.byPopulation ? 'odds2.bornHerePopPast' : 'odds2.bornHereBirthsPast') : view?.byPopulation ? 'odds2.bornHerePop' : 'odds2.bornHereBirths';
+  const facts: [string, FactVM, number][] = view
+    ? ([['people', view.facts.population, 180], ['cities', view.facts.urban, 240], ['income', view.facts.gdp, 300]] as [string, FactVM | null, number][]).filter((f): f is [string, FactVM, number] => !!f[1])
+    : [];
+
   return (
     <>
-      <div className="bo-id">
-        <Initial name={cert.given || cert.name} bg={PORTRAIT_BG.baby} className="bo-id__face" />
-        <span className="bo-id__text">
-          <span className="bo-id__name">{cert.name}</span>
-          <span className="bo-id__meta">{t('birthOdds.born', { date, place: cert.place })}</span>
-        </span>
-      </div>
+      <section className="od-block" data-block="forecast" ref={watch('forecast')} style={block('forecast')}>
+        <h2 className="od-h2">{t('odds2.forecast')}</h2>
+        <div className="od-plaque" style={{ transform: `scale(${(0.88 + 0.12 * outBack(p('forecast', 0, 480))).toFixed(3)})` }}>
+          <i className="od-stud od-stud--tl" /><i className="od-stud od-stud--tr" /><i className="od-stud od-stud--bl" /><i className="od-stud od-stud--br" />
+          <Sil name="hourglass" f={(life / 100) * out3(kLife)} tier={tierOf(life)} />
+          <div className="od-plaque__text">
+            <span className="od-plaque__lead">{t('odds2.likely')}</span>
+            <b className="od-big od-big--26">~{yearsBig(Math.round(life), kLife)}</b>
+            <span className="od-plaque__aside">{aside}</span>
+          </div>
+        </div>
+      </section>
 
-      <h2 className="bo-h2">{t('odds.startingStats')}</h2>
-      <div className="bo-card bo-stats">
-        {STATS.map(s => <OddsMeter key={s} stat={s} label={t(`stat.${s}`)} value={cert.stats[s]} k={k} />)}
-      </div>
+      <section className="od-block" data-block="stats" ref={watch('stats')} style={block('stats')}>
+        <h2 className="od-h2">{t('odds.startingStats')}</h2>
+        <div className="od-card od-stats" role="group" aria-label={t('odds.startingStats')}>
+          {stats.map(([art, key]) => (
+            <div key={key} className="od-stat" role="meter" aria-label={t(`stat.${key}`)} aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(cert.stats[key])}>
+              <Sil name={art} f={(cert.stats[key] / 100) * kStats} />
+              <b aria-hidden="true">{Math.round(cert.stats[key] * kStats)}</b>
+              <span aria-hidden="true">{lower(t(`stat.${key}`))}</span>
+            </div>
+          ))}
+        </div>
+      </section>
 
-      <h2 className="bo-h2">{t('odds.yourOdds')}</h2>
-      <div className="bo-tiles">
-        <Tile k={k} value={cert.survival.to5} caption={t('birthOdds.reach5')} />
-        <Tile k={k} value={cert.survival.to18} caption={t('birthOdds.reach18')} />
-        <Tile k={k} value={cert.survival.to65} caption={t('birthOdds.reach65')} />
-        <Tile k={k} value={cert.lifeExpectancy.toFixed(1)} unit={t('birthOdds.yrs')} caption={t('birthOdds.lifespan')} />
-        {view?.edu && (
+      <section className="od-block" data-block="life" ref={watch('life')} style={block('life')}>
+        <h2 className="od-h2">{t('odds2.lifeAhead')}</h2>
+        <div className="od-card od-life">
+          <i className="od-life__line" aria-hidden="true" />
+          {steps.map((s, i) => {
+            const n = firstNumber(s.value), x = p('life', 160 + i * STEP_MS, COUNT_MS);
+            return (
+              <div key={s.art} className="od-step" style={rise(p('life', 100 + i * STEP_MS, IN_MS), -12, 0)}>
+                <span className="od-step__icon"><Sil name={s.art} f={(n / 100) * out3(x)} tier={tierOf(n)} /></span>
+                <div className="od-step__text">
+                  <div><b className="od-big od-big--22">{percent(s.value, x)}</b><span className="od-step__label">{s.label}</span></div>
+                  {s.sub && <span className="od-step__sub">{s.sub}</span>}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        {view?.edu && <p className="od-note">{t('birthOdds.eduNote', { country: cert.country, source: view.edu.schoolSource })}</p>}
+      </section>
+
+      <section className="od-block" data-block="born" ref={watch('born')} style={block('born')}>
+        <h2 className="od-h2">{t('odds2.whereBorn')}</h2>
+        <div className="od-card od-born">
+          <div className="od-born__top">
+            <span className="od-born__one" style={{ transform: `scale(${(0.7 + 0.3 * outBack(p('born', 140, 460))).toFixed(3)})` }}><b className="od-big od-big--26">{t('odds2.oneIn', { n: formatNumber(cert.shareOneIn) })}</b></span>
+            <span className="od-born__text">{t(bornKey, { country: cert.country, year: cert.year })}</span>
+          </div>
+          {facts.length > 0 && (
+            <dl className="od-facts">
+              {facts.map(([icon, f, delay]) => (
+                <div key={icon} className="od-fact">
+                  <Icon name={icon} />
+                  <dd>{count(f.value, p('born', delay, COUNT_MS))}</dd>
+                  <dt>{f.label}</dt>
+                </div>
+              ))}
+            </dl>
+          )}
+        </div>
+      </section>
+
+      <section className="od-block" data-block="same" ref={watch('same')} style={block('same')}>
+        <h2 className="od-h2">{t('odds.sameSecond')}</h2>
+        {cert.companions.length ? (
           <>
-            <Tile k={k} value={view.edu.school} caption={t(view.edu.oneSecondary ? 'birthOdds.schoolOneSec' : 'birthOdds.school')} />
-            <Tile k={k} value={view.edu.uni} caption={t('birthOdds.uni')} />
+            <ul className="od-card od-same">
+              {cert.companions.slice(0, 4).map((c, i) => {
+                const luck = luckOf(c.iso), n = luck == null ? null : Math.round(luck * 100), x = out3(p('same', 160 + i * STEP_MS, COUNT_MS));
+                return (
+                  <li key={`${c.name}-${i}`} className="od-comp" style={rise(p('same', 100 + i * STEP_MS, IN_MS), -12, 0)} aria-label={`${c.name}, ${sexLabel(c.sex)} · ${c.place}${n == null ? '' : `, ${t('odds2.luck', { n })}`}`}>
+                    <span className="od-comp__face" aria-hidden="true"><PersonPortrait look={looks?.[i] ?? null} fallback={<BabyGlyph size={34} />} /></span>
+                    <span className="od-comp__text" aria-hidden="true">
+                      <b>{c.name}</b>
+                      <span>{sexLabel(c.sex)} · {c.place}</span>
+                    </span>
+                    {n != null && (
+                      <span className="od-comp__luck" aria-hidden="true">
+                        <Sil name="clover" f={(n / 100) * x} tier={tierOf(n)} />
+                        <b>{Math.round(n * x)}</b>
+                      </span>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+            <p className="od-note od-note--icon"><Icon name="cloverNote" /><span>{t('odds2.cloverNote')}</span></p>
+            <p className="od-note">{t('odds.sameSecondNote')}</p>
           </>
+        ) : (
+          <p className="od-note" role="status">{t('odds.pending')}</p>
         )}
-      </div>
-      {view?.edu && <p className="bo-note">{t('birthOdds.eduNote', { country: cert.country, source: view.edu.schoolSource })}</p>}
+      </section>
 
-      <h2 className="bo-h2">{t('odds.bornIn', { country: cert.country })}</h2>
-      <ShareBlock cert={cert} view={view} k={k} />
-      {view && <Facts facts={view.facts} k={k} />}
-      <div className="bo-tile bo-place">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="M12 21s-6.5-5.8-6.5-11a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11-6.5 11Z" /><circle cx="12" cy="10" r="2.3" />
-        </svg>
-        <p><strong>{t('birthOdds.placeLine', { place: cert.place })}</strong> {t(cert.urban ? 'birthOdds.cityBirth' : 'birthOdds.ruralBirth')} {cert.ruralLine}</p>
-      </div>
-
-      <h2 className="bo-h2">{t('odds.sameSecond')}</h2>
-      {cert.companions.length ? (
-        <>
-          <ul className="bo-comps">
-            {cert.companions.map((c, i) => <Companion key={`${c.name}-${i}`} c={c} />)}
-          </ul>
-          <p className="bo-note">{t('odds.wealthDots')}</p>
-          <p className="bo-note">{t('odds.sameSecondNote')}</p>
-        </>
-      ) : (
-        <p className="bo-note" role="status">{t('odds.pending')}</p>
+      {view?.home && (
+        <section className="od-block" data-block="cmp" ref={watch('cmp')} style={block('cmp')}>
+          <h2 className="od-h2">{t('odds2.comparison')}</h2>
+          <Comparison home={view.home} rowStyle={i => rise(p('cmp', 100 + i * 70, IN_MS), 0, 8)} />
+        </section>
       )}
-
-      {view?.home && <HomeCompare home={view.home} sex={cert.sex} k={k} />}
     </>
   );
 }
 
-/** Показатель 0–100: полоса растёт преобразованием (scaleX), число — отсчётом; meter сообщает итог. */
-function OddsMeter({ stat, label, value, k }: { stat: StatKey; label: string; value: number; k: number }) {
-  const v = Math.max(0, Math.min(100, value));
-  return (
-    <div className="bo-meter" role="meter" aria-label={label} aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(value)}>
-      <p className="bo-meter__label">{label}</p>
-      <div className="bo-meter__bar" aria-hidden="true">
-        <span className="bo-meter__fill" style={{ background: STAT_COLOR[stat], transform: `scaleX(${(v / 100) * k})` }} />
-        <span className="bo-meter__over">
-          <StatIcon k={stat} size={16} />
-          <span className="k-o tabular bo-meter__num">{Math.round(value * k)}</span>
-        </span>
-      </div>
-    </div>
-  );
-}
-
-function Tile({ value, unit, caption, k }: { value: string; unit?: string; caption: string; k: number }) {
-  return (
-    <div className="bo-tile">
-      <p className="bo-tile__value tabular"><Count text={value} k={k} />{unit && <span className="bo-tile__unit"> {unit}</span>}</p>
-      <p className="bo-tile__caption">{caption}</p>
-    </div>
-  );
-}
-
-function ShareBlock({ cert, view, k }: { cert: CertificateVM; view: BirthOddsVM | null; k: number }) {
-  const oneIn = formatNumber(cert.shareOneIn);
-  const textKey = view?.pastEra
-    ? (view.byPopulation ? 'birthOdds.sharePastPop' : 'birthOdds.sharePastBirths')
-    : (view?.byPopulation ? 'birthOdds.sharePop' : 'birthOdds.shareBirths');
-  const per100 = view ? Math.round(view.share * 100) : null;
-  const filled = per100 == null ? 0 : Math.round(per100 * k);
-  return (
-    <div className="bo-share">
-      {per100 != null && (
-        <div className="bo-grid" role="img" aria-label={t(view?.byPopulation ? 'birthOdds.gridPop' : 'birthOdds.gridBirths', { n: per100, country: cert.country })}>
-          {Array.from({ length: 100 }, (_, i) => <span key={i} className={i < filled ? 'is-on' : ''} />)}
-        </div>
-      )}
-      <p className="bo-share__text">
-        <strong className="bo-share__big tabular"><Count text={cert.share} k={k} /></strong>
-        <br />
-        {t(textKey, { country: cert.country, oneIn, year: cert.year })}
-      </p>
-    </div>
-  );
-}
-
-function Facts({ facts, k }: { facts: BirthOddsVM['facts']; k: number }) {
-  const list = [facts.population, facts.births, facts.urban, facts.gdp].filter((f): f is FactVM => !!f);
-  if (!list.length) return null;
-  return (
-    <dl className="bo-facts">
-      {list.map(f => (
-        <div key={f.label} className="bo-fact">
-          <dt>{f.label}</dt>
-          <dd className="tabular"><Count text={f.value} k={k} /></dd>
-        </div>
-      ))}
-    </dl>
-  );
-}
-
-function Companion({ c }: { c: CompanionVM }) {
-  return (
-    <li className="bo-comp">
-      <span className="bo-comp__text">
-        <span className="bo-comp__name">{c.name}</span>
-        <span className="bo-comp__meta">{sexLabel(c.sex)} · {c.place}</span>
-      </span>
-      <span className="bo-dots" role="img" aria-label={t('birthOdds.wealth', { family: c.family, q: c.quintile })}>
-        {[1, 2, 3, 4, 5].map(i => <i key={i} className={i <= c.quintile ? 'is-on' : ''} />)}
-      </span>
-    </li>
-  );
-}
-
-/** «If you’d been born in …» — только если в жизни задана настоящая страна игрока (S.home). */
-function HomeCompare({ home, sex, k }: { home: HomeCompareVM; sex: 'F' | 'M'; k: number }) {
-  const r = home.rows;
-  const yrs = (n: number) => `${n.toFixed(1)} ${t('birthOdds.yrs')}`;
-  const rows: [string, string, string][] = [
-    [t('birthOdds.row.le'), yrs(r.lifeExpectancy.here), yrs(r.lifeExpectancy.home)],
-    [t('birthOdds.row.u5'), r.under5.here, r.under5.home],
-    [t('birthOdds.row.eys'), `${r.schoolYears.here} ${t('birthOdds.yrs')}`, `${r.schoolYears.home} ${t('birthOdds.yrs')}`],
-    [t('birthOdds.row.gdp'), r.gdp.here, r.gdp.home],
+/** Сравнение со страной игрока (S.home): где показатель лучше — зелёный со стрелкой вверх, где хуже — красный. */
+function Comparison({ home, rowStyle }: { home: HomeCompareVM; rowStyle: (i: number) => { opacity: number; transform: string } }) {
+  if (home.same) return <p className="od-card od-plain">{t('birthOdds.homeSame', { country: home.here })}</p>;
+  const r = home.rows, yrs = (n: number) => t('sum.years', { n: Math.round(n) });
+  const rows: [string, string, string, 'here' | 'home' | 'same'][] = [
+    [t('birthOdds.row.le'), yrs(r.lifeExpectancy.here), yrs(r.lifeExpectancy.home), home.better.lifeExpectancy],
+    [t('birthOdds.row.u5'), r.under5.here, r.under5.home, home.better.under5],
+    [t('birthOdds.row.eys'), String(Math.round(r.schoolYears.here)), String(Math.round(r.schoolYears.home)), home.better.schoolYears],
+    [t('birthOdds.row.gdp'), r.gdp.here, r.gdp.home, home.better.gdp],
   ];
+  const chip = (text: string, side: 'here' | 'home', better: 'here' | 'home' | 'same') => {
+    const state = better === 'same' ? 'same' : better === side ? 'up' : 'down';
+    return (
+      <td>
+        <span className={`od-chip od-chip--${state}`}>
+          {state !== 'same' && <Icon name={state} />}
+          <span>{text}</span>
+          {state !== 'same' && <span className="sr-only">{t(state === 'up' ? 'odds2.better' : 'odds2.worse')}</span>}
+        </span>
+      </td>
+    );
+  };
   return (
-    <section aria-labelledby="bo-home-h">
-      <h2 className="bo-h2" id="bo-home-h">{t('odds.ifHome', { country: home.home })}</h2>
-      {home.same ? (
-        <p className="bo-home-same">{t('birthOdds.homeSame', { country: home.here })}</p>
-      ) : (
-        <table className="bo-table">
-          <thead>
-            <tr>
-              <th scope="col">{t(sex === 'F' ? 'birthOdds.forSex.F' : 'birthOdds.forSex.M')}</th>
-              <th scope="col">{home.here}</th>
-              <th scope="col">{home.home}</th>
+    <>
+      <table className="od-card od-cmp">
+        <thead>
+          <tr>
+            <td />
+            <th scope="col"><b>{home.here}</b><span>{t('odds2.bornHereCol')}</span></th>
+            <th scope="col"><b>{home.home}</b><span>{t('odds2.yourCountry')}</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map(([label, here, there, better], i) => (
+            <tr key={label} style={rowStyle(i)}>
+              <th scope="row">{label}</th>
+              {chip(here, 'here', better)}
+              {chip(there, 'home', better)}
             </tr>
-          </thead>
-          <tbody>
-            {rows.map(([label, here, there]) => (
-              <tr key={label}>
-                <th scope="row">{label}</th>
-                <td className="is-here tabular"><Count text={here} k={k} /></td>
-                <td className="tabular"><Count text={there} k={k} /></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-      {home.guessed && <p className="bo-note">{t('birthOdds.homeGuessed', { country: home.home })}</p>}
-    </section>
+          ))}
+        </tbody>
+      </table>
+      {home.guessed && <p className="od-note">{t('birthOdds.homeGuessed', { country: home.home })}</p>}
+    </>
   );
 }

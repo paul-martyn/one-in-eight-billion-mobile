@@ -7,11 +7,11 @@
     "fontSize": 0
   },
   "src/screens/birthOdds/birthOdds.css": {
-    "hex": 4,
-    "rgb": 1,
-    "duration": 0,
+    "hex": 16,
+    "rgb": 5,
+    "duration": 1,
     "easing": 0,
-    "fontSize": 2
+    "fontSize": 27
   },
   "src/screens/certificate/certificate.css": {
     "hex": 1,

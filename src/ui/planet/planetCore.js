@@ -1591,4 +1591,10 @@ class Component extends DCLogic {
   }
 }
 
-export { Component as PlanetCore, world as planetWorld, WORLD as WORLD_RATES };
+// The birth luck of a country by the game's id (0..1), or null when the planet has no figures for it.
+function luckOf(iso) {
+  var W = world(), ci = findCountry(W, iso), s = ci >= 0 ? scalesOf(W, ci) : null;
+  return s ? s.luck : null;
+}
+
+export { Component as PlanetCore, world as planetWorld, WORLD as WORLD_RATES, luckOf };

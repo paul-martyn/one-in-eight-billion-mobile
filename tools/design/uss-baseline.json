@@ -10,14 +10,12 @@
     "@media / @container / @supports": 2
   },
   "src/screens/birthOdds/birthOdds.css": {
-    "grid": 10,
-    "box-shadow": 2,
-    "gradient": 1,
-    "calc / clamp / min / max": 7,
-    "vh / vw / cq / em / rem": 5,
-    "z-index": 2,
-    "structural pseudo-class": 3,
-    "@media / @container / @supports": 1
+    "grid": 2,
+    "box-shadow": 5,
+    "vh / vw / cq / em / rem": 1,
+    "z-index": 1,
+    "structural pseudo-class": 2,
+    "sibling combinator": 2
   },
   "src/screens/certificate/certificate.css": {
     "grid": 7,

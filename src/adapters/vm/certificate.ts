@@ -32,7 +32,10 @@ export type HomeCompareVM = {
     schoolYears: { home: number; here: number };
     gdp: { home: string; here: string };
   };
+  /** Где показатель лучше: в стране рождения (here), в стране игрока (home) или одинаково (same). */
+  better: { lifeExpectancy: Side; under5: Side; schoolYears: Side; gdp: Side };
 };
+type Side = 'here' | 'home' | 'same';
 
 export type BirthOddsVM = {
   /** share(BB()) — доля рождений (или населения в режиме pop) страны рождения, 0–1. */
@@ -79,6 +82,9 @@ export function birthOddsView(T: Top): BirthOddsVM | null {
   const l = S.home && T.CBY[S.home] ? T.CBY[S.home] : null;
   const d = l && S.era && S.era !== 'now' ? T.eraAt(l, S.by) : l;
   if (d) {
+    // Больше — лучше; для смертности до пяти лет — наоборот.
+    const side = (here: number, there: number, lowerIsBetter = false): Side => (here === there ? 'same' : (here > there) !== lowerIsBetter ? 'here' : 'home');
+    const u5 = (id: string) => 1 - T.cohortL(id, S.sex, 5);
     home = {
       home: plain(T.placeTag(d)),
       here: plain(T.placeTag(e)),
@@ -89,6 +95,12 @@ export function birthOddsView(T: Top): BirthOddsVM | null {
         under5: { home: plain(T.pctStr(1 - T.cohortL(d.id, S.sex, 5), 1)), here: plain(T.pctStr(1 - T.cohortL(S.born, S.sex, 5), 1)) },
         schoolYears: { home: d.eys, here: e.eys },
         gdp: { home: plain(T.usdStr(d.ppp)), here: plain(T.usdStr(e.ppp)) },
+      },
+      better: {
+        lifeExpectancy: side(T.leOf(e, S.sex), T.leOf(d, S.sex)),
+        under5: side(u5(S.born), u5(d.id), true),
+        schoolYears: side(e.eys, d.eys),
+        gdp: side(e.ppp, d.ppp),
       },
     };
   }
