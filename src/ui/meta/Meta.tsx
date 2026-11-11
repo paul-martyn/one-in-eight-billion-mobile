@@ -51,11 +51,11 @@ export function EnergyPill({ meta, progress = 1 }: { meta: MetaView; progress?: 
  * shown — показываемое число во время «досчёта» после Claim (читалке всегда
  * говорится точное значение снимка); pop — плашка подпрыгивает при зачислении.
  */
-export function CurrencyPill({ kind, value, progress = 1, shown, pop = false }: { kind: 'dollars' | 'gems'; value: number; progress?: number; shown?: number; pop?: boolean }) {
+export function CurrencyPill({ kind, value, progress = 1, shown, pop = false, bump = 0 }: { kind: 'dollars' | 'gems'; value: number; progress?: number; shown?: number; pop?: boolean; bump?: number }) {
   const display = NUM.format(Math.round(shown ?? value * progress));
   const exact = NUM.format(value);
   return (
-    <div className={`meta-slot${pop ? ' meta-slot--pop' : ''}`} data-meta-slot={kind}>
+    <div className={`meta-slot${pop ? ' meta-slot--pop' : bump ? (bump % 2 ? ' meta-slot--bump-a' : ' meta-slot--bump-b') : ''}`} data-meta-slot={kind}>
       <p className="meta-pill">
         <span className="sr-only">{t(kind === 'dollars' ? 'hub.meta.dollarsValue' : 'hub.meta.gemsValue', { n: exact })}</span>
         <span className="k-os meta-pill__value" aria-hidden="true">{display}</span>
@@ -70,15 +70,16 @@ export function CurrencyPill({ kind, value, progress = 1, shown, pop = false }: 
  * Ряд из трёх плашек верхней панели хаба. counts — показываемые доллары и
  * кристаллы, пока награда «долетает» и досчитывается (null — значения снимка);
  * pop — обе валютные плашки подпрыгивают. Цель полёта — [data-meta-slot] .meta-pill.
+ * bump — сколько лиц поймано на планете: плашка вздрагивает при каждом новом.
  */
-export function MetaBar({ meta, progress = 1, counts = null, pop = false, className = '' }: {
-  meta: MetaView; progress?: number; counts?: { dollars: number; gems: number } | null; pop?: boolean; className?: string;
+export function MetaBar({ meta, progress = 1, counts = null, pop = false, bump, className = '' }: {
+  meta: MetaView; progress?: number; counts?: { dollars: number; gems: number } | null; pop?: boolean; bump?: { coin: number; gem: number }; className?: string;
 }) {
   return (
     <div className={`meta-bar ${className}`} role="group" aria-label={t('hub.meta.bar')}>
       <EnergyPill meta={meta} progress={progress} />
-      <CurrencyPill kind="dollars" value={meta.dollars} progress={progress} shown={counts?.dollars} pop={pop} />
-      <CurrencyPill kind="gems" value={meta.gems} progress={progress} shown={counts?.gems} pop={pop} />
+      <CurrencyPill kind="dollars" value={meta.dollars} progress={progress} shown={counts?.dollars} pop={pop} bump={bump?.coin} />
+      <CurrencyPill kind="gems" value={meta.gems} progress={progress} shown={counts?.gems} pop={pop} bump={bump?.gem} />
     </div>
   );
 }

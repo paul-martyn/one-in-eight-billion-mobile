@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "notes": "Motion specification shared by the web UI and the future Unity port. Coordinates are in the 393x852 portrait frame; normalized anchors are 0..1 of that frame. Every transition is presentation-only: game commands are applied before any animation starts, and skip/interrupt/reduced-motion leave the same game state.",
   "easing": {
     "pop": [0.3, 1.45, 0.5, 1],
@@ -14,13 +14,23 @@
     "easeOutCubic": "1-(1-t)^3",
     "easeOutQuart": "1-(1-t)^4"
   },
+  "duration": {
+    "notes": "Shared duration scale (ms). press <= 100, state changes 150-250, screen transitions 300-500, milestones up to 1500 with a tap-to-skip. Generated as --duration-* in tokens.css and tokens.uss.",
+    "press": 80,
+    "fast": 150,
+    "state": 250,
+    "medium": 400,
+    "slow": 600,
+    "milestone": 1200
+  },
   "screenTransitions": [
     { "id": "screen.fade", "trigger": "navigate (default)", "from": "*", "to": "*", "durationMs": 380, "delayMs": 0, "easing": "ease", "enter": { "opacity": [0, 1] }, "exit": null, "interrupt": "jump-to-end; new transition starts from the current screen", "input": "only the arriving screen receives input" },
     { "id": "screen.tab", "trigger": "sticker tab", "from": "life tab", "to": "life tab", "durationMs": 220, "delayMs": 0, "easing": "ease", "enter": { "opacity": [0, 1] }, "exit": null, "interrupt": "jump-to-end", "input": "immediate" },
     { "id": "screen.rise", "trigger": "Who am I?", "from": "roll", "to": "certificate", "durationMs": 520, "delayMs": 0, "easing": "screen", "enter": { "translateY": ["100%", "0%"] }, "exit": null, "interrupt": "jump-to-end", "input": "after 0 ms" },
     { "id": "screen.push", "trigger": "Your odds; Settings", "from": "certificate|hub", "to": "odds|language", "durationMs": 440, "delayMs": 0, "easing": "screen", "enter": { "translateX": ["100%", "0%"] }, "exit": { "translateX": ["0%", "-30%"], "brightness": [1, 0.8] }, "interrupt": "jump-to-end", "input": "arriving" },
     { "id": "screen.pop", "trigger": "Back", "from": "odds|language", "to": "certificate|hub", "durationMs": 440, "delayMs": 0, "easing": "screen", "enter": { "translateX": ["-30%", "0%"], "brightness": [0.8, 1] }, "exit": { "translateX": ["0%", "100%"] }, "zOrder": "leaving on top", "interrupt": "jump-to-end", "input": "arriving" },
-    { "id": "screen.zoom", "trigger": "Start life", "from": "certificate|odds", "to": "life", "durationMs": 480, "delayMs": 0, "easing": "easeOut", "enter": { "opacity": [0, 1], "scale": [1.08, 1] }, "exit": null, "interrupt": "jump-to-end", "input": "arriving" }
+    { "id": "screen.zoom", "trigger": "Start life", "from": "certificate|odds", "to": "life", "durationMs": 480, "delayMs": 0, "easing": "easeOut", "enter": { "opacity": [0, 1], "scale": [1.08, 1] }, "exit": null, "interrupt": "jump-to-end", "input": "arriving" },
+    { "id": "screen.glide", "trigger": "navigate between the planet screens", "from": "language|start|roll|hub", "to": "language|start|roll|hub", "durationMs": 760, "delayMs": 0, "easing": "ease", "enter": { "opacity": [0, 1], "durationMs": 460, "delayMs": 220 }, "exit": { "opacity": [1, 0], "durationMs": 320 }, "planet": { "moveMs": 750, "note": "one planet under these screens glides to its place on the next one and keeps turning" }, "interrupt": "jump-to-end", "input": "arriving; touches pass through to the planet" }
   ],
   "sequences": {
     "roll": { "startDelayMs": 400, "spinMs": 4600, "turns": 3, "spinEasing": "easeOutQuart", "zoom": 2.4, "revealDelayMs": 1300, "nameFlips": 30, "flipEasing": "1-(1-p)^2", "reveal": { "durationMs": 600, "translateY": [10, 0], "ctaDelayMs": 150 }, "label": { "durationMs": 400, "easing": "pop", "scale": [0.94, 1] } },

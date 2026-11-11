@@ -1,10 +1,10 @@
 /* «2 · Birth roll» (RollCute.dc.html). Макет 393 × 852: подпись, название
    страны 52 px, планета 290, область подсказки/результата 130, кнопка 230 × 64.
    По высоте 568–932 сжимаются отступы (cqh), планета занимает оставшееся место. */
-.rl { color: var(--ink); }
+.rl { color: var(--color-ink); }
 .rl[data-instant] *, .rl[data-instant] *::before, .rl[data-instant] *::after { transition-duration: 0s !important; transition-delay: 0s !important; animation: none !important; }
 .rl--wait { display: grid; place-items: center; padding: 24px; }
-.rl__waiting { margin: 0; font-size: 17px; font-weight: 600; color: var(--muted); }
+.rl__waiting { margin: 0; font-size: var(--font-size-lead); font-weight: 600; color: var(--color-muted); }
 .rl__glow { top: calc(var(--safe-top) + clamp(40px, 14cqh, 120px)); }
 
 .rl__col {
@@ -18,10 +18,10 @@
 /* «Where will you be born?» → «You are born in» */
 .rl__label {
   position: relative; flex: none; margin: 0; max-width: calc(100% - 72px); min-height: 30px;
-  font-size: 17px; font-weight: 700; line-height: 30px; color: var(--muted);
+  font-size: var(--font-size-lead); font-weight: 700; line-height: 32px; color: var(--color-muted);
   transform: scale(var(--rl-label-from)); transition: transform var(--rl-label-ms) var(--rl-label-ease), color 0.3s ease;
 }
-.rl__label[data-on] { font-size: 20px; color: var(--orange); transform: none; }
+.rl__label[data-on] { font-size: var(--font-size-title); color: var(--color-accent-orange); transform: none; }
 
 /* Название страны: одна строка, у длинных названий — две, кегль подгоняется под ширину */
 .rl__name {
@@ -42,8 +42,8 @@
 /* Подсказка и результат занимают одно место */
 .rl__info { position: relative; flex: none; width: 100%; height: clamp(104px, 15.3cqh, 130px); margin-top: clamp(6px, 1.6cqh, 14px); }
 .rl__hint {
-  position: absolute; left: 0; right: 0; top: 10px; margin: 0; font-size: clamp(15px, 2cqh, 17px); font-weight: 600; line-height: 1.4; color: var(--muted);
-  transition: opacity 0.4s ease;
+  position: absolute; left: 0; right: 0; top: 10px; margin: 0; font-size: clamp(15px, 2cqh, 17px); font-weight: 600; line-height: 1.4; color: var(--color-muted);
+  transition: opacity var(--duration-medium) ease;
 }
 .rl[data-stage='landed'] .rl__hint, .rl[data-stage='revealed'] .rl__hint { opacity: 0; }
 .rl__reveal {
@@ -54,7 +54,7 @@
 .rl[data-stage='revealed'] .rl__reveal { opacity: 1; visibility: visible; transform: none; transition: opacity var(--rl-reveal-ms) ease, transform var(--rl-reveal-ms) ease, visibility 0s; }
 .rl__chip {
   position: relative; display: inline-flex; align-items: center; max-width: calc(100% - 16px); min-height: 32px; padding: 3px 14px 3px 28px;
-  border: 2px solid var(--line); border-radius: 8px; background: var(--paper); font-size: 15px; font-weight: 600; line-height: 1.2; color: var(--ink);
+  border: 2px solid var(--color-line); border-radius: 8px; background: var(--color-paper); font-size: var(--font-size-body); font-weight: 600; line-height: 1.2; color: var(--color-ink);
 }
 .rl__chip-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .rl__pin { position: absolute; left: -9px; top: -3px; }
@@ -62,7 +62,7 @@
 
 /* Кнопка «Who am I?» и строка ожидания четырёх жизней */
 .rl__cta { flex: none; margin-top: auto; padding-top: clamp(6px, 1.2cqh, 10px); width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.rl__comps { margin: 0; min-height: 18px; font-size: 13px; font-weight: 600; line-height: 18px; color: var(--muted); }
+.rl__comps { margin: 0; min-height: 18px; font-size: var(--font-size-small); font-weight: 600; line-height: var(--line-height-body); color: var(--color-muted); }
 .rl__slot { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 64px; }
 .rl__skip { opacity: 0.85; }
 .rl__who { max-width: 100%; animation: rl-cta-in var(--rl-reveal-ms) ease var(--rl-cta-delay) both; }

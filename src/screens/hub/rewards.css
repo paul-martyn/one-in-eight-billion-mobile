@@ -1,60 +1,56 @@
 /* «A life lived» (HubCute.dc.html, rewards: on). Окно в 22 px от краёв, верх — 236 px
    на 852 (ниже — меньше, но не меньше места под медальон 92 px), лента, плашка имени
-   и лет, список наград с цветными точками, итог «In all» и Claim 200 × 56.
+   и лет, список наград с цветными точками, итог «In all» и Claim 196 × 70 (основная кнопка макета).
    Появление: затемнение 0,35 с, окно поднимается 0,45 с, медальон «подпрыгивает»
    через 0,2 с, строки — по одной с 0,35 с через 0,1 с. Claim: окно гаснет и
    сжимается до 0,92 за 0,25 с, затемнение — за 0,3 с. */
-.hub-reward { position: absolute; inset: 0; z-index: 30; transition: opacity 0.3s ease; }
+.hub-reward { position: absolute; inset: 0; z-index: 30; pointer-events: auto; transition: opacity 0.3s ease; }
 .hub-reward[data-closing] { opacity: 0; }
-.hub-reward__dim { position: absolute; inset: 0; background: var(--backdrop); animation: hrw-dim 0.35s ease both; }
+.hub-reward__dim { position: absolute; inset: 0; background: var(--color-backdrop); animation: hrw-dim 0.35s ease both; }
 .hub-reward__frame {
   position: absolute; inset: 0; display: flex; flex-direction: column;
   padding: calc(var(--safe-top) + clamp(116px, 27.7cqh, 236px)) 22px calc(16px + var(--safe-bottom));
 }
-.hub-reward__scale { display: flex; flex-direction: column; min-height: 0; transition: transform 0.25s ease, opacity 0.25s ease; }
+.hub-reward__scale { display: flex; flex-direction: column; min-height: 0; transition: transform var(--duration-state) ease, opacity var(--duration-state) ease; }
 .hub-reward[data-closing] .hub-reward__scale { transform: scale(0.92); opacity: 0; }
-.popup.hub-reward__card { transform-origin: 50% 50%; animation: hrw-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.popup.hub-reward__card { transform-origin: 50% 50%; animation: hrw-rise 0.45s var(--ease-screen) both; }
 
-.popup__medallion.hub-reward__face { background: #bfe8ef; animation: hrw-pop 0.5s ease-out 0.2s both; }
+.popup__medallion.hub-reward__face { background: var(--color-portrait-sky); animation: hrw-pop 0.5s ease-out 0.2s both; }
 .hub-reward__letter { font-size: 44px; font-weight: 700; line-height: 1; }
 
 .hub-reward__who { display: flex; justify-content: center; margin: 0; }
 .hub-reward__who > span {
-  max-width: 100%; height: 26px; padding: 0 14px; border-radius: 13px; background: #c0661a; color: #fff;
-  font-size: 13px; font-weight: 700; line-height: 26px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 100%; height: 26px; padding: 0 14px; border-radius: 13px; background: var(--color-popup-status); color: var(--color-white);
+  font-size: var(--font-size-small); font-weight: 700; line-height: 28px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
-.hub-reward__box { margin-top: 10px; padding: 8px 12px 10px; border: 2px solid var(--line); border-radius: 14px; background: var(--card); text-align: start; }
-.hub-reward__head { margin: 0 0 4px; font-size: 11px; font-weight: 700; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.hub-reward__box { margin-top: 10px; padding: 8px 12px 10px; border: 2px solid var(--color-line); border-radius: 14px; background: var(--color-card); text-align: start; }
+.hub-reward__head { margin: 0 0 4px; font-size: var(--font-size-label); font-weight: 700; line-height: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-muted); }
 .hub-reward__list { list-style: none; margin: 0; padding: 0; }
 .hub-reward__row { display: flex; align-items: center; gap: 8px; min-height: 27px; animation: hrw-rise 0.35s ease-out both; }
-.hub-reward__dot { flex: none; width: 10px; height: 10px; border: 2px solid var(--line); border-radius: 5px; }
-.hub-reward__text { flex: 1; min-width: 0; font-size: 14px; font-weight: 500; line-height: 17px; color: var(--ink-dark); overflow-wrap: anywhere; }
+.hub-reward__dot { flex: none; width: 10px; height: 10px; border: 2px solid var(--color-line); border-radius: 5px; }
+.hub-reward__text { flex: 1; min-width: 0; font-size: var(--font-size-small); font-weight: 500; line-height: var(--line-height-body); color: var(--color-ink-dark); overflow-wrap: break-word; hyphens: auto; }
 .hub-reward__amount {
   flex: none; display: inline-flex; align-items: center; gap: 2px;
-  font-size: 14px; font-weight: 700; color: var(--ink-dark); white-space: nowrap; font-variant-numeric: tabular-nums;
+  font-size: var(--font-size-small); font-weight: 700; color: var(--color-ink-dark); white-space: nowrap; font-variant-numeric: tabular-nums;
 }
 .hub-reward__icon { flex: none; }
-.hub-reward__none { margin: 2px 0 4px; font-size: 14px; font-weight: 500; line-height: 18px; color: var(--ink-dark); }
+.hub-reward__none { margin: 2px 0 4px; font-size: var(--font-size-small); font-weight: 500; line-height: var(--line-height-body); color: var(--color-ink-dark); }
 .hub-reward__total {
   display: flex; align-items: center; justify-content: space-between; gap: 8px;
-  margin-top: 6px; padding-top: 7px; border-top: 2px dashed var(--divider);
+  margin-top: 6px; padding-top: 7px; border-top: 2px dashed var(--color-divider);
 }
-.hub-reward__total-label { font-size: 14px; font-weight: 700; color: var(--ink-dark); }
+.hub-reward__total-label { font-size: var(--font-size-small); font-weight: 700; color: var(--color-ink-dark); }
 .hub-reward__sums { display: flex; gap: 6px; min-width: 0; }
 .hub-reward__sum {
   display: inline-flex; align-items: center; gap: 3px; height: 28px; padding: 0 10px 0 4px;
-  border: 2px solid var(--line); border-radius: 14px; background: #5b4636;
-  font-size: 15px; font-weight: 700; line-height: 1; white-space: nowrap; font-variant-numeric: tabular-nums;
+  border: 2px solid var(--color-line); border-radius: 14px; background: var(--color-life-track);
+  font-size: var(--font-size-body); font-weight: 700; line-height: 1; white-space: nowrap; font-variant-numeric: tabular-nums;
 }
 
 .hub-reward__actions { flex: none; display: flex; justify-content: center; margin-top: 14px; }
-.chunky.hub-reward__claim {
-  min-width: 200px; height: 56px; padding: 0 20px; border-radius: 16px;
-  box-shadow: inset 0 -3px 0 rgba(90, 52, 24, 0.22), inset 0 3px 0 rgba(255, 255, 255, 0.5);
-}
-.chunky.hub-reward__claim[aria-disabled='true'] { cursor: default; }
-.chunky.hub-reward__claim[aria-disabled='true']:active { transform: none; }
+.cta.hub-reward__claim[aria-disabled='true'] { cursor: default; }
+.cta.hub-reward__claim[aria-disabled='true']:active { transform: none; }
 
 /* Полёт после Claim: копии сумм и портрета от окна к плашкам и вкладке Lives. */
 .hub-fly { position: absolute; inset: 0; z-index: 40; pointer-events: none; }
@@ -62,16 +58,16 @@
 .hub-fly__sum { box-shadow: 0 6px 14px rgba(58, 34, 14, 0.3); }
 .hub-fly__face {
   display: grid; place-items: center; overflow: hidden;
-  border: 2px solid var(--line); border-radius: 50%; background: #bfe8ef; box-shadow: 0 6px 14px rgba(58, 34, 14, 0.35);
+  border: 2px solid var(--color-line); border-radius: 50%; background: var(--color-portrait-sky); box-shadow: 0 6px 14px rgba(58, 34, 14, 0.35);
 }
 
 /* Бейдж новых жизней на вкладке Lives: красный, белая цифра с контуром; пульсирует,
    а при зачислении награды «выпрыгивает». */
 .hub-tab__badge {
   position: absolute; right: 8px; top: -10px; z-index: 1; min-width: 22px; height: 22px; padding: 0 5px;
-  display: grid; place-items: center; border: 2px solid var(--line); border-radius: 11px; background: #f2384c;
+  display: grid; place-items: center; border: 2px solid var(--color-line); border-radius: 11px; background: var(--color-badge-red);
   box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.45), inset 0 -2px 0 rgba(90, 52, 24, 0.25);
-  font-size: 12px; font-weight: 700; line-height: 1; pointer-events: none;
+  font-size: var(--font-size-label); font-weight: 700; line-height: 1; pointer-events: none;
   animation: hub-badge-pulse 2s ease-in-out infinite;
 }
 .hub-tab__badge[data-new] { animation: hrw-pop 0.45s ease-out; }

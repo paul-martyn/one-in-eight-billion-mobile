@@ -1,5 +1,11 @@
 {
   "start.starting": "Preparando una nueva vida…",
   "start.continueNewborn": "Continuar con {name}, recién nacido",
-  "start.continuePlace": "En {place}"
+  "start.continuePlace": "En {place}",
+  "since.born": "nacieron",
+  "since.died": "murieron",
+  "planet.free": "El planeta. Los destellos rosas son nacimientos; los violetas, muertes. Arrástralo para girarlo.",
+  "planet.hub": "El planeta. Los destellos rosas son nacimientos; los violetas, muertes. Toca una cara para atraparla. Toca un país para ver sus cifras.",
+  "planet.perDay": "al día",
+  "planet.open": "Abrir el país"
 }

@@ -96,6 +96,16 @@ export class MetaEconomy {
     return r;
   }
 
+  /**
+   * Лицо, пойманное на планете в хабе: +1 доллар, «счастливое» — +1 кристалл
+   * (макет HubCute; решение продукта о размере и лимитах ещё не принято).
+   */
+  catchFlash(kind: 'coin' | 'gem'): void {
+    if (kind === 'gem') this.state.gems += 1;
+    else this.state.dollars += 1;
+    this.save();
+  }
+
   /** Вкладка Lives открыта — бейдж новых жизней снимается. */
   seeLives(): void {
     if (!this.state.unseenLives) return;

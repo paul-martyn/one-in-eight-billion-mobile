@@ -1,0 +1,170 @@
+{
+  "src/app/styles.css": {
+    "hex": 0,
+    "rgb": 1,
+    "duration": 0,
+    "easing": 0,
+    "fontSize": 0
+  },
+  "src/screens/birthOdds/birthOdds.css": {
+    "hex": 4,
+    "rgb": 1,
+    "duration": 0,
+    "easing": 0,
+    "fontSize": 2
+  },
+  "src/screens/certificate/certificate.css": {
+    "hex": 0,
+    "rgb": 5,
+    "duration": 16,
+    "easing": 0,
+    "fontSize": 8
+  },
+  "src/screens/ended/ended.css": {
+    "hex": 9,
+    "rgb": 8,
+    "duration": 14,
+    "easing": 0,
+    "fontSize": 3
+  },
+  "src/screens/hub/hub.css": {
+    "hex": 0,
+    "rgb": 1,
+    "duration": 10,
+    "easing": 2,
+    "fontSize": 4
+  },
+  "src/screens/hub/rewards.css": {
+    "hex": 0,
+    "rgb": 4,
+    "duration": 8,
+    "easing": 0,
+    "fontSize": 1
+  },
+  "src/screens/language/language.css": {
+    "hex": 0,
+    "rgb": 2,
+    "duration": 7,
+    "easing": 1,
+    "fontSize": 4
+  },
+  "src/screens/life/life.css": {
+    "hex": 24,
+    "rgb": 16,
+    "duration": 20,
+    "easing": 2,
+    "fontSize": 3
+  },
+  "src/screens/life/lifeTab.css": {
+    "hex": 14,
+    "rgb": 10,
+    "duration": 6,
+    "easing": 0,
+    "fontSize": 0
+  },
+  "src/screens/life/tabs/activities.css": {
+    "hex": 1,
+    "rgb": 1,
+    "duration": 0,
+    "easing": 0,
+    "fontSize": 0
+  },
+  "src/screens/life/tabs/money.css": {
+    "hex": 2,
+    "rgb": 0,
+    "duration": 0,
+    "easing": 0,
+    "fontSize": 1
+  },
+  "src/screens/life/tabs/odds.css": {
+    "hex": 1,
+    "rgb": 0,
+    "duration": 0,
+    "easing": 0,
+    "fontSize": 1
+  },
+  "src/screens/life/tabs/people.css": {
+    "hex": 1,
+    "rgb": 1,
+    "duration": 0,
+    "easing": 0,
+    "fontSize": 0
+  },
+  "src/screens/life/tabs/peopleParts/tabframe.css": {
+    "hex": 1,
+    "rgb": 0,
+    "duration": 0,
+    "easing": 0,
+    "fontSize": 1
+  },
+  "src/screens/life/tabs/spendParts/spend.css": {
+    "hex": 9,
+    "rgb": 2,
+    "duration": 0,
+    "easing": 0,
+    "fontSize": 0
+  },
+  "src/screens/roll/roll.css": {
+    "hex": 0,
+    "rgb": 0,
+    "duration": 3,
+    "easing": 0,
+    "fontSize": 4
+  },
+  "src/screens/settings/settings.css": {
+    "hex": 0,
+    "rgb": 7,
+    "duration": 0,
+    "easing": 0,
+    "fontSize": 0
+  },
+  "src/screens/start/world.css": {
+    "hex": 0,
+    "rgb": 3,
+    "duration": 0,
+    "easing": 0,
+    "fontSize": 3
+  },
+  "src/screens/system.css": {
+    "hex": 3,
+    "rgb": 0,
+    "duration": 2,
+    "easing": 0,
+    "fontSize": 0
+  },
+  "src/ui/frame/frame.css": {
+    "hex": 2,
+    "rgb": 4,
+    "duration": 3,
+    "easing": 0,
+    "fontSize": 5
+  },
+  "src/ui/meta/meta.css": {
+    "hex": 0,
+    "rgb": 1,
+    "duration": 2,
+    "easing": 0,
+    "fontSize": 0
+  },
+  "src/ui/people/people.css": {
+    "hex": 0,
+    "rgb": 1,
+    "duration": 0,
+    "easing": 0,
+    "fontSize": 0
+  },
+  "src/ui/planet/planet.css": {
+    "hex": 0,
+    "rgb": 1,
+    "duration": 2,
+    "easing": 0,
+    "fontSize": 2
+  },
+  "src/ui/ui.css": {
+    "hex": 1,
+    "rgb": 8,
+    "duration": 7,
+    "easing": 0,
+    "fontSize": 1
+  }
+}

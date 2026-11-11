@@ -2,11 +2,12 @@
 // оранжевая карточка, медальон, бирюзовая лента. В отличие от общего Popup
 // карточка подстраивается под высоту экрана (320–430 × 568–932) и
 // прокручивает своё содержимое, если вариантов много.
-import { useEffect, useRef, type KeyboardEvent, type ReactNode } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import spec from '../../../design/motion.json';
 import { Ribbon } from '../../../ui/components';
 import { useReducedMotion } from '../../../ui/motionPrefs';
+import { useBack } from '../../../flow/useBack';
 
 const POP = spec.sequences.popup;
 const POP_EASE = spec.easing.pop as [number, number, number, number];
@@ -57,9 +58,9 @@ function DialogCard({ title, titleId, medallion, onEscape, below, contentKey, re
   useEffect(() => {
     ref.current?.focus({ preventScroll: true });
   }, [contentKey]);
-  const onKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape' && onEscape) { e.stopPropagation(); onEscape(); }
-  };
+  // «Назад» (Esc) — безопасное действие окна (пауза: «Продолжить»). Окно без него
+  // (решение) нажатие поглощает: экран под ним не должен реагировать.
+  useBack(() => { onEscape?.(); }, { layer: 'dialog' });
   return (
     <div className="ld-wrap">
       <motion.section
@@ -69,7 +70,6 @@ function DialogCard({ title, titleId, medallion, onEscape, below, contentKey, re
         aria-modal="true"
         aria-labelledby={titleId}
         tabIndex={-1}
-        onKeyDown={onKeyDown}
         initial={reduced ? false : { opacity: 0, scale: 0.94 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: POP.enter.durationMs / 1000, ease: POP_EASE }}

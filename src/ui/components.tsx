@@ -6,6 +6,7 @@ import tokens from '../design/tokens.json';
 import spec from '../design/motion.json';
 import { t } from '../i18n';
 import { useReducedMotion } from './motionPrefs';
+import { useBack } from '../flow/useBack';
 import './ui.css';
 
 type BtnProps = ButtonHTMLAttributes<HTMLButtonElement>;
@@ -98,7 +99,8 @@ export function StickerBar({ active, labels, badges, onSelect }: { active: TabId
           const on = s.id === active;
           const badge = badges?.[s.id];
           return (
-            <div key={s.id} className={`sticker ${on ? 'is-on' : ''}`} style={{ left: `${(s.left / 393) * 100}%`, top: s.top, transform: `rotate(${s.rot}deg) scale(${on ? 1.1 : 1})`, zIndex: on ? 3 : 1 }}>
+            // Позиция — центр стикера (left + 32 в кадре 393): ширина растёт под длинную подпись, центр остаётся на месте.
+            <div key={s.id} className={`sticker ${s.id === 'activities' ? 'sticker--wide' : ''} ${on ? 'is-on' : ''}`} style={{ left: `${((s.left + 32) / 393) * 100}%`, top: s.top, transform: `translateX(-50%) rotate(${s.rot}deg) scale(${on ? 1.1 : 1})`, zIndex: on ? 3 : 1 }}>
               <button type="button" className="sticker__btn" aria-label={labels[s.id]} aria-current={on ? 'page' : undefined} onClick={() => onSelect(s.id)}>
                 <span className="sticker__face">
                   <svg width="24" height="24" viewBox="0 0 24 24" className="sticker__icon" aria-hidden="true">{TAB_ICON[s.id]}</svg>
@@ -138,6 +140,8 @@ export function Popup({ open, title, medallion, medallionBg = '#bfe8ef', onClose
   const reduced = useReducedMotion();
   const id = useId();
   const ref = useRef<HTMLElement | null>(null);
+  // «Назад» (Esc) закрывает окно тем же действием, что и его кнопка закрытия.
+  useBack(() => { onClose?.(); }, { layer: 'dialog', enabled: open });
   useEffect(() => {
     if (!open) return;
     const prev = document.activeElement as HTMLElement | null;

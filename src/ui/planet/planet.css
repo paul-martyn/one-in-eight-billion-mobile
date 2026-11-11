@@ -1,0 +1,24 @@
+/* Планета и карточка страны (GlobeLive холста). Размеры — в единицах кадра 393.
+   Место, прозрачность и масштаб карточки каждый кадр ставит planetCore.js. */
+.planet { position: relative; font-family: var(--font-display); }
+.planet__canvas { display: block; touch-action: none; cursor: grab; }
+.glyph { display: block; flex: none; }
+
+.planet-tip { position: absolute; left: 0; top: 0; width: 176px; height: 72px; visibility: hidden; opacity: 0; pointer-events: none; text-align: left; }
+.planet-tip__shape { position: absolute; left: 0; top: 0; overflow: visible; filter: drop-shadow(0 3px 6px rgba(90, 52, 24, 0.22)); }
+.planet-tip__body { position: relative; height: 62px; padding: 6px 7px 0 11px; }
+.planet-tip__head { display: flex; align-items: center; gap: 6px; height: 28px; }
+.planet-tip__name { flex: 1 1 auto; min-width: 0; margin: 0; font-weight: 700; line-height: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--color-ink-dark); }
+.planet-tip__bang {
+  flex: none; width: 34px; height: 40px; margin: -6px -2px -6px 0; padding: 0; border: none; background: none;
+  display: flex; align-items: center; justify-content: center; pointer-events: auto;
+}
+.planet-tip__bang svg { display: block; overflow: visible; transform-origin: 50% 88%; animation: planet-bang-sway 1.3s ease-in-out infinite; }
+.planet-tip__bang:active svg { animation-duration: 0.5s; }
+@keyframes planet-bang-sway { 0%, 100% { transform: rotate(-11deg); } 50% { transform: rotate(11deg); } }
+.planet-tip__nums {
+  display: flex; align-items: center; gap: 8px; margin: 2px 0 0;
+  font-size: 13.5px; font-weight: 700; line-height: 20px; font-variant-numeric: tabular-nums; color: var(--color-ink-dark);
+}
+.planet-tip__num { display: inline-flex; align-items: center; gap: 3px; }
+.planet-tip__unit { font-size: 11px; font-weight: 600; color: var(--color-muted); }

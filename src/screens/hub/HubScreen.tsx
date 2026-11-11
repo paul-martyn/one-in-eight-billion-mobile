@@ -1,6 +1,9 @@
-// «9 · Hub between lives» (HubCute.dc.html): настройки, энергия, доллары и
-// кристаллы мобильной версии (snapshot.meta), планета, счётчики, «Be Born!»
-// за 1 энергию, продолжение сохранённой жизни и нижнее меню Shop / World / Lives.
+// «9 · Hub between lives» (HubCute холста, версия «как старт»): шестерёнка-значок и
+// плашки энергии / долларов / кристаллов (snapshot.meta) сверху, под экраном — общая
+// планета (PlanetStage; лица на ней можно ловить: доллар, «счастливое» — кристалл),
+// облачко, счётчики от самой планеты, «Be Born!» 196 × 70 с ценой на уголке,
+// продолжение сохранённой жизни и нижнее меню Shop / World / Lives (вкладки-папки).
+// Экран нарисован в кадре 393 × H; места по высоте считает layHub.
 // «Be Born!»: при сохранённой жизни — подтверждение, затем команда startLife,
 // затем уход интерфейса (hubLeave), затем рулетка.
 // После прожитой жизни — окно наград «A life lived» и Claim (./Rewards.tsx), бейдж
@@ -12,15 +15,17 @@ import { useAdapter, useSnapshot } from '../../adapters/useGame';
 import { META_RULES } from '../../adapters/meta';
 import type { PastLifeVM } from '../../adapters/viewModels';
 import { SoftButton } from '../../ui/components';
-import { GearIcon } from '../../ui/icons';
-import { Globe } from '../../ui/globe/Globe';
-import { BornButton, MetaBar, NoEnergyLine } from '../../ui/meta/Meta';
+import { Frame, useFrame } from '../../ui/frame/Frame';
+import { CtaButton, CtaCost, Say, Since } from '../../ui/frame/parts';
+import { MetaBar, NoEnergyLine } from '../../ui/meta/Meta';
+import { usePlanetEvents } from '../../ui/planet/bus';
 import { useCountUpProgress } from '../../ui/meta/useMeta';
 import { useReducedMotion } from '../../ui/motionPrefs';
 import type { ScreenProps } from '../registry';
 import { NewLifeGuard, useBeBorn } from '../start/newLife';
 import { RewardFlights, RewardsPopup, useLifeReward } from './Rewards';
-import { BrandTitle, fmtInt, useContinueLife, useFitSize, WorldCounters } from '../start/shared';
+import { fmtInt, useContinueLife } from '../start/shared';
+import { extrasOf, layHub } from '../layouts';
 import './hub.css';
 
 type HubTab = 'shop' | 'world' | 'lives';
@@ -74,7 +79,8 @@ export function HubScreen({ nav, active }: ScreenProps) {
   const [shown, setShown] = useState(reduced);
   const [leaving, setLeaving] = useState(false);
   const leaveTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  const rootRef = useRef<HTMLElement | null>(null);
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  const frame = useFrame();
   const livesRef = useRef<HTMLButtonElement | null>(null);
   // Команда уже применена; уход интерфейса только показывает начатую жизнь.
   const onStarted = useCallback(() => {
@@ -90,10 +96,15 @@ export function HubScreen({ nav, active }: ScreenProps) {
   const ready = snap.status === 'ready';
   const resume = snap.resume;
   const meta = born.meta;
-  // После начатой жизни (busy) уходящий экран не показывает «нет энергии».
-  const noEnergy = !!meta && !meta.canStartLife && !busy;
   const reward = useLifeReward({ active, leaving, reduced, rootRef, livesRef });
   const inert = reward.modal || undefined;
+  const extras = extrasOf(snap);
+  const lay = layHub(frame, extras);
+  // Пойманные на планете лица: плашка валюты вздрагивает, когда монета долетела.
+  const [caught, setCaught] = useState({ coin: 0, gem: 0 });
+  usePlanetEvents((type, payload) => {
+    if (type === 'catch' && (payload === 'coin' || payload === 'gem')) setCaught(c => ({ ...c, [payload]: c[payload] + 1 }));
+  }, active);
 
   // Появление: интерфейс скрыт первые 50 мс, затем «съезжается» к планете.
   useEffect(() => {
@@ -115,53 +126,50 @@ export function HubScreen({ nav, active }: ScreenProps) {
   const tabId = (k: HubTab) => `${uid}-tab-${k}`;
 
   return (
-    <main ref={rootRef} className="screen hub" style={ROOT_VARS} data-shown={(shown && !leaving) || undefined} data-leaving={leaving || undefined}>
-      <div className="sky-glow hub__glow" aria-hidden="true" />
-      <header className="hub__top" inert={inert}>
-        <div className="hub__bar">
-          <button type="button" className="round-btn hub__gear" onClick={onSettings} disabled={leaving} aria-label={t('hub.settingsOpen')}>
-            <GearIcon size={26} />
+    <main className="pscreen over-planet hub" style={ROOT_VARS} data-shown={(shown && !leaving) || undefined} data-leaving={leaving || undefined}>
+      <Frame ref={rootRef}>
+        <header className="hub__top" style={{ top: lay.bar }} inert={inert}>
+          <button type="button" className="hub__gear" onClick={onSettings} disabled={leaving} aria-label={t('hub.settingsOpen')}>
+            <GearCute />
           </button>
-          {meta && <MetaBar className="hub__meta" meta={meta} progress={countUp} counts={reward.counts} pop={reward.landed} />}
-        </div>
-        <BrandTitle className="hub__title" />
-      </header>
+          {meta && <MetaBar className="hub__meta" meta={meta} progress={countUp} counts={reward.counts} pop={reward.landed} bump={caught} />}
+        </header>
 
-      <div className="hub__body" inert={inert}>
         {tab === 'world' && (
-          <section key="world" className="hub__panel hub__world" role="tabpanel" id={panelId('world')} aria-labelledby={tabId('world')}>
-            <WorldPanelGlobe reduced={reduced} />
-            <WorldCounters className="hub__counters" />
-            <div className="hub__actions">
-              <BornButton
-                className="hub__born"
+          <section key="world" className="hub__world" role="tabpanel" id={panelId('world')} aria-labelledby={tabId('world')} inert={inert}>
+            {lay.say != null && <Say className="hub__mid" style={{ top: lay.say }} line={t('start.bubble1')} accent={t('start.bubble2')} />}
+            <Since className="hub__mid" style={{ top: lay.since }} />
+            <div className="hub__cta" style={{ top: lay.cta }}>
+              <CtaButton
                 label={t('hub.bornNew')}
-                cost={born.cost}
+                cost={born.cost != null ? <CtaCost n={born.cost} label={t('hub.meta.cost', { n: born.cost })} /> : undefined}
                 onClick={reward.pending ? reward.openNow : born.request}
                 disabled={!ready || busy || leaving || !born.canStart}
                 aria-busy={busy || undefined}
-                aria-describedby={noEnergy ? waitId : undefined}
+                aria-describedby={extras.noEnergy ? waitId : undefined}
               />
-              {noEnergy && <NoEnergyLine id={waitId} nextRefillAt={meta?.nextRefillAt ?? null} />}
-              {resume && (
-                <SoftButton className="continue-btn hub__continue" onClick={onContinue} disabled={!ready || busy || leaving}>
+            </div>
+            <div className="below hub__below" style={{ top: lay.below }}>
+              {extras.noEnergy && <NoEnergyLine id={waitId} nextRefillAt={meta?.nextRefillAt ?? null} />}
+              {extras.resume && resume && (
+                <SoftButton className="continue-btn" onClick={onContinue} disabled={!ready || busy || leaving}>
                   <span className="continue-btn__main">
                     {resume.phase === 'birth' ? t('hub.continueNewborn', { name: resume.name }) : t('hub.continue', { name: resume.name, age: resume.age })}
                   </span>
                   <span className="continue-btn__sub">{t('hub.continuePlace', { place: resume.place })}</span>
                 </SoftButton>
               )}
-              <p className="sr-only" role="status">{busy ? t('hub.starting') : ''}</p>
             </div>
+            <p className="sr-only" role="status">{busy ? t('hub.starting') : ''}</p>
           </section>
         )}
         {tab === 'lives' && (
-          <section key="lives" className="hub__panel hub__lives scroll" role="tabpanel" id={panelId('lives')} aria-labelledby={tabId('lives')}>
+          <section key="lives" data-hit="" className="hub__panel hub__lives scroll" style={{ top: lay.panelTop, bottom: lay.panelBottom }} role="tabpanel" id={panelId('lives')} aria-labelledby={tabId('lives')} inert={inert}>
             <LivesList lives={snap.pastLives} />
           </section>
         )}
         {tab === 'shop' && (
-          <section key="shop" className="hub__panel hub__shop" role="tabpanel" id={panelId('shop')} aria-labelledby={tabId('shop')}>
+          <section key="shop" data-hit="" className="hub__panel hub__shop" style={{ top: lay.panelTop, bottom: lay.panelBottom }} role="tabpanel" id={panelId('shop')} aria-labelledby={tabId('shop')} inert={inert}>
             <div className="hub-card">
               <span className="hub-card__icon" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24">{TABS[0]!.icon}</svg></span>
               <p className="hub-card__eyebrow">{t('hub.shop')}</p>
@@ -171,55 +179,65 @@ export function HubScreen({ nav, active }: ScreenProps) {
             </div>
           </section>
         )}
-      </div>
 
-      <nav className="hub__nav" aria-label={t('hub.menu')} inert={inert}>
-        <div className="hub__tabs" role="tablist" aria-label={t('hub.menu')}>
-          {TABS.map(x => {
-            const on = x.key === tab;
-            return (
-              <button
-                key={x.key}
-                ref={x.key === 'lives' ? livesRef : undefined}
-                type="button"
-                role="tab"
-                id={tabId(x.key)}
-                aria-selected={on}
-                aria-controls={on ? panelId(x.key) : undefined}
-                className="hub-tab"
-                style={{ background: x.color }}
-                onClick={() => pick(x.key)}
-              >
-                <svg className="hub-tab__icon" width="30" height="30" viewBox="0 0 24 24" aria-hidden="true">{x.icon}</svg>
-                <span className="k-os hub-tab__label">{t(x.label)}</span>
-                {x.key === 'lives' && reward.badge > 0 && (
-                  <>
-                    <span className="k-os hub-tab__badge" data-new={reward.landed || undefined} aria-hidden="true">{reward.badge}</span>
-                    <span className="sr-only">{reward.badge === 1 ? t('hub.livesNewOne') : t('hub.livesNew', { n: reward.badge })}</span>
-                  </>
-                )}
-              </button>
-            );
-          })}
-        </div>
-        <div className="hub__band" style={{ background: open.color }} aria-hidden="true" />
-      </nav>
+        <nav className="hub__nav" style={{ height: 124 + frame.bottom }} aria-label={t('hub.menu')} inert={inert}>
+          <div className="hub__tabs" style={{ bottom: 42 + frame.bottom }} role="tablist" aria-label={t('hub.menu')}>
+            {TABS.map(x => {
+              const on = x.key === tab;
+              return (
+                <div key={x.key} className="hub-tab" data-on={on || undefined}>
+                  <button
+                    ref={x.key === 'lives' ? livesRef : undefined}
+                    type="button"
+                    role="tab"
+                    id={tabId(x.key)}
+                    aria-selected={on}
+                    aria-controls={on ? panelId(x.key) : undefined}
+                    aria-label={t(x.label)}
+                    className="hub-tab__btn"
+                    style={{ background: x.color }}
+                    onClick={() => pick(x.key)}
+                  >
+                    <svg className="hub-tab__icon" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">{x.icon}</svg>
+                    <span className="t-stroke-s hub-tab__label" aria-hidden="true">{t(x.label)}</span>
+                    {x.key === 'lives' && reward.badge > 0 && (
+                      <>
+                        <span className="t-stroke-s hub-tab__badge" data-new={reward.landed || undefined} aria-hidden="true">{reward.badge}</span>
+                        <span className="sr-only">{reward.badge === 1 ? t('hub.livesNewOne') : t('hub.livesNew', { n: reward.badge })}</span>
+                      </>
+                    )}
+                  </button>
+                  <span className="hub-tab__line" aria-hidden="true" />
+                </div>
+              );
+            })}
+          </div>
+          <div className="hub__band" style={{ background: open.color, height: 44 + frame.bottom }} aria-hidden="true" />
+        </nav>
+        {reward.shown && (
+          <RewardsPopup key={reward.shown.lifeId} reward={reward.shown} closing={reward.closing} ready={reward.ready} onClaim={reward.claim} sources={reward.sources} />
+        )}
+        {reward.flying && <RewardFlights key={reward.flying.key} run={reward.flying} />}
+        <p className="sr-only" role="status">{reward.said}</p>
+      </Frame>
       <NewLifeGuard {...born.guard} />
-      {reward.shown && (
-        <RewardsPopup key={reward.shown.lifeId} reward={reward.shown} closing={reward.closing} ready={reward.ready} onClaim={reward.claim} sources={reward.sources} />
-      )}
-      {reward.flying && <RewardFlights key={reward.flying.key} run={reward.flying} />}
-      <p className="sr-only" role="status">{reward.said}</p>
     </main>
   );
 }
 
-function WorldPanelGlobe({ reduced }: { reduced: boolean }) {
-  const [box, size] = useFitSize<HTMLDivElement>(290);
+/** Шестерёнка-значок настроек (HubCute, 2026-11-04): объёмная, без круглой кнопки под ней. */
+const GEAR = 'M14.57 6.92L14.98 3.10L21.02 3.10L21.43 6.92L23.41 7.74L26.40 5.33L30.67 9.60L28.26 12.59L29.08 14.57L32.90 14.98L32.90 21.02L29.08 21.43L28.26 23.41L30.67 26.40L26.40 30.67L23.41 28.26L21.43 29.08L21.02 32.90L14.98 32.90L14.57 29.08L12.59 28.26L9.60 30.67L5.33 26.40L7.74 23.41L6.92 21.43L3.10 21.02L3.10 14.98L6.92 14.57L7.74 12.59L5.33 9.60L9.60 5.33L12.59 7.74Z';
+function GearCute() {
   return (
-    <div ref={box} className="hub__globe">
-      {size > 0 && <Globe size={size} startLon={-40} reducedMotion={reduced} idleLabel={t('globe.idle')} />}
-    </div>
+    <svg width="40" height="40" viewBox="0 0 36 36" aria-hidden="true">
+      <defs><clipPath id="hub-gear"><path d={GEAR} /></clipPath></defs>
+      <path d={GEAR} transform="translate(0 2)" fill="#8d96b8" stroke="#5a3418" strokeWidth="2.2" strokeLinejoin="round" />
+      <path d={GEAR} fill="#c3cae3" />
+      <g clipPath="url(#hub-gear)"><circle cx="13.5" cy="12.5" r="13" fill="#e4e8f5" /><circle cx="20.5" cy="22" r="13.5" fill="#c3cae3" /></g>
+      <path d={GEAR} fill="none" stroke="#5a3418" strokeWidth="2.2" strokeLinejoin="round" />
+      <circle cx="18" cy="18" r="5.2" fill="#fff3d6" stroke="#5a3418" strokeWidth="2.2" />
+      <path d="M14.4 17.2a3.8 3.8 0 0 1 7.2 0" fill="none" stroke="#d7bd92" strokeWidth="2" strokeLinecap="round" />
+    </svg>
   );
 }
 

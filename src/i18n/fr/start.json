@@ -1,5 +1,11 @@
 {
   "start.starting": "Une nouvelle vie se prépare…",
   "start.continueNewborn": "Continuer : {name}, nouveau-né",
-  "start.continuePlace": "Lieu : {place}"
+  "start.continuePlace": "Lieu : {place}",
+  "since.born": "naissances",
+  "since.died": "décès",
+  "planet.free": "La planète. Les éclats roses sont des naissances, les violets des décès. Faites-la tourner du doigt.",
+  "planet.hub": "La planète. Les éclats roses sont des naissances, les violets des décès ; touchez un visage pour l’attraper. Touchez un pays pour voir ses chiffres.",
+  "planet.perDay": "par jour",
+  "planet.open": "Ouvrir le pays"
 }

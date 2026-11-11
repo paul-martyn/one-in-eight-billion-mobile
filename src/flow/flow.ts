@@ -18,7 +18,8 @@ export type Screen =
   | { id: 'ended' }
   | { id: 'hub' };
 
-export type TransitionKind = 'none' | 'fade' | 'tab' | 'rise' | 'push' | 'pop' | 'zoom';
+/** glide — между экранами с общей планетой: интерфейсы сменяются, планета перелетает (ставит FlowHost). */
+export type TransitionKind = 'none' | 'fade' | 'tab' | 'rise' | 'push' | 'pop' | 'zoom' | 'glide';
 
 export type FlowState = {
   screen: Screen;
