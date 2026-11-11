@@ -27,7 +27,7 @@ const GLIDE = spec.screenTransitions.find(x => x.id === 'screen.glide');
 const GLIDE_IN = { duration: (GLIDE?.enter?.durationMs ?? 460) / 1000, delay: (GLIDE?.enter?.delayMs ?? 220) / 1000 };
 const GLIDE_OUT = { duration: (GLIDE?.exit?.durationMs ?? 320) / 1000 };
 const EASE: Record<string, Easing> = {
-  fade: 'easeInOut', tab: 'easeInOut', zoom: 'easeOut', glide: spec.easing.ease as [number, number, number, number],
+  fade: 'easeInOut', tab: 'easeInOut', zoom: 'easeOut', glide: spec.easing.ease as [number, number, number, number], birth: spec.easing.ease as [number, number, number, number],
   rise: spec.easing.screen as [number, number, number, number],
   push: spec.easing.screen as [number, number, number, number],
   pop: spec.easing.screen as [number, number, number, number],
@@ -38,7 +38,7 @@ function poses(kind: TransitionKind): { enterFrom: Pose; enterTo: Pose; leaveTo:
     case 'push': return { enterFrom: { x: '100%' }, enterTo: { x: '0%' }, leaveTo: { x: '-30%', filter: 'brightness(0.8)' } };
     case 'pop': return { enterFrom: { x: '-30%', filter: 'brightness(0.8)' }, enterTo: { x: '0%', filter: 'brightness(1)' }, leaveTo: { x: '100%' } };
     case 'zoom': return { enterFrom: { opacity: 0, scale: 1.08 }, enterTo: { opacity: 1, scale: 1 }, leaveTo: null };
-    case 'glide': return { enterFrom: { opacity: 0 }, enterTo: { opacity: 1 }, leaveTo: { opacity: 0 } };
+    case 'glide': case 'birth': return { enterFrom: { opacity: 0 }, enterTo: { opacity: 1 }, leaveTo: { opacity: 0 } };
     case 'none': return { enterFrom: {}, enterTo: {}, leaveTo: null };
     default: return { enterFrom: { opacity: 0 }, enterTo: { opacity: 1 }, leaveTo: null };
   }
@@ -139,7 +139,7 @@ function Layer({ flow, kind, screen, leaving, nav, onDone }: { flow: FlowState; 
   const still = planet && (kind === 'push' || kind === 'pop');
   const initial = leaving || still ? false : (p.enterFrom as Record<string, unknown>);
   const animate = still ? {} : leaving ? (p.leaveTo ?? {}) : p.enterTo;
-  const timing = kind === 'glide' ? (leaving ? GLIDE_OUT : GLIDE_IN) : { duration };
+  const timing = kind === 'glide' ? (leaving ? GLIDE_OUT : GLIDE_IN) : kind === 'birth' && leaving ? { duration: 0.2 } : { duration };
   return (
     <motion.div
       className="flow__layer"

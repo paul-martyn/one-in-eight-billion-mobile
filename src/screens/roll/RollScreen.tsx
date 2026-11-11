@@ -19,7 +19,8 @@ import { layRoll } from '../layouts';
 import type { ScreenProps } from '../registry';
 import { capFirst, fmtInt } from '../start/shared';
 import type { Land } from './luck';
-import { spendReroll, useRerolls } from './rerolls';
+import { RerollButton } from './RerollButton';
+import { spendReroll } from './rerolls';
 import { Summary } from './Summary';
 import './roll.css';
 
@@ -32,7 +33,6 @@ export function RollScreen({ nav, active }: ScreenProps) {
   const snap = useSnapshot();
   const frame = useFrame();
   const reduced = useReducedMotion();
-  const rerolls = useRerolls();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const data = useMemo(() => (snap.status === 'ready' && snap.lifePhase === 'birth' ? adapter.view(rollVM) : null), [adapter, snap.status, snap.lifePhase, snap.lifeSeq]);
   const L = layRoll(frame);
@@ -103,19 +103,7 @@ export function RollScreen({ nav, active }: ScreenProps) {
 
         <CtaButton className="rl-cta rl-spin" style={{ top: L.cta }} label={t('roll.spin')} aria-label={t('roll.spinLabel')} onClick={spin} disabled={!ready} tabIndex={idle ? 0 : -1} />
         <CtaButton className="rl-cta rl-meet" style={{ top: L.cta }} label={t('roll.meet')} onClick={onMeet} disabled={!snap.companionsReady || busy} aria-busy={!snap.companionsReady || undefined} tabIndex={revealed ? 0 : -1} />
-        <button type="button" className="rl-again" style={{ top: L.cta + 3 }} onClick={reroll} disabled={busy} tabIndex={revealed ? 0 : -1} aria-label={rerolls > 0 ? t('roll.again', { n: rerolls }) : t('roll.againAd')}>
-          <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M5.27 10.07A7 7 0 0 1 17.20 7.32M18.73 13.93A7 7 0 0 1 6.80 16.68" fill="none" stroke="#2f5a17" strokeWidth="5.6" strokeLinecap="round" />
-            <path d="M19.19 4.45L20.15 10.59L14.14 9.00ZM4.81 19.55L3.85 13.41L9.86 15.00Z" fill="#2f5a17" stroke="#2f5a17" strokeWidth="3" strokeLinejoin="round" />
-            <path d="M5.27 10.07A7 7 0 0 1 17.20 7.32M18.73 13.93A7 7 0 0 1 6.80 16.68" fill="none" stroke="#ffffff" strokeWidth="2.6" strokeLinecap="round" />
-            <path d="M19.19 4.45L20.15 10.59L14.14 9.00ZM4.81 19.55L3.85 13.41L9.86 15.00Z" fill="#ffffff" />
-          </svg>
-          {rerolls > 0 ? (
-            <span className="rl-again__n" aria-hidden="true">{rerolls}</span>
-          ) : (
-            <span className="rl-again__ad" aria-hidden="true"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M2 1l7 4-7 4Z" fill="#2f5a17" /></svg>{t('roll.ad')}</span>
-          )}
-        </button>
+        <RerollButton className="rl-again" style={{ top: L.cta + 3 }} onClick={reroll} disabled={busy} tabIndex={revealed ? 0 : -1} />
         <p className="rl-wait" role="status" style={{ top: L.cta + 76 }}>{revealed && !snap.companionsReady ? t('roll.waitComps') : ''}</p>
       </Frame>
     </main>

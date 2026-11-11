@@ -20,18 +20,11 @@
     "@media / @container / @supports": 1
   },
   "src/screens/certificate/certificate.css": {
-    "grid": 10,
-    "pseudo-element": 2,
+    "grid": 7,
     "keyframes": 4,
-    "box-shadow": 4,
+    "box-shadow": 3,
     "gradient": 1,
-    "calc / clamp / min / max": 41,
-    "vh / vw / cq / em / rem": 26,
-    "z-index": 6,
-    "attribute selector": 5,
-    "structural pseudo-class": 1,
-    "!important": 1,
-    "@media / @container / @supports": 1
+    "vh / vw / cq / em / rem": 6
   },
   "src/screens/ended/ended.css": {
     "grid": 10,
@@ -162,10 +155,9 @@
     "sibling combinator": 1
   },
   "src/screens/roll/roll.css": {
-    "box-shadow": 3,
-    "attribute selector": 15,
-    "structural pseudo-class": 3,
-    "filter / backdrop-filter": 2
+    "attribute selector": 6,
+    "structural pseudo-class": 2,
+    "filter / backdrop-filter": 1
   },
   "src/screens/roll/summary.css": {
     "box-shadow": 2,
@@ -203,10 +195,10 @@
   },
   "src/ui/frame/frame.css": {
     "keyframes": 2,
-    "box-shadow": 2,
+    "box-shadow": 6,
     "attribute selector": 4,
-    "structural pseudo-class": 1,
-    "filter / backdrop-filter": 2
+    "structural pseudo-class": 2,
+    "filter / backdrop-filter": 3
   },
   "src/ui/meta/meta.css": {
     "grid": 2,
