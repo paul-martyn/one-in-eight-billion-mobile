@@ -38,5 +38,11 @@
   "hub.guard.kept": "No podrás continuarla después. Se guardará en este dispositivo entre tus vidas no vividas.",
   "hub.guard.keep": "Seguir viviendo",
   "hub.guard.new": "Volver a nacer",
-  "hub.guard.close": "Cerrar"
+  "hub.guard.close": "Cerrar",
+  "hub.bubble2": "¡Toca un país para nacer allí!",
+  "hub.country.label": "País de nacimiento",
+  "hub.country.born": "Nacer aquí",
+  "hub.country.bornLabel": "Nacer aquí, por un anuncio (cuesta {n} de energía)",
+  "hub.country.back": "Volver al planeta",
+  "hub.country.status": "{country}. Nace aquí o vuelve al planeta."
 }

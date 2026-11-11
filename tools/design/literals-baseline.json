@@ -30,9 +30,9 @@
   "src/screens/hub/hub.css": {
     "hex": 0,
     "rgb": 1,
-    "duration": 10,
+    "duration": 20,
     "easing": 2,
-    "fontSize": 4
+    "fontSize": 6
   },
   "src/screens/hub/rewards.css": {
     "hex": 0,

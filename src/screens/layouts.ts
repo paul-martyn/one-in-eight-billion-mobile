@@ -194,6 +194,19 @@ export function layRoll(f: FrameBox) {
 }
 
 /**
+ * Страница страны в хабе (HubCountry): как рулетка после остановки — подпись и название страны сверху,
+ * сводка и кнопки внизу; планета хаба приближена к стране, страна стоит там же, где на рулетке.
+ */
+export function layHubCountry(f: FrameBox, extras: Extras = {}) {
+  const roll = layRoll(f), hub = layHub(f, extras);
+  return {
+    label: roll.label, name: roll.name, cta: roll.cta, summaryBottom: roll.summaryBottom,
+    diveY: Math.round(roll.planet.cy + roll.diveY - hub.planet.cy),
+    diveR: roll.diveR,
+  };
+}
+
+/**
  * «3 · Birth certificate» (CertCute layout): телефоны от 16:9 (кадр 699) до 19,5:9 (852). На 852
  * кнопки там же, где Meet me! на рулетке (84 от низа), на коротких экранах — ближе к низу;
  * свидетельство начинается под верхом (60 / 28) и кончается в 14 над кнопками. Ниже 760 оно

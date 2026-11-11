@@ -43,9 +43,9 @@
     "box-shadow": 3,
     "calc / clamp / min / max": 1,
     "vh / vw / cq / em / rem": 3,
-    "z-index": 5,
-    "attribute selector": 13,
-    "structural pseudo-class": 3,
+    "z-index": 6,
+    "attribute selector": 19,
+    "structural pseudo-class": 5,
     "sibling combinator": 1,
     "!important": 1
   },
