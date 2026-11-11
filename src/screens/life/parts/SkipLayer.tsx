@@ -10,7 +10,7 @@ import type { Top } from '../../../adapters/commands';
 import { useAdapter, useYearProgress } from '../../../adapters/useGame';
 import type { LifeVM } from '../../../adapters/viewModels';
 import { useReducedMotion } from '../../../ui/motionPrefs';
-import { LifeBar } from './Scene';
+import { LifeBar } from './LifeBar';
 import { BigHourglassGlyph } from './lifeIcons';
 
 const AGE_READ_MS = 250;

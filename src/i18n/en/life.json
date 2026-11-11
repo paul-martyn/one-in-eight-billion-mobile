@@ -43,5 +43,6 @@
   "life.notice.jobLost": "Work came to an end this year.",
   "life.notice.focus": "Choose where this year goes, then carry on.",
   "life.notice.spend": "Done.",
-  "life.notice.noEnergy": "Not enough energy for a new life yet."
+  "life.notice.noEnergy": "Not enough energy for a new life yet.",
+  "life.focusFamily": "For now, your family decides how the year goes."
 }
