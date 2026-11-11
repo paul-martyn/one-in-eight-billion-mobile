@@ -151,7 +151,7 @@ export function FocusRow({ life, enabled }: { life: LifeVM; enabled: boolean }) 
     <section className="lt-focus" aria-label={t('activities.focus.title')}>
       <p className="lt-focus__title">{t('activities.focus.title')}</p>
       {opts.length ? (
-        <div className="lt-focus__row" role="group" aria-label={t('activities.focus.title')} data-many={opts.length > 5 || undefined}>
+        <div className="lt-focus__row" role="group" aria-label={t('activities.focus.title')} data-many={opts.length > 3 || undefined}>
           {opts.map(o => (
             <button key={o.k} type="button" className="lt-focus__btn" aria-pressed={life.focus.current === o.k} title={o.desc} disabled={!enabled} onClick={() => pick(o.k)}>
               <span>{o.name}</span>
