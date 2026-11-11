@@ -40,7 +40,7 @@ export function StartScreen({ nav, active }: ScreenProps) {
           className="st__cta"
           style={{ top: L.cta }}
           label={t('start.cta')}
-          onClick={born.request}
+          onClick={() => born.request()}
           disabled={!ready || busy || !born.canStart}
           aria-busy={busy || undefined}
           aria-describedby={extras.noEnergy ? waitId : undefined}

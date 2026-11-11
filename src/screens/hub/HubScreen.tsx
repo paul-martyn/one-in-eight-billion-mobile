@@ -4,6 +4,10 @@
 // облачко, счётчики от самой планеты, «Be Born!» 196 × 70 с ценой на уголке,
 // продолжение сохранённой жизни и нижнее меню Shop / World / Lives (вкладки-папки).
 // Экран нарисован в кадре 393 × H; места по высоте считает layHub.
+// Тап по стране на планете показывает её карточку; «!» на карточке приближает планету к стране,
+// и поверх открывается страница страны (HubCountry холста): та же сводка, что на рулетке,
+// «Назад» к планете и «Be born here» — жизнь в этой стране (1 энергия; в макете — за рекламу,
+// пока рекламы нет — без неё). Хаб на это время уходит в стороны.
 // «Be Born!»: при сохранённой жизни — подтверждение, затем команда startLife,
 // затем уход интерфейса (hubLeave), затем рулетка.
 // После прожитой жизни — окно наград «A life lived» и Claim (./Rewards.tsx), бейдж
@@ -18,14 +22,19 @@ import { SoftButton } from '../../ui/components';
 import { Frame, useFrame } from '../../ui/frame/Frame';
 import { CtaButton, CtaCost, Say, Since } from '../../ui/frame/parts';
 import { MetaBar, NoEnergyLine } from '../../ui/meta/Meta';
-import { usePlanetEvents } from '../../ui/planet/bus';
+import { planetBus, usePlanetEvents } from '../../ui/planet/bus';
+import { useBack } from '../../flow/useBack';
+import { gestureId } from '../../adapters/useGame';
+import type { Land } from '../roll/luck';
+import { Summary } from '../roll/Summary';
 import { useCountUpProgress } from '../../ui/meta/useMeta';
 import { useReducedMotion } from '../../ui/motionPrefs';
 import type { ScreenProps } from '../registry';
 import { NewLifeGuard, useBeBorn } from '../start/newLife';
 import { RewardFlights, RewardsPopup, useLifeReward } from './Rewards';
 import { fmtInt, useContinueLife } from '../start/shared';
-import { extrasOf, layHub } from '../layouts';
+import { extrasOf, layHub, layHubCountry } from '../layouts';
+import { capFirst } from '../start/shared';
 import './hub.css';
 
 type HubTab = 'shop' | 'world' | 'lives';
@@ -83,7 +92,10 @@ export function HubScreen({ nav, active }: ScreenProps) {
   const frame = useFrame();
   const livesRef = useRef<HTMLButtonElement | null>(null);
   // Команда уже применена; уход интерфейса только показывает начатую жизнь.
-  const onStarted = useCallback(() => {
+  const [bornIn, setBornIn] = useState<string | null>(null);
+  const onStarted = useCallback((iso?: string) => {
+    // Страна выбрана на планете: планета уже у неё, рулетка не нужна — дальше сразу рождение.
+    if (iso) { setBornIn(iso); return; }
     if (reduced) { nav.go({ id: 'roll' }); return; }
     setLeaving(true);
     leaveTimer.current = setTimeout(() => nav.go({ id: 'roll' }), L.navigateAfterMs);
@@ -106,6 +118,25 @@ export function HubScreen({ nav, active }: ScreenProps) {
     if (type === 'catch' && (payload === 'coin' || payload === 'gem')) setCaught(c => ({ ...c, [payload]: c[payload] + 1 }));
   }, active);
 
+  // Страница страны: планета сообщает страну, когда начинает приближаться, и «dive in / out» в конце.
+  const [country, setCountry] = useState<{ land: Land; shown: boolean } | null>(null);
+  usePlanetEvents((type, payload) => {
+    if (type === 'land') setCountry({ land: payload as Land, shown: false });
+    else if (type === 'dive' && payload === 'in') setCountry(c => (c ? { ...c, shown: true } : c));
+    else if (type === 'dive' && payload === 'out') setCountry(null);
+  }, active);
+  const away = !!country;
+  const toPlanet = () => { if (country && !bornIn) planetBus.emit('cmd', 'undive'); };
+  useBack(() => { if (!country) return false; toPlanet(); }, { layer: 'screen', enabled: active && !!country });
+  // «Be born here»: жизнь уже начата в этой стране; когда досчитаны четыре жизни той же секунды — свидетельство.
+  useEffect(() => {
+    if (!bornIn || !active || snap.lifePhase !== 'birth' || !snap.companionsReady) return;
+    if (adapter.revealCertificate(gestureId())) nav.go({ id: 'certificate', filled: false }, 'birth');
+  }, [bornIn, active, snap.lifePhase, snap.companionsReady, adapter, nav]);
+  const page = layHubCountry(frame, extras);
+  const countryName = country ? capFirst(country.land.short) : '';
+  const nameSize = Math.max(28, Math.min(52, Math.floor(330 / Math.max(1, [...countryName].length * 0.58))));
+
   // Появление: интерфейс скрыт первые 50 мс, затем «съезжается» к планете.
   useEffect(() => {
     if (shown) return;
@@ -126,7 +157,7 @@ export function HubScreen({ nav, active }: ScreenProps) {
   const tabId = (k: HubTab) => `${uid}-tab-${k}`;
 
   return (
-    <main className="pscreen over-planet hub" style={ROOT_VARS} data-shown={(shown && !leaving) || undefined} data-leaving={leaving || undefined}>
+    <main className="pscreen over-planet hub" style={ROOT_VARS} data-shown={(shown && !leaving && !away) || undefined} data-leaving={leaving || undefined} data-country={away ? (country!.shown ? 'shown' : 'in') : undefined}>
       <Frame ref={rootRef}>
         <header className="hub__top" style={{ top: lay.bar }} inert={inert}>
           <button type="button" className="hub__gear" onClick={onSettings} disabled={leaving} aria-label={t('hub.settingsOpen')}>
@@ -137,13 +168,13 @@ export function HubScreen({ nav, active }: ScreenProps) {
 
         {tab === 'world' && (
           <section key="world" className="hub__world" role="tabpanel" id={panelId('world')} aria-labelledby={tabId('world')} inert={inert}>
-            {lay.say != null && <Say className="hub__mid" style={{ top: lay.say }} line={t('start.bubble1')} accent={t('start.bubble2')} />}
+            {lay.say != null && <Say className="hub__mid" style={{ top: lay.say }} line={t('start.bubble1')} accent={t('hub.bubble2')} />}
             <Since className="hub__mid" style={{ top: lay.since }} />
             <div className="hub__cta" style={{ top: lay.cta }}>
               <CtaButton
                 label={t('hub.bornNew')}
                 cost={born.cost != null ? <CtaCost n={born.cost} label={t('hub.meta.cost', { n: born.cost })} /> : undefined}
-                onClick={reward.pending ? reward.openNow : born.request}
+                onClick={reward.pending ? reward.openNow : () => born.request()}
                 disabled={!ready || busy || leaving || !born.canStart}
                 aria-busy={busy || undefined}
                 aria-describedby={extras.noEnergy ? waitId : undefined}
@@ -179,6 +210,33 @@ export function HubScreen({ nav, active }: ScreenProps) {
             </div>
           </section>
         )}
+
+        {/* Страница страны: подпись и название сверху, сводка и кнопки внизу — как на рулетке */}
+        <div className="hub-country" aria-hidden={!away || undefined} inert={!away || undefined}>
+          <p className="hub-country__label" style={{ top: page.label }}>{t('hub.country.label')}</p>
+          <p className="hub-country__name" aria-hidden="true" style={{ top: page.name, fontSize: nameSize, WebkitTextStroke: `${((nameSize / 52) * 5).toFixed(1)}px #5a3418`, textShadow: `0 ${((nameSize / 52) * 4).toFixed(1)}px 0 #5a3418` }}>{countryName}</p>
+          <p className="sr-only" role="status">{country?.shown ? t('hub.country.status', { country: country.land.name }) : ''}</p>
+          <Summary land={country?.land ?? null} shown={!!country?.shown} fast style={{ bottom: page.summaryBottom }} />
+          <button type="button" className="side-btn hub-country__back" style={{ top: page.cta + 3 }} onClick={toPlanet} disabled={!!bornIn || busy} aria-label={t('hub.country.back')}>
+            <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14.5 5.5L8 12l6.5 6.5" fill="none" stroke="#5a3418" strokeWidth="5.2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M14.5 5.5L8 12l6.5 6.5" fill="none" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <CtaButton
+            className="hub-country__born"
+            style={{ top: page.cta }}
+            label={t('hub.country.born')}
+            aria-label={t('hub.country.bornLabel', { n: born.cost ?? 1 })}
+            onClick={() => { if (country) born.request(country.land.iso); }}
+            disabled={!ready || busy || !!bornIn || !born.canStart || !country?.land.iso}
+            aria-busy={busy || !!bornIn || undefined}
+            cost={<span className="side-btn__ad hub-country__ad" aria-hidden="true"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M2 1l7 4-7 4Z" fill="#2f5a17" /></svg>{t('roll.ad')}</span>}
+          />
+          <p className="hub-country__wait" role="status" style={{ top: page.cta + 76 }}>
+            {bornIn ? t('roll.waitComps') : away && !born.canStart ? t('hub.meta.noEnergy') : ''}
+          </p>
+        </div>
 
         <nav className="hub__nav" style={{ height: 124 + frame.bottom }} aria-label={t('hub.menu')} inert={inert}>
           <div className="hub__tabs" style={{ bottom: 42 + frame.bottom }} role="tablist" aria-label={t('hub.menu')}>

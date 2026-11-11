@@ -38,5 +38,11 @@
   "hub.guard.kept": "That life can’t be continued afterwards. It will be kept on this device among your unlived lives.",
   "hub.guard.keep": "Keep living",
   "hub.guard.new": "Be born anew",
-  "hub.guard.close": "Close"
+  "hub.guard.close": "Close",
+  "hub.bubble2": "Tap a country to be born there!",
+  "hub.country.label": "Be born in",
+  "hub.country.born": "Be born here",
+  "hub.country.bornLabel": "Be born here, for an ad (costs {n} energy)",
+  "hub.country.back": "Back to the planet",
+  "hub.country.status": "{country}. Be born here, or go back to the planet."
 }

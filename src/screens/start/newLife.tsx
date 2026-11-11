@@ -4,7 +4,7 @@
 // «Keep living» продолжает её, «Be born anew» — startLife, и startNewLife
 // оригинала переносит сохранённую жизнь в непрожитые (199757-199760).
 // Команды вызываются только из обработчиков нажатий.
-import { useCallback, useId, useState } from 'react';
+import { useCallback, useId, useRef, useState } from 'react';
 import { useAdapter, useSnapshot } from '../../adapters/useGame';
 import type { ResumeVM } from '../../adapters/viewModels';
 import type { Nav } from '../../flow/FlowHost';
@@ -19,7 +19,7 @@ import './newLife.css';
  * Новая жизнь с ценой и подтверждением. onStarted вызывается после
  * применённой команды startLife (навигация/анимация ухода — у экрана).
  */
-export function useBeBorn(nav: Nav, active: boolean, onStarted: () => void) {
+export function useBeBorn(nav: Nav, active: boolean, onStarted: (iso?: string) => void) {
   const adapter = useAdapter();
   const snap = useSnapshot();
   const meta = snap.meta;
@@ -29,13 +29,17 @@ export function useBeBorn(nav: Nav, active: boolean, onStarted: () => void) {
   const closeGuard = useCallback(() => setGuardOpen(false), []);
   useMetaRefresh(meta?.nextRefillAt);
 
+  // Страна, выбранная на планете хаба («Be born here»); без неё страну выбирает движок.
+  const wanted = useRef<string | undefined>(undefined);
   const begin = useCallback(async () => {
-    if (await start()) onStarted();
+    const iso = wanted.current;
+    if (await start(iso)) onStarted(iso);
   }, [start, onStarted]);
 
-  /** Нажатие «Be Born!». */
-  const request = useCallback(() => {
+  /** Нажатие «Be Born!» (iso — «Be born here»: родиться в выбранной стране). */
+  const request = useCallback((iso?: string) => {
     if (!active || busy) return;
+    wanted.current = typeof iso === 'string' ? iso : undefined;
     const s = adapter.getSnapshot();
     if (s.status !== 'ready' || !s.meta?.canStartLife) return;
     if (s.resume) { setGuardOpen(true); return; }

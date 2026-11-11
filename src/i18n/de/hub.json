@@ -38,5 +38,11 @@
   "hub.guard.kept": "Du kannst es danach nicht fortsetzen. Es bleibt auf diesem Gerät unter deinen ungelebten Leben gespeichert.",
   "hub.guard.keep": "Weiterleben",
   "hub.guard.new": "Neu geboren werden",
-  "hub.guard.close": "Schließen"
+  "hub.guard.close": "Schließen",
+  "hub.bubble2": "Tippe ein Land an, um dort geboren zu werden!",
+  "hub.country.label": "Geburtsland",
+  "hub.country.born": "Hier geboren werden",
+  "hub.country.bornLabel": "Hier geboren werden – für Werbung (kostet {n} Energie)",
+  "hub.country.back": "Zurück zum Planeten",
+  "hub.country.status": "{country}. Werde hier geboren oder geh zurück zum Planeten."
 }

@@ -92,14 +92,14 @@ export function useStartNewLife() {
   const [busy, setBusy] = useState(false);
   const mounted = useRef(true);
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
-  const start = useCallback(async (): Promise<boolean> => {
+  const start = useCallback(async (iso?: string): Promise<boolean> => {
     if (busyRef.current) return false;
     const snap = adapter.getSnapshot();
     if (snap.status !== 'ready') return false;
     busyRef.current = true;
     setBusy(true);
     // id создаётся синхронно, внутри обработчика нажатия.
-    const ok = await adapter.startLife(gestureId(), snap.lifeSeq);
+    const ok = await adapter.startLife(gestureId(), snap.lifeSeq, iso ? { iso } : {});
     // Жизнь за энергию: снова три бесплатных переброса.
     if (ok) resetRerolls();
     if (!ok) {

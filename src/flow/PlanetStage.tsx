@@ -8,7 +8,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useAdapter, useSnapshot } from '../adapters/useGame';
 import { t, useLocale } from '../i18n';
 import { rollVM } from '../adapters/vm/roll';
-import { extrasOf, hasPlanet, layHub, layRoll, planetPlace } from '../screens/layouts';
+import { extrasOf, hasPlanet, layHub, layHubCountry, layRoll, planetPlace } from '../screens/layouts';
 import { capFirst } from '../screens/start/shared';
 import { Frame, useFrame } from '../ui/frame/Frame';
 import { Planet } from '../ui/planet/Planet';
@@ -43,6 +43,8 @@ export function PlanetStage({ flow, kind }: { flow: FlowState; kind: TransitionK
   // Место рождения текущей жизни — для броска планеты (читается раз на жизнь).
   const onRoll = at === 'roll';
   const roll = layRoll(frame);
+  const onHub = at === 'hub';
+  const country = layHubCountry(frame, extras);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const birth = useMemo(() => (onRoll && snap.status === 'ready' && snap.lifePhase === 'birth' ? adapter.view(rollVM) : null), [adapter, onRoll, snap.status, snap.lifePhase, snap.lifeSeq]);
 
@@ -80,8 +82,8 @@ export function PlanetStage({ flow, kind }: { flow: FlowState; kind: TransitionK
           events={at === 'language' ? 'dots' : 'icons'}
           fate={birth ? `${birth.iso},${birth.urban ? birth.place : ''}` : ''}
           pinLabel={birth ? capFirst(birth.place) : ''}
-          diveY={onRoll ? roll.diveY : 0}
-          diveR={onRoll ? roll.diveR : 150}
+          diveY={onRoll ? roll.diveY : onHub ? country.diveY : 0}
+          diveR={onRoll ? roll.diveR : onHub ? country.diveR : 150}
           page="host"
           coinAt={`188,${hubBar + 21}`}
           gemAt={`301,${hubBar + 21}`}
@@ -89,7 +91,7 @@ export function PlanetStage({ flow, kind }: { flow: FlowState; kind: TransitionK
           names={names}
           pixelScale={frame.k}
           asleep={!shown}
-          canOpen={false}
+          canOpen={onHub}
           labels={{ planet: t(at === 'roll' ? 'roll.planet' : at === 'hub' ? 'planet.hub' : 'planet.free'), perDay: t('planet.perDay'), open: t('planet.open') }}
         />
       </Frame>
