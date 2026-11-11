@@ -275,3 +275,30 @@ test('Skip to the end, награда за жизнь и Claim (мета-сло�
   assert.equal(stateHash(b['host'].top.S), stateHash(a['host'].top.S), 'skip воспроизводится журналом');
   console.log(`skipToEnd: ${ms} ms, age ${snap.ended.age}`);
 });
+
+test('переброс рождения: новая жизнь без энергии; страну можно задать', async () => {
+  const a = await adapterWith(null, 'adapter-reroll');
+  assert.equal(await a.rerollLife(id(), 0), false, 'перебрасывать нечего: рождения ещё нет');
+  assert.equal(await a.startLife(id(), 0), true);
+  await waitFor(() => a.getSnapshot().companionsReady, 'сопутствующие жизни готовы');
+  const energy = a.getSnapshot().meta.energy;
+  const first = a.view(rollVM).iso;
+  // Переброс: другая жизнь, энергия та же, lifeSeq вырос.
+  assert.equal(await a.rerollLife(id(), a.getSnapshot().lifeSeq), true);
+  await waitFor(() => a.getSnapshot().companionsReady, 'сопутствующие жизни после переброса');
+  assert.equal(a.getSnapshot().meta.energy, energy, 'переброс не тратит энергию');
+  assert.equal(a.getSnapshot().lifeSeq, 2);
+  assert.equal(a.getSnapshot().lifePhase, 'birth');
+  // Переброс ребёнка в той же стране (свидетельство) и рождение в выбранной стране (хаб).
+  const here = a.view(rollVM).iso;
+  assert.equal(await a.rerollLife(id(), a.getSnapshot().lifeSeq, here), true);
+  assert.equal(a.view(rollVM).iso, here, 'страна сохранена');
+  await waitFor(() => a.getSnapshot().companionsReady, 'сопутствующие жизни после второго переброса');
+  const other = here === 'JPN' ? 'BRA' : 'JPN';
+  assert.equal(await a.startLife(id(), a.getSnapshot().lifeSeq, { iso: other }), true);
+  assert.equal(a.view(rollVM).iso, other, 'родились в выбранной стране');
+  assert.equal(a.getSnapshot().meta.energy, energy - 1, 'рождение в выбранной стране стоит энергии');
+  assert.ok(typeof first === 'string' && first.length === 3);
+  const replay = a.exportReplay();
+  assert.deepEqual(replay.commands[0].args, [other], 'страна записана в журнал команд');
+});

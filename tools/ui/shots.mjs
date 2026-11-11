@@ -146,11 +146,13 @@ async function runFlow(browser, url, lang, [width, height]) {
     await button('lang.go').click();
     await waitScreen('start'); await page.waitForTimeout(1200); await shot('start');
     await button('start.cta').click();
-    await waitScreen('roll');
-    const who = button('roll.cta');
-    await who.waitFor({ timeout: 30000 });
+    await waitScreen('roll'); await page.waitForTimeout(1600); await shot('roll-spin');
+    // Бросок: Spin!, планета садится на страну рождения, поднимается сводка и Meet me!.
+    await button('roll.spinLabel').click();
+    const who = button('roll.meet');
+    await page.waitForFunction(() => document.querySelector('.rl')?.getAttribute('data-phase') === 'revealed', null, { timeout: 30000 });
     for (let i = 0; i < 60 && !(await who.isEnabled()); i++) await page.waitForTimeout(250);
-    await page.waitForTimeout(1500); await shot('roll');
+    await page.waitForTimeout(2200); await shot('roll');
     await who.click();
     await waitScreen('certificate'); await page.waitForTimeout(1500);
     const skip = button('cert.skip');

@@ -1,69 +1,61 @@
-/* «2 · Birth roll» (RollCute.dc.html). Макет 393 × 852: подпись, название
-   страны 52 px, планета 290, область подсказки/результата 130, кнопка 230 × 64.
-   По высоте 568–932 сжимаются отступы (cqh), планета занимает оставшееся место. */
-.rl { color: var(--color-ink); }
-.rl[data-instant] *, .rl[data-instant] *::before, .rl[data-instant] *::after { transition-duration: 0s !important; transition-delay: 0s !important; animation: none !important; }
-.rl--wait { display: grid; place-items: center; padding: 24px; }
-.rl__waiting { margin: 0; font-size: var(--font-size-lead); font-weight: 600; color: var(--color-muted); }
-.rl__glow { top: calc(var(--safe-top) + clamp(40px, 14cqh, 120px)); }
+/* «2 · Birth roll» (RollCute холста) в кадре 393 × H: подпись, название страны, место
+   планеты 368 с орбитой-подсказкой, сводка о стране (summary.css), Spin! / Meet me! 196 × 70
+   и зелёная кнопка переброса 64 × 64. Места по высоте считает layRoll. */
+.rl { text-align: center; }
 
-.rl__col {
-  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; text-align: center;
-  padding: calc(var(--safe-top) + clamp(14px, calc(14px + (100cqh - 568px) * 0.155), 58px)) 24px calc(var(--safe-bottom) + clamp(16px, calc(16px + (100cqh - 568px) * 0.296), 100px));
+.rl-label {
+  position: absolute; left: 0; right: 0; margin: 0; font-size: 17px; font-weight: 700; line-height: 30px; color: var(--color-muted);
+  transform: scale(0.94); transition: transform 0.4s var(--ease-pop), color 0.3s ease, font-size 0.3s ease;
 }
-.rl__corner { position: absolute; z-index: 3; top: calc(var(--safe-top) + clamp(8px, calc(8px + (100cqh - 568px) * 0.148), 50px)); right: 12px; display: flex; }
-.round-btn.rl__replay { width: 44px; height: 44px; animation: rl-fade var(--rl-reveal-ms) ease both; }
-@keyframes rl-fade { from { opacity: 0; } }
+.rl-label[data-on] { font-size: 20px; color: var(--color-accent-orange); transform: none; }
+.rl-name {
+  position: absolute; left: 0; right: 0; margin: 0; font-weight: 700; line-height: 60px; white-space: nowrap;
+  color: var(--color-white); paint-order: stroke fill;
+  opacity: 0.6; transform: scale(0.92); transition: opacity 0.25s ease, transform 0.35s ease;
+}
+.rl-name[data-on] { opacity: 1; transform: none; }
 
-/* «Where will you be born?» → «You are born in» */
-.rl__label {
-  position: relative; flex: none; margin: 0; max-width: calc(100% - 72px); min-height: 30px;
-  font-size: var(--font-size-lead); font-weight: 700; line-height: 32px; color: var(--color-muted);
-  transform: scale(var(--rl-label-from)); transition: transform var(--rl-label-ms) var(--rl-label-ease), color 0.3s ease;
-}
-.rl__label[data-on] { font-size: var(--font-size-title); color: var(--color-accent-orange); transform: none; }
+/* Орбита с надписью и палец-подсказка: уходят, как только бросок начался */
+.rl-orbit { position: absolute; left: 0; top: 0; width: 393px; height: 852px; transform-origin: 0 0; pointer-events: none; opacity: 0; transition: opacity 0.3s ease; }
+.rl-orbit[data-on] { opacity: 1; }
+.rl-orbit > svg { position: absolute; left: 0; top: 0; overflow: visible; }
+.rl-txt { font-family: var(--font-display); }
+.rl-hand-box { position: absolute; left: 0; top: 0; width: 40px; height: 40px; opacity: 0; transition: opacity 0.3s ease; }
+.rl-hand-box[data-on] { opacity: 1; }
+.rl-hand { position: absolute; left: 0; top: 0; width: 40px; height: 40px; opacity: 0; transform-origin: 18px 5.6px; will-change: transform; }
+.rl-hand svg { display: block; overflow: visible; filter: drop-shadow(0 3px 3px rgba(90, 52, 24, 0.28)); }
 
-/* Название страны: одна строка, у длинных названий — две, кегль подгоняется под ширину */
-.rl__name {
-  --name-h: clamp(44px, 7.04cqh, 60px);
-  position: relative; flex: none; display: grid; place-items: center; width: 100%; height: var(--name-h); margin: clamp(2px, 1.2cqh, 10px) 0 0;
-  font-weight: 700; white-space: nowrap; line-height: 1.12;
-  font-size: max(16px, min(52px, calc(var(--name-h) / 1.15), calc((100cqw - 48px) / (var(--len) * 0.6))));
-  opacity: 0.6; transform: scale(0.9); transition: opacity 0.35s ease, transform 0.35s ease;
+/* Кнопки: Spin! до броска, Meet me! и переброс — когда планета села */
+.rl-cta { position: absolute; left: 98.5px; }
+.rl-spin { transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0s; }
+.rl:not([data-phase='idle']) .rl-spin { opacity: 0; visibility: hidden; transform: scale(0.9); transition-delay: 0s, 0s, 0.3s; }
+.rl-meet, .rl-again {
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease, visibility 0s linear 0.6s;
 }
-.rl__name[data-lines='2'] { white-space: normal; text-wrap: balance; line-height: 1.02; font-size: max(14px, min(calc(var(--name-h) / 2.15), calc((100cqw - 48px) / (var(--len) * 0.6)))); }
-.rl__name[data-on] { opacity: 1; transform: none; }
+.rl[data-fast] .rl-meet, .rl[data-fast] .rl-again { transition-duration: 0.25s, 0.25s, 0s; }
+.rl[data-phase='revealed'] .rl-meet { opacity: 1; visibility: visible; transform: none; transition-delay: 0.15s, 0.15s, 0s; }
+.rl[data-phase='revealed'] .rl-again { opacity: 1; visibility: visible; transform: none; transition-delay: 0.25s, 0.25s, 0s; }
+.rl[data-phase='revealed'][data-fast] .rl-meet { transition-delay: 0.05s, 0.05s, 0s; }
+.rl[data-phase='revealed'][data-fast] .rl-again { transition-delay: 0.1s, 0.1s, 0s; }
+.rl[data-phase='revealed'] .rl-meet:active:not(:disabled) { transform: translateY(2px) scale(0.97); transition: transform 140ms var(--ease-screen); }
 
-.rl__globe {
-  position: relative; flex: 1 1 0; width: 100%; min-height: 96px; max-height: 290px; margin-top: clamp(2px, 0.5cqh, 4px);
-  display: flex; align-items: center; justify-content: center;
+.rl-again {
+  position: absolute; left: 310.5px; width: 64px; height: 64px; padding: 0; display: flex; align-items: center; justify-content: center;
+  border: 2px solid #2f5a17; border-radius: 20px; background: var(--color-cta-green);
+  box-shadow: inset 0 -5px 0 rgba(30, 70, 10, 0.25), inset 0 4px 0 rgba(255, 255, 255, 0.45);
 }
-
-/* Подсказка и результат занимают одно место */
-.rl__info { position: relative; flex: none; width: 100%; height: clamp(104px, 15.3cqh, 130px); margin-top: clamp(6px, 1.6cqh, 14px); }
-.rl__hint {
-  position: absolute; left: 0; right: 0; top: 10px; margin: 0; font-size: clamp(15px, 2cqh, 17px); font-weight: 600; line-height: 1.4; color: var(--color-muted);
-  transition: opacity var(--duration-medium) ease;
+.rl[data-phase='revealed'] .rl-again:active:not(:disabled) { transform: translateY(2px) scale(0.96); transition: transform 140ms var(--ease-screen); }
+.rl-again:disabled { filter: grayscale(0.5) opacity(0.7); }
+.rl-again svg { display: block; overflow: visible; }
+.rl-again__n {
+  position: absolute; right: -10px; top: -10px; min-width: 26px; height: 26px; padding: 0 6px; display: flex; align-items: center; justify-content: center;
+  border: 2px solid #2f5a17; border-radius: 13px; background: var(--color-white); box-shadow: 0 2px 0 rgba(30, 70, 10, 0.25);
+  font-size: 14px; font-weight: 700; line-height: 1; color: #2f5a17; font-variant-numeric: tabular-nums;
 }
-.rl[data-stage='landed'] .rl__hint, .rl[data-stage='revealed'] .rl__hint { opacity: 0; }
-.rl__reveal {
-  position: absolute; left: 0; right: 0; top: 0; display: flex; flex-direction: column; align-items: center;
-  opacity: 0; visibility: hidden; transform: translateY(var(--rl-reveal-y));
-  transition: opacity var(--rl-reveal-ms) ease, transform var(--rl-reveal-ms) ease, visibility 0s linear var(--rl-reveal-ms);
+.rl-again__ad {
+  position: absolute; right: -11px; top: -11px; display: inline-flex; align-items: center; gap: 2px; height: 22px; padding: 0 6px 0 5px;
+  border: 2px solid #2f5a17; border-radius: 8px; background: var(--color-white); box-shadow: 0 2px 0 rgba(30, 70, 10, 0.25);
+  font-size: 11.5px; font-weight: 700; line-height: 1; color: #2f5a17;
 }
-.rl[data-stage='revealed'] .rl__reveal { opacity: 1; visibility: visible; transform: none; transition: opacity var(--rl-reveal-ms) ease, transform var(--rl-reveal-ms) ease, visibility 0s; }
-.rl__chip {
-  position: relative; display: inline-flex; align-items: center; max-width: calc(100% - 16px); min-height: 32px; padding: 3px 14px 3px 28px;
-  border: 2px solid var(--color-line); border-radius: 8px; background: var(--color-paper); font-size: var(--font-size-body); font-weight: 600; line-height: 1.2; color: var(--color-ink);
-}
-.rl__chip-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.rl__pin { position: absolute; left: -9px; top: -3px; }
-.rl__bubble { margin-top: clamp(8px, 1.6cqh, 14px); padding: 9px 18px 10px; font-size: clamp(14px, 2.1cqh, 19px); }
-
-/* Кнопка «Who am I?» и строка ожидания четырёх жизней */
-.rl__cta { flex: none; margin-top: auto; padding-top: clamp(6px, 1.2cqh, 10px); width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.rl__comps { margin: 0; min-height: 18px; font-size: var(--font-size-small); font-weight: 600; line-height: var(--line-height-body); color: var(--color-muted); }
-.rl__slot { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 64px; }
-.rl__skip { opacity: 0.85; }
-.rl__who { max-width: 100%; animation: rl-cta-in var(--rl-reveal-ms) ease var(--rl-cta-delay) both; }
-@keyframes rl-cta-in { from { opacity: 0; transform: translateY(var(--rl-reveal-y)); } }
+.rl-wait { position: absolute; left: 24px; right: 24px; margin: 0; font-size: 12px; font-weight: 600; line-height: 15px; color: var(--color-muted); }

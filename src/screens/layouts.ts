@@ -158,13 +158,49 @@ export function layLanguage(f: FrameBox, extras: Extras = {}) {
   };
 }
 
+/**
+ * «2 · Birth roll»: подпись и название страны, планета 368 по центру, под ней — сводка о стране
+ * и кнопки (RollCute). k — во сколько раз планета меньше макетной: на столько же меньше орбита с
+ * подсказкой и подъём страны после остановки (diveY).
+ */
+export function layRoll(f: FrameBox) {
+  const p = stack(f.H, [
+    { size: 46, min: Math.max(10, f.top + 6), max: 70, tier: 0 },
+    { size: 30 },
+    { size: 6 },
+    { size: 60 },
+    { size: 60, min: 14, max: 80, tier: 0 },
+    { size: 368, min: 280, tier: 2 },
+    { size: 128, min: 96, max: 150, tier: 1 },
+    { size: 70 },
+    { size: 84, min: 18 + f.bottom, max: Infinity, tier: 0 },
+  ]);
+  const size = round(p.size[5]!), k = size / 368, cta = round(p.at[7]!), cy = round(p.at[5]! + p.size[5]! / 2);
+  // После остановки страна стоит между названием и сводкой (в макете — от 142 до 550, середина на 290).
+  const zoneTop = p.at[3]! + 60, zone = cta - 148 - zoneTop;
+  return {
+    label: round(p.at[1]!),
+    name: round(p.at[3]!),
+    planet: { cx: CX, cy, size } as Place,
+    k,
+    /** Насколько вид поднимается над серединой планеты, когда она приближена к стране. */
+    diveY: Math.round(zoneTop + zone * (148 / 408) - cy),
+    /** Радиус, в который вписывается страна вблизи (150 в макете). */
+    diveR: Math.round(150 * Math.min(1, zone / 408)),
+    cta,
+    /** Сводка стоит над кнопками: её низ — в 44 над ними. */
+    summaryBottom: round(f.H - (cta - 44)),
+  };
+}
+
 /** Экраны, под которыми живёт общая планета. */
-export const PLANET_SCREENS: ReadonlySet<ScreenId> = new Set<ScreenId>(['language', 'start', 'hub']);
+export const PLANET_SCREENS: ReadonlySet<ScreenId> = new Set<ScreenId>(['language', 'start', 'roll', 'hub']);
 export const hasPlanet = (id: ScreenId) => PLANET_SCREENS.has(id);
 
 /** Место планеты под экраном. */
 export function planetPlace(id: ScreenId, f: FrameBox, extras: Extras): Place {
   if (id === 'language') return layLanguage(f, extras).planet;
   if (id === 'hub') return layHub(f, extras).planet;
+  if (id === 'roll') return layRoll(f).planet;
   return layStart(f, extras).planet;
 }

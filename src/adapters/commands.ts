@@ -19,6 +19,11 @@ export type StartOptions = {
   companionRng: () => number;
   /** Вызывается, когда сопутствующие жизни досчитаны. */
   onCompanions: () => void;
+  /**
+   * Страна рождения задана заранее (код из COUNTRIES): «Be born here» в хабе и переброс
+   * ребёнка на свидетельстве. Оригинал умеет это сам: третий аргумент newLife.
+   */
+  iso?: string;
 };
 
 /** Нужен ли era.js до старта жизни при текущих настройках (startNewLife 199725-199749 ждёт его через eraWait). */
@@ -51,7 +56,7 @@ export function startLife(T: Top, opts: StartOptions): void {
   T.lsSet(T.PREF_KEY, T.UI.prefs);
   T.lsSet(T.ROLL_KEY, T.lsGet(T.ROLL_KEY, 0) + 1);
   const n = new Date(opts.now);
-  T.newLife(T.UI.prefs.mode, T.UI.prefs.pace, null, e ? { era: t, by: e } : null);
+  T.newLife(T.UI.prefs.mode, T.UI.prefs.pace, opts.iso && T.CBY[opts.iso] ? opts.iso : null, e ? { era: t, by: e } : null);
   const S = T.S;
   S.home = T.UI.prefs.home || null;
   S.journal = [];

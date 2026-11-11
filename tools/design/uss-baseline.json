@@ -162,14 +162,16 @@
     "sibling combinator": 1
   },
   "src/screens/roll/roll.css": {
-    "grid": 4,
-    "pseudo-element": 2,
-    "keyframes": 5,
-    "calc / clamp / min / max": 30,
-    "vh / vw / cq / em / rem": 15,
-    "z-index": 1,
-    "attribute selector": 9,
-    "!important": 3
+    "box-shadow": 3,
+    "attribute selector": 15,
+    "structural pseudo-class": 3,
+    "filter / backdrop-filter": 2
+  },
+  "src/screens/roll/summary.css": {
+    "box-shadow": 2,
+    "gradient": 1,
+    "calc / clamp / min / max": 1,
+    "attribute selector": 5
   },
   "src/screens/settings/settings.css": {
     "grid": 10,

@@ -42,7 +42,7 @@ export async function replayLife(replay) {
     let ok;
     switch (c.cmd) {
       case 'startLife':
-        ok = await a.startLife(id(), a.getSnapshot().lifeSeq);
+        ok = await a.startLife(id(), a.getSnapshot().lifeSeq, c.args[0] ? { iso: c.args[0] } : {});
         for (let i = 0; i < 100000 && !a.getSnapshot().companionsReady; i++) await new Promise(r => setTimeout(r, 0));
         break;
       case 'revealCertificate': ok = a.revealCertificate(id()); break;

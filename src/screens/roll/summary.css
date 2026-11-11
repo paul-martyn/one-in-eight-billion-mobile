@@ -1,0 +1,68 @@
+/* Сводка о стране (RollCute холста) в единицах кадра 393: светлая панель в 20 от краёв,
+   четыре силуэта по 50 и клевер справа; пояснение — пузырь над панелью со стрелкой к
+   выбранному силуэту. Появление: панель поднимается на 10 за 0,6 с (после ускоренного
+   броска — 0,25 с), силуэты заполняются по очереди. */
+.sum {
+  position: absolute; left: 20px; right: 20px; padding: 8px 10px 9px; text-align: left;
+  border: 1.5px solid #cfae84; border-radius: 18px; background: var(--color-card); box-shadow: 0 3px 10px rgba(90, 52, 24, 0.12);
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease, visibility 0s linear 0.6s;
+}
+.sum[data-fast] { transition-duration: 0.25s, 0.25s, 0s; transition-delay: 0s, 0s, 0.25s; }
+.sum[data-shown] { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.sum-plain { margin: 2px 0; font-size: 14px; font-weight: 600; text-align: center; color: var(--color-ink-dark); }
+
+/* Тап мимо закрывает пояснение */
+.sum-veil { position: absolute; left: 0; top: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; background: transparent; }
+
+.sum-row { display: flex; align-items: stretch; }
+.sum-scales { flex: none; display: flex; gap: 5px; }
+.sum-item {
+  display: flex; flex-direction: column; align-items: center; width: 50px; min-width: 0; margin: 0; padding: 6px 0 5px;
+  border: 0; background: transparent; color: inherit; text-align: center; transition: opacity 0.12s ease;
+}
+.sum-item:active { opacity: 0.85; }
+.sum-item--luck { flex: 1 1 auto; width: auto; }
+.sum-rule { flex: none; display: block; width: 0; margin: 6px 9px; border-left: 2px dashed #e6d0a8; }
+.sum-shape { display: block; flex: none; overflow: visible; }
+
+.sum-icon { position: relative; display: block; flex: none; width: 40px; height: 40px; }
+.sum-icon--luck { width: 44px; height: 44px; }
+/* Свет позади выбранного силуэта */
+.sum-glow {
+  position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 247, 222, 0.75) 36%, rgba(255, 247, 222, 0) 70%);
+  opacity: 0; transform: scale(0.6); transition: opacity 0.25s ease, transform 0.35s ease;
+}
+.sum-icon--luck .sum-glow { width: 70px; height: 70px; margin: -35px 0 0 -35px; }
+.sum-item[data-on] .sum-glow { opacity: 1; transform: none; }
+.sum-grow { position: absolute; left: 0; top: 0; width: 100%; height: 100%; transform-origin: 50% 70%; transition: transform 0.32s cubic-bezier(0.3, 1.6, 0.5, 1); }
+.sum-item[data-on] .sum-grow { transform: scale(1.16); }
+/* Заливка: тот же силуэт «полного» цвета, обрезанный по высоте */
+.sum-fill { position: absolute; left: 0; right: 0; bottom: 0; overflow: hidden; }
+.sum-fill__in { position: absolute; left: 0; bottom: 0; }
+
+.sum-value { display: flex; align-items: center; justify-content: center; gap: 2px; height: 16px; margin-top: 7px; }
+.sum-value b { font-weight: 700; line-height: 16px; color: var(--color-ink-dark); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.sum-value svg { display: block; flex: none; }
+.sum-name { font-weight: 600; line-height: 11.5px; color: var(--color-muted); white-space: nowrap; }
+.sum-luck { display: flex; align-items: baseline; justify-content: center; margin-top: 4px; }
+.sum-luck b { font-size: 15px; font-weight: 700; line-height: 16px; font-variant-numeric: tabular-nums; }
+.sum-luck span { font-size: 10px; font-weight: 700; color: var(--color-muted); }
+/* Длинное слово оценки («Очень трудный старт») переносится на вторую строку, а не мельчает. */
+.sum-verdict { display: block; max-width: 96px; font-size: 10px; font-weight: 700; line-height: 12px; text-wrap: balance; }
+
+/* Пояснение */
+.sum-tip {
+  position: absolute; left: 0; right: 0; bottom: calc(100% + 15px); padding: 10px 12px 11px; text-align: left; cursor: pointer;
+  border: 2px solid var(--color-line); border-radius: 16px; background: var(--color-paper); box-shadow: 0 6px 18px rgba(90, 52, 24, 0.22);
+  opacity: 0; visibility: hidden; transform: scale(0.9);
+  transition: opacity 0.16s ease, transform 0.24s cubic-bezier(0.3, 1.4, 0.5, 1), visibility 0s linear 0.16s;
+}
+.sum-tip[data-open] { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.sum-tip__head { display: flex; align-items: center; gap: 6px; }
+.sum-tip__title { font-size: 15px; font-weight: 700; line-height: 18px; color: var(--color-ink-dark); white-space: nowrap; }
+.sum-tip__value { margin-left: auto; font-size: 14px; font-weight: 700; line-height: 18px; color: var(--color-accent-orange); text-align: right; }
+.sum-tip__body { margin: 5px 0 0; font-size: 12.5px; font-weight: 500; line-height: 16px; color: #6b4a2e; }
+.sum-tip__more { margin: 4px 0 0; font-size: 12.5px; font-weight: 700; line-height: 16px; color: var(--color-ink-dark); }
+.sum-tip__arrow { position: absolute; top: 100%; margin-left: -13px; display: block; overflow: visible; }
