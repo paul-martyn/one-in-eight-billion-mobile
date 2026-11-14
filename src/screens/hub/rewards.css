@@ -73,9 +73,6 @@
 .hub-tab__badge[data-new] { animation: hrw-pop 0.45s ease-out; }
 
 /* Reduced motion: окно сразу в конечном виде (без задержек строк и медальона). */
-@media (prefers-reduced-motion: reduce) {
-  .hub-reward, .hub-reward * { animation: none !important; }
-}
 :root[data-motion='reduced'] .hub-reward, :root[data-motion='reduced'] .hub-reward * { animation: none !important; }
 
 @keyframes hrw-dim { from { opacity: 0; } to { opacity: 1; } }

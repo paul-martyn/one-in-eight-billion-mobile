@@ -1,13 +1,13 @@
 {
   "src/app/styles.css": {
     "grid": 2,
-    "pseudo-element": 4,
+    "pseudo-element": 2,
     "box-shadow": 1,
     "calc / clamp / min / max": 4,
     "vh / vw / cq / em / rem": 6,
     "attribute selector": 4,
-    "!important": 9,
-    "@media / @container / @supports": 2
+    "!important": 5,
+    "@media / @container / @supports": 1
   },
   "src/screens/birthOdds/birthOdds.css": {
     "grid": 2,
@@ -51,14 +51,13 @@
   },
   "src/screens/hub/rewards.css": {
     "grid": 4,
-    "keyframes": 12,
+    "keyframes": 11,
     "box-shadow": 3,
     "calc / clamp / min / max": 3,
     "vh / vw / cq / em / rem": 2,
     "z-index": 3,
     "attribute selector": 7,
-    "!important": 2,
-    "@media / @container / @supports": 1
+    "!important": 1
   },
   "src/screens/language/language.css": {
     "grid": 2,
