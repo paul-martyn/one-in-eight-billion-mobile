@@ -78,6 +78,19 @@ html { touch-action: pan-x pan-y; }
 .k-big { color: var(--color-white); text-shadow: var(--text-outline-big); }
 
 .screen { position: absolute; inset: 0; overflow: hidden; background: var(--color-page); }
+/*
+ * Экран в единицах макета (жизнь со вкладками, итоги, настройки): 393 × H, масштаб --k и высота --fh — от хоста
+ * экранов (FlowHost), как у кадра .frame. Без этого на экране шире 393 CSS-пикселей (Safari с уменьшенным масштабом
+ * страницы, большой iPhone, планшет) эти экраны оставались мелкими, а экраны рождения — крупными (15 ноября 2026).
+ * Безопасные зоны приходят в CSS-пикселях, поэтому внутри кадра делятся на масштаб.
+ */
+.screen--u {
+  inset: auto; left: 0; top: 0; width: 393px; height: var(--fh, 852px);
+  transform: scale(var(--k, 1)); transform-origin: 0 0;
+  container-type: size;
+  --safe-top: calc(env(safe-area-inset-top, 0px) / var(--k, 1));
+  --safe-bottom: calc(env(safe-area-inset-bottom, 0px) / var(--k, 1));
+}
 .scroll { overflow-y: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 .scroll::-webkit-scrollbar { display: none; }
 .tabular { font-variant-numeric: tabular-nums; }

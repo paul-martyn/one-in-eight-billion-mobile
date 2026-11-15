@@ -3,7 +3,7 @@
     "grid": 2,
     "pseudo-element": 2,
     "box-shadow": 1,
-    "calc / clamp / min / max": 6,
+    "calc / clamp / min / max": 8,
     "vh / vw / cq / em / rem": 7,
     "attribute selector": 4,
     "!important": 5,
@@ -88,20 +88,12 @@
     "keyframes": 6,
     "box-shadow": 6,
     "gradient": 3,
-    "calc / clamp / min / max": 12,
+    "calc / clamp / min / max": 13,
     "vh / vw / cq / em / rem": 5,
     "z-index": 8,
     "attribute selector": 1,
     "structural pseudo-class": 3,
     "filter / backdrop-filter": 2
-  },
-  "src/screens/life/tabs/activities.css": {
-    "grid": 1,
-    "box-shadow": 2,
-    "vh / vw / cq / em / rem": 2,
-    "attribute selector": 1,
-    "structural pseudo-class": 1,
-    "sibling combinator": 1
   },
   "src/screens/life/tabs/money.css": {
     "grid": 5,

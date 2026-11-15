@@ -44,13 +44,20 @@ const HomeIcon = () => (
   </svg>
 );
 
-function Plate({ icon, tint, label, value }: { icon: ReactNode; tint: string; label: string; value: string }) {
+/**
+ * Плашки равной ширины (15 ноября 2026): возраст и деньги — крупным числом, кегль по длине строки, чтобы сумма
+ * влезала целиком; занятие — прежним кеглем, при нужде в две строки.
+ */
+const numSize = (s: string) => (s.length <= 7 ? '' : s.length <= 9 ? ' lp__value--m' : s.length <= 11 ? ' lp__value--s' : ' lp__value--xs');
+
+function Plate({ icon, tint, label, value, text = false }: { icon: ReactNode; tint: string; label: string; value: string; text?: boolean }) {
+  const v = value || '—';
   return (
     <li className="lp__plate">
       <span className="lp__icon" style={{ background: tint }} aria-hidden="true">{icon}</span>
       <span className="lp__text">
         <span className="lp__label">{label}</span>
-        <b className="lp__value">{value || '—'}</b>
+        <b className={`lp__value${text ? ' lp__value--text' : numSize(v)}`}>{v}</b>
       </span>
     </li>
   );
@@ -68,7 +75,7 @@ export function Plates({ life }: { life: LifeVM }) {
     <ul className="lp" aria-label={t('life.plates')}>
       <Plate icon={<CakeIcon />} tint="var(--color-plate-age)" label={t('life.plate.age')} value={String(life.age)} />
       <Plate icon={<MoneyIcon />} tint="var(--color-plate-money)" label={t('life.plate.money')} value={life.money} />
-      <Plate icon={occ.icon} tint={occ.tint} label={t(occ.label)} value={life.occupation.text} />
+      <Plate icon={occ.icon} tint={occ.tint} label={t(occ.label)} value={life.occupation.text} text />
     </ul>
   );
 }
