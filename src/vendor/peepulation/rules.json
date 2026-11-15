@@ -1,0 +1,2154 @@
+{
+  "$comment": "Правила генератора персонажей «Nemo Peeps» как данные. Источник решений — spec/DECISIONS.md и CATALOG.md. Значения с \"pending\" ждут исследования research/appearance-stats.md.",
+  "version": "0.1.0",
+  "updated": "2026-11-15",
+  "units": "единицы холста головы пака nemo, 145×143",
+  "weightsNote": "веса относительные: перед выбором нормируются среди вариантов, доступных по полу и возрасту, поэтому суммы не обязаны быть ровно 100",
+  "product": {
+    "workingName": "Peepulation",
+    "styleName": "Nemo Peeps",
+    "shortlist": [
+      "Peepulation",
+      "Billion Pips",
+      "Billion Dots"
+    ],
+    "status": "рабочее, финал после фокус-группы (NAMING.md)"
+  },
+  "style": {
+    "proportions": "nemo chibi: огромная голова, маленькое тело",
+    "contourUnits": 2.4,
+    "contourColor": "#1D1A1A",
+    "hairContour": {
+      "color": "тёмный оттенок цвета волос, множитель 0.5",
+      "width": "как основной контур, никогда не тоньше"
+    },
+    "face": "точки nemo: глаза + рот, без носа и бровей",
+    "seams": "между цветами одной детали — тонкий шов 1.2 единицы, не полный контур",
+    "lightAreasOutlined": true,
+    "only": "Peepulation (Nemo Peeps): лица-точки, детали v1, тело кодом. Стиль «nemo, оригинал», мультяшные лица и старые рисунки пака убраны из генератора 2026-11-15"
+  },
+  "parts": {
+    "$comment": "Как детали из листов ChatGPT становятся частями генератора (tools/slice-sheet.html, parts/manifest.json).",
+    "format": "растровые маски по ключевым цветам: PNG, белый + альфа, сглаживание в альфе; цвет слоя задаётся при отрисовке",
+    "layerOrder": "сначала заливки, потом линии; заливка доходит до середины контура",
+    "resolutionPxPerUnit": 2.45,
+    "cropMarginUnits": 3,
+    "alignTolerancePx": {
+      "dx": 8,
+      "dy": 12,
+      "scaleMin": 0.98,
+      "scaleMax": 1.02
+    },
+    "chatgptPostprocessing": "запрещена: цвета и выравнивание приводим сами",
+    "smallScaleLineFix": {
+      "below": 0.9,
+      "filterWidthPerMissingScale": 1.04,
+      "$comment": "у персонажей мельче 0.9 недостающая толщина контура добирается снаружи детали",
+      "method": "запечённая маска (2026-11-15): силуэт всех слоёв детали размывается по Гауссу и режется порогом alpha × 14 − 0,7 в родном разрешении деталей; под деталью лежит прямоугольник цвета линии с этой маской",
+      "blurUnits": "1,7 × 1,04 × доля толщины × (1 − sk) / sk, в единицах детали (sk — масштаб персонажа × масштаб головы); у бород доля 0,7",
+      "bakePxPerUnit": 4.89,
+      "blurStepUnits": 0.05,
+      "maskIds": "v1t_<деталь>_<размытие × 100>; общий <defs id=\"filters\">; считается при первом рисовании, готовность — thickReady()",
+      "rejected": "SVG-фильтр (feGaussianBlur + порог) на экране: порог считался в пикселях экрана и съедал сглаживание — в сцене игры (0,5 px на единицу) контур детей и подростков выходил ступеньками"
+    },
+    "vectorParts": {
+      "who": "Claude, кодом (tools/vector-parts.mjs)",
+      "what": [
+        "eyes",
+        "mouths",
+        "wrinkles",
+        "glasses frames",
+        "swaddles"
+      ],
+      "lightAreaOutlineUnits": 1.6,
+      "closedEyeArcUnits": 4,
+      "format": "SVG в ключевых цветах, в манифесте format: svg"
+    },
+    "frontHairInnerStrokes": "нет: только внешний контур и структурные линии вроде пробора (2026-11-06)",
+    "backHairInnerStrokes": "только там, где их видно: по бокам ниже ушей и у концов; не в верхней части — выглядывают над чёлкой",
+    "lineTargetUnits": {
+      "contour": 2.4,
+      "glassesFrame": 3,
+      "$comment": "толще — сужаем при нарезке к середине штриха, пропорционально для всех штрихов слоя"
+    },
+    "beardShape": "middle и long стыкуются с волосами (как у пака), без внутренних штрихов; *_jaw из N1 не используются",
+    "vector": "pending: трассировка в SVG (potrace) — после решения пользователя",
+    "body": {
+      "drawnBy": "код (composer → codeBody), с 2026-11-15",
+      "geometry": "как у пака: руки 12×28 rx 6 с наклоном ±12°, ноги — капсулы 13×28, футболка с поясом (шов на 135 убран), платье-трапеция; рукав до 13 (короткий) или 21 (длинный), шорты до 12, брюки до 18, обувь с 18",
+      "contour": "один общий контур INK 2,4 на руку, ногу и торс; толщина делится на масштаб персонажа",
+      "seams": "нет: внутри только смена цвета (решение пользователя)",
+      "colours": {
+        "top": "верх, рукава, платье",
+        "bottom": "брюки, шорты, пояс",
+        "shoe": "обувь"
+      },
+      "n4": "детали N4 (ChatGPT) нарезаны, но не используются: полные контуры на стыках делали тело «конструктором»",
+      "newClothes": "новую одежду рисовать кодом по тем же правилам",
+      "decided": "2026-11-15",
+      "layering": "полосы цвета сверху вниз, каждая только на своём участке, нахлёст 0,5 на соседнюю; под одеждой нет кожи (иначе светлая линия на краю)"
+    },
+    "packDrawings": "не используются с 2026-11-15: генератор рисует только детали v1 (nemo-peeps/parts) и тело кодом; файлы пака лежат в third-party/nemo-character-creation/pack как источник лицензии и истории",
+    "polishScope": "полировка рисованных деталей — только ровность их собственной обводки (каждый спрайт отдельно): неровный край выравнивать, форму, линии между деталями и их сочетания не менять (пользователь, 2026-11-15)",
+    "polishEdges": {
+      "decided": "2026-11-15",
+      "checked": "25 нарисованных спрайтов, которые использует генератор: каждый отдельно крупно, толщина линии замерена по контуру",
+      "smoothed": {
+        "hair_back_ponytail_high": 1.8,
+        "hair_back_pigtails": 1.4,
+        "hair_front_buzz": 1,
+        "hair_front_straight": 1,
+        "hair_front_bowl": 0.6,
+        "hair_front_elegant": 0.8
+      },
+      "how": "переобводка: силуэт (заливка ∪ линия) сглаживается σ (единицы), контур проводится заново полосой постоянной ширины (медиана прежней линии); форма и сочетания деталей не меняются",
+      "backup": "parts/_archive/2026-11-15_before_smooth/",
+      "boards": [
+        "previews/edges_sprites_1.png … _5.png",
+        "previews/edges_smooth_candidates.png",
+        "previews/edges_smooth_applied.png"
+      ],
+      "fillToLineMiddle": "заливка после переобводки — только до середины линии (иначе светлая нить на краю), исправлено 2026-11-15"
+    }
+  },
+  "ages": {
+    "baby": {
+      "years": [
+        0,
+        1
+      ],
+      "scale": 0.52,
+      "figure": "голова в пелёнке"
+    },
+    "child": {
+      "years": [
+        2,
+        11
+      ],
+      "scale": 0.56,
+      "headScale": 1.18
+    },
+    "teen": {
+      "years": [
+        12,
+        17
+      ],
+      "scale": 0.78,
+      "headScale": 1.07
+    },
+    "adult": {
+      "years": [
+        18,
+        59
+      ],
+      "scale": 1,
+      "headScale": 1
+    },
+    "elder": {
+      "years": [
+        60,
+        null
+      ],
+      "scale": 0.95,
+      "headScale": 1,
+      "headDropUnits": 2,
+      "wrinkles": true
+    },
+    "standingToddler": false,
+    "wrinkles": {
+      "set60": "с 55–60 лет: гусиные лапки у глаз",
+      "set75": "с 75 лет: плюс нижние складки у глаз и короткие мешки под глазами",
+      "folds": "носогубные складки — отдельная деталь wrinkles_folds, с первым набором; стоят на высоте рта и сдвигаются вместе с ним; шире самого широкого рта (смех)",
+      "lineUnits": 1.8,
+      "decided": "2026-11-15",
+      "crowsFeet": "на 3 единицы ближе к вискам, чем раньше (x 42–47 и 98–103), чтобы не касаться широких глаз (2026-11-15)"
+    },
+    "greyingStages": "натуральный цвет → «тронутые сединой» (смесь натурального и седого 50/50) → седые; моменты переходов — по phenotypeRules.greying"
+  },
+  "head": {
+    "shapes": 1
+  },
+  "skin": {
+    "tones": 6,
+    "source": "игра (sk0–sk5)"
+  },
+  "sex": {
+    "beard": "только мужчины",
+    "dress": "только женщины",
+    "dressChanceFemale": 0.45,
+    "lean": "мягкий: любой вариант возможен, кроме запрещённых, отличаются только веса"
+  },
+  "hairFront": {
+    "variants": {
+      "chupchik": {
+        "lean": "-",
+        "minAge": 0
+      },
+      "curly": {
+        "lean": "-",
+        "minAge": 0,
+        "hairType": "curly|coily чаще"
+      },
+      "elegant": {
+        "lean": "f",
+        "minAge": 0
+      },
+      "regular": {
+        "lean": "-",
+        "minAge": 0
+      },
+      "straight": {
+        "lean": "m",
+        "minAge": 0
+      },
+      "receding": {
+        "lean": "m-only",
+        "minAge": 40,
+        "note": "шанс растёт с возрастом до 30% к старости",
+        "pairsWithBack": null
+      },
+      "bald": {
+        "lean": "m-only",
+        "minAge": 50,
+        "art": false
+      },
+      "buzz": {
+        "lean": "m",
+        "minAge": 0,
+        "pairsWithBack": null
+      },
+      "side_part": {
+        "lean": "m",
+        "minAge": 12
+      },
+      "spiky": {
+        "lean": "m",
+        "minAge": 2,
+        "maxAge": 17
+      },
+      "top_bun": {
+        "lean": "f",
+        "minAge": 6,
+        "pairsWithBack": null
+      },
+      "afro": {
+        "lean": "-",
+        "minAge": 0,
+        "hairType": "coily чаще",
+        "pairsWithBack": "curly"
+      },
+      "bob": {
+        "lean": "f",
+        "minAge": 0,
+        "pairsWithBack": "short"
+      },
+      "side_swept": {
+        "lean": "f",
+        "minAge": 12,
+        "pairsWithBack": null
+      },
+      "wavy_part": {
+        "lean": "f",
+        "minAge": 0
+      },
+      "bowl": {
+        "lean": "-",
+        "minAge": 0,
+        "maxAge": 14,
+        "sheet": "N10",
+        "note": "детская стрижка под горшок"
+      },
+      "pixie": {
+        "lean": "f",
+        "minAge": 12,
+        "sheet": "N10"
+      },
+      "slicked_back": {
+        "lean": "m",
+        "minAge": 16,
+        "sheet": "N10"
+      },
+      "comb_over": {
+        "lean": "m-only",
+        "minAge": 55,
+        "sheet": "N10",
+        "note": "вместе с логикой облысения: вариант залысин у пожилых",
+        "pairsWithBack": null
+      },
+      "braid_crown": {
+        "lean": "f",
+        "minAge": 4,
+        "sheet": "N10"
+      }
+    },
+    "weightsPercent": {
+      "m": {
+        "chupchik": 12,
+        "curly": 9,
+        "elegant": 2,
+        "regular": 12,
+        "straight": 13,
+        "buzz": 12,
+        "side_part": 12,
+        "spiky": 8,
+        "top_bun": 1,
+        "afro": 6,
+        "bob": 1,
+        "side_swept": 1,
+        "wavy_part": 1,
+        "bowl": 4,
+        "pixie": 0.5,
+        "slicked_back": 7,
+        "braid_crown": 0
+      },
+      "f": {
+        "chupchik": 6,
+        "curly": 9,
+        "elegant": 13,
+        "regular": 9,
+        "straight": 2,
+        "buzz": 1,
+        "side_part": 3,
+        "spiky": 1,
+        "top_bun": 10,
+        "afro": 6,
+        "bob": 13,
+        "side_swept": 12,
+        "wavy_part": 13,
+        "bowl": 3,
+        "pixie": 7,
+        "slicked_back": 1,
+        "braid_crown": 5
+      }
+    },
+    "inPrototype": [
+      "chupchik",
+      "curly",
+      "elegant",
+      "regular",
+      "straight"
+    ],
+    "planned2026_11_06": "+5 передних (лист N10): bowl, pixie, slicked_back, comb_over, braid_crown; веса относительные, нормируются среди доступных по полу и возрасту"
+  },
+  "hairBack": {
+    "variants": {
+      "none": {
+        "lean": "m"
+      },
+      "short": {
+        "lean": "-"
+      },
+      "long": {
+        "lean": "f"
+      },
+      "curly": {
+        "lean": "-",
+        "hairType": "curly|coily чаще"
+      },
+      "pigtails": {
+        "lean": "f",
+        "minAge": 3,
+        "maxAge": 14
+      },
+      "braids": {
+        "lean": "f",
+        "minAge": 0
+      },
+      "ponytail_high": {
+        "lean": "f",
+        "minAge": 6,
+        "male": "нет: у мужчин высокий хвост не выпадает (решение 2026-11-15)"
+      },
+      "very_long": {
+        "lean": "f",
+        "minAge": 6
+      },
+      "wavy": {
+        "lean": "f",
+        "minAge": 0
+      },
+      "locs": {
+        "status": "отложено"
+      }
+    },
+    "weightsPercent": {
+      "m": {
+        "none": 71,
+        "short": 18,
+        "long": 3,
+        "curly": 8,
+        "ponytail_high": 0
+      },
+      "f": {
+        "none": 5,
+        "short": 18,
+        "long": 22,
+        "curly": 10,
+        "pigtails": 15,
+        "braids": 8,
+        "ponytail_high": 10,
+        "very_long": 6,
+        "wavy": 11
+      }
+    },
+    "inPrototype": [
+      "none",
+      "short",
+      "long",
+      "curly"
+    ],
+    "tieColour": "резинка — цвет верха; если верх светлый (яркость > 200) — цвет низа; если и он светлый — CLOTH2 (2026-11-15)",
+    "rejected": {
+      "join": "2026-11-15, откат: заплатка цветом волос на стыке передних и задних причёсок убирала линию между ними — пользователь: «стало сильно хуже». Линии между передними и задними волосами — часть стиля, их не трогаем",
+      "ponytailVector": "2026-11-15, откат: векторный высокий хвост (варианты A, B, D, E) не понравился, остаётся нарезанный из N6"
+    }
+  },
+  "phenotypeProfiles": {
+    "$comment": "Профили фенотипов из research/appearance-stats.md, раздел 7. Порядок цветов: black, darkBrown, brown, blond, red. Тип волос: straight, wavy, curly, coily. Облысение — доля мужчин в 30/50/70 лет. Седина: start — медианный возраст первых седых волос, grey60 — доля наполовину седых в 60. Очки — доля носящих: child 6–12, teen 13–19, adult 20–59, elder 60+. «estimate» — оценка без прямых данных.",
+    "eastAsia": {
+      "hairColour": [
+        85,
+        14,
+        1,
+        0,
+        0
+      ],
+      "hairType": [
+        85,
+        12,
+        3,
+        0
+      ],
+      "bald": [
+        5,
+        25,
+        42
+      ],
+      "greyStart": 37,
+      "grey60": 28,
+      "glasses": [
+        25,
+        55,
+        50,
+        50
+      ]
+    },
+    "southeastAsia": {
+      "hairColour": [
+        84,
+        14,
+        2,
+        0,
+        0
+      ],
+      "hairType": [
+        70,
+        22,
+        7,
+        1
+      ],
+      "bald": [
+        5,
+        22,
+        38
+      ],
+      "greyStart": 38,
+      "grey60": 25,
+      "glasses": [
+        10,
+        25,
+        25,
+        35
+      ]
+    },
+    "southAsia": {
+      "hairColour": [
+        78,
+        18,
+        4,
+        0,
+        0
+      ],
+      "hairType": [
+        45,
+        40,
+        13,
+        2
+      ],
+      "bald": [
+        15,
+        38,
+        55
+      ],
+      "greyStart": 36,
+      "grey60": 30,
+      "glasses": [
+        4,
+        8,
+        8,
+        20
+      ],
+      "estimate": [
+        "hairType"
+      ]
+    },
+    "centralAsia": {
+      "hairColour": [
+        55,
+        33,
+        9,
+        2,
+        1
+      ],
+      "hairType": [
+        60,
+        32,
+        8,
+        0
+      ],
+      "bald": [
+        12,
+        32,
+        50
+      ],
+      "greyStart": 37,
+      "grey60": 30,
+      "glasses": [
+        5,
+        12,
+        15,
+        40
+      ],
+      "estimate": [
+        "all"
+      ]
+    },
+    "mena": {
+      "hairColour": [
+        55,
+        35,
+        8,
+        1,
+        1
+      ],
+      "hairType": [
+        30,
+        45,
+        22,
+        3
+      ],
+      "bald": [
+        18,
+        42,
+        62
+      ],
+      "greyStart": 35,
+      "grey60": 35,
+      "glasses": [
+        8,
+        18,
+        22,
+        45
+      ],
+      "estimate": [
+        "hairType",
+        "bald",
+        "greying"
+      ]
+    },
+    "subSaharanAfrica": {
+      "hairColour": [
+        97,
+        3,
+        0,
+        0,
+        0
+      ],
+      "hairType": [
+        1,
+        3,
+        8,
+        88
+      ],
+      "bald": [
+        5,
+        15,
+        30
+      ],
+      "greyStart": 43,
+      "grey60": 15,
+      "glasses": [
+        1,
+        2,
+        3,
+        8
+      ]
+    },
+    "hornOfAfrica": {
+      "hairColour": [
+        97,
+        3,
+        0,
+        0,
+        0
+      ],
+      "hairType": [
+        5,
+        15,
+        40,
+        40
+      ],
+      "bald": [
+        5,
+        15,
+        30
+      ],
+      "greyStart": 43,
+      "grey60": 15,
+      "glasses": [
+        1,
+        2,
+        3,
+        8
+      ],
+      "estimate": [
+        "bald",
+        "greying",
+        "glasses"
+      ]
+    },
+    "nordic": {
+      "hairColour": [
+        2,
+        16,
+        39,
+        40,
+        3
+      ],
+      "hairType": [
+        50,
+        38,
+        12,
+        0
+      ],
+      "bald": [
+        20,
+        45,
+        65
+      ],
+      "greyStart": 32,
+      "grey60": 45,
+      "glasses": [
+        8,
+        25,
+        50,
+        90
+      ]
+    },
+    "westCentralEurope": {
+      "hairColour": [
+        4,
+        31,
+        45,
+        17,
+        3
+      ],
+      "hairType": [
+        45,
+        40,
+        15,
+        0
+      ],
+      "bald": [
+        20,
+        45,
+        65
+      ],
+      "greyStart": 34,
+      "grey60": 40,
+      "glasses": [
+        8,
+        25,
+        50,
+        90
+      ]
+    },
+    "britishIsles": {
+      "hairColour": [
+        5,
+        37,
+        41,
+        12,
+        5
+      ],
+      "hairType": [
+        45,
+        40,
+        15,
+        0
+      ],
+      "bald": [
+        20,
+        45,
+        65
+      ],
+      "greyStart": 33,
+      "grey60": 42,
+      "glasses": [
+        8,
+        25,
+        50,
+        88
+      ],
+      "note": "Шотландия и Ирландия: рыжих 10"
+    },
+    "southernEurope": {
+      "hairColour": [
+        15,
+        50,
+        27,
+        7,
+        1
+      ],
+      "hairType": [
+        35,
+        45,
+        20,
+        0
+      ],
+      "bald": [
+        18,
+        42,
+        62
+      ],
+      "greyStart": 34,
+      "grey60": 38,
+      "glasses": [
+        8,
+        25,
+        48,
+        85
+      ]
+    },
+    "easternEurope": {
+      "hairColour": [
+        6,
+        31,
+        44,
+        17,
+        2
+      ],
+      "hairType": [
+        50,
+        38,
+        12,
+        0
+      ],
+      "bald": [
+        18,
+        42,
+        62
+      ],
+      "greyStart": 34,
+      "grey60": 40,
+      "glasses": [
+        6,
+        18,
+        38,
+        70
+      ],
+      "estimate": [
+        "hairColour",
+        "hairType"
+      ]
+    },
+    "latinAmerica": {
+      "hairColour": [
+        35,
+        45,
+        15,
+        4,
+        1
+      ],
+      "hairType": [
+        35,
+        38,
+        22,
+        5
+      ],
+      "bald": [
+        15,
+        35,
+        55
+      ],
+      "greyStart": 35,
+      "grey60": 32,
+      "glasses": [
+        5,
+        12,
+        20,
+        50
+      ]
+    },
+    "indigenousAmericas": {
+      "hairColour": [
+        94,
+        6,
+        0,
+        0,
+        0
+      ],
+      "hairType": [
+        85,
+        12,
+        3,
+        0
+      ],
+      "bald": [
+        5,
+        18,
+        32
+      ],
+      "greyStart": 38,
+      "grey60": 25,
+      "glasses": [
+        2,
+        4,
+        6,
+        25
+      ]
+    },
+    "europeanOriginNA": {
+      "hairColour": [
+        4,
+        34,
+        43,
+        15,
+        4
+      ],
+      "hairType": [
+        45,
+        40,
+        15,
+        0
+      ],
+      "bald": [
+        20,
+        45,
+        65
+      ],
+      "greyStart": 33,
+      "grey60": 42,
+      "glasses": [
+        10,
+        25,
+        55,
+        90
+      ]
+    },
+    "africanDiasporaMixed": {
+      "hairColour": [
+        92,
+        7,
+        1,
+        0,
+        0
+      ],
+      "hairType": [
+        1,
+        6,
+        28,
+        65
+      ],
+      "bald": [
+        8,
+        22,
+        38
+      ],
+      "greyStart": 41,
+      "grey60": 18,
+      "glasses": [
+        6,
+        15,
+        35,
+        80
+      ],
+      "estimate": [
+        "hairType"
+      ]
+    },
+    "europeanOriginAUNZ": {
+      "hairColour": [
+        4,
+        35,
+        42,
+        14,
+        5
+      ],
+      "hairType": [
+        45,
+        40,
+        15,
+        0
+      ],
+      "bald": [
+        20,
+        45,
+        65
+      ],
+      "greyStart": 33,
+      "grey60": 42,
+      "glasses": [
+        6,
+        18,
+        45,
+        88
+      ]
+    },
+    "aboriginalAustralia": {
+      "hairColour": [
+        70,
+        20,
+        7,
+        3,
+        0
+      ],
+      "hairType": [
+        15,
+        45,
+        35,
+        5
+      ],
+      "bald": [
+        8,
+        25,
+        40
+      ],
+      "greyStart": 40,
+      "grey60": 25,
+      "glasses": [
+        2,
+        4,
+        8,
+        35
+      ],
+      "estimate": [
+        "all"
+      ],
+      "note": "у детей 1–10 лет светлых около 60"
+    },
+    "melanesia": {
+      "hairColour": [
+        86,
+        5,
+        2,
+        7,
+        0
+      ],
+      "hairType": [
+        2,
+        5,
+        18,
+        75
+      ],
+      "bald": [
+        8,
+        22,
+        38
+      ],
+      "greyStart": 42,
+      "grey60": 18,
+      "glasses": [
+        1,
+        2,
+        3,
+        8
+      ],
+      "note": "натуральный блонд — свой вариант гена TYRP1"
+    },
+    "polynesia": {
+      "hairColour": [
+        82,
+        14,
+        3,
+        1,
+        0
+      ],
+      "hairType": [
+        25,
+        45,
+        27,
+        3
+      ],
+      "bald": [
+        10,
+        30,
+        48
+      ],
+      "greyStart": 40,
+      "grey60": 25,
+      "glasses": [
+        2,
+        5,
+        10,
+        35
+      ],
+      "estimate": [
+        "all"
+      ]
+    },
+    "southAfricaColoured": {
+      "hairColour": [
+        85,
+        12,
+        3,
+        0,
+        0
+      ],
+      "hairType": [
+        5,
+        20,
+        40,
+        35
+      ],
+      "bald": [
+        10,
+        28,
+        45
+      ],
+      "greyStart": 40,
+      "grey60": 22,
+      "glasses": [
+        5,
+        12,
+        25,
+        60
+      ],
+      "estimate": [
+        "all"
+      ]
+    },
+    "roma": {
+      "hairColour": [
+        40,
+        45,
+        12,
+        2,
+        1
+      ],
+      "hairType": [
+        35,
+        45,
+        18,
+        2
+      ],
+      "bald": [
+        15,
+        38,
+        58
+      ],
+      "greyStart": 35,
+      "grey60": 32,
+      "glasses": [
+        5,
+        12,
+        25,
+        60
+      ],
+      "estimate": [
+        "all"
+      ]
+    }
+  },
+  "profileFromGame": {
+    "$comment": "Как группа игры (SKIN_W) и страна выбирают профиль фенотипов. Сначала этническая группа S.eth.g, затем страна, затем группа.",
+    "byGroup": {
+      "e": "eastAsia",
+      "se": "southeastAsia",
+      "s": "southAsia",
+      "ca": "centralAsia",
+      "m": "mena",
+      "a": "subSaharanAfrica",
+      "ha": "hornOfAfrica",
+      "l": "latinAmerica",
+      "sc": "southernEurope",
+      "c": "africanDiasporaMixed",
+      "br": "africanDiasporaMixed",
+      "in": "indigenousAmericas",
+      "au": "aboriginalAustralia",
+      "pa": "melanesia",
+      "co": "southAfricaColoured",
+      "ro": "roma",
+      "n": "westCentralEurope"
+    },
+    "byEthnicGroup": {
+      "us_black": "africanDiasporaMixed",
+      "gb_black": "africanDiasporaMixed",
+      "co_afro": "africanDiasporaMixed",
+      "ec_afro": "africanDiasporaMixed",
+      "in_adiv": "southAsia",
+      "nz_maori": "polynesia",
+      "nz_pasi": "polynesia",
+      "za_white": "europeanOriginAUNZ"
+    },
+    "byCountryForGroupN": {
+      "nordic": "NOR,SWE,FIN,DNK,ISL,EST,LVA,LTU",
+      "britishIsles": "GBR,IRL",
+      "southernEurope": "ITA,ESP,PRT,GRC,MLT,CYP,ALB,MKD,MNE",
+      "easternEurope": "RUS,UKR,BLR,POL,CZE,SVK,HUN,ROU,BGR,MDA,SRB,HRV,BIH,SVN",
+      "westCentralEurope": "DEU,FRA,NLD,BEL,LUX,AUT,CHE,LIE",
+      "europeanOriginNA": "USA,CAN",
+      "europeanOriginAUNZ": "AUS,NZL",
+      "latinAmerica": "BRA",
+      "mena": "SAU,ARE,QAT,KWT,BHR,OMN"
+    },
+    "gameQuirks": [
+      "в игре Бразилия попадает в группу n, а богатые страны Персидского залива — в n через регион «hi»; для волос берём Латинскую Америку и Ближний Восток",
+      "группа a объединяет Африку и чернокожих жителей США и Великобритании; по этнической группе диаспоре даём смешанный профиль"
+    ]
+  },
+  "phenotypeRules": {
+    "childhoodLightening": "для европейских профилей: в 1–8 лет 30% веса darkBrown переходит в brown, затем 50% веса brown — в blond; в 9–14 лет вдвое меньше; с 15 лет взрослые веса",
+    "baldness": "мужчины: у каждого порог из сида; облысение появляется, когда интерполированная по возрасту доля (bald[30/50/70]) превышает порог; после этого остаётся. Ранние стадии — receding, поздние — bald",
+    "greying": "возраст «наполовину седой» H = greyStart + 10 + u × (50 − greyStart) × 100 / grey60, где u — число из сида от 0 до 1 (так к 60 годам наполовину седы grey60 % людей); мужчинам начало на 2 года раньше и +5 п. п. к grey60. Исправлено 2026-11-15: в прежней записи не хватало × 100 (grey60 в процентах)",
+    "glasses": "у каждого порог из сида; очки есть, когда доля носящих для возраста превышает порог — так очки сохраняются с возрастом. В бедных районах доли делить на 2–3; после 45 лет добавлять пресбиопию (×1,5 в странах с хорошим доступом к очкам, ×1,1 с плохим)",
+    "eastAsiaUrban": "города Японии, Кореи, Тайваня: очки 35/70/60/75",
+    "baldnessInPrototype": {
+      "defaultProfile": [
+        13,
+        33,
+        50
+      ],
+      "recedingFromAge": 40,
+      "baldFromAge": 50,
+      "stage": "progress = (доля − порог) / доля: < 0.5 — залысины, иначе лысина",
+      "combOverShareOfBald": 0.2,
+      "note": "в игре вместо среднего — профиль из profileFromGame"
+    },
+    "originInPrototype": {
+      "groupBirthWeights": {
+        "s": 27,
+        "a": 24,
+        "ha": 5,
+        "e": 8,
+        "se": 7.5,
+        "m": 7,
+        "n": 8,
+        "l": 6,
+        "ca": 1.5,
+        "c": 0.5,
+        "sc": 0.7,
+        "br": 0.5,
+        "in": 0.5,
+        "pa": 0.3,
+        "au": 0.05,
+        "co": 0.1,
+        "ro": 0.1
+      },
+      "groupNProfiles": {
+        "westCentralEurope": 2,
+        "easternEurope": 3,
+        "southernEurope": 1.5,
+        "britishIsles": 1,
+        "nordic": 0.5,
+        "europeanOriginNA": 3,
+        "europeanOriginAUNZ": 0.4
+      },
+      "hairTypeToFront": {
+        "straight": {
+          "afro": 0.05,
+          "curly": 0.3
+        },
+        "wavy": {
+          "afro": 0.2,
+          "curly": 0.8
+        },
+        "curly": {
+          "curly": 3,
+          "afro": 1.2
+        },
+        "coily": {
+          "afro": 5,
+          "curly": 3,
+          "buzz": 2,
+          "elegant": 0.6,
+          "side_swept": 0.4
+        }
+      },
+      "hairTypeToBack": {
+        "straight": {
+          "curly": 0.2
+        },
+        "wavy": {
+          "curly": 0.6
+        },
+        "curly": {
+          "curly": 3
+        },
+        "coily": {
+          "curly": 4,
+          "long": 0.3
+        }
+      },
+      "note": "оценки для прототипа; в игре группа и профиль — из страны и этнической группы рождения"
+    },
+    "agingInPrototype": {
+      "greyStages": "свой цвет → «тронутые сединой» (50/50 свой и седой) с H − 5 → седые с H + 10; оттенок седины — один из hairColour.grey, выбирается раз на жизнь; крашеные не седеют; борода и щетина седеют вместе с волосами",
+      "wrinkles": "первый набор (set60) с 55 + 5u лет (u из сида), полный (set75) с 75",
+      "glasses": "порог u из сида; доля по профилю [6–12, 13–19, 20–59, 60+]; с 45 лет пресбиопия ×1,5 (доля пожилых профиля ≥ 50%) или ×1,1, не больше доли пожилых; берётся накопленный максимум по возрасту — очки не снимаются; оправа выбирается раз на жизнь",
+      "defaultsWithoutOrigin": {
+        "greyStart": 36,
+        "grey60": 30,
+        "glasses": [
+          5,
+          15,
+          25,
+          55
+        ]
+      },
+      "baldness": "доли облысения — по профилю происхождения (bald), без происхождения — среднее",
+      "decided": "2026-11-15"
+    },
+    "childhoodLighteningInPrototype": {
+      "decided": "2026-11-15",
+      "where": "composer → childHair, вызывается из ageLook",
+      "profiles": "nordic, westCentralEurope, britishIsles, southernEurope, easternEurope, europeanOriginNA, europeanOriginAUNZ; aboriginalAustralia (с 2026-11-15)",
+      "how": "два порога из сида (lightU): тёмно-русые → русые при u1 < 0,3·k, затем русые → блонд при u2 < 0,5·k; k = 1 в 1–8 лет, 0,5 в 9–14, 0 с 15 лет. С возрастом волосы только темнеют",
+      "checked": "6000 персонажей: у европейских детей 8 лет блонд 40% против 12% у взрослых, в 12 лет 25%; у остальных профилей без изменений",
+      "notApplied": "младенцы (правило с 1 года), крашеные волосы",
+      "board": "previews/childhood_hair_lightening.png",
+      "aboriginalAustralia": "чёрные, тёмно-русые и русые → блонд при u1 < 0,6·k (k как у европейцев); проверка: 60% блондинов в 8 лет, 31% в 12, 3% у взрослых",
+      "melanesiaNotApplied": "светлые волосы меланезийцев — свой ген у 7% взрослых; данных о детском посветлении нет"
+    }
+  },
+  "hairType": {
+    "classes": [
+      "straight",
+      "wavy",
+      "curly",
+      "coily"
+    ],
+    "source": "профиль фенотипов рождения (phenotypeProfiles) + наследование от родителей",
+    "inheritFromParent": 0.75,
+    "inheritInPrototype": "если тип волос унаследован и отличается от выбранного при создании, причёска выбирается заново по унаследованному типу (2026-11-15)"
+  },
+  "hairColour": {
+    "natural": {
+      "black": "#3A3033",
+      "darkBrown": "#3B2A22",
+      "brown": "#6B4630",
+      "blond": "#E8C77E",
+      "red": "#C8642C"
+    },
+    "grey": [
+      "#C9C5C0",
+      "#E6E2DC"
+    ],
+    "dyed": [
+      "#8FD3D2",
+      "#F2A6C8",
+      "#B9A2E8"
+    ],
+    "source": "профиль фенотипов рождения (phenotypeProfiles) с модификатором детства",
+    "inheritFromParent": 0.75,
+    "greying": "phenotypeRules.greying"
+  },
+  "lookPhases": {
+    "teen": {
+      "dyeChance": "заменено dyedHairByAge (2026-11-15)",
+      "newHaircutChance": 0.4
+    },
+    "adult": {
+      "newHaircutChance": 0.4,
+      "hairColour": "натуральный"
+    },
+    "elder": {
+      "keepsAdultHaircut": true,
+      "grey": true,
+      "wrinkles": true
+    },
+    "laterTieTo": "темперамент игры (складывается до 5 лет)",
+    "dyedHairByAge": {
+      "decided": "2026-11-15, аудит",
+      "sharePercent": {
+        "13-17": 10,
+        "18-35": 4,
+        "36-55": 1.5,
+        "56+": 0
+      },
+      "how": "один порог dyeU на жизнь и один яркий цвет dyeTone: кто красится взрослым, красился и подростком; натуральный цвет хранится отдельно и седеет как обычно",
+      "source": "оценка без источника; прежде было 30% подростков и 3% людей любого возраста, в том числе пожилых"
+    }
+  },
+  "beards": {
+    "weightsPercentByAge": {
+      "16-17": {
+        "none": 95,
+        "stubble": 5
+      },
+      "18-59": {
+        "none": 72,
+        "stubble": 12,
+        "moustache": 4,
+        "goatee": 4,
+        "middle": 6,
+        "long": 2
+      },
+      "60+": {
+        "none": 62,
+        "stubble": 8,
+        "moustache": 8,
+        "goatee": 4,
+        "middle": 10,
+        "long": 8
+      }
+    },
+    "keepAcrossPhase": 0.6,
+    "colour": "как у волос, седеет вместе с ними",
+    "drawing": "middle и long стыкуются с волосами: поднимаются по челюсти до висков, как у пака; без внутренних штрихов (2026-11-05, отменено «от линии челюсти»)",
+    "stubble": {
+      "drawnBy": "код, не рисунок: зона по челюсти и над губой без контура + точки",
+      "zoneOpacity": {
+        "darkerThanSkin": 0.32,
+        "lighterThanSkin": 0.14
+      },
+      "elder": "так же, как у молодых (вариант C)",
+      "dotColour": "контраст с кожей: светлые волосы (седина, блонд) на светлой коже (яркость кожи > 150) — тёмный оттенок волос ×0.5, как контур седины; на тёмной коже — цвет волос, смешанный с кожей на долю 0.35 + (150 − яркость кожи) / 300, чтобы точки не искрили; тёмные волосы — тёмный оттенок ×0.5",
+      "layer": "под морщинами"
+    },
+    "geneticDensityByGroup": "вопрос открыт, решается с исследованием",
+    "mouthWithBeard": {
+      "short": {
+        "dy": 7,
+        "note": "рот под усами"
+      },
+      "middle": {
+        "dy": 7
+      },
+      "long": {
+        "dy": 7
+      },
+      "mouthLine": "обычная чёрная на любой бороде; светлая линия на тёмной бороде попробована 2026-11-14 и отклонена",
+      "goatee": "без изменений (только бородка на подбородке)",
+      "stubble": "без изменений",
+      "note": "пересмотрено 2026-11-14: у полных бород рот опущен на 7, как у усов, все рты видны, без просвета в бороде; скрытие закрытых ртов (2026-11-07) отменено"
+    },
+    "contour": {
+      "widthUnits": 1.6,
+      "hairWidthUnits": 2.2,
+      "shade": 0.68,
+      "hairShade": 0.5,
+      "packFilterWidth": 0.7,
+      "rule": "контур бород и усов тоньше и бледнее, чем у волос (2026-11-07)"
+    },
+    "stubbleZone": "с головой v1 (2026-11-15): зона по форме лица — по бокам до внутреннего края щеки, огибает мочку уха и уходит к челюсти; низ обрезан маской «кожа головы без контура», поэтому край совпадает с челюстью, не заходит на уши и не подкрашивает контур"
+  },
+  "glasses": {
+    "shapes": [
+      "round",
+      "square"
+    ],
+    "shapesLater": [
+      "big_round",
+      "cat_eye"
+    ],
+    "frameColoursPercent": {
+      "black": 45,
+      "brown": 20,
+      "metal": 15,
+      "colour": 15,
+      "white": 5
+    },
+    "chanceByAge": {
+      "baby": 0,
+      "child": 0.05,
+      "teen": 0.15,
+      "adult": 0.25,
+      "elder": 0.55,
+      "$comment": "только для режима без происхождения; с происхождением — phenotypeProfiles.*.glasses"
+    },
+    "persistAcrossPhase": "автоматически через порог из сида (phenotypeRules.glasses)",
+    "sunglasses": "только кастомизация",
+    "mouthDy": {
+      "units": 7,
+      "rule": "при любых очках рот ниже на 7; с бородой или усами сдвиги не складываются (тоже 7); носогубные складки сдвигаются вместе со ртом",
+      "decided": "2026-11-15"
+    },
+    "white": {
+      "parts": "glasses_round_white, glasses_square_white — векторные (tools/vector-parts.mjs)",
+      "frame": "LIGHT, толщина 3, форма снята с нарезанных оправ N1, линзы симметрично по центру лица",
+      "outline": "INK 2,2 только снаружи оправы, внутри линз обводки нет",
+      "reason": "обводка фильтром давала двойной контур и лесенки на маленьком размере; из 8 вариантов выбран A",
+      "decided": "2026-11-15"
+    },
+    "frameInPrototype": "форма поровну; цвет — frameColoursPercent среди нарисованных цветов (чёрная 45 и белая 5 → 90 и 10%); выбирается один раз на жизнь (pickGlasses). Исправлено 2026-11-15: раньше белая выпадала в 50%",
+    "frames": {
+      "decided": "2026-11-15",
+      "look": "чёрная — сплошная (нарезанная N1); белая и цветные — оправа толщиной 3 своего цвета и тёмная обводка 2,2 только снаружи (glasses_*_white с LIGHT = цвет); металл — оправа 2,2 и обводка 1,8 (glasses_*_metal)",
+      "colours": {
+        "white": "#FFFFFF",
+        "brown": "#8A5A36",
+        "red": "#D2483C",
+        "blue": "#3F78C8",
+        "green": "#3E9A62",
+        "silver": "#C9CDD2",
+        "gold": "#E2A62A",
+        "gunmetal": "#6E757D"
+      },
+      "groups": {
+        "metal": [
+          "silver",
+          "gold",
+          "gunmetal"
+        ],
+        "colour": [
+          "red",
+          "blue",
+          "green"
+        ]
+      },
+      "pick": "форма поровну; группа по frameColoursPercent (чёрная 45, коричневая 20, металл 15, цветная 15, белая 5); цвет внутри группы поровну среди подходящих к коже",
+      "skinContrast": "цвет оправы не выпадает, если разница с кожей ΔE (CIELAB) меньше 30: коричневая — на коже 3–6, серебро — на коже 1; чёрная и белая без проверки. Проверка по одной яркости отвергнута: запрещала красную, синюю и зелёную на тёмной коже",
+      "rejected": "цветные оправы сплошным цветом без обводки (вариант B) — сплошная только чёрная; золото #D8B45A — бледное, терялось на светлой коже"
+    }
+  },
+  "faces": {
+    "style": "dots — единственный (мультяшные лица убраны 2026-11-15)",
+    "dotFaces": {
+      "smile": [
+        "ordinary",
+        "smile"
+      ],
+      "cute": [
+        "cute",
+        "smile"
+      ],
+      "laughs": [
+        "closed",
+        "grin"
+      ],
+      "willing": [
+        "love",
+        "saliva"
+      ],
+      "love": [
+        "love",
+        "smile"
+      ],
+      "melancholic": [
+        "Default",
+        "sad"
+      ],
+      "sleepy": [
+        "sad",
+        "saliva"
+      ],
+      "sad": [
+        "sad",
+        "sad"
+      ],
+      "gloating": [
+        "evil",
+        "smile"
+      ],
+      "tempered": [
+        "sad",
+        "smile"
+      ],
+      "angry": [
+        "evil",
+        "teeth"
+      ],
+      "fright": [
+        "fright",
+        "open_mouth"
+      ],
+      "crying": [
+        "crying",
+        "sad"
+      ]
+    },
+    "baseFaceWeightsPercent": {
+      "smile": 40,
+      "neutral": 5,
+      "smirk": 5,
+      "cute": 15,
+      "tempered": 15,
+      "laughs": 10,
+      "gloating": 5,
+      "melancholic": 5,
+      "$comment": "neutral и smirk — новые рты, нарисованы 2026-11-06 (tools/vector-parts.mjs) и подключены в генератор. Позже доли привязываются к темпераменту."
+    },
+    "lashes": {
+      "replacesOrdinary": {
+        "f": 0.25,
+        "m": 0.03
+      }
+    },
+    "wink": "только редкое событие",
+    "mouthsUse": {
+      "base": [
+        "smile",
+        "neutral",
+        "smirk"
+      ],
+      "emotions": [
+        "sad",
+        "open_mouth",
+        "grin",
+        "laugh",
+        "teeth"
+      ],
+      "sleepAndBabies": [
+        "saliva",
+        "small_o"
+      ]
+    },
+    "salivaMeansSleep": {
+      "eyes": "sad",
+      "rule": "рот saliva всегда со спокойно закрытыми глазами (eyes_sad — дуги вниз), если глаза не заданы явно; willing (love + saliva) рисуется как sleepy",
+      "decided": "2026-11-14"
+    },
+    "stateFaces": {
+      "tired": [
+        "Default",
+        "smile"
+      ],
+      "ill": [
+        "Default",
+        "sad"
+      ],
+      "dead": [
+        "dead",
+        "sad"
+      ],
+      "peace": [
+        "sad",
+        "smile"
+      ]
+    },
+    "outlinedEyes": [
+      "crying",
+      "love"
+    ],
+    "eventsOnly": {
+      "love": "влюблённость, помолвка, свадьба",
+      "crying": "потеря близкого"
+    },
+    "mood": {
+      "stat": "S.st.h",
+      "tiers": [
+        {
+          "from": 70,
+          "face": "базовое, если оно радостное (cute, laughs, smile, love), иначе cute"
+        },
+        {
+          "from": 40,
+          "face": "базовое"
+        },
+        {
+          "from": 20,
+          "face": "melancholic"
+        },
+        {
+          "from": 0,
+          "face": "sad"
+        }
+      ]
+    },
+    "health": {
+      "stat": "S.st.hl",
+      "below40": {
+        "face": "tired (при счастье ниже 40 — ill)",
+        "bags": true,
+        "headDropUnits": 1
+      },
+      "below20": {
+        "face": "ill",
+        "bags": true,
+        "headDropUnits": 2
+      },
+      "skinTone": "не меняется"
+    },
+    "death": {
+      "rule": "счастье в момент смерти ≥ 40 — peace (спокойно закрытые глаза), ниже 40 — dead (крестики)",
+      "threshold": 40,
+      "laterOption": "учитывать причину смерти"
+    }
+  },
+  "babies": {
+    "blanket": {
+      "genderedShare": 0.75,
+      "bySex": {
+        "f": "#F5C6DA",
+        "m": "#BFD9F2"
+      },
+      "neutral": [
+        "#F6E3A5",
+        "#CFE8C4",
+        "#BFE3E8",
+        "#E8DDF2"
+      ],
+      "source": "оценка: Mintel 2017 — нейтральную детскую одежду поддерживают 20% родителей в США, 24–25% среди молодых и городских"
+    },
+    "faces": {
+      "sleepy": 40,
+      "smile": 30,
+      "cute": 20,
+      "laughs": 10
+    },
+    "swaddle": {
+      "weights": {
+        "wrap": 70,
+        "bow": 15,
+        "ribbon": 15
+      },
+      "variants": "wrap — со складкой; bow — маленький бантик (×0,69, центр y 131,5); ribbon — бантик с хвостиками ленты (×0,76, центр y 131); контур бантика 1,2 единицы (до 2026-11-15: ×0,6 у y 128 и ×0,66 у y 127,5)",
+      "bowColour": "насыщенный тон пелёнки (HSL: светлота −0,22, не ниже 0,4; насыщенность ×1,1 + 0,15, не выше 0,85), смягчённый на 35% к цвету пелёнки",
+      "drawnBy": "код (tools/vector-parts.mjs), не ChatGPT; лист N8 — только детские волосы",
+      "decided": "2026-11-14",
+      "fold": "у wrap складка — тёмный тон пелёнки (цвет × 0,72), толщина 2 (2026-11-15)",
+      "outline": "контур пелёнки в размере сцены добирается фильтром, как у остальных деталей; чёткий векторный вариант показан 2026-11-15 и отклонён — оставить как есть"
+    },
+    "pacifier": {
+      "onlyWithSwaddle": "wrap",
+      "weights": {
+        "none": 64,
+        "ring": 18,
+        "oval": 18
+      },
+      "weightsNote": "доли среди пелёнок wrap (70% младенцев), всего соска примерно у 25%; с бантиком (bow, ribbon) соски нет (решение 2026-11-15)",
+      "variants": "ring — щиток-«бабочка», кольцо и кнопка одного цвета; oval — овальный щиток, кольцо побольше, светлая кнопка",
+      "replaces": "рот; глаза — по лицу младенца (у спящего закрыты)",
+      "colour": "насыщенный тон пелёнки (как у бантика до смягчения)",
+      "drawnBy": "код (tools/vector-parts.mjs)",
+      "decided": "2026-11-15"
+    },
+    "hair": {
+      "none": 35,
+      "wisps": 14,
+      "curl": "curl — крупная спираль линией 2,6; curl_wisp — спираль и короткий волосок рядом (2026-11-15); делят долю волосинок",
+      "curl_wisp": 8,
+      "fuzz": 20,
+      "fuzz_wavy": 15,
+      "curlyType": {
+        "none": 25,
+        "wisps": 11,
+        "curl": 7,
+        "curl_wisp": 7,
+        "fuzz": 15,
+        "fuzz_wavy": 35,
+        "for": [
+          "curly",
+          "coily"
+        ]
+      },
+      "colour": "натуральный цвет волос + 12% белого (светлый детский сдвиг); чёрные и тёмные (яркость ниже 60) не осветляются",
+      "parts": "векторные (tools/vector-parts.mjs, 2026-11-15): wisps — три волоска линией тёмного оттенка волос; fuzz, fuzz_wavy — полупрозрачный (0,5) цвет волос без контура, обрезанный маской «кожа головы без контура» (manifest → maskBy). Хохолок и кудряшки N8 отклонены, лежат как baby_hair_*_n8_rejected",
+      "lines": "волосинки и завитки рисуются без утолщения на мелком масштабе (v1Thick): иначе в сцене склеиваются в комок",
+      "note": "у кудрявых и курчавых чаще пушок с волной",
+      "fuzzOpacity": 0.25,
+      "fuzzNote": "пушок и пушок волной — цвет волос с прозрачностью 0,25 (было 0,5 — темновато, решение 2026-11-15)"
+    }
+  },
+  "appearanceGroups": {
+    "source": "SKIN_W / SKIN_C / SKIN_G в src/engine/game.en.js (около строки 150073), уточнение этнической группой S.eth.g",
+    "groups": [
+      "n",
+      "m",
+      "s",
+      "e",
+      "se",
+      "ca",
+      "a",
+      "ha",
+      "l",
+      "sc",
+      "c",
+      "br",
+      "in",
+      "au",
+      "pa",
+      "co",
+      "ro"
+    ],
+    "europeSplitForHairColour": [
+      "nordic",
+      "britishIsles",
+      "southern",
+      "eastern",
+      "westCentral"
+    ]
+  },
+  "ethics": [
+    "одинаковые наборы глаз, ртов и причёсок для всех стран",
+    "от происхождения зависят только фенотипы с данными: тон кожи, цвет и тип волос, седина, облысение, очки",
+    "религиозные и национальные вещи — только выбор игрока в кастомизации, никогда автоматически",
+    "болезнь не меняет тон кожи"
+  ],
+  "output": {
+    "frames": {
+      "body": {
+        "x": -14,
+        "y": 0,
+        "w": 173,
+        "h": 174,
+        "ground": 164,
+        "note": "полный рост, общий для всех"
+      },
+      "portrait": {
+        "x": -6,
+        "y": 2,
+        "w": 157,
+        "h": 130,
+        "note": "по голове и плечам, лица одного размера"
+      }
+    },
+    "anchors": {
+      "feet": [
+        72.5,
+        164
+      ],
+      "headCenter": [
+        72.5,
+        77
+      ],
+      "note": "взрослый, масштаб 1; у детей и пожилых — с масштабом возраста"
+    },
+    "rule": "общая рамка для всех персонажей (DECISIONS.md, 2026-11-06)"
+  },
+  "clothes": {
+    "drawnBy": "код (composer → codeBody), 2026-11-15",
+    "details": "вещи отличаются формой; из деталей остались только шнурки худи (светлый тон: цвет + 55% белого, на белых вещах — цвет × 0,8) и капюшон худи тоном × 0,9; тон = цвет × 0,82 (у тёмных вещей — цвет + 22% белого)",
+    "top": {
+      "kinds": {
+        "tee": "футболка",
+        "shirt": "рубашка: широкий короткий рукав (трапеция шире руки на 2,2 с каждой стороны, общий контур с рукой); планка и воротник убраны",
+        "hoodie": "худи: капюшон тоном у плеч и два шнурка 2 × 10, длинный рукав; манжеты, карман и резинка снизу убраны",
+        "sweater": "свитер-жилет поверх рубашки: глубокий V-вырез и длинные рукава цвета рубашки (белая, у светлых жилетов — голубая #8FB3E0); полосы, резинка и манжеты убраны"
+      },
+      "weightsPercent": {
+        "tee": 50,
+        "shirt": 20,
+        "hoodie": 15,
+        "sweater": 15
+      },
+      "decided": "2026-11-15: из вариантов формой пользователь выбрал рубашку B (широкий рукав), свитер C (жилет на рубашке); худи — прежнее без затемнений, шнурки крупнее"
+    },
+    "legwear": {
+      "weightsPercent": {
+        "f": {
+          "pants": 45,
+          "shorts": 25,
+          "skirt": 30
+        },
+        "m": {
+          "pants": 65,
+          "shorts": 35
+        }
+      },
+      "skirt": "расклёшенная до y 151, ноги под ней голые"
+    },
+    "dress": {
+      "kinds": {
+        "basic": "прежнее платье",
+        "sundress": "сарафан: без рукавов, волнистый низ — волна (5 полуволн, высота 1,6) или волна мельче (7 × 1,2), поровну, один на всю жизнь (c.hem); светлая полоса у подола убрана 2026-11-15",
+        "belted": "с поясом: расклёшенная юбка от талии; линия пояса убрана 2026-11-15 — платье отличается только формой"
+      },
+      "weightsPercent": {
+        "basic": 50,
+        "sundress": 25,
+        "belted": 25
+      },
+      "hemPercent": {
+        "wave": 50,
+        "wave_small": 50
+      }
+    },
+    "rejected": {
+      "sneakers": "слишком цветной человечек — лишний цвет на ногах",
+      "boots": "на таком маленьком теле не отличаются от обычной обуви, широкие слипаются",
+      "kidsV1": "2026-11-15: комбинезон с лямками, полоски, принт-сердечко, сарафан-фартук — на детском теле мелкие детали не читаются",
+      "adultTopVariants": "2026-11-15: рубашка навыпуск с круглым низом, открытый ворот, расстёгнутая поверх футболки, крупная клетка; худи с капюшоном в цвет, большим капюшоном, оверсайз, рукава другим тоном, большой карман; свитер оверсайз, суженный к низу, с кокеткой, кардиган",
+      "sundressScallops": "2026-11-15: фестоны (все полуволны вниз) у сарафана"
+    },
+    "pending": {
+      "sandals": "набросок на доске, в генератор не включены (похожи на полосатые носки)"
+    },
+    "decided": "2026-11-15",
+    "kids": {
+      "decided": "2026-11-15",
+      "age": "только «ребёнок»; рубашка, худи, свитер и платье с поясом — с подросткового возраста",
+      "principle": "крупные цветовые блоки и силуэт, без мелких деталей",
+      "kinds": {
+        "tee": "футболка (обычная)",
+        "raglan": "реглан: рукава цвета низа",
+        "band": "одна широкая светлая полоса через грудь (на белых вещах — на тон темнее)",
+        "block": "комбинезон одним цветом: торс и брюки цвета низа, из рукавов видна футболка цвета верха",
+        "romper": "песочник: футболка и шорты одного цвета, короткий рукав",
+        "dress": "обычное платье или сарафан, поровну",
+        "apron": "платье поверх футболки: платье цвета низа, рукава цвета верха",
+        "puffy": "пышное короткое платье; 40% — без рукавов"
+      },
+      "weightsPercent": {
+        "m": {
+          "tee": 30,
+          "raglan": 15,
+          "band": 15,
+          "block": 20,
+          "romper": 20
+        },
+        "f": {
+          "tee": 15,
+          "raglan": 10,
+          "band": 10,
+          "block": 10,
+          "romper": 10,
+          "dress": 10,
+          "apron": 15,
+          "puffy": 20
+        }
+      },
+      "legwearPercent": {
+        "m": {
+          "pants": 50,
+          "shorts": 50
+        },
+        "f": {
+          "pants": 35,
+          "shorts": 35,
+          "skirt": 30
+        }
+      },
+      "legwearNote": "комбинезон — всегда брюки, песочник — шорты, платья — без штанин",
+      "persistence": "гардероб выбирается один раз на персонажа (c.childOutfit) и не меняется при перерисовке",
+      "boards": [
+        "previews/kids_clothes_v2.png",
+        "previews/kids_clothes_in_generator.png",
+        "previews/kids_clothes_in_generator_closeup.png",
+        "previews/kids_clothes_catalog.png"
+      ]
+    },
+    "principle": "вещи отличаются формой (силуэт, длина, низ, рукав, вырез), а не полосками, планками и цветовыми переходами (пользователь, 2026-11-15)"
+  },
+  "animation": {
+    "decided": "2026-11-15, прототип в composer (переключатель «Анимация»)",
+    "where": "composer → ANIM, ppWrap, ppCss; работает в режиме новых рисунков",
+    "parts": {
+      "head": ".pp-head — задние волосы и голова, два слоя (за телом и перед ним)",
+      "torso": ".pp-torso — торс с одеждой или платье",
+      "arms": ".pp-arm.pp-l / .pp-r — рука с рукавом, точка вращения — плечо (середина руки по ширине, 3 ниже верха)",
+      "legs": ".pp-leg.pp-l / .pp-r — нога со штаниной и обувью",
+      "eyes": ".pp-eyes — глаза, внутри масштаба головы",
+      "upper": ".pp-up — всё выше ног; при шаге качается вместе вокруг середины стоп",
+      "baby": ".pp-swaddle — пелёнка, .pp-head — голова"
+    },
+    "idle": {
+      "breathSeconds": 2.5,
+      "torsoStretch": 1.03,
+      "headUp": 1.2,
+      "armsUp": 0.8,
+      "note": "торс вытягивается вверх от бёдер, голова и руки поднимаются вместе с ним"
+    },
+    "blink": {
+      "periodSeconds": "3,4–6,0, свой у каждого",
+      "closedShare": "глаза сжаты около 7% периода",
+      "how": "сжатие глаз по вертикали до 0,08 вокруг линии глаз (y 82)",
+      "noBlink": "закрытые глаза (closed, sad), dead, crying, love; мультяшные лица"
+    },
+    "walk": {
+      "stepSeconds": 0.8,
+      "legLift": 3,
+      "armSwingDegrees": 7,
+      "bodyBob": 1.4,
+      "bodyRockDegrees": 1.5,
+      "note": "шаг на месте лицом к зрителю: ноги поочерёдно поднимаются, тело приподнимается и чуть наклоняется к опорной ноге, руки качаются"
+    },
+    "elderSlow": 1.35,
+    "phase": "сдвиг фазы и период моргания берутся из порогов персонажа (greyU, wrinkleU): люди рядом двигаются не в такт и не меняются при перерисовке",
+    "reducedMotion": "при системной настройке «меньше движения» анимация выключена",
+    "boards": [
+      "previews/anim_frames_v1.png",
+      "previews/anim_frames_ages.png"
+    ]
+  },
+  "ageEffects": {
+    "$comment": "Привязки внешности к образу жизни и условиям (аудит 2026-11-15). Входы из игры: c.access (доступ к очкам по стране проживания и доходу), c.climate (hot / temperate / cold по стране проживания), c.smoker (S.smoker), c.temperament (S.trait). Без них прототип берёт значения по профилю происхождения или случайно.",
+    "access": {
+      "$comment": "Доступ к коррекции зрения вдаль eREC 2021 (Bourne 2022), доля 0–1; research/appearance-stats.md, раздел 5. Доли очков профиля — «носят на родине»; при другом доступе (c.access) доля умножается на отношение доступов. В игре c.access = доступ страны проживания × поправка на доход (бедным ×0,5, богатым ×1,1 — оценка).",
+      "byProfile": {
+        "eastAsia": 0.4,
+        "southeastAsia": 0.4,
+        "southAsia": 0.09,
+        "centralAsia": 0.495,
+        "mena": 0.62,
+        "subSaharanAfrica": 0.057,
+        "hornOfAfrica": 0.057,
+        "nordic": 0.79,
+        "westCentralEurope": 0.79,
+        "britishIsles": 0.79,
+        "southernEurope": 0.79,
+        "easternEurope": 0.495,
+        "latinAmerica": 0.345,
+        "indigenousAmericas": 0.2,
+        "europeanOriginNA": 0.79,
+        "africanDiasporaMixed": 0.79,
+        "europeanOriginAUNZ": 0.79,
+        "aboriginalAustralia": 0.5,
+        "melanesia": 0.1,
+        "polynesia": 0.3,
+        "southAfricaColoured": 0.4,
+        "roma": 0.495
+      },
+      "estimate": [
+        "indigenousAmericas",
+        "aboriginalAustralia",
+        "melanesia",
+        "polynesia",
+        "southAfricaColoured",
+        "roma"
+      ]
+    },
+    "greyCover": {
+      "women": 0.4,
+      "men": 0.07,
+      "untilAge": 70,
+      "source": "Pew (США): закрашивают седину 45% женщин и 8% мужчин; Pantene (Британия): 40% и 7%. В бедных странах — пропорционально доступу (оценка)",
+      "effect": "натуральный цвет без седины до 70 лет"
+    },
+    "smoking": {
+      "shareMen": 0.325,
+      "shareWomen": 0.066,
+      "source": "ВОЗ, отчёт о трендах табака 2025 (данные 2024)",
+      "effect": "носогубные складки с 45–50 лет, мешки под глазами с 50; гусиные лапки без изменений (Guyuron 2013, близнецы)"
+    },
+    "temperament": {
+      "faceMultipliers": {
+        "warm": {
+          "smile": 1.3,
+          "cute": 1.6,
+          "gloating": 0.3,
+          "tempered": 0.7,
+          "melancholic": 0.8
+        },
+        "act": {
+          "laughs": 2,
+          "smirk": 1.6,
+          "cute": 1.2,
+          "melancholic": 0.5,
+          "tempered": 0.6,
+          "neutral": 0.7
+        },
+        "cur": {
+          "cute": 1.5,
+          "smirk": 1.4,
+          "neutral": 1.2,
+          "tempered": 0.8
+        },
+        "grit": {
+          "tempered": 1.8,
+          "neutral": 1.8,
+          "laughs": 0.6,
+          "cute": 0.7,
+          "smile": 0.9
+        }
+      },
+      "dyeMultipliers": {
+        "act": 1.5,
+        "cur": 1.5,
+        "warm": 1,
+        "grit": 0.6
+      },
+      "note": "замысел, не статистика; в прототипе темперамент случайный, поровну"
+    },
+    "climate": {
+      "byProfile": {
+        "eastAsia": "temperate",
+        "southeastAsia": "hot",
+        "southAsia": "hot",
+        "centralAsia": "cold",
+        "mena": "hot",
+        "subSaharanAfrica": "hot",
+        "hornOfAfrica": "hot",
+        "nordic": "cold",
+        "westCentralEurope": "temperate",
+        "britishIsles": "temperate",
+        "southernEurope": "temperate",
+        "easternEurope": "cold",
+        "latinAmerica": "hot",
+        "indigenousAmericas": "hot",
+        "europeanOriginNA": "temperate",
+        "africanDiasporaMixed": "temperate",
+        "europeanOriginAUNZ": "temperate",
+        "aboriginalAustralia": "hot",
+        "melanesia": "hot",
+        "polynesia": "hot",
+        "southAfricaColoured": "temperate",
+        "roma": "temperate"
+      },
+      "multipliers": {
+        "hot": {
+          "top": {
+            "tee": 1.4,
+            "shirt": 1.3,
+            "hoodie": 0.3,
+            "sweater": 0.3
+          },
+          "legwear": {
+            "shorts": 1.8,
+            "skirt": 1.2,
+            "pants": 0.8
+          },
+          "dress": {
+            "sundress": 1.8
+          },
+          "longSleeve": 0.25,
+          "child": {
+            "romper": 1.5,
+            "block": 0.7
+          }
+        },
+        "temperate": {
+          "longSleeve": 0.5
+        },
+        "cold": {
+          "top": {
+            "tee": 0.7,
+            "shirt": 0.9,
+            "hoodie": 1.6,
+            "sweater": 1.8
+          },
+          "legwear": {
+            "shorts": 0.3,
+            "skirt": 0.9,
+            "pants": 1.3
+          },
+          "dress": {
+            "sundress": 0.3
+          },
+          "longSleeve": 0.75,
+          "child": {
+            "romper": 0.4,
+            "block": 1.3
+          }
+        }
+      },
+      "note": "в игре — климат страны проживания; по профилю — только для прототипа. Множители — замысел"
+    },
+    "height": {
+      "men": 1.02,
+      "women": 0.985,
+      "individualSd": 0.02,
+      "max": 0.04,
+      "source": "мужчины в среднем на 7–8% выше женщин, разброс внутри пола около 4% (NCD-RisC); в чиби — половина",
+      "fromAge": "разница полов с подросткового возраста, индивидуальный разброс — с детства"
+    },
+    "decided": "2026-11-15"
+  },
+  "gameHookup": {
+    "$comment": "Как игра «1 in 8 B» берёт людей из генератора (решено 2026-11-15, макет экрана жизни, холст v353). Решения — DECISIONS.md, раздел «Подключение к игре».",
+    "replaces": "старый генератор игры (src/ui/people) и его картинки на экране жизни",
+    "static": "макет v353 — статичные кадры; с v354 сцена — живой SVG генератора с айдл-анимацией (ppCss), портреты и доска — статичные кадры того же рендера",
+    "inputs": {
+      "years": "возраст в годах → группа по ages[*].years; ageYears = реальные годы (ageLook)",
+      "happiness": "S.st.h → state.h",
+      "health": "S.st.hl → state.hl",
+      "deathHappiness": "S.st.h в момент смерти → deathH",
+      "origin": "группа S.eth.g → profileFromGame.byGroup",
+      "family": "relative(родитель) — дети от родителей, внуки от детей"
+    },
+    "playerFaces": {
+      "base": "счастье 40–69",
+      "happy": "счастье 70+",
+      "low": "счастье < 40",
+      "sad": "счастье < 20",
+      "tired": "здоровье < 40",
+      "ill": "здоровье < 20, или < 40 при счастье < 40"
+    },
+    "scene": {
+      "bodyViewBox": [
+        -6,
+        -14,
+        157,
+        182
+      ],
+      "pxPerUnit": 0.5,
+      "bodyPx": [
+        78.5,
+        91
+      ],
+      "feetPx": 89,
+      "centrePx": 39.25,
+      "groundY": 236,
+      "headOverlapPx": 5,
+      "height": "AGES[группа].scale × heightK, все на одной линии земли",
+      "portraitViewBox": [
+        -6,
+        2,
+        157,
+        130
+      ],
+      "masks": "головы и волосы — растровые маски в общих defs генератора; PNG вынесены ассетами (production-ui/assets/peeps/parts)"
+    },
+    "mockupRender": {
+      "tool": "mobile-mockups/production-ui/tools/peeps-render.js",
+      "seed": 41,
+      "rng": "mulberry32 вместо Math.random",
+      "order": "новые кадры только в конец: возрастные черты запоминаются при первом рисовании группы",
+      "note": "одна семья = один проход рендера: при смене кода генератора тот же сид даёт других людей"
+    },
+    "idle": {
+      "always": true,
+      "classes": [
+        ".pp-torso",
+        ".pp-head",
+        ".pp-arm",
+        ".pp-eyes"
+      ],
+      "numbers": "ANIM (breath 2.5 s, breathStretch 1.03, headBob 1.2, armBob 0.8, elderSlow 1.35); blink period 3.4–6 s by wrinkleU",
+      "dead": "не двигается",
+      "reducedMotion": "выключает"
+    }
+  },
+  "freckles": {
+    "decided": "2026-11-15",
+    "kinds": {
+      "A": "по 3 точки на щеку",
+      "C": "по 5 точек на щеку и 3 на переносице на уровне глаз"
+    },
+    "weights": {
+      "A": 60,
+      "C": 40
+    },
+    "sharePercent": {
+      "red": 75,
+      "blondSkin1to2": 35,
+      "brownSkin1": 15,
+      "other": 0
+    },
+    "fromAge": 3,
+    "colour": "кожа, смешанная с #7A3E22 наполовину; точки радиусом 0,95",
+    "source": "оценка: веснушки дают в основном варианты гена MC1R у рыжих и светлокожих (Bastiaens 2001); точных долей по цвету волос нет",
+    "rejected": "вариант B (по 5 точек без переносицы); переносица на уровне рта"
+  },
+  "cane": {
+    "decided": "2026-11-15",
+    "kinds": {
+      "crook": "прямая деревянная с крюком",
+      "medical": "медицинская, ручка симметрична относительно трости"
+    },
+    "weights": {
+      "crook": 70,
+      "medical": 30
+    },
+    "sharePercentByAge": {
+      "65-74": 9,
+      "75-84": 18,
+      "85+": 30
+    },
+    "source": "NHATS 2011: трость у 16,4% жителей США старше 65; разбивка по возрастам — оценка",
+    "drawing": "в правой руке, перед рукой, ручка на уровне кисти и не выше руки; контур 2,3 снаружи; у детей и подростков не бывает; игра может задать трость явно (c.cane) при инвалидности",
+    "wheelchair": "не нарисована: персонаж всегда стоит, нужна сидячая поза тела",
+    "medicalPosition": "медицинская — по центру кисти (трость x 99,5, ручка 93,5–105,5), сдвинута ближе к телу по просьбе пользователя 2026-11-15"
+  }
+}

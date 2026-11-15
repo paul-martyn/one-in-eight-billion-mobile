@@ -1,0 +1,10 @@
+People in the game are drawn by the character generator Peepulation (style "Nemo Peeps": proportions and parts
+of the free character pack below, redrawn; files in peeps/parts, generator in src/vendor/peepulation).
+
+Character pack by nonemo (https://nonemo.itch.io/)
+
+License (CC0)
+http://creativecommons.org/publicdomain/zero/1.0/
+
+You may use these graphics in personal and commercial projects.
+Credit (nonemo, https://nonemo.itch.io/) would be nice but is not mandatory.

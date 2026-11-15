@@ -122,7 +122,7 @@ function DeathDialog({ onLookBack, still, settled }: { onLookBack: () => void; s
         <h2 id={titleId} className="lfd__title">{t('death.title')}</h2>
         <div className="lfd__who">
           <span className="lfd__face">
-            <PersonPortrait look={look} size={56} fallback={<span className="lfd__initial k-big" aria-hidden="true">{initial}</span>} />
+            <PersonPortrait look={look} size={56} face="dead" fallback={<span className="lfd__initial k-big" aria-hidden="true">{initial}</span>} />
           </span>
           <span className="lfd__names">
             <span className="lfd__name k-o">{name}</span>

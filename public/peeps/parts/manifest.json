@@ -1,0 +1,2097 @@
+{
+ "unit": "nemo head canvas 145x143",
+ "note": "Слои — маски (белый + альфа) в порядке order; цвет каждого слоя задаётся ключом при отрисовке.",
+ "parts": {
+  "head": {
+   "version": "v1",
+   "sheet": "N1",
+   "source": "output/N1_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "SKIN",
+    "INK"
+   ],
+   "files": {
+    "SKIN": "head/head.SKIN.png",
+    "INK": "head/head.INK.png"
+   }
+  },
+  "hair_back_short": {
+   "version": "v1",
+   "sheet": "N1",
+   "source": "output/N1_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_back_short.HAIR.png",
+    "HAIRLINE": "hair/hair_back_short.HAIRLINE.png"
+   }
+  },
+  "hair_back_long": {
+   "version": "v1",
+   "sheet": "N1",
+   "source": "output/N1_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_back_long.HAIR.png",
+    "HAIRLINE": "hair/hair_back_long.HAIRLINE.png"
+   }
+  },
+  "hair_back_curly": {
+   "version": "v1",
+   "sheet": "N1",
+   "source": "output/N1_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_back_curly.HAIR.png",
+    "HAIRLINE": "hair/hair_back_curly.HAIRLINE.png"
+   }
+  },
+  "glasses_round": {
+   "version": "v1",
+   "sheet": "N1",
+   "source": "output/N1_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "INK"
+   ],
+   "files": {
+    "INK": "glasses/glasses_round.INK.png"
+   }
+  },
+  "glasses_square": {
+   "version": "v1",
+   "sheet": "N1",
+   "source": "output/N1_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "INK"
+   ],
+   "files": {
+    "INK": "glasses/glasses_square.INK.png"
+   }
+  },
+  "beard_middle_jaw": {
+   "version": "v1",
+   "sheet": "N1",
+   "source": "output/N1_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "beard/beard_middle_jaw.HAIR.png",
+    "HAIRLINE": "beard/beard_middle_jaw.HAIRLINE.png"
+   }
+  },
+  "beard_long_jaw": {
+   "version": "v1",
+   "sheet": "N1",
+   "source": "output/N1_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "beard/beard_long_jaw.HAIR.png",
+    "HAIRLINE": "beard/beard_long_jaw.HAIRLINE.png"
+   }
+  },
+  "hair_front_chupchik": {
+   "version": "v1",
+   "sheet": "N2",
+   "source": "output/N2_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_chupchik.HAIR.png",
+    "HAIRLINE": "hair/hair_front_chupchik.HAIRLINE.png"
+   }
+  },
+  "hair_front_curly": {
+   "version": "v1",
+   "sheet": "N2",
+   "source": "output/N2_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_curly.HAIR.png",
+    "HAIRLINE": "hair/hair_front_curly.HAIRLINE.png"
+   }
+  },
+  "hair_front_elegant": {
+   "version": "v1",
+   "sheet": "N2",
+   "source": "output/N2_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_elegant.HAIR.png",
+    "HAIRLINE": "hair/hair_front_elegant.HAIRLINE.png"
+   },
+   "polished": {
+    "date": "2026-11-15",
+    "restrokeSigmaUnits": 0.8,
+    "before": "parts/_archive/2026-11-15_before_smooth/hair_front_elegant.*.png"
+   }
+  },
+  "hair_front_regular": {
+   "version": "v1",
+   "sheet": "N2",
+   "source": "output/N2_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_regular.HAIR.png",
+    "HAIRLINE": "hair/hair_front_regular.HAIRLINE.png"
+   }
+  },
+  "hair_front_straight": {
+   "version": "v1",
+   "sheet": "N2",
+   "source": "output/N2_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_straight.HAIR.png",
+    "HAIRLINE": "hair/hair_front_straight.HAIRLINE.png"
+   },
+   "polished": {
+    "date": "2026-11-15",
+    "restrokeSigmaUnits": 1,
+    "before": "parts/_archive/2026-11-15_before_smooth/hair_front_straight.*.png"
+   }
+  },
+  "eyes_ordinary": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK"
+   ],
+   "file": "eyes/eyes_ordinary.svg"
+  },
+  "eyes_default": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK"
+   ],
+   "file": "eyes/eyes_default.svg"
+  },
+  "eyes_closed": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK"
+   ],
+   "file": "eyes/eyes_closed.svg"
+  },
+  "eyes_sad": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK"
+   ],
+   "file": "eyes/eyes_sad.svg"
+  },
+  "eyes_cute": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK",
+    "LIGHT"
+   ],
+   "file": "eyes/eyes_cute.svg"
+  },
+  "eyes_evil": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK"
+   ],
+   "file": "eyes/eyes_evil.svg"
+  },
+  "eyes_fright": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK",
+    "LIGHT"
+   ],
+   "file": "eyes/eyes_fright.svg"
+  },
+  "eyes_love": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK",
+    "HEART"
+   ],
+   "file": "eyes/eyes_love.svg"
+  },
+  "eyes_crying": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK",
+    "LIGHT"
+   ],
+   "file": "eyes/eyes_crying.svg"
+  },
+  "eyes_dead": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK"
+   ],
+   "file": "eyes/eyes_dead.svg"
+  },
+  "eyes_lashes": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK"
+   ],
+   "file": "eyes/eyes_lashes.svg"
+  },
+  "eyes_wink": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK"
+   ],
+   "file": "eyes/eyes_wink.svg"
+  },
+  "mouth_smile": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK"
+   ],
+   "file": "mouth/mouth_smile.svg"
+  },
+  "mouth_sad": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK"
+   ],
+   "file": "mouth/mouth_sad.svg"
+  },
+  "mouth_open_mouth": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK",
+    "MOUTH",
+    "BLUSH"
+   ],
+   "file": "mouth/mouth_open_mouth.svg"
+  },
+  "mouth_saliva": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK",
+    "LIGHT"
+   ],
+   "file": "mouth/mouth_saliva.svg"
+  },
+  "mouth_grin": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK",
+    "LIGHT",
+    "MOUTH",
+    "BLUSH"
+   ],
+   "file": "mouth/mouth_grin.svg"
+  },
+  "mouth_teeth": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK",
+    "LIGHT"
+   ],
+   "file": "mouth/mouth_teeth.svg"
+  },
+  "mouth_neutral": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK"
+   ],
+   "file": "mouth/mouth_neutral.svg"
+  },
+  "mouth_smirk": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK"
+   ],
+   "file": "mouth/mouth_smirk.svg"
+  },
+  "mouth_laugh": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK",
+    "LIGHT",
+    "MOUTH",
+    "BLUSH"
+   ],
+   "file": "mouth/mouth_laugh.svg"
+  },
+  "mouth_small_o": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK",
+    "MOUTH"
+   ],
+   "file": "mouth/mouth_small_o.svg"
+  },
+  "wrinkles_60": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK"
+   ],
+   "file": "wrinkles/wrinkles_60.svg"
+  },
+  "wrinkles_75": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK"
+   ],
+   "file": "wrinkles/wrinkles_75.svg"
+  },
+  "hair_front_receding": {
+   "version": "v1",
+   "sheet": "N5",
+   "source": "output/N5_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_receding.HAIR.png",
+    "HAIRLINE": "hair/hair_front_receding.HAIRLINE.png"
+   }
+  },
+  "hair_front_buzz": {
+   "version": "v1",
+   "sheet": "N5",
+   "source": "output/N5_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_buzz.HAIR.png",
+    "HAIRLINE": "hair/hair_front_buzz.HAIRLINE.png"
+   },
+   "polished": {
+    "date": "2026-11-15",
+    "restrokeSigmaUnits": 1,
+    "before": "parts/_archive/2026-11-15_before_smooth/hair_front_buzz.*.png"
+   }
+  },
+  "hair_front_side_part": {
+   "version": "v1",
+   "sheet": "N5",
+   "source": "output/N5_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_side_part.HAIR.png",
+    "HAIRLINE": "hair/hair_front_side_part.HAIRLINE.png"
+   }
+  },
+  "hair_front_top_bun": {
+   "version": "v1",
+   "sheet": "N5",
+   "source": "output/N5_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_top_bun.HAIR.png",
+    "HAIRLINE": "hair/hair_front_top_bun.HAIRLINE.png"
+   }
+  },
+  "hair_front_afro": {
+   "version": "v1",
+   "sheet": "N5",
+   "source": "output/N5_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_afro.HAIR.png",
+    "HAIRLINE": "hair/hair_front_afro.HAIRLINE.png"
+   }
+  },
+  "hair_front_bob": {
+   "version": "v1",
+   "sheet": "N5",
+   "source": "output/N5_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_bob.HAIR.png",
+    "HAIRLINE": "hair/hair_front_bob.HAIRLINE.png"
+   }
+  },
+  "hair_front_bowl": {
+   "version": "v1",
+   "sheet": "N10",
+   "source": "output/N10_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_bowl.HAIR.png",
+    "HAIRLINE": "hair/hair_front_bowl.HAIRLINE.png"
+   },
+   "polished": {
+    "date": "2026-11-15",
+    "restrokeSigmaUnits": 0.6,
+    "before": "parts/_archive/2026-11-15_before_smooth/hair_front_bowl.*.png"
+   }
+  },
+  "hair_front_pixie": {
+   "version": "v1",
+   "sheet": "N10",
+   "source": "output/N10_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_pixie.HAIR.png",
+    "HAIRLINE": "hair/hair_front_pixie.HAIRLINE.png"
+   }
+  },
+  "hair_front_slicked_back": {
+   "version": "v1",
+   "sheet": "N10",
+   "source": "output/N10_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_slicked_back.HAIR.png",
+    "HAIRLINE": "hair/hair_front_slicked_back.HAIRLINE.png"
+   }
+  },
+  "hair_front_braid_crown": {
+   "version": "v1",
+   "sheet": "N10",
+   "source": "output/N10_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_braid_crown.HAIR.png",
+    "HAIRLINE": "hair/hair_front_braid_crown.HAIRLINE.png"
+   }
+  },
+  "hair_front_comb_over_rejected": {
+   "version": "v1",
+   "sheet": "N10",
+   "source": "output/N10_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_comb_over_rejected.HAIR.png",
+    "HAIRLINE": "hair/hair_front_comb_over_rejected.HAIRLINE.png"
+   }
+  },
+  "hair_back_pigtails": {
+   "version": "v1",
+   "sheet": "N6",
+   "source": "output/N6_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "CLOTH1",
+    "HAIRLINE",
+    "INK"
+   ],
+   "files": {
+    "HAIR": "hair/hair_back_pigtails.HAIR.png",
+    "CLOTH1": "hair/hair_back_pigtails.CLOTH1.png",
+    "HAIRLINE": "hair/hair_back_pigtails.HAIRLINE.png",
+    "INK": "hair/hair_back_pigtails.INK.png"
+   },
+   "polished": {
+    "date": "2026-11-15",
+    "restrokeSigmaUnits": 1.4,
+    "before": "parts/_archive/2026-11-15_before_smooth/hair_back_pigtails.*.png"
+   }
+  },
+  "hair_back_braids": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK",
+    "HAIR",
+    "HAIRLINE",
+    "CLOTH1"
+   ],
+   "file": "hair/hair_back_braids.svg"
+  },
+  "hair_back_ponytail_high": {
+   "version": "v1",
+   "sheet": "N6",
+   "source": "output/N6_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "CLOTH1",
+    "HAIRLINE",
+    "INK"
+   ],
+   "files": {
+    "HAIR": "hair/hair_back_ponytail_high.HAIR.png",
+    "CLOTH1": "hair/hair_back_ponytail_high.CLOTH1.png",
+    "HAIRLINE": "hair/hair_back_ponytail_high.HAIRLINE.png",
+    "INK": "hair/hair_back_ponytail_high.INK.png"
+   },
+   "polished": {
+    "date": "2026-11-15",
+    "restrokeSigmaUnits": 1.8,
+    "before": "parts/_archive/2026-11-15_before_smooth/hair_back_ponytail_high.*.png"
+   }
+  },
+  "beard_goatee": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "file": "beard/beard_goatee.svg"
+  },
+  "beard_middle": {
+   "version": "v1",
+   "sheet": "N6",
+   "source": "output/N6_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "beard/beard_middle.HAIR.png",
+    "HAIRLINE": "beard/beard_middle.HAIRLINE.png"
+   }
+  },
+  "beard_long": {
+   "version": "v1",
+   "sheet": "N6",
+   "source": "output/N6_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "beard/beard_long.HAIR.png",
+    "HAIRLINE": "beard/beard_long.HAIRLINE.png"
+   }
+  },
+  "beard_short_n1": {
+   "version": "v1",
+   "sheet": "N1",
+   "source": "output/N1_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "beard/beard_short_n1.HAIR.png",
+    "HAIRLINE": "beard/beard_short_n1.HAIRLINE.png"
+   }
+  },
+  "beard_short": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "file": "beard/beard_short.svg"
+  },
+  "hair_back_braids_n6": {
+   "version": "v1",
+   "sheet": "N6",
+   "source": "output/N6_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "CLOTH1",
+    "HAIRLINE",
+    "INK"
+   ],
+   "files": {
+    "HAIR": "hair/hair_back_braids_n6.HAIR.png",
+    "CLOTH1": "hair/hair_back_braids_n6.CLOTH1.png",
+    "HAIRLINE": "hair/hair_back_braids_n6.HAIRLINE.png",
+    "INK": "hair/hair_back_braids_n6.INK.png"
+   }
+  },
+  "beard_goatee_n6": {
+   "version": "v1",
+   "sheet": "N6",
+   "source": "output/N6_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "beard/beard_goatee_n6.HAIR.png",
+    "HAIRLINE": "beard/beard_goatee_n6.HAIRLINE.png"
+   }
+  },
+  "hair_front_side_swept": {
+   "version": "v1",
+   "sheet": "N9",
+   "source": "output/N9_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_side_swept.HAIR.png",
+    "HAIRLINE": "hair/hair_front_side_swept.HAIRLINE.png"
+   }
+  },
+  "hair_front_spiky": {
+   "version": "v1",
+   "sheet": "N9",
+   "source": "output/N9_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_spiky.HAIR.png",
+    "HAIRLINE": "hair/hair_front_spiky.HAIRLINE.png"
+   }
+  },
+  "hair_front_wavy_part": {
+   "version": "v1",
+   "sheet": "N9",
+   "source": "output/N9_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_front_wavy_part.HAIR.png",
+    "HAIRLINE": "hair/hair_front_wavy_part.HAIRLINE.png"
+   }
+  },
+  "hair_back_very_long": {
+   "version": "v1",
+   "sheet": "N9",
+   "source": "output/N9_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_back_very_long.HAIR.png",
+    "HAIRLINE": "hair/hair_back_very_long.HAIRLINE.png"
+   }
+  },
+  "hair_back_wavy": {
+   "version": "v1",
+   "sheet": "N9",
+   "source": "output/N9_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 154
+   },
+   "px": [
+    738,
+    752
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "hair/hair_back_wavy.HAIR.png",
+    "HAIRLINE": "hair/hair_back_wavy.HAIRLINE.png"
+   }
+  },
+  "baby_swaddle_wrap": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 170
+   },
+   "keys": [
+    "INK",
+    "CLOTH1",
+    "CLOTH2"
+   ],
+   "file": "baby/baby_swaddle_wrap.svg"
+  },
+  "baby_swaddle_bow": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 170
+   },
+   "keys": [
+    "INK",
+    "CLOTH1",
+    "CLOTH2"
+   ],
+   "file": "baby/baby_swaddle_bow.svg"
+  },
+  "baby_swaddle_ribbon": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 170
+   },
+   "keys": [
+    "INK",
+    "CLOTH1",
+    "CLOTH2"
+   ],
+   "file": "baby/baby_swaddle_ribbon.svg"
+  },
+  "baby_pacifier_ring": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK",
+    "CLOTH2"
+   ],
+   "file": "baby/baby_pacifier_ring.svg"
+  },
+  "baby_pacifier_oval": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK",
+    "LIGHT",
+    "CLOTH2"
+   ],
+   "file": "baby/baby_pacifier_oval.svg"
+  },
+  "baby_hair_tuft_n8_rejected": {
+   "version": "v1",
+   "sheet": "N8",
+   "source": "output/N8_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 176
+   },
+   "px": [
+    1044,
+    1218
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "baby/baby_hair_tuft_n8_rejected.HAIR.png",
+    "HAIRLINE": "baby/baby_hair_tuft_n8_rejected.HAIRLINE.png"
+   },
+   "rejected": "2026-11-15: заменены векторными волосинками и пушком"
+  },
+  "baby_hair_curls_n8_rejected": {
+   "version": "v1",
+   "sheet": "N8",
+   "source": "output/N8_v01.png",
+   "box": {
+    "x": -3,
+    "y": -3,
+    "w": 151,
+    "h": 176
+   },
+   "px": [
+    1044,
+    1218
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "HAIR",
+    "HAIRLINE"
+   ],
+   "files": {
+    "HAIR": "baby/baby_hair_curls_n8_rejected.HAIR.png",
+    "HAIRLINE": "baby/baby_hair_curls_n8_rejected.HAIRLINE.png"
+   },
+   "rejected": "2026-11-15: заменены векторными волосинками и пушком"
+  },
+  "baby_hair_wisps": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "HAIRLINE"
+   ],
+   "file": "baby/baby_hair_wisps.svg"
+  },
+  "baby_hair_fuzz": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "HAIR"
+   ],
+   "file": "baby/baby_hair_fuzz.svg",
+   "maskBy": "head:SKIN"
+  },
+  "baby_hair_fuzz_wavy": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "HAIR"
+   ],
+   "file": "baby/baby_hair_fuzz_wavy.svg",
+   "maskBy": "head:SKIN"
+  },
+  "baby_hair_curl": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "HAIRLINE"
+   ],
+   "file": "baby/baby_hair_curl.svg"
+  },
+  "baby_hair_curl_wisp": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "HAIRLINE"
+   ],
+   "file": "baby/baby_hair_curl_wisp.svg"
+  },
+  "wrinkles_folds": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK"
+   ],
+   "file": "wrinkles/wrinkles_folds.svg"
+  },
+  "glasses_round_white": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK",
+    "LIGHT"
+   ],
+   "file": "glasses/glasses_round_white.svg"
+  },
+  "glasses_square_white": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK",
+    "LIGHT"
+   ],
+   "file": "glasses/glasses_square_white.svg"
+  },
+  "arms": {
+   "version": "v1",
+   "sheet": "N4",
+   "source": "output/N4_v01.png",
+   "box": {
+    "x": 26.235294117647058,
+    "y": 98.23529411764706,
+    "w": 92.52941176470588,
+    "h": 69.52941176470588
+   },
+   "px": [
+    630,
+    472
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "SKIN",
+    "INK"
+   ],
+   "files": {
+    "SKIN": "arms/arms.SKIN.png",
+    "INK": "arms/arms.INK.png"
+   }
+  },
+  "sleeves_short": {
+   "version": "v1",
+   "sheet": "N4",
+   "source": "output/N4_v01.png",
+   "box": {
+    "x": 26.235294117647058,
+    "y": 98.23529411764706,
+    "w": 92.52941176470588,
+    "h": 69.52941176470588
+   },
+   "px": [
+    630,
+    472
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "CLOTH1",
+    "CLOTH2",
+    "CLOTH3",
+    "INK"
+   ],
+   "files": {
+    "CLOTH1": "sleeves/sleeves_short.CLOTH1.png",
+    "CLOTH2": "sleeves/sleeves_short.CLOTH2.png",
+    "CLOTH3": "sleeves/sleeves_short.CLOTH3.png",
+    "INK": "sleeves/sleeves_short.INK.png"
+   }
+  },
+  "sleeves_long": {
+   "version": "v1",
+   "sheet": "N4",
+   "source": "output/N4_v01.png",
+   "box": {
+    "x": 26.235294117647058,
+    "y": 98.23529411764706,
+    "w": 92.52941176470588,
+    "h": 69.52941176470588
+   },
+   "px": [
+    630,
+    472
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "CLOTH1",
+    "CLOTH2",
+    "CLOTH3",
+    "INK"
+   ],
+   "files": {
+    "CLOTH1": "sleeves/sleeves_long.CLOTH1.png",
+    "CLOTH2": "sleeves/sleeves_long.CLOTH2.png",
+    "CLOTH3": "sleeves/sleeves_long.CLOTH3.png",
+    "INK": "sleeves/sleeves_long.INK.png"
+   }
+  },
+  "tee_with_shorts": {
+   "version": "v1",
+   "sheet": "N4",
+   "source": "output/N4_v01.png",
+   "box": {
+    "x": 26.235294117647058,
+    "y": 98.23529411764706,
+    "w": 92.52941176470588,
+    "h": 69.52941176470588
+   },
+   "px": [
+    630,
+    472
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "CLOTH1",
+    "CLOTH2",
+    "CLOTH3",
+    "INK"
+   ],
+   "files": {
+    "CLOTH1": "tee/tee_with_shorts.CLOTH1.png",
+    "CLOTH2": "tee/tee_with_shorts.CLOTH2.png",
+    "CLOTH3": "tee/tee_with_shorts.CLOTH3.png",
+    "INK": "tee/tee_with_shorts.INK.png"
+   }
+  },
+  "dress": {
+   "version": "v1",
+   "sheet": "N4",
+   "source": "output/N4_v01.png",
+   "box": {
+    "x": 26.235294117647058,
+    "y": 98.23529411764706,
+    "w": 92.52941176470588,
+    "h": 69.52941176470588
+   },
+   "px": [
+    630,
+    472
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "CLOTH1",
+    "CLOTH2",
+    "CLOTH3",
+    "INK"
+   ],
+   "files": {
+    "CLOTH1": "dress/dress.CLOTH1.png",
+    "CLOTH2": "dress/dress.CLOTH2.png",
+    "CLOTH3": "dress/dress.CLOTH3.png",
+    "INK": "dress/dress.INK.png"
+   }
+  },
+  "legs": {
+   "version": "v1",
+   "sheet": "N4",
+   "source": "output/N4_v01.png",
+   "box": {
+    "x": 26.235294117647058,
+    "y": 98.23529411764706,
+    "w": 92.52941176470588,
+    "h": 69.52941176470588
+   },
+   "px": [
+    630,
+    472
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "SKIN",
+    "INK"
+   ],
+   "files": {
+    "SKIN": "legs/legs.SKIN.png",
+    "INK": "legs/legs.INK.png"
+   }
+  },
+  "pants": {
+   "version": "v1",
+   "sheet": "N4",
+   "source": "output/N4_v01.png",
+   "box": {
+    "x": 26.235294117647058,
+    "y": 98.23529411764706,
+    "w": 92.52941176470588,
+    "h": 69.52941176470588
+   },
+   "px": [
+    630,
+    472
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "CLOTH1",
+    "CLOTH2",
+    "CLOTH3",
+    "INK"
+   ],
+   "files": {
+    "CLOTH1": "pants/pants.CLOTH1.png",
+    "CLOTH2": "pants/pants.CLOTH2.png",
+    "CLOTH3": "pants/pants.CLOTH3.png",
+    "INK": "pants/pants.INK.png"
+   }
+  },
+  "shorts": {
+   "version": "v1",
+   "sheet": "N4",
+   "source": "output/N4_v01.png",
+   "box": {
+    "x": 26.235294117647058,
+    "y": 98.23529411764706,
+    "w": 92.52941176470588,
+    "h": 69.52941176470588
+   },
+   "px": [
+    630,
+    472
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "CLOTH1",
+    "CLOTH2",
+    "CLOTH3",
+    "INK"
+   ],
+   "files": {
+    "CLOTH1": "shorts/shorts.CLOTH1.png",
+    "CLOTH2": "shorts/shorts.CLOTH2.png",
+    "CLOTH3": "shorts/shorts.CLOTH3.png",
+    "INK": "shorts/shorts.INK.png"
+   }
+  },
+  "shoes": {
+   "version": "v1",
+   "sheet": "N4",
+   "source": "output/N4_v01.png",
+   "box": {
+    "x": 26.235294117647058,
+    "y": 98.23529411764706,
+    "w": 92.52941176470588,
+    "h": 69.52941176470588
+   },
+   "px": [
+    630,
+    472
+   ],
+   "smooth": {
+    "ss": 6,
+    "out": 2,
+    "sigma": 0.6
+   },
+   "order": [
+    "CLOTH1",
+    "CLOTH2",
+    "CLOTH3",
+    "INK"
+   ],
+   "files": {
+    "CLOTH1": "shoes/shoes.CLOTH1.png",
+    "CLOTH2": "shoes/shoes.CLOTH2.png",
+    "CLOTH3": "shoes/shoes.CLOTH3.png",
+    "INK": "shoes/shoes.INK.png"
+   }
+  },
+  "glasses_round_metal": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK",
+    "LIGHT"
+   ],
+   "file": "glasses/glasses_round_metal.svg"
+  },
+  "glasses_square_metal": {
+   "version": "v1",
+   "sheet": "vector",
+   "source": "tools/vector-parts.mjs",
+   "format": "svg",
+   "box": {
+    "x": 0,
+    "y": 0,
+    "w": 145,
+    "h": 143
+   },
+   "keys": [
+    "INK",
+    "LIGHT"
+   ],
+   "file": "glasses/glasses_square_metal.svg"
+  }
+ }
+}

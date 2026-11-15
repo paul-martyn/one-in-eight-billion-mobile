@@ -267,7 +267,7 @@ function OddsContent({ cert, view }: { cert: CertificateVM; view: BirthOddsVM | 
                 const luck = luckOf(c.iso), n = luck == null ? null : Math.round(luck * 100), x = out3(p('same', 160 + i * STEP_MS, COUNT_MS));
                 return (
                   <li key={`${c.name}-${i}`} className="od-comp" style={rise(p('same', 100 + i * STEP_MS, IN_MS), -12, 0)} aria-label={`${c.name}, ${sexLabel(c.sex)} · ${c.place}${n == null ? '' : `, ${t('odds2.luck', { n })}`}`}>
-                    <span className="od-comp__face" aria-hidden="true"><PersonPortrait look={looks?.[i] ?? null} fallback={<BabyGlyph size={34} />} /></span>
+                    <span className="od-comp__face" aria-hidden="true"><PersonPortrait look={looks?.[i] ?? null} frame="circle" fallback={<BabyGlyph size={34} />} /></span>
                     <span className="od-comp__text" aria-hidden="true">
                       <b>{c.name}</b>
                       <span>{sexLabel(c.sex)} · {c.place}</span>
