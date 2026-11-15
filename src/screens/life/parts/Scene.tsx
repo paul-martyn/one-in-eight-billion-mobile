@@ -6,7 +6,7 @@
 // грузятся — инициал игрока в круге.
 import { useMemo, useRef } from 'react';
 import { t } from '../../../i18n';
-import { gestureId, useAdapter, useYearProgress } from '../../../adapters/useGame';
+import { gestureId, useAdapter } from '../../../adapters/useGame';
 import type { LifeVM } from '../../../adapters/viewModels';
 import { householdAppearances } from '../../../adapters/vm/appearance';
 import type { StatKey } from '../../../ui/components';
@@ -14,6 +14,20 @@ import { useSharedCoreView } from '../../../ui/people/hooks';
 import { Household, type HouseholdMemberView } from '../../../ui/people/Household';
 import { SIL } from '../../birthOdds/oddsArt';
 import { FastGlyph, PauseGlyph, PlayGlyph } from './lifeIcons';
+
+/** Кристалл над игроком (холст v322): «это вы», без подписи. */
+function Crystal() {
+  return (
+    <span className="lt-gem" aria-hidden="true">
+      <svg width="14" height="20" viewBox="0 0 18 26">
+        <path d="M9 1.2 L1.2 13 L9 24.8 Z" fill="#9be57a" />
+        <path d="M9 1.2 L16.8 13 L9 24.8 Z" fill="#62c43f" />
+        <path d="M1.2 13 H16.8" stroke="#2f5a17" strokeWidth="1.1" opacity="0.35" />
+        <path d="M9 1.2 L16.8 13 L9 24.8 L1.2 13 Z" fill="none" stroke="#2f5a17" strokeWidth="1.6" strokeLinejoin="round" />
+      </svg>
+    </span>
+  );
+}
 
 /** Повторное нажатие на переключатель в пределах 350 мс игнорируется. */
 function useTapGuard(ms = 350) {
@@ -102,7 +116,7 @@ export function Scene({ life, k, enabled, over, flash }: { life: LifeVM; k: numb
     <header className={`lt-scene ${over ? 'is-over' : ''}`}>
       <div className="lt-art" aria-hidden="true"><span className="lt-art__light" /></div>
       <TopStats life={life} k={k} flash={flash} />
-      <Household members={members} badge={<span className="lt-hero__you">{t('life.you')}</span>} label={homeLabel} fallback={hero} />
+      <Household members={members} badge={<Crystal />} label={homeLabel} fallback={hero} />
       {over ? null : (
         <>
           {life.fastForward && <p className="lt-ffbadge" role="status"><FastGlyph />{t('life.ffBadge')}</p>}
@@ -117,50 +131,9 @@ export function Scene({ life, k, enabled, over, flash }: { life: LifeVM; k: numb
               {t('life.speedNow', { speed: life.speed })}
             </button>
           </div>
-          <YearProgress pace={t('life.yearPace', { sec: Math.round(life.secondsPerYear) })} />
         </>
       )}
     </header>
   );
 }
 
-/** Тонкая полоса доли текущего года (S.t), обновляется каждый кадр отдельно от снимка. */
-function YearProgress({ pace }: { pace: string }) {
-  const p = useYearProgress();
-  const pct = Math.round(p * 100);
-  return (
-    <div className="lt-year" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={pct} aria-label={t('life.yearProgress', { pct, pace })}>
-      <span className="lt-year__fill" style={{ transform: `scaleX(${p})` }} />
-    </div>
-  );
-}
-
-/**
- * Фокус года под шапкой (FOCUS оригинала, команда setFocus): варианты зависят от
- * возраста и занятия; пока выбирать нельзя (младенчество), решает семья.
- */
-export function FocusRow({ life, enabled }: { life: LifeVM; enabled: boolean }) {
-  const adapter = useAdapter();
-  const opts = life.focus.options;
-  const pick = (key: string) => {
-    const now = adapter.getSnapshot();
-    if (!enabled || now.lifePhase !== 'life' || !now.life || now.life.focus.current === key) return;
-    adapter.setFocus(gestureId(), key);
-  };
-  return (
-    <section className="lt-focus" aria-label={t('activities.focus.title')}>
-      <p className="lt-focus__title">{t('activities.focus.title')}</p>
-      {opts.length ? (
-        <div className="lt-focus__row" role="group" aria-label={t('activities.focus.title')} data-many={opts.length > 3 || undefined}>
-          {opts.map(o => (
-            <button key={o.k} type="button" className="lt-focus__btn" aria-pressed={life.focus.current === o.k} title={o.desc} disabled={!enabled} onClick={() => pick(o.k)}>
-              <span>{o.name}</span>
-            </button>
-          ))}
-        </div>
-      ) : (
-        <p className="lt-focus__none">{t('life.focusFamily')}</p>
-      )}
-    </section>
-  );
-}

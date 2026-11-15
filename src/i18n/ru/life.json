@@ -44,5 +44,19 @@
   "life.notice.focus": "Выберите фокус года, затем продолжите.",
   "life.notice.spend": "Готово.",
   "life.notice.noEnergy": "Пока недостаточно энергии для новой жизни.",
-  "life.focusFamily": "Пока что, как пройдёт год, решает семья."
+  "life.focusFamily": "Пока что, как пройдёт год, решает семья.",
+  "life.plates": "Сейчас",
+  "life.plate.age": "Возраст",
+  "life.plate.money": "Деньги",
+  "life.plate.school": "Учёба",
+  "life.plate.work": "Работа",
+  "life.plate.status": "Статус",
+  "life.tabs": "Дневник и фокус",
+  "life.tab.focus": "Фокус: {name}",
+  "life.tab.focusNone": "Фокус",
+  "life.card.age": "Возр.",
+  "life.focus.make": "Выбрать",
+  "life.focus.on": "В фокусе",
+  "life.focus.makeAria": "Выбрать фокус: {name}",
+  "life.newestFirst": "Сначала новые"
 }

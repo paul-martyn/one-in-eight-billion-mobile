@@ -19,9 +19,14 @@ export type LifeVM = {
   place: string; bornIn: string; bornIso: string; curIso: string; migrated: boolean;
   stats: Stats; status: Segment[]; job: string;
   netWorth: string; income: string; lifeExpectancy: number;
+  /** Деньги на руках (S.money) в валюте игры — плашка «Деньги» под сценой. */
+  money: string;
+  /** Занятие для плашки под сценой: учёба (класс), работа (должность) или статус (малыш, армия, пенсия, поиск работы). */
+  occupation: { kind: 'school' | 'work' | 'status'; text: string };
   speed: number; speeds: number[]; paused: boolean; fastForward: boolean; secondsPerYear: number;
   pending: DecisionVM | null;
-  focus: { current: string | null; options: { k: string; name: string; desc: string }[] };
+  /** Варианты фокуса года (focusOptions) и их изменения статов за год (FOCUS[k].e). */
+  focus: { current: string | null; options: { k: string; name: string; desc: string; fx: Fx }[] };
   family: FamilyRowVM[];
   companions: CompanionVM[];
   logLength: number;
@@ -87,14 +92,27 @@ export function lifeVM(T: Top): LifeVM {
     stats: { hl: S.st.hl, h: S.st.h, sm: S.st.sm, so: S.st.so },
     status, job: plain(T.jobNow()),
     netWorth: plain(T.wonStr(T.netWorth())), income: plain(T.wonStr(S.income || 0)),
+    money: plain(T.wonStr(S.money || 0)),
+    occupation: occupationOf(S, status),
     lifeExpectancy: T.leOf(B, S.sex),
     speed: S.speed, speeds: [...T.SPEEDS], paused: !!S.paused, fastForward: !!S.ff, secondsPerYear: S.yearSec / S.speed,
     pending: decisionVM(S.pending),
-    focus: { current: S.focus ?? null, options: focusKeys.map(k => ({ k, name: plain(T.FOCUS[k].n), desc: plain(T.focusD(k)) })) },
+    focus: { current: S.focus ?? null, options: focusKeys.map(k => ({ k, name: plain(T.FOCUS[k].n), desc: plain(T.focusD(k)), fx: fxOf(T.FOCUS[k].e) })) },
     family: [],
     companions: (S.comps || []).map((c: Record<string, any>) => companionVM(T, c, S.age)),
     logLength: S.log.length,
   };
+}
+
+/**
+ * Занятие для плашки: первая часть statusLine оригинала. Класс, должность, армия и пенсия там выделены <b> — берётся
+ * выделенный текст; у малыша и ребёнка без школы — простой текст до первой « · ».
+ */
+function occupationOf(S: Record<string, any>, status: Segment[]): LifeVM['occupation'] {
+  const first = status[0];
+  const text = !first ? '' : first.strong ? first.text.trim() : first.text.split('·')[0]!.trim();
+  const kind = S.school ? 'school' : first?.strong && !S.retired && !(S.serveLeft > 0) ? 'work' : 'status';
+  return { kind, text };
 }
 
 /** Строки семьи из famRows. Вызывать только в renderPass-точках (famRows может обратиться к RNG). */

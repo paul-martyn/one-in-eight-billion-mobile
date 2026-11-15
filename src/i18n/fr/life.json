@@ -44,5 +44,19 @@
   "life.notice.focus": "Choisissez la priorité de l’année, puis continuez.",
   "life.notice.spend": "C’est fait.",
   "life.notice.noEnergy": "Pas encore assez d’énergie pour une nouvelle vie.",
-  "life.focusFamily": "Pour l’instant, c’est votre famille qui décide de l’année."
+  "life.focusFamily": "Pour l’instant, c’est votre famille qui décide de l’année.",
+  "life.plates": "Maintenant",
+  "life.plate.age": "Âge",
+  "life.plate.money": "Argent",
+  "life.plate.school": "École",
+  "life.plate.work": "Travail",
+  "life.plate.status": "Statut",
+  "life.tabs": "Journal et priorité",
+  "life.tab.focus": "Priorité : {name}",
+  "life.tab.focusNone": "Priorité",
+  "life.card.age": "Âge",
+  "life.focus.make": "Choisir",
+  "life.focus.on": "Choisie",
+  "life.focus.makeAria": "Choisir la priorité : {name}",
+  "life.newestFirst": "Les plus récents d’abord"
 }

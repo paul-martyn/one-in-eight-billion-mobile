@@ -41,6 +41,34 @@
   --color-money-up: #347119;
   --color-money-down: #b63629;
   --color-focus: #1c6e7a;
+  --color-journal-paper: #fbf4e5;
+  --color-journal-card: #fffaf1;
+  --color-journal-cap: #f5e8cf;
+  --color-journal-ink: #3b2414;
+  --color-journal-dec-line: #cfae84;
+  --color-tab-off: #e9d6b2;
+  --color-tab-off-ink: #6b4a2e;
+  --color-pressed-bg: #ead7b3;
+  --color-focus-on: #fff0b8;
+  --color-chip-up-bg: #e2f3d5;
+  --color-chip-up-line: #6cc04a;
+  --color-chip-up-ink: #2a7019;
+  --color-chip-down-bg: #fce0d8;
+  --color-chip-down-line: #e8775f;
+  --color-chip-down-ink: #a8321c;
+  --color-stat-health-dark: #b8314f;
+  --color-stat-joy-dark: #a8740a;
+  --color-stat-mind-dark: #3450c4;
+  --color-stat-ties-dark: #1f8466;
+  --color-plate-age: #ffe3ec;
+  --color-plate-money: #e4f3d6;
+  --color-plate-school: #e1e7ff;
+  --color-plate-work: #f7e3cd;
+  --color-plate-status: #fff1c4;
+  --color-time-btn-line: rgba(123, 75, 42, 0.45);
+  --color-time-btn-bg: rgba(255, 250, 240, 0.8);
+  --color-gem-shadow: rgba(40, 90, 20, 0.3);
+  --color-scroll-track: rgba(90, 52, 24, 0.1);
 
   /* Показатели */
   --color-stat-health: #ff6f8a;
@@ -84,6 +112,8 @@
   --font-size-title: 22px;
   --font-size-headline: 28px;
   --font-size-display: 40px;
+  --font-size-caption: 13px;
+  --font-size-row: 15px;
 
   /* Межстрочный интервал */
   --line-height-tight: 1.15;
