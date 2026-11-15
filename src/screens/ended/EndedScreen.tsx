@@ -60,7 +60,7 @@ export function EndedScreen({ nav, active }: ScreenProps) {
   useBack(toHub, { layer: 'screen', enabled: active });
 
   return (
-    <main className={`screen en${reduced ? ' en--still' : ''}`} data-shown={shown || undefined}>
+    <main className={`screen screen--u en${reduced ? ' en--still' : ''}`} data-shown={shown || undefined}>
       <div className="en__glow" aria-hidden="true" />
       <div className="en__scroll scroll">
         {data ? <Summary vm={data.vm} last={data.last} reduced={reduced} /> : <p className="en__missing">{t('ended.missing')}</p>}

@@ -99,7 +99,7 @@ export function LifeScreen({ screen, nav, active }: ScreenProps) {
   };
 
   return (
-    <main className={`screen lf ${dead ? 'is-over' : ''}`} data-tab={tab}>
+    <main className={`screen screen--u lf ${dead ? 'is-over' : ''}`} data-tab={tab}>
       <div className="lf__body" inert={blocked || undefined}>
         <div className="lf__stage">
           {shown.map(id => {

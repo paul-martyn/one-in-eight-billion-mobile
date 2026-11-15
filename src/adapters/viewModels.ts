@@ -93,7 +93,7 @@ export function lifeVM(T: Top): LifeVM {
     status, job: plain(T.jobNow()),
     netWorth: plain(T.wonStr(T.netWorth())), income: plain(T.wonStr(S.income || 0)),
     money: plain(T.wonStr(S.money || 0)),
-    occupation: occupationOf(S, status),
+    occupation: occupationOf(T, S, status),
     lifeExpectancy: T.leOf(B, S.sex),
     speed: S.speed, speeds: [...T.SPEEDS], paused: !!S.paused, fastForward: !!S.ff, secondsPerYear: S.yearSec / S.speed,
     pending: decisionVM(S.pending),
@@ -108,11 +108,15 @@ export function lifeVM(T: Top): LifeVM {
  * Занятие для плашки: первая часть statusLine оригинала. Класс, должность, армия и пенсия там выделены <b> — берётся
  * выделенный текст; у малыша и ребёнка без школы — простой текст до первой « · ».
  */
-function occupationOf(S: Record<string, any>, status: Segment[]): LifeVM['occupation'] {
+function occupationOf(T: Top, S: Record<string, any>, status: Segment[]): LifeVM['occupation'] {
   const first = status[0];
   const text = !first ? '' : first.strong ? first.text.trim() : first.text.split('·')[0]!.trim();
   // Учёба — и между ступенями школы (S.flags.between), и у «студента» без школы в этом году (S.job student).
-  const kind = S.school || S.job === 'student' || S.flags?.between ? 'school' : first?.strong && !S.retired && !(S.serveLeft > 0) ? 'work' : 'status';
+  // «Работа» — только у работающего (isWorking оригинала: должность есть и не из NONWORK); «ищет работу», «дома»,
+  // пенсия, служба и т. п. — «Статус».
+  const nonWork: string[] = Array.isArray(T.NONWORK) ? T.NONWORK : [];
+  const working = !!T.JOBS?.[S.job] && !nonWork.includes(S.job);
+  const kind = S.school || S.job === 'student' || S.flags?.between ? 'school' : first?.strong && working && !S.retired && !(S.serveLeft > 0) ? 'work' : 'status';
   return { kind, text };
 }
 

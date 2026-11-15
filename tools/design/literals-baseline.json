@@ -62,13 +62,6 @@
     "easing": 1,
     "fontSize": 0
   },
-  "src/screens/life/tabs/activities.css": {
-    "hex": 1,
-    "rgb": 1,
-    "duration": 0,
-    "easing": 0,
-    "fontSize": 0
-  },
   "src/screens/life/tabs/money.css": {
     "hex": 2,
     "rgb": 0,

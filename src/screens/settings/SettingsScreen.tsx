@@ -45,7 +45,7 @@ export function SettingsScreen({ nav, active }: ScreenProps) {
   const toLanguage = () => { if (active) nav.go({ id: 'language' }); };
 
   return (
-    <main className="screen stg">
+    <main className="screen screen--u stg">
       <div className="stg-glow" aria-hidden="true" />
       <header className="stg-head">
         <RoundButton className="stg-back" aria-label={t('settings.back')} onClick={back}><BackIcon size={22} /></RoundButton>

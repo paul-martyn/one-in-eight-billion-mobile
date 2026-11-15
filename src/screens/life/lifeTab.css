@@ -8,12 +8,20 @@
 .lt__wait { margin: 0; color: var(--color-muted); font-weight: 600; }
 
 /* ---- Шапка (вариант B2): светлый фон, свет за семьёй, показатели наверху ---- */
-.lt-scene { position: relative; flex: none; height: var(--scene-h); overflow: hidden; border-bottom: 2px solid var(--color-line); }
+.lt-scene {
+  position: relative; flex: none; height: var(--scene-h); overflow: hidden; border-bottom: 2px solid var(--color-line);
+  --stats-top: max(calc(var(--safe-top) + 6px), clamp(10px, 5.9cqh, 50px));
+}
+/*
+ * Семья стоит низко, у нижнего края сцены (15 ноября 2026: была на четверти высоты), между показателями и землёй,
+ * слева от столбика кнопок времени. Household сам уменьшает масштаб, если ряд не влезает в ширину или высоту.
+ */
+.lt-scene .pa-home { top: calc(var(--stats-top) + 62px); bottom: 6px; left: 8px; right: 54px; }
 .lt-art { position: absolute; inset: 0; background: linear-gradient(#fff0c8, #ffc777); }
 .lt-art__light { position: absolute; left: 9%; right: 9%; top: 37%; height: 70%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0)); }
 
 .lt-top {
-  position: absolute; z-index: 1; left: 0; right: 0; top: max(calc(var(--safe-top) + 6px), clamp(10px, 5.9cqh, 50px));
+  position: absolute; z-index: 1; left: 0; right: 0; top: var(--stats-top);
   display: flex; justify-content: center; gap: clamp(12px, 6.1cqw, 24px);
 }
 .lt-stat { position: relative; display: block; flex: none; width: 58px; height: 58px; }
@@ -54,15 +62,19 @@
 }
 .lt-hero__shadow { width: calc(var(--hero) * 0.72); height: 8px; margin-top: 3px; border-radius: 50%; background: rgba(107, 66, 38, 0.2); }
 
-/* Время: маленькие круглые кнопки 32 × 32 справа внизу шапки (холст v322); касание — с запасом 6 px вокруг. */
-.lt-time { position: absolute; z-index: 2; right: 10px; bottom: 9px; display: flex; gap: 6px; }
+/*
+ * Время: круглые кнопки 38 × 38 столбиком у правого края шапки, сверху вниз — «до решения», пауза, скорость
+ * (холст v322: 32 × 32 в ряд; 15 ноября 2026 — крупнее и столбиком, чтобы семья стояла низко и не заходила
+ * под кнопки). Касание — с запасом 3 px вокруг (кнопки стоят через 6).
+ */
+.lt-time { position: absolute; z-index: 2; right: 10px; bottom: 8px; display: flex; flex-direction: column; gap: 6px; }
 .lt-sq {
-  position: relative; display: grid; place-items: center; width: 32px; height: 32px; padding: 0;
-  border: 1.5px solid var(--color-time-btn-line); border-radius: 16px; background: var(--color-time-btn-bg); color: var(--color-ink);
+  position: relative; display: grid; place-items: center; width: 38px; height: 38px; padding: 0;
+  border: 1.5px solid var(--color-time-btn-line); border-radius: 19px; background: var(--color-time-btn-bg); color: var(--color-ink);
   transition: transform 140ms var(--ease-screen), background-color 0.2s ease;
 }
-.lt-sq::after { content: ''; position: absolute; inset: -6px; }
-.lt-sq svg { width: 13px; height: 13px; }
+.lt-sq::after { content: ''; position: absolute; inset: -3px; }
+.lt-sq svg { width: 15px; height: 15px; }
 .lt-sq:active:not(:disabled) { transform: translateY(2px) scale(0.96); }
 .lt-sq:disabled { opacity: 0.55; }
 .lt-sq.is-on { background: var(--color-teal); color: var(--color-white); }
@@ -81,20 +93,29 @@
 @keyframes lt-gem { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
 
 /* ---- Три плашки под сценой: возраст, деньги, занятие (v343–346) ---- */
-/* Ширина по содержимому: возраст и деньги узкие, занятию (класс, должность) — всё остальное место. */
-.lp { flex: none; display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: 6px; margin: 8px 10px 0; padding: 0; list-style: none; }
+/* Три плашки равной ширины, высота 54 (15 ноября 2026: было 44 и ширина по содержимому). */
+.lp { flex: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin: 8px 10px 0; padding: 0; list-style: none; }
 .lp__plate {
-  display: flex; align-items: center; gap: 8px; min-width: 0; height: 44px; padding: 0 8px 0 5px;
+  display: flex; align-items: center; gap: 6px; min-width: 0; height: 54px; padding: 0 5px 0 4px;
   border: 2px solid var(--color-ink); border-radius: 12px; background: var(--color-journal-card);
 }
-.lp__icon { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 9px; }
-.lp__icon svg { display: block; }
+/* Квадрат значка 28 (было 32): в плашке равной ширины тексту нужно место — слово занятия до ~72 px. */
+.lp__icon { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; }
+.lp__icon svg { display: block; width: 22px; height: 22px; }
 .lp__text { display: flex; flex-direction: column; min-width: 0; }
 .lp__label { font-size: var(--font-size-label); font-weight: 700; line-height: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .lp__value {
   /* Запас 2 px по бокам: обводка букв выходит за их рамку, а обрезка многоточием её бы срезала. */
-  margin: 1px -2px 0; padding: 0 2px; font-size: var(--font-size-caption); font-weight: 700; line-height: 16px; color: var(--color-white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin: 1px -2px 0; padding: 0 2px; font-size: var(--font-size-lead); font-weight: 700; line-height: 22px; color: var(--color-white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   text-shadow: var(--text-outline-os);
+}
+.lp__value--m { font-size: var(--font-size-body); }
+.lp__value--s { font-size: var(--font-size-small); }
+.lp__value--xs { font-size: var(--font-size-caption); }
+/* Занятие (класс, должность): прежний кегль 13, до двух строк. */
+.lp__value--text {
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; padding-bottom: 1px;
+  font-size: var(--font-size-caption); line-height: 15px; white-space: normal; overflow-wrap: break-word; hyphens: auto;
 }
 
 /* ---- Блок «Дневник жизни» / «Фокус» (v342–354): вкладки сверху на всю ширину, лист под ними ---- */
@@ -145,28 +166,31 @@
 .lc__src { display: block; margin-top: 3px; font-size: var(--font-size-caption); font-weight: 600; line-height: 17px; color: var(--color-journal-ink); overflow-wrap: break-word; hyphens: auto; }
 .lc__fx { margin-top: 5px; }
 
-/* Строки фокуса (строки действия дизайн-кода): значок в плашке 38, название, значки, кнопка в строке 106 × 40. */
-.lf { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 2px 7px 0 0; list-style: none; }
-.lf__row {
-  display: flex; align-items: center; gap: 10px; min-height: 62px; padding: 8px 8px 8px 9px;
+/*
+ * Строки фокуса (строки действия дизайн-кода): значок в плашке 44, название, значки, кнопка в строке 106 × 40.
+ * 15 ноября 2026: строки выше (68, было 62) и тянутся на всю высоту листа, если вариантов мало.
+ */
+.lfc { display: flex; flex-direction: column; gap: 6px; min-height: 100%; margin: 0; padding: 2px 7px 0 0; list-style: none; }
+.lfc__row {
+  flex: 1 0 auto; display: flex; align-items: center; gap: 10px; min-height: 68px; max-height: 92px; padding: 8px 8px 8px 9px;
   border: 1.5px solid var(--color-journal-outline); border-radius: 16px; background: var(--color-card);
 }
-.lf__row.is-on { border-color: var(--color-line); background: var(--color-focus-on); box-shadow: inset 0 0 0 1px var(--color-line); }
-.lf__tile { flex: none; display: grid; place-items: center; width: 38px; height: 38px; border: 1.5px solid var(--color-divider); border-radius: 11px; background: var(--color-paper); }
-.lf__tile svg { display: block; }
-.lf__main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
-.lf__name { font-size: var(--font-size-row); font-weight: 700; line-height: 19px; color: var(--color-ink-dark); overflow-wrap: break-word; }
-.lf__btn {
+.lfc__row.is-on { border-color: var(--color-line); background: var(--color-focus-on); box-shadow: inset 0 0 0 1px var(--color-line); }
+.lfc__tile { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border: 1.5px solid var(--color-divider); border-radius: 12px; background: var(--color-paper); }
+.lfc__tile svg { display: block; width: 28px; height: 28px; }
+.lfc__main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.lfc__name { font-size: var(--font-size-body); font-weight: 700; line-height: 20px; color: var(--color-ink-dark); overflow-wrap: break-word; }
+.lfc__btn {
   flex: none; display: flex; align-items: center; justify-content: center; gap: 4px; width: 106px; height: 40px; padding: 0 0 2.5px;
   border: 2px solid var(--color-line); border-radius: 13px; background: var(--color-cta);
   box-shadow: var(--shadow-cta-lip);
   font-size: var(--font-size-row); font-weight: 700; line-height: 1; transition: transform 140ms var(--ease-screen);
 }
-.lf__btn > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 96px; }
-.lf__btn:active:not(:disabled) { transform: translateY(2px) scale(0.97); }
-.lf__btn:disabled:not(.lf__btn--on) { opacity: 0.55; }
+.lfc__btn > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 96px; }
+.lfc__btn:active:not(:disabled) { transform: translateY(2px) scale(0.97); }
+.lfc__btn:disabled:not(.lfc__btn--on) { opacity: 0.55; }
 /* Нажатая «В фокусе»: плоская, без губы и блика, рамка и бежевый фон, тёмный текст с галочкой; не нажимается. */
-.lf__btn--on { padding: 0; border-color: var(--color-journal-outline); background: var(--color-pressed-bg); box-shadow: none; color: var(--color-tab-off-ink); font-size: var(--font-size-small); cursor: default; }
+.lfc__btn--on { padding: 0; border-color: var(--color-journal-outline); background: var(--color-pressed-bg); box-shadow: none; color: var(--color-tab-off-ink); font-size: var(--font-size-small); cursor: default; }
 
 /* Значки изменений по знаку (дизайн-код v350): число, потом значок стата. */
 .sc-row { display: flex; flex-wrap: wrap; gap: 5px; margin: 0; padding: 0; list-style: none; }

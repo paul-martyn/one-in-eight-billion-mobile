@@ -149,23 +149,23 @@ function FocusList({ id, tab, life, enabled }: { id: string; tab: string; life: 
   return (
     <div id={id} className="lb__scroll" role="tabpanel" aria-labelledby={tab} tabIndex={0}>
       {opts.length ? (
-        <ol className="lf" aria-label={t('activities.focus.title')}>
+        <ol className="lfc" aria-label={t('activities.focus.title')}>
           {opts.map(o => {
             const on = life.focus.current === o.k;
             return (
-              <li key={o.k} className={`lf__row ${on ? 'is-on' : ''}`} title={o.desc}>
-                <span className="lf__tile" aria-hidden="true">{FOCUS_ICON[o.k] ?? TARGET}</span>
-                <span className="lf__main">
-                  <b className="lf__name">{o.name}</b>
+              <li key={o.k} className={`lfc__row ${on ? 'is-on' : ''}`} title={o.desc}>
+                <span className="lfc__tile" aria-hidden="true">{FOCUS_ICON[o.k] ?? TARGET}</span>
+                <span className="lfc__main">
+                  <b className="lfc__name">{o.name}</b>
                   <FxChips fx={o.fx} />
                 </span>
                 {on ? (
-                  <button type="button" className="lf__btn lf__btn--on" disabled aria-pressed="true">
+                  <button type="button" className="lfc__btn lfc__btn--on" disabled aria-pressed="true">
                     <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="3.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
                     {t('life.focus.on')}
                   </button>
                 ) : (
-                  <button type="button" className="lf__btn" disabled={!enabled} aria-label={t('life.focus.makeAria', { name: o.name })} onClick={() => pick(o.k)}>
+                  <button type="button" className="lfc__btn" disabled={!enabled} aria-label={t('life.focus.makeAria', { name: o.name })} onClick={() => pick(o.k)}>
                     <span className="k-os">{t('life.focus.make')}</span>
                   </button>
                 )}
