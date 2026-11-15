@@ -5,14 +5,11 @@
 .pa-fill { width: 100%; height: 100%; border-radius: inherit; }
 
 /*
- * Семья в сцене: все стоят на одной линии земли (верх полосы земли — 25% снизу сцены).
- * Рамка каждого человека — 157 × 182 единицы генератора, ноги на 178 от верха (на 4 выше низа рамки).
+ * Семья в сцене (Household): у каждого человека своё место, масштаб и подъём земли (глубина: задний план мельче
+ * и выше). Рамка каждого — 157 × 182 единицы генератора, ноги на 178 от верха (на 4 выше низа рамки).
  */
-.pa-home {
-  position: absolute; z-index: 1; left: 8px; right: 8px; bottom: calc(25% - 8px);
-  display: flex; justify-content: center; align-items: flex-end; pointer-events: none;
-}
-.pa-home__p { position: relative; flex: none; display: block; }
+.pa-home { position: absolute; z-index: 1; left: 8px; right: 8px; bottom: calc(25% - 8px); pointer-events: none; }
+.pa-home__p { position: absolute; display: block; }
 .pa-home__body { position: absolute; inset: 0; display: block; }
 .pa-home__shadow {
   position: absolute; z-index: -1; left: 50%; bottom: 0; height: 6px; border-radius: 50%; transform: translateX(-50%);
