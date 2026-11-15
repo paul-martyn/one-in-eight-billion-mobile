@@ -45,8 +45,17 @@ button:disabled { cursor: default; }
 .orientation-notice h1 { font-size: 2rem; line-height: 1.2; margin-block: 16px 8px; }
 .orientation-notice p { margin: 0; line-height: 1.5; color: var(--color-muted); }
 
-/* На планшете/компьютере меняется только окружение, не композиция приложения. */
-@media (min-width: 480px) {
+/*
+ * Телефон и планшет (касание) — на весь экран (решение 15 ноября 2026: на iPhone с уменьшенным масштабом страницы
+ * и на iPad mini приложение показывалось маленькой рамкой посреди пустого экрана). Кадр макета сам растягивается
+ * на всю ширину. Если экран заметно шире телефона (планшет), приложение занимает всю высоту, а ширину — не больше,
+ * чем у кадра высотой 660 единиц макета (как у iPhone в Safari): иначе экраны стали бы ниже, чем рассчитаны раскладки (src/screens/layouts.ts).
+ */
+@media (min-width: 600px) and (pointer: coarse), (min-width: 600px) and (hover: none) {
+  .mobile-viewport { width: min(100%, calc(100dvh * 393 / 660)); }
+}
+/* Компьютер (мышь): композиция та же, приложение — в рамке телефона по центру окна. */
+@media (min-width: 480px) and (hover: hover) and (pointer: fine) {
   .preview-stage { padding: 24px; }
   .mobile-viewport {
     width: min(393px, calc((100svh - 48px) * 393 / 852));
@@ -55,6 +64,13 @@ button:disabled { cursor: default; }
     box-shadow: 0 0 0 2px var(--color-line), 0 18px 60px rgba(90, 52, 24, 0.22);
   }
 }
+
+/*
+ * Зум страницы щипком и двойным касанием выключен (просьба пользователя 15 ноября 2026): игра сама рисует всё
+ * крупно под экран, а случайный зум сдвигает и обрезает кадр. Прокрутка остаётся; планета задаёт свой touch-action.
+ * Safari не слушает user-scalable=no — его жесты щипка гасит src/app/noZoom.ts.
+ */
+html { touch-action: pan-x pan-y; }
 
 /* Белые буквы с коричневым контуром — фирменный приём макетов. */
 .k-o { color: var(--color-white); text-shadow: var(--text-outline-o); }

@@ -10,8 +10,11 @@ import '@fontsource/courier-prime/400.css';
 import '@fontsource/courier-prime/700.css';
 import '@fontsource/caveat/600.css';
 import { App } from './app/App';
+import { disablePageZoom } from './app/noZoom';
 import { setReducedMotion } from './ui/motionPrefs';
 import './app/styles.css';
+
+disablePageZoom();
 
 // ?motion=reduced — тот же путь без анимаций (проверка и доступность).
 const motionParam = new URLSearchParams(location.search).get('motion');

@@ -3,11 +3,11 @@
     "grid": 2,
     "pseudo-element": 2,
     "box-shadow": 1,
-    "calc / clamp / min / max": 4,
-    "vh / vw / cq / em / rem": 6,
+    "calc / clamp / min / max": 6,
+    "vh / vw / cq / em / rem": 7,
     "attribute selector": 4,
     "!important": 5,
-    "@media / @container / @supports": 1
+    "@media / @container / @supports": 2
   },
   "src/screens/birthOdds/birthOdds.css": {
     "grid": 2,
