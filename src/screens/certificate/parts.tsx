@@ -47,7 +47,7 @@ export function Initial({ name, bg, className = '', shape = 'circle' }: { name: 
   const fam = useSharedCoreView(familyAppearances);
   return (
     <span className={`ph-initial ph-initial--${shape} ${className}`} style={{ background: bg }} aria-hidden="true">
-      <PersonPortrait look={lookFor(fam, name, bg)} fallback={<span className="k-o ph-initial__letter">{initialOf(name)}</span>} />
+      <PersonPortrait look={lookFor(fam, name, bg)} frame={shape} fallback={<span className="k-o ph-initial__letter">{initialOf(name)}</span>} />
     </span>
   );
 }
@@ -60,7 +60,7 @@ export function PeopleGlyph({ size = 26 }: { size?: number }) {
   if (sibs.length && ready) {
     return (
       <span className="pa-sibs" aria-hidden="true">
-        {sibs.map((look, i) => <span key={i} className="pa-sibs__one"><PersonPortrait look={look} /></span>)}
+        {sibs.map((look, i) => <span key={i} className="pa-sibs__one"><PersonPortrait look={look} frame="square" /></span>)}
       </span>
     );
   }

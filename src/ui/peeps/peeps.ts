@@ -140,15 +140,25 @@ export function bodyOf(look: PersonLook, face: Face = 'alive'): Body {
 }
 
 /**
- * Портрет «по грудь» — рамка генератора (FRAMES.portrait, 157 × 130); младенец — в пелёнке (рамка 157 × 150).
- * Заполняет квадрат вызывающего как object-fit: cover: бока подрезаются, низ — грудь.
+ * Рамка портрета:
+ *  - 'bust' — «по грудь», рамка генератора (FRAMES.portrait, 157 × 130); младенец — в пелёнке (157 × 150). Заполняет
+ *    квадрат вызывающего как object-fit: cover: бока подрезаются, низ — грудь (People, итоги, хаб, окно смерти);
+ *  - 'square', 'circle' — человек целиком внутри рамки, с воздухом: в круге шире, чтобы волосы и ботинки не упирались
+ *    в окружность; у детей квадрат шире (голова крупнее); младенец меньше, с воздухом вокруг пелёнки (свидетельство,
+ *    «Your start in life»: обрезанные по груди родители и слишком крупный малыш смотрелись странно — решение 2026-11-15).
  */
-export function portraitOf(look: PersonLook, face: Face = 'alive'): string {
+export type Frame = 'bust' | 'square' | 'circle';
+const FIT = {
+  square: { x: -15, y: -9, w: 176, h: 176 }, squareKid: { x: -27, y: -20, w: 200, h: 200 },
+  circle: { x: -35.5, y: -28, w: 216, h: 216 }, baby: { x: -42.5, y: -20, w: 230, h: 230 },
+};
+export function portraitOf(look: PersonLook, face: Face = 'alive', frame: Frame = 'bust'): string {
   const { x, band } = aged(look, face);
-  return cached(`p|${keyOf(look)}|${look.years}|${stateKey(look)}|${face}|${face === 'dead' ? (look.deathH ?? 50) >= 40 : ''}`, () => {
+  return cached(`p|${frame}|${keyOf(look)}|${look.years}|${stateKey(look)}|${face}|${face === 'dead' ? (look.deathH ?? 50) >= 40 : ''}`, () => {
     G.useScale(1);
     const content = draw(look, x, band);
-    const f = band === 'baby' ? { x: -6, y: 20, w: 157, h: 150 } : G.FRAMES.portrait;
-    return `<svg viewBox="${f.x} ${f.y} ${f.w} ${f.h}" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">${content}</svg>`;
+    const f = frame === 'bust' ? (band === 'baby' ? { x: -6, y: 20, w: 157, h: 150 } : G.FRAMES.portrait)
+      : band === 'baby' ? FIT.baby : frame === 'circle' ? FIT.circle : band === 'child' ? FIT.squareKid : FIT.square;
+    return `<svg viewBox="${f.x} ${f.y} ${f.w} ${f.h}" preserveAspectRatio="xMidYMid ${frame === 'bust' ? 'slice' : 'meet'}" aria-hidden="true" focusable="false">${content}</svg>`;
   });
 }

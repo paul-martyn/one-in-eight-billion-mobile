@@ -2,7 +2,7 @@
 // Пока детали генератора грузятся или если они не загрузились, показывается fallback вызывающего (инициал в круге).
 import { useEffect, useSyncExternalStore, type ReactNode } from 'react';
 import type { PersonLook } from '../../adapters/vm/appearance';
-import { bodyOf, loadPeeps, peepsStatus, portraitOf, subscribePeeps, type Face } from '../peeps/peeps';
+import { bodyOf, loadPeeps, peepsStatus, portraitOf, subscribePeeps, type Face, type Frame } from '../peeps/peeps';
 import './people.css';
 
 /** true — детали генератора загружены; первый вызов запускает загрузку. */
@@ -15,8 +15,9 @@ export function usePeepsReady(): boolean {
 /**
  * Портрет «по грудь» (рамка генератора), заполняет квадрат: без size — родителя, рамку (круг, скругление) задаёт
  * вызывающий. face="dead" — лицо после смерти (спокойное или крестики — по счастью в момент смерти).
+ * frame: 'bust' (по умолчанию) — «по грудь»; 'square' / 'circle' — человек целиком внутри рамки такой формы.
  */
-export function PersonPortrait({ look, size, fallback = null, className = '', face = 'alive' }: { look: PersonLook | null | undefined; size?: number; fallback?: ReactNode; className?: string; face?: Face }) {
+export function PersonPortrait({ look, size, fallback = null, className = '', face = 'alive', frame = 'bust' }: { look: PersonLook | null | undefined; size?: number; fallback?: ReactNode; className?: string; face?: Face; frame?: Frame }) {
   const ready = usePeepsReady();
   if (!ready || !look) return <>{fallback}</>;
   return (
@@ -24,7 +25,7 @@ export function PersonPortrait({ look, size, fallback = null, className = '', fa
       className={`pa-portrait ${size == null ? 'pa-fill' : ''} ${className}`}
       style={size == null ? undefined : { width: size, height: size }}
       aria-hidden="true"
-      dangerouslySetInnerHTML={{ __html: portraitOf(look, face) }}
+      dangerouslySetInnerHTML={{ __html: portraitOf(look, face, frame) }}
     />
   );
 }
