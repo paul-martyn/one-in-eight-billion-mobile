@@ -149,7 +149,7 @@ export function bodyOf(look: PersonLook, face: Face = 'alive'): Body {
  */
 export type Frame = 'bust' | 'square' | 'circle';
 const FIT = {
-  square: { x: -15, y: -9, w: 176, h: 176 }, squareKid: { x: -27, y: -20, w: 200, h: 200 },
+  square: { x: -15, y: -9, w: 176, h: 176 }, squareKid: { x: -31, y: -30, w: 210, h: 210 },
   circle: { x: -35.5, y: -28, w: 216, h: 216 }, baby: { x: -42.5, y: -20, w: 230, h: 230 },
 };
 export function portraitOf(look: PersonLook, face: Face = 'alive', frame: Frame = 'bust'): string {
