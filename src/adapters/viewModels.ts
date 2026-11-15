@@ -111,7 +111,8 @@ export function lifeVM(T: Top): LifeVM {
 function occupationOf(S: Record<string, any>, status: Segment[]): LifeVM['occupation'] {
   const first = status[0];
   const text = !first ? '' : first.strong ? first.text.trim() : first.text.split('·')[0]!.trim();
-  const kind = S.school ? 'school' : first?.strong && !S.retired && !(S.serveLeft > 0) ? 'work' : 'status';
+  // Учёба — и между ступенями школы (S.flags.between), и у «студента» без школы в этом году (S.job student).
+  const kind = S.school || S.job === 'student' || S.flags?.between ? 'school' : first?.strong && !S.retired && !(S.serveLeft > 0) ? 'work' : 'status';
   return { kind, text };
 }
 

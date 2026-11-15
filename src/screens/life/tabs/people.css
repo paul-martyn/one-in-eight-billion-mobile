@@ -14,10 +14,9 @@
 .ppl-chip__count { flex: none; font-size: var(--font-size-label); color: var(--color-muted); }
 @media (max-width: 350px) { .ppl-chip { padding: 0 8px; gap: 4px; } }
 
-/* Аватар: нейтральный инициал в пастельном круге. */
+/* Аватар: портрет «по грудь» в пастельном квадрате со скруглением (холст PeopleCute); скругление задаёт размер. */
 .ppl-ava {
-  position: relative; flex: none; display: grid; place-items: center; border: 2px solid var(--color-line); border-radius: 50%;
-  box-shadow: var(--shadow-gloss), inset 0 -3px 0 rgba(90, 52, 24, 0.12);
+  position: relative; flex: none; display: grid; place-items: center; border: 2px solid var(--color-line);
 }
 .ppl-ava.is-faded { filter: grayscale(0.7); }
 .ppl-ava__letter { font-weight: 700; line-height: 1; }

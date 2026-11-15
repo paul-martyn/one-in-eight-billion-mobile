@@ -50,7 +50,7 @@ export function Avatar({ id, name, size, memory = false, away = false, pet = fal
   return (
     <span
       className={`ppl-ava ${memory || away ? 'is-faded' : ''}`}
-      style={{ width: size, height: size, background: bg, fontSize: Math.round(size * 0.46) }}
+      style={{ width: size, height: size, borderRadius: Math.round(size * 0.22), background: bg, fontSize: Math.round(size * 0.46) }}
       aria-hidden="true"
     >
       <PersonPortrait look={look} fallback={letter} />
