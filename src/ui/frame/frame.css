@@ -29,6 +29,7 @@
   transition: transform 140ms var(--ease-screen), filter 200ms ease;
 }
 .cta--green { background: var(--color-cta-green); }
+.cta--red { background: var(--color-cta-red); }
 .cta:active:not(:disabled) { transform: translateY(2px) scale(0.97); }
 .cta:disabled { filter: grayscale(0.6) opacity(0.6); }
 .cta__text { display: block; overflow: visible; }

@@ -9,7 +9,6 @@
   --ld-below: 16px;
   position: absolute; inset: 0; z-index: 30; background: var(--color-backdrop);
 }
-.ld-layer--pause { --ld-below: 82px; }
 .ld-wrap {
   position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center;
   padding: calc(var(--safe-top) + var(--ld-med) + 30px) 18px calc(var(--safe-bottom) + var(--ld-below));
@@ -57,7 +56,6 @@
 }
 .ld-bubble__text { margin: 0; font-size: var(--font-size-body); font-weight: 500; line-height: var(--line-height-body); color: var(--color-ink-dark); white-space: pre-line; }
 .ld-bubble__fam { margin: 6px 0 0; font-size: var(--font-size-small); font-weight: 600; color: var(--color-muted); }
-.ld-bubble--center { text-align: center; }
 .ld-bubble--quiet { color: #7a4f2c; }
 .ld-result + .ld-result { margin-top: 8px; }
 .ld-fact { margin: 8px 2px 0; font-size: var(--font-size-small); font-weight: 500; line-height: var(--line-height-body); color: var(--color-ink-dark); text-align: left; overflow-wrap: break-word; hyphens: auto; }
@@ -107,16 +105,64 @@
 }
 .ld-cta--green { background: var(--color-cta-green); }
 .ld-cta:active { transform: translateY(2px) scale(0.98); }
-.ld-exit {
-  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 18px; border: 2px solid var(--color-line);
-  border-radius: 10px; background: var(--color-secondary); box-shadow: var(--shadow-lip); color: var(--color-ink); font-size: var(--font-size-small); font-weight: 700;
+
+/* ---- Окно паузы: настройки в игре (холст «Пауза · варианты», вариант 1, 15 ноября 2026) ----
+   Окно дизайн-кода (#fffaf0, рамка 2, радиус 26) пониже середины, под ним красная «Закрыть»; затемнение сильнее,
+   чем у окна решения. Подтверждение «Закончить жизнь» — то же окно: заголовок белой надписью, что теряется
+   (бледно-красные строки), «Отмена» жёлтая и «Закончить жизнь» красная, без крестика. */
+.ps-layer {
+  position: absolute; inset: 0; z-index: 30; background: var(--color-backdrop-strong);
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
 }
-.ld-exit:active { transform: translateY(1px); }
-.ld-close {
-  position: absolute; left: 50%; bottom: -66px; width: 48px; height: 48px; margin-left: -24px; display: grid; place-items: center;
-  padding: 0; border: 2px solid var(--color-line); border-radius: 50%; background: var(--color-close-x); box-shadow: var(--shadow-lip), inset 0 3px 0 rgba(255, 255, 255, 0.4);
+.ps-wrap {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px;
+  padding: calc(var(--safe-top) + 126px) 26px calc(var(--safe-bottom) + 24px);
 }
-.ld-close:active { transform: scale(0.94); }
+.ps {
+  position: relative; width: 100%; max-width: 341px; padding: 16px 16px 14px; border: 2px solid var(--color-line); border-radius: 26px;
+  background: var(--color-paper); box-shadow: var(--shadow-window); color: var(--color-ink-dark);
+}
+.ps:focus { outline: none; }
+.ps__rows { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.ps-row {
+  display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 8px 10px 8px 9px;
+  border: 1.5px solid var(--color-divider); border-radius: 16px; background: var(--color-card);
+}
+.ps-row__tile { flex: none; display: grid; place-items: center; width: 38px; height: 38px; border: 1.5px solid var(--color-divider); border-radius: 11px; background: var(--color-paper); }
+.ps-row__tile svg { display: block; }
+.ps-row__name { flex: 1; min-width: 0; font-size: var(--font-size-body); font-weight: 700; line-height: 20px; overflow-wrap: break-word; }
+/* Переключатель: дорожка 54 × 32 (зелёная — включено), кружок 24 с губой; касание — вся дорожка и запас вокруг. */
+.ps-switch {
+  position: relative; flex: none; width: 54px; height: 32px; padding: 0; border: 2px solid var(--color-line); border-radius: 16px;
+  background: var(--color-switch-off); box-shadow: var(--shadow-switch-track); transition: background-color var(--duration-fast) ease;
+}
+.ps-switch::after { content: ''; position: absolute; inset: -8px -6px; }
+.ps-switch[aria-checked='true'] { background: var(--color-cta-green); }
+.ps-switch__knob {
+  position: absolute; top: 2px; left: 2px; width: 24px; height: 24px; border: 2px solid var(--color-line); border-radius: 12px;
+  background: var(--color-paper); box-shadow: var(--shadow-knob); transition: transform var(--duration-fast) var(--ease-screen);
+}
+.ps-switch[aria-checked='true'] .ps-switch__knob { transform: translateX(22px); }
+.ps__end { display: flex; justify-content: center; margin-top: 18px; }
+.ps__links { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 18px; margin-top: 14px; padding-top: 8px; border-top: 1.5px dashed var(--color-divider); }
+.ps-link { display: inline-block; padding: 8px 2px; font-size: var(--font-size-small); font-weight: 600; line-height: 18px; color: var(--color-muted); text-decoration: underline; text-underline-offset: 3px; }
+.ps-close {
+  flex: none; display: grid; place-items: center; width: 56px; height: 56px; padding: 0; border: 2px solid var(--color-line); border-radius: 50%;
+  background: var(--color-close-x); box-shadow: var(--shadow-lip), var(--shadow-gloss), var(--shadow-close-drop); transition: transform var(--duration-fast) var(--ease-screen);
+}
+.ps-close:active { transform: translateY(2px) scale(0.95); }
+.ps--confirm { padding: 18px 16px 16px; text-align: center; }
+.ps__title { display: flex; justify-content: center; margin: 0; line-height: 0; }
+.ps-warn { display: flex; flex-direction: column; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; text-align: left; }
+.ps-warn li {
+  display: flex; align-items: center; gap: 12px; min-height: 54px; padding: 8px 12px; border: 1.5px solid var(--color-chip-down-line);
+  border-radius: 14px; background: var(--color-chip-down-bg); font-size: var(--font-size-body); font-weight: 700; line-height: 21px; color: var(--color-ink-dark);
+}
+.ps-lost { position: relative; flex: none; width: 34px; height: 34px; }
+.ps-lost svg { display: block; }
+.ps-lost__x { position: absolute; right: -4px; bottom: -3px; }
+.ps__buttons { display: flex; gap: 10px; margin-top: 18px; }
+.ps__buttons .cta { flex: 1 1 0; min-width: 0; width: auto; height: 52px; padding: 0 4px; border-radius: 15px; }
 
 /* ---- Сообщения ---- */
 .lf-toasts {
@@ -129,11 +175,6 @@
 }
 .lf-toast__text { margin: 0; font-size: var(--font-size-body); font-weight: 600; line-height: var(--line-height-body); text-align: left; overflow-wrap: break-word; hyphens: auto; }
 .lf-toast__x { flex: none; display: grid; place-items: center; width: 44px; height: 44px; margin: -4px 0; padding: 0; border: 0; border-radius: 12px; background: transparent; color: var(--color-line); }
-
-/* ---- Пауза: второстепенные кнопки в ряд (Exit to hub, Skip to the end) ---- */
-.ld-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-.ld-exit--skip { padding: 0 14px; }
-.ld-exit svg { flex: none; }
 
 /* ---- «Skip to the end» идёт ---- */
 .lfs {

@@ -69,18 +69,19 @@
     "filter / backdrop-filter": 1
   },
   "src/screens/life/life.css": {
-    "grid": 17,
-    "pseudo-element": 2,
+    "grid": 19,
+    "pseudo-element": 3,
     "keyframes": 22,
-    "box-shadow": 13,
+    "box-shadow": 15,
     "gradient": 2,
-    "calc / clamp / min / max": 25,
+    "calc / clamp / min / max": 27,
     "vh / vw / cq / em / rem": 7,
-    "z-index": 9,
-    "attribute selector": 2,
+    "z-index": 10,
+    "attribute selector": 4,
     "structural pseudo-class": 5,
     "sibling combinator": 1,
-    "!important": 2
+    "!important": 2,
+    "filter / backdrop-filter": 1
   },
   "src/screens/life/lifeTab.css": {
     "grid": 14,

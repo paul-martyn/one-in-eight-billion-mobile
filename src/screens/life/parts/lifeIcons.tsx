@@ -46,14 +46,6 @@ export const PlayGlyph = ({ size = 16 }: { size?: number }) => (
 export const MenuGlyph = () => (
   <S w={18} h={18}><path d="M5 7h14M5 12h14M5 17h14" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" /></S>
 );
-export const BigPauseGlyph = () => (
-  <S w={52} h={52}>
-    <rect x="5" y="4" width="5.4" height="16" rx="2" fill="#ffd75a" stroke="#7b4b2a" strokeWidth="1.6" />
-    <rect x="13.6" y="4" width="5.4" height="16" rx="2" fill="#ffd75a" stroke="#7b4b2a" strokeWidth="1.6" />
-    <rect x="6.4" y="5.6" width="1.4" height="5" rx="0.7" fill="#fff" opacity="0.7" />
-    <rect x="15" y="5.6" width="1.4" height="5" rx="0.7" fill="#fff" opacity="0.7" />
-  </S>
-);
 /** Нейтральный медальон решения: облачко с вопросом (говорящего в оригинале нет). */
 export const AskGlyph = () => (
   <S w={50} h={50}>
@@ -68,25 +60,6 @@ export const ReflectGlyph = () => (
     <path d="M3 6.5c3-1.4 6-1.4 9 .8 3-2.2 6-2.2 9-.8v12c-3-1.4-6-1.4-9 .8-3-2.2-6-2.2-9-.8Z" fill="#fff3d6" stroke="#7b4b2a" strokeWidth="1.5" strokeLinejoin="round" />
     <path d="M12 7.3v12" stroke="#7b4b2a" strokeWidth="1.3" />
     <path d="M5.5 10h4M5.5 12.5h4M14.5 10h4M14.5 12.5h3" stroke="#c9a874" strokeWidth="1.1" strokeLinecap="round" />
-  </S>
-);
-export const HourglassGlyph = () => (
-  <S w={11} h={11}><path d="M5 2h14v3c0 3.4-2.6 5.4-4.6 7 2 1.6 4.6 3.6 4.6 7v3H5v-3c0-3.4 2.6-5.4 4.6-7C7.6 10.4 5 8.4 5 5Z" fill="currentColor" /></S>
-);
-export const HouseGlyph = () => (
-  <S w={15} h={15}><path d="M3.5 11 12 4l8.5 7" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" /><path d="M6 9.5V20h12V9.5" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" /></S>
-);
-export const ResumeGlyph = () => (
-  <S w={20} h={22} vb="0 0 20 22"><path d="M4.5 3.5 L16.5 11 L4.5 18.5 Z" fill="#fff" stroke="#7b4b2a" strokeWidth="2.6" strokeLinejoin="round" /></S>
-);
-export const XGlyph = () => (
-  <S w={18} h={18}><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="#fff" strokeWidth="4" strokeLinecap="round" /></S>
-);
-/** «Skip to the end» окна паузы: двойной треугольник (LiveCute v107). */
-export const SkipGlyph = () => (
-  <S w={16} h={15} vb="0 0 26 24">
-    <path d="M3 5l9 7-9 7Z" fill="currentColor" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-    <path d="M13 5l9 7-9 7Z" fill="currentColor" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
   </S>
 );
 /** Черепок окна смерти (84 px в круге 112 px). */

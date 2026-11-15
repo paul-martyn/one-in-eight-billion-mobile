@@ -291,6 +291,23 @@ export class GameAdapter {
       this.publish({ resume: this.read(resumeVM), pastLives: this.read(pastLives) });
     });
   }
+  /**
+   * «Закончить жизнь» из паузы (15 ноября 2026): жизнь не сохраняется и награды за неё нет. Так же оригинал
+   * поступает с сохранённой жизнью, когда поверх неё начинают новую (startLife: unlivedAdd + удаление
+   * сохранения): жизнь уходит в «непрожитые», запись о прожитой жизни (recordLife) и награда не появляются.
+   * Текущая жизнь сбрасывается, чтобы сохранение при скрытии вкладки (saveQuietly) её не вернуло.
+   */
+  abandonLife(id: string): boolean {
+    const T = this.need().top;
+    if (!this.accept(id) || !T.S || !(T.S.phase === 'life' || T.S.phase === 'birth')) return false;
+    this.setClockActive(false);
+    return this.guard(() => {
+      T.unlivedAdd(T.S);
+      T.lsDel(T.SAVE_KEY);
+      T.S = null;
+      this.publish({ resume: this.read(resumeVM), pastLives: this.read(pastLives), lifePhase: 'none', life: null, certificate: null });
+    });
+  }
   /** Продолжить сохранённую жизнь (restore0, 206472-206489). */
   resume(id: string): boolean {
     if (!this.accept(id)) return false;
