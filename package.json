@@ -13,6 +13,7 @@
     "test": "node --experimental-strip-types --test tests/*.test.mjs tests/core/*.test.mjs",
     "test:equivalence": "node --experimental-strip-types --test tests/core/regressions.test.mjs",
     "tokens": "node tools/design/tokens-to-css.mjs",
+    "peeps:sync": "node tools/peeps/sync.mjs",
     "check:tokens": "node tools/design/check-tokens.mjs",
     "lint:uss": "node tools/design/lint-uss.mjs",
     "shots": "node tools/ui/shots.mjs",

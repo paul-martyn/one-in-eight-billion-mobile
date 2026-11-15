@@ -5,8 +5,8 @@ import { gestureId, useAdapter } from '../../adapters/useGame';
 import { familyAppearances, type FamilyLooks, type PersonLook } from '../../adapters/vm/appearance';
 import type { Nav } from '../../flow/FlowHost';
 import { t } from '../../i18n';
-import { useFigures, useSharedCoreView } from '../../ui/people/hooks';
-import { PersonPortrait, PortraitView } from '../../ui/people/PersonArt';
+import { useSharedCoreView } from '../../ui/people/hooks';
+import { PersonPortrait, usePeepsReady } from '../../ui/people/PersonArt';
 
 const segmenter = typeof Intl !== 'undefined' && 'Segmenter' in Intl ? new Intl.Segmenter(undefined, { granularity: 'grapheme' }) : null;
 
@@ -56,12 +56,11 @@ export function Initial({ name, bg, className = '', shape = 'circle' }: { name: 
 export function PeopleGlyph({ size = 26 }: { size?: number }) {
   const fam = useSharedCoreView(familyAppearances);
   const sibs = fam ? fam.siblings.slice(0, 2) : [];
-  const states = useFigures(sibs);
-  const figs = states.flatMap(s => (s?.status === 'ready' ? [s.fig] : []));
-  if (sibs.length && figs.length === sibs.length) {
+  const ready = usePeepsReady();
+  if (sibs.length && ready) {
     return (
       <span className="pa-sibs" aria-hidden="true">
-        {figs.map((fig, i) => <span key={i} className="pa-sibs__one"><PortraitView fig={fig} /></span>)}
+        {sibs.map((look, i) => <span key={i} className="pa-sibs__one"><PersonPortrait look={look} /></span>)}
       </span>
     );
   }

@@ -1,0 +1,792 @@
+{
+ "$comment": "Копия генератора Peepulation (character-art/nemo-peeps). Не править руками: npm run peeps:sync.",
+ "syncedAt": "2026-11-15",
+ "source": "character-art/nemo-peeps",
+ "files": {
+  "src/vendor/peepulation/peepulation.js": {
+   "from": "peepulation.js",
+   "bytes": 98813,
+   "sha256": "ad4f6b8081c81813b48fb42f5e009c413df90b6f1e7bd73b9330b251fd50158b"
+  },
+  "src/vendor/peepulation/rules.json": {
+   "from": "spec/rules.json",
+   "bytes": 73984,
+   "sha256": "844430e14d9be54c499865498373cffc9455904e899645b047d6432d4ce77ad2"
+  },
+  "public/peeps/parts/manifest.json": {
+   "from": "parts/manifest.json",
+   "bytes": 34889,
+   "sha256": "301e28add606241e3f1949df09dd673a174d6e630ef457a00eebba22377c74be"
+  },
+  "public/peeps/parts/arms/arms.INK.png": {
+   "from": "parts/arms/arms.INK.png",
+   "bytes": 19684,
+   "sha256": "5e38ec5146c72ac7c6d6607f86f937e96a40535cce2eeaf85e48131007a8643b"
+  },
+  "public/peeps/parts/arms/arms.SKIN.png": {
+   "from": "parts/arms/arms.SKIN.png",
+   "bytes": 11465,
+   "sha256": "0daec4e32544d12b04f60e364e9ea4cd62cc6a19a299b1225e7ecdc7b240dd81"
+  },
+  "public/peeps/parts/baby/baby_hair_curl.svg": {
+   "from": "parts/baby/baby_hair_curl.svg",
+   "bytes": 335,
+   "sha256": "e561956d6db6b7b9e42e6cedc98ddd39d8609cf717359d87c606c8bbde36a68a"
+  },
+  "public/peeps/parts/baby/baby_hair_curl_wisp.svg": {
+   "from": "parts/baby/baby_hair_curl_wisp.svg",
+   "bytes": 476,
+   "sha256": "5633a3c65eb2fb3de3dd797b0e1ddf997b4c9e712469016f6c764cb09547e6de"
+  },
+  "public/peeps/parts/baby/baby_hair_curls_n8_rejected.HAIR.png": {
+   "from": "parts/baby/baby_hair_curls_n8_rejected.HAIR.png",
+   "bytes": 35152,
+   "sha256": "d640ce1d087398ea55dc37ded5aaf710f1afca5434dbf4a35c12eed1f7d2b0a2"
+  },
+  "public/peeps/parts/baby/baby_hair_curls_n8_rejected.HAIRLINE.png": {
+   "from": "parts/baby/baby_hair_curls_n8_rejected.HAIRLINE.png",
+   "bytes": 43014,
+   "sha256": "e03147257207386197dd6aac9bcd9fa44fbe6ce0b1bde4a266891252453d5660"
+  },
+  "public/peeps/parts/baby/baby_hair_fuzz.svg": {
+   "from": "parts/baby/baby_hair_fuzz.svg",
+   "bytes": 212,
+   "sha256": "1fd73f9f1125b165a7514593e10f9e2860ae31f31a5a3722c302c432e4d2e1ef"
+  },
+  "public/peeps/parts/baby/baby_hair_fuzz_wavy.svg": {
+   "from": "parts/baby/baby_hair_fuzz_wavy.svg",
+   "bytes": 333,
+   "sha256": "2a90c350de282f1e50355af8f3ef9357bb06ae9a40c11136080095eddab84b10"
+  },
+  "public/peeps/parts/baby/baby_hair_tuft_n8_rejected.HAIR.png": {
+   "from": "parts/baby/baby_hair_tuft_n8_rejected.HAIR.png",
+   "bytes": 31039,
+   "sha256": "d6719e95e352aa44edccf68671149fd4db0eede4769a083c64d01ee2b3f2c366"
+  },
+  "public/peeps/parts/baby/baby_hair_tuft_n8_rejected.HAIRLINE.png": {
+   "from": "parts/baby/baby_hair_tuft_n8_rejected.HAIRLINE.png",
+   "bytes": 32511,
+   "sha256": "86c2a2375ef4a3bd8d38f0935be6180f509335f5ca1c5b42780cc62bb9959d59"
+  },
+  "public/peeps/parts/baby/baby_hair_wisps.svg": {
+   "from": "parts/baby/baby_hair_wisps.svg",
+   "bytes": 533,
+   "sha256": "11cd43ebae0a24f168b2e1cd2b3cced0d75a52a69ccc8b13a1792cd27def0ca8"
+  },
+  "public/peeps/parts/baby/baby_pacifier_oval.svg": {
+   "from": "parts/baby/baby_pacifier_oval.svg",
+   "bytes": 564,
+   "sha256": "2947420ae59868ce0571bfecf4a151505f21b7c78edea5314220fda8c9e00550"
+  },
+  "public/peeps/parts/baby/baby_pacifier_ring.svg": {
+   "from": "parts/baby/baby_pacifier_ring.svg",
+   "bytes": 744,
+   "sha256": "2a067e50dfd5a030004d23b5c3013d96387912e5a5f16486fb04a91b7474350e"
+  },
+  "public/peeps/parts/baby/baby_swaddle_bow.svg": {
+   "from": "parts/baby/baby_swaddle_bow.svg",
+   "bytes": 1104,
+   "sha256": "bf5279fe30cbe267543dd8ac7d8dddf9b6811387a74a161155461e3ec896fd90"
+  },
+  "public/peeps/parts/baby/baby_swaddle_ribbon.svg": {
+   "from": "parts/baby/baby_swaddle_ribbon.svg",
+   "bytes": 1358,
+   "sha256": "f8f84f2079efe8687c4858476b98065f45c55516be1670560188472dd8e0d24d"
+  },
+  "public/peeps/parts/baby/baby_swaddle_wrap.svg": {
+   "from": "parts/baby/baby_swaddle_wrap.svg",
+   "bytes": 546,
+   "sha256": "b7cb1b646af0c92e62f1e13fc947a39557d180a53f2a99e123bc4af7bc91429d"
+  },
+  "public/peeps/parts/beard/beard_goatee.svg": {
+   "from": "parts/beard/beard_goatee.svg",
+   "bytes": 440,
+   "sha256": "f60988ae35edae691a67bcb1cd7db7d077b69159c5e76ba572f407ea77d9f7aa"
+  },
+  "public/peeps/parts/beard/beard_goatee_n6.HAIR.png": {
+   "from": "parts/beard/beard_goatee_n6.HAIR.png",
+   "bytes": 19396,
+   "sha256": "4facbdf7c7cce8919c12207f06d6261678411d4cdcdfb2e4eeef1ce419044ddf"
+  },
+  "public/peeps/parts/beard/beard_goatee_n6.HAIRLINE.png": {
+   "from": "parts/beard/beard_goatee_n6.HAIRLINE.png",
+   "bytes": 25333,
+   "sha256": "49de7a6fa3a3b78758416d8b4c2937d1d172469adab10078ea0e6fc5bdd8fdae"
+  },
+  "public/peeps/parts/beard/beard_long.HAIR.png": {
+   "from": "parts/beard/beard_long.HAIR.png",
+   "bytes": 20052,
+   "sha256": "a91bc2e66df284945dd50db29ab0d410a31c2af577ceeea2d87950a0a90807a7"
+  },
+  "public/peeps/parts/beard/beard_long.HAIRLINE.png": {
+   "from": "parts/beard/beard_long.HAIRLINE.png",
+   "bytes": 25558,
+   "sha256": "7b797171b2de53a762132cc3f35fd927a0f4235bef89e37297d57f181ae5ab29"
+  },
+  "public/peeps/parts/beard/beard_long_jaw.HAIR.png": {
+   "from": "parts/beard/beard_long_jaw.HAIR.png",
+   "bytes": 18775,
+   "sha256": "1a71466a3daeda96ee3748d5c426099a8f329322f0a0534bdaf4b00240d786ef"
+  },
+  "public/peeps/parts/beard/beard_long_jaw.HAIRLINE.png": {
+   "from": "parts/beard/beard_long_jaw.HAIRLINE.png",
+   "bytes": 27088,
+   "sha256": "14305afc56175e186433c2635265c0dbbe768b462fe5e325a79fdbedacb5114c"
+  },
+  "public/peeps/parts/beard/beard_middle.HAIR.png": {
+   "from": "parts/beard/beard_middle.HAIR.png",
+   "bytes": 18861,
+   "sha256": "23b7e572bc0d42a8498395d234deaf95c1db2f6e1486d2b7e41a7697e7804ed7"
+  },
+  "public/peeps/parts/beard/beard_middle.HAIRLINE.png": {
+   "from": "parts/beard/beard_middle.HAIRLINE.png",
+   "bytes": 23191,
+   "sha256": "df59adcc8f99ec03504df6388ee2ff6566f7e914b402effcf2a4a9723a3be9f6"
+  },
+  "public/peeps/parts/beard/beard_middle_jaw.HAIR.png": {
+   "from": "parts/beard/beard_middle_jaw.HAIR.png",
+   "bytes": 17848,
+   "sha256": "011fec2d6bb6e97bf705fc9ee1068aa794f2b9b38e283f073cca6559efdeeb66"
+  },
+  "public/peeps/parts/beard/beard_middle_jaw.HAIRLINE.png": {
+   "from": "parts/beard/beard_middle_jaw.HAIRLINE.png",
+   "bytes": 24125,
+   "sha256": "bd67568403558c46919a3ea7ad8f84932887d39e18ffe60e5a211fda76f62dbc"
+  },
+  "public/peeps/parts/beard/beard_short.svg": {
+   "from": "parts/beard/beard_short.svg",
+   "bytes": 588,
+   "sha256": "e1f272c91d465b1fa764aef6e22fc8404181b75f4b50360b1a3ec6e6a1bb92b2"
+  },
+  "public/peeps/parts/beard/beard_short_n1.HAIR.png": {
+   "from": "parts/beard/beard_short_n1.HAIR.png",
+   "bytes": 16599,
+   "sha256": "dedb68aa1cfc6bdc8cd49ccb5bdd4fff578cf66b9fe438fe0749ab727ee98b6c"
+  },
+  "public/peeps/parts/beard/beard_short_n1.HAIRLINE.png": {
+   "from": "parts/beard/beard_short_n1.HAIRLINE.png",
+   "bytes": 20077,
+   "sha256": "dc79c2797486af058cd4a81f51fc22b897e2ea6c269c33f90404a04f4d387461"
+  },
+  "public/peeps/parts/dress/dress.CLOTH1.png": {
+   "from": "parts/dress/dress.CLOTH1.png",
+   "bytes": 10076,
+   "sha256": "d274ebe8e2d1c785d5ff84adc7454bc77cccb3681526361fa10665d6e2b2765e"
+  },
+  "public/peeps/parts/dress/dress.CLOTH2.png": {
+   "from": "parts/dress/dress.CLOTH2.png",
+   "bytes": 7761,
+   "sha256": "03d96a05b07ec8f91bbaadb2b1cd831302c8fd401c4b1e47dff8a37d03ab089a"
+  },
+  "public/peeps/parts/dress/dress.CLOTH3.png": {
+   "from": "parts/dress/dress.CLOTH3.png",
+   "bytes": 7761,
+   "sha256": "03d96a05b07ec8f91bbaadb2b1cd831302c8fd401c4b1e47dff8a37d03ab089a"
+  },
+  "public/peeps/parts/dress/dress.INK.png": {
+   "from": "parts/dress/dress.INK.png",
+   "bytes": 15649,
+   "sha256": "0c020f9d32d9e608d46375c2a885409029e0624321c628ec949edfddcc8bc63f"
+  },
+  "public/peeps/parts/eyes/eyes_closed.svg": {
+   "from": "parts/eyes/eyes_closed.svg",
+   "bytes": 392,
+   "sha256": "b68acd3e8e9df40ecec3702d559a7fff122c29de3629a0c845c681f39b63fbcb"
+  },
+  "public/peeps/parts/eyes/eyes_crying.svg": {
+   "from": "parts/eyes/eyes_crying.svg",
+   "bytes": 925,
+   "sha256": "a7497de08e080a63a5c52498280c777fc0a30e0a7c66f04753019bdc100879eb"
+  },
+  "public/peeps/parts/eyes/eyes_cute.svg": {
+   "from": "parts/eyes/eyes_cute.svg",
+   "bytes": 502,
+   "sha256": "9beb244d93d8f47fab5544c56db99d7d0c4c23466226627f40271bc4f788b02a"
+  },
+  "public/peeps/parts/eyes/eyes_dead.svg": {
+   "from": "parts/eyes/eyes_dead.svg",
+   "bytes": 1244,
+   "sha256": "ec5bbdffe81737c912ef00a4bbce38f6fd4113ab6fd33d03ed8db8edb1ec8882"
+  },
+  "public/peeps/parts/eyes/eyes_default.svg": {
+   "from": "parts/eyes/eyes_default.svg",
+   "bytes": 877,
+   "sha256": "d62f5fe2af7a9311bddf31b19b914cae95251cb45c477f38cfecc8181bbfa0b8"
+  },
+  "public/peeps/parts/eyes/eyes_evil.svg": {
+   "from": "parts/eyes/eyes_evil.svg",
+   "bytes": 836,
+   "sha256": "2d06ec09d08d80c23bfe5771e354c889ecbc662ef4c3c0bc22e022ba3ddc33e1"
+  },
+  "public/peeps/parts/eyes/eyes_fright.svg": {
+   "from": "parts/eyes/eyes_fright.svg",
+   "bytes": 561,
+   "sha256": "8e800cc48a47808d743a6a5e100dd2fe00394152ab910ce899d9273f4d5fb396"
+  },
+  "public/peeps/parts/eyes/eyes_lashes.svg": {
+   "from": "parts/eyes/eyes_lashes.svg",
+   "bytes": 598,
+   "sha256": "9b72086c560b10fdedbb3bbef56838c3717fe0113e39b9742751b2604808c227"
+  },
+  "public/peeps/parts/eyes/eyes_love.svg": {
+   "from": "parts/eyes/eyes_love.svg",
+   "bytes": 1954,
+   "sha256": "962ace238b7460e8b020e979d34fa27fffadf0c1dfa18c2164bbde036b2863f7"
+  },
+  "public/peeps/parts/eyes/eyes_ordinary.svg": {
+   "from": "parts/eyes/eyes_ordinary.svg",
+   "bytes": 238,
+   "sha256": "5a13958b76e16ff05e3c64bd34afbb41a7cbb389504d6522952111cc7791ff42"
+  },
+  "public/peeps/parts/eyes/eyes_sad.svg": {
+   "from": "parts/eyes/eyes_sad.svg",
+   "bytes": 392,
+   "sha256": "139b3968caf2da12f8c06ee078dd373c36674f44adaf532eec1bcce54132c385"
+  },
+  "public/peeps/parts/eyes/eyes_wink.svg": {
+   "from": "parts/eyes/eyes_wink.svg",
+   "bytes": 315,
+   "sha256": "0c8fc9ce6c0492b9ac00b9927deb174da65993f5bf0a2e40439b2c4840375c41"
+  },
+  "public/peeps/parts/glasses/glasses_round.INK.png": {
+   "from": "parts/glasses/glasses_round.INK.png",
+   "bytes": 24404,
+   "sha256": "c592211f91ede7f472e33378164df905b07a9b6ca874e7d756e0c50d8a4f6d40"
+  },
+  "public/peeps/parts/glasses/glasses_round_metal.svg": {
+   "from": "parts/glasses/glasses_round_metal.svg",
+   "bytes": 937,
+   "sha256": "bc36e12afecfc447cd37bdbec273aae23693c9a26ed71ab86bb338296a173f66"
+  },
+  "public/peeps/parts/glasses/glasses_round_white.svg": {
+   "from": "parts/glasses/glasses_round_white.svg",
+   "bytes": 804,
+   "sha256": "1aa28e896b57d71caa388cf582d19d2ef5b7bebb2ebb32260b48031c4c04be2f"
+  },
+  "public/peeps/parts/glasses/glasses_square.INK.png": {
+   "from": "parts/glasses/glasses_square.INK.png",
+   "bytes": 20093,
+   "sha256": "bfe4a0effc5acad0bf94138fd998b1d97fef14edfa0a7ffe703aa190ea7bc716"
+  },
+  "public/peeps/parts/glasses/glasses_square_metal.svg": {
+   "from": "parts/glasses/glasses_square_metal.svg",
+   "bytes": 1121,
+   "sha256": "0bfe94ae385f17bf2cec9e74834d0bd32a01fa6d92b1abac1f2b89467c78781d"
+  },
+  "public/peeps/parts/glasses/glasses_square_white.svg": {
+   "from": "parts/glasses/glasses_square_white.svg",
+   "bytes": 956,
+   "sha256": "9aac3daa2a2b6df0bedc0ac486590c60db2fd089367ccf0f1fc410806e77fc27"
+  },
+  "public/peeps/parts/hair/hair_back_braids.svg": {
+   "from": "parts/hair/hair_back_braids.svg",
+   "bytes": 1336,
+   "sha256": "08962f8047a7514097a77bfac094fd1655ee9529cd9803162112be5f44a669c6"
+  },
+  "public/peeps/parts/hair/hair_back_braids_n6.CLOTH1.png": {
+   "from": "parts/hair/hair_back_braids_n6.CLOTH1.png",
+   "bytes": 15170,
+   "sha256": "b8cc9827aee29e5532bde9ea7655fa679661bf79d669140cca52789300a9f0b1"
+  },
+  "public/peeps/parts/hair/hair_back_braids_n6.HAIR.png": {
+   "from": "parts/hair/hair_back_braids_n6.HAIR.png",
+   "bytes": 24538,
+   "sha256": "896f90c2f1e4453bb88966e42dd03e0f9f42b3f67f3987006ddf86ecb4187827"
+  },
+  "public/peeps/parts/hair/hair_back_braids_n6.HAIRLINE.png": {
+   "from": "parts/hair/hair_back_braids_n6.HAIRLINE.png",
+   "bytes": 33123,
+   "sha256": "a942304dca3a5712ef55cc8f6b69d5058f5f98e338789b161be8607aa82b2d8a"
+  },
+  "public/peeps/parts/hair/hair_back_braids_n6.INK.png": {
+   "from": "parts/hair/hair_back_braids_n6.INK.png",
+   "bytes": 16974,
+   "sha256": "cb0fc5be945c50c40bd0140c16541c3b038210d2a10404da632a8a0694ae18c2"
+  },
+  "public/peeps/parts/hair/hair_back_curly.HAIR.png": {
+   "from": "parts/hair/hair_back_curly.HAIR.png",
+   "bytes": 22390,
+   "sha256": "292eb15b381baa9c19f749e3d17c86c8856166b6ce93f8e79aa843ffd0af8243"
+  },
+  "public/peeps/parts/hair/hair_back_curly.HAIRLINE.png": {
+   "from": "parts/hair/hair_back_curly.HAIRLINE.png",
+   "bytes": 36397,
+   "sha256": "a7b313caaecab2704a0659d3327f80bfd635753aea80f8406ac96899b139cadc"
+  },
+  "public/peeps/parts/hair/hair_back_long.HAIR.png": {
+   "from": "parts/hair/hair_back_long.HAIR.png",
+   "bytes": 18730,
+   "sha256": "d2428f176dd9d8032f0013f0a1ae0ffad22a6db41076e81f221d02a0aee6446f"
+  },
+  "public/peeps/parts/hair/hair_back_long.HAIRLINE.png": {
+   "from": "parts/hair/hair_back_long.HAIRLINE.png",
+   "bytes": 25468,
+   "sha256": "46334f4800ef4449267a675fae4b88ad0d23c4c2284bc382d6a82a0aae4e42e1"
+  },
+  "public/peeps/parts/hair/hair_back_pigtails.CLOTH1.png": {
+   "from": "parts/hair/hair_back_pigtails.CLOTH1.png",
+   "bytes": 15950,
+   "sha256": "f9238aed67e60f2812eebd6b4a026896190f74ed1ab409ec18341ecc09e07683"
+  },
+  "public/peeps/parts/hair/hair_back_pigtails.HAIR.png": {
+   "from": "parts/hair/hair_back_pigtails.HAIR.png",
+   "bytes": 24781,
+   "sha256": "4fcd3239812c4e6fdc1320d39c398bd0ca79dc4a318e23f6492bccfb7f7b4849"
+  },
+  "public/peeps/parts/hair/hair_back_pigtails.HAIRLINE.png": {
+   "from": "parts/hair/hair_back_pigtails.HAIRLINE.png",
+   "bytes": 34737,
+   "sha256": "40df7d229b99aa2e4acdcca48da9889a41c7f19347caa13834a944939c1281b3"
+  },
+  "public/peeps/parts/hair/hair_back_pigtails.INK.png": {
+   "from": "parts/hair/hair_back_pigtails.INK.png",
+   "bytes": 18505,
+   "sha256": "a5e6ec53cedb08aca965f07f965e57f179217de3a96879db64e0a4054666e3b9"
+  },
+  "public/peeps/parts/hair/hair_back_ponytail_high.CLOTH1.png": {
+   "from": "parts/hair/hair_back_ponytail_high.CLOTH1.png",
+   "bytes": 14932,
+   "sha256": "cd14b5c04858a61c8d7a35b0a0bacd371b948140f905d5a80dcf1b474646beee"
+  },
+  "public/peeps/parts/hair/hair_back_ponytail_high.HAIR.png": {
+   "from": "parts/hair/hair_back_ponytail_high.HAIR.png",
+   "bytes": 24074,
+   "sha256": "1e33ac0752c3a8bf1c2c40b8a117b8f434f9708ef4b78631095edab9018800f0"
+  },
+  "public/peeps/parts/hair/hair_back_ponytail_high.HAIRLINE.png": {
+   "from": "parts/hair/hair_back_ponytail_high.HAIRLINE.png",
+   "bytes": 33073,
+   "sha256": "e68fbb7a2873f53edca45dfb05241b4c28b8cf6dd8918ff5617740dc41efda3c"
+  },
+  "public/peeps/parts/hair/hair_back_ponytail_high.INK.png": {
+   "from": "parts/hair/hair_back_ponytail_high.INK.png",
+   "bytes": 16222,
+   "sha256": "654afe787a78c3a503654334c168728fb69c0d212b73fd61fd146945c8e2bc3d"
+  },
+  "public/peeps/parts/hair/hair_back_short.HAIR.png": {
+   "from": "parts/hair/hair_back_short.HAIR.png",
+   "bytes": 17401,
+   "sha256": "1aef6ca43a910434f1084be8ef01497efa4c5cb2fdecfe02fc6f62e8ca461e6c"
+  },
+  "public/peeps/parts/hair/hair_back_short.HAIRLINE.png": {
+   "from": "parts/hair/hair_back_short.HAIRLINE.png",
+   "bytes": 24643,
+   "sha256": "5b1ee47d79b8a7ebde3644032e78ff55d141f057ab7087ef34639fae71eeac9c"
+  },
+  "public/peeps/parts/hair/hair_back_very_long.HAIR.png": {
+   "from": "parts/hair/hair_back_very_long.HAIR.png",
+   "bytes": 19198,
+   "sha256": "ea7351a96df9928eba44353c7bb023ac39f0b383803a4963437e3f6260842d79"
+  },
+  "public/peeps/parts/hair/hair_back_very_long.HAIRLINE.png": {
+   "from": "parts/hair/hair_back_very_long.HAIRLINE.png",
+   "bytes": 26125,
+   "sha256": "c0c3586fea3e11bf3c5c689cb683e334180c38ae79827b1d66b55aac12a2ac87"
+  },
+  "public/peeps/parts/hair/hair_back_wavy.HAIR.png": {
+   "from": "parts/hair/hair_back_wavy.HAIR.png",
+   "bytes": 21256,
+   "sha256": "0619c22a12ba6706ff7a046edc0e8e5592d9396fbd5d119b65af666e2ccf1c2d"
+  },
+  "public/peeps/parts/hair/hair_back_wavy.HAIRLINE.png": {
+   "from": "parts/hair/hair_back_wavy.HAIRLINE.png",
+   "bytes": 31681,
+   "sha256": "ad13ffc9435507de697b5d0c2a07c1dc78a15af50f322e8a468c8282da91350f"
+  },
+  "public/peeps/parts/hair/hair_front_afro.HAIR.png": {
+   "from": "parts/hair/hair_front_afro.HAIR.png",
+   "bytes": 21060,
+   "sha256": "ba5012df55a0efe6f61a030fcf214b51c18e9e35b216720d18e5ef471c8b017c"
+  },
+  "public/peeps/parts/hair/hair_front_afro.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_afro.HAIRLINE.png",
+   "bytes": 30937,
+   "sha256": "f3d1ab651de0f244e0b16e3411fce5853d0dc0f356c772ceca45ae2b1bb12726"
+  },
+  "public/peeps/parts/hair/hair_front_bob.HAIR.png": {
+   "from": "parts/hair/hair_front_bob.HAIR.png",
+   "bytes": 17651,
+   "sha256": "7a9ec0879110cd53d2aeee0be3943e4319ad1f69596d697d5a0080dfa207e36f"
+  },
+  "public/peeps/parts/hair/hair_front_bob.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_bob.HAIRLINE.png",
+   "bytes": 23040,
+   "sha256": "21b6c7bbd8d5ceaab90b02cb49eb170453c5b618b3bd5ca46fda661b781ca7cc"
+  },
+  "public/peeps/parts/hair/hair_front_bowl.HAIR.png": {
+   "from": "parts/hair/hair_front_bowl.HAIR.png",
+   "bytes": 17969,
+   "sha256": "ce652395ef98dbc13f18c18d8264f7db636444ef6c2e85f7eff20f2fc8585fd3"
+  },
+  "public/peeps/parts/hair/hair_front_bowl.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_bowl.HAIRLINE.png",
+   "bytes": 21643,
+   "sha256": "c0c425d1570eeeb440911ae9036c033c1259cbb714d13738117cc3e17ca6be52"
+  },
+  "public/peeps/parts/hair/hair_front_braid_crown.HAIR.png": {
+   "from": "parts/hair/hair_front_braid_crown.HAIR.png",
+   "bytes": 20835,
+   "sha256": "5dcef10479ce0bb14847f06101b6aa2b602118aa1299c127699fcccbebfac8b0"
+  },
+  "public/peeps/parts/hair/hair_front_braid_crown.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_braid_crown.HAIRLINE.png",
+   "bytes": 26860,
+   "sha256": "760324b6d6cece5930732e42d5c614062ab5d0beeb67c0f342b620e29b5f0617"
+  },
+  "public/peeps/parts/hair/hair_front_buzz.HAIR.png": {
+   "from": "parts/hair/hair_front_buzz.HAIR.png",
+   "bytes": 20042,
+   "sha256": "79f4dc605b5d526c01a771ee5617719b692e92de0ffd0a7bb71f190466e336a6"
+  },
+  "public/peeps/parts/hair/hair_front_buzz.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_buzz.HAIRLINE.png",
+   "bytes": 25409,
+   "sha256": "39a039a1b6a083283bed0f62d9eedefacbe00e02b6c10648560f4a00e42d3930"
+  },
+  "public/peeps/parts/hair/hair_front_chupchik.HAIR.png": {
+   "from": "parts/hair/hair_front_chupchik.HAIR.png",
+   "bytes": 19365,
+   "sha256": "f3e3b7642b2f25308af62d28ad48d7205519550b37a1c66227185f34a15f3d30"
+  },
+  "public/peeps/parts/hair/hair_front_chupchik.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_chupchik.HAIRLINE.png",
+   "bytes": 25867,
+   "sha256": "d8378483563cdd25d9a51d734da5d352b88e380c3b0c8d3b9648c0a2dc5b59e2"
+  },
+  "public/peeps/parts/hair/hair_front_comb_over_rejected.HAIR.png": {
+   "from": "parts/hair/hair_front_comb_over_rejected.HAIR.png",
+   "bytes": 18793,
+   "sha256": "a37cffc8533d2514ebc0ebfb434dd07172a749954e67d64bc9cf0334d7b38564"
+  },
+  "public/peeps/parts/hair/hair_front_comb_over_rejected.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_comb_over_rejected.HAIRLINE.png",
+   "bytes": 24936,
+   "sha256": "83b70308c4133dfeff8135d8b5aed7ab66e11ebd4886822c62b856a798bec921"
+  },
+  "public/peeps/parts/hair/hair_front_curly.HAIR.png": {
+   "from": "parts/hair/hair_front_curly.HAIR.png",
+   "bytes": 19778,
+   "sha256": "fcf0968cdbdfce1877ea5c1133c1bd25840c94ecb426ed4efdfe31fb8cea7e5f"
+  },
+  "public/peeps/parts/hair/hair_front_curly.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_curly.HAIRLINE.png",
+   "bytes": 27572,
+   "sha256": "72134c9dc70874f87f3b69d0cf818ca711319f42c19da35d9c2ba6fc69ad19a4"
+  },
+  "public/peeps/parts/hair/hair_front_elegant.HAIR.png": {
+   "from": "parts/hair/hair_front_elegant.HAIR.png",
+   "bytes": 21414,
+   "sha256": "ba587747c8293d92bad17e80227f775d62e06458ce5473bc1ea6d4f10c3449d8"
+  },
+  "public/peeps/parts/hair/hair_front_elegant.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_elegant.HAIRLINE.png",
+   "bytes": 28196,
+   "sha256": "211cbe86174575792530f0aa7e82dc5b21ca570b036819d9cbb8c58347aebeb0"
+  },
+  "public/peeps/parts/hair/hair_front_pixie.HAIR.png": {
+   "from": "parts/hair/hair_front_pixie.HAIR.png",
+   "bytes": 18420,
+   "sha256": "99e82afdd2ff8e4d1166cbf4f9efc9b793383d904d4068864926e45043efc835"
+  },
+  "public/peeps/parts/hair/hair_front_pixie.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_pixie.HAIRLINE.png",
+   "bytes": 24267,
+   "sha256": "3a4dee809f4412615867eae0d8aefb4a597715f11f8635c418cd6f9826b450f9"
+  },
+  "public/peeps/parts/hair/hair_front_receding.HAIR.png": {
+   "from": "parts/hair/hair_front_receding.HAIR.png",
+   "bytes": 16983,
+   "sha256": "c26a41021a92420c340d9052fb51ce1a690f64d6b10288832c6f184802e6ab11"
+  },
+  "public/peeps/parts/hair/hair_front_receding.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_receding.HAIRLINE.png",
+   "bytes": 20944,
+   "sha256": "ce287b892248406a59cd128409bc876562153ed12ceb6db6c640414aba7b7317"
+  },
+  "public/peeps/parts/hair/hair_front_regular.HAIR.png": {
+   "from": "parts/hair/hair_front_regular.HAIR.png",
+   "bytes": 18501,
+   "sha256": "fcf8e36055769113d27143e0fc7c8bf627ed14ae08e4ad13d57a5584c36a3d64"
+  },
+  "public/peeps/parts/hair/hair_front_regular.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_regular.HAIRLINE.png",
+   "bytes": 24968,
+   "sha256": "9c4b1a4f7da416750e765effe1df0a4cb58de52aa1da09e1ff3d5645f6627f71"
+  },
+  "public/peeps/parts/hair/hair_front_side_part.HAIR.png": {
+   "from": "parts/hair/hair_front_side_part.HAIR.png",
+   "bytes": 19948,
+   "sha256": "a692882425013088660726afd0b144ec3eef4d1a3bcc2658b19f9954f68ed0e5"
+  },
+  "public/peeps/parts/hair/hair_front_side_part.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_side_part.HAIRLINE.png",
+   "bytes": 27625,
+   "sha256": "9c7ccbe8b9d401344e0eb3ba1d43f2e618b948205cea7426d5a7fe6d31b6455b"
+  },
+  "public/peeps/parts/hair/hair_front_side_swept.HAIR.png": {
+   "from": "parts/hair/hair_front_side_swept.HAIR.png",
+   "bytes": 19037,
+   "sha256": "eab04597fccae32b748055db33a2360c3aee3fb78bfa77333432debcb659c198"
+  },
+  "public/peeps/parts/hair/hair_front_side_swept.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_side_swept.HAIRLINE.png",
+   "bytes": 25377,
+   "sha256": "f74366949f36348ac40adda849afd3705e0e1f1918782097a7e15cd1041bbbcc"
+  },
+  "public/peeps/parts/hair/hair_front_slicked_back.HAIR.png": {
+   "from": "parts/hair/hair_front_slicked_back.HAIR.png",
+   "bytes": 19508,
+   "sha256": "9f097e7ad350b421b8c9992c1e9f2adf964d51d19aa564bc4a670e281c2535fd"
+  },
+  "public/peeps/parts/hair/hair_front_slicked_back.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_slicked_back.HAIRLINE.png",
+   "bytes": 26437,
+   "sha256": "febe8691fac881c74262ce1021189e6e5cc0f2937d8809fa76d583f3a44712bd"
+  },
+  "public/peeps/parts/hair/hair_front_spiky.HAIR.png": {
+   "from": "parts/hair/hair_front_spiky.HAIR.png",
+   "bytes": 19038,
+   "sha256": "2832391819e412804363acb705f46bf8b3e94d59f386bc593c5c6889cc85f65c"
+  },
+  "public/peeps/parts/hair/hair_front_spiky.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_spiky.HAIRLINE.png",
+   "bytes": 26128,
+   "sha256": "05447fd146159859c0eb6bc2ccd8098ac228ad6d4cc776ea55b97445fb721fb4"
+  },
+  "public/peeps/parts/hair/hair_front_straight.HAIR.png": {
+   "from": "parts/hair/hair_front_straight.HAIR.png",
+   "bytes": 16800,
+   "sha256": "5f2772742975e9d6e7b58b98065dd65fb0526932fe3ceb7e4e53d5e1e64449f8"
+  },
+  "public/peeps/parts/hair/hair_front_straight.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_straight.HAIRLINE.png",
+   "bytes": 19241,
+   "sha256": "7f5504ef505ecc82623aac81abb3a32991e2037d000e04b3ca522156897c8aed"
+  },
+  "public/peeps/parts/hair/hair_front_top_bun.HAIR.png": {
+   "from": "parts/hair/hair_front_top_bun.HAIR.png",
+   "bytes": 20114,
+   "sha256": "1204989bcd12943696b95d678906686501a0dcda1b88b5b9aa33b445c3b7bf4d"
+  },
+  "public/peeps/parts/hair/hair_front_top_bun.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_top_bun.HAIRLINE.png",
+   "bytes": 28723,
+   "sha256": "2ab00b641808d9ba911f498b878a346fac3134d4c14e46c5de3c4e94ae8a0311"
+  },
+  "public/peeps/parts/hair/hair_front_wavy_part.HAIR.png": {
+   "from": "parts/hair/hair_front_wavy_part.HAIR.png",
+   "bytes": 20344,
+   "sha256": "cb46d3c7d36d8571d8c0f22451fbab0d088472fc1b08beea92c620cc8fafbca5"
+  },
+  "public/peeps/parts/hair/hair_front_wavy_part.HAIRLINE.png": {
+   "from": "parts/hair/hair_front_wavy_part.HAIRLINE.png",
+   "bytes": 28838,
+   "sha256": "94f6cd49d0f8a4e44bd4eab574c1abff3965631a470fc081b9831b1f54ceca9f"
+  },
+  "public/peeps/parts/head/head.INK.png": {
+   "from": "parts/head/head.INK.png",
+   "bytes": 28129,
+   "sha256": "651969e343ac6e0458d7d0c8230b15e88e9cd692b79b425e63db2cfa8c7c7949"
+  },
+  "public/peeps/parts/head/head.SKIN.png": {
+   "from": "parts/head/head.SKIN.png",
+   "bytes": 19598,
+   "sha256": "e441f8f261d843ccf5999172c8b8dcbdae1ac87383248e82305eac9d18bda6b5"
+  },
+  "public/peeps/parts/legs/legs.INK.png": {
+   "from": "parts/legs/legs.INK.png",
+   "bytes": 14926,
+   "sha256": "c83aa7c024a445a6c8ca84f99dc41aeff3f466d216e866cc715fe1b88bca6c0e"
+  },
+  "public/peeps/parts/legs/legs.SKIN.png": {
+   "from": "parts/legs/legs.SKIN.png",
+   "bytes": 10246,
+   "sha256": "3a4c67cf28285a822324b4d29172e061ddb7c77b7eb525099553004053e2b360"
+  },
+  "public/peeps/parts/mouth/mouth_grin.svg": {
+   "from": "parts/mouth/mouth_grin.svg",
+   "bytes": 641,
+   "sha256": "389eca1853bf5e10940a547443ffce086e34a695561ba43b1b83772493f178d8"
+  },
+  "public/peeps/parts/mouth/mouth_laugh.svg": {
+   "from": "parts/mouth/mouth_laugh.svg",
+   "bytes": 628,
+   "sha256": "16eb27c38702c714f8efa6af8defa7d48153995322953f9d278c7512a02d894b"
+  },
+  "public/peeps/parts/mouth/mouth_neutral.svg": {
+   "from": "parts/mouth/mouth_neutral.svg",
+   "bytes": 225,
+   "sha256": "0ca26c139af3603e8ed8723c5cf142811512625568e7ab001a4802e86893979a"
+  },
+  "public/peeps/parts/mouth/mouth_open_mouth.svg": {
+   "from": "parts/mouth/mouth_open_mouth.svg",
+   "bytes": 703,
+   "sha256": "0b71fa31d2963cee32f760babf91fbde535783090d289c63a7255b257a326d00"
+  },
+  "public/peeps/parts/mouth/mouth_sad.svg": {
+   "from": "parts/mouth/mouth_sad.svg",
+   "bytes": 291,
+   "sha256": "bc6a6e2251b6ba6d307c3d18dc688ece8809e13dc18e9b813e35c3fa6525abfd"
+  },
+  "public/peeps/parts/mouth/mouth_saliva.svg": {
+   "from": "parts/mouth/mouth_saliva.svg",
+   "bytes": 454,
+   "sha256": "485f48681c6a2ac189d1c146515fd38df139dc74dd1a8ae020801dd000248d08"
+  },
+  "public/peeps/parts/mouth/mouth_small_o.svg": {
+   "from": "parts/mouth/mouth_small_o.svg",
+   "bytes": 205,
+   "sha256": "1cef8a858558118e92fa68cacac8b68caa622ceed86c9b15d1fe125ca57596b5"
+  },
+  "public/peeps/parts/mouth/mouth_smile.svg": {
+   "from": "parts/mouth/mouth_smile.svg",
+   "bytes": 285,
+   "sha256": "f2355a5fb2d8852138dff2f24e1e9ad9e879f30a85b9e19af87127d3b42bfedb"
+  },
+  "public/peeps/parts/mouth/mouth_smirk.svg": {
+   "from": "parts/mouth/mouth_smirk.svg",
+   "bytes": 238,
+   "sha256": "20c39bc494474f1ccec25cbac64ef3b5c0a3e612f14477ccd933c10610e81e84"
+  },
+  "public/peeps/parts/mouth/mouth_teeth.svg": {
+   "from": "parts/mouth/mouth_teeth.svg",
+   "bytes": 367,
+   "sha256": "387a4a6c830398415b968fd8e615b0cef3d341a40d31ffce3cc8f5d71f6c70be"
+  },
+  "public/peeps/parts/pants/pants.CLOTH1.png": {
+   "from": "parts/pants/pants.CLOTH1.png",
+   "bytes": 7761,
+   "sha256": "03d96a05b07ec8f91bbaadb2b1cd831302c8fd401c4b1e47dff8a37d03ab089a"
+  },
+  "public/peeps/parts/pants/pants.CLOTH2.png": {
+   "from": "parts/pants/pants.CLOTH2.png",
+   "bytes": 9558,
+   "sha256": "778e7cf3360ec1144497c91da063e195e233f0e6c7a1368ef5b9516e3104c88c"
+  },
+  "public/peeps/parts/pants/pants.CLOTH3.png": {
+   "from": "parts/pants/pants.CLOTH3.png",
+   "bytes": 7761,
+   "sha256": "03d96a05b07ec8f91bbaadb2b1cd831302c8fd401c4b1e47dff8a37d03ab089a"
+  },
+  "public/peeps/parts/pants/pants.INK.png": {
+   "from": "parts/pants/pants.INK.png",
+   "bytes": 12247,
+   "sha256": "ac2f4cb4c168e1035efa84793b8103cc562a09d8dfa8012eb3ace1d0eb271171"
+  },
+  "public/peeps/parts/shoes/shoes.CLOTH1.png": {
+   "from": "parts/shoes/shoes.CLOTH1.png",
+   "bytes": 7761,
+   "sha256": "03d96a05b07ec8f91bbaadb2b1cd831302c8fd401c4b1e47dff8a37d03ab089a"
+  },
+  "public/peeps/parts/shoes/shoes.CLOTH2.png": {
+   "from": "parts/shoes/shoes.CLOTH2.png",
+   "bytes": 7761,
+   "sha256": "03d96a05b07ec8f91bbaadb2b1cd831302c8fd401c4b1e47dff8a37d03ab089a"
+  },
+  "public/peeps/parts/shoes/shoes.CLOTH3.png": {
+   "from": "parts/shoes/shoes.CLOTH3.png",
+   "bytes": 9200,
+   "sha256": "9fa55bf96ef7e7fd3651d7d60abd096d41fb2d6593033c06f255593559405ad1"
+  },
+  "public/peeps/parts/shoes/shoes.INK.png": {
+   "from": "parts/shoes/shoes.INK.png",
+   "bytes": 12286,
+   "sha256": "700dea5a38fd67f1a9370f4ac4f2d9ac8a70b6fb8b81bcb0743567137b377d19"
+  },
+  "public/peeps/parts/shorts/shorts.CLOTH1.png": {
+   "from": "parts/shorts/shorts.CLOTH1.png",
+   "bytes": 7761,
+   "sha256": "03d96a05b07ec8f91bbaadb2b1cd831302c8fd401c4b1e47dff8a37d03ab089a"
+  },
+  "public/peeps/parts/shorts/shorts.CLOTH2.png": {
+   "from": "parts/shorts/shorts.CLOTH2.png",
+   "bytes": 9293,
+   "sha256": "3896afdf57a9380dc18765fed7ee9c86a7a1e4c3b8190ce30fe931f03cfa9f4c"
+  },
+  "public/peeps/parts/shorts/shorts.CLOTH3.png": {
+   "from": "parts/shorts/shorts.CLOTH3.png",
+   "bytes": 7761,
+   "sha256": "03d96a05b07ec8f91bbaadb2b1cd831302c8fd401c4b1e47dff8a37d03ab089a"
+  },
+  "public/peeps/parts/shorts/shorts.INK.png": {
+   "from": "parts/shorts/shorts.INK.png",
+   "bytes": 12083,
+   "sha256": "9293a23cda84dfbdcf90fad863c6e561fb677dc175187685d37b0c043cbab0b8"
+  },
+  "public/peeps/parts/sleeves/sleeves_long.CLOTH1.png": {
+   "from": "parts/sleeves/sleeves_long.CLOTH1.png",
+   "bytes": 10961,
+   "sha256": "154fbe8384e0f57bfa08b27e7a4051e46363a4e774118fcd1d1d6aa6e0cceabc"
+  },
+  "public/peeps/parts/sleeves/sleeves_long.CLOTH2.png": {
+   "from": "parts/sleeves/sleeves_long.CLOTH2.png",
+   "bytes": 7761,
+   "sha256": "03d96a05b07ec8f91bbaadb2b1cd831302c8fd401c4b1e47dff8a37d03ab089a"
+  },
+  "public/peeps/parts/sleeves/sleeves_long.CLOTH3.png": {
+   "from": "parts/sleeves/sleeves_long.CLOTH3.png",
+   "bytes": 7761,
+   "sha256": "03d96a05b07ec8f91bbaadb2b1cd831302c8fd401c4b1e47dff8a37d03ab089a"
+  },
+  "public/peeps/parts/sleeves/sleeves_long.INK.png": {
+   "from": "parts/sleeves/sleeves_long.INK.png",
+   "bytes": 18571,
+   "sha256": "19092849b4d6abd111666132e85537bcc7b777fe6c1cd9acb88413982ffd8a54"
+  },
+  "public/peeps/parts/sleeves/sleeves_short.CLOTH1.png": {
+   "from": "parts/sleeves/sleeves_short.CLOTH1.png",
+   "bytes": 10290,
+   "sha256": "611adc66e27b2e6b88b32ab771d4bc53103a094328fcebdcd451d1ae20ca33b3"
+  },
+  "public/peeps/parts/sleeves/sleeves_short.CLOTH2.png": {
+   "from": "parts/sleeves/sleeves_short.CLOTH2.png",
+   "bytes": 7761,
+   "sha256": "03d96a05b07ec8f91bbaadb2b1cd831302c8fd401c4b1e47dff8a37d03ab089a"
+  },
+  "public/peeps/parts/sleeves/sleeves_short.CLOTH3.png": {
+   "from": "parts/sleeves/sleeves_short.CLOTH3.png",
+   "bytes": 7761,
+   "sha256": "03d96a05b07ec8f91bbaadb2b1cd831302c8fd401c4b1e47dff8a37d03ab089a"
+  },
+  "public/peeps/parts/sleeves/sleeves_short.INK.png": {
+   "from": "parts/sleeves/sleeves_short.INK.png",
+   "bytes": 15875,
+   "sha256": "a90e2e75cd3630f61f0aade25e511e43a8ad03fa3ba8498e92b9a7d16556197c"
+  },
+  "public/peeps/parts/tee/tee_with_shorts.CLOTH1.png": {
+   "from": "parts/tee/tee_with_shorts.CLOTH1.png",
+   "bytes": 8590,
+   "sha256": "834f5c573ced8ecb4d259322ab58024f7d626c73a769f48dc16e1c6c2505aafe"
+  },
+  "public/peeps/parts/tee/tee_with_shorts.CLOTH2.png": {
+   "from": "parts/tee/tee_with_shorts.CLOTH2.png",
+   "bytes": 8693,
+   "sha256": "8d8846183237f6a71aef3cf6bfec84d67fd36e032a01409ea171f38a68a28dfc"
+  },
+  "public/peeps/parts/tee/tee_with_shorts.CLOTH3.png": {
+   "from": "parts/tee/tee_with_shorts.CLOTH3.png",
+   "bytes": 7761,
+   "sha256": "03d96a05b07ec8f91bbaadb2b1cd831302c8fd401c4b1e47dff8a37d03ab089a"
+  },
+  "public/peeps/parts/tee/tee_with_shorts.INK.png": {
+   "from": "parts/tee/tee_with_shorts.INK.png",
+   "bytes": 11152,
+   "sha256": "87bdcd6e4a083484f086a790eee3d98ced3eacb0bf4bf7bca2f4eb30b98a5b2f"
+  },
+  "public/peeps/parts/wrinkles/wrinkles_60.svg": {
+   "from": "parts/wrinkles/wrinkles_60.svg",
+   "bytes": 345,
+   "sha256": "1d223943228a70c99d9d41b64afbc2a1d0716aa1122b5e0ff79e01ef40e531da"
+  },
+  "public/peeps/parts/wrinkles/wrinkles_75.svg": {
+   "from": "parts/wrinkles/wrinkles_75.svg",
+   "bytes": 844,
+   "sha256": "280411e1d825a679d3baa85af5bb459268785347292146905c2a9a1a6bf94a1e"
+  },
+  "public/peeps/parts/wrinkles/wrinkles_folds.svg": {
+   "from": "parts/wrinkles/wrinkles_folds.svg",
+   "bytes": 404,
+   "sha256": "1702782ff00af9d12f0c30262c2b496052c820849dd54e258fd18649b4ceb742"
+  }
+ }
+}
