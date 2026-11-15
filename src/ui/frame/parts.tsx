@@ -22,10 +22,10 @@ export function CtaText({ children, field = CTA_FIT, width = 168 }: { children: 
   );
 }
 
-/** Основная кнопка макета. cost — цена в энергии на уголке (Be Born! в хабе). */
-export function CtaButton({ label, tone = 'yellow', cost, className = '', children, ...rest }: ButtonHTMLAttributes<HTMLButtonElement> & { label: string; tone?: 'yellow' | 'green'; cost?: ReactNode }) {
+/** Основная кнопка макета. cost — цена в энергии на уголке (Be Born! в хабе). Красная — опасное действие, только последним шагом в окне подтверждения (дизайн-код, 15 ноября 2026). */
+export function CtaButton({ label, tone = 'yellow', cost, className = '', children, ...rest }: ButtonHTMLAttributes<HTMLButtonElement> & { label: string; tone?: 'yellow' | 'green' | 'red'; cost?: ReactNode }) {
   return (
-    <button type="button" className={`cta ${tone === 'green' ? 'cta--green' : ''} ${className}`} aria-label={label} {...rest}>
+    <button type="button" className={`cta ${tone === 'green' ? 'cta--green' : tone === 'red' ? 'cta--red' : ''} ${className}`} aria-label={label} {...rest}>
       <CtaText>{label}</CtaText>
       {cost}
       {children}

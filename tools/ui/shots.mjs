@@ -175,8 +175,13 @@ async function runFlow(browser, url, lang, [width, height]) {
       await button(`tab.${tab}`, true).click(); await page.waitForTimeout(1300); await shot(`tab-${tab}`);
     }
     await button('tab.life', true).click(); await page.waitForTimeout(1000);
-    await button('life.pause', true).click(); await dialog.first().waitFor(); await page.waitForTimeout(800); await shot('pause');
-    await button('life.pauseSkip').click();
+    await button('life.pause', true).click(); await page.locator('.ps').first().waitFor(); await page.waitForTimeout(800); await shot('pause');
+    await button('pause.endLife', true).click(); await page.locator('.ps--confirm').waitFor(); await page.waitForTimeout(600); await shot('pause-end');
+    await button('pause.cancel', true).click(); await page.waitForTimeout(400);
+    // «Прожить до конца» в окне паузы больше нет (вариант 1, 15 ноября 2026): до смерти — командой адаптера
+    // (window.__game есть только у dev-сервера, его и поднимает прогон).
+    const skipped = await page.evaluate(() => { const g = window.__game; if (!g) return false; void g.skipToEnd('shots-skip'); return true; });
+    if (!skipped) throw new Error('пропуск до конца нужен dev-сервер (window.__game): запустите без --url или с адресом npm run dev');
     const lookBack = button('death.lookBack');
     await lookBack.waitFor({ timeout: 90000 }); await page.waitForTimeout(3000); await shot('death');
     await lookBack.click();

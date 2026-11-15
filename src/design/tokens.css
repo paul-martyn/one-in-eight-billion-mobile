@@ -35,7 +35,10 @@
   --color-popup-card: #f4a940;
   --color-popup-ring: #f8c46b;
   --color-popup-status: #b15e18;
-  --color-close-x: #ef7f7f;
+  --color-close-x: #f0625a;
+  --color-cta-red: #f0625a;
+  --color-switch-off: #e3cfa8;
+  --color-backdrop-strong: rgba(28,15,6,0.78);
   --color-portrait-sky: #bfe8ef;
   --color-backdrop: rgba(58,34,14,0.55);
   --color-money-up: #347119;
@@ -146,6 +149,10 @@
   --shadow-gloss: inset 0 3px 0 rgba(255,255,255,0.45);
   --shadow-cta-lip: inset 0 -4px 0 rgba(90,52,24,0.22), inset 0 4px 0 rgba(255,255,255,0.5);
   --shadow-popup: 0 10px 26px rgba(58,34,14,0.35), inset 0 0 0 3px #f8c46b;
+  --shadow-window: 0 14px 34px rgba(20,10,4,0.45);
+  --shadow-switch-track: inset 0 3px 0 rgba(58,34,14,0.18);
+  --shadow-knob: inset 0 -3px 0 rgba(90,52,24,0.2);
+  --shadow-close-drop: 0 4px 10px rgba(20,10,4,0.3);
 
   /* Контур текста */
   --text-outline-o: 1.5px 0px 0 #5a3418, -1.5px 0px 0 #5a3418, 0px 1.5px 0 #5a3418, 0px -1.5px 0 #5a3418, 1.1px 1.1px 0 #5a3418, -1.1px 1.1px 0 #5a3418, 1.1px -1.1px 0 #5a3418, -1.1px -1.1px 0 #5a3418, 0px 2px 0 #5a3418;
