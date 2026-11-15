@@ -1,5 +1,5 @@
-// Вкладка «Жизнь» (LiveCute холста, вариант B2): светлая шапка с семьёй и показателями
-// наверху, управление временем, фокус года под шапкой и журнал жизни. Все значения — из снимка
+// Вкладка «Жизнь» (LiveCute холста v354): светлая шапка с семьёй и показателями наверху, управление
+// временем, под шапкой три плашки (возраст, деньги, занятие), ниже блок с вкладками «Дневник жизни» и «Фокус». Все значения — из снимка
 // адаптера (life, journal); формул здесь нет. После смерти (frame «died»)
 // вкладка замирает: управление временем скрыто, сцена приглушена, сверху
 // журнала — последняя запись die() оригинала.
@@ -11,8 +11,9 @@ import type { JournalEntryVM } from '../../adapters/viewModels';
 import type { StatKey } from '../../ui/components';
 import { useReducedMotion } from '../../ui/motionPrefs';
 import type { TabProps } from './tabs/types';
-import { FocusRow, Scene, type StatFlash } from './parts/Scene';
+import { Scene, type StatFlash } from './parts/Scene';
 import { Journal } from './parts/Journal';
+import { Plates } from './parts/Plates';
 import { useCountUp } from './parts/lifeHooks';
 import './lifeTab.css';
 
@@ -32,8 +33,8 @@ export function LifeTab({ active }: TabProps) {
   return (
     <section className={`lt ${over ? 'is-over' : ''}`} aria-label={t('tab.life')}>
       <Scene life={life} k={k} enabled={active} over={over} flash={flash} />
-      {!over && <FocusRow life={life} enabled={active} />}
-      <Journal journal={snap.journal} offset={track.offset} freshFrom={track.freshFrom} reduced={reduced} lifeSeq={snap.lifeSeq} over={over} />
+      <Plates life={life} />
+      <Journal journal={snap.journal} offset={track.offset} freshFrom={track.freshFrom} reduced={reduced} lifeSeq={snap.lifeSeq} over={over} life={life} enabled={active} />
     </section>
   );
 }

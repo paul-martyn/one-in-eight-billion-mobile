@@ -44,5 +44,19 @@
   "life.notice.focus": "Wähle den Fokus für dieses Jahr und fahre fort.",
   "life.notice.spend": "Erledigt.",
   "life.notice.noEnergy": "Noch nicht genug Energie für ein neues Leben.",
-  "life.focusFamily": "Vorerst entscheidet deine Familie, wie das Jahr verläuft."
+  "life.focusFamily": "Vorerst entscheidet deine Familie, wie das Jahr verläuft.",
+  "life.plates": "Jetzt",
+  "life.plate.age": "Alter",
+  "life.plate.money": "Geld",
+  "life.plate.school": "Schule",
+  "life.plate.work": "Arbeit",
+  "life.plate.status": "Status",
+  "life.tabs": "Tagebuch und Fokus",
+  "life.tab.focus": "Fokus: {name}",
+  "life.tab.focusNone": "Fokus",
+  "life.card.age": "Alter",
+  "life.focus.make": "Wählen",
+  "life.focus.on": "Gewählt",
+  "life.focus.makeAria": "Fokus wählen: {name}",
+  "life.newestFirst": "Neueste zuerst"
 }
