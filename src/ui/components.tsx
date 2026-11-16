@@ -90,7 +90,7 @@ export function StickerBar({ active, labels, badges, onSelect }: { active: TabId
           <filter id="kraft-grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" /><feColorMatrix type="saturate" values="0" /></filter>
           <clipPath id="kraft-clip"><path d={KRAFT} /></clipPath>
         </defs>
-        <path d={KRAFT} fill="#dcb27a" />
+        <path d={KRAFT} fill="var(--color-kraft)" />
         <rect width="393" height="100" filter="url(#kraft-grain)" opacity="0.14" clipPath="url(#kraft-clip)" style={{ mixBlendMode: 'multiply' }} />
         <path d={KRAFT_EDGE} fill="none" stroke="#7b4b2a" strokeWidth="2" />
       </svg>

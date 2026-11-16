@@ -86,17 +86,20 @@
     "filter / backdrop-filter": 1
   },
   "src/screens/life/lifeTab.css": {
-    "grid": 14,
-    "pseudo-element": 1,
-    "keyframes": 6,
-    "box-shadow": 6,
-    "gradient": 3,
-    "calc / clamp / min / max": 13,
+    "grid": 12,
+    "pseudo-element": 4,
+    "keyframes": 11,
+    "box-shadow": 16,
+    "clip-path / mask": 2,
+    "gradient": 7,
+    "calc / clamp / min / max": 17,
     "vh / vw / cq / em / rem": 5,
     "z-index": 8,
     "attribute selector": 1,
-    "structural pseudo-class": 3,
-    "filter / backdrop-filter": 2
+    "structural pseudo-class": 4,
+    "sibling combinator": 1,
+    "filter / backdrop-filter": 2,
+    "@media / @container / @supports": 1
   },
   "src/screens/life/tabs/money.css": {
     "grid": 5,

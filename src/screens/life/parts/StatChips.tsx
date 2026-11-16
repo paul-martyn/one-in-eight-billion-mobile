@@ -1,9 +1,14 @@
 // Значки статов по дизайн-коду (холст, страница «Дизайн-код», v350): у значка изменения сначала число, потом значок
 // стата; цвет — по знаку (плюс зелёный, минус красный), стат узнаётся по значку, у значка обводка тёмным тоном своего
 // цвета. Порядок всегда: здоровье → счастье → знания → отношения. Деньги — не стат: значков денег нет.
+import { Fragment } from 'react';
+import { t } from '../../../i18n';
 import type { Fx } from '../../../adapters/viewModels';
 import type { StatKey } from '../../../ui/components';
-import { fxText } from './lifeHooks';
+import { fxText, STAT_LABEL } from './lifeHooks';
+// Стрелки пользователя (холст 17.11, production-ui/icons/arrows v2): зелёная вверх, красная вниз.
+import arrowUp from './arrows/arrow-up.png';
+import arrowDown from './arrows/arrow-down.png';
 
 /** Силуэты статов — те же, что большие значки наверху (один контур на значок). */
 export const STAT_PATH: Record<StatKey, string> = {
@@ -27,6 +32,33 @@ export function StatGlyph({ k, size = 16, line }: { k: StatKey; size?: number; l
       <path d={STAT_PATH[k]} fill={stroke} stroke={stroke} strokeWidth="1.5" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
       <path d={STAT_PATH[k]} fill={FILL[k]} />
     </svg>
+  );
+}
+
+/**
+ * Строка фокуса (холст 17.11): куда ведёт стат за год — словами со стрелками, без чисел: «Счастье ↓ · Знания ↑↑».
+ * ↑ / ↓ — на 1–2 в год, ↑↑ / ↓↓ — на 3 и больше (FOCUS[k].e движка). Порядок статов — как в дизайн-коде. Для экранного
+ * диктора — те же изменения числом (скрытый текст), стрелки и слова скрыты.
+ */
+export function FxArrows({ fx }: { fx: Fx }) {
+  const list = ORDER.flatMap(k => fx.filter(f => f.k === k && f.d !== 0));
+  if (!list.length) return null;
+  return (
+    <span className="sa-line">
+      <span className="sr-only">{list.map(f => fxText(f.k, f.d)).join(', ')}</span>
+      {list.map((f, i) => (
+        <Fragment key={f.k}>
+          {/* Точка — отдельно от стата: при переносе остаётся в конце строки, стат целиком уходит на следующую. */}
+          {i > 0 && <span className="sa-sep" aria-hidden="true">·</span>}
+          <span className="sa-item" aria-hidden="true">
+            <span>{t(STAT_LABEL[f.k])}</span>
+            <span className="sa-arrows">
+              {Array.from({ length: Math.abs(f.d) >= 3 ? 2 : 1 }, (_, j) => <img key={j} className="sa-arrow" src={f.d > 0 ? arrowUp : arrowDown} alt="" />)}
+            </span>
+          </span>
+        </Fragment>
+      ))}
+    </span>
   );
 }
 
