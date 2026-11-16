@@ -28,8 +28,6 @@
   "life.kind.hist": "World news",
   "life.mine": "Your choice",
   "life.dec.status": "{kind} · {when}",
-  "life.dec.notePlaceholder": "A line of your own",
-  "life.dec.noteLabel": "Your note",
   "life.dec.nameLabel": "Name",
   "life.dec.locked": "Not possible now",
   "life.dec.group": "Pick one",

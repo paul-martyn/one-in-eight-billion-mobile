@@ -2,14 +2,14 @@
 // записями, которые добавил core, → Continue. Выбор применяется сразу
 // командой adapter.choose; окно ответа только показывает результат.
 // Защита от случайного нажатия: 700 мс после появления вопроса (DEC_ARM_MS, 203091).
-import { useId, useState, type KeyboardEvent } from 'react';
+import { useId, useState } from 'react';
 import { t } from '../../../i18n';
 import { gestureId, useAdapter, useCoreView } from '../../../adapters/useGame';
 import type { Snapshot } from '../../../adapters/gameAdapter';
 import type { DecisionVM, LifeVM } from '../../../adapters/viewModels';
 import { decisionExtra, type DecisionItem } from '../../../adapters/vm/life';
 import { LifeDialog } from './LifeDialog';
-import { AskGlyph, PauseGlyph, ReflectGlyph } from './lifeIcons';
+import { AskGlyph, PauseGlyph } from './lifeIcons';
 import { fxColor, fxText } from './lifeHooks';
 
 const DEC_ARM_MS = 700;
@@ -22,13 +22,13 @@ export function DecisionDialog({ open, life, lastChoice, lifeSeq }: {
   const pending = life.pending;
   // Счётчик ответов: каждый следующий вопрос получает новый ключ и заново взводит защиту.
   const [answers, setAnswers] = useState(0);
-  // Заголовок и вид вопроса, на который ответили (для окна ответа).
-  const [asked, setAsked] = useState<{ id: string; title: string; reflect: boolean } | null>(null);
+  // Заголовок вопроса, на который ответили (для окна ответа).
+  const [asked, setAsked] = useState<{ id: string; title: string } | null>(null);
 
   const answered = !!lastChoice;
   const choose = (k: string, note: string) => {
     if (!pending) return false;
-    setAsked({ id: pending.id, title: pending.title, reflect: pending.reflect });
+    setAsked({ id: pending.id, title: pending.title });
     const ok = adapter.choose(gestureId(), pending.id, k, note);
     setAnswers(n => n + 1);
     return ok;
@@ -36,7 +36,6 @@ export function DecisionDialog({ open, life, lastChoice, lifeSeq }: {
 
   const decEntry = lastChoice?.entries.find(e => e.kind === 'dec');
   const answeredTitle = asked && lastChoice && asked.id === lastChoice.decisionId ? asked.title : decEntry?.question || pending?.title || '';
-  const reflect = answered ? !!(asked && asked.reflect) : !!pending?.reflect;
   const title = answered ? answeredTitle : pending?.title ?? '';
   const contentKey = answered ? `a${answers}` : `q${lifeSeq}:${pending?.id ?? ''}:${answers}`;
 
@@ -47,7 +46,7 @@ export function DecisionDialog({ open, life, lastChoice, lifeSeq }: {
       title={title}
       titleId={titleId}
       contentKey={contentKey}
-      medallion={reflect ? <ReflectGlyph /> : <AskGlyph />}
+      medallion={<AskGlyph />}
     >
       {answered && lastChoice ? (
         <DecisionAnswer lastChoice={lastChoice} onContinue={() => adapter.dismissLastChoice()} />
@@ -64,20 +63,14 @@ function DecisionAsk({ life, pending, onChoose }: { life: LifeVM; pending: Decis
   const [shownAt] = useState(() => performance.now());
   const [busy, setBusy] = useState(false);
   const [note, setNote] = useState('');
-  const noteId = useId();
 
   const items: DecisionItem[] = extra?.items ?? pending.choices.map((c, i) => ({ type: 'choice', n: i + 1, k: c.k, label: c.label, sub: c.sub }));
-  const hasWrite = pending.choices.some(c => c.k === 'write');
-  const withNote = !!pending.input || !!extra?.nameInput;
+  const withNote = !!extra?.nameInput;
 
   const pick = (k: string) => {
     if (busy || performance.now() - shownAt < DEC_ARM_MS) return;
     setBusy(true);
     onChoose(k, withNote ? note : '');
-  };
-  // Ctrl/Cmd+Enter в поле размышления = «записать» (208521-208529).
-  const onNoteKey = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && hasWrite) { e.preventDefault(); pick('write'); }
   };
 
   const when = life.year != null ? t('life.ageYear', { age: life.age, year: life.year }) : t('life.age', { age: life.age });
@@ -95,21 +88,7 @@ function DecisionAsk({ life, pending, onChoose }: { life: LifeVM; pending: Decis
           </div>
         )}
         {pending.fact && <p className="ld-fact">{pending.fact}</p>}
-        {pending.question && <p className="ld-question" id={`${noteId}-q`}>{pending.question}</p>}
-        {pending.input && (
-          <textarea
-            id={noteId}
-            className="ld-note"
-            maxLength={200}
-            rows={3}
-            value={note}
-            placeholder={pending.input.placeholder || t('life.dec.notePlaceholder')}
-            aria-label={pending.question || t('life.dec.noteLabel')}
-            onChange={e => setNote(e.target.value)}
-            onKeyDown={onNoteKey}
-          />
-        )}
-        {!pending.input && extra?.nameInput && (
+        {extra?.nameInput && (
           <label className="ld-name">
             <span className="ld-name__label">{t('life.dec.nameLabel')}</span>
             <input

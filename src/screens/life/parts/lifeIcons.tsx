@@ -54,14 +54,6 @@ export const AskGlyph = () => (
     <circle cx="12" cy="15.1" r="0.95" fill="#2593a3" />
   </S>
 );
-/** Медальон «паузы-размышления» (reflect): раскрытая тетрадь. */
-export const ReflectGlyph = () => (
-  <S w={50} h={50}>
-    <path d="M3 6.5c3-1.4 6-1.4 9 .8 3-2.2 6-2.2 9-.8v12c-3-1.4-6-1.4-9 .8-3-2.2-6-2.2-9-.8Z" fill="#fff3d6" stroke="#7b4b2a" strokeWidth="1.5" strokeLinejoin="round" />
-    <path d="M12 7.3v12" stroke="#7b4b2a" strokeWidth="1.3" />
-    <path d="M5.5 10h4M5.5 12.5h4M14.5 10h4M14.5 12.5h3" stroke="#c9a874" strokeWidth="1.1" strokeLinecap="round" />
-  </S>
-);
 /** Черепок окна смерти (84 px в круге 112 px). */
 export const SkullGlyph = () => (
   <S w={84} h={84} vb="0 0 100 100">

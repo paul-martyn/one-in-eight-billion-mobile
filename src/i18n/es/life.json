@@ -28,8 +28,6 @@
   "life.kind.hist": "Noticias del mundo",
   "life.mine": "Tu elección",
   "life.dec.status": "{kind} · {when}",
-  "life.dec.notePlaceholder": "Una frase tuya",
-  "life.dec.noteLabel": "Tu nota",
   "life.dec.nameLabel": "Nombre",
   "life.dec.locked": "Ahora no es posible",
   "life.dec.group": "Elige una opción",
