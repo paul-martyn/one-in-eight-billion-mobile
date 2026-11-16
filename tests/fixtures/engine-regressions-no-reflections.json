@@ -1,0 +1,128 @@
+{
+  "format": "owned-engine-regressions/1",
+  "change": "reflection prompts removed",
+  "clockAt": 1793102400000,
+  "method": "Every command compared with pre-removal engine after removing only reflection scheduling and its milestone override. Historical oracle fixtures unchanged.",
+  "cases": [
+    {
+      "lang": "en",
+      "scenario": "can-f-auto",
+      "commands": 385,
+      "age": 92,
+      "decisions": 53,
+      "sha256": "7d173b0c10efaca75baff7cfe1625987fb1533bcedb6981f8e233c5ca94ab83f"
+    },
+    {
+      "lang": "en",
+      "scenario": "ind-m-first",
+      "commands": 284,
+      "age": 67,
+      "decisions": 41,
+      "sha256": "753773b7b87568d2178794f166ccc7b82a4ccb1d57c446e70ed9342986ea4467"
+    },
+    {
+      "lang": "en",
+      "scenario": "nga-f-last",
+      "commands": 226,
+      "age": 55,
+      "decisions": 30,
+      "sha256": "98310e96f5b22626682f373aa035dff6fbff4e1f9af9a36cdedd219fb4f09f6f"
+    },
+    {
+      "lang": "en",
+      "scenario": "usa-m-rotate",
+      "commands": 360,
+      "age": 85,
+      "decisions": 52,
+      "sha256": "b7d538fb1c06526144c5688844262c5f27637b46cb5927bc623ec4e5f84a77e4"
+    },
+    {
+      "lang": "en",
+      "scenario": "kor-m-auto",
+      "commands": 367,
+      "age": 88,
+      "decisions": 51,
+      "sha256": "51c68d3d99ddc36662e4329dcedef5fa5a014a4b54921e48243ceb46beba4bdd"
+    },
+    {
+      "lang": "en",
+      "scenario": "chn-f-rotate",
+      "commands": 358,
+      "age": 86,
+      "decisions": 50,
+      "sha256": "38e3c08f4e233859ea82d9cd4df01125a97371c212ff3da4ddb95b1150e3cb72"
+    },
+    {
+      "lang": "en",
+      "scenario": "bra-m-last",
+      "commands": 217,
+      "age": 46,
+      "decisions": 40,
+      "sha256": "5a3f61e4090b347eba125ddb0401c5bd7601e99af37cbc59c94b9e99b9953398"
+    },
+    {
+      "lang": "en",
+      "scenario": "rus-f-first",
+      "commands": 388,
+      "age": 92,
+      "decisions": 56,
+      "sha256": "47057ed47a0a9a5f42e260c68eb3b9809ef642c1795a7e01396e55133c7fb739"
+    },
+    {
+      "lang": "en",
+      "scenario": "random-country-auto",
+      "commands": 338,
+      "age": 86,
+      "decisions": 39,
+      "sha256": "9f823ed3af7769354551ac9c28dd1291e3c95f150d57a786d91858e7cf56274b"
+    },
+    {
+      "lang": "en",
+      "scenario": "past-1950-auto",
+      "commands": 156,
+      "age": 36,
+      "decisions": 23,
+      "sha256": "1faf576b81dec7e969db5b50df10a991389242f45bdce7a7603dd5912b89f5c8"
+    },
+    {
+      "lang": "en",
+      "scenario": "future-2045-rotate",
+      "commands": 354,
+      "age": 89,
+      "decisions": 44,
+      "sha256": "fe70694a5c6826d5622cb5e8d385ec864397f47fb9836e013bd26fc9a69cfd5a"
+    },
+    {
+      "lang": "ru",
+      "scenario": "can-f-auto",
+      "commands": 385,
+      "age": 92,
+      "decisions": 53,
+      "sha256": "10e69126fc3ac076de3788abe2eaa87cb0cd67214584d0d527dc79a784736cf1"
+    },
+    {
+      "lang": "es",
+      "scenario": "can-f-auto",
+      "commands": 385,
+      "age": 92,
+      "decisions": 53,
+      "sha256": "e4ed1889c18532f169bb859cf39cb58a8ece72141721d111e4af892cacace5a8"
+    },
+    {
+      "lang": "fr",
+      "scenario": "can-f-auto",
+      "commands": 385,
+      "age": 92,
+      "decisions": 53,
+      "sha256": "2ac7e6774744d69bd1a14d235d6a6699673aa0ca31f17622e01f7a55a825e58b"
+    },
+    {
+      "lang": "de",
+      "scenario": "can-f-auto",
+      "commands": 385,
+      "age": 92,
+      "decisions": 53,
+      "sha256": "22002043be44f0caf77f8b7f8ecec39272cdd741756ac76d4b751e35622bcd71"
+    }
+  ]
+}

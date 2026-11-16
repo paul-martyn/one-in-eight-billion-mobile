@@ -1,3 +1,4 @@
+import { stripLegacyReflections as __stripReflections, stripStoredReflections as __stripStoredReflections } from "./legacy-reflections.js";
 import { applyRenderEffects as __renderEffects } from "./state-effects.js";
 export const CORE_META = {"generator":"standalone-engine/1","sourceSha256":"f98bd80cd361531ffcf27a660b7ea2706af0dbd9d0a56217e61c41c7967effb5","sourceBytes":7141946,"freeGlobals":{"window":"host","localStorage":"host","Object":"host","document":"host","Intl":"host","navigator":"host","ZH_HK_T":"late","RegExp":"host","Date":"host","Math":"host","Set":"host","WeakMap":"host","String":"host","Array":"host","Number":"host","COUNTRY_G":"late","COUNTRY_GX":"late","COUNTRY_A":"late","parseFloat":"host","PT_G":"late","IT_G":"late","COUNTRY_IN":"late","RU_CS":"late","parseInt":"host","isFinite":"host","RU_G":"late","Map":"host","DE_G":"late","AR_G":"late","Boolean":"host","Float64Array":"host","Error":"host","ERA":"late","performance":"host","setTimeout":"host","JSON":"host","indexedDB":"host","IDBKeyRange":"host","Promise":"host","console":"host","location":"host"},"topLevelCount":4985};
 export function instantiateCore(__env) {
@@ -56801,9 +56802,6 @@ const HOOK = {
     err(e) {
       throw e;
     },
-    noPause() {
-      return !1;
-    },
     humRecent() {
       return [];
     },
@@ -58647,7 +58645,7 @@ const ddDxGet = (e, t) =>
           chance(disAccess(e))
         ? 2
         : 0;
-const DD_OWN = new Set(["temper", "petq", "petsick", "hobby", "reflect"]);
+const DD_OWN = new Set(["temper", "petq", "petsick", "hobby"]);
 const DD_FAM = new Set([
     "illness",
     "diag",
@@ -63993,6 +63991,7 @@ const fillNums = (e, t) => {
     return e.map((n) => (Number.isFinite(n) ? (o = n) : o));
   };
 function healStats(e) {
+  __stripReflections(e);
   const t = [];
   if (!e) return t;
   const a = Array.isArray(e.years) ? e.years : [];
@@ -70994,19 +70993,7 @@ function milestone() {
       : S.sex === "F"
         ? L`여자아이`
         : L`남자아이`;
-  if (
-    !S.isComp &&
-    typeof REFLECT_AGES < "u" &&
-    REFLECT_AGES.includes(S.age) &&
-    (S.age === 5 || S.age === 50)
-  )
-    log(
-      S.age === 5
-        ? L`다섯 번째 생일을 맞았습니다.`
-        : L`쉰 번째 생일을 맞았습니다.`,
-      "ms",
-    );
-  else if (S.age === 5)
+  if (S.age === 5)
     log(
       L`다섯 번째 생일. ${B().ko}에서 태어난 아이 ${u5Pct()} 정도는 5살이 되기 전에 세상을 떠납니다. 당신은 그 시기를 넘겼습니다.`,
       "ms",
@@ -85491,10 +85478,7 @@ function openDecision(e, t) {
     return;
   const o = ddWay(e);
   if (o === "no" || (WD_NO.has(e) && wdOn())) return;
-  if (e === "reflect" && HOOK.noPause()) {
-    typeof reflectQuiet == "function" && reflectQuiet(S.age);
-    return;
-  }
+
   const n = a.build(t);
   if (n) {
     for (const l of ["title", "body", "fact"]) n[l] = ptSay(n[l]);
@@ -85751,10 +85735,6 @@ function scheduledDecisions() {
       !S.done.major &&
       (S.school === "uni" || S.school === "grad" || S.flags.nightUni) &&
       o("major"),
-    !S.isComp &&
-      typeof REFLECT_AGES < "u" &&
-      REFLECT_AGES.includes(e) &&
-      o("reflect", {}),
     mandDue())
   )
     o("mandret", {});
@@ -144724,85 +144704,10 @@ function eraPcalK(e) {
     3,
   );
 }
-const REFLECT_AGES = [5, 15, 30, 50, 70];
-const rqN = () => callName(S.name);
-const rqPoor = () => S.q <= 2 && (CBY[S.born] || C()).ppp < 15e3;
-const REFLECT_Q = {
-    5: [
-      [
-        () =>
-          L`당신의 다섯 살은 어땠나요? 그때 당연하게 누렸던 것 하나를 떠올려 보세요.`,
-        () =>
-          pick([
-            L`매일 저녁 차려지던 밥상`,
-            L`아플 때 데려가 주던 병원`,
-            L`동네 놀이터의 그네`,
-          ]),
-      ],
-      [
-        () => L`다섯 살 ${rqN()}에게 지금 가장 필요한 것은 무엇일까요?`,
-        () =>
-          rqPoor()
-            ? pick([
-                L`배불리 먹는 저녁`,
-                L`깨끗한 물`,
-                L`학교에 다닐 수 있는 길`,
-              ])
-            : pick([
-                L`곁에서 같이 놀아 주는 어른`,
-                L`잠들기 전 읽어 주는 그림책`,
-                L`마음껏 뛰어놀 마당`,
-              ]),
-      ],
-    ],
-    15: [
-      [
-        () => L`열다섯 살의 당신에게 학교는 어떤 곳이었나요?`,
-        () => pick([L`친구들을 만나러 가던 곳`, L`시험에 쫓기던 곳`]),
-      ],
-      [
-        () =>
-          L`${iga(rqN())} 꿈꿀 수 있는 미래와, 열다섯의 당신이 꿈꾸던 미래는 얼마나 달랐을까요?`,
-        () =>
-          pick([
-            L`내 앞에는 고를 수 있는 길이 더 많았다`,
-            L`꿈꾸는 마음은 비슷했을 것 같다`,
-          ]),
-      ],
-    ],
-    30: [
-      [
-        () => L`${rqN()}의 삶과 당신의 삶은 무엇이 같고, 무엇이 다른가요?`,
-        () => L`일에 지친 건 같고, 사는 곳은 다르다`,
-      ],
-      [
-        () => L`${iga(rqN())} 오늘 가장 고마워할 일은 무엇일까요?`,
-        () => pick([L`오늘도 일할 수 있다는 것`, L`가족이 건강하다는 것`]),
-      ],
-    ],
-    50: [
-      [
-        () =>
-          L`${iga(rqN())} 당신의 이웃이었다면, 어떤 이야기를 나누고 싶나요?`,
-        () => pick([L`자식 키우는 이야기`, L`젊을 때 하고 싶었던 일`]),
-      ],
-      [
-        () => L`살면서 당신을 붙잡아 준 사람은 누구였나요?`,
-        () => L`힘들 때 전화해 준 친구`,
-      ],
-    ],
-    70: [
-      [
-        () =>
-          L`한 번뿐인 삶에서, ${iga(rqN())} 가장 소중히 여긴 것은 무엇이었을까요?`,
-        () => L`가족과 함께한 저녁`,
-      ],
-      [
-        () => L`당신은 어떤 사람으로 기억되고 싶나요?`,
-        () => L`곁에 있으면 편했던 사람`,
-      ],
-    ],
-  };
+
+
+
+
 const EDU_SENT = [
     L`학교에 다니지 못했습니다.`,
     L`초등학교를 마쳤습니다.`,
@@ -145959,129 +145864,10 @@ function compStatus0(e, t) {
       : L`${e.death.age}세에 세상을 떠남 (${e.death.label})`
     : e.yrs[t] || e.yrs[t - 1] || L`살아 있음`;
 }
-function compLine(e) {
-  return !S.comps || !S.comps.length
-    ? null
-    : L`같은 1초에 태어난 사람들 — ` +
-        S.comps
-          .map(
-            (t) =>
-              L`${callName(t.name)}(${CBY[t.iso].ko}): ${compStatus(t, e)}`,
-          )
-          .join(" · ");
-}
-function reflectMirror(e) {
-  const t = B(),
-    a = C(),
-    o = S.home && CBY[S.home] ? CBY[S.home] : null,
-    n = eraYr(),
-    r = o && n ? eraAt(o, n) : o,
-    s = (d, u) => cohortL(d, S.sex, u),
-    i = { l: { 5: s(S.born, 5), 50: s(S.born, 50), 70: s(S.born, 70) } },
-    l = [];
-  return (
-    e === 5
-      ? (l.push(
-          L`${t.ko}에서는 아이 ${pctStr(1 - i.l[5], 1)}가 다섯 살 생일을 맞이하지 못합니다. 이 아이는 맞이했습니다.`,
-        ),
-        r &&
-          r.id !== t.id &&
-          l.push(
-            S.homeG
-              ? L`당신이 태어난 곳으로 짐작한 ${
-                  r.ko
-                }에서는 ${pctStr(1 - s(r.id, 5), 1)}입니다.`
-              : L`당신이 실제로 태어난 ${r.ko}에서는 ${pctStr(1 - s(r.id, 5), 1)}입니다.`,
-          ))
-      : e === 15
-        ? (l.push(
-            S.flags.between && S.job === "student"
-              ? L`이 아이는 지금 다음 학교로 갈 길을 고르고 있습니다.`
-              : S.school
-                ? L`이 아이는 지금 학교에 다닙니다.`
-                : S.fam.married
-                  ? S.flags.wedLeft
-                    ? L`이 아이는 이미 결혼해 학교를 떠났습니다.`
-                    : L`이 아이는 이미 결혼했습니다.`
-                  : L`이 아이는 학교 대신 일을 하고 있습니다.`,
-          ),
-          l.push(
-            L`${t.ko}의 기대 교육연수는 ${t.eys}년${r && r.id !== t.id ? L`, ${eun(r.ko)} ${r.eys}년` : ""}입니다.`,
-          ),
-          S.sex === "F" &&
-            t.cm >= 15 &&
-            l.push(
-              notNation(t)
-                ? L`이곳 여성의 ${t.cm}%는 18세가 되기 전에 결혼합니다.`
-                : L`이 나라 여성의 ${t.cm}%는 18세가 되기 전에 결혼합니다.`,
-            ))
-        : e === 30
-          ? (S.income > 0
-              ? l.push(
-                  L`이 사람의 한 해 소득은 세계 사람들 가운데 ${rankStr(worldPct(S.income))}에 듭니다.`,
-                )
-              : l.push(L`이 사람은 지금 소득이 없습니다.`),
-            l.push(
-              L`${a.ko}의 인터넷 이용률은 ${a.net}%, 도시에 사는 사람은 ${a.urb}%입니다.`,
-            ))
-          : e === 50
-            ? (l.push(
-                L`같은 해 ${t.ko}에서 태어난 사람 중 ${pctStr(i.l[50])}가 쉰 살을 맞습니다.`,
-              ),
-              r &&
-                r.id !== t.id &&
-                l.push(
-                  L`${r.ko}에서 태어났다면 ${pctStr(s(r.id, 50))}였을 겁니다.`,
-                ))
-            : (l.push(
-                L`같은 해 ${t.ko}에서 태어난 사람 중 ${pctStr(i.l[70])}만 일흔을 맞습니다.`,
-              ),
-              r &&
-                r.id !== t.id &&
-                l.push(L`${r.ko}에서는 ${pctStr(s(r.id, 70))}입니다.`)),
-    l
-  );
-}
-DEC.reflect = {
-  build: () => {
-    const e = S.age,
-      t = pick(REFLECT_Q[e] || REFLECT_Q[30]),
-      a = t[0]();
-    return (
-      (S.flags.refQ = a),
-      {
-        title: L`잠시 멈춤 · ${e}세`,
-        body: reflectMirror(e).join(" "),
-        fact: compLine(e),
-        q: a,
-        ph: L`예: ${t[1]()} (적지 않아도 괜찮아요)`,
-        input: !0,
-        choices: [
-          {
-            k: "write",
-            label: L`적어 두고 계속 살기`,
-            sub: L`적은 글은 이 삶의 기록에 남아요`,
-          },
-          { k: "skip", label: L`마음속에 담고 계속 살기`, sub: "" },
-        ],
-      }
-    );
-  },
-  apply: (e, t, a) => {
-    const o = (a || "").trim().slice(0, 200);
-    return !o || e === "skip"
-      ? !1
-      : ((S.journal = S.journal || []),
-        S.journal.push({ a: S.age, q: S.flags.refQ, t: o }),
-        typeof crisisNote == "function" &&
-          setTimeout(() => crisisNote(o), 1500),
-        { t: LANG === "de" ? `„${o}“` : Q1 + o + Q2, k: "note" });
-  },
-};
-function reflectQuiet(e) {
-  const t = reflectMirror(e).join(" ");
-  t && log(t, "ev", compLine(e));
-}
+
+
+
+
 const DISH = {
     NGA: L`졸로프 라이스`,
     GHA: L`졸로프 라이스`,
@@ -148447,7 +148233,6 @@ const HUM_W = { nbrkid: 0.3 };
 const RET_POOR_W = 0.1;
 const ER_AUTO = 0.3;
 const AUTO_W = {
-    reflect: { skip: 1 },
     invest: { cash: 0.4, mix: 0.25, stock: 0.2, property: 0.15 },
     adsearch: { go: 0.45, later: 0.4, no: 0.15 },
     reunite: { meet: 0.35, no: 0.65 },
@@ -152698,12 +152483,13 @@ const MV_JA = (() => {
 function lsGet(e, t) {
   try {
     const a = localStorage.getItem(lk(e));
-    return a ? JSON.parse(a) : t;
+    return a ? __stripStoredReflections(JSON.parse(a)) : t;
   } catch {
     return t;
   }
 }
 function lsSet(e, t) {
+  __stripStoredReflections(t);
   e === PAST_KEY && Array.isArray(t) && pdbPut(t);
   try {
     return (localStorage.setItem(lk(e), JSON.stringify(t)), !0);
@@ -152753,6 +152539,7 @@ function pdbTx(e, t) {
   );
 }
 async function pdbPut(e, t = LANG) {
+  __stripStoredReflections(e);
   try {
     if (
       !pdbCan() ||
@@ -153884,7 +153671,6 @@ const MOMENT_MINOR = new Set([
   "discipline",
   "bizop",
   "temper",
-  "reflect",
   "dream",
   "party",
   "gadget",
@@ -154004,7 +153790,7 @@ const decFa = (e) => {
     } catch {}
     return t ? `<p class="dec-fa">${esc(t)}</p>` : "";
   };
-HOOK.noPause = () => UI.prefs.reflect === !1 || autoHideOn();
+
 const HUM_KEY = "one8b.hum.v1";
 HOOK.humRecent = () => {
   const e = lsGet(HUM_KEY, []);
@@ -154046,402 +153832,63 @@ const leanSet = () =>
     Array.isArray(UI.prefs.lean) &&
     UI.prefs.lean.length === 4 &&
     UI.prefs.lean.some((e) => +e);
-const LB_OK = (() => {
-    try {
-      return new RegExp("(?<!a)b").test("b");
-    } catch {
-      return !1;
-    }
-  })();
-const CRISIS_SRC =
-    "(\\bi\\s*(really\\s*|just\\s*)?(want|wanna)\\s*(to\\s*)?die\\b|\\bkill(ing)?\\s*myself|\\bend(ing)?\\s*my\\s*(own\\s*)?life|\\btake\\s*my\\s*(own\\s*)?life|\\b(i['’]?m|i\\s*am|i\\s*feel|feeling)\\s*suicidal|\\bdon['’]?t\\s*want\\s*to\\s*(live|be\\s*alive|exist)|\\bhurt(ing)?\\s*myself|\\bcut(ting)?\\s*myself|죽고\\s*싶(?!지\\s*않|진\\s*않|지는\\s*않|지도\\s*않)|살기\\s*싫|살고\\s*싶지\\s*않|그만\\s*살고\\s*싶|사라지고\\s*싶|없어지고\\s*싶|자살\\s*하고\\s*싶|死にたい|\
-しにたい|消えたい|きえたい|自殺し(たい|よう)|生きていたくない|生きてたくない|もう生きられない|いなくなりたい|リスカ|自傷(したい|して|した)|首を吊り?たい|飛び降りたい|我想死|好想死|想死了|真想死|不想活|活不下去|想自殺|想自杀|要自殺|要自杀|想輕生|想轻生|想結束(自己的)?生命|想结束(自己的)?生命|想了結自己|想了结自己|割腕|自殘|自残|想跳樓|想跳楼|자살\\s*할\\s*(거|까|래)|자해\\s*(를\\s*)?(하고|했|해)|죽어\\s*버리고|극단적\\s*(인\\s*)?선택\\s*(을\\s*)?(하고|할)|목숨을\\s*끊|(tôi|mình|tao|tớ|em|con)\\s+(chỉ\\s+|thật sự\\s+|thực sự\\s+|rất\\s+)?muốn\\s+chết|muốn\\s+chết\\s+(đi\\s+)?cho\\s+(rồi|xong)|(muốn|định|sẽ|sắp)\\s+tự\\s+(tử|sát)|nghĩ\\s+(đến|tới)\\s+(chuyện\\s+|việc\\s+)?tự\\s+(tử|sát)|tự\\s+(tử|sát)\\s+cho\\s+(rồi|xong)|(không|chẳng)\\s+(còn\\s+)?muốn\\s+sống\\s+nữa|(không|chẳng)\\s+(còn\\s+)?thiết\\s+sống|(tôi|mình|tao|tớ|em|con)\\s+(chán\\s+sống|muốn\\s+biến\\s+mất)|không\\s+muốn\\s+tồn\\s+tại|tự\\s+kết\\s+liễu|(kết\\s+liễu|kết\\s+thúc)\\s+(cuộc\\s+)?đời\\s+mình|tự\\s+(làm\\s+)?(hại|đau)\\s+(bản\\s+thân|mình)|rạch\\s+tay|muốn\\s+nhảy\\s+lầu|\\b(khong|chang)\\s+muon\\s+song\\s+nua\\b|\\bket\\s+lieu\\s+(cuoc\\s+)?doi\\s+minh\\b|\\btu\\s+ket\\s+lieu\\b|\\btu\\s+(lam\\s+)?hai\\s+ban\\s+than\\b|\\bmuon\\s+tu\\s+sat\\b|\\bi\\s*(?:really\\s*|just\\s*|ho\
-nestly\\s*|still\\s*|seriously\\s*|actually\\s*|kinda\\s*|so\\s*)?(?:want|wanna|need|plan|intend)\\s*(?:to\\s*)?commit\\s*suicide\\b|\\b(?:i['’]?m|im|i\\s*am)\\s*(?:going|gonna|planning|about|thinking\\s*(?:of|about)|considering)\\s*(?:to\\s*)?(?:commit(?:ting)?\\s*suicide|suicide)\\b(?!\\s*(?:rates?|prevention|mechanics?|events?|cards?|lines?|deaths?|statistics?|stats|data|awareness|feature|topic|system|in\\s+(?:the|this)\\s+(?:game|simulation)|in\\s+game))|\\bi\\s*(?:['’]?ll|will)\\s*(?:just\\s*)?commit\\s*suicide\\b|(?:^\\s*(?:been\\s*|still\\s*)?|\\bi\\s*(?:am|['’]?m|m)?\\s*(?:still\\s*)?|\\bi\\s*(?:keep|kept)\\s*|\\bi\\s*(?:have|['’]ve|had|['’]d)?\\s*been\\s*)thinking\\s*(?:about|of)\\s*(?:suicide|killing\\s*myself|ending\\s*(?:my\\s*life|it\\s*all))\\b(?!\\s*(?:rates?|prevention|mechanics?|events?|cards?|lines?|deaths?|statistics?|stats|data|awareness|feature|topic|system|in\\s+(?:the|this)\\s+(?:game|simulation)|in\\s+game))|\\bi\\s*(?:often\\s*|always\\s*|constantly\\s*|sometimes\\s*|still\\s*)?(?:think|thought)\\s*(?:about|of)\\s*(?:suic\
-ide|killing\\s*myself|ending\\s*my\\s*life)\\b(?!\\s*(?:rates?|prevention|mechanics?|events?|cards?|lines?|deaths?|statistics?|stats|data|awareness|feature|topic|system|in\\s+(?:the|this)\\s+(?:game|simulation)|in\\s+game))|\\bi\\s*(?:have|['’]ve|had|get|got|keep|still\\s*have|often\\s*have|sometimes\\s*have)\\s*(?:been\\s*)?(?:having\\s*|getting\\s*)?suicidal\\s*(?:thoughts|ideation|feelings|urges)\\b|(?:^\\s*(?:been\\s*)?|\\bi\\s*(?:have|['’]ve|had)?\\s*been\\s*|\\bmy\\s*)(?:having\\s*)?suicidal\\s*(?:thoughts|ideation|feelings|urges)\\b|\\bi\\s*wish\\s*i\\s*(?:was|were|['’]?d\\s*be|could\\s*(?:just\\s*)?be)\\s*dead\\b|\\bi\\s*wish\\s*i\\s*could\\s*(?:just\\s*)?(?:die|disappear|stop\\s*existing)\\b|\\bi\\s*wish\\s*i\\s*(?:had|['’]?d)\\s*never\\s*been\\s*born\\b|\\bi\\s*(?:want|wanna)\\s*(?:to\\s*)?be\\s*dead\\b|\\bi['’]?d\\s*(?:rather\\s*be|be\\s*better\\s*off)\\s*dead\\b|\\b(?:and|i\\s*(?:honestly|still|sometimes|literally|seriously|actually|kinda|kind\\s*of|often|truly|so))\\s*(?:just\\s*|really\\s*)?(?:want|wanna)\\s*(?:to\\s*)?die\\b(?!\\s*(?:laughing|of\\s\
-*laughter|from\\s*laughing))|\\b(?:want|wanna|going\\s*to|gonna)\\s*(?:to\\s*)?end\\s*it\\s*all\\b|\\bi\\s*(?:just\\s*|really\\s*)?(?:want|wanna|need)\\s*(?:to\\s*)?end\\s*it(?=\\s*(?:$|[.!?…]|now\\b|tonight\\b|today\\b))|\\bbetter\\s*off\\s*without\\s*me\\b|\\b(?:no|any)\\s*(?:more\\s*)?reasons?\\s*(?:left\\s*)?(?:to\\s*live|for\\s*living|to\\s*keep\\s*living|to\\s*go\\s*on)\\b|\\bnothing\\s*(?:left\\s*)?to\\s*live\\s*for\\b|\\bnot\\s*worth\\s*living\\b|\\bisn['’]?t\\s*worth\\s*living\\b|\\bmy\\s*life\\s*(?:is\\s*not|isn['’]?t|is\\s*no\\s*longer|['’]?s\\s*not)\\s*worth\\s*it\\b|\\b(?:don['’]?t|do\\s*not)\\s*want\\s*to\\s*be\\s*(?:here|around)\\s*any\\s*more\\b|\\b(?:don['’]?t|do\\s*not)\\s*want\\s*to\\s*(?:wake\\s*up|exist)\\s*(?:any\\s*more|again|ever\\s*again)\\b|\\bhope\\s*i\\s*(?:don['’]?t|never)\\s*wake\\s*up\\b|\\bi\\s*(?:just\\s*|really\\s*)?(?:want|wanna)\\s*(?:to\\s*)?disappear\\b(?!\\s*(?:(?:for|from|into|to|on|with|off|in|under|behind|after|before|when|until|while|somewhere|like)\\b|a\\s*(?:bit|while|little)\\b|and\\s+(?:go|travel|live|start)\\b))|\\bi\\s*(?:am|['’]?m|m)?\
-\\s*(?:going|gonna|about|planning|want|wanna|will|['’]ll|need)?\\s*(?:to\\s*)?jump\\s*(?:off|from)\\s*(?:a|the|this|my|our)\\s*(?:bridge|roof|rooftop|building|cliff|balcony|tower|window|ledge)\\b(?!\\s*(?:into|in\\s*to))|\\bunalive\\s*myself\\b|자살\\s*(?:생각|충동)이\\s*(?:자꾸\\s*|계속\\s*|요즘\\s*|많이\\s*|너무\\s*|또\\s*|자주\\s*|가끔\\s*|매일\\s*)?(?:들(?!지\\s*않|진\\s*않|지도\\s*않|지는\\s*않)|나(?:요|서|고|는데|$|[\\s.!?…~ㅠㅜ])|있(?:어|다|음|습|는데|고)|생기|생겨|심해)|자살\\s*충동을?\\s*(?:느끼|느껴|참|억누르|견디)|자살\\s*(?:생각|충동)(?:을|만)\\s*(?:자꾸\\s*|계속\\s*|요즘\\s*|많이\\s*|또\\s*|자주\\s*|매일\\s*)?(?:해(?:요|$|[\\s.!?…~ㅠㅜ])|하게\\s*돼|했어|했다|했습니다)|죽어야겠|(?:그냥|차라리)\\s*죽어야(?:지|겠|\\s*해|\\s*할\\s*것\\s*같)|(?:살|살아갈|살아야\\s*할)\\s*이유가\\s*(?:없|하나도\\s*없|더는\\s*없)|살\\s*이유를\\s*모르|투신\\s*(?:하고\\s*싶|할까|하려고|할\\s*거|해\\s*버리)|뛰어\\s*내리고\\s*싶|뛰어\\s*내리려고|(?:손목|팔|허벅지)을?\\s*(?:긋고\\s*싶|그었|긋고\\s*있|그어\\s*버리|긋는\\s*게)|그냥\\s*(?:다|전부|모든\\s*걸|모든\\s*것을|모두)\\s*끝내(?:고\\s*싶|버리고\\s*싶|고\\s*말겠|야겠)|(?:내|제|나의)\\s*(?:인생|삶|목숨)을?\\s*(?:그만\\s*)?끝내(?:고\\s*싶|려고|야겠|버리고)|(?:나|난|내가|저|전|제가)\\s*(?:같은\\s*(?:건|게|애는?|사람은?)|따위는?)?\\s*(?:없어지는|사라지는|죽는|없는)\\s*게\\s*(?:나|낫)|(?:나|난|내가|저|제가)\\s*같은\\s*(?:건\
-|게|애는?|사람은?)\\s*(?:없어져야|사라져야|죽어야|태어나지\\s*말았어야)|想去死|我要去死|要結束(?:自己的)?生命|要结束(?:自己的)?生命|死のうと(?:思|おも)|死んでしまいたい|死んじゃいたい|死にてえ|死にてー|\\b(?:toi|minh|tao|em|con)\\s+(?:chi\\s+|that\\s+su\\s+|thuc\\s+su\\s+|rat\\s+)?muon\\s+chet\\b|\\bmuon\\s+chet\\s+(?:di\\s+)?cho\\s+(?:roi|xong)\\b|\\b(?:toi|minh|tao|em|con)\\s+(?:muon|dinh|se|sap)\\s+tu\\s+tu\\s*(?:$|[.!?…]|cho\\s+(?:roi|xong))|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:(?:je|j['’ʼ`´]?|jv|jveux|jveu|jvx|jvais|jvai|moi\\s+je)\\s*(?:veux|veu|veut|voudrais|voudrai|aimerais|aimerai|souhaite)|(?:je\\s+n['’ʼ`´]?\\s*ai|j\\s*['’ʼ`´]?\\s*n?['’ʼ`´]?\\s*ai|jai|jnai|g)\\s+(?:trop\\s+|tellement\\s+|vraiment\\s+|juste\\s+|encore\\s+|souvent\\s+)?(?:envie|envi|le\\s+go[uû]t))\\s+(?:de\\s+|d['’ʼ`´]?\\s*)?(?:mourr?ir|crever)(?!\\s*(?:de\\s|d['’ʼ`´]|l['’ʼ`´]|du\\s|des\\s|en\\s|[àa]\\s|au\\s|aux\\s|comme\\s|dans\\s|entour|chez\\s|vieux|vieille|[âa]g[ée]|un\\s+jour|plus\\s+tard|heureu|tranquille|paisible|dignement|pour\\s|avec\\s|sur\\s|ici|l[àa]\\s|la\\s|le\\s|un\\s|une\\s|apr[èe]s|avant|quand|si\\s|sans\\s|loin|pr[èe]s))|^\\s*(?:trop\\s+|telle\
-ment\\s+)?envie\\s+de\\s+(?:mourr?ir|crever)(?!\\s*(?:de\\s|d['’ʼ`´]|l['’ʼ`´]|du\\s|des\\s|en\\s|[àa]\\s|au\\s|aux\\s|comme\\s|dans\\s|entour|chez\\s|vieux|vieille|[âa]g[ée]|un\\s+jour|plus\\s+tard|heureu|tranquille|paisible|dignement|pour\\s|avec\\s|sur\\s|ici|l[àa]\\s|la\\s|le\\s|un\\s|une\\s|apr[èe]s|avant|quand|si\\s|sans\\s|loin|pr[èe]s))|(?:^|[^a-z0-9à-öø-ÿœæ_])me\\s+suicid|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:je\\s+(?:suis|me\\s+sens|deviens)|jsuis|chui|chu)\\s+(?:un\\s+peu\\s+|tr[eè]s\\s+|vraiment\\s+|encore\\s+)?suicidaire|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:je\\s+n['’ʼ`´]?\\s*ai|j\\s*['’ʼ`´]?\\s*n?['’ʼ`´]?\\s*ai|jai|jnai|g)\\s+(?:encore\\s+|souvent\\s+|parfois\\s+)?des\\s+(?:pens[ée]es|id[ée]es)\\s+(?:suicidaires|noires)|(?:^|[^a-z0-9à-öø-ÿœæ_])je\\s+pense\\s+(?:souvent\\s+|beaucoup\\s+|parfois\\s+|encore\\s+)?au\\s+suicide(?!\\s*(?:de\\s|d['’ʼ`´]|du\\s))|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:(?:je|j['’ʼ`´]?|jv|jveux|jveu|jvx|jvais|jvai|moi\\s+je)\\s*(?:vais|vai|veux|voudrais|pense\\s+[àa]|songe\\s+[àa]|devrais)|envie\\s+de|besoin\\s+de|j['’ʼ`´]?\\s*ai\\s+pens[ée]\\s+[\
-àa])\\s+me\\s+(?:tuer|pendre|flinguer|buter|foutre\\s+en\\s+l['’ʼ`´]?\\s*air|jeter\\s+(?:sous|du\\s+haut|d['’ʼ`´]?\\s*un|du\\s+pont|par\\s+la\\s+fen))(?!\\s*(?:[àa]\\s|au\\s|aux\\s|sur\\s|pour\\s+(?:rien|toi|vous|eux|lui|elle)|de\\s+rire|l[àa]-dessus))|(?:^|[^a-z0-9à-öø-ÿœæ_])me\\s+foutre\\s+en\\s+l['’ʼ`´]?\\s*air|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:(?:je|j['’ʼ`´]?|jv|jveux|jveu|jvx|jvais|jvai|moi\\s+je)\\s*(?:vais|veux)|envie\\s+de)\\s+sauter\\s+(?:d['’ʼ`´]?\\s*un|du|par\\s+la|de\\s+la)\\s+(?:pont|toit|immeuble|fen[eê]tre|balcon|falaise)|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:mettre|mets|met|vais\\s+mettre)\\s+fin\\s+[àa]\\s+(?:mes\\s+jours|ma\\s+vie)|(?:^|[^a-z0-9à-öø-ÿœæ_])mettre\\s+un\\s+terme\\s+[àa]\\s+(?:ma\\s+vie|mes\\s+jours)|(?:^|[^a-z0-9à-öø-ÿœæ_])en\\s+finir\\s+avec\\s+(?:la|ma|cette)\\s+vie|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:(?:je|j['’ʼ`´]?|jv|jveux|jveu|jvx|jvais|jvai|moi\\s+je)\\s*(?:(?:veux|veu|veut|voudrais|voudrai|aimerais|aimerai|souhaite)|vais|vai)|(?:je\\s+n['’ʼ`´]?\\s*ai|j\\s*['’ʼ`´]?\\s*n?['’ʼ`´]?\\s*ai|jai|jnai|g)\\s+envie\\s+d['’ʼ`´]?)\\s*en\\s+f\
-inir(?=\\s*(?:$|[.!?…,;:]|une\\s+bonne\\s+fois|pour\\s+de\\s+bon|pour\\s+toujours|avec\\s+(?:moi|tout(?![\\s-]*(?:[çc]a|cela|ce))|la\\s+vie|ma\\s+vie|cette\\s+vie)\\b))|(?:^|[^a-z0-9à-öø-ÿœæ_])me\\s+donner\\s+la\\s+mort|(?:^|[^a-z0-9à-öø-ÿœæ_])m['’ʼ`´]?\\s*[oô]ter\\s+la\\s+vie|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:je\\s+n['’ʼ`´]?\\s*ai|j\\s*['’ʼ`´]?\\s*n?['’ʼ`´]?\\s*ai|jai|jnai|g)\\s+(?:vraiment\\s+|juste\\s+|m[ê]me\\s+)?(?:plus|pu|pas|aucune|plus\\s+du\\s+tout|plus\\s+trop|plus\\s+aucune)\\s+(?:envie|envi|le\\s+go[uû]t|la\\s+force|la\\s+volont[ée]|de\\s+raison)\\s+de\\s+vivre(?!\\s*(?:ici|l[àa]|comme|avec|dans|chez|en\\s|[àa]\\s|au\\s|aux\\s|sans|sous|seul|loin|pr[èe]s|de\\s|d['’ʼ`´]|sur\\s|une\\s|un\\s|cette|ce\\s|[çc]a\\b|cela|ainsi|l[àa]-bas|chere|ch[èe]re|en\\s+ville))|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:je\\s+(?:ne\\s+|n['’ʼ`´]\\s*)?|j['’ʼ`´]?\\s*)(?:veux|veu|voudrais)\\s+(?:plus|pu)\\s+(?:vivre|exister)(?!\\s*(?:ici|l[àa]|comme|avec|dans|chez|en\\s|[àa]\\s|au\\s|aux\\s|sans|sous|seul|loin|pr[èe]s|de\\s|d['’ʼ`´]|sur\\s|une\\s|un\\s|cette|ce\\s|[çc]a\\b|cela|ainsi|l\
-[àa]-bas|chere|ch[èe]re|en\\s+ville))|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:(?:veux|veu|veut|voudrais|voudrai|aimerais|aimerai|souhaite)|envie\\s+de)\\s+ne\\s+plus\\s+(?:exister|vivre|[ê]tre\\s+l[àa]|me\\s+r[ée]veiller)(?!\\s*(?:ici|l[àa]|comme|avec|dans|chez|en\\s|[àa]\\s|au\\s|aux\\s|sans|sous|seul|loin|pr[èe]s|de\\s|d['’ʼ`´]|sur\\s|une\\s|un\\s|cette|ce\\s|[çc]a\\b|cela|ainsi|l[àa]-bas|chere|ch[èe]re|en\\s+ville))(?!\\s*(?:la\\s+nuit|t[ôo]t|aussi|en\\s+sursaut))|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:j['’ʼ`´]?\\s*en\\s+ai|jen\\s+ai|j\\s+en\\s+ai)\\s+(?:vraiment\\s+|trop\\s+|tellement\\s+)?(?:marre|ras\\s+le\\s+bol|assez)\\s+de\\s+(?:vivre|la\\s+vie|ma\\s+vie)(?!\\s*(?:ici|l[àa]|comme|avec|dans|chez|en\\s|[àa]\\s|au\\s|aux\\s|sans|sous|seul|loin|pr[èe]s|de\\s|d['’ʼ`´]|sur\\s|une\\s|un\\s|cette|ce\\s|[çc]a\\b|cela|ainsi|l[àa]-bas|chere|ch[èe]re|en\\s+ville))(?!\\s*(?:de\\s|d['’ʼ`´]|ch[èe]re|parisienne|citadine|[àa]\\s|qu))|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:je\\s+suis|jsuis|chui|chu|j['’ʼ`´]?\\s*suis)\\s+(?:tellement\\s+|trop\\s+|vraiment\\s+)?(?:tann[ée]e?|fatigu[ée]e?|l\
-as|lasse|[ée]c(?:œ|oe)ur[ée]e?)\\s+de\\s+(?:vivre|la\\s+vie)(?!\\s*(?:ici|l[àa]|comme|avec|dans|chez|en\\s|[àa]\\s|au\\s|aux\\s|sans|sous|seul|loin|pr[èe]s|de\\s|d['’ʼ`´]|sur\\s|une\\s|un\\s|cette|ce\\s|[çc]a\\b|cela|ainsi|l[àa]-bas|chere|ch[èe]re|en\\s+ville))|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:tout\\s+le\\s+monde|le\\s+monde|ils|elles|vous|ma\\s+famille|mes\\s+parents|ils\\s+tous)\\s+(?:serai(?:en)?t|seront|serait)\\s+(?:tous\\s+|toutes\\s+)?mieux\\s+sans\\s+moi|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:(?:je|j['’ʼ`´]?|jv|jveux|jveu|jvx|jvais|jvai|moi\\s+je)\\s*(?:veux|veu|veut|voudrais|voudrai|aimerais|aimerai|souhaite)|(?:je\\s+n['’ʼ`´]?\\s*ai|j\\s*['’ʼ`´]?\\s*n?['’ʼ`´]?\\s*ai|jai|jnai|g)\\s+(?:trop\\s+|tellement\\s+|vraiment\\s+|juste\\s+|souvent\\s+)?envie\\s+de)\\s+dispara[iî]tre(?!\\s*(?:sous|de\\s|d['’ʼ`´]|du\\s|des\\s|quelques|un\\s+(?:moment|peu|instant|temps|week|jour|mois|an)|une\\s|pendant|en\\s|[àa]\\s|au\\s|aux\\s|dans|loin|ailleurs|deux|trois|le\\s+temps|pour\\s+(?:quelques|un|une|le\\s+week)|avec|chez))|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:(?:je|j['’ʼ`´]\
-?|jv|jveux|jveu|jvx|jvais|jvai|moi\\s+je)\\s*(?:vais|vai|(?:veux|veu|veut|voudrais|voudrai|aimerais|aimerai|souhaite))|envie\\s+de|besoin\\s+de|recommenc\\w*\\s+[àa]|continue\\w*\\s+[àa])\\s+me\\s+faire\\s+du\\s+mal(?!\\s*(?:[àa]\\s|en\\s|pour\\s+rien))|(?:^|[^a-z0-9à-öø-ÿœæ_])je\\s+me\\s+(?:fais|suis\\s+fait|suis\\s+faite)\\s+du\\s+mal(?!\\s*(?:[àa]\\s|en\\s|pour\\s+rien|tout\\s+seul|toute\\s+seule|au\\s|aux\\s))|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:me|m['’ʼ`´])\\s*(?:scarifi|automutil|mutil)|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:je\\s+me|jme)\\s+(?:suis\\s+)?(?:scarif|mutil)|(?:^|[^a-z0-9à-öø-ÿœæ_])me\\s+(?:couper|tailler|ouvrir|taillader|entailler)\\s+les\\s+(?:veines|poignets|bras|cuisses)|(?:^|[^a-z0-9à-öø-ÿœæ_])m['’ʼ`´]?\\s*ouvrir\\s+les\\s+veines|(?:^|[^a-z0-9à-öø-ÿœæ_])(?:recommenc\\w*|continue\\w*)\\s+[àa]\\s+me\\s+(?:couper|scarifier|mutiler)|(?:^|[^a-z0-9à-öø-ÿœæ_])je\\s+me\\s+coupe(?:\\s+(?:encore|souvent|volontairement|expr[eè]s))?\\s*(?:$|[.!?…,;])|(?<!ไม่)(?<!ไม่ได้)อยากตาย|(?<!ไม่)(?<!ไม่ได้)อยาก(?:จะ)?ฆ่าตัวตาย|(?:คิด|กำลังคิด|ตั้งใจ)(?:\
-จะ|ว่าจะ)?ฆ่าตัวตาย|ไม่อยาก(?:มีชีวิต)?อยู่(?:ต่อ)?(?:แล้ว|อีกต่อไป)|ไม่อยากมีชีวิตอยู่|อยาก(?:หายไป|หายไปจากโลก)|อยากจบชีวิต|จบชีวิตตัวเอง|ทำร้ายตัวเอง|กรีด(?:แขน|ข้อมือ)(?:ตัวเอง)?|ไม่อยากตื่น(?:ขึ้นมา)?อีก|(?<!\\bno\\s+(?:me\\s+)?)(?<!\\bnunca\\s+(?:me\\s+)?)\\b(?:me\\s+)?(?:quiero|quisiera|deseo|tengo\\s+ganas\\s+de|ganas\\s+de|solo\\s+quiero)\\s+morir(?:me)?(?![a-zà-öø-ÿ])(?!\\s*(?:de\\s+(?!verdad|veras)|del\\s|en\\s|a\\s|al\\s|con\\s|como\\s|feliz|tranquil|viej|ancian|alg[uú]n|un\\s+d[ií]a|dormid|junt|cerca|aqu[ií]|all[ií]|rodead|sin\\s|joven|antes|despu[eé]s|cuando|si\\s|por\\s|para\\s|lejos))|\\bsuicidarme\\b|\\bme\\s+(?:voy\\s+a|quiero|pienso)\\s+(?:suicidar|quitar\\s+la\\s+vida)|\\bquitarme\\s+la\\s+vida\\b|\\b(?:quiero|quisiera|voy\\s+a|pienso\\s+en|estoy\\s+pensando\\s+en|ganas\\s+de|deseo)\\s+matarme\\b|\\bme\\s+(?:voy\\s+a|quiero)\\s+matar(?![a-zà-öø-ÿ])(?!\\s*(?:estudiando|trabajando|de\\s+risa|de\\s+hambre|a\\s+trabajar))|\\b(?:me\\s+)?(?:quiero|voy\\s+a|ganas\\s+de|necesito)\\s+(?:hacerme\\s+da[ñn]o|lastimarme|cortarme\\s+(?:las\
-\\s+venas|los\\s+brazos|las\\s+mu[ñn]ecas|las\\s+piernas))|\\bme\\s+(?:hago|sigo\\s+haciendo)\\s+da[ñn]o\\s*(?:a\\s+m[ií]\\s+mism[oa])?(?=\\s*(?:$|[.!?…,;]))|\\bme\\s+(?:corto|sigo\\s+cortando)\\s+(?:las\\s+venas|los\\s+brazos|las\\s+mu[ñn]ecas|las\\s+piernas)|\\bcortarme\\s+las\\s+venas|(?<!\\bnunca\\s+)\\bno\\s+quiero\\s+(?:vivir|seguir\\s+viviendo|estar\\s+viv[oa]|existir)(?![a-zà-öø-ÿ])(?!\\s*(?:en\\s|con\\s|cerca|lejos|aqu[ií]|all[ií]|ah[ií]|sol[oa](?![a-zà-öø-ÿ])|de\\s|del\\s|junt|a\\s|al\\s|por\\s|para\\s|bajo\\s|sin\\s|otra\\s|otro\\s|lo\\s+mismo))|\\bpienso\\s+(?:mucho\\s+|siempre\\s+|a\\s+veces\\s+|seguido\\s+)?en\\s+(?:el\\s+)?suicidio\\b|\\b(?:tengo|tuve)\\s+(?:pensamientos|ideas)\\s+suicidas\\b|\\b(?:soy|estoy|me\\s+siento)\\s+suicida\\b|\\bestar[ií]an\\s+mejor\\s+sin\\s+m[ií](?![a-zà-öø-ÿ])|\\bojal[aá]\\s+(?:me\\s+)?(?:muriera|estuviera\\s+muert[oa])\\b|\\bno\\s+vale\\s+la\\s+pena\\s+(?:seguir\\s+)?vivir\\b)";
-const CRISIS_LB_ALTS = [
-    "(?<!ไม่)(?<!ไม่ได้)อยา\
-กตาย",
-    "(?<!ไม่)(?<!ไม่ได้)อยาก(?:จะ)?ฆ่าตัวตาย",
-    "(?<!\\bno\\s+(?:me\\s+)?)(?<!\\bnunca\\s+(?:me\\s+)?)\\b(?:me\\s+)?(?:quiero|quisiera|deseo|tengo\\s+ganas\\s+de|ganas\\s+de|solo\\s+quiero)\\s+morir(?:me)?(?![a-zà-öø-ÿ])(?!\\s*(?:de\\s+(?!verdad|veras)|del\\s|en\\s|a\\s|al\\s|con\\s|como\\s|feliz|tranquil|viej|ancian|alg[uú]n|un\\s+d[ií]a|dormid|junt|cerca|aqu[ií]|all[ií]|rodead|sin\\s|joven|antes|despu[eé]s|cuando|si\\s|por\\s|para\\s|lejos))",
-    "(?<!\\bnunca\\s+)\\bno\\s+quiero\\s+(?:vivir|seguir\\s+viviendo|estar\\s+viv[oa]|existir)(?![a-zà-öø-ÿ])(?!\\s*(?:en\\s|con\\s|cerca|lejos|aqu[ií]|all[ií]|ah[ií]|sol[oa](?![a-zà-öø-ÿ])|de\\s|del\\s|junt|a\\s|al\\s|por\\s|para\\s|bajo\\s|sin\\s|otra\\s|otro\\s|lo\\s+mismo))",
-  ];
-const CRISIS_RE = new RegExp(
-    LB_OK
-      ? CRISIS_SRC
-      : CRISIS_LB_ALTS.reduce((e, t) => e.replace("|" + t, ""), CRISIS_SRC),
-  );
-const CRISIS_HAND = LB_OK
-    ? []
-    : [
-        [/อยาก(?:ตาย|(?:จะ)?ฆ่าตัวตาย)/y, /(?:ไม่|ไม่ได้)$/],
-        [
-          new RegExp(
-            "\\b(?:me\\s+)?(?:quiero|quisiera|deseo|tengo\\s+ganas\\s+de|ganas\\s+de|solo\\s+quiero)\\s+morir(?:me)?(?![a-zà-öø-ÿ])(?!\\s*(?:de\\s+(?!verdad|veras)|del\\s|en\\s|a\\s|al\\s|con\\s|como\\s|feliz|tranquil|viej|ancian|alg[uú]n|un\\s+d[ií]a|dormid|junt|cerca|aqu[ií]|all[ií]|rodead|sin\\s|joven|antes|despu[eé]s|cuando|si\\s|por\\s|para\\s|lejos))",
-            "y",
-          ),
-          /(?:\bno|\bnunca)\s+(?:me\s+)?$/,
-        ],
-        [
-          new RegExp(
-            "\\bno\\s+quiero\\s+(?:vivir|seguir\\s+viviendo|estar\\s+viv[oa]|existir)(?![a-zà-öø-ÿ])(?!\\s*(?:en\\s|con\\s|cerca|lejos|aqu[ií]|all[ií]|ah[ií]|sol[oa](?![a-zà-öø-ÿ])|de\\s|del\\s|junt|a\\s|al\\s|por\\s|para\\s|bajo\\s|sin\\s|otra\\s|otro\\s|lo\\s+mismo))",
-            "y",
-          ),
-          /\bnunca\s+$/,
-        ],
-      ];
-const crisisLbHand = (e) =>
-    CRISIS_HAND.some(([t, a]) => {
-      for (let o = 0; o < e.length; o++)
-        if (((t.lastIndex = o), t.test(e) && !a.test(e.slice(0, o)))) return !0;
-      return !1;
-    });
-const CRDE_ADV =
-    "(?:(?:einfach|nur|noch|endlich|wirklich|echt|so|lieber|am\\s+liebsten|gerade|jetzt|heute|manchmal|oft|ofters|immer|auch|halt|eigentlich|erns\
-thaft|langsam|wieder|schon|bald)\\s+)*";
-const CRDE_I = "(?<![a-zß])ich\\s+" + CRDE_ADV;
-const CRDE_WANT =
-    "(?:" +
-    CRDE_I +
-    "(?:will|mochte|moechte|wurde|wuerde|wollte)|(?<![a-zß])(?:will|mochte|moechte|wurde|wuerde|wollte)\\s+ich|^\\s*(?:will|mochte|moechte)|[.!?…]\\s*(?:will|mochte|moechte))\\s+" +
-    CRDE_ADV;
-const CRDE_NOT_DIE =
-    "(?![a-z])(?!\\s*(?:,?\\s*(?:wenn|als|sobald|bevor|nachdem|weil|wie|sondern)(?![a-z])|vor\\s+(?:lachen|scham|langeweile|hunger|durst|kalte|kaelte|hitze|neugier|sehnsucht|gluck|glueck|freude|angst|mudigkeit|muedigkeit|stress)|in\\s+(?:ruhe|frieden|wurde|wuerde|meinem|meiner|meinen)|im\\s+(?:alter|schlaf|bett|kreis)|alt(?![a-z])|mit\\s+\\d|zu\\s+hause|zuhause|daheim|friedlich|glucklich|gluecklich|ruhig|ohne\\s+(?:schmerz|angst|reue)|eines\\s+(?:naturlichen|natuerlichen|tages)|irgendwann|spater|spaeter|nicht(?![a-z])|niemals|nie(?![a-z])|neben|umgeben|bei\\s+(?:dir|euch|meiner|meinem|meinen)))";
-const CRDE_NOT_LIVE =
-    "(?![a-z])(?!\\s*(?:hier|dort|da(?![a-z])|so(?![a-z])|wie\\s|in\\s|im\\s|mit\\s|ohne\\s|bei\
-\\s|als\\s|unter\\s|neben\\s|allein|zusammen|von\\s|auf\\s|nach\\s|fur\\s|fuer\\s))";
-const CRDE_SELF =
-    "(?:mich\\s+(?:selbst\\s+)?(?:umbringen|toten|toeten|ritzen|verletzen|aufhangen|aufhaengen|erhangen|erhaengen|erschiessen|erschießen|vergiften)|mir\\s+(?:selbst\\s+)?(?:das\\s+leben\\s+nehmen|etwas\\s+antun|was\\s+antun|die\\s+pulsadern\\s+aufschneiden)|(?:suizid|selbstmord)\\s+(?:begehen|machen))(?![a-z])";
-const CRDE_SELF_ZU =
-    "(?:mich\\s+(?:selbst\\s+)?(?:zu\\s+ritzen|zu\\s+verletzen|umzubringen|zu\\s+toten|zu\\s+toeten|aufzuhangen|aufzuhaengen|zu\\s+erhangen|zu\\s+erhaengen)|mir\\s+(?:selbst\\s+)?das\\s+leben\\s+zu\\s+nehmen|mir\\s+(?:etwas|was)\\s+anzutun|(?:suizid|selbstmord)\\s+zu\\s+begehen|(?:an|uber|ueber)\\s+(?:den\\s+)?(?:suizid|selbstmord))(?![a-z])";
-const lbFree = (e) =>
-    LB_OK
-      ? e
-      : e
-          .replace(/\(\?<!\[a-zß\]\)/g, "(?:^|[^a-zß])")
-          .replace(/\(\?<!\[a-z\]\)/g, "(?:^|[^a-z])");
-const CRISIS_DE_UI = new RegExp(
-    lbFree(
-      [
-        CRDE_WANT + "sterben" + CRDE_NOT_DIE,
-        CRDE_WANT +
-          "(?:tot\\s+sein|nicht\\s+mehr\\s+(?:da\\s+)?sein|(?:einschla\
-fen\\s+und\\s+)?(?:nie|nicht)\\s+(?:mehr|wieder)\\s+aufwachen|(?:fur|fuer)\\s+immer\\s+verschwinden|verschwinden(?=\\s*(?:$|[.!?,…;])))(?![a-z])",
-        CRDE_WANT +
-          "nicht\\s+(?:mehr|langer|laenger)\\s+(?:leben|weiterleben|existieren|am\\s+leben\\s+sein)" +
-          CRDE_NOT_LIVE,
-        CRDE_I +
-          "(?:mag|kann)\\s+" +
-          CRDE_ADV +
-          "nicht\\s+mehr\\s+(?:leben|weiterleben)" +
-          CRDE_NOT_LIVE,
-        CRDE_WANT + CRDE_SELF,
-        CRDE_I +
-          "(?:bring(?:e)?|werd(?:e)?|kill(?:e)?|tot(?:e)?|toet(?:e)?)\\s+mich\\s+" +
-          CRDE_ADV +
-          "(?:um|umbringen|toten|toeten|killen|aufhangen|aufhaengen|ritzen)(?![a-z])(?!\\s+(?:den|die|das|dem|meinen|meine|mein|meinem|alles|jede|jeden|einen|eine|ein|vor|\\d))",
-        CRDE_I + "nehme\\s+mir\\s+" + CRDE_ADV + "das\\s+leben(?![a-z])",
-        "(?:" +
-          CRDE_I +
-          "(?:denke|dachte|uberlege|ueberlege|plane|versuche|versuchte|habe\\s+versucht|hab\\s+versucht|hatte\\s+versucht|will|wollte|mochte|moechte|habe\\s+vor|hab\\s+vor|hatte\\s+vor)|(?<![a-zß])(?:denke|dachte|uberlege|ueberlege|plane|versuche|versuchte)\\s+ich)(?:\\s*,?\\s*(?:oft|ernsthaft|daruber|darueber|nach|\
-daran|dran|schon|wieder|manchmal|immer|noch|wirklich|echt|mal|viel|standig|staendig))*\\s*,?\\s*" +
-          CRDE_SELF_ZU,
-        CRDE_I + "ritz(?:e)?\\s+mich(?![a-z])",
-        "(?:(?<![a-zß])ich\\s+(?:hab|habe|hatte)|(?<![a-zß])(?:hab|habe|hatte)\\s+ich|(?:^|[.!?…]\\s*)(?:hab|habe))\\s+mich\\s+" +
-          CRDE_ADV +
-          "(?:(?:gestern|heute|letzte\\s+woche|selbst)\\s+)*(?:geritzt|selbst\\s+verletzt)(?![a-z])",
-        CRDE_I +
-          "(?:verletze|schneide)\\s+mich\\s+" +
-          CRDE_ADV +
-          "selbst(?![a-z])",
-        CRDE_I +
-          "(?:bin|fuhle\\s+mich|fuehle\\s+mich|war)\\s+" +
-          CRDE_ADV +
-          "(?:sehr\\s+)?(?:suizidal|suizidgefahrdet|suizidgefaehrdet|selbstmordgefahrdet|selbstmordgefaehrdet|lebensmude|lebensmuede)(?![a-z])",
-        "(?:" +
-          CRDE_I +
-          "(?:habe|hab|hatte|kriege|krieg|bekomme)|(?<![a-zß])(?:habe|hab|hatte)\\s+ich)\\s+" +
-          CRDE_ADV +
-          "(?:(?:starke|schlimme|standige|staendige)\\s+)?(?:suizid|selbstmord)(?:gedanken|absichten|plane|fantasien|phantasien)",
-        "(?<![a-z])meine\\s+(?:suizid|selbstmord)(?:gedanken|absichten|plane)",
-        "(?:" +
-          CRDE_I +
-          "(?:wunschte|wuenschte|wunsche|wuensche)(?:\\s+mir\
-)?\\s*,?\\s*(?:ich\\s+)?|(?<![a-zß])(?:ich\\s+(?:ware|waere)|(?:ware|waere)\\s+ich)\\s+)" +
-          CRDE_ADV +
-          "(?:(?:ware|waere|war)\\s+" +
-          CRDE_ADV +
-          ")?(?:lieber\\s+)?(?:tot|nie\\s+geboren|nicht\\s+geboren|nicht\\s+mehr\\s+(?:da|am\\s+leben))(?![a-z])",
-        "(?<![a-zß])ich\\s+war\\s+(?:echt\\s+|wirklich\\s+)?lieber\\s+tot(?![a-z])",
-        "(?<![a-z])(?:alle|jeder|jede|die\\s+welt|meine\\s+familie|meine\\s+eltern|alle\\s+anderen)\\s+(?:waren|waeren|ware|waere|sind|ist|hatten|haetten)\\s+(?:es\\s+)?(?:ohne\\s+mich\\s+besser(?:\\s+dran)?|besser\\s+(?:dran\\s+)?ohne\\s+mich)",
-        CRDE_I +
-          "(?:habe|hab)\\s+" +
-          CRDE_ADV +
-          "(?:keine\\s+(?:lust|kraft|energie)|keinen\\s+(?:bock|grund|willen))\\s+mehr\\s*,?\\s*(?:zu\\s+leben|am\\s+leben|weiterzuleben|zum\\s+leben)(?![a-z])",
-        "(?:^|[.!?…]\\s*)(?:keine\\s+(?:lust|kraft)|keinen\\s+bock)\\s+mehr\\s*,?\\s*(?:zu\\s+leben|weiterzuleben|am\\s+leben)(?![a-z])",
-        CRDE_I +
-          "(?:sehne\\s+mich\\s+nach\\s+dem\\s+tod|wunsche\\s+mir\\s+den\\s+tod|wuensche\\s+mir\\s+den\\s+tod)(?![a-z])",
-      ].join("|"),
-    ),
-  );
-const crisisDeIn = (e) =>
-    CRISIS_DE_UI.test(
-      String(e)
-        .normalize("NFKD")
-        .replace(/\p{M}/gu, "")
-        .normalize("NFKC")
-        .toLowerCase()
-        .replace(/ß/g, "ss"),
-    );
-const CRISIS_PT_A =
-    /\b(?:eu\s+)?(?:quero|queria|vou|preciso|tenho\s+vontade\s+de|s[oó]\s+quero|penso\s+em|estou\s+pensando\s+em|ando\s+pensando\s+em)\s+(?:me\s+(?:matar|suicidar)|suicidar(?:-me)?|matar-me)(?![a-zà-ÿ])|\b(?:tirar|acabar\s+com)\s+(?:a\s+)?minha\s+(?:pr[oó]pria\s+)?vida\b|\b(?:quero|vou)\s+me\s+(?:cortar|machucar|ferir)\b|\b(?:penso|estou\s+pensando|ando\s+pensando|tenho\s+pensado)\s+em\s+suic[ií]dio\b|\bn[aã]o\s+(?:quero|aguento)\s+mais\s+viver\b|\bn[aã]o\s+quero\s+(?:viver|existir|estar\s+viv[oa])(?![a-zà-ÿ])(?!\s*(?:em\s|no\s|na\s|nos\s|nas\s|assim|com\s|sem\s|longe|perto|aqui|l[aá]\b|ali\b|de\s|s[oó]\b|sozinh|para\s|por\s|nesse|nessa|neste|nesta))/;
-const CRISIS_PT_B =
-    /\b(?:quero|queria|s[oó]\s+quero|tenho\s+vontade\s+de)\s+morrer(?![a-zà-ÿ])(?!\s*(?:de\s|velh|feliz|em\s|no\s|na\s|ao\s|junt|perto|aqui|l[aá]\b|ali\b|cercad|rodead|dormind|sem\s|antes|depois|quando|se\s|por\s|para\s|longe|tranquil|em\s+paz))/g;
-function crisisPtIn(e) {
-  if (CRISIS_PT_A.test(e)) return !0;
-  CRISIS_PT_B.lastIndex = 0;
-  let t;
-  for (; (t = CRISIS_PT_B.exec(e)); )
-    if (!/(?:\bn[aã]o|\bnunca)\s+(?:eu\s+)?$/.test(e.slice(0, t.index)))
-      return !0;
-  return !1;
-}
-const CRISIS_TR_A =
-    /(?:^|[^a-zçğıöşü])(?:kendimi\s+öldür(?:eceğim|ecegim|mek\s+istiyorum|meyi\s+düşünüyorum)|intihar\s+(?:edeceğim|edecegim|etmek\s+istiyorum|etmeyi\s+düşünüyorum)|intiharı\s+düşünüyorum|canıma\s+kıy(?:acağım|acagim|mak\s+istiyorum)|kendime\s+zarar\s+(?:vereceğim|vermek\s+istiyorum|veriyorum)|yaşamanın\s+(?:bir\s+)?anlamı\s+yok)(?![a-zçğıöşü])/;
-const CRISIS_TR_B =
-    /(?:ölmek|ölüp\s+gitmek|yok\s+olmak)\s+ist(?:iyorum|iyom|erdim)(?![a-zçğıöşü])/g;
-const CRISIS_TR_C = /yaşamak\s+istemiyorum(?![a-zçğıöşü])/g;
-function crisisTrIn(e) {
-  let t = String(e).normalize("NFC");
-  if (!/[a-zçğıöşüA-ZÇĞİÖŞÜ]/.test(t)) return !1;
-  if (
-    ((t = t.toLocaleLowerCase("tr-TR").replace(/\u0307/g, "")),
-    CRISIS_TR_A.test(t))
-  )
-    return !0;
-  let a;
-  for (CRISIS_TR_B.lastIndex = 0; (a = CRISIS_TR_B.exec(t)); ) {
-    const o = t.slice(0, a.index);
-    if (!/[a-zçğıöşü]$/.test(o) && !/(?:tan|ten|dan|den)\s+$/.test(o))
-      return !0;
-  }
-  for (CRISIS_TR_C.lastIndex = 0; (a = CRISIS_TR_C.exec(t)); ) {
-    const o = t.slice(0, a.index);
-    if (
-      !/[a-zçğıöşü]$/.test(o) &&
-      !/(?:'?(?:da|de|ta|te|la|le)|burada|orada|şurada|böyle|onsuz|onunla|seninle|yalnız)\s+$/.test(
-        o,
-      )
-    )
-      return !0;
-  }
-  return !1;
-}
-const CRISIS_RU_A =
-    /(?:^|[^а-я])(?:(?:покончу|покончить|кончу)\s+с\s+собой|(?:убью|убить|убиваю)\s+себя|себя\s+убить|жить\s+не\s+хочется|не\s+вижу\s+смысла\s+жить|(?:думаю|думала?|мысли)\s+об?\s+(?:суициде|самоубийстве)|суицидальные\s+мысли|режу\s+себя|(?:хочу|буду|собираюсь)\s+(?:себя\s+)?(?:резать|порезать|покалечить))(?![а-я])/;
-const CRISIS_RU_C =
-    /(?:^|[^а-я])не\s+(?:хочу|хочется)\s+(?:больше\s+)?жить(?![а-я])(?!\s*(?:в\s|во\s|на\s|с\s|со\s|без\s|так(?![а-я])|там|тут|здесь|рядом|одн|вместе|у\s|по\s|как\s))/;
-const CRISIS_RU_B =
-    /(?:я\s+)?(?:очень\s+|так\s+|просто\s+|правда\s+)?(?:хочу|хотела?|хочется)\s+(?:умереть|сдохнуть|исчезнуть\s+навсегда)(?![а-я])(?!\s*(?:от\s|со\s+смеху|в\s+старости|своей\s+смертью|спокойно|дома|рядом|вместе|с\s|в\s+окружении))/g;
-function crisisRuIn(e) {
-  if (!/[а-я]/.test(e)) return !1;
-  if (((e = e.replace(/ё/g, "е")), CRISIS_RU_A.test(e) || CRISIS_RU_C.test(e)))
-    return !0;
-  CRISIS_RU_B.lastIndex = 0;
-  let t;
-  for (; (t = CRISIS_RU_B.exec(e)); ) {
-    const a = e.slice(0, t.index);
-    if (!/[а-я]$/.test(a) && !/(?:^|[^а-я])не\s+$/.test(a)) return !0;
-  }
-  return !1;
-}
-const CRISIS_UK_A =
-    /(?:(?:покінчу|покінчити)\s+(?:з|із|зі)\s+(?:собою|життям)|(?:вб'ю|вбити|вбиваю|уб'ю|убити)\s+себе|себе\s+(?:вбити|убити)|жити\s+не\s+хочеться|не\s+бачу\s+(?:сенсу|змісту)\s+жити|(?:думаю|думала|думав|думки)\s+(?:про|за)\s+(?:суїцид|самогубство)|суїцидальні\s+думки|ріжу\s+себе|(?:хочу|буду|збираюся)\s+(?:себе\s+)?(?:різати|порізати|покалічити|скалічити)|(?:хочу|збираюся|буду)\s+(?:завдати\s+собі\s+шкоди|нашкодити\s+собі|зробити\s+собі\s+боляче)|краще\s+б\s+я\s+(?:помер|померла|вмер|вмерла))(?![а-яіїєґ'])/g;
-const CRISIS_UK_C =
-    /(?:^|[^а-яіїєґ'])не\s+(?:хочу|хочеться)\s+(?:більше\s+)?жити(?![а-яіїєґ'])(?!\s*(?:в\s|у\s|на\s|з\s|із\s|зі\s|без\s|так(?![а-яіїєґ'])|там|тут|поруч|один|одна|разом|по\s|як\s))/;
-const CRISIS_UK_B =
-    /(?:я\s+)?(?:дуже\s+|так\s+|просто\s+|справді\s+|реально\s+)?(?:хочу|хотів|хотіла|хочеться|хотілося|хотілось)\s+(?:би\s+|б\s+)?(?:померти|вмерти|здохнути|зникнути\s+назавжди)(?![а-яіїєґ'])(?!\s*(?:від\s|зі\s+сміху|у\s+старості|в\s+старості|своєю\s+смертю|спокійно|вдома|поруч|разом|в\s+оточенні|у\s+оточенні|з\s|в\s|у\s))/g;
-function crisisUkIn(e) {
-  if (!/[а-яіїєґ]/.test(e)) return !1;
-  if (((e = e.replace(/[’ʼ`´]/g, "'")), CRISIS_UK_C.test(e))) return !0;
-  for (const t of [CRISIS_UK_A, CRISIS_UK_B]) {
-    t.lastIndex = 0;
-    let a;
-    for (; (a = t.exec(e)); ) {
-      const o = e.slice(0, a.index);
-      if (
-        !/[а-яіїєґ']$/.test(o) &&
-        !/(?:^|[^а-яіїєґ'])не\s+(?:(?:хочу|буду|збираюся|збирався|збиралася|можу)\s+)?$/.test(
-          o,
-        )
-      )
-        return !0;
-    }
-  }
-  return !1;
-}
-const plFold = (e) =>
-    e.replace(
-      /[ąćęłńóśźż]/g,
-      (t) =>
-        ({
-          ą: "a",
-          ć: "c",
-          ę: "e",
-          ł: "l",
-          ń: "n",
-          ó: "o",
-          ś: "s",
-          ź: "z",
-          ż: "z",
-        })[t],
-    );
-const CRISIS_PL_A =
-    /(?:chce|chcialbym|chcialabym|chcialoby\s+mi\s+sie|mam\s+ochote)\s+(?:juz\s+)?(?:umrzec|zniknac\s+na\s+zawsze|sie\s+zabic|zabic\s+sie|odebrac\s+sobie\s+zycie|skonczyc\s+ze\s+soba|sie\s+(?:pociac|okaleczyc))(?![a-z])(?!\s+(?:ze\s+smiechu|z\s+nudow|ze\s+starosci|w\s+spokoju|we\s+snie|spokojnie|w\s+domu|w\s+otoczeniu))/g;
-const CRISIS_PL_B =
-    /(?:zabije\s+sie|zabic\s+sie|odebrac\s+sobie\s+zycie|odbiore\s+sobie\s+zycie|skoncze\s+ze\s+soba|skonczyc\s+ze\s+soba|mysli\s+samobojcze|mysle\s+o\s+samobojstwie|samobojstw[a-z]*|nie\s+ma\s+sensu\s+zyc|nie\s+widze\s+sensu\s+(?:zycia|zyc|dalej\s+zyc)|tne\s+sie)(?![a-z])/g;
-const CRISIS_PL_C =
-    /(?:^|[^a-z])nie\s+chce\s+(?:juz\s+)?(?:dluzej\s+)?zyc(?![a-z])(?!\s*(?:w\s|we\s|na\s|z\s|ze\s|bez\s|tak(?![a-z])|tam|tu(?![a-z])|tutaj|sam(?![a-z])|sama(?![a-z])|razem|jak\s|po\s))/;
-function crisisPlIn(e) {
-  if (!/[a-ząćęłńóśźż]/.test(e)) return !1;
-  if (((e = plFold(e)), CRISIS_PL_C.test(e))) return !0;
-  for (const t of [CRISIS_PL_A, CRISIS_PL_B]) {
-    t.lastIndex = 0;
-    let a;
-    for (; (a = t.exec(e)); ) {
-      const o = e.slice(0, a.index);
-      if (
-        !/[a-z]$/.test(o) &&
-        !/(?:^|[^a-z])(?:nie|moglem|moglam|mogl|mogla|malo|omal|prawie)\s+(?:(?:chce|bede|moge|zamierzam)\s+)?$/.test(
-          o,
-        )
-      )
-        return !0;
-    }
-  }
-  return !1;
-}
-const CRISIS_ID_A =
-    /(?:^|[^a-z])(?:(?:ingin|mau|pengen|pingin|kepengen|berpikir\s+untuk|kepikiran)\s+(?:bunuh\s+diri|mengakhiri\s+hidup(?:ku)?|menghilang\s+selamanya)|(?:tidak|tak|gak|nggak|ngga|ga|enggak)\s+(?:ingin|mau|pengen|sanggup)\s+hidup\s+lagi|lebih\s+baik\s+(?:aku|saya|gue|gw)\s+mati|lebih\s+baik\s+mati\s+saja|(?:capek|lelah|cape)\s+hidup(?:\s+ini)?(?![a-z]))/;
-const CRISIS_ID_B =
-    /(?:^|[^a-z])(?:aku|saya|gue|gw|ku)\s+(?:sangat\s+|benar-benar\s+|cuma\s+|hanya\s+)?(?:ingin|mau|pengen|pingin|kepengen)\s+mati(?![a-z])(?!\s+(?:ketawa|tertawa|kelaparan\s+aja))/;
-const crisisIdIn = (e) =>
-    /[a-z]/.test(e) && (CRISIS_ID_A.test(e) || CRISIS_ID_B.test(e));
-const CRISIS_IT =
-    /(?:^|[^a-zà-ù])(?:(?:voglio|vorrei|ho\s+voglia\s+di)\s+(?:morire(?![a-zà-ù])(?!\s+(?:dal\s+ridere|dalle\s+risate|di\s+risate|vecchi[oa]|in\s+pace|nel\s+sonno|felice))|farla\s+finita(?!\s+con)|uccidermi|ammazzarmi|suicidarmi|togliermi\s+la\s+vita|sparire\s+per\s+sempre|farmi\s+del\s+male|tagliarmi)|mi\s+(?:voglio|vorrei)\s+(?:uccidere|ammazzare|suicidare|togliere\s+la\s+vita|fare\s+del\s+male)|(?:penso|sto\s+pensando|ho\s+pensato)\s+(?:al|di)\s+(?:suicidio|suicidarmi|uccidermi|farla\s+finita)|pensieri\s+suicidi|non\s+(?:voglio|ce\s+la\s+faccio)\s+più\s+(?:a\s+)?vivere|vorrei\s+non\s+essere\s+mai\s+nat[oa]|mi\s+(?:taglio|faccio\s+del\s+male)(?![a-zà-ù]))/;
-const crisisItIn = (e) =>
-    /[a-zà-ù]/.test(e) &&
-    CRISIS_IT.test(
-      e.replace(
-        /non\s+(?:voglio|vorrei)\s+(?:morire|farla\s+finita|uccidermi)/g,
-        "",
-      ),
-    );
-const arNorm = (e) =>
-    String(e)
-      .replace(/[\u064b-\u065f\u0670\u0640]/g, "")
-      .replace(/[أإآٱ]/g, "ا")
-      .replace(/ى/g, "ي")
-      .replace(/ؤ/g, "و")
-      .replace(/ئ/g, "ي")
-      .replace(/ة/g, "ه")
-      .replace(/ی/g, "ي")
-      .replace(/ک/g, "ك");
-const AR_WISH =
-    "(?:اريد|اود|ابي|ابغي|بدي|عايز|عايزه|عاوز|عاوزه|نفسي|اتمني|حابب|حابه|ودي|بغيت|حاب|نبغي)";
-const CRISIS_AR = new RegExp(
-    "(?:^|[^\\u0621-\\u064a])(?:" +
-      AR_WISH +
-      "\\s+(?:ان\\s+)?(?:اموت|نموت|الموت|موت)(?![\\u0621-\\u064a])(?!\\s*(?:من\\s+الضحك|ضحك|من\\s+الجوع|فيك|فيكي|فيكم|عليك|عليكي|عليه|عليها|في\\s+حبك))|" +
-      AR_WISH +
-      "\\s+(?:ان\\s+)?(?:انتحر|ننتحر|الانتحار|اقتل\\s+(?:نفسي|روحي)|نقتل\\s+روحي|انهي\\s+حياتي|اختفي\\s+للابد|اوذي\\s+نفسي|اجرح\\s+نفسي|ايذاء\\s+نفسي)|(?:سانتحر|سوف\\s+انتحر|راح\\s+انتحر|رح\\s+انتحر|حنتحر|هنتحر|بنتحر)(?![\\u0621-\\u064a])|(?:ساقتل|سوف\\s+اقتل|راح\\s+اقتل|رح\\s+اقتل|حقتل|هقتل)\\s+(?:نفسي|روحي)|(?:سانهي|سوف\\s+انهي|راح\\s+انهي)\\s+حياتي|(?:افكر|بفكر|عم\\s+فكر)\\s+(?:جديا\\s+)?(?:في|ب|بال)\\s*(?:ال)?انتحار|(?:افكر|بفكر)\\s+(?:ان|اني|في\\s+ان)\\s+(?:انتحر|اموت|اقتل\\s+نفسي|انهي\\s+حياتي)|(?:لا|ما|مش|مو|مب)\\s*(?:اريد|اود|ابي|ابغي|بدي|عايز|عاوز|و\
-دي|حابب|بغيت)\\s+(?:ان\\s+)?(?:اعيش|عيش|العيش|الحياه)(?![\\u0621-\\u064a]))",
-  );
-const crisisArIn = (e) => {
-    const t = arNorm(e);
-    return (
-      AR_ANY.test(t) &&
-      CRISIS_AR.test(
-        t.replace(
-          /(?:لا|ما|مش|مو|مب)\s*(?:اريد|اود|ابي|ابغي|بدي|عايز|عاوز|ودي|حابب)\s+(?:ان\s+)?(?:اموت|نموت|الموت|موت)/g,
-          "",
-        ),
-      )
-    );
-  };
-const faNorm = (e) =>
-    String(e)
-      .replace(/[ً-ٰٟـ]/g, "")
-      .replace(/‌/g, " ")
-      .replace(/ي/g, "ی")
-      .replace(/ك/g, "ک")
-      .replace(/[أإآ]/g, "ا")
-      .replace(/\s+/g, " ");
-const FA_WANT =
-    "(?:می ?خواهم|می ?خوام|دلم می ?خواد|دلم می ?خواهد|دوست دارم|تصمیم دارم|تصمیم گرفتم|قصد دارم)";
-const CRISIS_FA = new RegExp(
-    "(?:^|[^\\u0600-\\u06ff])(?:" +
-      FA_WANT +
-      " (?:که )?(?:بمیرم|خودکشی کنم|خودم را بکشم|خودمو بکشم|خودم رو بکشم|به زندگیم پایان بدم|به زندگی ام پایان بدهم|به زندگیم پایان بدهم|زندگیمو تموم کنم|زندگیم را تمام کنم|به خودم اسیب بزنم|به خودم صدمه بزنم)|(?:ای )?کاش (?:بمیرم|مرده بودم|می مردم|میمردم|نبودم|به د\
-نیا نیامده بودم|به دنیا نمیومدم)|(?:خودم را|خودمو|خودم رو) (?:می ?کشم|خواهم کشت)|(?:به|دارم به) خودکشی فکر می ?کنم|فکر خودکشی (?:دارم|به سرم)|(?:دیگر|دیگه) (?:نمی ?خواهم|نمی ?خوام) (?:زنده باشم|زندگی کنم|زنده بمانم|زنده بمونم)|(?:نمی ?خواهم|نمی ?خوام) (?:دیگر|دیگه) (?:زنده باشم|زندگی کنم|زنده بمانم|زنده بمونم)|(?:به خودم اسیب|به خودم صدمه) (?:می ?زنم|میزنم))",
-  );
-const crisisFaIn = (e) => {
-    const t = faNorm(e);
-    return AR_ANY.test(t) && CRISIS_FA.test(t);
-  };
-const crisisWords = (e) => {
-    const t = String(e).normalize("NFC").toLowerCase();
-    return (
-      CRISIS_RE.test(t) ||
-      (!LB_OK && crisisLbHand(t)) ||
-      crisisDeIn(e) ||
-      crisisPtIn(t) ||
-      crisisRuIn(t) ||
-      crisisUkIn(t) ||
-      crisisPlIn(t) ||
-      crisisTrIn(e) ||
-      crisisIdIn(t) ||
-      crisisItIn(t) ||
-      crisisArIn(e) ||
-      crisisFaIn(e)
-    );
-  };
-const CALM_KEY = "one8b.calm.v1";
-const CALM_MS = 30 * 864e5;
-let CALM_AT = null;
-function calmMark() {
-  CALM_AT = Date.now();
-  try {
-    localStorage.setItem(CALM_KEY, String(CALM_AT));
-  } catch {}
-}
-HOOK.calm = () => {
-  if (CALM_AT == null) {
-    let e = 0;
-    try {
-      e = +localStorage.getItem(CALM_KEY) || 0;
-    } catch {}
-    CALM_AT = e;
-  }
-  return Date.now() - CALM_AT < CALM_MS;
-};
-const crisisMsg = () =>
-  EDU_ON
-    ? L`지금 마음이 힘들다면 혼자 견디지 않아도 돼요. 청소년상담 1388 (휴대전화는 지역번호+1388, 문자는 #1388)이나 자살예방상담전화 109 (전화·문자, 24시간), SNS 상담 마들랜이 이야기를 들어 줄 거예요. 다른 나라에서는 findahelpline.com에서 찾을 수 있어요.`
-    : L`혹시 지금 마음이 많이 힘드시다면, 109(자살예방상담전화, 24시간)에 전화나 문자를 해 보세요. 누군가 이야기를 들어 줄 거예요. 연결이 어렵다면 정신건강위기상담 1577-0199(24시간)나 SNS 상담 마들랜도 있어요. 다른 나라에서는 findahelpline.com에서 찾을 수 있어요.`;
-function crisisNote(e) {
-  !e || !crisisWords(e) || (calmMark(), toast(crisisMsg(), 12e3));
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function bandName(e) {
   return [
     L`1세 미만`,
@@ -154521,7 +153968,6 @@ ife_end",
       cause: e.cause,
       decisions: S.stats.decisions,
       auto: (S.stats.auto || 0) > 0,
-      notes: (S.journal || []).length,
       minutes: S.startedAt
         ? Math.round((Date.now() - S.startedAt) / 6e4)
         : null,
@@ -154682,8 +154128,6 @@ function endFrames(e) {
     ),
     a = e < 5 ? 2 : Math.min(8, 3 + Math.floor(e / 10)),
     o = [],
-    n = new Set((S.journal || []).map((f) => f.a + "|“" + f.t + "”")),
-    r = (f) => f.kind === "note" && n.has(f.a + "|" + f.text),
     s = (f) => {
       f && !o.some((m) => m.a === f.a) && o.push(f);
     };
@@ -154692,8 +154136,7 @@ function endFrames(e) {
       (f) => f.star && f.a > 0 && f.a <= e && !f.nf && !END_SKIP_D.has(f.d),
     )
     .slice(-(a + 2))
-    .forEach(s),
-    t.filter(r).slice(-2).forEach(s));
+    .forEach(s));
   const i = (f) => (f.act || f.kind).split(":")[0],
     l = {};
   for (const f of o) l[i(f)] = (l[i(f)] || 0) + 1;
@@ -154738,7 +154181,6 @@ function endFrames(e) {
     .map((f) => ({
       a: f.a,
       t: endClean(f.text),
-      note: r(f),
       act: f.act || "",
     }));
 }
@@ -155033,6 +154475,7 @@ function endLastLoss(e) {
   return t ? endClean(t.text) : "";
 }
 function endingData() {
+  __stripReflections(S);
   const e = S.deathAt;
   if (!e) return null;
   const t = e.age,
@@ -155051,7 +154494,6 @@ function endingData() {
   });
   const i = landsN(S.years.map((c) => c.cur)),
     l = Math.round((t + 0.5) * 365.25).toLocaleString(LC.loc),
-    d = (S.journal || []).slice(-1)[0],
     u = t >= 18 ? lifeRoad() : null;
   return {
     v: 1,
@@ -155115,12 +154557,12 @@ function endingData() {
       i > 1 ? L`${i}개 나라와 지역에서 살았습니다.` : "",
       t < 5 ? L`짧았지만, 분명히 이 세상에 있었던 삶이었습니다.` : "",
     ].filter(Boolean),
-    quote: d ? { t: d.t, a: d.a } : null,
     farewell: S.farewell || "",
     gr: (typeof grainOf == "function" && grainOf(S)) || void 0,
   };
 }
 function savePast(e) {
+  __stripReflections(S);
   try {
     const t = Object.assign({}, S, { queue: [], pending: null, recent: [] });
     (pdbPut([{ at: e, S: t }]), pastPush({ at: e, S: t }));
@@ -155137,6 +154579,7 @@ function pastPush(e) {
     }
 }
 function save() {
+  __stripReflections(S);
   if (!S || !(S.phase === "life" || S.phase === "birth")) return;
   const e = { S, at: Date.now() };
   if (lsSet(SAVE_KEY, e)) return;
@@ -156070,7 +155513,7 @@ get rstWait(){return rstWait},
 get retireAge(){return retireAge},
 get wonStr(){return wonStr},
 get usdStr(){return usdStr},
-get S(){return S},set S(value){S=value},
+get S(){return S},set S(value){S=__stripReflections(value)},
 get HOOK(){return HOOK},
 get C(){return C},
 get B(){return B},
@@ -159866,10 +159309,6 @@ get artOK(){return artOK},
 get eraLayText(){return eraLayText},
 get eraUrbK(){return eraUrbK},
 get eraPcalK(){return eraPcalK},
-get REFLECT_AGES(){return REFLECT_AGES},
-get rqN(){return rqN},
-get rqPoor(){return rqPoor},
-get REFLECT_Q(){return REFLECT_Q},
 get EDU_SENT(){return EDU_SENT},
 get EDU_SENT_A(){return EDU_SENT_A},
 get eduSent(){return eduSent},
@@ -159903,9 +159342,6 @@ get storyOf(){return storyOf},
 get storyOf0(){return storyOf0},
 get compStatus(){return compStatus},
 get compStatus0(){return compStatus0},
-get compLine(){return compLine},
-get reflectMirror(){return reflectMirror},
-get reflectQuiet(){return reflectQuiet},
 get DISH(){return DISH},
 get DISH_CN_CITY(){return DISH_CN_CITY},
 get DISH_CN_M(){return DISH_CN_M},set DISH_CN_M(value){DISH_CN_M=value},
@@ -160157,62 +159593,6 @@ get bcareMine(){return bcareMine},
 get auSync(){return auSync},
 get autoHideOn(){return autoHideOn},
 get leanSet(){return leanSet},
-get LB_OK(){return LB_OK},
-get CRISIS_SRC(){return CRISIS_SRC},
-get CRISIS_LB_ALTS(){return CRISIS_LB_ALTS},
-get CRISIS_RE(){return CRISIS_RE},
-get CRISIS_HAND(){return CRISIS_HAND},
-get crisisLbHand(){return crisisLbHand},
-get CRDE_ADV(){return CRDE_ADV},
-get CRDE_I(){return CRDE_I},
-get CRDE_WANT(){return CRDE_WANT},
-get CRDE_NOT_DIE(){return CRDE_NOT_DIE},
-get CRDE_NOT_LIVE(){return CRDE_NOT_LIVE},
-get CRDE_SELF(){return CRDE_SELF},
-get CRDE_SELF_ZU(){return CRDE_SELF_ZU},
-get lbFree(){return lbFree},
-get CRISIS_DE_UI(){return CRISIS_DE_UI},
-get crisisDeIn(){return crisisDeIn},
-get CRISIS_PT_A(){return CRISIS_PT_A},
-get CRISIS_PT_B(){return CRISIS_PT_B},
-get crisisPtIn(){return crisisPtIn},
-get CRISIS_TR_A(){return CRISIS_TR_A},
-get CRISIS_TR_B(){return CRISIS_TR_B},
-get CRISIS_TR_C(){return CRISIS_TR_C},
-get crisisTrIn(){return crisisTrIn},
-get CRISIS_RU_A(){return CRISIS_RU_A},
-get CRISIS_RU_C(){return CRISIS_RU_C},
-get CRISIS_RU_B(){return CRISIS_RU_B},
-get crisisRuIn(){return crisisRuIn},
-get CRISIS_UK_A(){return CRISIS_UK_A},
-get CRISIS_UK_C(){return CRISIS_UK_C},
-get CRISIS_UK_B(){return CRISIS_UK_B},
-get crisisUkIn(){return crisisUkIn},
-get plFold(){return plFold},
-get CRISIS_PL_A(){return CRISIS_PL_A},
-get CRISIS_PL_B(){return CRISIS_PL_B},
-get CRISIS_PL_C(){return CRISIS_PL_C},
-get crisisPlIn(){return crisisPlIn},
-get CRISIS_ID_A(){return CRISIS_ID_A},
-get CRISIS_ID_B(){return CRISIS_ID_B},
-get crisisIdIn(){return crisisIdIn},
-get CRISIS_IT(){return CRISIS_IT},
-get crisisItIn(){return crisisItIn},
-get arNorm(){return arNorm},
-get AR_WISH(){return AR_WISH},
-get CRISIS_AR(){return CRISIS_AR},
-get crisisArIn(){return crisisArIn},
-get faNorm(){return faNorm},
-get FA_WANT(){return FA_WANT},
-get CRISIS_FA(){return CRISIS_FA},
-get crisisFaIn(){return crisisFaIn},
-get crisisWords(){return crisisWords},
-get CALM_KEY(){return CALM_KEY},
-get CALM_MS(){return CALM_MS},
-get CALM_AT(){return CALM_AT},set CALM_AT(value){CALM_AT=value},
-get calmMark(){return calmMark},
-get crisisMsg(){return crisisMsg},
-get crisisNote(){return crisisNote},
 get bandName(){return bandName},
 get recordLife(){return recordLife},
 get partnerCell(){return partnerCell},

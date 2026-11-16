@@ -23,7 +23,7 @@ export type DecisionItem = DecisionChoiceItem | DecisionGroupItem;
 export type DecisionExtraVM = {
   /** Id открытого решения (сверяется с life.pending.id). */
   id: string;
-  /** Заголовок вида решения: «A big decision», «A small choice», «Decided with family», «A pause». */
+  /** Заголовок вида решения: «A big decision», «A small choice», «Decided with family». */
   kind: string;
   /** Возраст членов семьи, упомянутых в тексте (decFa, 203083). */
   famLine: string;
@@ -42,9 +42,7 @@ export function decisionExtra(T: Top): DecisionExtraVM | null {
   const v = pd.view;
   const id = String(pd.id ?? '');
   // Заголовок окна решения в showDecision (203129-203136).
-  const kind = v.q
-    ? tr(T, '잠시 멈춤')
-    : id.startsWith('sm_')
+  const kind = id.startsWith('sm_')
       ? tr(T, '작은 선택')
       : typeof T.ddWithFam === 'function' && T.ddWithFam(pd.id)
         ? tr(T, '가족과 함께 정해요')
