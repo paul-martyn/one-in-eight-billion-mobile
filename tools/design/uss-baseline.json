@@ -61,12 +61,14 @@
   },
   "src/screens/language/language.css": {
     "grid": 2,
-    "keyframes": 4,
-    "box-shadow": 2,
+    "pseudo-element": 2,
+    "keyframes": 9,
+    "box-shadow": 13,
     "calc / clamp / min / max": 1,
     "vh / vw / cq / em / rem": 2,
-    "structural pseudo-class": 3,
-    "filter / backdrop-filter": 1
+    "structural pseudo-class": 6,
+    "filter / backdrop-filter": 1,
+    "@media / @container / @supports": 1
   },
   "src/screens/life/life.css": {
     "grid": 19,
