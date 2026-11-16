@@ -72,6 +72,15 @@
   --color-time-btn-bg: rgba(255, 250, 240, 0.8);
   --color-gem-shadow: rgba(40, 90, 20, 0.3);
   --color-scroll-track: rgba(90, 52, 24, 0.1);
+  --color-choice-off-bg: #f7eedb;
+  --color-choice-off-line: #c2a174;
+  --color-choice-off-ink: #6b4a2e;
+  --color-choice-on-bg: #fff0b8;
+  --color-choice-base: #c9a874;
+  --color-choice-lip: rgba(190, 140, 80, 0.25);
+  --color-choice-soft: rgba(90, 52, 24, 0.22);
+  --color-choice-glow: rgba(232, 128, 36, 0.28);
+  --color-check-orange: #ff9a2a;
 
   /* Показатели */
   --color-stat-health: #ff6f8a;
@@ -166,6 +175,7 @@
   --duration-medium: 400ms;
   --duration-slow: 600ms;
   --duration-milestone: 1200ms;
+  --duration-choice: 460ms;
 
   /* Кривые */
   --ease-pop: cubic-bezier(0.3, 1.45, 0.5, 1);
@@ -177,6 +187,9 @@
   --ease-sparkle: cubic-bezier(0.2, 0.8, 0.3, 1);
   --ease-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
   --ease-ease-out: cubic-bezier(0, 0, 0.58, 1);
+  --ease-choice-launch: cubic-bezier(0.25, 0.7, 0.4, 1);
+  --ease-sine-in-out: cubic-bezier(0.37, 0, 0.63, 1);
+  --ease-settle-in: cubic-bezier(0.4, 0, 0.6, 1);
 
   /* Кадр */
   --frame-width: 393px;

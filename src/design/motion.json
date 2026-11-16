@@ -11,6 +11,9 @@
     "sparkle": [0.2, 0.8, 0.3, 1],
     "ease": [0.25, 0.1, 0.25, 1],
     "easeOut": [0, 0, 0.58, 1],
+    "choiceLaunch": [0.25, 0.7, 0.4, 1],
+    "sineInOut": [0.37, 0, 0.63, 1],
+    "settleIn": [0.4, 0, 0.6, 1],
     "easeOutCubic": "1-(1-t)^3",
     "easeOutQuart": "1-(1-t)^4"
   },
@@ -21,7 +24,8 @@
     "state": 250,
     "medium": 400,
     "slow": 600,
-    "milestone": 1200
+    "milestone": 1200,
+    "choice": 460
   },
   "screenTransitions": [
     { "id": "screen.fade", "trigger": "navigate (default)", "from": "*", "to": "*", "durationMs": 380, "delayMs": 0, "easing": "ease", "enter": { "opacity": [0, 1] }, "exit": null, "interrupt": "jump-to-end; new transition starts from the current screen", "input": "only the arriving screen receives input" },

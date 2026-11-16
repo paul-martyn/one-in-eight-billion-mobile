@@ -68,9 +68,16 @@ function fitWidth(text: string, size: number): number {
   return probe > 0 ? (1000 / probe) * size : text.length * size * 0.6;
 }
 
-const Check = ({ size = 18 }: { size?: number }) => (
-  <span className="lng-check" style={{ width: size, height: size }} aria-hidden="true">
-    <svg width={size / 2} height={size / 2} viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+// Галочка дизайн-кода (DcChoice): оранжевый круг с коричневой обводкой, белая галочка с коричневой
+// подложкой. Есть у каждой плашки, видна только у выбранной — так она и появляется, и гаснет плавно.
+const TICK_D = 'M7.6 12.5l3 3 5.8-6';
+const Check = () => (
+  <span className="lng-check" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <circle className="lng-check__disc" cx="12" cy="12" r="10.6" />
+      <path className="lng-check__under" d={TICK_D} pathLength={1} />
+      <path className="lng-check__tick" d={TICK_D} pathLength={1} />
+    </svg>
   </span>
 );
 
@@ -80,6 +87,9 @@ export function LanguageScreen({ nav, active }: ScreenProps) {
   const frame = useFrame();
   useFontsReady();
   const [lang, setLang] = useState<Locale>(UI_LANG);
+  // Прошлый выбранный язык: его плашка опускается с приседанием (.was). Пружинка и приседание — только
+  // после выбора игроком (is-live), а не при входе на экран.
+  const [prevLang, setPrevLang] = useState<string | null>(null);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const currencies = useMemo(() => adapter.currencies(lang), [adapter, snap.version, lang]);
   const current = currencies.find(c => c.current)?.key ?? currencies[0]?.key ?? 'USD';
@@ -143,7 +153,7 @@ export function LanguageScreen({ nav, active }: ScreenProps) {
           </div>
         </div>
 
-        <div className="lng-chips rise-in" style={{ top: L.chips, animationDelay: '0.2s' }} role="radiogroup" aria-label={t('lang.languagesLabel')}>
+        <div className={`lng-chips rise-in${prevLang ? ' is-live' : ''}`} style={{ top: L.chips, animationDelay: '0.2s' }} role="radiogroup" aria-label={t('lang.languagesLabel')}>
           {LANGS.map(l => {
             const on = l.id === lang;
             const avail = isLocale(l.id);
@@ -156,15 +166,15 @@ export function LanguageScreen({ nav, active }: ScreenProps) {
                 aria-disabled={!avail}
                 disabled={!avail || busy}
                 title={avail ? undefined : t('lang.soon')}
-                onClick={() => { if (isLocale(l.id)) { setLang(l.id); setLocale(l.id); setCur(null); setFailed(false); } }}
-                className={`lng-chip ${on ? 'is-on' : ''}`}
+                onClick={() => { if (isLocale(l.id) && l.id !== lang) { setPrevLang(lang); setLang(l.id); setLocale(l.id); setCur(null); setFailed(false); } }}
+                className={`lng-chip${on ? ' is-on' : ''}${!on && l.id === prevLang ? ' was' : ''}`}
                 lang={l.id}
                 dir="ltr"
                 style={{ fontSize: fitSize(l.name, CHIP_FIT) }}
               >
                 <span className="lng-chip__flag" aria-hidden="true" dangerouslySetInnerHTML={{ __html: FLAGS[l.flag] ?? '' }} />
                 <span className="lng-chip__name">{l.name}</span>
-                {on && <Check />}
+                <Check />
               </button>
             );
           })}
