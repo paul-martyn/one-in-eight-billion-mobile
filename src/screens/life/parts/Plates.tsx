@@ -1,6 +1,6 @@
 // Ряд из трёх плашек-сведений под сценой (холст LiveCute v343–346): возраст (без года), деньги, занятие — школа,
-// работа или статус. Плашки не нажимаются: без «губы», рамка как у журнала; значок 24 в квадрате 32 со своим бледным
-// тоном, подпись капсом в цвет рамки, значение — белым с обводкой. Значения — из снимка (life), формул здесь нет.
+// работа или статус. Плашки не нажимаются: без «губы», рамка как у журнала; значок 26 сам по себе, без цветной подложки
+// (холст 17.11), подпись капсом в цвет рамки, значение — белым с обводкой. Значения — из снимка (life), формул здесь нет.
 import type { ReactNode } from 'react';
 import { t } from '../../../i18n';
 import type { LifeVM } from '../../../adapters/viewModels';
@@ -50,11 +50,11 @@ const HomeIcon = () => (
  */
 const numSize = (s: string) => (s.length <= 7 ? '' : s.length <= 9 ? ' lp__value--m' : s.length <= 11 ? ' lp__value--s' : ' lp__value--xs');
 
-function Plate({ icon, tint, label, value, text = false }: { icon: ReactNode; tint: string; label: string; value: string; text?: boolean }) {
+function Plate({ icon, label, value, text = false }: { icon: ReactNode; label: string; value: string; text?: boolean }) {
   const v = value || '—';
   return (
     <li className="lp__plate">
-      <span className="lp__icon" style={{ background: tint }} aria-hidden="true">{icon}</span>
+      <span className="lp__icon" aria-hidden="true">{icon}</span>
       <span className="lp__text">
         <span className="lp__label">{label}</span>
         <b className={`lp__value${text ? ' lp__value--text' : numSize(v)}`}>{v}</b>
@@ -64,18 +64,18 @@ function Plate({ icon, tint, label, value, text = false }: { icon: ReactNode; ti
 }
 
 const OCC = {
-  school: { icon: <SchoolIcon />, tint: 'var(--color-plate-school)', label: 'life.plate.school' },
-  work: { icon: <WorkIcon />, tint: 'var(--color-plate-work)', label: 'life.plate.work' },
-  status: { icon: <HomeIcon />, tint: 'var(--color-plate-status)', label: 'life.plate.status' },
+  school: { icon: <SchoolIcon />, label: 'life.plate.school' },
+  work: { icon: <WorkIcon />, label: 'life.plate.work' },
+  status: { icon: <HomeIcon />, label: 'life.plate.status' },
 } as const;
 
 export function Plates({ life }: { life: LifeVM }) {
   const occ = OCC[life.occupation.kind];
   return (
     <ul className="lp" aria-label={t('life.plates')}>
-      <Plate icon={<CakeIcon />} tint="var(--color-plate-age)" label={t('life.plate.age')} value={String(life.age)} />
-      <Plate icon={<MoneyIcon />} tint="var(--color-plate-money)" label={t('life.plate.money')} value={life.money} />
-      <Plate icon={occ.icon} tint={occ.tint} label={t(occ.label)} value={life.occupation.text} text />
+      <Plate icon={<CakeIcon />} label={t('life.plate.age')} value={String(life.age)} />
+      <Plate icon={<MoneyIcon />} label={t('life.plate.money')} value={life.money} />
+      <Plate icon={occ.icon} label={t(occ.label)} value={life.occupation.text} text />
     </ul>
   );
 }

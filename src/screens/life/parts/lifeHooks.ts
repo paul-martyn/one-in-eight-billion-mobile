@@ -37,7 +37,7 @@ export function useCountUp(reduced: boolean, skipAtMount = false): number {
   return k;
 }
 
-const STAT_LABEL: Record<StatKey, string> = { hl: 'stat.hl', h: 'stat.h', sm: 'stat.sm', so: 'stat.so' };
+export const STAT_LABEL: Record<StatKey, string> = { hl: 'stat.hl', h: 'stat.h', sm: 'stat.sm', so: 'stat.so' };
 /** «+3 Health» / «−4 Knowledge» (минус U+2212, как в макете). */
 export function fxText(k: StatKey, d: number): string {
   const delta = d > 0 ? `+${d}` : `−${Math.abs(d)}`;

@@ -50,10 +50,10 @@
   "life.plate.work": "Work",
   "life.plate.status": "Status",
   "life.tabs": "Journal and focus",
-  "life.tab.focus": "Focus: {name}",
+  "life.tab.journal": "Journal",
   "life.tab.focusNone": "Focus",
   "life.card.age": "Age",
-  "life.focus.make": "Make focus",
+  "life.focus.make": "Select",
   "life.focus.on": "In focus",
   "life.focus.makeAria": "Make {name} the focus",
   "life.newestFirst": "Newest first"
