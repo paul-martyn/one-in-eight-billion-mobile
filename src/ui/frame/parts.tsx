@@ -2,10 +2,15 @@
 // основная кнопка 196 × 70, облачко под планетой, счётчики «с открытия игры»,
 // заголовок «1 in 8 B». Размеры — в единицах кадра 393.
 import type { ButtonHTMLAttributes, CSSProperties, ReactNode } from 'react';
-import { t, formatNumber } from '../../i18n';
+import { t, formatNumber, useLocale, type Locale } from '../../i18n';
 import { usePlanetCounts } from '../planet/bus';
 import { BabyGlyph, SkullGlyph } from '../planet/glyphs';
 import { fitAll, fitCount, fitSize, useFontsReady, type Field } from './fit';
+import logoEn from './logo/logo-en.svg';
+import logoRu from './logo/logo-ru.svg';
+import logoDe from './logo/logo-de.svg';
+import logoFr from './logo/logo-fr.svg';
+import logoEs from './logo/logo-es.svg';
 
 const CTA_FIT: Field = [160, 28, 16];
 
@@ -44,16 +49,20 @@ export function CtaCost({ n, label }: { n: number; label: string }) {
   );
 }
 
-const SAY_FIT: Field = [272, 18, 13];
+/** Контур облачка ширины w: хвост по центру сверху, тело 13,25…87,75 (StartCute, 15.11: w = 270). */
+const sayPath = (w: number) => `M19.25 13.25H${w / 2 - 11}L${w / 2} 1.25L${w / 2 + 11} 13.25H${w - 19.25}A18 18 0 0 1 ${w - 1.25} 31.25V69.75A18 18 0 0 1 ${w - 19.25} 87.75H19.25A18 18 0 0 1 1.25 69.75V31.25A18 18 0 0 1 19.25 13.25Z`;
 
-/** Облачко под планетой: две строки, вторая — оранжевая. Хвост смотрит вверх, на планету. */
-export function Say({ line, accent, style, className = '' }: { line: string; accent: string; style?: CSSProperties; className?: string }) {
+/**
+ * Облачко под планетой: две строки, вторая — акцентная. Хвост смотрит вверх и заходит на планету (StartCute, 15.11).
+ * Ширина по макету старта 270; хабу с длинной второй строкой — 304, чтобы она не переносилась.
+ */
+export function Say({ line, accent, width = 270, style, className = '' }: { line: string; accent: string; width?: number; style?: CSSProperties; className?: string }) {
   useFontsReady();
-  const size = fitAll([line, accent], SAY_FIT, 700);
+  const size = fitAll([line, accent], [width - 24, 18, 13], 700);
   return (
-    <div className={`say ${className}`} style={style}>
-      <svg className="say__shape" width="304" height="86" viewBox="0 0 304 86" aria-hidden="true">
-        <path d="M19.25 13.25H141L152 1.25L163 13.25H284.75A18 18 0 0 1 302.75 31.25V66.75A18 18 0 0 1 284.75 84.75H19.25A18 18 0 0 1 1.25 66.75V31.25A18 18 0 0 1 19.25 13.25Z" fill="#fff3d6" stroke="#d0b48b" strokeWidth="2.5" strokeLinejoin="round" />
+    <div className={`say ${className}`} style={{ ...style, width, left: (393 - width) / 2 }}>
+      <svg className="say__shape" width={width} height="89" viewBox={`0 0 ${width} 89`} aria-hidden="true">
+        <path d={sayPath(width)} fill="#fff3d6" stroke="#d0b48b" strokeWidth="1.5" strokeLinejoin="round" />
       </svg>
       <p className="say__text" style={{ fontSize: size }}>
         <span>{line}</span>
@@ -75,7 +84,8 @@ function CountBox({ kind, n, size, word }: { kind: 'born' | 'died'; n: string; s
       <svg className="since__shape" width="147" height="82" viewBox="0 0 147 82" aria-hidden="true">
         <path d={BOX} fill={born ? '#ffe8ee' : '#f0eafc'} />
         <path d={BOX_TAB} fill={born ? '#ffcdd9' : '#ddd2ff'} />
-        <path d={BOX} fill="none" stroke="#7b4b2a" strokeWidth="2" strokeLinejoin="round" />
+        {/* Счётчик не нажимается — обводка в его собственном тоне, а не коричневая кнопочная (StartCute, 15.11). */}
+        <path d={BOX} fill="none" stroke={born ? '#e09aae' : '#ab97e6'} strokeWidth="2" strokeLinejoin="round" />
       </svg>
       <div className="since__top">
         {born ? <BabyGlyph size={40} /> : <SkullGlyph size={38} />}
@@ -107,18 +117,25 @@ export function Since({ style, className = '' }: { style?: CSSProperties; classN
   );
 }
 
-const TITLE_FIT: Field = [352, 64, 30];
+// Логотип — рисунок на каждый язык (production-ui/tools/gen-logo.js; размер рисунка при кегле 64).
+const LOGOS: Record<Locale, { src: string; w: number; h: number }> = {
+  en: { src: logoEn, w: 199, h: 80 },
+  ru: { src: logoRu, w: 350, h: 80 },
+  de: { src: logoDe, w: 341, h: 80 },
+  fr: { src: logoFr, w: 442, h: 80 },
+  es: { src: logoEs, w: 414, h: 80 },
+};
+const TITLE_W = 352;
 
-/** Заголовок «1 in 8 B»: цифра 8 жёлтая; длинные переводы ужимаются по ширине кадра. */
+/** Заголовок «1 in 8 B»: рисунок, цифра 8 жёлтая; длинные переводы ужимаются по ширине кадра. */
 export function Title({ style, className = '' }: { style?: CSSProperties; className?: string }) {
-  useFontsReady();
-  const pre = t('start.title.pre'), eight = t('start.title.eight'), post = t('start.title.post');
-  const size = fitSize(pre + eight + post, TITLE_FIT);
-  // Контур и «ступенька» пропорциональны кеглю (6 и 5 px при 64).
-  const k = size / 64;
+  const lang = useLocale();
+  const logo = LOGOS[lang] ?? LOGOS.en;
+  const k = Math.min(1, TITLE_W / logo.w);
+  const label = t('start.title.pre') + t('start.title.eight') + t('start.title.post');
   return (
-    <h1 className={`title ${className}`} style={{ ...style, fontSize: size, WebkitTextStroke: `${(6 * k).toFixed(1)}px #5a3418`, textShadow: `0 ${(5 * k).toFixed(1)}px 0 #5a3418` }}>
-      {pre}<span className="title__eight">{eight}</span>{post}
+    <h1 className={`title ${className}`} style={style} aria-label={label}>
+      <img className="title__logo" src={logo.src} width={Math.round(logo.w * k)} height={Math.round(logo.h * k)} alt="" draggable={false} />
     </h1>
   );
 }

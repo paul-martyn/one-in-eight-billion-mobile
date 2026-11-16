@@ -168,7 +168,7 @@ export function HubScreen({ nav, active }: ScreenProps) {
 
         {tab === 'world' && (
           <section key="world" className="hub__world" role="tabpanel" id={panelId('world')} aria-labelledby={tabId('world')} inert={inert}>
-            {lay.say != null && <Say className="hub__mid" style={{ top: lay.say }} line={t('start.bubble1')} accent={t('hub.bubble2')} />}
+            {lay.say != null && <Say className="hub__mid" width={304} style={{ top: lay.say }} line={t('start.bubble1')} accent={t('hub.bubble2')} />}
             <Since className="hub__mid" style={{ top: lay.since }} />
             <div className="hub__cta" style={{ top: lay.cta }}>
               <CtaButton
