@@ -10,7 +10,7 @@ export type Fx = { k: StatKey; d: number }[];
 
 export type JournalEntryVM = { i: number; age: number; year: number | null; kind: string; text: string; fact: string; question: string; fx: Fx; mine: boolean };
 export type ChoiceVM = { k: string; label: string; sub: string };
-export type DecisionVM = { id: string; title: string; body: string; fact: string; question: string; input: { placeholder: string } | null; reflect: boolean; choices: ChoiceVM[] };
+export type DecisionVM = { id: string; title: string; body: string; fact: string; choices: ChoiceVM[] };
 export type CompanionVM = { name: string; given: string; iso: string; place: string; sex: 'F' | 'M'; quintile: number; family: string; status: string; died: boolean; deathAge: number | null; deathLabel: string };
 export type FamilyRowVM = { label: string; value: string; detail: Record<string, string> };
 
@@ -62,9 +62,6 @@ export function decisionVM(pd: Record<string, any> | null): DecisionVM | null {
     title: plain(v.title),
     body: plain(v.body),
     fact: plain(v.fact),
-    question: v.q && typeof v.q === 'string' ? plain(v.q) : '',
-    input: v.input ? { placeholder: plain(v.ph) } : null,
-    reflect: !!v.q,
     choices: (v.choices || []).map((c: Record<string, unknown>) => ({ k: String(c.k), label: plain(c.label), sub: plain(c.sub) })),
   };
 }

@@ -59,7 +59,6 @@ export function startLife(T: Top, opts: StartOptions): void {
   T.newLife(T.UI.prefs.mode, T.UI.prefs.pace, opts.iso && T.CBY[opts.iso] ? opts.iso : null, e ? { era: t, by: e } : null);
   const S = T.S;
   S.home = T.UI.prefs.home || null;
-  S.journal = [];
   if (S.home && !T.UI.prefs.homeHand) S.homeG = 1;
   S.comps = [];
   if (!S.era) S.by = n.getFullYear();

@@ -60,7 +60,6 @@
 .ld-result + .ld-result { margin-top: 8px; }
 .ld-fact { margin: 8px 2px 0; font-size: var(--font-size-small); font-weight: 500; line-height: var(--line-height-body); color: var(--color-ink-dark); text-align: left; overflow-wrap: break-word; hyphens: auto; }
 .ld-fact--in { margin: 6px 0 0; color: #7a4f2c; }
-.ld-question { margin: 12px 2px 6px; font-size: var(--font-size-body); font-weight: 700; line-height: var(--line-height-body); text-align: left; }
 .ld-note {
   display: block; width: 100%; min-height: 76px; padding: 8px 10px; border: 2px solid var(--color-line); border-radius: 12px;
   background: var(--color-paper); color: var(--color-ink-dark); font-size: var(--font-size-body); line-height: 1.35; resize: none;

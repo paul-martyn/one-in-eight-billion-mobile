@@ -28,8 +28,6 @@
   "life.kind.hist": "Новости мира",
   "life.mine": "Ваш выбор",
   "life.dec.status": "{kind} · {when}",
-  "life.dec.notePlaceholder": "Ваша собственная строка",
-  "life.dec.noteLabel": "Ваша заметка",
   "life.dec.nameLabel": "Имя",
   "life.dec.locked": "Сейчас невозможно",
   "life.dec.group": "Выберите один вариант",
