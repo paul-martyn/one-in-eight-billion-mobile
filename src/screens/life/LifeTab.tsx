@@ -1,5 +1,6 @@
-// Вкладка «Жизнь» (LiveCute холста v354): светлая шапка с семьёй и показателями наверху, управление
-// временем, под шапкой три плашки (возраст, деньги, занятие), ниже блок с вкладками «Дневник жизни» и «Фокус». Все значения — из снимка
+// Вкладка «Жизнь» (LiveCute холста; 17.11 — шаг 4 листа «Жизнь · шаги»): светлая шапка с семьёй и показателями
+// наверху, кнопки «до решения» и пауза, на стыке шапки и плашек — полоса года (возраст), под ней две плашки
+// (занятие, деньги), ниже блок с вкладками «Журнал» и «Фокус». Все значения — из снимка
 // адаптера (life, journal); формул здесь нет. После смерти (frame «died»)
 // вкладка замирает: управление временем скрыто, сцена приглушена, сверху
 // журнала — последняя запись die() оригинала.
@@ -14,6 +15,7 @@ import type { TabProps } from './tabs/types';
 import { Scene, type StatFlash } from './parts/Scene';
 import { Journal } from './parts/Journal';
 import { Plates } from './parts/Plates';
+import { YearBar } from './parts/YearBar';
 import { useCountUp } from './parts/lifeHooks';
 import './lifeTab.css';
 
@@ -33,6 +35,7 @@ export function LifeTab({ active }: TabProps) {
   return (
     <section className={`lt ${over ? 'is-over' : ''}`} aria-label={t('tab.life')}>
       <Scene life={life} k={k} enabled={active} over={over} flash={flash} />
+      <YearBar age={life.age} over={over} />
       <Plates life={life} />
       <Journal journal={snap.journal} offset={track.offset} freshFrom={track.freshFrom} reduced={reduced} lifeSeq={snap.lifeSeq} over={over} life={life} enabled={active} />
     </section>

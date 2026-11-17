@@ -4,7 +4,6 @@
   "life.sceneLabel": "{name}, возраст: {age}, место: {place}",
   "life.menuSettings": "Меню: настройки",
   "life.pauseSkip": "Прожить до конца",
-  "life.speedNow": "×{speed}",
   "life.ffBadge": "До следующего решения",
   "life.yearProgress": "Этот год: прошло {pct}%. {pace}",
   "life.chipAge": "Возраст: {age}",
@@ -44,7 +43,6 @@
   "life.notice.noEnergy": "Пока недостаточно энергии для новой жизни.",
   "life.focusFamily": "Пока что, как пройдёт год, решает семья.",
   "life.plates": "Сейчас",
-  "life.plate.age": "Возраст",
   "life.plate.money": "Деньги",
   "life.plate.school": "Учёба",
   "life.plate.work": "Работа",
@@ -56,5 +54,7 @@
   "life.focus.make": "Выбрать",
   "life.focus.on": "В фокусе",
   "life.focus.makeAria": "Выбрать фокус: {name}",
-  "life.newestFirst": "Сначала новые"
+  "life.newestFirst": "Сначала новые",
+  "life.yearAge": "Возраст {age}",
+  "life.yearAria": "Возраст {age}: идёт год до {next}"
 }

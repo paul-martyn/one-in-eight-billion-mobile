@@ -1,10 +1,10 @@
 // Шапка вкладки «Жизнь» (LiveCute холста, вариант B2): светлый фон с мягким светом за
 // семьёй, наверху — четыре показателя силуэтами с числом внутри, на земле — люди дома
-// (sceneModel оригинала) из генератора персонажей, справа внизу — квадратные кнопки:
-// «до следующего решения», пауза и скорость. Полосы жизни, плашки места и кнопки меню
+// (sceneModel оригинала) из генератора персонажей, справа внизу — круглые кнопки в ряд:
+// пауза и «до следующего решения» (17.11: выбора скорости нет). Полосы жизни, плашки места и кнопки меню
 // в этом варианте нет; возраст виден в заголовках журнала. Пока детали персонажей
 // грузятся — инициал игрока в круге.
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { t } from '../../../i18n';
 import { gestureId, useAdapter } from '../../../adapters/useGame';
 import type { LifeVM } from '../../../adapters/viewModels';
@@ -85,12 +85,12 @@ export function Scene({ life, k, enabled, over, flash }: { life: LifeVM; k: numb
     if (!enabled || blocked || !guard()) return;
     adapter.togglePause(gestureId());
   };
-  const onSpeed = () => {
-    if (!enabled || blocked) return;
-    const list = life.speeds;
-    const next = list[(list.indexOf(life.speed) + 1) % list.length] ?? list[0];
-    if (next != null) adapter.setSpeed(gestureId(), next);
-  };
+  // Выбора скорости больше нет (решение 17.11): жизнь идёт на обычной скорости ×1. Жизнь из старого сохранения с
+  // другой скоростью возвращается к ×1, как только время снова может идти.
+  const base = life.speeds[0];
+  useEffect(() => {
+    if (enabled && !blocked && base != null && life.speed !== base) adapter.setSpeed(gestureId(), base);
+  }, [adapter, enabled, blocked, base, life.speed]);
   const onFast = () => {
     if (!enabled || blocked || !guard()) return;
     adapter.toggleFastForward(gestureId());
@@ -99,7 +99,8 @@ export function Scene({ life, k, enabled, over, flash }: { life: LifeVM; k: numb
   const initial = Array.from(life.given || life.name || '?')[0] ?? '?';
   const household = useSharedCoreView(householdAppearances);
   const members = useMemo<HouseholdMemberView[]>(
-    () => (household ?? []).map((p, i) => ({ key: `${i}:${p.look?.id ?? p.role}`, look: p.look, me: p.role === 'me' })),
+    // Семья клином: родители — дальний план, по краям (Household).
+    () => (household ?? []).map((p, i) => ({ key: `${i}:${p.look?.id ?? p.role}`, look: p.look, me: p.role === 'me', far: p.role === 'par' })),
     [household],
   );
   const homeLabel = household && household.length > 1
@@ -121,14 +122,11 @@ export function Scene({ life, k, enabled, over, flash }: { life: LifeVM; k: numb
         <>
           {life.fastForward && <p className="lt-ffbadge" role="status"><FastGlyph />{t('life.ffBadge')}</p>}
           <div className="lt-time">
-            <button type="button" className={`lt-sq ${life.fastForward ? 'is-on' : ''}`} aria-label={t('life.ff')} aria-pressed={life.fastForward} disabled={blocked} onClick={onFast}>
-              <FastGlyph />
-            </button>
             <button type="button" className="lt-sq" aria-label={running ? t('life.pause') : t('life.resume')} disabled={blocked} onClick={onPause}>
               {running ? <PauseGlyph /> : <PlayGlyph />}
             </button>
-            <button type="button" className="lt-sq lt-sq--speed" aria-label={t('life.speed', { speed: life.speed })} title={t('life.yearPace', { sec: Math.round(life.secondsPerYear) })} disabled={blocked} onClick={onSpeed}>
-              {t('life.speedNow', { speed: life.speed })}
+            <button type="button" className={`lt-sq ${life.fastForward ? 'is-on' : ''}`} aria-label={t('life.ff')} aria-pressed={life.fastForward} disabled={blocked} onClick={onFast}>
+              <FastGlyph />
             </button>
           </div>
         </>

@@ -4,7 +4,6 @@
   "life.sceneLabel": "{name}, Alter {age}, lebt in {place}",
   "life.menuSettings": "Menü: Einstellungen",
   "life.pauseSkip": "Bis zum Ende leben",
-  "life.speedNow": "×{speed}",
   "life.ffBadge": "Bis zur nächsten Entscheidung",
   "life.yearProgress": "Dieses Jahr: {pct}% vergangen. {pace}",
   "life.chipAge": "Alter: {age}",
@@ -44,7 +43,6 @@
   "life.notice.noEnergy": "Noch nicht genug Energie für ein neues Leben.",
   "life.focusFamily": "Vorerst entscheidet deine Familie, wie das Jahr verläuft.",
   "life.plates": "Jetzt",
-  "life.plate.age": "Alter",
   "life.plate.money": "Geld",
   "life.plate.school": "Schule",
   "life.plate.work": "Arbeit",
@@ -56,5 +54,7 @@
   "life.focus.make": "Wählen",
   "life.focus.on": "Gewählt",
   "life.focus.makeAria": "Fokus wählen: {name}",
-  "life.newestFirst": "Neueste zuerst"
+  "life.newestFirst": "Neueste zuerst",
+  "life.yearAge": "Alter {age}",
+  "life.yearAria": "Alter {age}: das Jahr läuft bis {next}"
 }

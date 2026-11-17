@@ -107,7 +107,9 @@ export function lifeVM(T: Top): LifeVM {
  */
 function occupationOf(T: Top, S: Record<string, any>, status: Segment[]): LifeVM['occupation'] {
   const first = status[0];
-  const text = !first ? '' : first.strong ? first.text.trim() : first.text.split('·')[0]!.trim();
+  const raw = !first ? '' : first.strong ? first.text.trim() : first.text.split('·')[0]!.trim();
+  // Плашка — всегда с заглавной (17.11): профессии и русские школьные строки движок пишет строчными.
+  const text = raw ? raw.charAt(0).toLocaleUpperCase() + raw.slice(1) : '';
   // Учёба — и между ступенями школы (S.flags.between), и у «студента» без школы в этом году (S.job student).
   // «Работа» — только у работающего (isWorking оригинала: должность есть и не из NONWORK); «ищет работу», «дома»,
   // пенсия, служба и т. п. — «Статус».

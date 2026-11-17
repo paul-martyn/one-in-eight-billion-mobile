@@ -1,20 +1,13 @@
-// Ряд из трёх плашек-сведений под сценой (холст LiveCute v343–346): возраст (без года), деньги, занятие — школа,
-// работа или статус. Плашки не нажимаются: без «губы», рамка как у журнала; значок 26 сам по себе, без цветной подложки
-// (холст 17.11), подпись капсом в цвет рамки, значение — белым с обводкой. Значения — из снимка (life), формул здесь нет.
-import type { ReactNode } from 'react';
+// Две плашки-сведения под полосой года (холст «Жизнь · шаги», шаг 4, 17.11): слева занятие — школа, работа или статус
+// (≈ 2/3 ширины): подпись капсом тёмная, ниже текст обычным шрифтом, приглушённый, с заглавной буквы, в одну строку
+// (длинный — «…»); справа деньги (≈ 1/3): значок и сумма белым с обводкой, без подписи, сумма по центру места справа от
+// значка. Возраста здесь нет — он на полосе года. Плашки не нажимаются: без «губы», рамка как у журнала; значок 26 без
+// подложки. Значения — из снимка (life), формул здесь нет.
 import { t } from '../../../i18n';
 import type { LifeVM } from '../../../adapters/viewModels';
 
 const INK = 'var(--color-ink)';
 
-const CakeIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
-    <rect x="3.5" y="11" width="17" height="9.5" rx="2.2" fill="#ff8fb0" stroke={INK} strokeWidth="1.5" />
-    <path d="M3.8 14.6c2.1 1.3 4.1 1.3 6.1 0s4.1-1.3 6.1 0 2.8 1.1 4.2.5" fill="none" stroke={INK} strokeWidth="1.3" />
-    <rect x="10.9" y="5.6" width="2.2" height="5.4" rx="0.6" fill="var(--color-cta)" stroke={INK} strokeWidth="1.2" />
-    <path d="M12 1.8c1.1 1.2 1.1 2.2 0 3-1.1-.8-1.1-1.8 0-3Z" fill="#ff9f43" stroke={INK} strokeWidth="1" />
-  </svg>
-);
 const MoneyIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
     <rect x="5" y="4.5" width="16.5" height="10" rx="2" fill="#6fbf3a" stroke={INK} strokeWidth="1.5" />
@@ -44,24 +37,8 @@ const HomeIcon = () => (
   </svg>
 );
 
-/**
- * Плашки равной ширины (15 ноября 2026): возраст и деньги — крупным числом, кегль по длине строки, чтобы сумма
- * влезала целиком; занятие — прежним кеглем, при нужде в две строки.
- */
+/** Сумма — кегль по длине строки, чтобы влезала целиком в узкую плашку. */
 const numSize = (s: string) => (s.length <= 7 ? '' : s.length <= 9 ? ' lp__value--m' : s.length <= 11 ? ' lp__value--s' : ' lp__value--xs');
-
-function Plate({ icon, label, value, text = false }: { icon: ReactNode; label: string; value: string; text?: boolean }) {
-  const v = value || '—';
-  return (
-    <li className="lp__plate">
-      <span className="lp__icon" aria-hidden="true">{icon}</span>
-      <span className="lp__text">
-        <span className="lp__label">{label}</span>
-        <b className={`lp__value${text ? ' lp__value--text' : numSize(v)}`}>{v}</b>
-      </span>
-    </li>
-  );
-}
 
 const OCC = {
   school: { icon: <SchoolIcon />, label: 'life.plate.school' },
@@ -71,11 +48,23 @@ const OCC = {
 
 export function Plates({ life }: { life: LifeVM }) {
   const occ = OCC[life.occupation.kind];
+  const money = life.money || '—';
   return (
     <ul className="lp" aria-label={t('life.plates')}>
-      <Plate icon={<CakeIcon />} label={t('life.plate.age')} value={String(life.age)} />
-      <Plate icon={<MoneyIcon />} label={t('life.plate.money')} value={life.money} />
-      <Plate icon={occ.icon} label={t(occ.label)} value={life.occupation.text} text />
+      <li className="lp__plate lp__plate--occ">
+        <span className="lp__icon" aria-hidden="true">{occ.icon}</span>
+        <span className="lp__text">
+          <span className="lp__label">{t(occ.label)}</span>
+          <span className="lp__occ">{life.occupation.text || '—'}</span>
+        </span>
+      </li>
+      <li className="lp__plate lp__plate--money">
+        <span className="lp__icon" aria-hidden="true"><MoneyIcon /></span>
+        <span className="lp__sum">
+          <span className="sr-only">{t('life.plate.money')}: </span>
+          <b className={`lp__value${numSize(money)}`}>{money}</b>
+        </span>
+      </li>
     </ul>
   );
 }
