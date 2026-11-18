@@ -3,7 +3,7 @@
 // цвета. Порядок всегда: здоровье → счастье → знания → отношения. Деньги — не стат: значков денег нет.
 import { Fragment } from 'react';
 import { t } from '../../../i18n';
-import type { Fx } from '../../../adapters/viewModels';
+import type { Fx, MoneyVM } from '../../../adapters/viewModels';
 import type { StatKey } from '../../../ui/components';
 import { fxText, STAT_LABEL } from './lifeHooks';
 // Стрелки пользователя (холст 17.11, production-ui/icons/arrows v2): зелёная вверх, красная вниз.
@@ -62,10 +62,29 @@ export function FxArrows({ fx }: { fx: Fx }) {
   );
 }
 
-/** Ряд значков изменений («+3 ❤»): число и значок, цвет по знаку. */
-export function FxChips({ fx, className = '' }: { fx: Fx; className?: string }) {
+/** Значок денег — банкноты, как на плашке денег под сценой. */
+export const MoneyGlyph = ({ size = 17 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" className="sc-glyph">
+    <rect x="5" y="4.5" width="16.5" height="10" rx="2" fill="#6fbf3a" stroke="var(--color-ink)" strokeWidth="1.5" />
+    <rect x="2.5" y="9.5" width="16.5" height="10" rx="2" fill="var(--color-cta-green)" stroke="var(--color-ink)" strokeWidth="1.5" />
+    <circle cx="10.75" cy="14.5" r="2.4" fill="#e1f1ce" stroke="var(--color-ink)" strokeWidth="1.3" />
+  </svg>
+);
+
+/** Значок суммы денег («+3,1 Br» с банкнотами), цвет по знаку — как у значков статов (журнал, 18.11). */
+export function MoneyChip({ money }: { money: MoneyVM }) {
+  return (
+    <span className={`sc-chip sc-chip--money ${money.up ? 'is-up' : 'is-down'}`} aria-label={t('life.card.money', { v: money.v })}>
+      <span aria-hidden="true">{money.v}</span>
+      <MoneyGlyph />
+    </span>
+  );
+}
+
+/** Ряд значков изменений («+3 ❤»): число и значок, цвет по знаку; в конце — деньги, если есть. */
+export function FxChips({ fx, money = null, className = '' }: { fx: Fx; money?: MoneyVM | null; className?: string }) {
   const list = ORDER.flatMap(k => fx.filter(f => f.k === k && f.d !== 0));
-  if (!list.length) return null;
+  if (!list.length && !money) return null;
   return (
     <ul className={`sc-row ${className}`}>
       {list.map(f => (
@@ -74,6 +93,7 @@ export function FxChips({ fx, className = '' }: { fx: Fx; className?: string }) 
           <StatGlyph k={f.k} />
         </li>
       ))}
+      {money ? <li className="sc-li"><MoneyChip money={money} /></li> : null}
     </ul>
   );
 }

@@ -87,6 +87,21 @@
   --color-focus-fx-sep: #b39271;
   --color-year-fill: #ffd04a;
   --color-year-fill-hi: #ffe27a;
+  --color-journal-sheet: #ece8e1;
+  --color-journal-card-quiet: #f6f3f1;
+  --color-journal-row: #efe9e1;
+  --color-buy-bg: #fff3cf;
+  --color-buy-line: #ecd28c;
+  --color-kind-warm: #a85a14;
+  --color-kind-bad: #b8433a;
+  --color-kind-big: #85630a;
+  --color-kind-money: #2f7a35;
+  --color-kind-age: #1c7a70;
+  --color-kind-loss: #665585;
+  --color-kind-note: #3c6aa3;
+  --color-kind-comp: #7656c0;
+  --color-kind-death: #5a4a40;
+  --color-kind-dec: #7b5a3a;
 
   /* Показатели */
   --color-stat-health: #ff6f8a;
@@ -168,6 +183,7 @@
   --shadow-switch-track: inset 0 3px 0 rgba(58,34,14,0.18);
   --shadow-knob: inset 0 -3px 0 rgba(90,52,24,0.2);
   --shadow-close-drop: 0 4px 10px rgba(20,10,4,0.3);
+  --shadow-card-soft: 0 2px 8px rgba(58,40,24,0.12), 0 1px 2px rgba(58,40,24,0.08);
 
   /* Контур текста */
   --text-outline-o: 1.5px 0px 0 #5a3418, -1.5px 0px 0 #5a3418, 0px 1.5px 0 #5a3418, 0px -1.5px 0 #5a3418, 1.1px 1.1px 0 #5a3418, -1.1px 1.1px 0 #5a3418, 1.1px -1.1px 0 #5a3418, -1.1px -1.1px 0 #5a3418, 0px 2px 0 #5a3418;

@@ -269,10 +269,21 @@ function shopReopen(T: Top): void {
 
 /** data-buy (208322-208332) без shopAsk (подтверждение показывает новый UI) и без перерисовки листа. */
 export function buy(T: Top, key: string): string | null {
+  // Что куплено и за сколько (журнал, 18.11): buyShop записывает покупку в книгу года S.fl.it[название] (как в итоге года);
+  // разница книги до и после — название и сумма. Только чтение S, движок не вызывается.
+  const book0: Record<string, number> = { ...(T.S.fl?.it || {}) };
   const s = T.buyShop(key);
   if (s) {
     T.log(s, 'big', T.SHOP_F);
-    T.S.log[T.S.log.length - 1].sh = 1;
+    const entry = T.S.log[T.S.log.length - 1];
+    entry.sh = 1;
+    const book1: Record<string, number> = T.S.fl?.it || {};
+    let pk: [string, number] | null = null;
+    for (const name of Object.keys(book1)) {
+      const d = (book1[name] || 0) - (book0[name] || 0);
+      if (d && (!pk || Math.abs(d) > Math.abs(pk[1]))) pk = [name, Math.round(d)];
+    }
+    if (pk) entry.pk = pk;
   }
   T.fxEnd();
   if (s) {

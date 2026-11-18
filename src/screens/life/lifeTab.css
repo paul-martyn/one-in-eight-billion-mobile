@@ -166,45 +166,74 @@
   border: 2px solid var(--color-ink); border-radius: 14px; background: var(--color-journal-paper);
 }
 .lb__scroll {
-  position: absolute; inset: 0; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; padding: 14px 2px 18px 8px;
-  -webkit-mask-image: linear-gradient(transparent, var(--color-ink) 14px, var(--color-ink) calc(100% - 18px), transparent), linear-gradient(var(--color-ink), var(--color-ink));
-  mask-image: linear-gradient(transparent, var(--color-ink) 14px, var(--color-ink) calc(100% - 18px), transparent), linear-gradient(var(--color-ink), var(--color-ink));
-  -webkit-mask-size: calc(100% - 8px) 100%, 8px 100%; mask-size: calc(100% - 8px) 100%, 8px 100%;
-  -webkit-mask-position: 0 0, 100% 0; mask-position: 0 0, 100% 0;
-  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  position: absolute; inset: 0; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; overflow-anchor: none; padding: 14px 10px 18px;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(transparent, var(--color-ink) 14px, var(--color-ink) calc(100% - 18px), transparent);
+  mask-image: linear-gradient(transparent, var(--color-ink) 14px, var(--color-ink) calc(100% - 18px), transparent);
 }
 .lb__scroll:focus-visible { outline-offset: -3px; border-radius: 12px; }
-/* Полоса прокрутки видна всегда (на телефоне системная прячется — свой элемент позже). Резерв 8 (был 14): дорожка 4 и
-   бегунок 6 — как были, а строке статов фокуса на десктопе хватает места (холст 16.11). */
-.lb__scroll::-webkit-scrollbar { width: 8px; }
-.lb__scroll::-webkit-scrollbar-track { background: var(--color-scroll-track); border: 2px solid transparent; background-clip: padding-box; border-radius: 7px; margin: 8px 0; }
-.lb__scroll::-webkit-scrollbar-thumb { background: var(--color-ink); border: 1px solid transparent; background-clip: padding-box; border-radius: 7px; min-height: 44px; }
+/*
+ * Полоса прокрутки — свой элемент (ScrollRail): на iPhone системной полосы не видно. Дорожка 4 px в правом поле листа
+ * (между карточками и рамкой), бегунок по доле видимого; поля списка слева и справа одинаковые — 10 px.
+ */
+.lb__scroll::-webkit-scrollbar { display: none; }
+.lb__rail { position: absolute; z-index: 2; right: 3px; top: 14px; bottom: 14px; width: 4px; border-radius: 2px; background: var(--color-scroll-track); pointer-events: none; }
+.lb__thumb { position: absolute; left: 0; top: 0; width: 4px; border-radius: 2px; background: var(--color-muted); }
+/* Лист журнала (вид 3): нейтральный светло-серый; выбранная вкладка «Журнал» — в цвет листа. */
+.lb--journal .lb__box { background: var(--color-journal-sheet); }
+.lb--journal .lb__tab.is-on { background: var(--color-journal-sheet); }
 .lb__empty { margin: 18px 6px; text-align: center; color: var(--color-journal-ink); font-size: var(--font-size-body); line-height: var(--line-height-body); font-weight: 600; }
 .lb__more {
   display: block; min-height: 44px; margin: 12px auto 0; padding: 0 16px; border: 2px solid var(--color-ink); border-radius: 12px;
   background: var(--color-journal-cap); box-shadow: var(--shadow-lip); color: var(--color-journal-ink); font-size: var(--font-size-small); font-weight: 700;
 }
 
-/* Карточки дневника (F1, схема E): корешок «Возраст» над числом, текст одним стилем, подпись источника, значки. */
-.lc { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0 6px 0 0; list-style: none; }
-.lc__card {
-  display: grid; grid-template-columns: 40px 1fr; border: 1.5px solid var(--color-divider); border-radius: 12px;
-  background: var(--color-journal-card); overflow: hidden;
-}
-.lc__card.is-dec { border-style: dashed; border-color: var(--color-journal-dec-line); background: transparent; }
+/* ---- Журнал: карточки В2, вид 3 (холст «Жизнь · шаги», 18.11) ----
+ * Белая карточка с мягкой тенью, без обводки. Шапка: «15 лет» слева, вид записи справа (точка и подпись цветом вида;
+ * у обычного события метки нет). Текст 15/20; деньги — значком в ряду статов; покупка — «чек»; итог года — строками;
+ * статистика (источник) — внизу, мелко и приглушённо, за пунктиром. Решение: вопрос, «→ ответ», за пунктиром последствие.
+ * Потеря и конец жизни — приглушённым тоном.
+ */
+.lc { display: flex; flex-direction: column; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.lc__card { display: block; border-radius: 12px; background: var(--color-white); box-shadow: var(--shadow-card-soft); overflow: hidden; }
+.lc__card.is-quiet { background: var(--color-journal-card-quiet); }
 .lc__card.is-new { animation: lc-in 260ms var(--ease-glide) both; }
 @keyframes lc-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
-.lc__cap {
-  display: flex; flex-direction: column; align-items: center; padding-top: 6px;
-  background: var(--color-journal-cap); border-right: 1.5px solid var(--color-divider); color: var(--color-journal-ink);
+.lc__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 7px 11px 0; }
+.lc__age { font-size: var(--font-size-label); font-weight: 700; line-height: 16px; color: var(--color-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lc__kind { display: inline-flex; align-items: center; gap: 5px; min-width: 0; font-size: var(--font-size-label); font-weight: 700; line-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lc__kind::before { content: ''; flex: none; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.lc__kind--warm { color: var(--color-kind-warm); }
+.lc__kind--bad { color: var(--color-kind-bad); }
+.lc__kind--big, .lc__kind--out, .lc__kind--shop { color: var(--color-kind-big); }
+.lc__kind--dec { color: var(--color-kind-dec); }
+.lc__kind--ledger { color: var(--color-kind-money); }
+.lc__kind--ms { color: var(--color-kind-age); }
+.lc__kind--loss { color: var(--color-kind-loss); }
+.lc__kind--note { color: var(--color-kind-note); }
+.lc__kind--comp { color: var(--color-kind-comp); }
+.lc__kind--death { color: var(--color-kind-death); }
+.lc__body { display: flex; flex-direction: column; min-width: 0; padding: 3px 11px 10px; }
+.lc__text { font-size: var(--font-size-row); font-weight: 500; line-height: 20px; color: var(--color-journal-ink); white-space: pre-line; overflow-wrap: break-word; hyphens: auto; }
+.lc__text--head { font-weight: 600; }
+.lc__q { font-size: var(--font-size-caption); font-weight: 500; line-height: 17px; color: var(--color-muted); overflow-wrap: break-word; }
+.lc__a { margin-top: 3px; font-size: var(--font-size-row); font-weight: 700; line-height: 20px; color: var(--color-journal-ink); overflow-wrap: break-word; }
+.lc__a b { color: var(--color-muted); }
+.lc__res { display: flex; flex-direction: column; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--color-divider); }
+.lc__fx { margin-top: 7px; }
+.lc__src {
+  display: flex; gap: 6px; align-items: flex-start; margin-top: 9px; padding-top: 7px; border-top: 1px dashed var(--color-divider);
+  font-size: var(--font-size-label); font-weight: 500; line-height: 16px; color: var(--color-muted); overflow-wrap: break-word; hyphens: auto;
 }
-.lc__card.is-dec .lc__cap { background: transparent; border-right: 1.5px dashed var(--color-journal-dec-line); }
-.lc__cap small { font-size: var(--font-size-label); font-weight: 500; line-height: 13px; letter-spacing: 0.02em; text-transform: uppercase; }
-.lc__cap b { font-size: var(--font-size-body); font-weight: 600; line-height: 19px; }
-.lc__body { min-width: 0; padding: 7px 8px 8px 9px; }
-.lc__text { display: block; font-size: var(--font-size-small); font-weight: 500; line-height: 19px; color: var(--color-journal-ink); white-space: pre-line; overflow-wrap: break-word; hyphens: auto; }
-.lc__src { display: block; margin-top: 3px; font-size: var(--font-size-caption); font-weight: 600; line-height: 17px; color: var(--color-journal-ink); overflow-wrap: break-word; hyphens: auto; }
-.lc__fx { margin-top: 5px; }
+.lc__src svg { flex: none; display: block; margin-top: 1px; color: var(--color-dot-outline); }
+.lc__buy { display: flex; align-items: center; gap: 7px; margin-top: 8px; padding: 6px 6px 6px 8px; border: 1px solid var(--color-buy-line); border-radius: 9px; background: var(--color-buy-bg); }
+.lc__bag { flex: none; display: block; }
+.lc__buy-name { flex: 1 1 auto; min-width: 0; font-size: var(--font-size-caption); font-weight: 600; line-height: 16px; color: var(--color-ink); overflow-wrap: break-word; }
+.lc__rows { display: flex; flex-direction: column; margin-top: 6px; }
+.lc__row { display: flex; justify-content: space-between; gap: 10px; padding: 4px 0; border-top: 1px solid var(--color-journal-row); font-size: var(--font-size-caption); font-weight: 500; line-height: 17px; color: var(--color-tab-off-ink); }
+.lc__row b { flex: none; font-weight: 700; font-variant-numeric: tabular-nums; }
+.lc__row b.is-up { color: var(--color-chip-up-ink); }
+.lc__row b.is-down { color: var(--color-chip-down-ink); }
 
 /*
  * Строки фокуса — «плашка выбора» дизайн-кода (DcChoice, холст 16–17.11): невыбранная приглушена, с тенью снизу внутри;
@@ -287,6 +316,8 @@
 .sc-chip.is-up { background: var(--color-chip-up-bg); border-color: var(--color-chip-up-line); color: var(--color-chip-up-ink); }
 .sc-chip.is-down { background: var(--color-chip-down-bg); border-color: var(--color-chip-down-line); color: var(--color-chip-down-ink); }
 .sc-glyph { display: block; flex: none; }
+.sc-li { display: contents; }
+.sc-chip--money { min-width: 0; padding-right: 6px; }
 
 /* ---- Жизнь закончилась (LiveCute v107, frame «died») ----
    Семья остаётся в кадре, тише; значок «You» гаснет; плашка места — «Life ended · …». */
