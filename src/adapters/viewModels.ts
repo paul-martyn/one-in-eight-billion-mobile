@@ -8,7 +8,19 @@ export type StatKey = 'hl' | 'h' | 'sm' | 'so';
 export type Stats = Record<StatKey, number>;
 export type Fx = { k: StatKey; d: number }[];
 
-export type JournalEntryVM = { i: number; age: number; year: number | null; kind: string; text: string; fact: string; question: string; fx: Fx; mine: boolean };
+/** Сумма денег записи журнала: знак и готовая строка («+3,1 Br», «−$134»). */
+export type MoneyVM = { up: boolean; v: string };
+/**
+ * Запись журнала (S.log). text — без суммы в скобках в конце (она — в money); у решения answer — ответ без «Решение:»;
+ * out — запись-последствие решения (флаг d движка); shop — покупка игрока, buy — что куплено и за сколько (с 18.11,
+ * у старых покупок нет); ledger — денежный итог года, разобранный на заголовок и строки «статья — сумма».
+ */
+export type JournalEntryVM = {
+  i: number; age: number; year: number | null; kind: string; text: string; fact: string; question: string; fx: Fx; mine: boolean;
+  out: boolean; shop: boolean; answer: string; money: MoneyVM | null;
+  buy: { name: string; price: MoneyVM | null } | null;
+  ledger: { head: string; rows: { name: string; v: string; up: boolean }[] } | null;
+};
 export type ChoiceVM = { k: string; label: string; sub: string };
 export type DecisionVM = { id: string; title: string; body: string; fact: string; choices: ChoiceVM[] };
 export type CompanionVM = { name: string; given: string; iso: string; place: string; sex: 'F' | 'M'; quintile: number; family: string; status: string; died: boolean; deathAge: number | null; deathLabel: string };
@@ -39,18 +51,50 @@ function fxOf(fx: unknown): Fx {
   return FX_KEYS.filter(k => typeof o[k] === 'number' && Math.round(o[k]!) !== 0).map(k => ({ k, d: Math.round(o[k]!) }));
 }
 
+/** Сумма в скобках в конце текста записи: «… (+3,1 Br)», «… (−$134)». */
+const MONEY_TAG = /\s*\(([+−-])([^()]*\d[^()]*)\)\s*$/;
+/** Строка итога года «статья −сумма»: сумма — от последнего « −» / « +». */
+function ledgerRow(r: string): { name: string; v: string; up: boolean } {
+  const j = Math.max(r.lastIndexOf(' −'), r.lastIndexOf(' +'), r.lastIndexOf(' -'));
+  return j > 0 ? { name: r.slice(0, j), v: r.slice(j + 1), up: r[j + 1] === '+' } : { name: r, v: '', up: false };
+}
+
 export function journalEntry(T: Top, e: Record<string, any>, i: number): JournalEntryVM {
   const by = T.S?.by;
+  const kind: string = e.kind;
+  let text = plain(e.text);
+  let money: MoneyVM | null = null;
+  let ledger: JournalEntryVM['ledger'] = null;
+  if (kind === 'ledger') {
+    // «Итог года. статья −сумма · статья +сумма» (во всех языках движка — первое предложение, затем строки через « · »).
+    const dot = text.indexOf('. ');
+    const head = dot > 0 ? text.slice(0, dot + 1) : text;
+    const rest = dot > 0 ? text.slice(dot + 2) : '';
+    ledger = { head, rows: rest ? rest.split(' · ').map(ledgerRow) : [] };
+  } else {
+    const m = text.match(MONEY_TAG);
+    if (m) { money = { up: m[1] === '+', v: m[1] + m[2]!.trim() }; text = text.replace(MONEY_TAG, ''); }
+  }
+  const pk = Array.isArray(e.pk) ? e.pk : null;
+  const price = pk && typeof pk[1] === 'number' && Math.round(pk[1]) !== 0
+    ? { up: pk[1] > 0, v: (pk[1] > 0 ? '+' : '−') + plain(T.wonStr(Math.abs(pk[1]))) } : null;
   return {
     i,
     age: e.a,
     year: typeof by === 'number' ? by + e.a : null,
-    kind: e.kind,
-    text: plain(e.text),
+    kind,
+    text,
     fact: plain(e.fact),
     question: plain(e.q),
     fx: fxOf(e.fx),
-    mine: e.kind === 'dec' || !!e.d,
+    mine: kind === 'dec' || !!e.d,
+    out: !!e.d && kind !== 'dec',
+    shop: !!e.sh,
+    // «Решение: ответ» / «Décision : ответ» — без подписи перед двоеточием.
+    answer: kind === 'dec' ? text.replace(/^[^:]{1,24}\s?:\s*/, '') : '',
+    money,
+    buy: e.sh && (pk || price) ? { name: pk ? plain(String(pk[0] ?? '')) : '', price } : null,
+    ledger,
   };
 }
 
